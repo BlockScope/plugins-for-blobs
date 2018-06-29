@@ -72,4 +72,19 @@ tests:
     main: HLint.hs
     source-dirs:
     - hlint
+  liquid:
+    dependencies:
+    - base
+    - uom-plugin
+    - liquid-fixpoint
+    - liquidhaskell
+    ghc-options:
+    - -Wall
+    - -O0
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+    main: Liquid.hs
+    source-dirs:
+    - liquid
 version: '0.3.0.0'

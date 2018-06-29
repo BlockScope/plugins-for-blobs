@@ -2,5 +2,16 @@ resolver: lts-11.7
 packages:
 - 'uom-plugin'
 - 'uom-plugin-examples'
+- location:
+    git: https://github.com/ucsd-progsys/liquid-fixpoint.git
+    commit: 9d2694ac82262d135dd7ca0f3b9034b7c556cd48
+  extra-dep: true
+- location:
+    git: https://github.com/ucsd-progsys/liquidhaskell.git
+    commit: ec88f568d101bfd35b6254aa7db034164d9c89dd
+  extra-dep: true
 extra-deps:
 - units-parser-0.1.0.0
+- located-base-0.1.1.1
+- dotgen-0.4.2
+- fgl-visualize-0.1.0.1

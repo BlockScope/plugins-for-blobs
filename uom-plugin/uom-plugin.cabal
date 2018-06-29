@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d110f2f74fb66155437b924f27283bd9b16991b4f2be45693731488d98f4938c
+-- hash: 62470157a3ded2fa804832d9b55dff2b953072a48b4938bf27bb840a281bc821
 
 name:           uom-plugin
 version:        0.3.0.0
@@ -74,6 +74,21 @@ test-suite hlint
   build-depends:
       base
     , hlint >=1.7 && <2.2
+  default-language: Haskell2010
+
+test-suite liquid
+  type: exitcode-stdio-1.0
+  main-is: Liquid.hs
+  other-modules:
+      Paths_uom_plugin
+  hs-source-dirs:
+      liquid
+  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -Wall -O0 -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , liquid-fixpoint
+    , liquidhaskell
+    , uom-plugin
   default-language: Haskell2010
 
 test-suite units
