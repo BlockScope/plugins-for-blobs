@@ -1,29 +1,62 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE TypeFamilies #-}
 
 {-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
 
-module Main (main, AB(..), Qs, Qm) where
+module Main (main, DistanceTime(..), Qs, Qm, Qkmh) where
 
 import Language.Haskell.Liquid.Liquid (liquid)
-import Data.UnitsOfMeasure (Quantity, u)
+import Data.UnitsOfMeasure ((/:), Quantity, u, convert)
 import Data.UnitsOfMeasure.Defs ()
-
+import Data.UnitsOfMeasure.Convert (Convertible)
 
 -- NOTE: I cannot use quasiquotes or symbols with liquid haskell.
-type Qs = Quantity Double [u| s |]
-type Qm = Quantity Double [u| m |]
+type Qs a = Quantity a [u| s |]
+type Qm a = Quantity a [u| m |]
+type Qkmh a = Quantity a [u| km / h |]
 
-data AB
-    = A { x :: Quantity Double [u| s |] }
-    | B { y :: Quantity Double [u| m |] }
+data DistanceTime a =
+    DistanceTime
+        { dist :: Qm a
+        , time :: Qs a
+        }
 
-{-@ data A = A {x :: Qs} | B {y :: Qm} @-}
+deriving instance (Show a) => Show (DistanceTime a)
+
+mkDistanceTime
+    :: (Ord a, Fractional a, Convertible u [u| m |], Convertible v [u| s |])
+    => Quantity a u
+    -> Quantity a v
+    -> DistanceTime a
+mkDistanceTime d t =
+    DistanceTime (convert d) (convert t) 
+
+{-@
+data DistanceTime a =
+    DistanceTime
+        { dist :: Qm a
+        , time :: Qs a
+        }
+@-}
 
 minute :: Quantity Double [u| s |]
 minute = [u| 60 s |]
 
+{-@ kph :: DistanceTime Double -> Qkmh Double @-}
+kph :: DistanceTime Double -> Quantity Double [u| km / h |]
+kph DistanceTime{..} = convert $ dist /: time
+
+kph55 :: DistanceTime Double
+kph55 = mkDistanceTime [u| 110 km |] [u| 2 h |] 
+
 main :: IO a
 main = do
     putStrLn $ "One minute is " ++ show minute
+    putStrLn $ "55 kph is " ++ show kph55
+    putStrLn $ "55 kph is " ++ show (kph kph55)
     liquid ["liquid/Liquid.hs"]
