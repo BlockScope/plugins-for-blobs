@@ -1,18 +1,26 @@
-{-# LANGUAGE DataKinds#-}
+{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE QuasiQuotes #-}
 
 {-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
 
-module Main (main) where
+module Main (main, AB(..), Qs, Qm) where
 
 import Language.Haskell.Liquid.Liquid (liquid)
-import Data.UnitsOfMeasure
+import Data.UnitsOfMeasure (Quantity, u)
 import Data.UnitsOfMeasure.Defs ()
 
-{-@ type Qs = Quantity Double [u| s |] @-}
-type Qs = Quantity Double [u| s |]
 
-minute :: Qs
+-- NOTE: I cannot use quasiquotes or symbols with liquid haskell.
+type Qs = Quantity Double [u| s |]
+type Qm = Quantity Double [u| m |]
+
+data AB
+    = A { x :: Quantity Double [u| s |] }
+    | B { y :: Quantity Double [u| m |] }
+
+{-@ data A = A {x :: Qs} | B {y :: Qm} @-}
+
+minute :: Quantity Double [u| s |]
 minute = [u| 60 s |]
 
 main :: IO a
