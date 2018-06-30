@@ -1,5 +1,6 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE GADTs #-}
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE RecordWildCards #-}
@@ -20,11 +21,14 @@ type Qs a = Quantity a [u| s |]
 type Qm a = Quantity a [u| m |]
 type Qkmh a = Quantity a [u| km / h |]
 
-data DistanceTime a =
-    DistanceTime
-        { dist :: Qm a
-        , time :: Qs a
-        }
+{-@
+data DistanceTime a where
+    DistanceTime :: {dist :: Qm a, time :: Qs a} -> DistanceTime a
+@-}
+
+
+data DistanceTime a where
+    DistanceTime :: {dist :: Qm a, time :: Qs a} -> DistanceTime a
 
 deriving instance (Show a) => Show (DistanceTime a)
 
@@ -35,14 +39,6 @@ mkDistanceTime
     -> DistanceTime a
 mkDistanceTime d t =
     DistanceTime (convert d) (convert t) 
-
-{-@
-data DistanceTime a =
-    DistanceTime
-        { dist :: Qm a
-        , time :: Qs a
-        }
-@-}
 
 minute :: Quantity Double [u| s |]
 minute = [u| 60 s |]
