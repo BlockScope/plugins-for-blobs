@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b560f0805923b4e4d63984036ab852a6fb5aa62ba5fe0bd0cf13846fe7b77343
+-- hash: 85dcb4621637a37e81d1e1e5957aaca99cbbd889e4cd51b821fad79163dec409
 
 name:           uom-plugin
 version:        0.3.0.0
@@ -23,10 +25,9 @@ license-file:   LICENSE
 tested-with:    GHC == 7.10.3, GHC == 8.0.2, GHC == 8.2.2
 
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    changelog
     package.yaml
+    changelog
 
 source-repository head
   type: git
@@ -80,6 +81,7 @@ test-suite units
   type: exitcode-stdio-1.0
   main-is: Tests.hs
   other-modules:
+      ConvertTests
       Defs
       ErrorTests
       Z

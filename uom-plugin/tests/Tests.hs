@@ -69,6 +69,7 @@ import Test.Tasty.HUnit
 
 import Defs ()
 import ErrorTests
+import ConvertTests
 import Z (z)
 
 -- Some basic examples
@@ -303,6 +304,9 @@ tests = testGroup "uom-plugin"
     [ testCase "1 m/m"       $ read "[u| 1 m/m |]"       @?= [u| 1 |]
     , testCase "-0.3 m s^-1" $ read "[u| -0.3 m s^-1 |]" @?= [u| -0.3 m/s |]
     , testCase "42 s m s"    $ read "[u| 42 s m s |]"    @?= [u| 42 m s^2 |]
+    ]
+  , testGroup "convertible units"
+    [ testCase "1000 m == 1 km" $ (unwrapAsKm (Wrap [u| 1000 m |]) :: Double) @?= 1.0
     ]
   ]
 
