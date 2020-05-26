@@ -8,7 +8,14 @@ module GhcApi.Wrap
   ) where
 
 import GhcApi
-import GHC.TcPluginM.Extra
+  ( Ct, CtLoc, TcPluginM, EvTerm, PredType
+  , mkNonCanonical
+#if __GLASGOW_HASKELL__ >= 711
+  , newUnique
+#endif
+  )
+  
+import GHC.TcPluginM.Extra (newGiven, newWanted)
 
 #if __GLASGOW_HASKELL__ < 711
 newUnique :: TcPluginM Unique

@@ -42,12 +42,19 @@ in    defs
           , dependencies =
                 defs.dependencies
               # [ "deepseq >=1.3 && <1.5"
-                , "ghc >= 8.0.2 && <8.9"
                 , "ghc-tcplugins-extra >=0.1"
                 , "template-haskell >=2.9"
                 , "containers >=0.5"
                 , "units-parser >=0.1"
                 ]
+          , when =
+              { condition =
+                  "impl(ghc > 8.4.4)"
+              , `then` =
+                  { dependencies = "ghc-lib", source-dirs = "src-ghc-lib" }
+              , `else` =
+                  { dependencies = "ghc", source-dirs = "src-ghc" }
+              }
           }
       , tests =
           { units =
@@ -64,7 +71,7 @@ in    defs
               , source-dirs =
                   "test-suite-units"
               , when =
-                  { condition = "impl(ghc > 8.2.2)", buildable = False }
+                  { condition = "impl(ghc > 8.4.4)", buildable = False }
               }
           , hlint =
               { dependencies =

@@ -13,7 +13,7 @@ in    defs
       , license =
           "PublicDomain"
       , executables =
-          { Examples =
+          { uom-plugin-examples =
               { dependencies =
                   defs.dependencies # [ "uom-plugin" ]
               , source-dirs =
@@ -21,7 +21,7 @@ in    defs
               , main =
                   "Examples.hs"
               , when =
-                  { condition = "impl(ghc > 8.2.2)", buildable = False }
+                  { condition = "impl(ghc > 8.4.4)", buildable = False }
               }
           }
       }

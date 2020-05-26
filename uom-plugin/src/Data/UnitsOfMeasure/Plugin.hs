@@ -123,7 +123,7 @@ lookForUnpacks uds givens wanteds = mapM unpackCt unpacks
                                         Just xs -> [(ct,a,xs)]
                                         _       -> []
     collectType ct (TyConApp _ as)  = concatMap (collectType ct) as
-    collectType ct (FunTy t v)      = collectType ct t ++ collectType ct v
+    collectType ct (FunTy _ t v)      = collectType ct t ++ collectType ct v
     collectType ct (ForAllTy _ t)   = collectType ct t
     collectType _  _                = [] -- TyVarTy, LitTy from 7.10, plus CastTy and CoercionTy in 8.0
 
