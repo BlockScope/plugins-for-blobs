@@ -1,6 +1,3 @@
-{-# LANGUAGE CPP #-}
-{-# LANGUAGE PatternSynonyms #-}
-
 -- | This module defines a typechecker plugin that solves equations
 -- involving units of measure.  To use it, add
 --
@@ -9,25 +6,17 @@
 -- above the module header of your source files, or in the
 -- @ghc-options@ field of your @.cabal@ file.  You do not need to
 -- import this module.
-module Data.UnitsOfMeasure.Plugin
-  ( plugin
-  ) where
+module Data.UnitsOfMeasure.Plugin (plugin) where
 
-import GhcApi
-import GhcApi.Shim
-    ( mkEqPred, mkFunnyEqEvidence
-#if __GLASGOW_HASKELL__ < 802
-    , pattern FunTy
-#endif
-    )
-import GhcApi.Wrap (newGivenCt, newWantedCt)
+import Internal
+import Internal.Type (collectType)
+import Internal.Shim (mkEqPred, mkFunnyEqEvidence)
+import Internal.Wrap (newGivenCt, newWantedCt)
 import Data.Either
 import Data.List
 
 import Data.UnitsOfMeasure.Plugin.Convert
-import Data.UnitsOfMeasure.Plugin.NormalForm
 import Data.UnitsOfMeasure.Plugin.Unify
-
 
 -- | The plugin that GHC will load when this module is used with the
 -- @-fplugin@ option.
@@ -97,7 +86,6 @@ fromUnitEqualityForContradiction uds (UnitEquality ct u v) = case classifyPredTy
     u' = reifyUnit uds u
     v' = reifyUnit uds v
 
-
 substItemToCt :: UnitDefs -> SubstItem -> TcPluginM Ct
 substItemToCt uds si
       | isGiven (ctEvidence ct) = newGivenCt loc prd $ evByFiat "units" ty1 ty2
@@ -109,23 +97,12 @@ substItemToCt uds si
         ct   = siCt si
         loc  = ctLoc ct
 
-
 lookForUnpacks :: UnitDefs -> [Ct] -> [Ct] -> TcPluginM [Ct]
 lookForUnpacks uds givens wanteds = mapM unpackCt unpacks
   where
     unpacks = concatMap collectCt $ givens ++ wanteds
 
-    collectCt ct = collectType ct $ ctEvPred $ ctEvidence ct
-
-    collectType ct (AppTy f s)      = collectType ct f ++ collectType ct s
-    collectType ct (TyConApp tc [a])
-      | tc == unpackTyCon uds       = case maybeConstant =<< normaliseUnit uds a of
-                                        Just xs -> [(ct,a,xs)]
-                                        _       -> []
-    collectType ct (TyConApp _ as)  = concatMap (collectType ct) as
-    collectType ct (FunTy _ t v)      = collectType ct t ++ collectType ct v
-    collectType ct (ForAllTy _ t)   = collectType ct t
-    collectType _  _                = [] -- TyVarTy, LitTy from 7.10, plus CastTy and CoercionTy in 8.0
+    collectCt ct = collectType uds ct $ ctEvPred $ ctEvidence ct
 
     unpackCt (ct,a,xs) = newGivenCt loc (mkEqPred ty1 ty2) (evByFiat "units" ty1 ty2)
       where
@@ -143,7 +120,6 @@ lookForUnpacks uds givens wanteds = mapM unpackCt unpacks
 
     promoter x t = mkTyConApp cons_tycon [typeSymbolKind, mkStrLitTy x, t]
     cons_tycon = promoteDataCon consDataCon
-
 
 lookupUnitDefs :: TcPluginM UnitDefs
 lookupUnitDefs = do

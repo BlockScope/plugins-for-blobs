@@ -10,7 +10,7 @@ module Data.UnitsOfMeasure.Plugin.Unify
   , simplifyUnits
   ) where
 
-import GhcApi
+import Internal
 import Data.UnitsOfMeasure.Plugin.Convert
 import Data.UnitsOfMeasure.Plugin.NormalForm
 

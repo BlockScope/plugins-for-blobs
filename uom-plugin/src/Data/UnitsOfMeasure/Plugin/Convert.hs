@@ -1,13 +1,15 @@
 module Data.UnitsOfMeasure.Plugin.Convert
   ( UnitDefs(..)
+  , eqTc
+  , collectKindOrType
   , unitKind
   , isUnitKind
   , normaliseUnit
   , reifyUnit
   ) where
 
-import GhcApi
-import GhcApi.Shim (promoteTyCon)
+import Internal
+import Internal.Shim (promoteTyCon)
 import Data.List
 
 import Data.UnitsOfMeasure.Plugin.NormalForm
@@ -26,6 +28,15 @@ data UnitDefs = UnitDefs
     , unitSyntaxPromotedDataCon :: TyCon -- ^ The data constructor of 'UnitSyntax', promoted to a type constructor
     , equivTyCon      :: TyCon -- ^ The '(~~)' type family
     }
+
+eqTc :: UnitDefs -> TyCon -> Bool
+eqTc = (==) . unpackTyCon
+
+collectKindOrType :: UnitDefs -> a -> Type -> [(a, Type, [(BaseUnit, Integer)])]
+collectKindOrType uds ct a =
+    case maybeConstant =<< normaliseUnit uds a of
+        Just xs -> [(ct,a,xs)]
+        _       -> []
 
 -- | 'Unit' promoted to a kind
 unitKind :: UnitDefs -> Kind

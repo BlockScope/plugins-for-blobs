@@ -1,11 +1,6 @@
-module GhcApi.Compare
-  ( -- * GHC API changes
-    cmpType
-  , cmpTypes
-  , cmpTyCon
-  ) where
+module Internal.Compare (cmpTyCon, cmpType, cmpTypes) where
 
-import GhcApi
+import Internal
 
 cmpTyCon :: TyCon -> TyCon -> Ordering
 cmpTyCon a b = getUnique a `nonDetCmpUnique` getUnique b

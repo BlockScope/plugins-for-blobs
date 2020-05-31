@@ -21,7 +21,7 @@ in    defs
               , main =
                   "Examples.hs"
               , when =
-                  { condition = "impl(ghc > 8.4.4)", buildable = False }
+                  { condition = "impl(ghc >= 8.4.0)", buildable = False }
               }
           }
       }

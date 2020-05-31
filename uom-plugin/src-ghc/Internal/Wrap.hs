@@ -1,17 +1,6 @@
-module GhcApi.Wrap
-  ( -- * Wrappers
-    newUnique
-  , newWantedCt
-  , newGivenCt
-  ) where
+module Internal.Wrap (newUnique, newWantedCt, newGivenCt) where
 
-import GhcApi
-    {-
-  ( Ct, CtLoc, TcPluginM, EvTerm, PredType
-  , mkNonCanonical
-  , newUnique
-  )
-  -}
+import Internal
 import GHC.TcPluginM.Extra (newGiven, newWanted)
 
 newWantedCt :: CtLoc -> PredType -> TcPluginM Ct

@@ -24,5 +24,3 @@ declareConvertibleUnit "squiggle" 2 "m/s"
 [u| dime = 1 1 |]
 dime :: Fractional a => Quantity a [u|dime|] -> Quantity a [u|1|]
 dime = convert
-
-
