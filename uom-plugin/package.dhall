@@ -234,11 +234,7 @@ in    defs
       , tests =
           { units =
               { dependencies =
-                  [ "base"
-                  , "tasty"
-                  , "tasty-hunit"
-                  , "uom-plugin"
-                  ]
+                  [ "base", "tasty", "tasty-hunit", "uom-plugin" ]
               , ghc-options =
                   testopts
               , main =
@@ -250,7 +246,7 @@ in    defs
               }
           , hlint =
               { dependencies =
-                  [ "base", "hlint" ]
+                  "base"
               , ghc-options =
                   testopts
               , main =
@@ -258,7 +254,28 @@ in    defs
               , source-dirs =
                   "test-suite-hlint"
               , when =
-                  { condition = "impl(ghc < 8.10.0)", buildable = False }
+                  [ { condition =
+                        "impl(ghc >= 8.6.0)"
+                    , dependencies =
+                        "hlint"
+                    , buildable =
+                        True
+                    }
+                  , { condition =
+                        "impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)"
+                    , dependencies =
+                        "hlint < 2.1.18"
+                    , buildable =
+                        True
+                    }
+                  , { condition =
+                        "impl(ghc < 8.4.0)"
+                    , dependencies =
+                        "hlint"
+                    , buildable =
+                        False
+                    }
+                  ]
               }
           }
       }

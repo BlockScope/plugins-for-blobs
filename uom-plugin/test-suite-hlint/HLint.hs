@@ -7,8 +7,14 @@ arguments :: [String]
 arguments =
     [ "lint"
     , "--ignore=Parse error"
-    , "--ignore=Use fewer imports"  -- This is a pain for the CPP in TcPluginExtras
     , "src"
+    , "src-ghc"
+    , "src-ghc-8.10"
+    , "src-ghc-8.8"
+    , "src-ghc-8.6"
+    , "src-ghc-8.4"
+    , "src-ghc-8.2"
+    , "src-ghc-8.0"
     , "test-suite-units"
     , "test-suite-hlint"
     ]
