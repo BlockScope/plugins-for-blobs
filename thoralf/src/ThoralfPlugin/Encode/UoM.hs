@@ -5,7 +5,6 @@ module ThoralfPlugin.Encode.UoM (uomTheory) where
 import GhcPlugins (ModuleName, FastString)
 import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
-import Type (Type)
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
@@ -26,31 +25,17 @@ mkUoMEncoding :: TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TheoryEncoding
 mkUoMEncoding base one div' mult uom =
     emptyTheory
         { typeConvs =
-            [ baseConvert base
-            , oneConvert one
-            , divConvert div'
-            , mulConvert mult
+            [ f baseString base
+            , typeConvert oneString one
+            , f (opString "-") div'
+            , f (opString "+") mult
             ]
-        , kindConvs = [uomConvert uom]
+        , kindConvs = [kindConvert "(Array String Int)" uom]
         }
-
-oneConvert :: TyCon -> Type -> Maybe TyConvCont
-oneConvert = typeConvert oneString
-
-baseConvert :: TyCon -> Type -> Maybe TyConvCont
-baseConvert = typeArgConvert $ \case
-    (m : p : _) -> Just (m :> p :> VNil, baseString)
-    _ -> Nothing
-
-divConvert :: TyCon -> Type -> Maybe TyConvCont
-divConvert = typeArgConvert $ \case
-    (n : m : _) -> Just (n :> m :> VNil, opString "-")
-    _ -> Nothing
-
-mulConvert :: TyCon -> Type -> Maybe TyConvCont
-mulConvert = typeArgConvert $ \ case
-    (n : m : _) -> Just (n :> m :> VNil, opString "+")
-    _ -> Nothing
+    where
+        f s = typeArgConvert $ \case
+            (x : y : _) -> Just (x :> y :> VNil, s)
+            _ -> Nothing
 
 oneString :: String
 oneString = "((as const (Array String Int)) 0)"
@@ -62,6 +47,3 @@ baseString (measure :> power :> VNil) VNil =
 opString :: String -> Vec Two String -> Vec 'Zero String -> String
 opString op (n :> m :> VNil) VNil =
     "((_ map (" ++ op ++ " (Int Int) Int)) " ++ n ++ " " ++ m ++ ")"
-
-uomConvert :: TyCon -> Type -> Maybe KdConvCont
-uomConvert = kindConvert "(Array String Int)"
