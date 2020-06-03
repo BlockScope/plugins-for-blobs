@@ -15,7 +15,7 @@ in    defs
       , executables =
           { uom-plugin-examples =
               { dependencies =
-                  defs.dependencies # [ "uom-plugin" ]
+                  defs.dependencies # [ "uom-plugin", "uom-plugin-defs" ]
               , source-dirs =
                   "."
               , main =

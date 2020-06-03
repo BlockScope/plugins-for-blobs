@@ -31,7 +31,6 @@ in    defs
           , exposed-modules =
               [ "Data.UnitsOfMeasure"
               , "Data.UnitsOfMeasure.Convert"
-              , "Data.UnitsOfMeasure.Defs"
               , "Data.UnitsOfMeasure.Internal"
               , "Data.UnitsOfMeasure.Plugin"
               , "Data.UnitsOfMeasure.Read"
