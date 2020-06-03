@@ -9,7 +9,7 @@ import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe )
 
-import ThoralfPlugin.Encode.Convert (kindConvert)
+import ThoralfPlugin.Encode.Convert (Two, kindConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
@@ -67,7 +67,6 @@ divConvert divTycon ty = do
       let tyList = n :> m :> VNil in
       Just $ TyConvCont tyList VNil divString []
 
-type Two = 'Succ ('Succ 'Zero)
 divString :: Vec Two String -> Vec 'Zero String -> String
 divString (n :> m :> VNil) VNil =
     "((_ map (- (Int Int) Int)) " ++ n ++ " " ++ m ++ ")"

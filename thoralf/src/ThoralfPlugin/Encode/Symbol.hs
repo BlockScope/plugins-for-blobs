@@ -23,8 +23,7 @@ symLitConv ty = do
   fastStr <- isStrLitTy ty
   let str = unpackFS fastStr
   let sexprStr = "\"" ++ str ++ "\""
-  return $
-    TyConvCont VNil VNil ((const . const) sexprStr) []
+  return $ TyConvCont VNil VNil ((const . const) sexprStr) []
 
 symKindConv :: Type -> Maybe KdConvCont
 symKindConv = kindConvert "String" typeSymbolKindCon

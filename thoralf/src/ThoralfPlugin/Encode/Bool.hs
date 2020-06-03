@@ -10,11 +10,9 @@ import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe)
 
-import ThoralfPlugin.Encode.Convert (kindConvert)
+import ThoralfPlugin.Encode.Convert (Two, kindConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
-
-type Two = 'Succ ('Succ 'Zero)
 
 boolTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
 boolTheory theoryModuleName pkgName = do

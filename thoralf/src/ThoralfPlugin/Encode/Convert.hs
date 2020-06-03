@@ -1,8 +1,14 @@
-module ThoralfPlugin.Encode.Convert (kindConvert) where
+{-# LANGUAGE DataKinds #-}
+
+module ThoralfPlugin.Encode.Convert (One, Two, Three, kindConvert) where
 
 import TyCon (TyCon(..))
 import Type (Type, splitTyConApp_maybe )
 import ThoralfPlugin.Encode.TheoryEncoding
+
+type One = 'Succ 'Zero
+type Two = 'Succ One
+type Three = 'Succ Two
 
 kindConvert :: String -> TyCon -> Type -> Maybe KdConvCont
 kindConvert s c ty = do

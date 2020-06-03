@@ -9,10 +9,8 @@ import TcTypeNats (typeNatAddTyCon, typeNatSubTyCon)
 import Type (Type, TyVar, splitTyConApp_maybe, tyVarKind, isNumLitTy)
 import TcRnTypes(TcPluginM)
 
-import ThoralfPlugin.Encode.Convert (kindConvert)
+import ThoralfPlugin.Encode.Convert (Two, kindConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
-
-type Two = 'Succ ('Succ 'Zero)
 
 natTheory :: TcPluginM TheoryEncoding
 natTheory = return natEncoding
@@ -27,8 +25,7 @@ natEncoding = emptyTheory
 natLitConv :: Type -> Maybe TyConvCont
 natLitConv ty = do
   integer <- isNumLitTy ty
-  return $
-    TyConvCont VNil VNil ((const . const) (show integer)) []
+  return $ TyConvCont VNil VNil ((const . const) (show integer)) []
 
 natAddConv :: Type -> Maybe TyConvCont
 natAddConv ty = do

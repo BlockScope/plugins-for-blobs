@@ -10,14 +10,11 @@ import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe)
 import Data.Hashable (hash)
 
+import ThoralfPlugin.Encode.Convert (One, Two, Three)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
 type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
-
-type One = 'Succ 'Zero
-type Two = 'Succ One
-type Three = 'Succ Two
 
 fmTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
 fmTheory theoryModuleName pkgName = do
