@@ -50,7 +50,19 @@ in    defs
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
           }
       , tests =
-          { units =
+          { rows =
+              { dependencies =
+                  [ "base", "thoralf-plugin" ]
+              , ghc-options =
+                  [ "-Wall", "-fplugin Plugins.Thoralf" ]
+              , other-modules =
+                  [ "FiniteMaps", "Nat", "RowTypes" ]
+              , main =
+                  "Main.hs"
+              , source-dirs =
+                  "test-suite-rows"
+              }
+          , units =
               { dependencies =
                   [ "base"
                   , "QuickCheck"
