@@ -16,23 +16,23 @@ natTheory = return natEncoding
 
 natEncoding :: TheoryEncoding
 natEncoding = emptyTheory
-  { typeConvs = [natLitConv, natAddConv, natSubConv]
-  , kindConvs = [natKindConv]
-  , tyVarPreds = assertIntIsNat
-  }
+    { typeConvs = [litConvert, addConvert, subConvert]
+    , kindConvs = [natConvert]
+    , tyVarPreds = assertIntIsNat
+    }
 
-natLitConv :: Type -> Maybe TyConvCont
-natLitConv ty = do
-  integer <- isNumLitTy ty
-  return $ TyConvCont VNil VNil ((const . const) (show integer)) []
+litConvert :: Type -> Maybe TyConvCont
+litConvert ty = do
+    integer <- isNumLitTy ty
+    return $ TyConvCont VNil VNil (const . const $ show integer) []
 
-natAddConv :: Type -> Maybe TyConvCont
-natAddConv = (flip typeArgConvert) typeNatAddTyCon $ \case
+addConvert :: Type -> Maybe TyConvCont
+addConvert = (flip typeArgConvert) typeNatAddTyCon $ \case
     [x,y] ->  Just (x :> y :> VNil, opString "+")
     _ -> Nothing
 
-natSubConv :: Type -> Maybe TyConvCont
-natSubConv = (flip typeArgConvert) typeNatSubTyCon $ \case
+subConvert :: Type -> Maybe TyConvCont
+subConvert = (flip typeArgConvert) typeNatSubTyCon $ \case
     [x,y] -> Just (x :> y :> VNil, opString "-")
     _ -> Nothing
 
@@ -41,10 +41,10 @@ opString op (a :> b :> VNil)  VNil = "(" ++ op ++ " " ++ a ++ " " ++ b ++ ")"
 
 assertIntIsNat :: TyVar -> Maybe [String]
 assertIntIsNat tv = do
-    (KdConvCont _ _) <- natKindConv (tyVarKind tv)
+    KdConvCont _ _ <- natConvert (tyVarKind tv)
     let name = show $ getUnique tv
     let isNat = "(assert (<= 0 " ++ name ++ "))"
     return [isNat]
 
-natKindConv :: Type -> Maybe KdConvCont
-natKindConv = kindConvert "Int" typeNatKindCon
+natConvert :: Type -> Maybe KdConvCont
+natConvert = kindConvert "Int" typeNatKindCon
