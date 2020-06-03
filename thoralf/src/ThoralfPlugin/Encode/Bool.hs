@@ -10,7 +10,7 @@ import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe)
 
-import ThoralfPlugin.Encode.Convert (Two, kindConvert)
+import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
@@ -37,16 +37,10 @@ boolEncoding compTyCon compNatCon =
         }
 
 trueLitConv :: Type -> Maybe TyConvCont
-trueLitConv ty = do
-    (tcon, _) <- splitTyConApp_maybe ty
-    if tcon /= promotedTrueDataCon then Nothing else
-        return $ TyConvCont VNil VNil (const . const $ "true") []
+trueLitConv = typeConvert "true" promotedTrueDataCon
 
 falseLitConv :: Type -> Maybe TyConvCont
-falseLitConv ty = do
-    (tcon, _) <- splitTyConApp_maybe ty
-    if tcon /= promotedFalseDataCon then Nothing else
-        return $ TyConvCont VNil VNil (const . const $ "false") []
+falseLitConv = typeConvert "false" promotedFalseDataCon
 
 compLitConv :: TyCon -> Type -> Maybe TyConvCont
 compLitConv comp ty = do
@@ -71,7 +65,7 @@ compTyLitNat comp ty = do
 
 compLitMaker :: Vec Two String -> Vec 'Zero String -> String
 compLitMaker (x :> y :> VNil) VNil =
-  "(or (< " ++ x ++ " " ++ y ++ ")  (= " ++ x ++ " " ++ y ++ "))"
+    "(or (< " ++ x ++ " " ++ y ++ ") (= " ++ x ++ " " ++ y ++ "))"
 
 boolKindConv :: Type -> Maybe KdConvCont
 boolKindConv = kindConvert "Bool" boolTyCon
