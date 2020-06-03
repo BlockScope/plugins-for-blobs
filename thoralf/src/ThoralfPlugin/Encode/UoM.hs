@@ -2,53 +2,44 @@
     GADTs, RecordWildCards, StandaloneDeriving
 #-}
 
-module ThoralfPlugin.Encode.UoM ( uomTheory ) where
+module ThoralfPlugin.Encode.UoM (uomTheory) where
 
-import TyCon ( TyCon(..) )
-import Type ( Type, splitTyConApp_maybe )
-import TcPluginM ( tcLookupTyCon, lookupOrig
-                 , findImportedModule, FindResult(..)
-                 , TcPluginM
-                 )
-import OccName ( mkTcOcc )
-import Module ( Module, mkModuleName )
-import FastString ( fsLit )
+import GhcPlugins (ModuleName, FastString, Module)
+import TyCon (TyCon(..))
+import TcPluginM
+    (FindResult(..), TcPluginM, tcLookupTyCon, lookupOrig, findImportedModule)
+import Type (Type, splitTyConApp_maybe )
+import OccName (mkTcOcc )
 
 import ThoralfPlugin.Encode.TheoryEncoding
 
-
-uomTheory :: TcPluginM TheoryEncoding
-uomTheory = do
-  (Found _ uomModule) <- findImportedModule fmModName (Just pkg)
-  baseTyCon <- findTyCon uomModule "Base"
-  oneTyCon <- findTyCon uomModule "One"
-  divTyCon <- findTyCon uomModule "/:"
-  mulTyCon <- findTyCon uomModule "*:"
-  uomTyCon <- findTyCon uomModule "UoM"
+uomTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
+uomTheory theoryModuleName pkgName = do
+  (Found _ uomModule) <- findImportedModule theoryModuleName (Just pkgName)
+  let f = findTyCon uomModule
+  baseTyCon <- f "Base"
+  oneTyCon <- f "One"
+  divTyCon <- f "/:"
+  mulTyCon <- f "*:"
+  uomTyCon <- f "UoM"
   return $ mkUoMEncoding baseTyCon oneTyCon divTyCon mulTyCon uomTyCon
-  where
-    fmModName = mkModuleName "ThoralfPlugin.Theory.UoM"
-    pkg = fsLit "thoralf-plugin"
-
-
 
 findTyCon :: Module -> String -> TcPluginM TyCon
 findTyCon md strNm = do
     name <- lookupOrig md (mkTcOcc strNm)
     tcLookupTyCon name
 
-
 mkUoMEncoding :: TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TheoryEncoding
-mkUoMEncoding base one div' mult uom =  emptyTheory
-  { typeConvs =
-    [ baseConvert base
-    , oneConvert one
-    , divConvert div'
-    , mulConvert mult
-    ]
-  , kindConvs = [uomConvert uom]
-  }
-
+mkUoMEncoding base one div' mult uom =
+    emptyTheory
+        { typeConvs =
+            [ baseConvert base
+            , oneConvert one
+            , divConvert div'
+            , mulConvert mult
+            ]
+        , kindConvs = [uomConvert uom]
+        }
 
 baseConvert :: TyCon -> Type -> Maybe TyConvCont
 baseConvert base ty = do
@@ -58,12 +49,10 @@ baseConvert base ty = do
     True -> let tyList =  measure :> power :> VNil in
       Just $ TyConvCont tyList VNil baseString []
 
-
 baseString :: Vec Two String -> Vec 'Zero String -> String
 baseString (measure :> power :> VNil) VNil =
   let one = "((as const (Array String Int)) 0)" in
   "(store " ++ one ++ " " ++ measure ++ " " ++ power ++ ")"
-
 
 oneConvert :: TyCon -> Type -> Maybe TyConvCont
 oneConvert one ty = do
@@ -74,8 +63,6 @@ oneConvert one ty = do
       let one' = "((as const (Array String Int)) 0)" in
       Just $ TyConvCont VNil VNil (const . const $ one') []
 
-
-
 divConvert :: TyCon -> Type -> Maybe TyConvCont
 divConvert divTycon ty = do
   (tcon, (n : m : _)) <- splitTyConApp_maybe ty
@@ -85,13 +72,10 @@ divConvert divTycon ty = do
       let tyList = n :> m :> VNil in
       Just $ TyConvCont tyList VNil divString []
 
-
 type Two = 'Succ ('Succ 'Zero)
 divString :: Vec Two String -> Vec 'Zero String -> String
 divString (n :> m :> VNil) VNil =
     "((_ map (- (Int Int) Int)) " ++ n ++ " " ++ m ++ ")"
-
-
 
 mulConvert :: TyCon -> Type -> Maybe TyConvCont
 mulConvert mult ty = do
@@ -102,12 +86,9 @@ mulConvert mult ty = do
       let tyList = n :> m :> VNil in
       Just $ TyConvCont tyList VNil mulString []
 
-
 mulString :: Vec Two String -> Vec 'Zero String -> String
 mulString (n :> m :> VNil) VNil =
     "((_ map (+ (Int Int) Int)) " ++ n ++ " " ++ m ++ ")"
-
-
 
 uomConvert :: TyCon -> Type -> Maybe KdConvCont
 uomConvert uom ty = do
@@ -115,5 +96,3 @@ uomConvert uom ty = do
   case tcon == uom of
     False -> Nothing
     True -> Just $ KdConvCont VNil (const "(Array String Int)")
-
-

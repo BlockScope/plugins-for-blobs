@@ -2,77 +2,59 @@
     GADTs, RecordWildCards, StandaloneDeriving
 #-}
 
-module ThoralfPlugin.Encode.FiniteMap ( fmTheory ) where
+module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
-import TyCon ( TyCon(..) )
-import Type ( Type, splitTyConApp_maybe )
-import TcPluginM ( tcLookupTyCon, lookupOrig
-                 , findImportedModule, FindResult(..)
-                 , TcPluginM
-                 )
-import OccName ( mkTcOcc )
-import Module ( Module, mkModuleName )
-import FastString ( fsLit )
-import Data.Hashable ( hash )
+import GhcPlugins (ModuleName, FastString, Module)
+import TyCon (TyCon(..))
+import TcPluginM
+    (FindResult(..), TcPluginM, tcLookupTyCon, lookupOrig, findImportedModule)
+import Type (Type, splitTyConApp_maybe)
+import OccName (mkTcOcc)
+import Data.Hashable (hash)
 
 import ThoralfPlugin.Encode.TheoryEncoding
 
+type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
 
-fmTheory :: TcPluginM TheoryEncoding
-fmTheory = do
-  (Found _ fmModule) <- findImportedModule fmModName (Just pkg)
-  nil <- findTyCon fmModule "Nil"
-  alt <- findTyCon fmModule "Alter"
-  del <- findTyCon fmModule "Delete"
-  union <- findTyCon fmModule "UnionL"
-  inter <- findTyCon fmModule "IntersectL"
-  fm <- findTyCon fmModule "Fm"
+type One = 'Succ 'Zero
+type Two = 'Succ One
+type Three = 'Succ Two
+
+fmTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
+fmTheory theoryModuleName pkgName = do
+  (Found _ fmModule) <- findImportedModule theoryModuleName (Just pkgName)
+  let f = findTyCon fmModule
+  nil <- f "Nil"
+  alt <- f "Alter"
+  del <- f "Delete"
+  union <- f "UnionL"
+  inter <- f "IntersectL"
+  fm <- f "Fm"
   return $ mkFmTheory (nil, alt, del, union, inter, fm)
-  where
-    fmModName = mkModuleName "ThoralfPlugin.Theory.FiniteMap"
-    pkg = fsLit "thoralf-plugin"
-
-
 
 findTyCon :: Module -> String -> TcPluginM TyCon
 findTyCon md strNm = do
     name <- lookupOrig md (mkTcOcc strNm)
     tcLookupTyCon name
 
-
-type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
-
-mkFmTheory :: FmTyCons-> TheoryEncoding
+mkFmTheory :: FmTyCons -> TheoryEncoding
 mkFmTheory (nil, alter, delete, union, inter, fm) =
-  emptyTheory { startDecs = [maybeDef]
-           , typeConvs =
-             [ nilConvert nil
-             , alterConvert alter
-             , deleteConvert delete
-             , unionConvert union
-             , interConvert inter
-             ]
-           , kindConvs = [fmConvert fm]
-           }
+    emptyTheory
+        { startDecs = [maybeDef]
+        , typeConvs =
+            [ nilConvert nil
+            , alterConvert alter
+            , deleteConvert delete
+            , unionConvert union
+            , interConvert inter
+            ]
+        , kindConvs = [fmConvert fm]
+        }
 
 -- Data and constant declarations
+-- TODO: eventually make this less of a hack.
 maybeDef :: String
-maybeDef =
-  "(declare-datatypes (T) ((Maybe nothing (just (fromJust T)))))"
-
-
-
-{-
-Reference:
-
-
-TODO: eventually make this less of a hack.
-
--}
-
-type One = 'Succ 'Zero
-type Two = 'Succ One
-type Three = 'Succ Two
+maybeDef = "(declare-datatypes (T) ((Maybe nothing (just (fromJust T)))))"
 
 nilConvert :: TyCon -> Type -> Maybe TyConvCont
 nilConvert nil ty = do
@@ -81,13 +63,11 @@ nilConvert nil ty = do
   let kindList =  keyKind :> valKind :> VNil
   return $ TyConvCont VNil kindList nilString []
   where
-
-  nilString :: Vec 'Zero String -> Vec Two String -> String
-  nilString VNil (keyKindStr :> valKindStr :> VNil) = nilStr where
-    maybeVal = " (Maybe " ++ valKindStr ++ ")"
-    arrayTp = "(Array " ++ keyKindStr ++ " " ++ maybeVal ++ ")"
-    nilStr = "((as const " ++ arrayTp ++ ") nothing)"
-
+      nilString :: Vec 'Zero String -> Vec Two String -> String
+      nilString VNil (keyKindStr :> valKindStr :> VNil) = nilStr where
+        maybeVal = " (Maybe " ++ valKindStr ++ ")"
+        arrayTp = "(Array " ++ keyKindStr ++ " " ++ maybeVal ++ ")"
+        nilStr = "((as const " ++ arrayTp ++ ") nothing)"
 
 alterConvert :: TyCon -> Type -> Maybe TyConvCont
 alterConvert alter ty = do
@@ -96,12 +76,10 @@ alterConvert alter ty = do
   let tyList = fmTp :> keyTp :> valTp :> VNil
   return $ TyConvCont tyList VNil alterString []
   where
-
-  alterString :: Vec Three String -> Vec 'Zero String -> String
-  alterString (fmStr :> keyStr :> valStr :> VNil) VNil = altStr where
-    valueStr = "(just " ++ valStr  ++ ")"
-    altStr = "(store " ++ fmStr ++ " " ++ keyStr ++ " " ++ valueStr ++ ")"
-
+      alterString :: Vec Three String -> Vec 'Zero String -> String
+      alterString (fmStr :> keyStr :> valStr :> VNil) VNil = altStr where
+        valueStr = "(just " ++ valStr  ++ ")"
+        altStr = "(store " ++ fmStr ++ " " ++ keyStr ++ " " ++ valueStr ++ ")"
 
 deleteConvert :: TyCon -> Type -> Maybe TyConvCont
 deleteConvert delete ty = do
@@ -111,13 +89,10 @@ deleteConvert delete ty = do
   let kdList = valKd :> VNil
   return $ TyConvCont tyList kdList deleteString []
   where
-
-  deleteString :: Vec Two String -> Vec One String -> String
-  deleteString (fmStr :> keyStr :> VNil) (valKd :> VNil) =
-    "(store " ++ fmStr ++ " " ++ keyStr ++ 
-    " (as nothing (Maybe " ++ valKd ++ ") )  )"
-
-
+      deleteString :: Vec Two String -> Vec One String -> String
+      deleteString (fmStr :> keyStr :> VNil) (valKd :> VNil) =
+        "(store " ++ fmStr ++ " " ++ keyStr ++ 
+        " (as nothing (Maybe " ++ valKd ++ ") )  )"
 
 unionConvert :: TyCon -> Type -> Maybe TyConvCont
 unionConvert union ty = do
@@ -130,27 +105,25 @@ unionConvert union ty = do
   return $ TyConvCont tys kds unionStr [decCont]
   where
 
+      unionStr :: Vec Two String -> Vec One String -> String
+      unionStr (m1 :> m2 :> VNil) (valKd :> VNil) =
+        "( (_ map " ++ eith ++ " ) " ++ m1 ++ " " ++ m2 ++ " )"
+        where
 
-  unionStr :: Vec Two String -> Vec One String -> String
-  unionStr (m1 :> m2 :> VNil) (valKd :> VNil) =
-    "( (_ map " ++ eith ++ " ) " ++ m1 ++ " " ++ m2 ++ " )"
-    where
+        eith = "either" ++ hashVal
+        hashVal = show $ hash valKd
 
-    eith = "either" ++ hashVal
-    hashVal = show $ hash valKd
-
-  eitherDec :: Vec One String -> [String]
-  eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
-    [ "(declare-fun either" ++ hashVal ++ " ((Maybe "++ valKd ++ ") \
-      \(Maybe "++ valKd ++ ")) (Maybe " ++ valKd ++"))"
-    , "(assert (forall ((y (Maybe " ++ valKd ++ "))) \
-      \(= (either" ++ hashVal ++ " (as nothing (Maybe " ++
-        valKd ++ ") ) y) y)))"
-    , "(assert (forall ((x (Maybe " ++ valKd ++ ")) (y (Maybe " ++ valKd ++
-      "))) (=> ((_ is (just (" ++ valKd ++ ") (Maybe " ++ valKd ++
-      ") ) ) x) (= (either" ++ hashVal ++ " x y) x))))"
-    ]
-
+      eitherDec :: Vec One String -> [String]
+      eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
+        [ "(declare-fun either" ++ hashVal ++ " ((Maybe "++ valKd ++ ") \
+          \(Maybe "++ valKd ++ ")) (Maybe " ++ valKd ++"))"
+        , "(assert (forall ((y (Maybe " ++ valKd ++ "))) \
+          \(= (either" ++ hashVal ++ " (as nothing (Maybe " ++
+            valKd ++ ") ) y) y)))"
+        , "(assert (forall ((x (Maybe " ++ valKd ++ ")) (y (Maybe " ++ valKd ++
+          "))) (=> ((_ is (just (" ++ valKd ++ ") (Maybe " ++ valKd ++
+          ") ) ) x) (= (either" ++ hashVal ++ " x y) x))))"
+        ]
 
 interConvert :: TyCon -> Type -> Maybe TyConvCont
 interConvert intersect ty = do
@@ -189,8 +162,6 @@ interConvert intersect ty = do
         noth = "(as nothing (Maybe " ++ valKd ++ "))"
         jus = "(just ("++ valKd ++ ") (Maybe "++ valKd ++ "))"
 
-
-
 fmConvert :: TyCon -> Type -> Maybe KdConvCont
 fmConvert fm ty = do
   (tcon, (_ : _ : keyKind : valKind : _)) <- splitTyConApp_maybe ty
@@ -198,15 +169,10 @@ fmConvert fm ty = do
   let kindList = keyKind :> valKind :> VNil
   return $ KdConvCont kindList fmString
   where
+      fmString :: Vec Two String -> String
+      fmString (keyKindStr :> valKindStr :> VNil) =
+        mkArrayTp keyKindStr valKindStr
 
-  fmString :: Vec Two String -> String
-  fmString (keyKindStr :> valKindStr :> VNil) =
-    mkArrayTp keyKindStr valKindStr
-
-  mkArrayTp :: String -> String -> String
-  mkArrayTp keySort valSort =
-    "(Array " ++ keySort ++ " (Maybe " ++ valSort ++ "))"
-
-
-
-
+      mkArrayTp :: String -> String -> String
+      mkArrayTp keySort valSort =
+        "(Array " ++ keySort ++ " (Maybe " ++ valSort ++ "))"

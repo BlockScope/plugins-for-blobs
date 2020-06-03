@@ -1,6 +1,7 @@
 module ThoralfPlugin.Encode ( thoralfTheories ) where
 
 
+import GhcPlugins ( mkModuleName, fsLit )
 import TcRnTypes( TcPluginM )
 
 import ThoralfPlugin.Encode.TheoryEncoding
@@ -11,21 +12,17 @@ import ThoralfPlugin.Encode.UoM ( uomTheory )
 import ThoralfPlugin.Encode.Symbol ( symbolTheory )
 import ThoralfPlugin.Encode.Bool ( boolTheory )
 
-
 thoralfTheories :: TcPluginM TheoryEncoding
-thoralfTheories = sumEncodings
-  [ natTheory
-  , fmTheory
-  , symbolTheory
-  , boolTheory
-  , uomTheory
-  ]
-
-
-
-
-
-
-
-
-
+thoralfTheories =
+    let pkg = fsLit "thoralf-plugin"
+        fm = mkModuleName "ThoralfPlugin.Theory.FiniteMap"
+        uom = mkModuleName "ThoralfPlugin.Theory.UoM"
+        bool = mkModuleName "ThoralfPlugin.Theory.Bool"
+    in
+        sumEncodings
+            [ natTheory
+            , fmTheory fm pkg
+            , symbolTheory
+            , boolTheory bool pkg
+            , uomTheory uom pkg
+            ]

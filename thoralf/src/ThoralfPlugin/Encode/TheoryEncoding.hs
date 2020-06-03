@@ -108,11 +108,9 @@ data DecCont where
 -- * Helpful functions
 --------------------------------------------------------------------------------
 
-
 -- | Combining monadic theory encodings
 sumEncodings :: [TcPluginM TheoryEncoding] -> TcPluginM TheoryEncoding
 sumEncodings = fmap (foldl addEncodings emptyTheory) . sequence
-
 
 -- | An empty theory from which you can build any theory.
 emptyTheory :: TheoryEncoding
@@ -131,6 +129,3 @@ addEncodings encode1 encode2 = TheoryEncoding
   , tyVarPreds =
       \tvar -> (tyVarPreds encode1 tvar <|> tyVarPreds encode2 tvar)
   }
-
-
-

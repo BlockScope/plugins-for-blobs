@@ -2,27 +2,20 @@
     GADTs, RecordWildCards, StandaloneDeriving
 #-}
 
-module ThoralfPlugin.Encode.Symbol ( symbolTheory ) where
+module ThoralfPlugin.Encode.Symbol (symbolTheory) where
 
-import Type ( Type,
-              splitTyConApp_maybe, isStrLitTy
-            )
-import TcPluginM ( TcPluginM )
-import FastString ( unpackFS )
-import TysWiredIn ( typeSymbolKindCon )
-
+import Type (Type, splitTyConApp_maybe, isStrLitTy)
+import TcPluginM (TcPluginM)
+import FastString (unpackFS)
+import TysWiredIn (typeSymbolKindCon)
 
 import ThoralfPlugin.Encode.TheoryEncoding
-
 
 symbolTheory :: TcPluginM TheoryEncoding
 symbolTheory = return symbolEncoding
 
 symbolEncoding :: TheoryEncoding
-symbolEncoding = emptyTheory
-  { typeConvs = [symLitConv]
-  , kindConvs = [symKindConv]
-  }
+symbolEncoding = emptyTheory{typeConvs = [symLitConv], kindConvs = [symKindConv]}
 
 symLitConv :: Type -> Maybe TyConvCont
 symLitConv ty = do
@@ -32,7 +25,6 @@ symLitConv ty = do
   return $
     TyConvCont VNil VNil ((const . const) sexprStr) []
 
-
 symKindConv :: Type -> Maybe KdConvCont
 symKindConv ty = do
   (tcon, _) <- splitTyConApp_maybe ty
@@ -40,19 +32,3 @@ symKindConv ty = do
     False -> Nothing
     True ->
       Just $ KdConvCont VNil (const "String")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
