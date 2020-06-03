@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 59c313a9597379b081348d5edb0a9ad622958c91e6dd89b5cba52df94d93332c
+-- hash: f4e6a4794866514f12f36f4d65bdc90fef05e346c2fa67c4a54db528996cdd39
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -33,8 +33,6 @@ library
   ghc-options: -Wall -fno-warn-partial-type-signatures
   default-language: Haskell2010
   exposed-modules:
-      ThoralfPlugin.Plugin
-      ThoralfPlugin.ThoralfPlugin
       ThoralfPlugin.Convert
       ThoralfPlugin.Variables
       ThoralfPlugin.Singletons.Symbol
@@ -43,6 +41,8 @@ library
       ThoralfPlugin.Theory.FiniteMap
       ThoralfPlugin.Theory.UoM
       ThoralfPlugin.Theory.Bool
+      Plugins.Thoralf
+      Plugins.Thoralf.TcPlugin
   other-modules:
       ThoralfPlugin.Encode
       ThoralfPlugin.Encode.TheoryEncoding
@@ -69,7 +69,7 @@ test-suite units
       UoM
   hs-source-dirs:
       test-suite-units
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -fplugin ThoralfPlugin.Plugin
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -fplugin Plugins.Thoralf
   build-depends:
       QuickCheck
     , base

@@ -7,7 +7,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fdefer-type-errors #-}
-{-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 
 #if __GLASGOW_HASKELL__ > 710
 {-# OPTIONS_GHC -fno-warn-deferred-type-errors #-}

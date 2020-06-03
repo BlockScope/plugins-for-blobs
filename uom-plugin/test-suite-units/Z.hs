@@ -1,7 +1,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE TypeFamilies #-}
 
-{-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module Z (z) where

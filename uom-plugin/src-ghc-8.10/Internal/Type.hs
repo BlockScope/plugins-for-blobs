@@ -2,8 +2,8 @@ module Internal.Type (collectType) where
 
 import TyCoRep (Type(..))
 
-import Data.UnitsOfMeasure.Plugin.Convert (UnitDefs, eqTc, collectKindOrType)
-import Data.UnitsOfMeasure.Plugin.NormalForm (BaseUnit)
+import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs, eqTc, collectKindOrType)
+import Data.UnitsOfMeasure.Unsafe.NormalForm (BaseUnit)
 
 collectType :: UnitDefs -> a -> Type -> [(a, Type, [(BaseUnit, Integer)])]
 collectType uds ct (AppTy f s) = collectType uds ct f ++ collectType uds ct s

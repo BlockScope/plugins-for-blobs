@@ -21,7 +21,7 @@ import Text.Parse.Units
 import Language.Haskell.TH
 import Language.Haskell.TH.Quote
 
-import Data.UnitsOfMeasure.Internal
+import Data.UnitsOfMeasure.Unsafe
 import Data.UnitsOfMeasure.Convert
 
 -- | The 'u' quasiquoter may be used to create units or quantities;

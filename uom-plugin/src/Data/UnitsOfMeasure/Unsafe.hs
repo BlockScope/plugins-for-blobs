@@ -11,7 +11,7 @@
 -- library.  Note that importing this module may allow you to violate
 -- invariants, so you should generally work with the safe interface in
 -- "Data.UnitsOfMeasure" instead.
-module Data.UnitsOfMeasure.Internal
+module Data.UnitsOfMeasure.Unsafe
     ( -- * Type-level units of measure
       Unit
     , type One

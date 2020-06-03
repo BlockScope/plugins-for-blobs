@@ -4,7 +4,7 @@ in  let testopts =
           [ "-rtsopts"
           , "-threaded"
           , "-with-rtsopts=-N"
-          , "-fplugin Data.UnitsOfMeasure.Plugin"
+          , "-fplugin Plugins.UoM"
           ]
 
 in    defs

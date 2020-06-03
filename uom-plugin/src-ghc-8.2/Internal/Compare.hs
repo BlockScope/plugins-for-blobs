@@ -1,9 +1,4 @@
-module Internal.Compare
-  ( -- * GHC API changes
-    cmpTyCon
-  , cmpType
-  , cmpTypes
-  ) where
+module Internal.Compare (cmpTyCon, cmpType, cmpTypes) where
 
 import Internal
 

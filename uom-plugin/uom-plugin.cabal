@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 21d713de5180429d1a4f93b539ee256b7b8d9cb5c56f87f475ebad2311ed197c
+-- hash: 027e441cf591d78377126597a064100db016e8d17ab6791897a7abf56e11bf0a
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -37,17 +37,18 @@ library
   exposed-modules:
       Data.UnitsOfMeasure
       Data.UnitsOfMeasure.Convert
-      Data.UnitsOfMeasure.Internal
-      Data.UnitsOfMeasure.Plugin
       Data.UnitsOfMeasure.Read
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton
       Data.UnitsOfMeasure.Tutorial
+      Data.UnitsOfMeasure.Unsafe
+      Plugins.UoM
   other-modules:
-      Data.UnitsOfMeasure.Plugin.Convert
-      Data.UnitsOfMeasure.Plugin.NormalForm
-      Data.UnitsOfMeasure.Plugin.Unify
       Data.UnitsOfMeasure.TH
+      Data.UnitsOfMeasure.Unsafe.Convert
+      Data.UnitsOfMeasure.Unsafe.NormalForm
+      Data.UnitsOfMeasure.Unsafe.Unify
+      Plugins.UoM.TcPlugin
       Paths_uom_plugin
   hs-source-dirs:
       doc

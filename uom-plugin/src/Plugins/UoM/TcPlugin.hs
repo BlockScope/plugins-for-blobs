@@ -1,12 +1,12 @@
 -- | This module defines a typechecker plugin that solves equations
 -- involving units of measure.  To use it, add
 --
--- > {-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+-- > {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 --
 -- above the module header of your source files, or in the
 -- @ghc-options@ field of your @.cabal@ file.  You do not need to
 -- import this module.
-module Data.UnitsOfMeasure.Plugin (plugin) where
+module Plugins.UoM.TcPlugin (uomPlugin) where
 
 import Internal
 import Internal.Type (collectType)
@@ -15,22 +15,17 @@ import Internal.Wrap (newGivenCt, newWantedCt)
 import Data.Either
 import Data.List
 
-import Data.UnitsOfMeasure.Plugin.Convert
-import Data.UnitsOfMeasure.Plugin.Unify
-
--- | The plugin that GHC will load when this module is used with the
--- @-fplugin@ option.
-plugin :: Plugin
-plugin = defaultPlugin { tcPlugin = const $ Just uomPlugin }
+import Data.UnitsOfMeasure.Unsafe.Convert
+import Data.UnitsOfMeasure.Unsafe.Unify
 
 uomPlugin :: TcPlugin
-uomPlugin = tracePlugin
-                "uom-plugin"
-                TcPlugin { tcPluginInit  = lookupUnitDefs
-                         , tcPluginSolve = unitsOfMeasureSolver
-                         , tcPluginStop  = const $ return ()
-                         }
-
+uomPlugin =
+    tracePlugin "uom-plugin" $
+    TcPlugin
+        { tcPluginInit  = lookupUnitDefs
+        , tcPluginSolve = unitsOfMeasureSolver
+        , tcPluginStop  = const $ return ()
+        }
 
 unitsOfMeasureSolver :: UnitDefs -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
 unitsOfMeasureSolver uds givens _deriveds []      = do
@@ -140,7 +135,7 @@ lookupUnitDefs = do
                        _   -> error $ "lookupUnitDefs/getDataCon: missing " ++ s
 
     look md s = tcLookupTyCon =<< lookupName md (mkTcOcc s)
-    myModule  = mkModuleName "Data.UnitsOfMeasure.Internal"
+    myModule  = mkModuleName "Data.UnitsOfMeasure.Unsafe"
     myPackage = fsLit "uom-plugin"
 
 

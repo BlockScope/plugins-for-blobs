@@ -34,7 +34,7 @@ import qualified Data.Map as Map
 import Data.Type.Equality
 import Unsafe.Coerce
 
-import Data.UnitsOfMeasure.Internal
+import Data.UnitsOfMeasure.Unsafe
 
 
 -- | Singleton type for concrete units of measure represented as lists

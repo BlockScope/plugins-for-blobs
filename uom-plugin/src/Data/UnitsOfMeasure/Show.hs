@@ -25,7 +25,7 @@ module Data.UnitsOfMeasure.Show
     , showUnit
     ) where
 
-import Data.UnitsOfMeasure.Internal
+import Data.UnitsOfMeasure.Unsafe
 import Data.UnitsOfMeasure.Singleton
 
 import Data.List (group)

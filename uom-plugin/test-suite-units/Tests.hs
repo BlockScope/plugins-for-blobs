@@ -10,7 +10,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 
-{-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 
 -- WARNING: It would be a lot of work to add type annotations to avoid type-default
 -- warnings and what is more this leads to type checking failures;

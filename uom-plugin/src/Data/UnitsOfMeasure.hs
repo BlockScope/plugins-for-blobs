@@ -62,8 +62,8 @@ module Data.UnitsOfMeasure
     ) where
 
 import Data.UnitsOfMeasure.Convert
-import Data.UnitsOfMeasure.Internal
 import Data.UnitsOfMeasure.Read ()
 import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Singleton
 import Data.UnitsOfMeasure.TH
+import Data.UnitsOfMeasure.Unsafe

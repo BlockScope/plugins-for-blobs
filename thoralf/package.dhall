@@ -24,9 +24,7 @@ in    defs
           { source-dirs =
               "src"
           , exposed-modules =
-              [ "ThoralfPlugin.Plugin"
-              , "ThoralfPlugin.ThoralfPlugin"
-              , "ThoralfPlugin.Convert"
+              [ "ThoralfPlugin.Convert"
               , "ThoralfPlugin.Variables"
               , "ThoralfPlugin.Singletons.Symbol"
               , "ThoralfPlugin.Singletons.Nat"
@@ -34,6 +32,8 @@ in    defs
               , "ThoralfPlugin.Theory.FiniteMap"
               , "ThoralfPlugin.Theory.UoM"
               , "ThoralfPlugin.Theory.Bool"
+              , "Plugins.Thoralf"
+              , "Plugins.Thoralf.TcPlugin"
               ]
           , other-modules =
               [ "ThoralfPlugin.Encode"
@@ -62,7 +62,7 @@ in    defs
                   , "tasty-th"
                   ]
               , ghc-options =
-                  [ "-Wall", "-fplugin ThoralfPlugin.Plugin" ]
+                  [ "-Wall", "-fplugin Plugins.Thoralf" ]
               , other-modules =
                   [ "UoM" ]
               , main =

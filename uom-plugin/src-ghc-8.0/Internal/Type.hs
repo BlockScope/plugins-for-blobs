@@ -4,8 +4,8 @@ module Internal.Type (collectType) where
 
 import TyCoRep (Type(..), TyBinder(Anon))
 
-import Data.UnitsOfMeasure.Plugin.Convert (UnitDefs, eqTc, collectKindOrType)
-import Data.UnitsOfMeasure.Plugin.NormalForm (BaseUnit)
+import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs, eqTc, collectKindOrType)
+import Data.UnitsOfMeasure.Unsafe.NormalForm (BaseUnit)
 
 pattern FunTy :: Type -> Type -> Type
 pattern FunTy t v = ForAllTy (Anon t) v

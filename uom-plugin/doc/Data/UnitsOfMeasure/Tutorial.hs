@@ -63,7 +63,7 @@ import Data.UnitsOfMeasure
 -- To use the @uom-plugin@ library, import "Data.UnitsOfMeasure" after making
 -- GHC aware of the plugin and enabling language extensions.
 --
--- >>> {-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+-- >>> {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 -- >>> {-# LANGUAGE DataKinds, QuasiQuotes, TypeOperators #-}
 -- >>> import Data.UnitsOfMeasure
 --
@@ -77,7 +77,7 @@ import Data.UnitsOfMeasure
 -- To start experimenting with @uom-plugin@ in GHCi you will need to do the
 -- equivalent setup.
 --
--- >>> :seti -fplugin Data.UnitsOfMeasure.Plugin -XDataKinds -XQuasiQuotes -XTypeOperators
+-- >>> :seti -fplugin Plugins.UoM -XDataKinds -XQuasiQuotes -XTypeOperators
 -- >>> import Data.UnitsOfMeasure
 
 -- $units

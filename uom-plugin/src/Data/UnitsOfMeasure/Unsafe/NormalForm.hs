@@ -1,7 +1,7 @@
 {-# LANGUAGE CPP #-}
 {-# LANGUAGE TupleSections #-}
 
-module Data.UnitsOfMeasure.Plugin.NormalForm
+module Data.UnitsOfMeasure.Unsafe.NormalForm
   ( Atom(..)
   , BaseUnit
   , NormUnit

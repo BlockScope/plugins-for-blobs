@@ -4,7 +4,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 
-{-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module RationalExamples (dump) where
@@ -12,7 +12,7 @@ module RationalExamples (dump) where
 import Data.UnitsOfMeasure
 import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Defs ()
-import Data.UnitsOfMeasure.Internal (Quantity(..), toRational')
+import Data.UnitsOfMeasure.Unsafe (Quantity(..), toRational')
 
 -- A nautical mile.
 [u| NM = 1852 m |]

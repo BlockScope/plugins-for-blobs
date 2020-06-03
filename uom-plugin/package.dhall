@@ -31,12 +31,12 @@ in    defs
           , exposed-modules =
               [ "Data.UnitsOfMeasure"
               , "Data.UnitsOfMeasure.Convert"
-              , "Data.UnitsOfMeasure.Internal"
-              , "Data.UnitsOfMeasure.Plugin"
               , "Data.UnitsOfMeasure.Read"
               , "Data.UnitsOfMeasure.Show"
               , "Data.UnitsOfMeasure.Singleton"
               , "Data.UnitsOfMeasure.Tutorial"
+              , "Data.UnitsOfMeasure.Unsafe"
+              , "Plugins.UoM"
               ]
           , dependencies =
                 defs.dependencies

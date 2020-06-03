@@ -10,7 +10,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE UndecidableSuperClasses #-}
 
-{-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 
 -- | Experimental support for conversions between units with the same
 -- dimension, for example feet and metres.  This interface is not
@@ -66,7 +66,7 @@ module Data.UnitsOfMeasure.Convert
     , ToCanonicalUnit
     ) where
 
-import Data.UnitsOfMeasure.Internal
+import Data.UnitsOfMeasure.Unsafe
 import Data.UnitsOfMeasure.Singleton
 
 import GHC.Exts ( Constraint )

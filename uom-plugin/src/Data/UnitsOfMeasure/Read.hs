@@ -25,7 +25,7 @@ import Data.Proxy
 import Data.Type.Equality ((:~:)(..))
 import Text.Parse.Units (parseUnit, universalSymbolTable, UnitExp(..))
 
-import Data.UnitsOfMeasure.Internal
+import Data.UnitsOfMeasure.Unsafe
 import Data.UnitsOfMeasure.Singleton
 
 -- | Represents a quantity whose units have a syntactic representation

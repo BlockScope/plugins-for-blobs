@@ -1,4 +1,4 @@
-module Data.UnitsOfMeasure.Plugin.Convert
+module Data.UnitsOfMeasure.Unsafe.Convert
   ( UnitDefs(..)
   , eqTc
   , collectKindOrType
@@ -12,7 +12,7 @@ import Internal
 import Internal.Shim (promoteTyCon)
 import Data.List
 
-import Data.UnitsOfMeasure.Plugin.NormalForm
+import Data.UnitsOfMeasure.Unsafe.NormalForm
 
 -- | Contains references to the basic unit constructors declared in
 -- "Data.UnitsOfMeasure", as loaded inside GHC.

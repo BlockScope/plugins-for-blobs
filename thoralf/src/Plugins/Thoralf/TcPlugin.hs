@@ -10,7 +10,7 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 
-module ThoralfPlugin.ThoralfPlugin ( thoralfPlugin ) where
+module Plugins.Thoralf.TcPlugin ( thoralfPlugin ) where
 
 -- Simple imports:
 import Prelude hiding ( showList )
