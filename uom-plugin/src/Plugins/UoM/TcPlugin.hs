@@ -18,11 +18,10 @@ import Data.List
 import Data.UnitsOfMeasure.Unsafe.Convert
 import Data.UnitsOfMeasure.Unsafe.Unify
 
-uomPlugin :: TcPlugin
-uomPlugin =
-    tracePlugin "uom-plugin" $
+uomPlugin :: ModuleName -> FastString -> TcPlugin
+uomPlugin m pkg =
     TcPlugin
-        { tcPluginInit  = lookupUnitDefs
+        { tcPluginInit  = lookupUnitDefs m pkg
         , tcPluginSolve = unitsOfMeasureSolver
         , tcPluginStop  = const $ return ()
         }
@@ -116,9 +115,9 @@ lookForUnpacks uds givens wanteds = mapM unpackCt unpacks
     promoter x t = mkTyConApp cons_tycon [typeSymbolKind, mkStrLitTy x, t]
     cons_tycon = promoteDataCon consDataCon
 
-lookupUnitDefs :: TcPluginM UnitDefs
-lookupUnitDefs = do
-    md <- lookupModule myModule myPackage
+lookupUnitDefs :: ModuleName -> FastString -> TcPluginM UnitDefs
+lookupUnitDefs moduleName pkgName = do
+    md <- lookupModule moduleName pkgName
     u <- look md "Unit"
     b <- look md "Base"
     o <- look md "One"
@@ -135,8 +134,6 @@ lookupUnitDefs = do
                        _   -> error $ "lookupUnitDefs/getDataCon: missing " ++ s
 
     look md s = tcLookupTyCon =<< lookupName md (mkTcOcc s)
-    myModule  = mkModuleName "Data.UnitsOfMeasure.Unsafe"
-    myPackage = fsLit "uom-plugin"
 
 
 -- | Produce bogus evidence for a constraint, including actual

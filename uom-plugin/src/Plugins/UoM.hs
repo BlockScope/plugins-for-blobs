@@ -15,4 +15,8 @@ import Plugins.UoM.TcPlugin (uomPlugin)
 -- | The plugin that GHC will load when this module is used with the
 -- @-fplugin@ option.
 plugin :: Plugin
-plugin = defaultPlugin{tcPlugin = const $ Just uomPlugin}
+plugin =
+    let m = mkModuleName "Data.UnitsOfMeasure.Unsafe"
+        pkg = fsLit "uom-plugin"
+        tc = uomPlugin m pkg
+    in defaultPlugin{tcPlugin = const . Just $ tracePlugin "uom-plugin" tc}

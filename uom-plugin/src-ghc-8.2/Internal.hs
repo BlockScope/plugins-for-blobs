@@ -12,7 +12,7 @@ module Internal
     ) where
 
 import GhcPlugins
-    ( PredType, FastString(..), Role(..), TyCoVarSet, Plugin(..)
+    ( PredType, FastString(..), Role(..), TyCoVarSet, Plugin(..), ModuleName
     , Kind, TyVar, Id, DFunId, Coercion, TyCon(..), Outputable(..)
     , (<>), (<+>), ($$)
     , isNumLitTy, isStrLitTy, isFamilyTyCon
