@@ -1,15 +1,14 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators,
-    GADTs, RecordWildCards, StandaloneDeriving
-#-}
+{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase #-}
+
 module ThoralfPlugin.Encode.Nat (natTheory) where
 
 import GhcPlugins (getUnique)
 import TysWiredIn (typeNatKindCon)
 import TcTypeNats (typeNatAddTyCon, typeNatSubTyCon)
-import Type (Type, TyVar, splitTyConApp_maybe, tyVarKind, isNumLitTy)
+import Type (Type, TyVar, tyVarKind, isNumLitTy)
 import TcRnTypes(TcPluginM)
 
-import ThoralfPlugin.Encode.Convert (Two, kindConvert)
+import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeArgConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
 
 natTheory :: TcPluginM TheoryEncoding
@@ -28,37 +27,24 @@ natLitConv ty = do
   return $ TyConvCont VNil VNil ((const . const) (show integer)) []
 
 natAddConv :: Type -> Maybe TyConvCont
-natAddConv ty = do
-  (tycon, types) <- splitTyConApp_maybe ty
-  case (tycon == typeNatAddTyCon, types) of
-    (True, [x,y]) ->
-      let
-        mkNatSExpr :: Vec Two String -> Vec 'Zero String -> String
-        mkNatSExpr (a :> b :> VNil) VNil = "(+ " ++ a ++ " " ++ b ++ ")"
-        tyList = x :> y :> VNil
-      in
-        return $ TyConvCont tyList VNil mkNatSExpr []
-    (_, _) -> Nothing
+natAddConv = (flip typeArgConvert) typeNatAddTyCon $ \case
+    [x,y] ->  Just (x :> y :> VNil, opString "+")
+    _ -> Nothing
 
 natSubConv :: Type -> Maybe TyConvCont
-natSubConv ty = do
-  (tycon, types) <- splitTyConApp_maybe ty
-  case (tycon == typeNatSubTyCon, types) of
-    (True, [x,y]) ->
-      let
-        mkNatSExpr :: Vec Two String -> Vec 'Zero String -> String
-        mkNatSExpr (a :> b :> VNil)  VNil = "(- " ++ a ++ " " ++ b ++ ")"
-        tyList = x :> y :> VNil
-      in
-        return $ TyConvCont tyList VNil mkNatSExpr []
-    (_, _) -> Nothing
+natSubConv = (flip typeArgConvert) typeNatSubTyCon $ \case
+    [x,y] -> Just (x :> y :> VNil, opString "-")
+    _ -> Nothing
+
+opString :: String -> Vec Two String -> Vec 'Zero String -> String
+opString op (a :> b :> VNil)  VNil = "(" ++ op ++ " " ++ a ++ " " ++ b ++ ")"
 
 assertIntIsNat :: TyVar -> Maybe [String]
 assertIntIsNat tv = do
-  (KdConvCont _ _) <- natKindConv (tyVarKind tv)
-  let name = show $ getUnique tv
-  let isNat = "(assert (<= 0 " ++ name ++ "))"
-  return [isNat]
+    (KdConvCont _ _) <- natKindConv (tyVarKind tv)
+    let name = show $ getUnique tv
+    let isNat = "(assert (<= 0 " ++ name ++ "))"
+    return [isNat]
 
 natKindConv :: Type -> Maybe KdConvCont
 natKindConv = kindConvert "Int" typeNatKindCon
