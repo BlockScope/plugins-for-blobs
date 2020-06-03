@@ -38,34 +38,29 @@ mkUoMEncoding base one div' mult uom =
 
 baseConvert :: TyCon -> Type -> Maybe TyConvCont
 baseConvert base ty = do
-  (tcon, (measure : power : _)) <- splitTyConApp_maybe ty
-  case tcon == base of
-    False -> Nothing
-    True -> let tyList =  measure :> power :> VNil in
-      Just $ TyConvCont tyList VNil baseString []
+    (tcon, (measure : power : _)) <- splitTyConApp_maybe ty
+    if tcon /= base then Nothing else
+        let tyList = measure :> power :> VNil in
+        Just $ TyConvCont tyList VNil baseString []
 
 baseString :: Vec Two String -> Vec 'Zero String -> String
 baseString (measure :> power :> VNil) VNil =
-  let one = "((as const (Array String Int)) 0)" in
-  "(store " ++ one ++ " " ++ measure ++ " " ++ power ++ ")"
+    let one = "((as const (Array String Int)) 0)" in
+    "(store " ++ one ++ " " ++ measure ++ " " ++ power ++ ")"
 
 oneConvert :: TyCon -> Type -> Maybe TyConvCont
 oneConvert one ty = do
-  (tcon, _) <- splitTyConApp_maybe ty
-  case tcon == one of
-    False -> Nothing
-    True ->
-      let one' = "((as const (Array String Int)) 0)" in
-      Just $ TyConvCont VNil VNil (const . const $ one') []
+    (tcon, _) <- splitTyConApp_maybe ty
+    if tcon /= one then Nothing else
+        let one' = "((as const (Array String Int)) 0)" in
+        Just $ TyConvCont VNil VNil (const . const $ one') []
 
 divConvert :: TyCon -> Type -> Maybe TyConvCont
 divConvert divTycon ty = do
-  (tcon, (n : m : _)) <- splitTyConApp_maybe ty
-  case tcon == divTycon of
-    False -> Nothing
-    True ->
-      let tyList = n :> m :> VNil in
-      Just $ TyConvCont tyList VNil divString []
+    (tcon, (n : m : _)) <- splitTyConApp_maybe ty
+    if tcon /= divTycon then Nothing else
+        let tyList = n :> m :> VNil in
+        Just $ TyConvCont tyList VNil divString []
 
 divString :: Vec Two String -> Vec 'Zero String -> String
 divString (n :> m :> VNil) VNil =
@@ -73,12 +68,10 @@ divString (n :> m :> VNil) VNil =
 
 mulConvert :: TyCon -> Type -> Maybe TyConvCont
 mulConvert mult ty = do
-  (tcon, (n : m : _)) <- splitTyConApp_maybe ty
-  case tcon == mult of
-    False -> Nothing
-    True ->
-      let tyList = n :> m :> VNil in
-      Just $ TyConvCont tyList VNil mulString []
+    (tcon, (n : m : _)) <- splitTyConApp_maybe ty
+    if tcon /= mult then Nothing else
+        let tyList = n :> m :> VNil in
+        Just $ TyConvCont tyList VNil mulString []
 
 mulString :: Vec Two String -> Vec 'Zero String -> String
 mulString (n :> m :> VNil) VNil =

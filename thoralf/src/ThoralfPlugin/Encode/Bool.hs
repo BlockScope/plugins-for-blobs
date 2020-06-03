@@ -38,40 +38,36 @@ boolEncoding compTyCon compNatCon =
 
 trueLitConv :: Type -> Maybe TyConvCont
 trueLitConv ty = do
-  (tcon, _) <- splitTyConApp_maybe ty
-  case tcon == promotedTrueDataCon of
-    True -> return $
-      TyConvCont VNil VNil (const . const $ "true") []
-    False -> Nothing
+    (tcon, _) <- splitTyConApp_maybe ty
+    if tcon /= promotedTrueDataCon then Nothing else
+        return $ TyConvCont VNil VNil (const . const $ "true") []
 
 falseLitConv :: Type -> Maybe TyConvCont
 falseLitConv ty = do
-  (tcon, _) <- splitTyConApp_maybe ty
-  case tcon == promotedFalseDataCon of
-    True -> return $
-      TyConvCont VNil VNil (const . const $ "false") []
-    False -> Nothing
+    (tcon, _) <- splitTyConApp_maybe ty
+    if tcon /= promotedFalseDataCon then Nothing else
+        return $ TyConvCont VNil VNil (const . const $ "false") []
 
 compLitConv :: TyCon -> Type -> Maybe TyConvCont
 compLitConv comp ty = do
-  (tycon, types) <- splitTyConApp_maybe ty
-  case (tycon == comp, types) of
-    (True, (x : y : _)) -> return $
-        TyConvCont (x :> y :> VNil) VNil compMaker []
-    _ -> Nothing
+    (tycon, types) <- splitTyConApp_maybe ty
+    case (tycon == comp, types) of
+        (True, (x : y : _)) -> return $ TyConvCont (x :> y :> VNil) VNil compMaker []
+        _ -> Nothing
 
 compMaker :: Vec Two String -> Vec 'Zero String -> String
 compMaker (x :> y :> VNil) VNil = "(< " ++ x ++ " " ++ y ++ ")"
 
 compTyLitNat :: TyCon -> Type -> Maybe TyConvCont
 compTyLitNat comp ty = do
-  (tycon, types) <- splitTyConApp_maybe ty
-  case (tycon == comp, types) of
-    (True, (x : y : _)) -> return $
-        TyConvCont (x :> y :> VNil) VNil compLitMaker []
-        --TyConvCont (x :> y :> VNil) VNil (const . const $ "true") []
-        --TyConvCont VNil VNil (const . const $  "true") []
-    _ -> Nothing
+    (tycon, types) <- splitTyConApp_maybe ty
+
+    -- NOTE: Consider these alternative encodings.
+    -- TyConvCont (x :> y :> VNil) VNil (const . const $ "true") []
+    -- TyConvCont VNil VNil (const . const $  "true") []
+    case (tycon == comp, types) of
+        (True, (x : y : _)) -> return $ TyConvCont (x :> y :> VNil) VNil compLitMaker []
+        _ -> Nothing
 
 compLitMaker :: Vec Two String -> Vec 'Zero String -> String
 compLitMaker (x :> y :> VNil) VNil =

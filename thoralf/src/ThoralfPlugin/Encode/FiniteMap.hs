@@ -51,7 +51,7 @@ nilConvert :: TyCon -> Type -> Maybe TyConvCont
 nilConvert nil ty = do
   (tcon, (keyKind : valKind : _)) <- splitTyConApp_maybe ty
   True <- return $ tcon == nil
-  let kindList =  keyKind :> valKind :> VNil
+  let kindList = keyKind :> valKind :> VNil
   return $ TyConvCont VNil kindList nilString []
   where
       nilString :: Vec 'Zero String -> Vec Two String -> String
