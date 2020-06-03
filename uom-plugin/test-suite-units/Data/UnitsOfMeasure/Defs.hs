@@ -10,9 +10,7 @@
 -- | This module exports some example definitions of base and derived
 -- units, for demonstration purposes.  In the future, this is likely
 -- to change or be moved to a separate package.
-module Data.UnitsOfMeasure.Defs
-    ( MkUnit
-    ) where
+module Data.UnitsOfMeasure.Defs () where
 
 import Data.UnitsOfMeasure
 
