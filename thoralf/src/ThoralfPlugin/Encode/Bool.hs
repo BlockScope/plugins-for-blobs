@@ -1,6 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators,
-    GADTs, RecordWildCards, StandaloneDeriving
-#-}
+{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase #-}
 
 module ThoralfPlugin.Encode.Bool (boolTheory) where
 
@@ -8,9 +6,9 @@ import GhcPlugins (ModuleName, FastString, fsLit, mkModuleName)
 import TysWiredIn (boolTyCon, promotedTrueDataCon, promotedFalseDataCon)
 import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
-import Type (Type, splitTyConApp_maybe)
+import Type (Type)
 
-import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert)
+import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
@@ -43,25 +41,17 @@ falseLitConv :: Type -> Maybe TyConvCont
 falseLitConv = typeConvert "false" promotedFalseDataCon
 
 compLitConv :: TyCon -> Type -> Maybe TyConvCont
-compLitConv comp ty = do
-    (tycon, types) <- splitTyConApp_maybe ty
-    case (tycon == comp, types) of
-        (True, (x : y : _)) -> return $ TyConvCont (x :> y :> VNil) VNil compMaker []
-        _ -> Nothing
+compLitConv = typeArgConvert $ \case
+    (x : y : _) -> Just (x :> y :> VNil, compMaker)
+    _ -> Nothing
 
 compMaker :: Vec Two String -> Vec 'Zero String -> String
 compMaker (x :> y :> VNil) VNil = "(< " ++ x ++ " " ++ y ++ ")"
 
 compTyLitNat :: TyCon -> Type -> Maybe TyConvCont
-compTyLitNat comp ty = do
-    (tycon, types) <- splitTyConApp_maybe ty
-
-    -- NOTE: Consider these alternative encodings.
-    -- TyConvCont (x :> y :> VNil) VNil (const . const $ "true") []
-    -- TyConvCont VNil VNil (const . const $  "true") []
-    case (tycon == comp, types) of
-        (True, (x : y : _)) -> return $ TyConvCont (x :> y :> VNil) VNil compLitMaker []
-        _ -> Nothing
+compTyLitNat = typeArgConvert $ \case
+    (x : y : _) -> Just (x :> y :> VNil, compLitMaker)
+    _ -> Nothing
 
 compLitMaker :: Vec Two String -> Vec 'Zero String -> String
 compLitMaker (x :> y :> VNil) VNil =
