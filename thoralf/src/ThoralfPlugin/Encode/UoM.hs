@@ -9,6 +9,7 @@ import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe )
 
+import ThoralfPlugin.Encode.Convert (kindConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
@@ -85,8 +86,4 @@ mulString (n :> m :> VNil) VNil =
     "((_ map (+ (Int Int) Int)) " ++ n ++ " " ++ m ++ ")"
 
 uomConvert :: TyCon -> Type -> Maybe KdConvCont
-uomConvert uom ty = do
-  (tcon, _) <- splitTyConApp_maybe ty
-  case tcon == uom of
-    False -> Nothing
-    True -> Just $ KdConvCont VNil (const "(Array String Int)")
+uomConvert = kindConvert "(Array String Int)"

@@ -4,11 +4,12 @@
 
 module ThoralfPlugin.Encode.Symbol (symbolTheory) where
 
-import Type (Type, splitTyConApp_maybe, isStrLitTy)
+import Type (Type, isStrLitTy)
 import TcPluginM (TcPluginM)
 import FastString (unpackFS)
 import TysWiredIn (typeSymbolKindCon)
 
+import ThoralfPlugin.Encode.Convert (kindConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
 
 symbolTheory :: TcPluginM TheoryEncoding
@@ -26,9 +27,4 @@ symLitConv ty = do
     TyConvCont VNil VNil ((const . const) sexprStr) []
 
 symKindConv :: Type -> Maybe KdConvCont
-symKindConv ty = do
-  (tcon, _) <- splitTyConApp_maybe ty
-  case tcon == typeSymbolKindCon of
-    False -> Nothing
-    True ->
-      Just $ KdConvCont VNil (const "String")
+symKindConv = kindConvert "String" typeSymbolKindCon

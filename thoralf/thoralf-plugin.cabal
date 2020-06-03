@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2149bceefd02bdfcc39046031a499b9a91d7cf2fda01763618f0fc0f6e1b0153
+-- hash: d2f57bc32dee006cdb0d844a3eab1ed0ef694f3bdc7e7d3eb4a1c606bfa611ac
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -45,6 +45,7 @@ library
       Plugins.Thoralf.TcPlugin
   other-modules:
       ThoralfPlugin.Encode
+      ThoralfPlugin.Encode.Convert
       ThoralfPlugin.Encode.Find
       ThoralfPlugin.Encode.TheoryEncoding
       ThoralfPlugin.Encode.Nat

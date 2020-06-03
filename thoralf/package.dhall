@@ -37,6 +37,7 @@ in    defs
               ]
           , other-modules =
               [ "ThoralfPlugin.Encode"
+              , "ThoralfPlugin.Encode.Convert"
               , "ThoralfPlugin.Encode.Find"
               , "ThoralfPlugin.Encode.TheoryEncoding"
               , "ThoralfPlugin.Encode.Nat"

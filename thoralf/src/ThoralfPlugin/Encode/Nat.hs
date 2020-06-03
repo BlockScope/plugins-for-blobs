@@ -9,6 +9,7 @@ import TcTypeNats (typeNatAddTyCon, typeNatSubTyCon)
 import Type (Type, TyVar, splitTyConApp_maybe, tyVarKind, isNumLitTy)
 import TcRnTypes(TcPluginM)
 
+import ThoralfPlugin.Encode.Convert (kindConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
 
 type Two = 'Succ ('Succ 'Zero)
@@ -63,8 +64,4 @@ assertIntIsNat tv = do
   return [isNat]
 
 natKindConv :: Type -> Maybe KdConvCont
-natKindConv ty = do
-  (tycon, _) <- splitTyConApp_maybe ty
-  case tycon == typeNatKindCon of
-    True -> return $ KdConvCont VNil (const "Int")
-    False -> Nothing
+natKindConv = kindConvert "Int" typeNatKindCon

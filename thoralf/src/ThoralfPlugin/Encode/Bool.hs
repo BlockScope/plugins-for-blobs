@@ -10,6 +10,7 @@ import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe)
 
+import ThoralfPlugin.Encode.Convert (kindConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
@@ -79,8 +80,4 @@ compLitMaker (x :> y :> VNil) VNil =
   "(or (< " ++ x ++ " " ++ y ++ ")  (= " ++ x ++ " " ++ y ++ "))"
 
 boolKindConv :: Type -> Maybe KdConvCont
-boolKindConv ty = do
-  (tycon, _) <- splitTyConApp_maybe ty
-  case tycon == boolTyCon of
-    True -> return $ KdConvCont VNil (const "Bool")
-    False -> Nothing
+boolKindConv = kindConvert "Bool" boolTyCon
