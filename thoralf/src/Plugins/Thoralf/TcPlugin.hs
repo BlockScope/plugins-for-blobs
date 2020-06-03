@@ -14,7 +14,6 @@ module Plugins.Thoralf.TcPlugin ( thoralfPlugin ) where
 
 -- Simple imports:
 import Prelude hiding ( showList )
-import FastString ( fsLit )
 import Data.Maybe ( mapMaybe )
 import Data.List ( intersperse, (\\) )
 import qualified Data.Map.Strict as M
@@ -26,7 +25,7 @@ import Data.IORef ( IORef )
 
 
 -- GHC API imports:
-import GhcPlugins ( getUnique, getOccName )
+import GhcPlugins ( ModuleName, FastString, getUnique, getOccName )
 import TcPluginM ( tcPluginIO, lookupOrig, tcLookupClass
                  , findImportedModule, FindResult(..), zonkCt
                  , unsafeTcPluginTcM )
@@ -46,7 +45,7 @@ import Coercion ( mkUnivCo, Role(..)  )
 import Type ( Type, splitTyConApp_maybe, getTyVar_maybe )
 import TyCon ( TyCon )
 import Var ( Var, isTcTyVar )
-import Module ( Module, mkModuleName )
+import Module ( Module )
 import OccName ( mkTcOcc, occNameString )
 import Outputable ( showSDocUnsafe, ppr )
 import IOEnv ( newMutVar, readMutVar, writeMutVar )
@@ -73,16 +72,18 @@ data ThoralfState where
 
 type Debug = Bool
 
-thoralfPlugin :: Debug -> TcPluginM TheoryEncoding -> TcPlugin
-thoralfPlugin debug seed = TcPlugin
-  { tcPluginInit = mkThoralfInit debug seed
-  , tcPluginSolve = thoralfSolver debug  -- Debug flag
+thoralfPlugin
+    :: ModuleName -> FastString -> TcPluginM TheoryEncoding -> Debug -> TcPlugin
+thoralfPlugin disEqName pkgName seed debug = TcPlugin
+  { tcPluginInit = mkThoralfInit disEqName pkgName seed debug
+  , tcPluginSolve = thoralfSolver debug
   , tcPluginStop = thoralfStop
   }
 
 
-mkThoralfInit :: Debug -> TcPluginM TheoryEncoding -> TcPluginM ThoralfState
-mkThoralfInit debug seed = do
+mkThoralfInit
+    :: ModuleName -> FastString -> TcPluginM TheoryEncoding -> Debug -> TcPluginM ThoralfState
+mkThoralfInit disEqName pkgName seed debug = do
   encoding <- seed
   let findModule = findImportedModule
   (Found _ disEqModule) <- findModule disEqName (Just pkgName)
@@ -97,9 +98,6 @@ mkThoralfInit debug seed = do
   return $ ThoralfState solverRef encoding disEq
 
   where
-
-    disEqName = mkModuleName "ThoralfPlugin.Theory.DisEq"
-    pkgName = fsLit "thoralf-plugin"
 
     findClass :: Module -> String -> TcPluginM Class
     findClass md strNm = do
