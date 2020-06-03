@@ -6,7 +6,6 @@ import GhcPlugins (ModuleName, FastString, fsLit, mkModuleName)
 import TysWiredIn (boolTyCon, promotedTrueDataCon, promotedFalseDataCon)
 import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
-import Type (Type)
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
@@ -26,36 +25,21 @@ boolEncoding :: TyCon -> TyCon -> TheoryEncoding
 boolEncoding compTyCon compNatCon =
     emptyTheory
         { typeConvs =
-            [ trueLitConv
-            , falseLitConv
-            , compLitConv compTyCon
-            , compTyLitNat compNatCon
+            [ typeConvert "true" promotedTrueDataCon
+            , typeConvert "false" promotedFalseDataCon
+            , f compLT compTyCon
+            , f compLE compNatCon
             ]
-        , kindConvs = [boolKindConv]
+        , kindConvs = [kindConvert "Bool" boolTyCon]
         }
+    where
+        f s = typeArgConvert $ \case
+            (x : y : _) -> Just (x :> y :> VNil, s)
+            _ -> Nothing
 
-trueLitConv :: Type -> Maybe TyConvCont
-trueLitConv = typeConvert "true" promotedTrueDataCon
+compLT :: Vec Two String -> Vec 'Zero String -> String
+compLT (x :> y :> VNil) VNil = "(< " ++ x ++ " " ++ y ++ ")"
 
-falseLitConv :: Type -> Maybe TyConvCont
-falseLitConv = typeConvert "false" promotedFalseDataCon
-
-compLitConv :: TyCon -> Type -> Maybe TyConvCont
-compLitConv = typeArgConvert $ \case
-    (x : y : _) -> Just (x :> y :> VNil, compMaker)
-    _ -> Nothing
-
-compMaker :: Vec Two String -> Vec 'Zero String -> String
-compMaker (x :> y :> VNil) VNil = "(< " ++ x ++ " " ++ y ++ ")"
-
-compTyLitNat :: TyCon -> Type -> Maybe TyConvCont
-compTyLitNat = typeArgConvert $ \case
-    (x : y : _) -> Just (x :> y :> VNil, compLitMaker)
-    _ -> Nothing
-
-compLitMaker :: Vec Two String -> Vec 'Zero String -> String
-compLitMaker (x :> y :> VNil) VNil =
+compLE :: Vec Two String -> Vec 'Zero String -> String
+compLE (x :> y :> VNil) VNil =
     "(or (< " ++ x ++ " " ++ y ++ ") (= " ++ x ++ " " ++ y ++ "))"
-
-boolKindConv :: Type -> Maybe KdConvCont
-boolKindConv = kindConvert "Bool" boolTyCon
