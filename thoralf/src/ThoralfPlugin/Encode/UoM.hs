@@ -4,18 +4,17 @@
 
 module ThoralfPlugin.Encode.UoM (uomTheory) where
 
-import GhcPlugins (ModuleName, FastString, Module)
+import GhcPlugins (ModuleName, FastString)
 import TyCon (TyCon(..))
-import TcPluginM
-    (FindResult(..), TcPluginM, tcLookupTyCon, lookupOrig, findImportedModule)
+import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe )
-import OccName (mkTcOcc )
 
+import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
 uomTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
 uomTheory theoryModuleName pkgName = do
-  (Found _ uomModule) <- findImportedModule theoryModuleName (Just pkgName)
+  uomModule <- findModule theoryModuleName pkgName
   let f = findTyCon uomModule
   baseTyCon <- f "Base"
   oneTyCon <- f "One"
@@ -23,11 +22,6 @@ uomTheory theoryModuleName pkgName = do
   mulTyCon <- f "*:"
   uomTyCon <- f "UoM"
   return $ mkUoMEncoding baseTyCon oneTyCon divTyCon mulTyCon uomTyCon
-
-findTyCon :: Module -> String -> TcPluginM TyCon
-findTyCon md strNm = do
-    name <- lookupOrig md (mkTcOcc strNm)
-    tcLookupTyCon name
 
 mkUoMEncoding :: TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TheoryEncoding
 mkUoMEncoding base one div' mult uom =

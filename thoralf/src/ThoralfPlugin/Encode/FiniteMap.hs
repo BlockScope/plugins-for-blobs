@@ -4,14 +4,13 @@
 
 module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
-import GhcPlugins (ModuleName, FastString, Module)
+import GhcPlugins (ModuleName, FastString)
 import TyCon (TyCon(..))
-import TcPluginM
-    (FindResult(..), TcPluginM, tcLookupTyCon, lookupOrig, findImportedModule)
+import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe)
-import OccName (mkTcOcc)
 import Data.Hashable (hash)
 
+import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
 type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
@@ -22,7 +21,7 @@ type Three = 'Succ Two
 
 fmTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
 fmTheory theoryModuleName pkgName = do
-  (Found _ fmModule) <- findImportedModule theoryModuleName (Just pkgName)
+  fmModule <- findModule theoryModuleName pkgName
   let f = findTyCon fmModule
   nil <- f "Nil"
   alt <- f "Alter"
@@ -31,11 +30,6 @@ fmTheory theoryModuleName pkgName = do
   inter <- f "IntersectL"
   fm <- f "Fm"
   return $ mkFmTheory (nil, alt, del, union, inter, fm)
-
-findTyCon :: Module -> String -> TcPluginM TyCon
-findTyCon md strNm = do
-    name <- lookupOrig md (mkTcOcc strNm)
-    tcLookupTyCon name
 
 mkFmTheory :: FmTyCons -> TheoryEncoding
 mkFmTheory (nil, alter, delete, union, inter, fm) =
@@ -137,7 +131,7 @@ interConvert intersect ty = do
   where
 
   interStr :: Vec Two String -> Vec One String -> String
-  interStr (m1 :> m2 :> VNil) (valKd :> VNil) = 
+  interStr (m1 :> m2 :> VNil) (valKd :> VNil) =
     "( (_ map " ++ both ++") "++ m1 ++ " " ++ m2 ++")"
     where
 
@@ -146,15 +140,15 @@ interConvert intersect ty = do
 
   bothDec :: Vec One String -> [String]
   bothDec (valKd :> VNil) =
-    [ "(declare-fun both" ++ hashVal ++ 
+    [ "(declare-fun both" ++ hashVal ++
       " ((Maybe " ++ valKd ++ ") (Maybe " ++
         valKd ++ ")) (Maybe " ++ valKd ++ "))"
     , "(assert (forall ((y (Maybe " ++ valKd ++ "))) \
       \(= (both" ++ hashVal ++ " y " ++ noth ++ ") " ++ noth ++ ")))"
     , "(assert (forall ((y (Maybe " ++ valKd ++
       "))) (= (both" ++ hashVal ++ " nothing y) nothing)))"
-    , "(assert (forall ((x (Maybe " ++ valKd ++ ")) (y (Maybe " ++ 
-      valKd ++ "))) (=> (and ((_ is " ++ jus ++ 
+    , "(assert (forall ((x (Maybe " ++ valKd ++ ")) (y (Maybe " ++
+      valKd ++ "))) (=> (and ((_ is " ++ jus ++
       ") x) ((_ is "++ jus ++") y) ) (= (both" ++ hashVal ++ " x y) x))))"
     ] where
 

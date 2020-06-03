@@ -4,32 +4,26 @@
 
 module ThoralfPlugin.Encode.Bool (boolTheory) where
 
-import GhcPlugins (ModuleName, FastString, Module, fsLit, mkModuleName)
+import GhcPlugins (ModuleName, FastString, fsLit, mkModuleName)
 import TysWiredIn (boolTyCon, promotedTrueDataCon, promotedFalseDataCon)
 import TyCon (TyCon(..))
-import TcPluginM
-    (FindResult(..), TcPluginM, tcLookupTyCon, lookupOrig, findImportedModule)
+import TcPluginM (TcPluginM)
 import Type (Type, splitTyConApp_maybe)
-import OccName (mkTcOcc)
 
+import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
+
+type Two = 'Succ ('Succ 'Zero)
 
 boolTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
 boolTheory theoryModuleName pkgName = do
-  let f m p = do Found _ m' <- findImportedModule m (Just p); return m'
-
-  boolModule <- f theoryModuleName pkgName
-  typeNatMod <- f (mkModuleName "GHC.TypeNats") (fsLit "base")
+  boolModule <- findModule theoryModuleName pkgName
+  typeNatMod <- findModule (mkModuleName "GHC.TypeNats") (fsLit "base")
 
   compTyCon <- findTyCon boolModule "<?"
   compNat <- findTyCon typeNatMod "<=?"
 
   return $ boolEncoding compTyCon compNat
-
-findTyCon :: Module -> String -> TcPluginM TyCon
-findTyCon md strNm = do
-    name <- lookupOrig md (mkTcOcc strNm)
-    tcLookupTyCon name
 
 boolEncoding :: TyCon -> TyCon -> TheoryEncoding
 boolEncoding compTyCon compNatCon =
@@ -67,7 +61,6 @@ compLitConv comp ty = do
         TyConvCont (x :> y :> VNil) VNil compMaker []
     _ -> Nothing
 
-type Two = 'Succ ('Succ 'Zero)
 compMaker :: Vec Two String -> Vec 'Zero String -> String
 compMaker (x :> y :> VNil) VNil = "(< " ++ x ++ " " ++ y ++ ")"
 
