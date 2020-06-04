@@ -104,21 +104,18 @@ conv cts = do
         convPair (t1, t2) = do
             (t1', deps1) <- convertType t1
             (t2', deps2) <- convertType t2
-            let sexpr = SMT.Atom
-            let convertedPair = (sexpr t1', sexpr t2')
-            return (convertedPair, deps1 <> deps2)
+            return ((SMT.Atom t1', SMT.Atom t2'), deps1 <> deps2)
 
         mkEqExpr :: (SExpr, SExpr) -> SExpr
         mkEqExpr (s1,s2) = SMT.eq s1 s2
 
         mkDisEqExpr :: (SExpr, SExpr) -> SExpr
-        mkDisEqExpr (s1,s2) = (SMT.not $ SMT.eq s1 s2)
+        mkDisEqExpr (s1,s2) = SMT.not $ SMT.eq s1 s2
 
         mapSome :: [ConvMonad a] -> ConvMonad [a]
         mapSome xs = do
             state <- ask
-            let maybeVals = map (`runReaderT` state) xs
-            return $ catMaybes maybeVals
+            return . catMaybes $ map (`runReaderT` state) xs
 
 extractEq :: [Ct] -> [((Type, Type), Ct)]
 extractEq = mapMaybe maybeExtractTyEq
@@ -171,16 +168,12 @@ convertDecs ds = do
     return $ map SMT.Atom uniqueDecs
 
 mkDefaultSMTVar :: TyVar -> SExpr
-mkDefaultSMTVar tv = let
-    name = show $ getUnique tv
-    smtStr = "(declare-const " ++ name ++ " Type)"
-    in SMT.Atom smtStr
+mkDefaultSMTVar tv =
+    SMT.Atom $ "(declare-const " ++ (show $ getUnique tv) ++ " Type)"
 
 mkSMTSort :: TyVar -> SExpr
-mkSMTSort tv = let
-    name = "Sort" ++ (show $ getUnique tv)
-    smtStr = "(declare-sort " ++ name ++ ")"
-    in SMT.Atom smtStr
+mkSMTSort tv =
+    SMT.Atom $ "(declare-sort Sort" ++ (show $ getUnique tv) ++ ")"
 
 -- | Kind variables are just type variables
 type KdVar = TyVar
@@ -296,15 +289,14 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
     defTyVar :: Type -> Maybe (String, [TyVar])
     defTyVar ty = do
         tv <- getTyVar_maybe ty
-        return ( show $ getUnique tv, [tv])
+        return (show $ getUnique tv, [tv])
 
     defFn :: Type -> Maybe (String, [TyVar])
     defFn ty = do
         (fn, arg) <- splitFunTy_maybe ty
         (fnStr, tv1) <- defConvTy fn
         (argStr, tv2) <- defConvTy arg
-        let smtStr = fnDef fnStr argStr
-        return (smtStr, tv1 ++ tv2)
+        return (fnDef fnStr argStr, tv1 ++ tv2)
 
     fnDef :: String -> String -> String
     fnDef strIn strOut =
@@ -345,6 +337,6 @@ convKindTheories kind = do
 -- | In order, try the functions.
 tryFns :: [a -> Maybe b] -> a -> Maybe b
 tryFns [] _ = Nothing
-tryFns (f:fs) a = case f a of
+tryFns (f : fs) a = case f a of
     Nothing -> tryFns fs a
     Just b -> Just b
