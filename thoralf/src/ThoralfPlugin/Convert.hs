@@ -1,5 +1,3 @@
-{-# LANGUAGE GADTs #-}
-
 module ThoralfPlugin.Convert
     (
     -- * Data Definitions
@@ -51,25 +49,13 @@ import Data.Vec (vecMapAll)
 -- | The input needed to convert 'Ct' into smt expressions.
 -- We need the class for dis equality, and an encoding of a collection of
 -- theories.
-data EncodingData where
-    EncodingData
-        ::
-            { encodeDisEq :: Class
-            , encodeTheory :: TheoryEncoding
-            }
-        -> EncodingData
+data EncodingData = EncodingData {encDisEq :: Class, encTheory :: TheoryEncoding}
 
 -- | The output of converting constraints. We have a list of converted
 -- constraints as well as a list of declarations. These declarations are
 -- variable declarations as well as function symbols with accompanying
 -- defining assert statements.
-data ConvCts where
-    ConvCts
-        ::
-            { convEquals :: [(SExpr, Ct)]
-            , convDeps :: [SExpr]
-            }
-        -> ConvCts
+data ConvCts = ConvCts {convEquals :: [(SExpr, Ct)], convDeps :: [SExpr]}
 
 -- | Since our encoding data is passed around as a constant state, we put
 -- it in a reader monad. Of course, conversion could fail, so we transform
@@ -193,26 +179,22 @@ type ConvertedType = (String, ConvDependencies)
 -- | These are pieces of a type that need to be converted into
 -- SMT declarations or definitions in order for the converted
 -- type to be well sorted or correct.
-data ConvDependencies where
+data ConvDependencies =
     ConvDeps
-        ::
-            { convTyVars :: [TyVar] -- ^ Type variables for a known theory
-            , convKdVars :: [TyVar] -- ^ Kind variables for unknown theories
-            , convDefVar :: [TyVar] -- ^ Type variables for default, syntactic theories
-            , convDecs   :: [Decl]  -- ^ SMT declarations specific to some converted type
-            }
-        -> ConvDependencies
+        { convTyVars :: [TyVar] -- ^ Type variables for a known theory
+        , convKdVars :: [TyVar] -- ^ Kind variables for unknown theories
+        , convDefVar :: [TyVar] -- ^ Type variables for default, syntactic theories
+        , convDecs   :: [Decl]  -- ^ SMT declarations specific to some converted type
+        }
 
 noDeps :: ConvDependencies
 noDeps = mempty
 
-data Decl where
+data Decl =
     Decl
-        ::
-            { decKey :: (String, String) -- ^ A unique identifier
-            , localDec :: [String]       -- ^ A list of local declarations
-            }
-        -> Decl
+        { decKey :: (String, String) -- ^ A unique identifier
+        , localDec :: [String]       -- ^ A list of local declarations
+        }
 
 type Hash = String
 
