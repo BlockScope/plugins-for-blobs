@@ -1,10 +1,33 @@
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeInType #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE GADTs #-}
-{-# LANGUAGE StandaloneDeriving #-}
 
-module ThoralfPlugin.Convert where
+module ThoralfPlugin.Convert
+    (
+    -- * Data Definitions
+    -- ** Core Types
+      EncodingData(..), ConvCts(..), ConvMonad
+    -- ** Basic Definitions
+    , SExpr
+
+    -- * Convert Function
+    , convert, conv
+    -- ** Extraction
+    , extractEq, extractDisEq, maybeExtractTyDisEq, maybeExtractTyEq
+    -- ** Converting the Dependencies
+    , convertDeps, convertDecs, mkDefaultSMTVar, mkSMTSort, KdVar, convertTyVars
+
+    -- * Converting A Single Type
+    -- ** Type Conversion Data
+    , ConvertedType, ConvDependencies(..), noDeps, Decl(..), Hash
+    -- ** Converting A Type
+    , convertType, tyVarConv, tryConvTheory, addDepParts, convDecConts
+    , defaultConvTy, defConvTy
+
+    -- * Converting A Single Kind
+    , convertKind, convKindTheories
+
+    -- * A Common Helper Function
+    , tryFns
+    ) where
 
 import Data.Maybe ( mapMaybe, catMaybes )
 import qualified Data.Map as M
@@ -14,8 +37,6 @@ import Data.Semigroup
 import Control.Monad.Reader
 import Prelude
 
-
--- GHC API imports:
 import GhcPlugins ( getUnique )
 import TcRnTypes ( Ct, ctPred )
 import Class ( Class(..) )
@@ -25,61 +46,42 @@ import Type ( Type, PredTree (..), EqRel (..), getTyVar_maybe
             , splitTyConApp_maybe, splitFunTy_maybe
             , classifyPredType, tyVarKind )
 
-
--- Internal imports
 import ThoralfPlugin.Encode.TheoryEncoding
 import Data.Vec
-
-
-
--- * Data Definitions
---------------------------------------------------------------------------------
-
-
--- ** Core Types
 
 -- | The input needed to convert 'Ct' into smt expressions.
 -- We need the class for dis equality, and an encoding of a collection of
 -- theories.
 data EncodingData where
-  EncodingData ::
-    { encodeDisEq :: Class
-    , encodeTheory :: TheoryEncoding
-    } -> EncodingData
-
+    EncodingData
+        ::
+            { encodeDisEq :: Class
+            , encodeTheory :: TheoryEncoding
+            }
+        -> EncodingData
 
 -- | The output of converting constraints. We have a list of converted
 -- constraints as well as a list of declarations. These declarations are
 -- variable declarations as well as function symbols with accompanying
 -- defining assert statements.
 data ConvCts where
-  ConvCts ::
-    { convEquals :: [(SExpr, Ct)]
-    , convDeps :: [SExpr]
-    } -> ConvCts
-
+    ConvCts
+        ::
+            { convEquals :: [(SExpr, Ct)]
+            , convDeps :: [SExpr]
+            }
+        -> ConvCts
 
 -- | Since our encoding data is passed around as a constant state, we put
 -- it in a reader monad. Of course, conversion could fail, so we transform
 -- from a Maybe monad.
 type ConvMonad a = ReaderT EncodingData Maybe a
 
-
-
-
--- ** Basic Definitions
-
 -- | The type of smt expressions.
 type SExpr = SMT.SExpr
 
-
-
--- * Convert Function
---------------------------------------------------------------------------------
-
 convert :: EncodingData -> [Ct] -> Maybe ConvCts
 convert encodingData cts = runReaderT (conv cts) encodingData
-
 
 conv :: [Ct] -> ConvMonad ConvCts
 conv cts = do
@@ -122,18 +124,11 @@ conv cts = do
     let maybeVals = map (`runReaderT` state) xs
     return $ catMaybes maybeVals
 
-
-
-
--- ** Extraction
---------------------------------------------------------------------------------
-
 extractEq :: [Ct] -> [((Type, Type), Ct)]
 extractEq = mapMaybe maybeExtractTyEq
 
 extractDisEq :: Class -> [Ct] -> [((Type, Type), Ct)]
 extractDisEq cls = mapMaybe (maybeExtractTyDisEq cls) where
-
 
 maybeExtractTyDisEq :: Class -> Ct -> Maybe ((Type, Type), Ct)
 maybeExtractTyDisEq disEqCls ct = do
@@ -148,20 +143,6 @@ maybeExtractTyEq ct = do
   case predTree of
     EqPred NomEq t1 t2 -> return ((t1,t2),ct)
     _ -> Nothing
-
-
-  {-
-  return ((simpIfCan t1, simpIfCan t2), ct) where
-
-  simpIfCan :: Type -> Type
-  simpIfCan t = case coreView t of
-    Just t' -> t'
-    Nothing -> t -}
-
-
--- ** Converting the Dependencies
-----------------------------------------
-
 
 convertDeps :: ConvDependencies -> ConvMonad [SExpr]
 convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
@@ -185,7 +166,6 @@ convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
   let exprs = varExprs ++ otherExprs
   return exprs
 
-
 -- | Converting Local Declarations
 convertDecs :: [Decl] -> ConvMonad [SExpr]
 convertDecs ds = do
@@ -193,7 +173,6 @@ convertDecs ds = do
   let ourMap = M.fromList assocList
   let uniqueDecs = foldMap snd $ M.toList ourMap
   return $ map SMT.Atom uniqueDecs where
-
 
 mkDefaultSMTVar :: TyVar -> SExpr
 mkDefaultSMTVar tv = let
@@ -207,7 +186,6 @@ mkSMTSort tv = let
   smtStr = "(declare-sort " ++ name ++ ")"
   in SMT.Atom smtStr
 
-
 -- | Kind variables are just type variables
 type KdVar = TyVar
 convertTyVars :: TyVar -> ConvMonad (SExpr, [KdVar])
@@ -216,16 +194,6 @@ convertTyVars tv = do
   let tvId = show $ getUnique tv
   let smtVar = "(declare-const " ++ tvId ++ " " ++ smtSort ++ ")"
   return (SMT.Atom smtVar, kindVars)
-
-
-
-
--- * Converting A Single Type
---------------------------------------------------------------------------------
-
-
--- ** Type Conversion Data
-----------------------------------------
 
 -- | A Type is converted into a string which is a valid SMT term, if the
 -- dependencies are converted properly and sent to the solver before the
@@ -263,13 +231,6 @@ instance Monoid ConvDependencies where
   mempty = ConvDeps [] [] [] []
   mappend = (<>)
 
-
-
--- ** Converting A Type
-----------------------------------------
-
-
-
 convertType :: Type -> ConvMonad ConvertedType
 convertType ty =
   case tyVarConv ty of
@@ -286,7 +247,6 @@ tyVarConv ty = do
   guard isSkolem
   let tvarStr = show $ getUnique tyvar
   return (tvarStr, tyvar)
-
 
 tryConvTheory :: Type -> ConvMonad ConvertedType
 tryConvTheory ty = do
@@ -325,7 +285,6 @@ convDecConts dcs = do
    let kdVars = foldMap snd recur
    let decl = Decl declKey (cont kConvs)
    return (decl, kdVars)
-
 
 defaultConvTy :: Type -> ConvMonad ConvertedType
 defaultConvTy ty = do
@@ -366,15 +325,6 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
   appDef :: String -> String -> String
   appDef f x = "(apply " ++ f ++ " " ++ x ++ ")"
 
-
-
-
-
-
--- * Converting A Single Kind
-------------------------------------------------------------------------------
-
-
 -- | Converts a Kind into a String and some kind variables
 convertKind :: Kind -> ConvMonad (String, [KdVar])
 convertKind kind =
@@ -395,18 +345,9 @@ convKindTheories kind = do
       let holeVars = foldMap snd recur
       return (kContin convHoles, holeVars)
 
-
-
-
--- * A Common Helper Function
-
 -- | In order, try the functions.
 tryFns :: [a -> Maybe b] -> a -> Maybe b
 tryFns [] _ = Nothing
 tryFns (f:fs) a = case f a of
   Nothing -> tryFns fs a
   Just b -> Just b
-
-
-
-
