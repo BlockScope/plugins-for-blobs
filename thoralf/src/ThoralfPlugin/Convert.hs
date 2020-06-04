@@ -107,10 +107,10 @@ conv cts = do
             return ((SMT.Atom t1', SMT.Atom t2'), deps1 <> deps2)
 
         mkEqExpr :: (SExpr, SExpr) -> SExpr
-        mkEqExpr (s1,s2) = SMT.eq s1 s2
+        mkEqExpr (s1, s2) = SMT.eq s1 s2
 
         mkDisEqExpr :: (SExpr, SExpr) -> SExpr
-        mkDisEqExpr (s1,s2) = SMT.not $ SMT.eq s1 s2
+        mkDisEqExpr (s1, s2) = SMT.not $ SMT.eq s1 s2
 
         mapSome :: [ConvMonad a] -> ConvMonad [a]
         mapSome xs = do
@@ -128,13 +128,13 @@ maybeExtractTyDisEq disEqCls ct = do
     let predTree = classifyPredType $ ctPred ct
     ClassPred class' (_: t1 : t2 : _) <- return predTree
     guard (class' == disEqCls)
-    return ((t1,t2),ct)
+    return ((t1, t2), ct)
 
 maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)
 maybeExtractTyEq ct = do
     let predTree = classifyPredType $ ctPred ct
     case predTree of
-        EqPred NomEq t1 t2 -> return ((t1,t2),ct)
+        EqPred NomEq t1 t2 -> return ((t1, t2), ct)
         _ -> Nothing
 
 convertDeps :: ConvDependencies -> ConvMonad [SExpr]
@@ -162,7 +162,7 @@ convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
 -- | Converting Local Declarations
 convertDecs :: [Decl] -> ConvMonad [SExpr]
 convertDecs ds = do
-    let assocList = map (\(Decl k v) -> (k,v)) ds
+    let assocList = map (\(Decl k v) -> (k, v)) ds
     let ourMap = M.fromList assocList
     let uniqueDecs = foldMap snd $ M.toList ourMap
     return $ map SMT.Atom uniqueDecs
