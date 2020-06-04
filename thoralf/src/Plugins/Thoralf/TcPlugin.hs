@@ -1,8 +1,5 @@
-{-# LANGUAGE CPP, GADTs  #-}
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
-
-{-# OPTIONS_GHC -Wno-unused-top-binds #-}
-{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
 
@@ -10,8 +7,6 @@ import Prelude hiding (showList)
 import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
-import qualified Data.Map.Strict as M
-import qualified Data.Set as Set
 import qualified SimpleSMT as SMT
 import Class (Class(..))
 import System.IO.Error
@@ -19,8 +14,7 @@ import Data.IORef (IORef)
 import GhcPlugins (ModuleName, FastString)
 import TcPluginM
     ( tcPluginIO, lookupOrig, tcLookupClass
-    , findImportedModule, FindResult(..), zonkCt
-    , unsafeTcPluginTcM
+    , findImportedModule, FindResult(..), unsafeTcPluginTcM
     )
 import TcRnTypes (Ct, TcPluginM, TcPluginResult(..), TcPlugin(..))
 
@@ -42,16 +36,12 @@ import ThoralfPlugin.Convert
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import Plugins.Thoralf.Print (printCts, showList)
 
--- Renaming
-type Set = Set.Set
-type Map = M.Map
-
-data ThoralfState where
-  ThoralfState ::
-    { smtSolver :: IORef SMT.Solver
-    , theoryEncoding :: TheoryEncoding
-    , disEqClass :: Class
-    } -> ThoralfState
+data ThoralfState =
+    ThoralfState
+        { smtSolver :: IORef SMT.Solver
+        , theoryEncoding :: TheoryEncoding
+        , disEqClass :: Class
+        }
 
 type Debug = Bool
 
@@ -92,7 +82,12 @@ mkThoralfInit disEqName pkgName seed debug = do
         SMT.push z3Solver
         return z3Solver
     solverRef <- unsafeTcPluginTcM $ newMutVar z3Solver
-    return $ ThoralfState solverRef encoding disEq
+    return
+        ThoralfState
+            { smtSolver = solverRef
+            , theoryEncoding = encoding
+            , disEqClass = disEq
+            }
     where
         findClass :: Module -> String -> TcPluginM Class
         findClass md strNm = do
@@ -112,7 +107,14 @@ thoralfSolver
     -> [Ct]
     -> [Ct]
     -> TcPluginM TcPluginResult
-thoralfSolver debug (ThoralfState smtRef encode deCls) gs' ws' ds' = do
+thoralfSolver
+    debug
+    ThoralfState
+        { smtSolver = smtRef
+        , theoryEncoding = encode
+        , disEqClass = deCls
+        }
+    gs' ws' ds' = do
     -- Refresh the solver
     _ <- refresh encode smtRef debug
     smt <- unsafeTcPluginTcM $ readMutVar smtRef
@@ -212,13 +214,6 @@ addEvTerm ct = do
 debugIO :: Bool -> String -> TcPluginM ()
 debugIO False _ = return ()
 debugIO True s = tcPluginIO $ putStrLn s
-
-zonkEverything :: [Ct] -> TcPluginM [Ct]
-zonkEverything [] = return []
-zonkEverything (x : xs) = do
-    c <- zonkCt x
-    cs <- zonkEverything xs
-    return (c:cs)
 
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the
 -- form (EqPred NomEq t1 t2)
