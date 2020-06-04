@@ -37,9 +37,10 @@ import Module (Module)
 import OccName (mkTcOcc)
 import IOEnv (newMutVar, readMutVar, writeMutVar)
 
-import ThoralfPlugin.Convert --( convertor, maybeExtractTyEq )
-import ThoralfPlugin.Encode.TheoryEncoding ( TheoryEncoding (..) )
-import Plugins.Thoralf.Print
+import ThoralfPlugin.Convert
+    (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
+import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
+import Plugins.Thoralf.Print (printCts, showList)
 
 -- Renaming
 type Set = Set.Set
