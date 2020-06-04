@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b69cc5bd32be43feb138b4e68bd564f06992ee484ccfcf7c037a0fb9bf87aa24
+-- hash: 3587e2f0b16ef68d3058b8538dfd2313d5cf42caf5fc212671bfc2dab5a898bd
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -53,6 +53,7 @@ library
       ThoralfPlugin.Encode.Symbol
       ThoralfPlugin.Encode.UoM
       ThoralfPlugin.Encode.Bool
+      Plugins.Thoralf.Print
       Data.Vec
   other-extensions: TypeFamilies TypeInType GADTs RecordWildCards
   build-depends:

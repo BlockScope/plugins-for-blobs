@@ -45,6 +45,7 @@ in    defs
               , "ThoralfPlugin.Encode.Symbol"
               , "ThoralfPlugin.Encode.UoM"
               , "ThoralfPlugin.Encode.Bool"
+              , "Plugins.Thoralf.Print"
               , "Data.Vec"
               ]
           , other-extensions =

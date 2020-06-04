@@ -9,22 +9,20 @@ module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
 import Prelude hiding (showList)
 import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
-import Data.List ((\\), intercalate)
+import Data.List ((\\))
 import qualified Data.Map.Strict as M
 import qualified Data.Set as Set
 import qualified SimpleSMT as SMT
 import Class (Class(..))
 import System.IO.Error
 import Data.IORef (IORef)
-import GhcPlugins (ModuleName, FastString, getUnique, getOccName )
+import GhcPlugins (ModuleName, FastString)
 import TcPluginM
     ( tcPluginIO, lookupOrig, tcLookupClass
     , findImportedModule, FindResult(..), zonkCt
     , unsafeTcPluginTcM
     )
-import TcRnTypes
-    (WantedConstraints, Ct, TcPluginM, TcPluginResult(..), TcPlugin(..))
-import TcType (isMetaTyVar)
+import TcRnTypes (Ct, TcPluginM, TcPluginResult(..), TcPlugin(..))
 
 #if __GLASGOW_HASKELL__ > 804
 import TcEvidence (EvTerm(..), evCoercion)
@@ -34,16 +32,14 @@ import TcEvidence (EvTerm(..))
 
 import TyCoRep (UnivCoProvenance(..))
 import Coercion (mkUnivCo, Role(..))
-import Type (Type, splitTyConApp_maybe, getTyVar_maybe)
-import TyCon (TyCon)
-import Var (Var, isTcTyVar)
+import Type (Type)
 import Module (Module)
-import OccName (mkTcOcc, occNameString)
-import Outputable (showSDocUnsafe, ppr)
+import OccName (mkTcOcc)
 import IOEnv (newMutVar, readMutVar, writeMutVar)
 
 import ThoralfPlugin.Convert --( convertor, maybeExtractTyEq )
 import ThoralfPlugin.Encode.TheoryEncoding ( TheoryEncoding (..) )
+import Plugins.Thoralf.Print
 
 -- Renaming
 type Set = Set.Set
@@ -212,25 +208,6 @@ addEvTerm ct = do
     -- We never have a wanted disequality.
     return (makeEqEvidence "Fm Plugin" (t1,t2), ct')
 
-printParsedInputs :: Bool -> [SExpr] -> SExpr -> [SExpr] -> TcPluginM ()
-printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
-    putStrLn $ "Given SExpr: \n" ++ show (map (`SMT.showsSExpr` "") gSExpr)
-    putStrLn $ "Wanted SExpr: \n" ++ SMT.showsSExpr wSExpr ""
-    putStrLn $ "Variable Decs: \n" ++ show (map (`SMT.showsSExpr` "") parseDeclrs)
-printParsedInputs False _ _ _ = return ()
-
-printCts :: Bool -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
-printCts True bool gs ws ds = do
-    let iffail = "\n\n" ++ if bool then "Parse Failure" else "Solver call start" ++ "\n\n"
-    tcPluginIO $ do
-        putStrLn "\n\n  ----- Plugin Call HERE !!! ------\n\n"
-        putStrLn iffail
-        putStrLn ("\tGivens: \n" ++ showList gs)
-        putStrLn ("\tWanteds: \n" ++ showList ws)
-        putStrLn ("\tDesireds: \n" ++ showList ds)
-    return $ TcPluginOk [] []
-printCts False _ _ _ _ = return $ TcPluginOk [] []
-
 debugIO :: Bool -> String -> TcPluginM ()
 debugIO False _ = return ()
 debugIO True s = tcPluginIO $ putStrLn s
@@ -252,50 +229,3 @@ makeEqEvidence s (t1, t2) =
     EvCoercion
 #endif
     $ mkUnivCo (PluginProv s) Nominal t1 t2
-
--- *  Printing
-instance Show Type where
-    show ty = case splitTyConApp_maybe ty of
-        Just (tcon, tys) -> show tcon ++ " " ++ show tys
-        Nothing -> case getTyVar_maybe ty of
-            Just var -> show var
-            Nothing -> showSDocUnsafe $ ppr ty
-
-instance Show TyCon where
-    show = occNameString . getOccName
-
-instance Show Var where
-    show v =
-        let nicename = varOccName v ++ ";" ++ varUnique v in
-        nicename ++ ":" ++ classifyVar v
-
-varOccName :: Var -> String
-varOccName = showSDocUnsafe . ppr . getOccName
-
-varUnique :: Var -> String
-varUnique = show . getUnique
-
-classifyVar :: Var -> String
-classifyVar v
-    | isTcTyVar v = if isMetaTyVar v then "t" else "s"
-    | otherwise = "irr"
-
-showTupList :: (Show a, Show b) => [(a, b)] -> String
-showTupList xs =
-    "[\n" ++ intercalate "\n" (map mkEquality xs) ++ "\n]"
-    where
-        mkEquality (a, b) = show a ++ " ~ " ++ show b
-
-showList :: Show a => [a] -> String
-showList xs = "[\n" ++ intercalate "\n" (map show xs) ++ "\n]"
-
-instance Show Ct where
-    show ct = case maybeExtractTyEq ct of
-        Just ((t1,t2),_) -> show (t1, t2)
-        Nothing -> showSDocUnsafe $ ppr ct
-
-instance Show WantedConstraints where
-  show = showSDocUnsafe . ppr
-
-instance Show EvTerm where
-  show = showSDocUnsafe . ppr
