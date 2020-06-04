@@ -188,11 +188,10 @@ refresh encoding solverRef debug = do
 
     unsafeTcPluginTcM $ writeMutVar solverRef z3Solver
     where
-        typeDataType = SMT.Atom typeData
-
-        typeData =
-            -- As one long line to avoid problems with CPP and string gaps.
-            "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
+        typeDataType =
+            SMT.Atom
+                -- WARNING: As one long line to avoid problems with CPP and string gaps.
+                "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
 
 isEqCt :: Class -> Ct -> Bool
 isEqCt diseq ct = case (maybeExtractTyEq ct, maybeExtractTyDisEq diseq ct) of
