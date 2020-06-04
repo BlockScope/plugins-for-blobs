@@ -1,14 +1,7 @@
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeInType #-}
-{-# LANGUAGE TypeOperators #-}
-
-{-# OPTIONS_GHC -Wunused-top-binds #-}
+{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
 
 module ThoralfPlugin.Theory.Bool where
 
-import GHC.TypeLits ( Nat )
+import GHC.TypeLits (Nat)
 
 type family (<?) (x :: Nat) (y :: Nat) :: Bool where {}
-
-
-
