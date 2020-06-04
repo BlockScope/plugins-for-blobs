@@ -1,16 +1,15 @@
-module ThoralfPlugin.Encode ( thoralfTheories ) where
+module ThoralfPlugin.Encode (thoralfTheories) where
 
+import GhcPlugins (mkModuleName, fsLit)
+import TcRnTypes(TcPluginM)
 
-import GhcPlugins ( mkModuleName, fsLit )
-import TcRnTypes( TcPluginM )
+import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding, sumEncodings)
 
-import ThoralfPlugin.Encode.TheoryEncoding
-
-import ThoralfPlugin.Encode.Nat ( natTheory )
-import ThoralfPlugin.Encode.FiniteMap ( fmTheory )
-import ThoralfPlugin.Encode.UoM ( uomTheory )
-import ThoralfPlugin.Encode.Symbol ( symbolTheory )
-import ThoralfPlugin.Encode.Bool ( boolTheory )
+import ThoralfPlugin.Encode.Nat (natTheory)
+import ThoralfPlugin.Encode.FiniteMap (fmTheory)
+import ThoralfPlugin.Encode.UoM (uomTheory)
+import ThoralfPlugin.Encode.Symbol (symbolTheory)
+import ThoralfPlugin.Encode.Bool (boolTheory)
 
 thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
