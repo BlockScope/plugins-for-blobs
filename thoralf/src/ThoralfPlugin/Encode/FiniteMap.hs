@@ -131,19 +131,16 @@ bothDec (valKd :> VNil) =
         jus = "(just ("++ valKd ++ ") (Maybe "++ valKd ++ "))"
 
 nilString :: Vec 'Zero String -> Vec Two String -> String
-nilString VNil (keyKindStr :> valKindStr :> VNil) =
-    let maybeVal = " (Maybe " ++ valKindStr ++ ")"
-        arrayTp = "(Array " ++ keyKindStr ++ " " ++ maybeVal ++ ")"
-    in "((as const " ++ arrayTp ++ ") nothing)"
+nilString VNil (keyKd :> valKd :> VNil) =
+    "((as const (Array " ++ keyKd ++ " (Maybe " ++ valKd ++ "))) nothing)"
 
 alterString :: Vec Three String -> Vec 'Zero String -> String
-alterString (fmStr :> keyStr :> valStr :> VNil) VNil =
-    let valueStr = "(just " ++ valStr  ++ ")"
-    in "(store " ++ fmStr ++ " " ++ keyStr ++ " " ++ valueStr ++ ")"
+alterString (fm :> key :> val :> VNil) VNil =
+    "(store " ++ fm ++ " " ++ key ++ " (just " ++ val  ++ "))"
 
 deleteString :: Vec Two String -> Vec One String -> String
-deleteString (fmStr :> keyStr :> VNil) (valKd :> VNil) =
-    "(store " ++ fmStr ++ " " ++ keyStr ++ " (as nothing (Maybe " ++ valKd ++ ") )  )"
+deleteString (fm :> key :> VNil) (valKd :> VNil) =
+    "(store " ++ fm ++ " " ++ key ++ " (as nothing (Maybe " ++ valKd ++ ") )  )"
 
 opString :: String -> Vec Two String -> Vec One String -> String
 opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
