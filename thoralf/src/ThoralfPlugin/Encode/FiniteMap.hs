@@ -5,10 +5,10 @@ module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 import GhcPlugins (ModuleName, FastString)
 import TyCon (TyCon(..))
 import TcPluginM (TcPluginM)
-import Type (Type, splitTyConApp_maybe)
+import Type (Type)
 import Data.Hashable (hash)
 
-import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert)
+import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
 
@@ -147,14 +147,9 @@ opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
     "( (_ map " ++ op ++ (show $ hash valKd) ++") "++ m1 ++ " " ++ m2 ++ ")"
 
 fmConvert :: TyCon -> Type -> Maybe KdConvCont
-fmConvert fm ty = do
-    (tcon, (_ : _ : keyKind : valKind : _)) <- splitTyConApp_maybe ty
-    True <- return $ tcon == fm
-    let kindList = keyKind :> valKind :> VNil
-    return $ KdConvCont kindList fmString
-    where
-        fmString :: Vec Two String -> String
-        fmString (keyKindStr :> valKindStr :> VNil) = mkArrayTp keyKindStr valKindStr
+fmConvert = kindArgConvert $ \case
+    _ : _ : keyKind : valKind : _ -> Just (keyKind :> valKind :> VNil, fmString)
+    _ -> Nothing
 
-        mkArrayTp :: String -> String -> String
-        mkArrayTp keySort valSort = "(Array " ++ keySort ++ " (Maybe " ++ valSort ++ "))"
+fmString :: Vec Two String -> String
+fmString (keyKd :> valKd :> VNil) = "(Array " ++ keyKd ++ " (Maybe " ++ valKd ++ "))"

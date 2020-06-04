@@ -2,7 +2,7 @@
 
 module ThoralfPlugin.Encode.Convert
     ( One, Two, Three
-    , kindConvert, typeConvert, typeArgConvert, mkConvert
+    , kindConvert, typeConvert, kindArgConvert, typeArgConvert, mkConvert
     ) where
 
 import TyCon (TyCon(..))
@@ -24,6 +24,15 @@ typeConvert :: String -> TyCon -> Type -> Maybe TyConvCont
 typeConvert s c ty = do
     (c', _) <- splitTyConApp_maybe ty
     if c' /= c then Nothing else Just $ TyConvCont VNil VNil (const $ const s) []
+
+kindArgConvert
+    :: ([Type] -> Maybe (Vec m Kind, Vec m String -> String))
+    -> TyCon
+    -> Type
+    -> Maybe KdConvCont
+kindArgConvert f c ty = do
+    (c', xs) <- splitTyConApp_maybe ty
+    if c' /= c then Nothing else uncurry KdConvCont <$> f xs
 
 typeArgConvert
     :: ([Type] -> Maybe (Vec n Type, Vec n String -> Vec 'Zero String -> String))
