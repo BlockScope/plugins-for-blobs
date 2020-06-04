@@ -7,7 +7,12 @@ module Plugins.Thoralf.Print (printCts, showList) where
 import Prelude hiding (showList)
 import Data.List (intercalate)
 import qualified SimpleSMT as SMT (showsSExpr)
-import GhcPlugins (getUnique, getOccName )
+import GhcPlugins
+    ( Type, TyCon, Var
+    , splitTyConApp_maybe, getTyVar_maybe, isTcTyVar
+    , getUnique, getOccName, occNameString, showSDocUnsafe, ppr
+    )
+
 import TcPluginM (tcPluginIO)
 import TcRnTypes (WantedConstraints, Ct, TcPluginM, TcPluginResult(..))
 import TcType (isMetaTyVar)
@@ -17,12 +22,6 @@ import TcEvidence (EvTerm(..), evCoercion)
 #else
 import TcEvidence (EvTerm(..))
 #endif
-
-import Type (Type, splitTyConApp_maybe, getTyVar_maybe)
-import TyCon (TyCon)
-import Var (Var, isTcTyVar)
-import OccName (occNameString)
-import Outputable (showSDocUnsafe, ppr)
 
 import ThoralfPlugin.Convert (SExpr, maybeExtractTyEq)
 

@@ -9,9 +9,9 @@ import Data.Maybe (mapMaybe)
 import Data.List ((\\))
 import qualified SimpleSMT as SMT
 import Class (Class(..))
-import System.IO.Error
+import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
-import GhcPlugins (ModuleName, FastString)
+import GhcPlugins (ModuleName, FastString, Type, Module, mkTcOcc)
 import TcPluginM
     ( tcPluginIO, lookupOrig, tcLookupClass
     , findImportedModule, FindResult(..), unsafeTcPluginTcM
@@ -26,9 +26,6 @@ import TcEvidence (EvTerm(..))
 
 import TyCoRep (UnivCoProvenance(..))
 import Coercion (mkUnivCo, Role(..))
-import Type (Type)
-import Module (Module)
-import OccName (mkTcOcc)
 import IOEnv (newMutVar, readMutVar, writeMutVar)
 
 import ThoralfPlugin.Convert
