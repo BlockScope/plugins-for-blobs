@@ -2,13 +2,14 @@
 
 module ThoralfPlugin.Encode.Convert
     ( One, Two, Three
-    , kindConvert, typeConvert, typeArgConvert
+    , kindConvert, typeConvert, typeArgConvert, mkConvert
     ) where
 
 import TyCon (TyCon(..))
 import Type (Type, splitTyConApp_maybe )
 import ThoralfPlugin.Encode.TheoryEncoding
-    (KdConvCont(..), TyConvCont(..), Vec(..), Nat(..))
+    (KdConvCont(..), TyConvCont(..), Vec(..), Nat(..), DecCont)
+import TyCoRep (Kind)
 
 type One = 'Succ 'Zero
 type Two = 'Succ One
@@ -33,3 +34,21 @@ typeArgConvert f c ty = do
     (c', xs) <- splitTyConApp_maybe ty
     if c' /= c then Nothing else
         (\(vecTy, vecS) -> TyConvCont vecTy VNil vecS []) <$> f xs
+
+mkConvert
+    :: ([Type]
+            -> Maybe
+                ( Vec n Type, Vec m Kind
+                , Vec n String -> Vec m String -> String
+                , [DecCont]
+                )
+       )
+    -> TyCon
+    -> Type
+    -> Maybe TyConvCont
+mkConvert f c ty = do
+    (c', xs) <- splitTyConApp_maybe ty
+    if c' /= c then Nothing else uncurry4 TyConvCont <$> f xs
+
+uncurry4 :: (a -> b -> c -> d -> e) -> (a, b, c, d) -> e
+uncurry4 f ~(a, b, c, d) = f a b c d
