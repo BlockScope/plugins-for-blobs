@@ -5,11 +5,9 @@ module ThoralfPlugin.Encode.Convert
     , kindConvert, typeConvert, kindArgConvert, typeArgConvert, mkConvert
     ) where
 
-import TyCon (TyCon(..))
-import Type (Type, splitTyConApp_maybe )
+import GhcPlugins (TyCon, Kind, Type, splitTyConApp_maybe)
 import ThoralfPlugin.Encode.TheoryEncoding
     (KdConvCont(..), TyConvCont(..), Vec(..), Nat(..), DecCont)
-import TyCoRep (Kind)
 
 type One = 'Succ 'Zero
 type Two = 'Succ One

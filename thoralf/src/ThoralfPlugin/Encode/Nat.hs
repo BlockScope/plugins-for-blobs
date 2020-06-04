@@ -2,10 +2,8 @@
 
 module ThoralfPlugin.Encode.Nat (natTheory) where
 
-import GhcPlugins (getUnique)
-import TysWiredIn (typeNatKindCon)
+import GhcPlugins (Type, TyVar, tyVarKind, isNumLitTy, getUnique, typeNatKindCon)
 import TcTypeNats (typeNatAddTyCon, typeNatSubTyCon)
-import Type (Type, TyVar, tyVarKind, isNumLitTy)
 import TcRnTypes(TcPluginM)
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeArgConvert)

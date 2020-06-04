@@ -25,7 +25,7 @@ module ThoralfPlugin.Encode.TheoryEncoding
 import Control.Applicative ((<|>))
 import Data.Vec (Vec(..), Nat(..))
 import TcRnTypes (TcPluginM)
-import Type (Kind, TyVar, Type)
+import GhcPlugins (Kind, TyVar, Type)
 
 -- | Predicated on type variables 'tyVarPreds' take the encoding of a type
 -- variable, and create SMT statements which can be asserted that restrict the

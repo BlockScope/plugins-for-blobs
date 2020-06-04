@@ -4,10 +4,8 @@
 
 module ThoralfPlugin.Encode.Symbol (symbolTheory) where
 
-import Type (Type, isStrLitTy)
+import GhcPlugins (Type, isStrLitTy, unpackFS, typeSymbolKindCon)
 import TcPluginM (TcPluginM)
-import FastString (unpackFS)
-import TysWiredIn (typeSymbolKindCon)
 
 import ThoralfPlugin.Encode.Convert (kindConvert)
 import ThoralfPlugin.Encode.TheoryEncoding

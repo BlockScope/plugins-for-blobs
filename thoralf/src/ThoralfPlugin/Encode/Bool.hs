@@ -2,9 +2,10 @@
 
 module ThoralfPlugin.Encode.Bool (boolTheory) where
 
-import GhcPlugins (ModuleName, FastString, fsLit, mkModuleName)
-import TysWiredIn (boolTyCon, promotedTrueDataCon, promotedFalseDataCon)
-import TyCon (TyCon(..))
+import GhcPlugins
+    ( TyCon, ModuleName, FastString
+    , fsLit, mkModuleName ,boolTyCon, promotedTrueDataCon, promotedFalseDataCon
+    )
 import TcPluginM (TcPluginM)
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)

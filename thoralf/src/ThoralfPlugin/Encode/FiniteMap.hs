@@ -2,10 +2,8 @@
 
 module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
-import GhcPlugins (ModuleName, FastString)
-import TyCon (TyCon(..))
+import GhcPlugins (TyCon, Type, ModuleName, FastString)
 import TcPluginM (TcPluginM)
-import Type (Type)
 import Data.Hashable (hash)
 
 import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
