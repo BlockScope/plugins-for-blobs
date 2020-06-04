@@ -30,26 +30,23 @@ module ThoralfPlugin.Convert
     ) where
 
 import Data.Maybe (mapMaybe, catMaybes)
-import qualified Data.Map as M
-import qualified Data.Set as S
-import qualified SimpleSMT as SMT
-import Data.Semigroup
-import Control.Monad.Reader
-import Prelude
-
-import GhcPlugins (getUnique)
-import TcRnTypes (Ct, ctPred)
-import Class (Class(..))
-import TcType (Kind, tcGetTyVar_maybe)
-import Var (TyVar)
-import Type
-    ( Type, PredTree (..), EqRel (..)
+import qualified Data.Map as M (fromList, toList)
+import qualified Data.Set as S (fromList, toList)
+import qualified SimpleSMT as SMT (SExpr(Atom), not, eq)
+import Data.Semigroup (Semigroup(..))
+import Control.Monad.Reader (ReaderT(..), lift, ask, guard)
+import GhcPlugins
+    ( Kind, Type, TyVar, PredTree(ClassPred, EqPred), EqRel(NomEq)
+    , getUnique, classifyPredType, tyVarKind
     , getTyVar_maybe, splitTyConApp_maybe, splitFunTy_maybe
-    , classifyPredType, tyVarKind
     )
+import TcRnTypes (Ct, ctPred)
+import Class (Class)
+import TcType (tcGetTyVar_maybe)
 
 import ThoralfPlugin.Encode.TheoryEncoding
-import Data.Vec
+    (TheoryEncoding(..), DecCont(..), KdConvCont(..), TyConvCont(..))
+import Data.Vec (vecMapAll)
 
 -- | The input needed to convert 'Ct' into smt expressions.
 -- We need the class for dis equality, and an encoding of a collection of
