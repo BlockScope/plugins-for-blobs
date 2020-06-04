@@ -233,8 +233,7 @@ convertType ty =
 tyVarConv :: Type -> Maybe (String, TyVar)
 tyVarConv ty = do
     tyvar <- tcGetTyVar_maybe ty
-    -- Not checking for skolems.
-    -- See doc on "dumb tau variables"
+    -- Not checking for skolems. See doc on "dumb tau variables"
     let isSkolem = True
     guard isSkolem
     let tvarStr = show $ getUnique tyvar
