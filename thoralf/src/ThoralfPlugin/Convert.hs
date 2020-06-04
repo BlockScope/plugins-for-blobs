@@ -46,20 +46,19 @@ import ThoralfPlugin.Encode.TheoryEncoding
     (TheoryEncoding(..), DecCont(..), KdConvCont(..), TyConvCont(..))
 import Data.Vec (vecMapAll)
 
--- | The input needed to convert 'Ct' into smt expressions.
--- We need the class for dis equality, and an encoding of a collection of
--- theories.
+-- | The input needed to convert 'Ct' into smt expressions.  We need the class
+-- for dis equality, and an encoding of a collection of theories.
 data EncodingData = EncodingData {encDisEq :: Class, encTheory :: TheoryEncoding}
 
 -- | The output of converting constraints. We have a list of converted
 -- constraints as well as a list of declarations. These declarations are
--- variable declarations as well as function symbols with accompanying
--- defining assert statements.
+-- variable declarations as well as function symbols with accompanying defining
+-- assert statements.
 data ConvCts = ConvCts {convEquals :: [(SExpr, Ct)], convDeps :: [SExpr]}
 
--- | Since our encoding data is passed around as a constant state, we put
--- it in a reader monad. Of course, conversion could fail, so we transform
--- from a Maybe monad.
+-- | Since our encoding data is passed around as a constant state, we put it in
+-- a reader monad. Of course, conversion could fail, so we transform from
+-- a Maybe monad.
 type ConvMonad a = ReaderT EncodingData Maybe a
 
 -- | The type of smt expressions.
@@ -172,13 +171,12 @@ convertTyVars tv = do
     return (SMT.Atom smtVar, kindVars)
 
 -- | A Type is converted into a string which is a valid SMT term, if the
--- dependencies are converted properly and sent to the solver before the
--- term is mentioned.
+-- dependencies are converted properly and sent to the solver before the term
+-- is mentioned.
 type ConvertedType = (String, ConvDependencies)
 
--- | These are pieces of a type that need to be converted into
--- SMT declarations or definitions in order for the converted
--- type to be well sorted or correct.
+-- | These are pieces of a type that need to be converted into SMT declarations
+-- or definitions in order for the converted type to be well sorted or correct.
 data ConvDependencies =
     ConvDeps
         { convTyVars :: [TyVar] -- ^ Type variables for a known theory
