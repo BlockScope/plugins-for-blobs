@@ -84,7 +84,7 @@ unionConvert = mkConvert $ \case
         let kds = valKd :> VNil in Just $
             ( m1 :> m2 :> VNil
             , kds
-            , unionStr
+            , opString "either"
             , [DecCont kds "either" eitherDec]
             )
     _ -> Nothing
@@ -95,7 +95,7 @@ interConvert = mkConvert $ \case
         let kds = valKd :> VNil in Just $
             ( m1 :> m2 :> VNil
             , kds
-            , interStr
+            , opString "both"
             , [DecCont kds "both" bothDec]
             )
     _ -> Nothing
@@ -145,17 +145,9 @@ deleteString :: Vec Two String -> Vec One String -> String
 deleteString (fmStr :> keyStr :> VNil) (valKd :> VNil) =
     "(store " ++ fmStr ++ " " ++ keyStr ++ " (as nothing (Maybe " ++ valKd ++ ") )  )"
 
-unionStr :: Vec Two String -> Vec One String -> String
-unionStr (m1 :> m2 :> VNil) (valKd :> VNil) =
-    let eith = "either" ++ hashVal
-        hashVal = show $ hash valKd
-    in "( (_ map " ++ eith ++ " ) " ++ m1 ++ " " ++ m2 ++ " )"
-
-interStr :: Vec Two String -> Vec One String -> String
-interStr (m1 :> m2 :> VNil) (valKd :> VNil) =
-    let both = "both" ++ hashVal
-        hashVal = show $ hash valKd
-    in "( (_ map " ++ both ++") "++ m1 ++ " " ++ m2 ++")"
+opString :: String -> Vec Two String -> Vec One String -> String
+opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
+    "( (_ map " ++ op ++ (show $ hash valKd) ++") "++ m1 ++ " " ++ m2 ++ ")"
 
 fmConvert :: TyCon -> Type -> Maybe KdConvCont
 fmConvert fm ty = do
