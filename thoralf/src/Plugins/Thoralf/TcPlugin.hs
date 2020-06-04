@@ -70,6 +70,15 @@ thoralfPlugin disEqName pkgName seed debug = TcPlugin
     , tcPluginStop = thoralfStop
     }
 
+solverWithLevel :: Bool -> IO SMT.Solver
+solverWithLevel debug = do
+    let logLevel = if debug then 0 else 1
+    logger <- SMT.newLogger logLevel
+    grabSMTsolver logger
+    where
+        grabSMTsolver :: SMT.Logger -> IO SMT.Solver
+        grabSMTsolver logger = SMT.newSolver "z3" ["-smt2", "-in"] (Just logger)
+
 mkThoralfInit
     :: ModuleName
     -> FastString
@@ -82,9 +91,7 @@ mkThoralfInit disEqName pkgName seed debug = do
     (Found _ disEqModule) <- findModule disEqName (Just pkgName)
     disEq <- findClass disEqModule "DisEquality"
     z3Solver <- tcPluginIO $ do
-        let logLevel = if debug then 0 else 1
-        logger <- SMT.newLogger logLevel
-        z3Solver <- grabSMTsolver logger
+        z3Solver <- solverWithLevel debug
         SMT.push z3Solver
         return z3Solver
     solverRef <- unsafeTcPluginTcM $ newMutVar z3Solver
@@ -94,11 +101,6 @@ mkThoralfInit disEqName pkgName seed debug = do
         findClass md strNm = do
             name <- lookupOrig md (mkTcOcc strNm)
             tcLookupClass name
-
-        solverOpts = [ "-smt2", "-in" ]
-
-        grabSMTsolver :: SMT.Logger -> IO SMT.Solver
-        grabSMTsolver logger = SMT.newSolver "z3" solverOpts (Just logger)
 
 thoralfStop :: ThoralfState -> TcPluginM ()
 thoralfStop ThoralfState{smtSolver = solverRef} = do
@@ -179,9 +181,7 @@ refresh encoding solverRef debug = do
     let decs = startDecs encoding
 
     z3Solver <- tcPluginIO $ do
-        let logLevel = if debug then 0 else 1
-        logger <- SMT.newLogger logLevel
-        z3Solver <- grabSMTsolver logger
+        z3Solver <- solverWithLevel debug
         SMT.ackCommand z3Solver typeDataType
         traverse_ (SMT.ackCommand z3Solver . SMT.Atom) decs
         SMT.push z3Solver
@@ -194,11 +194,6 @@ refresh encoding solverRef debug = do
         typeData =
             -- As one long line to avoid problems with CPP and string gaps.
             "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
-
-        grabSMTsolver :: SMT.Logger -> IO SMT.Solver
-        grabSMTsolver logger = SMT.newSolver "z3" solverOpts (Just logger)
-
-        solverOpts = ["-smt2", "-in"]
 
 isEqCt :: Class -> Ct -> Bool
 isEqCt diseq ct = case (maybeExtractTyEq ct, maybeExtractTyDisEq diseq ct) of
