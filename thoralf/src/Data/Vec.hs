@@ -1,8 +1,4 @@
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeInType #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE GADTs #-}
-{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, GADTs #-}
 
 module Data.Vec where
 
@@ -45,10 +41,10 @@ vecMapAll f (x :> xs) = do
 
 vecMapList :: (a -> b) -> Vec n a -> [b]
 vecMapList _ VNil = []
-vecMapList f (x :> xs) = (f x) : (vecMapList f xs)
+vecMapList f (x :> xs) = f x : vecMapList f xs
 
 vecMap :: (a -> b) -> Vec n a -> Vec n b
 vecMap _ VNil = VNil
-vecMap f (x :> xs) = (f x) :> (vecMap f xs)
+vecMap f (x :> xs) = f x :> vecMap f xs
 
 

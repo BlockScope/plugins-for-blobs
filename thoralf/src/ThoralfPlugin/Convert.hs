@@ -27,6 +27,7 @@ module ThoralfPlugin.Convert
     , tryFns
     ) where
 
+import Data.Foldable (fold)
 import Data.Maybe (mapMaybe, catMaybes)
 import qualified Data.Map as M (fromList, toList)
 import qualified Data.Set as S (fromList, toList)
@@ -154,11 +155,11 @@ convertDecs ds = do
 
 mkDefaultSMTVar :: TyVar -> SExpr
 mkDefaultSMTVar tv =
-    SMT.Atom $ "(declare-const " ++ (show $ getUnique tv) ++ " Type)"
+    SMT.Atom $ "(declare-const " ++ show (getUnique tv) ++ " Type)"
 
 mkSMTSort :: TyVar -> SExpr
 mkSMTSort tv =
-    SMT.Atom $ "(declare-sort Sort" ++ (show $ getUnique tv) ++ ")"
+    SMT.Atom $ "(declare-sort Sort" ++ show (getUnique tv) ++ ")"
 
 -- | Kind variables are just type variables
 type KdVar = TyVar
@@ -252,7 +253,7 @@ convDecConts dcs = do
         convDecCont (DecCont kholes declName cont) = do
             recur <- vecMapAll convertKind kholes
             let kConvs = fmap fst recur
-            let declKey = (declName, foldMap id kConvs)
+            let declKey = (declName, fold kConvs)
             let kdVars = foldMap snd recur
             let decl = Decl declKey (cont kConvs)
             return (decl, kdVars)
@@ -287,7 +288,7 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
         recur <- traverse defConvTy tys
         let defConvTys = map fst recur
         let tvars = foldMap snd recur
-        let convTcon = "(lit \"" ++ (show $ getUnique tcon) ++ "\")"
+        let convTcon = "(lit \"" ++ show (getUnique tcon) ++ "\")"
         let converted = foldl appDef convTcon defConvTys
         return (converted, tvars)
 
@@ -298,7 +299,7 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
 convertKind :: Kind -> ConvMonad (String, [KdVar])
 convertKind kind =
     case getTyVar_maybe kind of
-        Just tvar -> return ("Sort" ++ (show $ getUnique tvar), [tvar])
+        Just tvar -> return ("Sort" ++ show (getUnique tvar), [tvar])
         Nothing -> convKindTheories kind
 
 convKindTheories :: Kind -> ConvMonad (String, [KdVar])

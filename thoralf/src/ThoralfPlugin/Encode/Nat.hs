@@ -25,12 +25,12 @@ litConvert ty = do
     return $ TyConvCont VNil VNil (const . const $ show integer) []
 
 addConvert :: Type -> Maybe TyConvCont
-addConvert = (flip typeArgConvert) typeNatAddTyCon $ \case
+addConvert = flip typeArgConvert typeNatAddTyCon $ \case
     [x,y] ->  Just (x :> y :> VNil, opString "+")
     _ -> Nothing
 
 subConvert :: Type -> Maybe TyConvCont
-subConvert = (flip typeArgConvert) typeNatSubTyCon $ \case
+subConvert = flip typeArgConvert typeNatSubTyCon $ \case
     [x,y] -> Just (x :> y :> VNil, opString "-")
     _ -> Nothing
 

@@ -15,9 +15,9 @@ data SSymbol :: Symbol -> Type where
 
 scomp :: SSymbol s -> SSymbol s' -> s :~?~: s'
 scomp s@(SSym :: SSymbol s) s'@(SSym :: SSymbol s') =
-    case symbolVal s == symbolVal s' of
-        True ->  unsafeCoerce  Refl
-        False -> forceCT @(DisEquality s s') DisRefl
+    if symbolVal s == symbolVal s'
+       then unsafeCoerce Refl
+       else forceCT @(DisEquality s s') DisRefl
 
 -- | Force constraints.
 forceCT :: forall c x. (c => x) -> x

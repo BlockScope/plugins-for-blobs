@@ -84,5 +84,15 @@ in    defs
               , source-dirs =
                   "test-suite-units"
               }
+          , hlint =
+              { dependencies =
+                  [ "base", "hlint" ]
+              , ghc-options =
+                  [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
+              , main =
+                  "HLint.hs"
+              , source-dirs =
+                  "test-suite-hlint"
+              }
           }
       }

@@ -2,10 +2,7 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE StandaloneDeriving #-}
-
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
 
 module RowTypes where
@@ -39,7 +36,7 @@ instance Show PricedRec where
 getPrice :: Has m "price" Int => RowType m -> Int
 getPrice (DelField rec _ _) = getPrice rec
 getPrice (AddField rec fld val) =
-  case (scomp fld (SSym @"price")) of
+  case scomp fld (SSym @"price") of
     D.Refl -> val
     D.DisRefl -> getPrice rec
 
@@ -47,7 +44,7 @@ pRecPrice :: PricedRec -> Int
 pRecPrice (PRec rec) = getPrice rec
 
 totalPrice :: [PricedRec] -> Int
-totalPrice = sum . (map pRecPrice)
+totalPrice = sum . map pRecPrice
 
 car :: PricedRec
 car = PRec

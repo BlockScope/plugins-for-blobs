@@ -1,21 +1,16 @@
-{-# LANGUAGE CPP                #-}
-{-# LANGUAGE TypeFamilies       #-}
-{-# LANGUAGE TypeInType         #-}
-{-# LANGUAGE TypeOperators      #-}
-{-# LANGUAGE GADTs              #-}
-{-# LANGUAGE StandaloneDeriving #-}
-
+{-# LANGUAGE CPP, GADTs  #-}
+{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
 
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
-
 
 module Plugins.Thoralf.TcPlugin ( thoralfPlugin ) where
 
 -- Simple imports:
 import Prelude hiding ( showList )
+import Data.Foldable (traverse_)
 import Data.Maybe ( mapMaybe )
-import Data.List ( intersperse, (\\) )
+import Data.List ((\\), intercalate)
 import qualified Data.Map.Strict as M
 import qualified Data.Set as Set
 import qualified SimpleSMT as SMT
@@ -112,7 +107,7 @@ mkThoralfInit disEqName pkgName seed debug = do
 
 
 thoralfStop :: ThoralfState -> TcPluginM ()
-thoralfStop (ThoralfState {smtSolver = solverRef}) = do
+thoralfStop ThoralfState{smtSolver = solverRef} = do
   solver <- unsafeTcPluginTcM $ readMutVar solverRef
   _ <- tcPluginIO (SMT.stop solver)
   return ()
@@ -151,8 +146,8 @@ thoralfSolver debug (ThoralfState smtRef encode deCls) gs' ws' ds' = do
       let wCtsWithEv = mapMaybe (addEvTerm . snd) wExprs
       givenCheck <- tcPluginIO $ hideError $ do
         SMT.push smt
-        _ <- traverse (SMT.ackCommand smt) decs1
-        _ <- traverse (SMT.assert smt . fst) gExprs
+        traverse_ (SMT.ackCommand smt) decs1
+        traverse_ (SMT.assert smt . fst) gExprs
         SMT.check smt
       case givenCheck of
         SMT.Unknown ->  tcPluginIO pop >> noSolving
@@ -162,7 +157,7 @@ thoralfSolver debug (ThoralfState smtRef encode deCls) gs' ws' ds' = do
           return $ TcPluginContradiction []
         SMT.Sat -> do
           wantedCheck <- tcPluginIO $ hideError $ do
-            _ <- traverse (SMT.ackCommand smt) decs2'
+            traverse_ (SMT.ackCommand smt) decs2'
             SMT.assert smt wSExpr
             SMT.check smt
           case wantedCheck of
@@ -184,7 +179,7 @@ refresh encoding solverRef debug = do
     logger <- SMT.newLogger logLevel
     z3Solver <- grabSMTsolver logger
     SMT.ackCommand z3Solver typeDataType
-    _ <- traverse (SMT.ackCommand z3Solver) $ map SMT.Atom decs
+    traverse_ (SMT.ackCommand z3Solver . SMT.Atom) decs
     SMT.push z3Solver
     return z3Solver
   unsafeTcPluginTcM $ writeMutVar solverRef z3Solver where
@@ -222,22 +217,17 @@ addEvTerm ct = do
 
 
 printParsedInputs :: Bool -> [SExpr] -> SExpr -> [SExpr] -> TcPluginM ()
-printParsedInputs True gSExpr wSExpr parseDeclrs = do
-  tcPluginIO $ do
-    putStrLn $ "Given SExpr: \n" ++
-      (show $ map (`SMT.showsSExpr`  "") gSExpr)
-    putStrLn $ "Wanted SExpr: \n" ++
-      (SMT.showsSExpr wSExpr "")
-    putStrLn $ "Variable Decs: \n" ++
-      (show $ map (`SMT.showsSExpr`  "") parseDeclrs)
+printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
+    putStrLn $ "Given SExpr: \n" ++ show (map (`SMT.showsSExpr` "") gSExpr)
+    putStrLn $ "Wanted SExpr: \n" ++ SMT.showsSExpr wSExpr ""
+    putStrLn $ "Variable Decs: \n" ++ show (map (`SMT.showsSExpr` "") parseDeclrs)
 printParsedInputs False _ _ _ = return ()
 
 
 printCts :: Bool -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
 printCts True bool gs ws ds = do
-  iffail <- case bool of
-    True -> return "\n\nParse Failure\n\n"
-    False -> return "\n\nSolver call start\n\n"
+  let iffail = "\n\n" ++ if bool then "Parse Failure" else "Solver call start" ++ "\n\n"
+
   tcPluginIO $ do
     putStrLn "\n\n  ----- Plugin Call HERE !!! ------\n\n"
     putStrLn iffail
@@ -309,27 +299,24 @@ varUnique :: Var -> String
 varUnique = show . getUnique
 
 classifyVar :: Var -> String
-classifyVar v | isTcTyVar v = case isMetaTyVar v of
-                  True ->  "t"
-                  False -> "s"
-              | otherwise = "irr"
-
-
+classifyVar v
+    | isTcTyVar v = if isMetaTyVar v then "t" else "s"
+    | otherwise = "irr"
 
 showTupList :: (Show a, Show b) => [(a,b)] -> String
 showTupList xs =
-  "[\n" ++ concat (intersperse "\n" (map mkEquality xs)) ++ "\n]"
+  "[\n" ++ intercalate "\n" (map mkEquality xs) ++ "\n]"
   where
-    mkEquality (a,b) = (show a) ++ " ~ " ++ (show b)
+    mkEquality (a,b) = show a ++ " ~ " ++ show b
 
 showList :: Show a => [a] -> String
 showList xs =
-  "[\n" ++ concat (intersperse "\n" (map show xs)) ++ "\n]"
+  "[\n" ++ intercalate "\n" (map show xs) ++ "\n]"
 
 instance Show Ct where
   show ct = case maybeExtractTyEq ct of
     Just ((t1,t2),_) -> show (t1,t2)
-    Nothing -> showSDocUnsafe $ ppr $ ct
+    Nothing -> showSDocUnsafe $ ppr ct
 
 instance Show WantedConstraints where
   show = showSDocUnsafe . ppr

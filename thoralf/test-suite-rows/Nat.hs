@@ -60,11 +60,11 @@ infixr 5 :>
 
 concatVec :: Vec n a -> Vec m a -> Vec (n+m) a
 concatVec VNil ys = ys
-concatVec (x:> xs) ys = x :> (concatVec xs ys)
+concatVec (x:> xs) ys = x :> concatVec xs ys
 
 snocVec :: a -> Vec n a -> Vec (1+n) a
 snocVec x VNil = x :> VNil
-snocVec x (y :> ys) = y :> (snocVec x ys)
+snocVec x (y :> ys) = y :> snocVec x ys
 
 reverseVec :: Vec n a -> Vec n a
 reverseVec VNil = VNil
@@ -80,11 +80,11 @@ vecTests = do
   let v = 1 :> 2 :> (VNil :: Vec 0 Int)
   let w = 3 :> 4 :> (VNil :: Vec 0 Int)
   let vw = concatVec v w
-  putStrLn ("[1,2] = " ++ (show v))
-  putStrLn ("reverse [1,2] = " ++ (show $ reverseVec v))
-  putStrLn ("concat [1,2] [3,4] = " ++ (show vw))
-  putStrLn ("snoc 3 [1,2] = " ++ (show $ snocVec 3 v))
-  putStrLn ("stripPrefix [1,2] [1,2,3,4] = " ++ (show $ stripPrefix v vw))
-  putStrLn ("stripPrefix [3,4] [1,2,3,4] = " ++ (show $ stripPrefix w vw))
-  putStrLn ("stripPrefix [] [1,2,3,4] = " ++ (show $ stripPrefix VNil vw))
-  putStrLn ("stripPrefix [1,2] [] = " ++ (show $ stripPrefix v VNil))
+  putStrLn ("[1,2] = " ++ show v)
+  putStrLn ("reverse [1,2] = " ++ show (reverseVec v))
+  putStrLn ("concat [1,2] [3,4] = " ++ show vw)
+  putStrLn ("snoc 3 [1,2] = " ++ show (snocVec 3 v))
+  putStrLn ("stripPrefix [1,2] [1,2,3,4] = " ++ show (stripPrefix v vw))
+  putStrLn ("stripPrefix [3,4] [1,2,3,4] = " ++ show (stripPrefix w vw))
+  putStrLn ("stripPrefix [] [1,2,3,4] = " ++ show (stripPrefix VNil vw))
+  putStrLn ("stripPrefix [1,2] [] = " ++ show (stripPrefix v VNil))

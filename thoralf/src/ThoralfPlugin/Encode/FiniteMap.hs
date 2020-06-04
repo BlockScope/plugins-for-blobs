@@ -79,7 +79,7 @@ deleteConvert = mkConvert $ \case
 unionConvert :: TyCon -> Type -> Maybe TyConvCont
 unionConvert = mkConvert $ \case
     _ : valKd : m1 : m2 : _ ->
-        let kds = valKd :> VNil in Just $
+        let kds = valKd :> VNil in Just
             ( m1 :> m2 :> VNil
             , kds
             , opString "either"
@@ -90,7 +90,7 @@ unionConvert = mkConvert $ \case
 interConvert :: TyCon -> Type -> Maybe TyConvCont
 interConvert = mkConvert $ \case
     _ : valKd : m1 : m2 : _ ->
-        let kds = valKd :> VNil in Just $
+        let kds = valKd :> VNil in Just
             ( m1 :> m2 :> VNil
             , kds
             , opString "both"
@@ -142,7 +142,7 @@ deleteString (fm :> key :> VNil) (valKd :> VNil) =
 
 opString :: String -> Vec Two String -> Vec One String -> String
 opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
-    "( (_ map " ++ op ++ (show $ hash valKd) ++") "++ m1 ++ " " ++ m2 ++ ")"
+    "( (_ map " ++ op ++ show (hash valKd) ++") "++ m1 ++ " " ++ m2 ++ ")"
 
 fmConvert :: TyCon -> Type -> Maybe KdConvCont
 fmConvert = kindArgConvert $ \case

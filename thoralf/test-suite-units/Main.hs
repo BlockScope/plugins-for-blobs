@@ -14,4 +14,4 @@ main = do
   $(defaultMainGenerator)
 
 prop_distance :: Double -> Double -> Bool
-prop_distance x y = x * y == (extract $ calcDistance (MkUnit x) (MkUnit y))
+prop_distance x y = x * y == extract (calcDistance (MkUnit x) (MkUnit y))

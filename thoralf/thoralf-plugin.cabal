@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d2f57bc32dee006cdb0d844a3eab1ed0ef694f3bdc7e7d3eb4a1c606bfa611ac
+-- hash: b69cc5bd32be43feb138b4e68bd564f06992ee484ccfcf7c037a0fb9bf87aa24
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -63,6 +63,25 @@ library
     , hashable
     , mtl
     , simple-smt
+
+test-suite hlint
+  type: exitcode-stdio-1.0
+  main-is: HLint.hs
+  other-modules:
+      Paths_thoralf_plugin
+  hs-source-dirs:
+      test-suite-hlint
+  ghc-options: -Wall -fno-warn-partial-type-signatures -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc
+    , ghc-prim
+    , hashable
+    , hlint
+    , mtl
+    , simple-smt
+  default-language: Haskell2010
 
 test-suite rows
   type: exitcode-stdio-1.0

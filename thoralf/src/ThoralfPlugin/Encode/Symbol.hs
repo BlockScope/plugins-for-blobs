@@ -1,6 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators,
-    GADTs, RecordWildCards, StandaloneDeriving
-#-}
+{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, GADTs #-}
 
 module ThoralfPlugin.Encode.Symbol (symbolTheory) where
 
