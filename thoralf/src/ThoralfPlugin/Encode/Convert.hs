@@ -8,6 +8,7 @@ module ThoralfPlugin.Encode.Convert
 import TyCon (TyCon(..))
 import Type (Type, splitTyConApp_maybe )
 import ThoralfPlugin.Encode.TheoryEncoding
+    (KdConvCont(..), TyConvCont(..), Vec(..), Nat(..))
 
 type One = 'Succ 'Zero
 type Two = 'Succ One
