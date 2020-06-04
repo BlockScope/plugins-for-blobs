@@ -196,10 +196,10 @@ type ConvertedType = (String, ConvDependencies)
 data ConvDependencies where
     ConvDeps
         ::
-            { convTyVars :: [TyVar] -- Type variables for a known theory
-            , convKdVars :: [TyVar] -- Kind variables for unknown theories
-            , convDefVar :: [TyVar] -- Type variables for default, syntactic theories
-            , convDecs   :: [Decl]  -- SMT declarations specific to some converted type
+            { convTyVars :: [TyVar] -- ^ Type variables for a known theory
+            , convKdVars :: [TyVar] -- ^ Kind variables for unknown theories
+            , convDefVar :: [TyVar] -- ^ Type variables for default, syntactic theories
+            , convDecs   :: [Decl]  -- ^ SMT declarations specific to some converted type
             }
         -> ConvDependencies
 
