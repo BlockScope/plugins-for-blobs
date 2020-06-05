@@ -45,14 +45,17 @@ in    defs
               , "Plugins.UoM"
               ]
           , other-modules =
-              [ "Data.UnitsOfMeasure.TH"
-              , "Plugins.UoM.TcPlugin"
-              ]
+              [ "Data.UnitsOfMeasure.TH", "Plugins.UoM.TcPlugin" ]
           }
       , tests =
           { units =
               { dependencies =
-                  [ "base", "tasty", "tasty-hunit", "units-quantity", "uom-plugin" ]
+                  [ "base"
+                  , "tasty"
+                  , "tasty-hunit"
+                  , "units-quantity"
+                  , "uom-plugin"
+                  ]
               , ghc-options =
                   testopts
               , main =

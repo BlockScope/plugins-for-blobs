@@ -8,7 +8,12 @@ arguments =
     [ "lint"
     , "--ignore=Parse error"
     , "src"
-    , "test-suite-units"
+    , "src-ghc-8.10"
+    , "src-ghc-8.8"
+    , "src-ghc-8.6"
+    , "src-ghc-8.4"
+    , "src-ghc-8.2"
+    , "src-ghc-8.0"
     ]
 
 main :: IO ()
