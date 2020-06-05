@@ -31,6 +31,6 @@ in    defs
               "Data.UnitsOfMeasure.Defs"
           , dependencies =
                 defs.dependencies
-              # [ "template-haskell >=2.9", "units-quantity", "uom-plugin" ]
+              # [ "template-haskell >=2.9", "uom-quantity", "uom-plugin" ]
           }
       }

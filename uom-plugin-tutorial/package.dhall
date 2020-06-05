@@ -23,7 +23,7 @@ in    defs
               { dependencies =
                     defs.dependencies
                   # [ "doctest >= 0.13.0"
-                    , "units-quantity"
+                    , "uom-quantity"
                     , "uom-plugin"
                     , "uom-plugin-defs"
                     ]

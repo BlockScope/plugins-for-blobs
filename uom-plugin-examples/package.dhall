@@ -16,7 +16,7 @@ in    defs
           { uom-plugin-examples =
               { dependencies =
                     defs.dependencies
-                  # [ "units-quantity", "uom-plugin", "uom-plugin-defs" ]
+                  # [ "uom-quantity", "uom-plugin", "uom-plugin-defs" ]
               , source-dirs =
                   "."
               , main =

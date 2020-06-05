@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1036a6d8adedc6077d8b4b3cfa524584ea5a7edc71578fbd58a0a236b0cf655c
+-- hash: 98bee2cc9626738f12d7b9306502f8732613be5cdb85cbc1ed720ba857d84291
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -54,7 +54,7 @@ library
     , ghc-tcplugins-extra >=0.5
     , template-haskell >=2.9
     , units-parser >=0.1
-    , units-quantity
+    , uom-quantity
   default-language: Haskell2010
 
 test-suite hlint
@@ -97,8 +97,8 @@ test-suite units
       base
     , tasty
     , tasty-hunit
-    , units-quantity
     , uom-plugin
+    , uom-quantity
   if impl(ghc >= 8.4.0)
     buildable: False
   default-language: Haskell2010

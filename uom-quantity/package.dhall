@@ -4,7 +4,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
 
 in    defs
     ⫽ { name =
-          "units-quantity"
+          "uom-quantity"
       , synopsis =
           "Units of measure as a GHC typechecker plugin"
       , description =

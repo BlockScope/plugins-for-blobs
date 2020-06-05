@@ -6,7 +6,6 @@ import System.Exit (exitFailure, exitSuccess)
 arguments :: [String]
 arguments =
     [ "lint"
-    , "--ignore=Parse error"
     , "src"
     , "test-suite-units"
     ]

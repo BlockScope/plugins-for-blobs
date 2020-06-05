@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9669119aa7790d7f7deeb05f91005cce1d5b5afb0365919b59d05c50fef0099a
+-- hash: 69db40af0517228de43dc964b32c60ee8267cb86419ec4aae6ee79930e9a8440
 
 name:           uom-plugin-defs
 version:        0.3.0.1
@@ -41,6 +41,6 @@ library
   build-depends:
       base >=4.9.1.0 && <5
     , template-haskell >=2.9
-    , units-quantity
     , uom-plugin
+    , uom-quantity
   default-language: Haskell2010

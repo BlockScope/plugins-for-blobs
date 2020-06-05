@@ -35,7 +35,7 @@ in    defs
                 , "ghc-corroborate"
                 , "template-haskell >=2.9"
                 , "containers >=0.5"
-                , "units-quantity"
+                , "uom-quantity"
                 , "units-parser >=0.1"
                 ]
           , exposed-modules =
@@ -53,7 +53,7 @@ in    defs
                   [ "base"
                   , "tasty"
                   , "tasty-hunit"
-                  , "units-quantity"
+                  , "uom-quantity"
                   , "uom-plugin"
                   ]
               , ghc-options =

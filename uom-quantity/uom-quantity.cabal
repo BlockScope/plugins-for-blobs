@@ -4,9 +4,9 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c867f7db13753e32b2c377a304196c9c3adc1edb2cfcaf5d7b92108e65dc1608
+-- hash: a2f6c6a9f471ae9017518364f6be8874436589fb59666d1a1645888c1a0e3c1d
 
-name:           units-quantity
+name:           uom-quantity
 version:        0.3.0.1
 synopsis:       Units of measure as a GHC typechecker plugin
 description:    The @uom-plugin@ library adds support for units of measure to GHC
@@ -120,7 +120,7 @@ test-suite hlint
   type: exitcode-stdio-1.0
   main-is: HLint.hs
   other-modules:
-      Paths_units_quantity
+      Paths_uom_quantity
   hs-source-dirs:
       test-suite-hlint
   ghc-options: -Wall -fno-warn-unticked-promoted-constructors -rtsopts -threaded -with-rtsopts=-N
