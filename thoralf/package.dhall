@@ -19,7 +19,13 @@ in    defs
           [ "-Wall", "-fno-warn-partial-type-signatures" ]
       , dependencies =
             defs.dependencies
-          # [ "containers", "ghc", "ghc-prim", "hashable", "mtl", "simple-smt" ]
+          # [ "containers"
+            , "ghc-tcplugins-api"
+            , "ghc-prim"
+            , "hashable"
+            , "mtl"
+            , "simple-smt"
+            ]
       , library =
           { source-dirs =
               "src"

@@ -15,7 +15,7 @@ import ThoralfPlugin.Singletons.Symbol
 import qualified ThoralfPlugin.Theory.DisEq as D
 import ThoralfPlugin.Theory.FiniteMap
 
-data RowType :: (Fm Symbol Type) -> Type where
+data RowType :: Fm Symbol Type -> Type where
 
   EmptyRec :: RowType Nil
 

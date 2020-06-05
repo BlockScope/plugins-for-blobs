@@ -1,9 +1,11 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, GADTs #-}
+{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, GADTs, CPP #-}
 
 module Data.Vec where
 
-import Data.Kind (Type)
+#if MIN_VERSION_base(4,9,0) && !MIN_VERSION_base(4,11,0)
 import Data.Monoid ((<>))
+#endif
+import Data.Kind (Type)
 
 data Vec :: Nat -> Type -> Type where
     VNil :: Vec 'Zero a

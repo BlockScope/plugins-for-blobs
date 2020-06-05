@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
@@ -7,21 +6,7 @@ module Plugins.Thoralf.Print (printCts, showList) where
 import Prelude hiding (showList)
 import Data.List (intercalate)
 import qualified SimpleSMT as SMT (showsSExpr)
-import GhcPlugins
-    ( Type, TyCon, Var
-    , splitTyConApp_maybe, getTyVar_maybe, isTcTyVar
-    , getUnique, getOccName, occNameString, showSDocUnsafe, ppr
-    )
-
-import TcPluginM (tcPluginIO)
-import TcRnTypes (WantedConstraints, Ct, TcPluginM, TcPluginResult(..))
-import TcType (isMetaTyVar)
-
-#if __GLASGOW_HASKELL__ > 804
-import TcEvidence (EvTerm(..), evCoercion)
-#else
-import TcEvidence (EvTerm(..))
-#endif
+import Internal
 
 import ThoralfPlugin.Convert (SExpr, maybeExtractTyEq)
 

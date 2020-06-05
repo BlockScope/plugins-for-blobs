@@ -1,10 +1,8 @@
 module ThoralfPlugin.Encode (thoralfTheories) where
 
-import GhcPlugins (mkModuleName, fsLit)
-import TcRnTypes(TcPluginM)
+import Internal
 
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding, sumEncodings)
-
 import ThoralfPlugin.Encode.Nat (natTheory)
 import ThoralfPlugin.Encode.FiniteMap (fmTheory)
 import ThoralfPlugin.Encode.UoM (uomTheory)

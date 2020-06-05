@@ -1,5 +1,5 @@
 {-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
-{-# LANGUAGE UndecidableInstances, RankNTypes, ConstraintKinds #-}
+{-# LANGUAGE UndecidableInstances, RankNTypes, ConstraintKinds, GADTs #-}
 
 -- | This module declares the finite maps interface.
 module ThoralfPlugin.Theory.FiniteMap

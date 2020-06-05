@@ -2,8 +2,7 @@
 
 module ThoralfPlugin.Encode.Symbol (symbolTheory) where
 
-import GhcPlugins (Type, isStrLitTy, unpackFS, typeSymbolKindCon)
-import TcPluginM (TcPluginM)
+import Internal
 
 import ThoralfPlugin.Encode.Convert (kindConvert)
 import ThoralfPlugin.Encode.TheoryEncoding

@@ -1,5 +1,4 @@
 {-# LANGUAGE GADTs #-}
-{-# LANGUAGE NamedFieldPuns #-}
 {-# OPTIONS_HADDOCK ignore-exports #-}
 {-# OPTIONS_HADDOCK show-extensions #-}
 
@@ -24,8 +23,7 @@ module ThoralfPlugin.Encode.TheoryEncoding
 
 import Control.Applicative ((<|>))
 import Data.Vec (Vec(..), Nat(..))
-import TcRnTypes (TcPluginM)
-import GhcPlugins (Kind, TyVar, Type)
+import Internal
 
 -- | Predicated on type variables 'tyVarPreds' take the encoding of a type
 -- variable, and create SMT statements which can be asserted that restrict the

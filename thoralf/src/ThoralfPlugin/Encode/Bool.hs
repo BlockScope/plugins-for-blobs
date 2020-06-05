@@ -2,11 +2,7 @@
 
 module ThoralfPlugin.Encode.Bool (boolTheory) where
 
-import GhcPlugins
-    ( TyCon, ModuleName, FastString
-    , fsLit, mkModuleName ,boolTyCon, promotedTrueDataCon, promotedFalseDataCon
-    )
-import TcPluginM (TcPluginM)
+import Internal
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)

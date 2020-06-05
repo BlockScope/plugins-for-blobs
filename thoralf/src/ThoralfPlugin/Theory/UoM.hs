@@ -1,4 +1,5 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, UndecidableInstances #-}
+{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
+{-# LANGUAGE UndecidableInstances, GADTs #-}
 
 -- | This module declares the unit of measure interface that is really just an
 -- abelian group isomorphic to Z+.
@@ -11,7 +12,6 @@ module ThoralfPlugin.Theory.UoM
     , IsDiv
     ) where
 
-import GHC.Types (Symbol)
 import Data.Kind (Constraint)
 import GHC.TypeLits
 

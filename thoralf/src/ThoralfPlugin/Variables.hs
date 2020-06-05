@@ -1,7 +1,6 @@
 module ThoralfPlugin.Variables where
 
-import GhcPlugins (TyVar, Var, isTcTyVar)
-import TcType (isMetaTyVar)
+import Internal
 
 data VarCat = Tau | Skol | Irr deriving Eq
 

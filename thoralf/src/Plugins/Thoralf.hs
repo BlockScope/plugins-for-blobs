@@ -1,6 +1,6 @@
 module Plugins.Thoralf (plugin) where
 
-import GhcPlugins (Plugin(..), mkModuleName, fsLit, defaultPlugin)
+import Internal
 
 import ThoralfPlugin.Encode (thoralfTheories )
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)

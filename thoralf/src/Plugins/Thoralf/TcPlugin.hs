@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
 
 module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
@@ -8,25 +7,9 @@ import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
 import qualified SimpleSMT as SMT
-import Class (Class(..))
 import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
-import GhcPlugins (ModuleName, FastString, Type, Module, mkTcOcc)
-import TcPluginM
-    ( tcPluginIO, lookupOrig, tcLookupClass
-    , findImportedModule, FindResult(..), unsafeTcPluginTcM
-    )
-import TcRnTypes (Ct, TcPluginM, TcPluginResult(..), TcPlugin(..))
-
-#if __GLASGOW_HASKELL__ > 804
-import TcEvidence (EvTerm(..), evCoercion)
-#else
-import TcEvidence (EvTerm(..))
-#endif
-
-import TyCoRep (UnivCoProvenance(..))
-import Coercion (mkUnivCo, Role(..))
-import IOEnv (newMutVar, readMutVar, writeMutVar)
+import Internal
 
 import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
@@ -214,10 +197,4 @@ debugIO True s = tcPluginIO $ putStrLn s
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the
 -- form (EqPred NomEq t1 t2)
 makeEqEvidence :: String -> (Type, Type) -> EvTerm
-makeEqEvidence s (t1, t2) =
-#if __GLASGOW_HASKELL__ > 804
-    evCoercion
-#else
-    EvCoercion
-#endif
-    $ mkUnivCo (PluginProv s) Nominal t1 t2
+makeEqEvidence s (t1, t2) = evByFiat s t1 t2

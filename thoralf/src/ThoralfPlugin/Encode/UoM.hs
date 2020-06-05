@@ -2,8 +2,7 @@
 
 module ThoralfPlugin.Encode.UoM (uomTheory) where
 
-import GhcPlugins (ModuleName, FastString, TyCon)
-import TcPluginM (TcPluginM)
+import Internal
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
