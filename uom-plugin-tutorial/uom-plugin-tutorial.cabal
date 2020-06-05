@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0abd861f3a0ecc1894752b87a3a98665630ee7989ecb6d56995fc82c34f36c10
+-- hash: 1965685e440cb14c504813ffca8835b899717af60d99bde427232c83041312a0
 
 name:           uom-plugin-tutorial
 version:        0.3.0.1
@@ -33,6 +33,7 @@ test-suite doctest
   build-depends:
       base >=4.9.1.0 && <5
     , doctest >=0.13.0
+    , units-quantity
     , uom-plugin
     , uom-plugin-defs
   if impl(ghc < 8.2.2) || impl(ghc > 8.2.2)

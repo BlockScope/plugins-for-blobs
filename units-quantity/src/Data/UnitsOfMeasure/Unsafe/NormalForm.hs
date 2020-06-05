@@ -37,6 +37,9 @@ module Data.UnitsOfMeasure.Unsafe.NormalForm
 import Prelude hiding ((<>))
 #endif
 import GHC.Corroborate
+    ( (<>), Type, TyCon, TyVar, Outputable, FastString
+    , ppr, text, isStrLitTy, thenCmp, elemVarSet
+    )
 import GHC.Corroborate.Compare (cmpType, cmpTypes, cmpTyCon)
 import GHC.Corroborate.Shim (tyVarsOfType, tyVarsOfTypes)
 

@@ -35,142 +35,24 @@ in    defs
                 , "ghc-corroborate"
                 , "template-haskell >=2.9"
                 , "containers >=0.5"
+                , "units-quantity"
                 , "units-parser >=0.1"
                 ]
           , exposed-modules =
               [ "Data.UnitsOfMeasure"
               , "Data.UnitsOfMeasure.Convert"
-              , "Data.UnitsOfMeasure.Read"
-              , "Data.UnitsOfMeasure.Show"
-              , "Data.UnitsOfMeasure.Singleton"
               , "Data.UnitsOfMeasure.Tutorial"
-              , "Data.UnitsOfMeasure.Unsafe"
               , "Plugins.UoM"
               ]
           , other-modules =
-              [ "GHC.Corroborate.Type"
-              , "Data.UnitsOfMeasure.TH"
-              , "Data.UnitsOfMeasure.Unsafe.Convert"
-              , "Data.UnitsOfMeasure.Unsafe.NormalForm"
-              , "Data.UnitsOfMeasure.Unsafe.Unify"
+              [ "Data.UnitsOfMeasure.TH"
               , "Plugins.UoM.TcPlugin"
-              ]
-          , when =
-              [ { condition =
-                    "impl(ghc >= 8.10.0)"
-                , source-dirs =
-                    "src-ghc-8.10"
-                , dependencies =
-                    [ { name =
-                          "ghc"
-                      , version =
-                          ">=8.10 && <8.12"
-                      , mixin =
-                          [] : List Text
-                      }
-                    ]
-                }
-              , { condition =
-                    "impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)"
-                , source-dirs =
-                    "src-ghc-8.8"
-                , dependencies =
-                    [ { name =
-                          "ghc"
-                      , version =
-                          ">=8.8 && <8.10"
-                      , mixin =
-                          [ "hiding ()"
-                          , "(TcRnTypes as TcRnTypes)"
-                          , "(Type as Type)"
-                          , "(TcRnTypes as Constraint)"
-                          , "(Type as Predicate)"
-                          ]
-                      }
-                    ]
-                }
-              , { condition =
-                    "impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)"
-                , source-dirs =
-                    "src-ghc-8.6"
-                , dependencies =
-                    [ { name =
-                          "ghc"
-                      , version =
-                          ">=8.6 && <8.8"
-                      , mixin =
-                          [ "hiding ()"
-                          , "(TcRnTypes as TcRnTypes)"
-                          , "(Type as Type)"
-                          , "(TcRnTypes as Constraint)"
-                          , "(Type as Predicate)"
-                          ]
-                      }
-                    ]
-                }
-              , { condition =
-                    "impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)"
-                , source-dirs =
-                    "src-ghc-8.4"
-                , dependencies =
-                    [ { name =
-                          "ghc"
-                      , version =
-                          ">=8.4 && <8.6"
-                      , mixin =
-                          [ "hiding ()"
-                          , "(TcRnTypes as TcRnTypes)"
-                          , "(Type as Type)"
-                          , "(TcRnTypes as Constraint)"
-                          , "(Type as Predicate)"
-                          ]
-                      }
-                    ]
-                }
-              , { condition =
-                    "impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)"
-                , source-dirs =
-                    "src-ghc-8.2"
-                , dependencies =
-                    [ { name =
-                          "ghc"
-                      , version =
-                          ">=8.2 && <8.4"
-                      , mixin =
-                          [ "hiding ()"
-                          , "(TcRnTypes as TcRnTypes)"
-                          , "(Type as Type)"
-                          , "(TcRnTypes as Constraint)"
-                          , "(Type as Predicate)"
-                          ]
-                      }
-                    ]
-                }
-              , { condition =
-                    "impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)"
-                , source-dirs =
-                    "src-ghc-8.0"
-                , dependencies =
-                    [ { name =
-                          "ghc"
-                      , version =
-                          ">=8.0 && <8.2"
-                      , mixin =
-                          [ "hiding ()"
-                          , "(TcRnTypes as TcRnTypes)"
-                          , "(Type as Type)"
-                          , "(TcRnTypes as Constraint)"
-                          , "(Type as Predicate)"
-                          ]
-                      }
-                    ]
-                }
               ]
           }
       , tests =
           { units =
               { dependencies =
-                  [ "base", "tasty", "tasty-hunit", "uom-plugin" ]
+                  [ "base", "tasty", "tasty-hunit", "units-quantity", "uom-plugin" ]
               , ghc-options =
                   testopts
               , main =

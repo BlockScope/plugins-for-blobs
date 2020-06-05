@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c24f6d164cc357a3524c9676da7170a76699b172e3de3528aada2fde31779dc3
+-- hash: 02a59315e1382a8fe2ac02d494a08bc810f67761671ab4268a63db835291549a
 
 name:           uom-plugin-examples
 version:        0.3.0.1
@@ -29,6 +29,7 @@ executable uom-plugin-examples
   ghc-options: -dcore-lint
   build-depends:
       base >=4.9.1.0 && <5
+    , units-quantity
     , uom-plugin
     , uom-plugin-defs
   if impl(ghc >= 8.4.0)

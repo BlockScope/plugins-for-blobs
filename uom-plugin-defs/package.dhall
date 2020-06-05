@@ -30,6 +30,7 @@ in    defs
           , exposed-modules =
               "Data.UnitsOfMeasure.Defs"
           , dependencies =
-              defs.dependencies # [ "template-haskell >=2.9", "uom-plugin" ]
+                defs.dependencies
+              # [ "template-haskell >=2.9", "units-quantity", "uom-plugin" ]
           }
       }
