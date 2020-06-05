@@ -74,7 +74,7 @@ reportContradiction uds eq = TcPluginContradiction . pure <$> fromUnitEqualityFo
 fromUnitEqualityForContradiction :: UnitDefs -> UnitEquality -> TcPluginM Ct
 fromUnitEqualityForContradiction uds (UnitEquality ct u v) = case classifyPredType $ ctEvPred $ ctEvidence ct of
     EqPred NomEq _ _ -> return ct
-    _ | isGivenCt ct -> newGivenCt  (ctLoc ct) (mkEqPred u' v') (mkFunnyEqEvidence (ctPred ct) u' v')
+    _ | isGivenCt ct -> newGivenCt  (ctLoc ct) (mkEqPred u' v') (mkFunnyEqEvidence "units" (ctPred ct) u' v')
       | otherwise    -> newWantedCt (ctLoc ct) (mkEqPred u' v')
   where
     u' = reifyUnit uds u
@@ -143,5 +143,5 @@ evMagic uds ct = case classifyPredType $ ctEvPred $ ctEvidence ct of
     EqPred NomEq t1 t2   -> evByFiat "units" t1 t2
     IrredPred t
       | Just (tc, [t1,t2]) <- splitTyConApp_maybe t
-      , tc == equivTyCon uds -> mkFunnyEqEvidence t t1 t2
+      , tc == equivTyCon uds -> mkFunnyEqEvidence "units" t t1 t2
     _                    -> error "evMagic"
