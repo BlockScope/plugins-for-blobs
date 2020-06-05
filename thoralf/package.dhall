@@ -20,7 +20,7 @@ in    defs
       , dependencies =
             defs.dependencies
           # [ "containers"
-            , "ghc-tcplugins-api"
+            , "ghc-corroborate"
             , "ghc-prim"
             , "hashable"
             , "mtl"

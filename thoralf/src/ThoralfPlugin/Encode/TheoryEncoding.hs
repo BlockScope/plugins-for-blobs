@@ -23,7 +23,7 @@ module ThoralfPlugin.Encode.TheoryEncoding
 
 import Control.Applicative ((<|>))
 import Data.Vec (Vec(..), Nat(..))
-import Internal
+import GHC.Corroborate
 
 -- | Predicated on type variables 'tyVarPreds' take the encoding of a type
 -- variable, and create SMT statements which can be asserted that restrict the

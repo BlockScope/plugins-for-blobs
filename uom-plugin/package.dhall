@@ -32,7 +32,7 @@ in    defs
                 defs.dependencies
               # [ "deepseq >=1.3 && <1.5"
                 , "ghc-tcplugins-extra >=0.5"
-                , "ghc-tcplugins-api"
+                , "ghc-corroborate"
                 , "template-haskell >=2.9"
                 , "containers >=0.5"
                 , "units-parser >=0.1"
@@ -48,7 +48,7 @@ in    defs
               , "Plugins.UoM"
               ]
           , other-modules =
-              [ "Internal.Type"
+              [ "GHC.Corroborate.Type"
               , "Data.UnitsOfMeasure.TH"
               , "Data.UnitsOfMeasure.Unsafe.Convert"
               , "Data.UnitsOfMeasure.Unsafe.NormalForm"

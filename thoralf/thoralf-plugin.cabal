@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 926d00b599d71acb5a413876db1ee5738181099ac39a384b462d3ff9d76cf334
+-- hash: 18ede61262c7c86d3ce3095c15bf33a404b0c6d8eab325f510182e01547ab64a
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -59,8 +59,8 @@ library
   build-depends:
       base
     , containers
+    , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-api
     , hashable
     , mtl
     , simple-smt
@@ -76,8 +76,8 @@ test-suite hlint
   build-depends:
       base
     , containers
+    , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-api
     , hashable
     , hlint
     , mtl
@@ -97,8 +97,8 @@ test-suite rows
   build-depends:
       base
     , containers
+    , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-api
     , hashable
     , mtl
     , simple-smt
@@ -117,8 +117,8 @@ test-suite units
       QuickCheck
     , base
     , containers
+    , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-api
     , hashable
     , mtl
     , simple-smt

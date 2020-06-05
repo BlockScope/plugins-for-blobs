@@ -1,6 +1,6 @@
 module ThoralfPlugin.Encode (thoralfTheories) where
 
-import Internal
+import GHC.Corroborate
 
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding, sumEncodings)
 import ThoralfPlugin.Encode.Nat (natTheory)

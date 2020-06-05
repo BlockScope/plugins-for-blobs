@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f2aa62ea7f9c4161cdeb3367a1258003125e70b50d80d2bd81e66216eee274c3
+-- hash: 8f02b09cfcdf355acacbb0700e21b0f82b6b2cbadf515aa57ecacec00ccfa975
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -44,7 +44,7 @@ library
       Data.UnitsOfMeasure.Unsafe
       Plugins.UoM
   other-modules:
-      Internal.Type
+      GHC.Corroborate.Type
       Data.UnitsOfMeasure.TH
       Data.UnitsOfMeasure.Unsafe.Convert
       Data.UnitsOfMeasure.Unsafe.NormalForm
@@ -58,7 +58,7 @@ library
       base >=4.9.1.0 && <5
     , containers >=0.5
     , deepseq >=1.3 && <1.5
-    , ghc-tcplugins-api
+    , ghc-corroborate
     , ghc-tcplugins-extra >=0.5
     , template-haskell >=2.9
     , units-parser >=0.1

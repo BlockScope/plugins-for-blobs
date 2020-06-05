@@ -6,7 +6,7 @@ module Plugins.Thoralf.Print (printCts, showList) where
 import Prelude hiding (showList)
 import Data.List (intercalate)
 import qualified SimpleSMT as SMT (showsSExpr)
-import Internal
+import GHC.Corroborate
 
 import ThoralfPlugin.Convert (SExpr, maybeExtractTyEq)
 

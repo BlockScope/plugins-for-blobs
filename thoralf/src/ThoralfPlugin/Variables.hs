@@ -1,6 +1,6 @@
 module ThoralfPlugin.Variables where
 
-import Internal
+import GHC.Corroborate
 
 data VarCat = Tau | Skol | Irr deriving Eq
 

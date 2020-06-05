@@ -8,8 +8,8 @@ module Data.UnitsOfMeasure.Unsafe.Convert
   , reifyUnit
   ) where
 
-import Internal
-import Internal.Shim (promoteTyCon)
+import GHC.Corroborate
+import GHC.Corroborate.Shim (promoteTyCon)
 import Data.List
 
 import Data.UnitsOfMeasure.Unsafe.NormalForm

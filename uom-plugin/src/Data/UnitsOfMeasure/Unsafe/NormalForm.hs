@@ -36,9 +36,9 @@ module Data.UnitsOfMeasure.Unsafe.NormalForm
 #if __GLASGOW_HASKELL__ >= 804
 import Prelude hiding ((<>))
 #endif
-import Internal
-import Internal.Compare (cmpType, cmpTypes, cmpTyCon)
-import Internal.Shim (tyVarsOfType, tyVarsOfTypes)
+import GHC.Corroborate
+import GHC.Corroborate.Compare (cmpType, cmpTypes, cmpTyCon)
+import GHC.Corroborate.Shim (tyVarsOfType, tyVarsOfTypes)
 
 import qualified Data.Foldable as Foldable
 import qualified Data.Map as Map

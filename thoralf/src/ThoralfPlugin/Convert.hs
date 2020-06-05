@@ -38,7 +38,7 @@ import qualified Data.Map as M (fromList, toList)
 import qualified Data.Set as S (fromList, toList)
 import qualified SimpleSMT as SMT (SExpr(Atom), not, eq)
 import Control.Monad.Reader (ReaderT(..), lift, ask, guard)
-import Internal hiding ((<>))
+import GHC.Corroborate hiding ((<>))
 
 import ThoralfPlugin.Encode.TheoryEncoding
     (TheoryEncoding(..), DecCont(..), KdConvCont(..), TyConvCont(..))

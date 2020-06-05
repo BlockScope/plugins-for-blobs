@@ -2,7 +2,7 @@
 
 module ThoralfPlugin.Encode.UoM (uomTheory) where
 
-import Internal
+import GHC.Corroborate
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)

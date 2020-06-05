@@ -8,10 +8,10 @@
 -- import this module.
 module Plugins.UoM.TcPlugin (uomPlugin) where
 
-import Internal
-import Internal.Type (collectType)
-import Internal.Shim (mkEqPred, mkFunnyEqEvidence)
-import Internal.Wrap (newGivenCt, newWantedCt)
+import GHC.Corroborate
+import GHC.Corroborate.Type (collectType)
+import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
+import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
 import Data.Either
 import Data.List
 

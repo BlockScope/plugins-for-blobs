@@ -5,7 +5,7 @@ module ThoralfPlugin.Encode.Convert
     , kindConvert, typeConvert, kindArgConvert, typeArgConvert, mkConvert
     ) where
 
-import Internal
+import GHC.Corroborate
 import ThoralfPlugin.Encode.TheoryEncoding
     (KdConvCont(..), TyConvCont(..), Vec(..), Nat(..), DecCont)
 

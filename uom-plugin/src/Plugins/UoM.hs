@@ -8,7 +8,7 @@
 -- import this module.
 module Plugins.UoM (plugin) where
 
-import Internal
+import GHC.Corroborate
 
 import Plugins.UoM.TcPlugin (uomPlugin)
 

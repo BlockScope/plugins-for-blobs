@@ -1,6 +1,6 @@
 module Plugins.Thoralf (plugin) where
 
-import Internal
+import GHC.Corroborate
 
 import ThoralfPlugin.Encode (thoralfTheories )
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)

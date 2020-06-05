@@ -10,7 +10,7 @@ module Data.UnitsOfMeasure.Unsafe.Unify
   , simplifyUnits
   ) where
 
-import Internal
+import GHC.Corroborate
 import Data.UnitsOfMeasure.Unsafe.Convert
 import Data.UnitsOfMeasure.Unsafe.NormalForm
 

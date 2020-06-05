@@ -9,7 +9,7 @@ import Data.List ((\\))
 import qualified SimpleSMT as SMT
 import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
-import Internal
+import GHC.Corroborate
 
 import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)

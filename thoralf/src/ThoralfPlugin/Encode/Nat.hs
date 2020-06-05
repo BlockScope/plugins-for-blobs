@@ -2,7 +2,7 @@
 
 module ThoralfPlugin.Encode.Nat (natTheory) where
 
-import Internal
+import GHC.Corroborate
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeArgConvert)
 import ThoralfPlugin.Encode.TheoryEncoding

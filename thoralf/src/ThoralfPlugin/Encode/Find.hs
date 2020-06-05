@@ -1,6 +1,6 @@
 module ThoralfPlugin.Encode.Find (findTyCon, findModule) where
 
-import Internal
+import GHC.Corroborate
 
 findModule :: ModuleName -> FastString -> TcPluginM Module
 findModule m p = do Found _ m' <- findImportedModule m (Just p); return m'

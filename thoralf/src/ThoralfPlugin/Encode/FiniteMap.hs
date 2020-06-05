@@ -2,7 +2,7 @@
 
 module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
-import Internal
+import GHC.Corroborate
 import Data.Hashable (hash)
 
 import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
