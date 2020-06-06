@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a2f6c6a9f471ae9017518364f6be8874436589fb59666d1a1645888c1a0e3c1d
+-- hash: 0c391041b49c101c6253ad9b500203f157ffbfce83a7b88b1f254577f6965563
 
 name:           uom-quantity
 version:        0.3.0.1
@@ -42,7 +42,6 @@ library
       Data.UnitsOfMeasure.Unsafe
       Data.UnitsOfMeasure.Unsafe.Convert
       Data.UnitsOfMeasure.Unsafe.Unify
-  other-modules:
       Data.UnitsOfMeasure.Unsafe.NormalForm
   hs-source-dirs:
       src
@@ -126,6 +125,8 @@ test-suite hlint
   ghc-options: -Wall -fno-warn-unticked-promoted-constructors -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
+    , hlint
+    , uom-quantity
   if impl(ghc >= 8.10.0)
     other-modules:
         GHC.Corroborate.Type
@@ -198,16 +199,4 @@ test-suite hlint
       , ghc (Type as Type)
       , ghc (TcRnTypes as Constraint)
       , ghc (Type as Predicate)
-  if impl(ghc >= 8.6.0)
-    build-depends:
-        hlint
-    buildable: True
-  if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
-    build-depends:
-        hlint <2.1.18
-    buildable: True
-  if impl(ghc < 8.4.0)
-    build-depends:
-        hlint
-    buildable: False
   default-language: Haskell2010

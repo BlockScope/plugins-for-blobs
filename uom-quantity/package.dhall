@@ -45,9 +45,9 @@ in    defs
               , "Data.UnitsOfMeasure.Unsafe"
               , "Data.UnitsOfMeasure.Unsafe.Convert"
               , "Data.UnitsOfMeasure.Unsafe.Unify"
+              , "Data.UnitsOfMeasure.Unsafe.NormalForm"
               ]
-          , other-modules =
-              "Data.UnitsOfMeasure.Unsafe.NormalForm"
+          , other-modules = [] : List Text
           }
       , when =
           [ { condition =
@@ -163,36 +163,13 @@ in    defs
       , tests =
           { hlint =
               { dependencies =
-                  "base"
+                  [ "base", "hlint", "uom-quantity" ]
               , ghc-options =
                   testopts
               , main =
                   "HLint.hs"
               , source-dirs =
                   "test-suite-hlint"
-              , when =
-                  [ { condition =
-                        "impl(ghc >= 8.6.0)"
-                    , dependencies =
-                        "hlint"
-                    , buildable =
-                        True
-                    }
-                  , { condition =
-                        "impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)"
-                    , dependencies =
-                        "hlint < 2.1.18"
-                    , buildable =
-                        True
-                    }
-                  , { condition =
-                        "impl(ghc < 8.4.0)"
-                    , dependencies =
-                        "hlint"
-                    , buildable =
-                        False
-                    }
-                  ]
               }
           }
       }

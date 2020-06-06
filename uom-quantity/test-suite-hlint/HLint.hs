@@ -6,6 +6,7 @@ import System.Exit (exitFailure, exitSuccess)
 arguments :: [String]
 arguments =
     [ "lint"
+    , "--ignore=Parse error"
     , "src"
     , "src-ghc-8.10"
     , "src-ghc-8.8"
