@@ -20,13 +20,10 @@
 -- Apart from the definitions below, this module also exports a 'Show'
 -- instance for @'Quantity' a u@, which is re-exported by
 -- "Data.UnitsOfMeasure".
-module Data.UnitsOfMeasure.Show
-    ( showQuantity
-    , showUnit
-    ) where
+module Data.UnitsOfMeasure.Show (showQuantity, showUnit) where
 
-import Data.UnitsOfMeasure.Unsafe
-import Data.UnitsOfMeasure.Singleton
+import Data.UnitsOfMeasure.Unsafe (Unpack, UnitSyntax((:/)), Quantity(..))
+import Data.UnitsOfMeasure.Singleton (KnownUnit, unitVal)
 
 import Data.List (group)
 

@@ -12,8 +12,13 @@ module Data.UnitsOfMeasure.Unsafe.Unify
 
 import GHC.Corroborate
 import Data.UnitsOfMeasure.Unsafe.Convert
+    (UnitDefs, isUnitKind, normaliseUnit, equivTyCon, unitKind)
 import Data.UnitsOfMeasure.Unsafe.NormalForm
-
+    ( NormUnit, Atom(..), (^:), (*:), (/:)
+    , mkNormUnit, varUnit, substUnit
+    , isConstant, isOne, isBase
+    , divisible, divideExponents, leftover, ascending, occurs
+    )
 
 -- | A substitution is essentially a list of (variable, unit) pairs,
 -- but we keep the original 'Ct' that lead to the substitution being

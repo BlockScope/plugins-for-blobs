@@ -43,10 +43,13 @@ import GHC.Corroborate
 import GHC.Corroborate.Compare (cmpType, cmpTypes, cmpTyCon)
 import GHC.Corroborate.Shim (tyVarsOfType, tyVarsOfTypes)
 
-import qualified Data.Foldable as Foldable
+import qualified Data.Foldable as Foldable (all)
 import qualified Data.Map as Map
-import Data.List ( sortOn )
-import Data.Maybe
+    ( Map, singleton, fromList, toList, empty
+    , null, keys, filter, map, lookup, delete, unionWith
+    )
+import Data.List (sortOn)
+import Data.Maybe (isJust)
 
 -- | Base units are just represented as strings, for simplicity
 type BaseUnit = FastString

@@ -58,8 +58,8 @@ module Data.UnitsOfMeasure.Unsafe
     , MkUnit
     ) where
 
-import Control.DeepSeq
-import Foreign.Storable
+import Control.DeepSeq (NFData)
+import Foreign.Storable (Storable)
 import GHC.Exts (Constraint)
 import GHC.TypeLits (Symbol, Nat, type (-))
 

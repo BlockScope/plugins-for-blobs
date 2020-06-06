@@ -10,9 +10,12 @@ module Data.UnitsOfMeasure.Unsafe.Convert
 
 import GHC.Corroborate
 import GHC.Corroborate.Shim (promoteTyCon)
-import Data.List
+import Data.List (partition)
 
 import Data.UnitsOfMeasure.Unsafe.NormalForm
+    ( (^:), (*:), (/:), Atom(..), NormUnit, BaseUnit
+    , one, baseUnit, varUnit, famUnit, maybeConstant, ascending
+    )
 
 -- | Contains references to the basic unit constructors declared in
 -- "Data.UnitsOfMeasure", as loaded inside GHC.

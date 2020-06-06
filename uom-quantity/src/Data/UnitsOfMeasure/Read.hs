@@ -19,14 +19,15 @@ module Data.UnitsOfMeasure.Read
    ) where
 
 import Control.Monad (join)
-import GHC.TypeLits
+import GHC.TypeLits (SomeSymbol(..), someSymbolVal)
 import Data.List (genericReplicate)
-import Data.Proxy
-import Data.Type.Equality ((:~:)(..))
+import Data.Proxy (Proxy(..))
+import Data.Type.Equality ((:~:)(Refl))
 import Text.Parse.Units (parseUnit, universalSymbolTable, UnitExp(..))
 
-import Data.UnitsOfMeasure.Unsafe
+import Data.UnitsOfMeasure.Unsafe (Pack, Unpack, UnitSyntax((:/)), Quantity(..))
 import Data.UnitsOfMeasure.Singleton
+    (SUnit(..), SList(..), KnownUnit, unitSing, forgetSUnit, testEquivalentSUnit)
 
 -- | Represents a quantity whose units have a syntactic representation
 -- that is known statically and at runtime.

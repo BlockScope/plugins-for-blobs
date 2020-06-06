@@ -28,14 +28,13 @@ module Data.UnitsOfMeasure.Singleton
     , KnownList(..)
     ) where
 
-import GHC.TypeLits
+import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 import Data.List (foldl')
-import qualified Data.Map as Map
-import Data.Type.Equality
-import Unsafe.Coerce
+import qualified Data.Map as Map (Map, filter, insertWith, empty)
+import Data.Type.Equality (TestEquality(), (:~:)(Refl), testEquality)
+import Unsafe.Coerce (unsafeCoerce)
 
-import Data.UnitsOfMeasure.Unsafe
-
+import Data.UnitsOfMeasure.Unsafe (Pack, UnitSyntax((:/)))
 
 -- | Singleton type for concrete units of measure represented as lists
 -- of base units
