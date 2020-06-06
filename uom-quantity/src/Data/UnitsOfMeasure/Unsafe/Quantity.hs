@@ -39,7 +39,7 @@ module Data.UnitsOfMeasure.Unsafe.Quantity
 import Control.DeepSeq (NFData)
 import Foreign.Storable (Storable)
 
-import Data.UnitsOfMeasure.Unsafe
+import Data.UnitsOfMeasure.Theory
 
 infixl 6 +:, -:
 infixl 7 *:, /:

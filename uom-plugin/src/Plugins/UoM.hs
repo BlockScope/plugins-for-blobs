@@ -16,7 +16,7 @@ import Plugins.UoM.TcPlugin (uomPlugin)
 -- @-fplugin@ option.
 plugin :: Plugin
 plugin =
-    let m = mkModuleName "Data.UnitsOfMeasure.Unsafe"
+    let m = mkModuleName "Data.UnitsOfMeasure.Theory"
         pkg = fsLit "uom-plugin"
         tc = uomPlugin m pkg
     in defaultPlugin{tcPlugin = const . Just $ tracePlugin "uom-plugin" tc}

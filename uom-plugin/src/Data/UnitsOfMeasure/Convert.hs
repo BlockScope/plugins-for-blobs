@@ -67,7 +67,7 @@ module Data.UnitsOfMeasure.Convert
     ) where
 
 import Data.UnitsOfMeasure.Unsafe.Quantity ((*:), (/:), Quantity, fromRational')
-import Data.UnitsOfMeasure.Unsafe
+import Data.UnitsOfMeasure.Theory
     ( type (/:), type (*:)
     , Pack, Unpack, Unit, One, Base, Prod, UnitSyntax((:/))
     )

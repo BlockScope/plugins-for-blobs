@@ -26,7 +26,7 @@ import Data.Type.Equality ((:~:)(Refl))
 import Text.Parse.Units (parseUnit, universalSymbolTable, UnitExp(..))
 
 import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
-import Data.UnitsOfMeasure.Unsafe (Pack, Unpack, UnitSyntax((:/)))
+import Data.UnitsOfMeasure.Theory (Pack, Unpack, UnitSyntax((:/)))
 import Data.UnitsOfMeasure.Singleton
     (SUnit(..), SList(..), KnownUnit, unitSing, forgetSUnit, testEquivalentSUnit)
 

@@ -25,7 +25,7 @@ import Language.Haskell.TH
 import Language.Haskell.TH.Quote
     (QuasiQuoter(..), quoteExp, quoteType, quotePat, quoteDec)
 import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
-import Data.UnitsOfMeasure.Unsafe
+import Data.UnitsOfMeasure.Theory
     (type (^:), type (*:), type (/:), One, Base, MkUnit)
 import Data.UnitsOfMeasure.Convert (HasCanonicalBaseUnit(..))
 

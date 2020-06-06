@@ -41,7 +41,7 @@ in    defs
               , "Data.UnitsOfMeasure.Read"
               , "Data.UnitsOfMeasure.Show"
               , "Data.UnitsOfMeasure.Singleton"
-              , "Data.UnitsOfMeasure.Unsafe"
+              , "Data.UnitsOfMeasure.Theory"
               , "Data.UnitsOfMeasure.Unsafe.Convert"
               , "Data.UnitsOfMeasure.Unsafe.Unify"
               , "Data.UnitsOfMeasure.Unsafe.NormalForm"

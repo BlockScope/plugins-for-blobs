@@ -12,7 +12,7 @@
 -- library.  Note that importing this module may allow you to violate
 -- invariants, so you should generally work with the safe interface in
 -- "Data.UnitsOfMeasure" instead.
-module Data.UnitsOfMeasure.Unsafe
+module Data.UnitsOfMeasure.Theory
     ( -- * Type-level units of measure
       Unit
     , type One
@@ -20,7 +20,6 @@ module Data.UnitsOfMeasure.Unsafe
     , type (*:)
     , type (/:)
     , type (^:)
-
 
       -- * Syntactic representation of units
     , UnitSyntax(..)
