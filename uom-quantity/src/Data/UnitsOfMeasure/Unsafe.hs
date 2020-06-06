@@ -63,19 +63,19 @@ import GHC.Exts (Constraint)
 import GHC.TypeLits (Symbol, Nat, type (-))
 
 -- | (Kind) Units of measure
-data Unit
+data Unit where {}
 
 -- | Dimensionless unit (identity element)
-type family One :: Unit where
+type family One :: Unit where {}
 
 -- | Base unit
-type family Base (b :: Symbol) :: Unit where
+type family Base (b :: Symbol) :: Unit where {}
 
 -- | Multiplication for units of measure
-type family (u :: Unit) *: (v :: Unit) :: Unit where
+type family (u :: Unit) *: (v :: Unit) :: Unit where {}
 
 -- | Division for units of measure
-type family (u :: Unit) /: (v :: Unit) :: Unit where
+type family (u :: Unit) /: (v :: Unit) :: Unit where {}
 
 -- | Exponentiation (to a positive power) for units of measure;
 -- negative exponents are not yet supported (they require an Integer kind)
@@ -223,13 +223,13 @@ type family Prod (xs :: [Symbol]) :: Unit where
 -- it does not allow the structure of the unit to be observed.  The
 -- reduction behaviour is implemented by the plugin, because we cannot
 -- define it otherwise.
-type family Unpack (u :: Unit) :: UnitSyntax Symbol where
+type family Unpack (u :: Unit) :: UnitSyntax Symbol where {}
 
 
 -- | This is a bit of a hack, honestly, but a good hack.  Constraints
 -- @u ~~ v@ are just like equalities @u ~ v@, except solving them will
 -- be delayed until the plugin.  This may lead to better inferred types.
-type family (u :: Unit) ~~ (v :: Unit) :: Constraint where
+type family (u :: Unit) ~~ (v :: Unit) :: Constraint where {}
 
 infix 4 ~~
 
