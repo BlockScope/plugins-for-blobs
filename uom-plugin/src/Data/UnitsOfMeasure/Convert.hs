@@ -67,10 +67,14 @@ module Data.UnitsOfMeasure.Convert
     ) where
 
 import Data.UnitsOfMeasure.Unsafe
-import Data.UnitsOfMeasure.Singleton
+    ( type (/:), type (*:), (*:), (/:)
+    , Pack, Unpack, Unit, One, Base, Prod
+    , Quantity, UnitSyntax((:/)), fromRational'
+    )
+import Data.UnitsOfMeasure.Singleton (KnownUnit, SUnit(..), SList(..), unitSing)
 
-import GHC.Exts ( Constraint )
-import GHC.TypeLits
+import GHC.Exts (Constraint)
+import GHC.TypeLits (Symbol)
 
 
 -- | Class to capture the dimensions to which base units belong.  For

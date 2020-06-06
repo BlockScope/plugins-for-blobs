@@ -14,15 +14,20 @@ module Data.UnitsOfMeasure.TH
     , declareConvertibleUnit
     ) where
 
-import Data.Char
-import Numeric
-import Text.Parse.Units
+import Data.Char (isSpace, isAlpha)
+import Numeric (readFloat, readSigned)
+import Text.Parse.Units (UnitExp(..), parseUnit, universalSymbolTable)
 
 import Language.Haskell.TH
+    ( Q, Exp, Type, Pat, Dec
+    , litE, litP, litT, strTyLit, integerL, rationalL, numTyLit, sigP, reportError
+    )
 import Language.Haskell.TH.Quote
+    (QuasiQuoter(..), quoteExp, quoteType, quotePat, quoteDec)
 
 import Data.UnitsOfMeasure.Unsafe
-import Data.UnitsOfMeasure.Convert
+    (type (^:), type (*:), type (/:), One, Base, MkUnit, Quantity(..))
+import Data.UnitsOfMeasure.Convert (HasCanonicalBaseUnit(..))
 
 -- | The 'u' quasiquoter may be used to create units or quantities;
 -- its meaning depends on the context:

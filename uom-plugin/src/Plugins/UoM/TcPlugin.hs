@@ -12,8 +12,8 @@ import GHC.Corroborate
 import GHC.Corroborate.Type (collectType)
 import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
 import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
-import Data.Either
-import Data.List
+import Data.Either (partitionEithers)
+import Data.List (genericReplicate)
 
 import Data.UnitsOfMeasure.Unsafe.Convert
 import Data.UnitsOfMeasure.Unsafe.Unify
