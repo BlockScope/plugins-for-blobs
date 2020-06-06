@@ -6,6 +6,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE GADTs #-}
 
 -- | This module defines the core types used in the @uom-plugin@
 -- library.  Note that importing this module may allow you to violate
