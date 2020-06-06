@@ -66,5 +66,5 @@ import Data.UnitsOfMeasure.Read ()
 import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Singleton
 import Data.UnitsOfMeasure.TH
-import Data.UnitsOfMeasure.Quantity
+import Data.UnitsOfMeasure.Unsafe.Quantity
 import Data.UnitsOfMeasure.Unsafe

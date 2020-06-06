@@ -22,7 +22,7 @@
 -- "Data.UnitsOfMeasure".
 module Data.UnitsOfMeasure.Show (showQuantity, showUnit) where
 
-import Data.UnitsOfMeasure.Quantity (Quantity(..))
+import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
 import Data.UnitsOfMeasure.Unsafe (Unpack, UnitSyntax((:/)))
 import Data.UnitsOfMeasure.Singleton (KnownUnit, unitVal)
 

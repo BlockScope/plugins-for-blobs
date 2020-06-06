@@ -8,7 +8,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE GADTs #-}
 
-module Data.UnitsOfMeasure.Quantity
+module Data.UnitsOfMeasure.Unsafe.Quantity
     ( -- * Values indexed by their units
       Quantity(..)
     , unQuantity

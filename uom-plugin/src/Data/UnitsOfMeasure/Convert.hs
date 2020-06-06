@@ -66,7 +66,7 @@ module Data.UnitsOfMeasure.Convert
     , ToCanonicalUnit
     ) where
 
-import Data.UnitsOfMeasure.Quantity ((*:), (/:), Quantity, fromRational')
+import Data.UnitsOfMeasure.Unsafe.Quantity ((*:), (/:), Quantity, fromRational')
 import Data.UnitsOfMeasure.Unsafe
     ( type (/:), type (*:)
     , Pack, Unpack, Unit, One, Base, Prod, UnitSyntax((:/))

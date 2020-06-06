@@ -38,7 +38,6 @@ in    defs
                 ]
           , exposed-modules =
               [ "GHC.Corroborate.Type"
-              , "Data.UnitsOfMeasure.Quantity"
               , "Data.UnitsOfMeasure.Read"
               , "Data.UnitsOfMeasure.Show"
               , "Data.UnitsOfMeasure.Singleton"
@@ -46,6 +45,7 @@ in    defs
               , "Data.UnitsOfMeasure.Unsafe.Convert"
               , "Data.UnitsOfMeasure.Unsafe.Unify"
               , "Data.UnitsOfMeasure.Unsafe.NormalForm"
+              , "Data.UnitsOfMeasure.Unsafe.Quantity"
               ]
           , other-modules = [] : List Text
           }
