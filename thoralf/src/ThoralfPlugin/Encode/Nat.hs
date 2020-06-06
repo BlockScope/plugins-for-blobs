@@ -6,6 +6,9 @@ import GHC.Corroborate
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeArgConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
+    ( Vec(..), Nat(Zero), KdConvCont(..), TyConvCont(..), TheoryEncoding(..)
+    , emptyTheory
+    )
 
 natTheory :: TcPluginM TheoryEncoding
 natTheory = return natEncoding

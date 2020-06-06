@@ -6,6 +6,7 @@ import GHC.Corroborate
 
 import ThoralfPlugin.Encode.Convert (kindConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
+    (Vec(..), TheoryEncoding(..), KdConvCont, TyConvCont(..), emptyTheory)
 
 symbolTheory :: TcPluginM TheoryEncoding
 symbolTheory = return symbolEncoding

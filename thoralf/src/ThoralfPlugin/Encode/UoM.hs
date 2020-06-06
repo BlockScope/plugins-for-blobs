@@ -7,6 +7,7 @@ import GHC.Corroborate
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
+    (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 
 uomTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
 uomTheory theoryModuleName pkgName = do

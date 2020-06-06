@@ -8,6 +8,9 @@ import Data.Hashable (hash)
 import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
+    ( Vec(..), Nat(Zero), KdConvCont, TyConvCont, DecCont(..), TheoryEncoding(..)
+    , emptyTheory
+    )
 
 type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
 

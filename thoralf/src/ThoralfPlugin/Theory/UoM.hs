@@ -13,7 +13,7 @@ module ThoralfPlugin.Theory.UoM
     ) where
 
 import Data.Kind (Constraint)
-import GHC.TypeLits
+import GHC.TypeLits (Symbol, Nat)
 
 data UoM where {}
 
