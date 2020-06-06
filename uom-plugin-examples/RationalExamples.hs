@@ -12,7 +12,7 @@ module RationalExamples (dump) where
 import Data.UnitsOfMeasure
 import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Defs ()
-import Data.UnitsOfMeasure.Unsafe (Quantity(..), toRational')
+import Data.UnitsOfMeasure.Quantity (Quantity(..), toRational')
 
 -- A nautical mile.
 [u| NM = 1852 m |]
