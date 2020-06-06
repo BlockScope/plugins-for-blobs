@@ -18,10 +18,10 @@ import Data.List (genericReplicate)
 import Data.UnitsOfMeasure.Unsafe.Convert
 import Data.UnitsOfMeasure.Unsafe.Unify
 
-uomPlugin :: ModuleName -> FastString -> TcPlugin
-uomPlugin m pkg =
+uomPlugin :: ModuleName -> ModuleName -> FastString -> TcPlugin
+uomPlugin theory syntax pkg =
     TcPlugin
-        { tcPluginInit  = lookupUnitDefs m pkg
+        { tcPluginInit  = lookupUnitDefs theory syntax pkg
         , tcPluginSolve = unitsOfMeasureSolver
         , tcPluginStop  = const $ return ()
         }
@@ -115,18 +115,19 @@ lookForUnpacks uds givens wanteds = mapM unpackCt unpacks
     promoter x t = mkTyConApp cons_tycon [typeSymbolKind, mkStrLitTy x, t]
     cons_tycon = promoteDataCon consDataCon
 
-lookupUnitDefs :: ModuleName -> FastString -> TcPluginM UnitDefs
-lookupUnitDefs moduleName pkgName = do
-    md <- lookupModule moduleName pkgName
-    u <- look md "Unit"
-    b <- look md "Base"
-    o <- look md "One"
-    m <- look md "*:"
-    d <- look md "/:"
-    e <- look md "^:"
-    x <- look md "Unpack"
-    i <- look md "UnitSyntax"
-    c <- look md "~~"
+lookupUnitDefs :: ModuleName -> ModuleName -> FastString -> TcPluginM UnitDefs
+lookupUnitDefs theory syntax pkgName = do
+    mT <- lookupModule theory pkgName
+    mS <- lookupModule syntax pkgName
+    u <- look mT "Unit"
+    b <- look mT "Base"
+    o <- look mT "One"
+    m <- look mT "*:"
+    d <- look mT "/:"
+    e <- look mT "^:"
+    x <- look mS "Unpack"
+    i <- look mS "UnitSyntax"
+    c <- look mS "~~"
     return $ UnitDefs u b o m d e x i (getDataCon i ":/") c
   where
     getDataCon u s = case [ dc | dc <- tyConDataCons u, occNameFS (occName (dataConName dc)) == fsLit s ] of

@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d72fa84132bf735a5aae0e92cf3f14d8b11400bf9f1fbf300246ffcd51d108e7
+-- hash: d17826918ee4a5d821c214ffc325aa3f6c9c0ef0e488e53446d40d3e60f316af
 
 name:           uom-quantity
 version:        0.3.0.1
@@ -38,6 +38,7 @@ library
       Data.UnitsOfMeasure.Read
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton
+      Data.UnitsOfMeasure.Syntax
       Data.UnitsOfMeasure.Theory
       Data.UnitsOfMeasure.Unsafe.Convert
       Data.UnitsOfMeasure.Unsafe.Unify

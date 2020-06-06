@@ -67,4 +67,5 @@ import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Singleton
 import Data.UnitsOfMeasure.TH
 import Data.UnitsOfMeasure.Unsafe.Quantity
+import Data.UnitsOfMeasure.Syntax
 import Data.UnitsOfMeasure.Theory

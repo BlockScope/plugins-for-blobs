@@ -40,6 +40,7 @@ import Control.DeepSeq (NFData)
 import Foreign.Storable (Storable)
 
 import Data.UnitsOfMeasure.Theory
+import Data.UnitsOfMeasure.Syntax
 
 infixl 6 +:, -:
 infixl 7 *:, /:

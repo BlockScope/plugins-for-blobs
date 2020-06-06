@@ -67,10 +67,8 @@ module Data.UnitsOfMeasure.Convert
     ) where
 
 import Data.UnitsOfMeasure.Unsafe.Quantity ((*:), (/:), Quantity, fromRational')
-import Data.UnitsOfMeasure.Theory
-    ( type (/:), type (*:)
-    , Pack, Unpack, Unit, One, Base, Prod, UnitSyntax((:/))
-    )
+import Data.UnitsOfMeasure.Syntax (Pack, Unpack, Prod, UnitSyntax((:/)))
+import Data.UnitsOfMeasure.Theory (type (/:), type (*:), Unit, One, Base)
 import Data.UnitsOfMeasure.Singleton (KnownUnit, SUnit(..), SList(..), unitSing)
 
 import GHC.Exts (Constraint)

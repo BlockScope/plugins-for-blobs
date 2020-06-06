@@ -33,7 +33,7 @@ import qualified Data.Map as Map (Map, filter, insertWith, empty)
 import Data.Type.Equality (TestEquality(), (:~:)(Refl), testEquality)
 import Unsafe.Coerce (unsafeCoerce)
 
-import Data.UnitsOfMeasure.Theory (Pack, UnitSyntax((:/)))
+import Data.UnitsOfMeasure.Syntax (Pack, UnitSyntax((:/)))
 
 -- | Singleton type for concrete units of measure represented as lists
 -- of base units
