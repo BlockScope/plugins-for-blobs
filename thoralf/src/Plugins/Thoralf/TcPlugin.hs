@@ -10,6 +10,7 @@ import qualified SimpleSMT as SMT
 import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
 import GHC.Corroborate
+import GHC.Corroborate.Divulge (divulgeClass)
 
 import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
@@ -52,7 +53,7 @@ mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
     encoding <- seed
     let findModule = findImportedModule
     (Found _ disEqModule) <- findModule disEqName (Just pkgName)
-    disEq <- findClass disEqModule "DisEquality"
+    disEq <- divulgeClass disEqModule "DisEquality"
     z3Solver <- tcPluginIO $ do
         z3Solver <- solverWithLevel debug
         SMT.push z3Solver
@@ -64,11 +65,6 @@ mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
             , theoryEncoding = encoding
             , disEqClass = disEq
             }
-    where
-        findClass :: Module -> String -> TcPluginM Class
-        findClass md strNm = do
-            name <- lookupOrig md (mkTcOcc strNm)
-            tcLookupClass name
 
 thoralfStop :: ThoralfState -> TcPluginM ()
 thoralfStop ThoralfState{smtSolver = solverRef} = do

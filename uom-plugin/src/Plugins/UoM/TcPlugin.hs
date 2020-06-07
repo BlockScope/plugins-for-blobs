@@ -9,6 +9,7 @@
 module Plugins.UoM.TcPlugin (uomPlugin) where
 
 import GHC.Corroborate
+import GHC.Corroborate.Divulge (divulgeTyCon)
 import GHC.Corroborate.Type (collectType)
 import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
 import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
@@ -119,23 +120,20 @@ lookupUnitDefs :: ModuleName -> ModuleName -> FastString -> TcPluginM UnitDefs
 lookupUnitDefs theory syntax pkgName = do
     mT <- lookupModule theory pkgName
     mS <- lookupModule syntax pkgName
-    u <- look mT "Unit"
-    b <- look mT "Base"
-    o <- look mT "One"
-    m <- look mT "*:"
-    d <- look mT "/:"
-    e <- look mT "^:"
-    x <- look mS "Unpack"
-    i <- look mS "UnitSyntax"
-    c <- look mS "~~"
+    u <- divulgeTyCon mT "Unit"
+    b <- divulgeTyCon mT "Base"
+    o <- divulgeTyCon mT "One"
+    m <- divulgeTyCon mT "*:"
+    d <- divulgeTyCon mT "/:"
+    e <- divulgeTyCon mT "^:"
+    x <- divulgeTyCon mS "Unpack"
+    i <- divulgeTyCon mS "UnitSyntax"
+    c <- divulgeTyCon mS "~~"
     return $ UnitDefs u b o m d e x i (getDataCon i ":/") c
   where
     getDataCon u s = case [ dc | dc <- tyConDataCons u, occNameFS (occName (dataConName dc)) == fsLit s ] of
                        [d] -> promoteDataCon d
                        _   -> error $ "lookupUnitDefs/getDataCon: missing " ++ s
-
-    look md s = tcLookupTyCon =<< lookupName md (mkTcOcc s)
-
 
 -- | Produce bogus evidence for a constraint, including actual
 -- equality constraints and our fake '(~~)' equality constraints.
