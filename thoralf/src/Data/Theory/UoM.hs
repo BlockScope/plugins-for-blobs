@@ -15,11 +15,19 @@ module Data.Theory.UoM
 import Data.Kind (Constraint)
 import GHC.TypeLits (Symbol, Nat)
 
+-- | (Kind) Units of measure
 data UoM where {}
 
+-- | Dimensionless unit (identity element)
 type family One :: UoM where {}
+
+-- | Base unit
 type family Base (measure :: Symbol) (power :: Nat) :: UoM where {}
+
+-- | Multiplication for units of measure
 type family (*:) (a :: UoM) (b :: UoM) :: UoM where {}
+
+-- | Division for units of measure
 type family (/:) (n :: UoM) (d :: UoM) :: UoM where {}
 
 type family IsBase (measure :: Symbol) (power :: Nat) (b :: UoM) :: Constraint where
