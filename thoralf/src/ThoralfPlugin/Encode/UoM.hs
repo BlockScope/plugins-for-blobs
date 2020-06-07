@@ -6,13 +6,13 @@ import GHC.Corroborate
 import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
-import ThoralfPlugin.Encode.Find (findModule, findTyCon)
+import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 
-uomTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
-uomTheory theory pkgName = do
-  uomModule <- findModule theory pkgName
+uomTheory :: PkgModuleName -> TcPluginM TheoryEncoding
+uomTheory theory = do
+  uomModule <- findModule theory
   let f = findTyCon uomModule
   baseTyCon <- f "Base"
   oneTyCon <- f "One"

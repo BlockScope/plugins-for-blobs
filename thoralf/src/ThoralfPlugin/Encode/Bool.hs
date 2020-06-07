@@ -6,14 +6,14 @@ import GHC.Corroborate
 import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
-import ThoralfPlugin.Encode.Find (findModule, findTyCon)
+import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 
-boolTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
-boolTheory theory pkgName = do
-  boolModule <- findModule theory pkgName
-  typeNatMod <- findModule (mkModuleName "GHC.TypeNats") (fsLit "base")
+boolTheory :: PkgModuleName -> PkgModuleName -> TcPluginM TheoryEncoding
+boolTheory nats theory = do
+  boolModule <- findModule theory
+  typeNatMod <- findModule nats
 
   compTyCon <- findTyCon boolModule "<?"
   compNat <- findTyCon typeNatMod "<=?"

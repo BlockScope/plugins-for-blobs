@@ -7,7 +7,7 @@ import Data.Hashable (hash)
 import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
-import ThoralfPlugin.Encode.Find (findModule, findTyCon)
+import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule, findTyCon)
 import ThoralfPlugin.Encode.TheoryEncoding
     ( Vec(..), Nat(Zero), KdConvCont, TyConvCont, DecCont(..), TheoryEncoding(..)
     , emptyTheory
@@ -15,9 +15,9 @@ import ThoralfPlugin.Encode.TheoryEncoding
 
 type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
 
-fmTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
-fmTheory theory pkgName = do
-    fmModule <- findModule theory pkgName
+fmTheory :: PkgModuleName -> TcPluginM TheoryEncoding
+fmTheory theory = do
+    fmModule <- findModule theory
     let f = findTyCon fmModule
     nil <- f "Nil"
     alt <- f "Alter"

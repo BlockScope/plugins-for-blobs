@@ -1,9 +1,19 @@
-module ThoralfPlugin.Encode.Find (findTyCon, findModule) where
+{-# LANGUAGE RecordWildCards #-}
+
+module ThoralfPlugin.Encode.Find (PkgModuleName(..), findTyCon, findModule) where
 
 import GHC.Corroborate
 
-findModule :: ModuleName -> FastString -> TcPluginM Module
-findModule m p = do Found _ m' <- findImportedModule m (Just p); return m'
+data PkgModuleName =
+    PkgModuleName
+        { moduleName :: ModuleName
+        , pkgName :: FastString
+        }
+
+findModule :: PkgModuleName -> TcPluginM Module
+findModule PkgModuleName{..} = do
+    Found _ m' <- findImportedModule moduleName (Just pkgName)
+    return m'
 
 findTyCon :: Module -> String -> TcPluginM TyCon
 findTyCon md strNm = do

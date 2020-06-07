@@ -2,6 +2,7 @@ module ThoralfPlugin.Encode (thoralfTheories) where
 
 import GHC.Corroborate
 
+import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding, sumEncodings)
 import ThoralfPlugin.Encode.Nat (natTheory)
 import ThoralfPlugin.Encode.FiniteMap (fmTheory)
@@ -12,14 +13,15 @@ import ThoralfPlugin.Encode.Bool (boolTheory)
 thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
     let pkg = fsLit "thoralf-plugin"
-        fm = mkModuleName "Data.Theory.FiniteMap"
-        uom = mkModuleName "Data.Theory.UoM"
-        bool = mkModuleName "Data.Theory.Bool"
+        fm = PkgModuleName (mkModuleName "Data.Theory.FiniteMap") pkg
+        uom = PkgModuleName (mkModuleName "Data.Theory.UoM") pkg
+        bool = PkgModuleName (mkModuleName "Data.Theory.Bool") pkg
+        nats = PkgModuleName (mkModuleName "GHC.TypeNats") (fsLit "base")
     in
         sumEncodings
             [ natTheory
-            , fmTheory fm pkg
+            , fmTheory fm
             , symbolTheory
-            , boolTheory bool pkg
-            , uomTheory uom pkg
+            , boolTheory nats bool
+            , uomTheory uom
             ]
