@@ -101,34 +101,39 @@ interConvert = mkConvert $ \case
             )
     _ -> Nothing
 
+forally :: String -> String
+forally = [s|forall ((y (Maybe %s)))|]
+
+forallxy :: String -> String -> String
+forallxy = [s|forall ((x (Maybe %s)) (y (Maybe %s)))|]
+
 eitherDec :: Vec One String -> [String]
 eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
     [ [s|(declare-fun either%s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
         hashVal valKd valKd valKd
 
-    , [s|(assert (forall ((y (Maybe %s))) (= (either%s (as nothing (Maybe %s)) y) y)))|]
-        valKd hashVal valKd
+    , [s|(assert (%s (= (either%s (as nothing (Maybe %s)) y) y)))|]
+        (forally valKd) hashVal valKd
 
-    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> ((_ is (just (%s) (Maybe %s))) x) (= (either%s x y) x))))|]
-        valKd valKd valKd valKd hashVal
+    , [s|(assert (%s (=> ((_ is (just (%s) (Maybe %s))) x) (= (either%s x y) x))))|]
+        (forallxy valKd valKd) valKd valKd hashVal
     ]
 
 bothDec :: Vec One String -> [String]
-bothDec (valKd :> VNil) =
+bothDec (valKd :> VNil) = let hashVal = show $ hash valKd in
     [ [s|(declare-fun both%s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
         hashVal valKd valKd valKd
 
-    , [s|(assert (forall ((y (Maybe %s))) (= (both%s y %s) %s)))|]
-        valKd hashVal noth noth
+    , [s|(assert (%s (= (both%s y %s) %s)))|]
+        (forally valKd) hashVal noth noth
 
-    , [s|(assert (forall ((y (Maybe %s))) (= (both%s nothing y) nothing)))|]
-        valKd hashVal
+    , [s|(assert (%s (= (both%s nothing y) nothing)))|]
+        (forally valKd) hashVal
 
-    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> (and ((_ is %s) x) ((_ is %s) y)) (= (both%s x y) x))))|]
-        valKd valKd jus jus hashVal
+    , [s|(assert (%s (=> (and ((_ is %s) x) ((_ is %s) y)) (= (both%s x y) x))))|]
+        (forallxy valKd valKd) jus jus hashVal
     ]
     where
-        hashVal = show $ hash valKd
         noth = [s|(as nothing (Maybe %s))|] valKd
         jus = [s|(just (%s) (Maybe %s))|] valKd valKd
 
