@@ -3,17 +3,18 @@
 module ThoralfPlugin.Encode.UoM (uomTheory) where
 
 import GHC.Corroborate
+import GHC.Corroborate.Divulge (divulgeTyCon)
 import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
-import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule, findTyCon)
+import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule)
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 
 uomTheory :: PkgModuleName -> TcPluginM TheoryEncoding
 uomTheory theory = do
   uomModule <- findModule theory
-  let f = findTyCon uomModule
+  let f = divulgeTyCon uomModule
   baseTyCon <- f "Base"
   oneTyCon <- f "One"
   divTyCon <- f "/:"

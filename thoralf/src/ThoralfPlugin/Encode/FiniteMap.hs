@@ -4,11 +4,12 @@ module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
 import Prelude hiding (maybe, either)
 import GHC.Corroborate
+import GHC.Corroborate.Divulge (divulgeTyCon)
 import Data.Hashable (hash)
 import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
-import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule, findTyCon)
+import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule)
 import ThoralfPlugin.Encode.TheoryEncoding
     ( Vec(..), Nat(Zero), KdConvCont, TyConvCont, DecCont(..), TheoryEncoding(..)
     , emptyTheory
@@ -19,7 +20,7 @@ type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
 fmTheory :: PkgModuleName -> TcPluginM TheoryEncoding
 fmTheory theory = do
     fmModule <- findModule theory
-    let f = findTyCon fmModule
+    let f = divulgeTyCon fmModule
     nil <- f "Nil"
     alt <- f "Alter"
     del <- f "Delete"
