@@ -106,10 +106,10 @@ eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
     [ [s|(declare-fun either%s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
         hashVal valKd valKd valKd
 
-    , [s|(assert (forall ((y (Maybe %s))) (= (either%s (as nothing (Maybe %s) ) y) y)))|]
+    , [s|(assert (forall ((y (Maybe %s))) (= (either%s (as nothing (Maybe %s)) y) y)))|]
         valKd hashVal valKd
 
-    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> ((_ is (just (%s) (Maybe %s) ) ) x) (= (either%s x y) x))))|]
+    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> ((_ is (just (%s) (Maybe %s))) x) (= (either%s x y) x))))|]
         valKd valKd valKd valKd hashVal
     ]
 
@@ -124,7 +124,7 @@ bothDec (valKd :> VNil) =
     , [s|(assert (forall ((y (Maybe %s))) (= (both%s nothing y) nothing)))|]
         valKd hashVal
 
-    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> (and ((_ is %s) x) ((_ is %s) y) ) (= (both%s x y) x))))|]
+    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> (and ((_ is %s) x) ((_ is %s) y)) (= (both%s x y) x))))|]
         valKd valKd jus jus hashVal
     ]
     where
@@ -142,7 +142,7 @@ alterString (fm :> key :> val :> VNil) VNil =
 
 deleteString :: Vec Two String -> Vec One String -> String
 deleteString (fm :> key :> VNil) (valKd :> VNil) =
-    [s|(store %s %s (as nothing (Maybe %s) )  )|] fm key valKd
+    [s|(store %s %s (as nothing (Maybe %s)))|] fm key valKd
 
 opString :: String -> Vec Two String -> Vec One String -> String
 opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
