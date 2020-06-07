@@ -16,8 +16,8 @@ import ThoralfPlugin.Encode.TheoryEncoding
 type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
 
 fmTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
-fmTheory theoryModuleName pkgName = do
-    fmModule <- findModule theoryModuleName pkgName
+fmTheory theory pkgName = do
+    fmModule <- findModule theory pkgName
     let f = findTyCon fmModule
     nil <- f "Nil"
     alt <- f "Alter"

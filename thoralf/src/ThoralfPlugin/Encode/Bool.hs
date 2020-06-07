@@ -11,8 +11,8 @@ import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 
 boolTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
-boolTheory theoryModuleName pkgName = do
-  boolModule <- findModule theoryModuleName pkgName
+boolTheory theory pkgName = do
+  boolModule <- findModule theory pkgName
   typeNatMod <- findModule (mkModuleName "GHC.TypeNats") (fsLit "base")
 
   compTyCon <- findTyCon boolModule "<?"

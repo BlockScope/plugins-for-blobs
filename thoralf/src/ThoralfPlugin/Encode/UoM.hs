@@ -11,8 +11,8 @@ import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 
 uomTheory :: ModuleName -> FastString -> TcPluginM TheoryEncoding
-uomTheory theoryModuleName pkgName = do
-  uomModule <- findModule theoryModuleName pkgName
+uomTheory theory pkgName = do
+  uomModule <- findModule theory pkgName
   let f = findTyCon uomModule
   baseTyCon <- f "Base"
   oneTyCon <- f "One"
