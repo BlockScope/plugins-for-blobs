@@ -1,12 +1,5 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE RoleAnnotations #-}
-{-# LANGUAGE StandaloneDeriving #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE UndecidableInstances #-}
-{-# LANGUAGE GADTs #-}
+{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
+{-# LANGUAGE UndecidableInstances, GADTs #-}
 
 -- | This module defines the core types used in the @uom-plugin@
 -- library.  Note that importing this module may allow you to violate
