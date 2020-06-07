@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 18ede61262c7c86d3ce3095c15bf33a404b0c6d8eab325f510182e01547ab64a
+-- hash: 6a211c86cd53353bd1c49e4993ba01e3cbff0da8c1ab3faa19764276ff1d9cb1
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -39,7 +39,7 @@ library
       ThoralfPlugin.Singletons.Nat
       ThoralfPlugin.Theory.DisEq
       ThoralfPlugin.Theory.FiniteMap
-      ThoralfPlugin.Theory.UoM
+      Data.Theory.UoM
       ThoralfPlugin.Theory.Bool
       Plugins.Thoralf
       Plugins.Thoralf.TcPlugin

@@ -13,7 +13,7 @@ thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
     let pkg = fsLit "thoralf-plugin"
         fm = mkModuleName "ThoralfPlugin.Theory.FiniteMap"
-        uom = mkModuleName "ThoralfPlugin.Theory.UoM"
+        uom = mkModuleName "Data.UoM.Theory"
         bool = mkModuleName "ThoralfPlugin.Theory.Bool"
     in
         sumEncodings

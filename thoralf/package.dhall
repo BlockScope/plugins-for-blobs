@@ -36,7 +36,7 @@ in    defs
               , "ThoralfPlugin.Singletons.Nat"
               , "ThoralfPlugin.Theory.DisEq"
               , "ThoralfPlugin.Theory.FiniteMap"
-              , "ThoralfPlugin.Theory.UoM"
+              , "Data.Theory.UoM"
               , "ThoralfPlugin.Theory.Bool"
               , "Plugins.Thoralf"
               , "Plugins.Thoralf.TcPlugin"

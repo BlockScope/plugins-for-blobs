@@ -7,7 +7,7 @@ module UoM where
 import Data.Kind (Type)
 import Data.Singletons.TypeLits hiding (SSymbol)
 import ThoralfPlugin.Singletons.Symbol (SSymbol)
-import ThoralfPlugin.Theory.UoM
+import Data.Theory.UoM
 
 data Unit :: UoM -> Type where
   MkUnit :: Double -> Unit m

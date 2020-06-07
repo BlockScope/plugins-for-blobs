@@ -3,7 +3,7 @@
 
 -- | This module declares the unit of measure interface that is really just an
 -- abelian group isomorphic to Z+.
-module ThoralfPlugin.Theory.UoM
+module Data.Theory.UoM
     ( UoM
     , FromList
     , One
