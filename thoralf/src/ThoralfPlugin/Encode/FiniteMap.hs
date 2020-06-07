@@ -2,7 +2,7 @@
 
 module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
-import Prelude hiding (either)
+import Prelude hiding (maybe, either)
 import GHC.Corroborate
 import Data.Hashable (hash)
 import Language.Haskell.Printf
@@ -102,22 +102,23 @@ interConvert = mkConvert $ \case
             )
     _ -> Nothing
 
-forally, forallxy :: String -> String
-forally = [s|forall ((y (Maybe %s)))|]
-forallxy x = [s|forall ((x (Maybe %s)) (y (Maybe %s)))|] x x
+maybe, forally, forallxy :: String -> String
+maybe = [s|(Maybe %s)|]
+forally x = [s|forall ((y %s))|] (maybe x)
+forallxy x = let m = maybe x in [s|forall ((x %s) (y %s))|] m m
 
 declarefun :: String -> String -> String
-declarefun f x = [s|(declare-fun %s ((Maybe %s) (Maybe %s)) (Maybe %s))|] f x x x
+declarefun f x = let m = maybe x in [s|(declare-fun %s (%s %s) %s)|] f m m m
 
 eitherDec :: Vec One String -> [String]
 eitherDec (valKd :> VNil) = let either = [s|either%s|] (show $ hash valKd) in
     [ declarefun either valKd
 
-    , [s|(assert (%s (= (%s (as nothing (Maybe %s)) y) y)))|]
-        (forally valKd) either valKd
+    , [s|(assert (%s (= (%s (as nothing %s) y) y)))|]
+        (forally valKd) either (maybe valKd)
 
-    , [s|(assert (%s (=> ((_ is (just (%s) (Maybe %s))) x) (= (%s x y) x))))|]
-        (forallxy valKd) valKd valKd either
+    , [s|(assert (%s (=> ((_ is (just (%s) %s)) x) (= (%s x y) x))))|]
+        (forallxy valKd) valKd (maybe valKd) either
     ]
 
 bothDec :: Vec One String -> [String]
@@ -134,12 +135,12 @@ bothDec (valKd :> VNil) = let both = [s|both%s|] (show $ hash valKd) in
         (forallxy valKd) jus jus both
     ]
     where
-        noth = [s|(as nothing (Maybe %s))|] valKd
-        jus = [s|(just (%s) (Maybe %s))|] valKd valKd
+        noth = [s|(as nothing %s)|] (maybe valKd)
+        jus = [s|(just (%s) %s)|] valKd (maybe valKd)
 
 nilString :: Vec 'Zero String -> Vec Two String -> String
 nilString VNil (keyKd :> valKd :> VNil) =
-    [s|((as const (Array %s (Maybe %s))) nothing)|] keyKd valKd
+    [s|((as const (Array %s %s)) nothing)|] keyKd (maybe valKd)
 
 alterString :: Vec Three String -> Vec 'Zero String -> String
 alterString (fm :> key :> val :> VNil) VNil =
@@ -147,7 +148,7 @@ alterString (fm :> key :> val :> VNil) VNil =
 
 deleteString :: Vec Two String -> Vec One String -> String
 deleteString (fm :> key :> VNil) (valKd :> VNil) =
-    [s|(store %s %s (as nothing (Maybe %s)))|] fm key valKd
+    [s|(store %s %s (as nothing %s))|] fm key (maybe valKd)
 
 opString :: String -> Vec Two String -> Vec One String -> String
 opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
@@ -159,4 +160,4 @@ fmConvert = kindArgConvert $ \case
     _ -> Nothing
 
 fmString :: Vec Two String -> String
-fmString (keyKd :> valKd :> VNil) = [s|(Array %s (Maybe %s))|] keyKd valKd
+fmString (keyKd :> valKd :> VNil) = [s|(Array %s %s)|] keyKd (maybe valKd)
