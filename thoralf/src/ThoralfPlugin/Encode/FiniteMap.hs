@@ -122,7 +122,7 @@ eitherDec (valKd :> VNil) = let either = [s|either%s|] (show $ hash valKd) in
     ]
 
 bothDec :: Vec One String -> [String]
-bothDec (valKd :> VNil) = let both = [s|both%s|] (show $ hash valKd) in
+bothDec (valKd :> VNil) =
     [ declarefun both valKd
 
     , [s|(assert (%s (= (%s y %s) %s)))|]
@@ -135,6 +135,7 @@ bothDec (valKd :> VNil) = let both = [s|both%s|] (show $ hash valKd) in
         (forallxy valKd) just just both
     ]
     where
+        both = [s|both%s|] (show $ hash valKd)
         nothing = [s|(as nothing %s)|] (maybe valKd)
         just = [s|(just (%s) %s)|] valKd (maybe valKd)
 
