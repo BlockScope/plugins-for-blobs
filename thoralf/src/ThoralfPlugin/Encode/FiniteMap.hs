@@ -126,17 +126,17 @@ bothDec (valKd :> VNil) = let both = [s|both%s|] (show $ hash valKd) in
     [ declarefun both valKd
 
     , [s|(assert (%s (= (%s y %s) %s)))|]
-        (forally valKd) both noth noth
+        (forally valKd) both nothing nothing
 
     , [s|(assert (%s (= (%s nothing y) nothing)))|]
         (forally valKd) both
 
     , [s|(assert (%s (=> (and ((_ is %s) x) ((_ is %s) y)) (= (%s x y) x))))|]
-        (forallxy valKd) jus jus both
+        (forallxy valKd) just just both
     ]
     where
-        noth = [s|(as nothing %s)|] (maybe valKd)
-        jus = [s|(just (%s) %s)|] valKd (maybe valKd)
+        nothing = [s|(as nothing %s)|] (maybe valKd)
+        just = [s|(just (%s) %s)|] valKd (maybe valKd)
 
 nilString :: Vec 'Zero String -> Vec Two String -> String
 nilString VNil (keyKd :> valKd :> VNil) =
