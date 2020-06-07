@@ -1,9 +1,10 @@
-{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase #-}
+{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase, QuasiQuotes #-}
 
 module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
 import GHC.Corroborate
 import Data.Hashable (hash)
+import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
@@ -102,49 +103,50 @@ interConvert = mkConvert $ \case
 
 eitherDec :: Vec One String -> [String]
 eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
-    [ "(declare-fun either" ++ hashVal ++ " ((Maybe "++ valKd ++ ") \
-      \(Maybe "++ valKd ++ ")) (Maybe " ++ valKd ++"))"
-    , "(assert (forall ((y (Maybe " ++ valKd ++ "))) \
-      \(= (either" ++ hashVal ++ " (as nothing (Maybe " ++
-        valKd ++ ") ) y) y)))"
-    , "(assert (forall ((x (Maybe " ++ valKd ++ ")) (y (Maybe " ++ valKd ++
-      "))) (=> ((_ is (just (" ++ valKd ++ ") (Maybe " ++ valKd ++
-      ") ) ) x) (= (either" ++ hashVal ++ " x y) x))))"
+    [ [s|(declare-fun either%s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
+        hashVal valKd valKd valKd
+
+    , [s|(assert (forall ((y (Maybe %s))) (= (either%s (as nothing (Maybe %s) ) y) y)))|]
+        valKd hashVal valKd
+
+    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> ((_ is (just (%s) (Maybe %s) ) ) x) (= (either%s x y) x))))|]
+        valKd valKd valKd valKd hashVal
     ]
 
 bothDec :: Vec One String -> [String]
 bothDec (valKd :> VNil) =
-    [ "(declare-fun both" ++ hashVal ++
-    " ((Maybe " ++ valKd ++ ") (Maybe " ++
-    valKd ++ ")) (Maybe " ++ valKd ++ "))"
-    , "(assert (forall ((y (Maybe " ++ valKd ++ "))) \
-    \(= (both" ++ hashVal ++ " y " ++ noth ++ ") " ++ noth ++ ")))"
-    , "(assert (forall ((y (Maybe " ++ valKd ++
-    "))) (= (both" ++ hashVal ++ " nothing y) nothing)))"
-    , "(assert (forall ((x (Maybe " ++ valKd ++ ")) (y (Maybe " ++
-    valKd ++ "))) (=> (and ((_ is " ++ jus ++
-    ") x) ((_ is "++ jus ++") y) ) (= (both" ++ hashVal ++ " x y) x))))"
+    [ [s|(declare-fun both%s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
+        hashVal valKd valKd valKd
+
+    , [s|(assert (forall ((y (Maybe %s))) (= (both%s y %s) %s)))|]
+        valKd hashVal noth noth
+
+    , [s|(assert (forall ((y (Maybe %s))) (= (both%s nothing y) nothing)))|]
+        valKd hashVal
+
+    , [s|(assert (forall ((x (Maybe %s)) (y (Maybe %s))) (=> (and ((_ is %s) x) ((_ is %s) y) ) (= (both%s x y) x))))|]
+        valKd valKd jus jus hashVal
     ]
     where
         hashVal = show $ hash valKd
-        noth = "(as nothing (Maybe " ++ valKd ++ "))"
-        jus = "(just ("++ valKd ++ ") (Maybe "++ valKd ++ "))"
+        noth = [s|(as nothing (Maybe %s))|] valKd
+        jus = [s|(just (%s) (Maybe %s))|] valKd valKd
 
 nilString :: Vec 'Zero String -> Vec Two String -> String
 nilString VNil (keyKd :> valKd :> VNil) =
-    "((as const (Array " ++ keyKd ++ " (Maybe " ++ valKd ++ "))) nothing)"
+    [s|((as const (Array %s (Maybe %s))) nothing)|] keyKd valKd
 
 alterString :: Vec Three String -> Vec 'Zero String -> String
 alterString (fm :> key :> val :> VNil) VNil =
-    "(store " ++ fm ++ " " ++ key ++ " (just " ++ val  ++ "))"
+    [s|(store %s %s (just %s))|] fm key val
 
 deleteString :: Vec Two String -> Vec One String -> String
 deleteString (fm :> key :> VNil) (valKd :> VNil) =
-    "(store " ++ fm ++ " " ++ key ++ " (as nothing (Maybe " ++ valKd ++ ") )  )"
+    [s|(store %s %s (as nothing (Maybe %s) )  )|] fm key valKd
 
 opString :: String -> Vec Two String -> Vec One String -> String
 opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
-    "( (_ map " ++ op ++ show (hash valKd) ++") "++ m1 ++ " " ++ m2 ++ ")"
+    [s|( (_ map %s%s) %s %s)|] op (show $ hash valKd) m1 m2
 
 fmConvert :: TyCon -> Type -> Maybe KdConvCont
 fmConvert = kindArgConvert $ \case
@@ -152,4 +154,4 @@ fmConvert = kindArgConvert $ \case
     _ -> Nothing
 
 fmString :: Vec Two String -> String
-fmString (keyKd :> valKd :> VNil) = "(Array " ++ keyKd ++ " (Maybe " ++ valKd ++ "))"
+fmString (keyKd :> valKd :> VNil) = [s|(Array %s (Maybe %s))|] keyKd valKd

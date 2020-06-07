@@ -25,6 +25,7 @@ in    defs
             , "hashable"
             , "mtl"
             , "simple-smt"
+            , "th-printf"
             ]
       , library =
           { source-dirs =

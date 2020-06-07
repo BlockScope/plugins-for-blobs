@@ -1,8 +1,9 @@
-{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase #-}
+{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase, QuasiQuotes #-}
 
 module ThoralfPlugin.Encode.Nat (natTheory) where
 
 import GHC.Corroborate
+import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeArgConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
@@ -36,14 +37,13 @@ subConvert = flip typeArgConvert typeNatSubTyCon $ \case
     _ -> Nothing
 
 opString :: String -> Vec Two String -> Vec 'Zero String -> String
-opString op (a :> b :> VNil)  VNil = "(" ++ op ++ " " ++ a ++ " " ++ b ++ ")"
+opString op (a :> b :> VNil)  VNil = [s|(%s %s %s)|] op a b
 
 assertIntIsNat :: TyVar -> Maybe [String]
 assertIntIsNat tv = do
     KdConvCont _ _ <- natConvert (tyVarKind tv)
     let name = show $ getUnique tv
-    let isNat = "(assert (<= 0 " ++ name ++ "))"
-    return [isNat]
+    return [[s|(assert (<= 0 %s))|] name]
 
 natConvert :: Type -> Maybe KdConvCont
 natConvert = kindConvert "Int" typeNatKindCon

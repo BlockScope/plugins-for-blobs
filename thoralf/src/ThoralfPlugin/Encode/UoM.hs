@@ -1,8 +1,9 @@
-{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase #-}
+{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase, QuasiQuotes #-}
 
 module ThoralfPlugin.Encode.UoM (uomTheory) where
 
 import GHC.Corroborate
+import Language.Haskell.Printf
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (findModule, findTyCon)
@@ -32,8 +33,8 @@ mkUoMEncoding base one div' mult uom =
         , kindConvs = [kindConvert "(Array String Int)" uom]
         }
     where
-        f s = typeArgConvert $ \case
-            (x : y : _) -> Just (x :> y :> VNil, s)
+        f s' = typeArgConvert $ \case
+            (x : y : _) -> Just (x :> y :> VNil, s')
             _ -> Nothing
 
 oneString :: String
@@ -41,8 +42,8 @@ oneString = "((as const (Array String Int)) 0)"
 
 baseString :: Vec Two String -> Vec 'Zero String -> String
 baseString (measure :> power :> VNil) VNil =
-    "(store " ++ oneString ++ " " ++ measure ++ " " ++ power ++ ")"
+    [s|(store %s %s %s)|] oneString measure power
 
 opString :: String -> Vec Two String -> Vec 'Zero String -> String
 opString op (n :> m :> VNil) VNil =
-    "((_ map (" ++ op ++ " (Int Int) Int)) " ++ n ++ " " ++ m ++ ")"
+    [s|((_ map (%s (Int Int) Int)) %s %s)|] op n m
