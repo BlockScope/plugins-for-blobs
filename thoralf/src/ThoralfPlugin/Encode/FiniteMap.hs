@@ -106,10 +106,12 @@ forally, forallxy :: String -> String
 forally = [s|forall ((y (Maybe %s)))|]
 forallxy x = [s|forall ((x (Maybe %s)) (y (Maybe %s)))|] x x
 
+declarefun :: String -> String -> String
+declarefun f x = [s|(declare-fun %s ((Maybe %s) (Maybe %s)) (Maybe %s))|] f x x x
+
 eitherDec :: Vec One String -> [String]
 eitherDec (valKd :> VNil) = let either = [s|either%s|] (show $ hash valKd) in
-    [ [s|(declare-fun %s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
-        either valKd valKd valKd
+    [ declarefun either valKd
 
     , [s|(assert (%s (= (%s (as nothing (Maybe %s)) y) y)))|]
         (forally valKd) either valKd
@@ -120,8 +122,7 @@ eitherDec (valKd :> VNil) = let either = [s|either%s|] (show $ hash valKd) in
 
 bothDec :: Vec One String -> [String]
 bothDec (valKd :> VNil) = let both = [s|both%s|] (show $ hash valKd) in
-    [ [s|(declare-fun %s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
-        both valKd valKd valKd
+    [ declarefun both valKd
 
     , [s|(assert (%s (= (%s y %s) %s)))|]
         (forally valKd) both noth noth
