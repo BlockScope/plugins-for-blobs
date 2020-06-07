@@ -2,7 +2,7 @@
 {-# LANGUAGE UndecidableInstances, RankNTypes, ConstraintKinds, GADTs #-}
 
 -- | This module declares the finite maps interface.
-module ThoralfPlugin.Theory.FiniteMap
+module Data.Theory.FiniteMap
   ( Fm
   , Nil
   , Has

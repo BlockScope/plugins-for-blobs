@@ -7,7 +7,7 @@ import Plugins.Thoralf.TcPlugin (thoralfPlugin)
 
 plugin :: Plugin
 plugin =
-    let disEqName = mkModuleName "ThoralfPlugin.Theory.DisEq"
+    let disEqName = mkModuleName "Data.Theory.DisEq"
         pkgName = fsLit "thoralf-plugin"
         debug = False
         tyCheck = thoralfPlugin disEqName pkgName thoralfTheories debug

@@ -8,7 +8,7 @@ import Data.Kind (Constraint, Type)
 import GHC.TypeLits (Nat, KnownNat, natVal)
 import Unsafe.Coerce (unsafeCoerce)
 
-import ThoralfPlugin.Theory.Bool (type (<?))
+import Data.Theory.Bool (type (<?))
 
 data SNat :: Nat -> Type where
     SNat :: KnownNat n => SNat n

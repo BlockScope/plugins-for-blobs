@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
 
-module ThoralfPlugin.Theory.Bool where
+module Data.Theory.Bool where
 
 import GHC.TypeLits (Nat)
 

@@ -9,7 +9,7 @@
 
 module Nat where
 
-import ThoralfPlugin.Theory.Bool
+import Data.Theory.Bool
 import Data.Type.Equality
 import Data.Kind
 import GHC.TypeLits

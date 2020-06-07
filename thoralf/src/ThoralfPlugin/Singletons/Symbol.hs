@@ -8,7 +8,7 @@ import Data.Kind (Constraint, Type)
 import GHC.TypeLits (symbolVal, Symbol, KnownSymbol)
 import Unsafe.Coerce (unsafeCoerce)
 
-import ThoralfPlugin.Theory.DisEq (DisEquality, (:~?~:)(..))
+import Data.Theory.DisEq (DisEquality, (:~?~:)(..))
 
 data SSymbol :: Symbol -> Type where
     SSym :: KnownSymbol s => SSymbol s

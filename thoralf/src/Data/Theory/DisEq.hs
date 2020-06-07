@@ -1,7 +1,7 @@
 {-# LANGUAGE TypeInType, TypeFamilies, TypeOperators #-}
 {-# LANGUAGE GADTs, MultiParamTypeClasses #-}
 
-module ThoralfPlugin.Theory.DisEq (DisEquality, (:~?~:)(..)) where
+module Data.Theory.DisEq (DisEquality, (:~?~:)(..)) where
 
 class DisEquality (x :: k) (y :: k) where {}
 

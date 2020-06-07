@@ -9,7 +9,7 @@
 
 module FiniteMaps where
 
-import ThoralfPlugin.Theory.FiniteMap
+import Data.Theory.FiniteMap
 import Data.Type.Equality
 
 -- import GHC.TypeLits -- Uncomment for symtest

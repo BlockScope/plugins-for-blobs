@@ -34,10 +34,10 @@ in    defs
               , "ThoralfPlugin.Variables"
               , "ThoralfPlugin.Singletons.Symbol"
               , "ThoralfPlugin.Singletons.Nat"
-              , "ThoralfPlugin.Theory.DisEq"
-              , "ThoralfPlugin.Theory.FiniteMap"
+              , "Data.Theory.Bool"
+              , "Data.Theory.DisEq"
+              , "Data.Theory.FiniteMap"
               , "Data.Theory.UoM"
-              , "ThoralfPlugin.Theory.Bool"
               , "Plugins.Thoralf"
               , "Plugins.Thoralf.TcPlugin"
               ]

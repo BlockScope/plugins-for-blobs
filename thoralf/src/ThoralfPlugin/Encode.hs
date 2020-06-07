@@ -12,9 +12,9 @@ import ThoralfPlugin.Encode.Bool (boolTheory)
 thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
     let pkg = fsLit "thoralf-plugin"
-        fm = mkModuleName "ThoralfPlugin.Theory.FiniteMap"
+        fm = mkModuleName "Data.Theory.FiniteMap"
         uom = mkModuleName "Data.Theory.UoM"
-        bool = mkModuleName "ThoralfPlugin.Theory.Bool"
+        bool = mkModuleName "Data.Theory.Bool"
     in
         sumEncodings
             [ natTheory

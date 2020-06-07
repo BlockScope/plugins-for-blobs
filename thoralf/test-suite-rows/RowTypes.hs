@@ -12,8 +12,8 @@ import GHC.TypeLits
 import Data.Kind
 
 import ThoralfPlugin.Singletons.Symbol
-import qualified ThoralfPlugin.Theory.DisEq as D
-import ThoralfPlugin.Theory.FiniteMap
+import qualified Data.Theory.DisEq as D
+import Data.Theory.FiniteMap
 
 data RowType :: Fm Symbol Type -> Type where
 
