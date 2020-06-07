@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, TypeApplications #-}
 {-# LANGUAGE GADTs, RankNTypes, ScopedTypeVariables #-}
-{-# LANGUAGE ConstraintKinds, KindSignatures, AllowAmbiguousTypes #-}
+{-# LANGUAGE ConstraintKinds, AllowAmbiguousTypes #-}
 
 module ThoralfPlugin.Singletons.Nat (SNat(..), NatComp(..), natComp) where
 

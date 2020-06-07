@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, GADTs, CPP #-}
+{-# LANGUAGE TypeFamilies, TypeInType, GADTs, CPP #-}
 
 module Data.Vec where
 

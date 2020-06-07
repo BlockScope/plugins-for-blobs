@@ -33,7 +33,7 @@ module ThoralfPlugin.Convert
 import Data.Semigroup (Semigroup(..))
 #endif
 import Data.Foldable (fold)
-import Data.Maybe (mapMaybe, catMaybes)
+import Data.Maybe (mapMaybe)
 import qualified Data.Map as M (fromList, toList)
 import qualified Data.Set as S (fromList, toList)
 import qualified SimpleSMT as SMT (SExpr(Atom), not, eq)
@@ -98,7 +98,7 @@ conv cts = do
         mapSome :: [ConvMonad a] -> ConvMonad [a]
         mapSome xs = do
             state <- ask
-            return . catMaybes $ map (`runReaderT` state) xs
+            return $ mapMaybe (`runReaderT` state) xs
 
 extractEq :: [Ct] -> [((Type, Type), Ct)]
 extractEq = mapMaybe maybeExtractTyEq

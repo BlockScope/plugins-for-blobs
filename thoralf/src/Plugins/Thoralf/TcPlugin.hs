@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators #-}
+{-# LANGUAGE TypeFamilies, TypeInType #-}
 
 module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
 

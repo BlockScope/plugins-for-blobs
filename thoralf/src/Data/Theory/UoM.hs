@@ -31,7 +31,7 @@ type family (*:) (a :: UoM) (b :: UoM) :: UoM where {}
 type family (/:) (n :: UoM) (d :: UoM) :: UoM where {}
 
 type family IsBase (measure :: Symbol) (power :: Nat) (b :: UoM) :: Constraint where
-    IsBase m i b = (b ~ (Base m i))
+    IsBase m i b = (b ~ Base m i)
 
 type family IsProd (a :: UoM) (b :: UoM) (aTimesb :: UoM) :: Constraint where
     IsProd a b c = (c ~ (a *: b))
@@ -41,4 +41,4 @@ type family IsDiv (a :: UoM) (b :: UoM) (aDivb :: UoM) :: Constraint where
 
 type family FromList (xs :: [(Symbol,Nat)]) :: UoM where
     FromList '[] = One
-    FromList ('(u,i) ': ys) = (Base u i) *: (FromList ys)
+    FromList ('(u,i) ': ys) = Base u i *: FromList ys

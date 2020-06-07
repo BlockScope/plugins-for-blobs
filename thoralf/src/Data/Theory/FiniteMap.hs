@@ -29,8 +29,8 @@ type family IntersectL (m :: Fm (k :: Type) (v :: Type)) (m' :: Fm k v) :: Fm k 
 -- Contraints
 type Has m k v = Alter m k v ~ m
 type Omits m k = Delete m k ~ m
-type AddField m m' k v = (Alter m k v) ~ m'
-type DelField m m' k = (Delete m k) ~ m'
+type AddField m m' k v = Alter m k v ~ m'
+type DelField m m' k = Delete m k ~ m'
 type UnionFm m1 m2 u = u ~ UnionL m1 m2
 type IntersectFm m1 m2 i = i ~ IntersectL m1 m2
 

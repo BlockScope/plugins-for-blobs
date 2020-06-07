@@ -1,7 +1,4 @@
-{-# LANGUAGE TypeInType #-}
-{-# LANGUAGE GADTs #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE TypeInType, TypeApplications, GADTs #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
 
