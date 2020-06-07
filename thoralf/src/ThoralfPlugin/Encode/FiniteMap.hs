@@ -2,6 +2,7 @@
 
 module ThoralfPlugin.Encode.FiniteMap (fmTheory) where
 
+import Prelude hiding (either)
 import GHC.Corroborate
 import Data.Hashable (hash)
 import Language.Haskell.Printf
@@ -106,30 +107,30 @@ forally = [s|forall ((y (Maybe %s)))|]
 forallxy x = [s|forall ((x (Maybe %s)) (y (Maybe %s)))|] x x
 
 eitherDec :: Vec One String -> [String]
-eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
-    [ [s|(declare-fun either%s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
-        hashVal valKd valKd valKd
+eitherDec (valKd :> VNil) = let either = [s|either%s|] (show $ hash valKd) in
+    [ [s|(declare-fun %s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
+        either valKd valKd valKd
 
-    , [s|(assert (%s (= (either%s (as nothing (Maybe %s)) y) y)))|]
-        (forally valKd) hashVal valKd
+    , [s|(assert (%s (= (%s (as nothing (Maybe %s)) y) y)))|]
+        (forally valKd) either valKd
 
-    , [s|(assert (%s (=> ((_ is (just (%s) (Maybe %s))) x) (= (either%s x y) x))))|]
-        (forallxy valKd) valKd valKd hashVal
+    , [s|(assert (%s (=> ((_ is (just (%s) (Maybe %s))) x) (= (%s x y) x))))|]
+        (forallxy valKd) valKd valKd either
     ]
 
 bothDec :: Vec One String -> [String]
-bothDec (valKd :> VNil) = let hashVal = show $ hash valKd in
-    [ [s|(declare-fun both%s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
-        hashVal valKd valKd valKd
+bothDec (valKd :> VNil) = let both = [s|both%s|] (show $ hash valKd) in
+    [ [s|(declare-fun %s ((Maybe %s) (Maybe %s)) (Maybe %s))|]
+        both valKd valKd valKd
 
-    , [s|(assert (%s (= (both%s y %s) %s)))|]
-        (forally valKd) hashVal noth noth
+    , [s|(assert (%s (= (%s y %s) %s)))|]
+        (forally valKd) both noth noth
 
-    , [s|(assert (%s (= (both%s nothing y) nothing)))|]
-        (forally valKd) hashVal
+    , [s|(assert (%s (= (%s nothing y) nothing)))|]
+        (forally valKd) both
 
-    , [s|(assert (%s (=> (and ((_ is %s) x) ((_ is %s) y)) (= (both%s x y) x))))|]
-        (forallxy valKd) jus jus hashVal
+    , [s|(assert (%s (=> (and ((_ is %s) x) ((_ is %s) y)) (= (%s x y) x))))|]
+        (forallxy valKd) jus jus both
     ]
     where
         noth = [s|(as nothing (Maybe %s))|] valKd
