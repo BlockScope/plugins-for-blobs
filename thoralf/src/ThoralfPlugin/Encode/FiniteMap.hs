@@ -101,11 +101,9 @@ interConvert = mkConvert $ \case
             )
     _ -> Nothing
 
-forally :: String -> String
+forally, forallxy :: String -> String
 forally = [s|forall ((y (Maybe %s)))|]
-
-forallxy :: String -> String -> String
-forallxy = [s|forall ((x (Maybe %s)) (y (Maybe %s)))|]
+forallxy x = [s|forall ((x (Maybe %s)) (y (Maybe %s)))|] x x
 
 eitherDec :: Vec One String -> [String]
 eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
@@ -116,7 +114,7 @@ eitherDec (valKd :> VNil) = let hashVal = show $ hash valKd in
         (forally valKd) hashVal valKd
 
     , [s|(assert (%s (=> ((_ is (just (%s) (Maybe %s))) x) (= (either%s x y) x))))|]
-        (forallxy valKd valKd) valKd valKd hashVal
+        (forallxy valKd) valKd valKd hashVal
     ]
 
 bothDec :: Vec One String -> [String]
@@ -131,7 +129,7 @@ bothDec (valKd :> VNil) = let hashVal = show $ hash valKd in
         (forally valKd) hashVal
 
     , [s|(assert (%s (=> (and ((_ is %s) x) ((_ is %s) y)) (= (both%s x y) x))))|]
-        (forallxy valKd valKd) jus jus hashVal
+        (forallxy valKd) jus jus hashVal
     ]
     where
         noth = [s|(as nothing (Maybe %s))|] valKd
