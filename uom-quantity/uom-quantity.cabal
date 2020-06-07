@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d17826918ee4a5d821c214ffc325aa3f6c9c0ef0e488e53446d40d3e60f316af
+-- hash: 18d33b8ced3ccefc327d666b63359fd7a0d3923c9b28f95f4a80f754144a57b9
 
 name:           uom-quantity
 version:        0.3.0.1
@@ -35,11 +35,11 @@ source-repository head
 library
   exposed-modules:
       GHC.Corroborate.Type
+      Data.Theory.UoM
       Data.UnitsOfMeasure.Read
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton
       Data.UnitsOfMeasure.Syntax
-      Data.UnitsOfMeasure.Theory
       Data.UnitsOfMeasure.Unsafe.Convert
       Data.UnitsOfMeasure.Unsafe.Unify
       Data.UnitsOfMeasure.Unsafe.NormalForm

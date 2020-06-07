@@ -38,11 +38,11 @@ in    defs
                 ]
           , exposed-modules =
               [ "GHC.Corroborate.Type"
+              , "Data.Theory.UoM"
               , "Data.UnitsOfMeasure.Read"
               , "Data.UnitsOfMeasure.Show"
               , "Data.UnitsOfMeasure.Singleton"
               , "Data.UnitsOfMeasure.Syntax"
-              , "Data.UnitsOfMeasure.Theory"
               , "Data.UnitsOfMeasure.Unsafe.Convert"
               , "Data.UnitsOfMeasure.Unsafe.Unify"
               , "Data.UnitsOfMeasure.Unsafe.NormalForm"

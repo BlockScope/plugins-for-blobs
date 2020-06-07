@@ -68,7 +68,7 @@ module Data.UnitsOfMeasure.Convert
 
 import Data.UnitsOfMeasure.Unsafe.Quantity ((*:), (/:), Quantity, fromRational')
 import Data.UnitsOfMeasure.Syntax (Pack, Unpack, Prod, UnitSyntax((:/)))
-import Data.UnitsOfMeasure.Theory (type (/:), type (*:), Unit, One, Base)
+import Data.Theory.UoM (type (/:), type (*:), Unit, One, Base)
 import Data.UnitsOfMeasure.Singleton (KnownUnit, SUnit(..), SList(..), unitSing)
 
 import GHC.Exts (Constraint)

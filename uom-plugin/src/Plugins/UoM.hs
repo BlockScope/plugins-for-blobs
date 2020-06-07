@@ -16,7 +16,7 @@ import Plugins.UoM.TcPlugin (uomPlugin)
 -- @-fplugin@ option.
 plugin :: Plugin
 plugin =
-    let mTheory = mkModuleName "Data.UnitsOfMeasure.Theory"
+    let mTheory = mkModuleName "Data.Theory.UoM"
         mSyntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
         pkg = fsLit "uom-plugin"
         tc = uomPlugin mTheory mSyntax pkg

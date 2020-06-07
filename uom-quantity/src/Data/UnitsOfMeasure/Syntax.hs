@@ -22,7 +22,7 @@ module Data.UnitsOfMeasure.Syntax
 
 import GHC.Exts (Constraint)
 import GHC.TypeLits (Symbol)
-import Data.UnitsOfMeasure.Theory
+import Data.Theory.UoM
 
 infix 4 ~~
 
