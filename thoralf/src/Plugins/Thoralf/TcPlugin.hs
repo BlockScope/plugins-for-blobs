@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType #-}
+{-# LANGUAGE TypeFamilies, TypeInType, NamedFieldPuns #-}
 
 module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
 
@@ -14,6 +14,7 @@ import GHC.Corroborate
 import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
+import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print (printCts, showList)
 
 data ThoralfState =
@@ -25,17 +26,13 @@ data ThoralfState =
 
 type Debug = Bool
 
-thoralfPlugin
-    :: ModuleName
-    -> FastString
-    -> TcPluginM TheoryEncoding
-    -> Debug
-    -> TcPlugin
-thoralfPlugin disEqName pkgName seed debug = TcPlugin
-    { tcPluginInit = mkThoralfInit disEqName pkgName seed debug
-    , tcPluginSolve = thoralfSolver debug
-    , tcPluginStop = thoralfStop
-    }
+thoralfPlugin :: PkgModuleName -> TcPluginM TheoryEncoding -> Debug -> TcPlugin
+thoralfPlugin pkgModuleName seed debug =
+    TcPlugin
+        { tcPluginInit = mkThoralfInit pkgModuleName seed debug
+        , tcPluginSolve = thoralfSolver debug
+        , tcPluginStop = thoralfStop
+        }
 
 solverWithLevel :: Bool -> IO SMT.Solver
 solverWithLevel debug = do
@@ -47,12 +44,11 @@ solverWithLevel debug = do
         grabSMTsolver logger = SMT.newSolver "z3" ["-smt2", "-in"] (Just logger)
 
 mkThoralfInit
-    :: ModuleName
-    -> FastString
+    :: PkgModuleName
     -> TcPluginM TheoryEncoding
     -> Debug
     -> TcPluginM ThoralfState
-mkThoralfInit disEqName pkgName seed debug = do
+mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
     encoding <- seed
     let findModule = findImportedModule
     (Found _ disEqModule) <- findModule disEqName (Just pkgName)
