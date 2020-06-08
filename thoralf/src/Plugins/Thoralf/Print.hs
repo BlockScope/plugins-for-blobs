@@ -22,15 +22,15 @@ printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
 printParsedInputs False _ _ _ = return ()
 
 printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
-printCts Debug{cts} bool gs ws ds
+printCts Debug{cts} parseFailed gs ws ds
     | cts == True = do
-        let iffail = "\n\n" ++ if bool then "Parse Failure" else "Solver call start" ++ "\n\n"
         tcPluginIO $ do
-            putStrLn "\n\n  ----- Plugin Call HERE !!! ------\n\n"
-            putStrLn iffail
-            putStrLn ("\tGivens: \n" ++ showList gs)
-            putStrLn ("\tWanteds: \n" ++ showList ws)
-            putStrLn ("\tDesireds: \n" ++ showList ds)
+            putStrLn . [s|>>> Plugin Call (%s)|] $
+                if parseFailed then "Parse Failed" else "Solving"
+
+            putStrLn . [s|>>> GHC-Givens = %s|] $ showList gs
+            putStrLn . [s|>>> GHC-Wanteds = %s|] $ showList ws
+            putStrLn . [s|>>> GHC-Desireds = %s|] $ showList ds
         return $ TcPluginOk [] []
     | otherwise = return $ TcPluginOk [] []
 

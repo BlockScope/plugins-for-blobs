@@ -1,8 +1,9 @@
-{-# LANGUAGE TypeFamilies, TypeInType, NamedFieldPuns #-}
+{-# LANGUAGE TypeFamilies, TypeInType, NamedFieldPuns, QuasiQuotes #-}
 
 module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
 
 import Prelude hiding (showList)
+import Language.Haskell.Printf (s)
 import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
@@ -102,9 +103,9 @@ thoralfSolver
 
     case (convertor gs, convertor $ ws ++ ds) of
         (Just (ConvCts gExprs decs1), Just (ConvCts wExprs decs2)) -> do
-            debugIO dbg $ "\nDecs:" ++ showList (decs1 ++ decs2)
-            debugIO dbg $ "\nGivens :" ++ showList gExprs
-            debugIO dbg $ "\nWanteds :" ++ showList wExprs
+            debugIO dbg . [s|+++ SMT-Decs = %s|] $ showList (decs1 ++ decs2)
+            debugIO dbg . [s|+++ SMT-Givens = %s|] $ showList gExprs
+            debugIO dbg . [s|+++ SMT-Wanteds = %s|] $ showList wExprs
 
             let decs2' = decs2 \\ decs1
             let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)
@@ -178,11 +179,11 @@ addEvTerm ct = do
     return (makeEqEvidence "Fm Plugin" (t1,t2), ct')
 
 debugIO :: Debug -> String -> TcPluginM ()
-debugIO Debug{cts} s
-    | cts == True = tcPluginIO $ putStrLn s
+debugIO Debug{cts} s'
+    | cts == True = tcPluginIO $ putStrLn s'
     | otherwise = return ()
 
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the
 -- form (EqPred NomEq t1 t2)
 makeEqEvidence :: String -> (Type, Type) -> EvTerm
-makeEqEvidence s (t1, t2) = evByFiat s t1 t2
+makeEqEvidence s' (t1, t2) = evByFiat s' t1 t2
