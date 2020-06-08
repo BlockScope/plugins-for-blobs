@@ -68,19 +68,22 @@ convert encodingData cts = runReaderT (conv cts) encodingData
 conv :: [Ct] -> ConvMonad ConvCts
 conv cts = do
     EncodingData disEqClass _ <- ask
+
     let disEquals = extractDisEq disEqClass cts
     let equals = extractEq cts
+    let matchingCts = snd <$> disEquals ++ equals
+
     convDisEqs <- traverse (convPair . fst) disEquals
     convEqs <- traverse (convPair . fst) equals
+
+    let disEqExprs = SMT.not . uncurry SMT.eq . fst <$> convDisEqs
+    let eqExprs = uncurry SMT.eq . fst <$> convEqs
+    let convPairs = zip (disEqExprs ++ eqExprs) matchingCts
 
     let deps = mconcat $ (snd <$> convDisEqs) ++ (snd <$> convEqs)
     decls <- convertDeps deps
 
-    let eqExprs = uncurry SMT.eq . fst <$> convEqs
-    let disEqExprs = SMT.not . uncurry SMT.eq . fst <$> convDisEqs
-    let matchingCts = snd <$> disEquals ++ equals
     --guard (length matchingCts == length (disEqExprs ++ eqExprs))
-    let convPairs = zip (disEqExprs ++ eqExprs) matchingCts
     return $ ConvCts convPairs decls
     where
         convPair :: (Type, Type) -> ConvMonad ((SExpr, SExpr), ConvDependencies)
