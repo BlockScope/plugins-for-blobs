@@ -118,20 +118,20 @@ nubKV = M.toList . M.fromList
 
 convertDeps :: ConvDependencies -> ConvMonad [SExpr]
 convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
-    let tyvars = nubX tyvars'
     let kdvars = nubX kdvars'
+    let tyvars = nubX tyvars'
     let defvars = nubX defvars'
 
-    EncodingData _ theories <- ask
-    let mkPred = tyVarPreds theories
-    let tvPreds = foldMap (fmap SMT.Atom) $ mapMaybe mkPred tyvars
-
     convertedTyVars <- traverse convertTyVars tyvars
-    let tyVarExprs = fst <$> convertedTyVars
     let kindVars = nubX $ concatMap snd convertedTyVars ++ kdvars
     let kindExprs = mkSMTSort <$> kindVars
+    let tyVarExprs = fst <$> convertedTyVars
     let defExprs = mkDefaultSMTVar <$> defvars
+
     decExprs <- convertDecs decs
+
+    EncodingData _ theories <- ask
+    let tvPreds = foldMap (fmap SMT.Atom) $ mapMaybe (tyVarPreds theories) tyvars
 
     -- WARNING: Order matters when putting these expressions together.
     let varExprs = kindExprs ++ tyVarExprs ++ defExprs
