@@ -39,7 +39,7 @@ solverWithLevel False = grabSMTsolver Nothing
 solverWithLevel True = grabSMTsolver . Just =<< SMT.newLogger 0
 
 grabSMTsolver :: Maybe SMT.Logger -> IO SMT.Solver
-grabSMTsolver logger = SMT.newSolver "z3" ["-smt2", "-in"] logger
+grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"]
 
 mkThoralfInit
     :: PkgModuleName
@@ -180,7 +180,7 @@ addEvTerm ct = do
 
 debugIO :: Debug -> String -> TcPluginM ()
 debugIO Debug{cts} s'
-    | cts == True = tcPluginIO $ putStrLn s'
+    | cts = tcPluginIO $ putStrLn s'
     | otherwise = return ()
 
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the

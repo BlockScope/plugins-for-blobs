@@ -23,7 +23,7 @@ printParsedInputs False _ _ _ = return ()
 
 printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
 printCts Debug{cts} parseFailed gs ws ds
-    | cts == True = do
+    | cts = do
         tcPluginIO $ do
             putStrLn . [s|>>> Plugin Call (%s)|] $
                 if parseFailed then "Parse Failed" else "Solving"
