@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-module Plugins.Thoralf.Print (printCts, showList) where
+module Plugins.Thoralf.Print (Debug(..), printCts, showList) where
 
 import Prelude hiding (showList)
 import Data.List (intercalate)
@@ -10,6 +10,8 @@ import GHC.Corroborate
 
 import ThoralfPlugin.Convert (SExpr, maybeExtractTyEq)
 
+newtype Debug = Debug Bool
+
 printParsedInputs :: Bool -> [SExpr] -> SExpr -> [SExpr] -> TcPluginM ()
 printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
     putStrLn $ "Given SExpr: \n" ++ show (map (`SMT.showsSExpr` "") gSExpr)
@@ -17,8 +19,8 @@ printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
     putStrLn $ "Variable Decs: \n" ++ show (map (`SMT.showsSExpr` "") parseDeclrs)
 printParsedInputs False _ _ _ = return ()
 
-printCts :: Bool -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
-printCts True bool gs ws ds = do
+printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
+printCts (Debug True) bool gs ws ds = do
     let iffail = "\n\n" ++ if bool then "Parse Failure" else "Solver call start" ++ "\n\n"
     tcPluginIO $ do
         putStrLn "\n\n  ----- Plugin Call HERE !!! ------\n\n"
@@ -27,7 +29,7 @@ printCts True bool gs ws ds = do
         putStrLn ("\tWanteds: \n" ++ showList ws)
         putStrLn ("\tDesireds: \n" ++ showList ds)
     return $ TcPluginOk [] []
-printCts False _ _ _ _ = return $ TcPluginOk [] []
+printCts (Debug False) _ _ _ _ = return $ TcPluginOk [] []
 
 -- *  Printing
 instance Show Type where

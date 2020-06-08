@@ -16,7 +16,7 @@ import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Thoralf.Print (printCts, showList)
+import Plugins.Thoralf.Print (Debug(..), printCts, showList)
 
 data ThoralfState =
     ThoralfState
@@ -24,8 +24,6 @@ data ThoralfState =
         , theoryEncoding :: TheoryEncoding
         , disEqClass :: Class
         }
-
-type Debug = Bool
 
 thoralfPlugin :: PkgModuleName -> TcPluginM TheoryEncoding -> Debug -> TcPlugin
 thoralfPlugin pkgModuleName seed debug =
@@ -49,7 +47,7 @@ mkThoralfInit
     -> TcPluginM TheoryEncoding
     -> Debug
     -> TcPluginM ThoralfState
-mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
+mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed (Debug debug) = do
     encoding <- seed
     Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
     disEq <- divulgeClass disEqModule "DisEquality"
@@ -145,7 +143,7 @@ thoralfSolver
         _ -> printCts debug True gs ws ds
 
 refresh :: TheoryEncoding -> IORef SMT.Solver -> Debug -> TcPluginM ()
-refresh encoding solverRef debug = do
+refresh encoding solverRef (Debug debug) = do
     solver <- unsafeTcPluginTcM $ readMutVar solverRef
     _ <- tcPluginIO $ SMT.stop solver
     let decs = startDecs encoding
@@ -181,9 +179,9 @@ addEvTerm ct = do
     -- We never have a wanted disequality.
     return (makeEqEvidence "Fm Plugin" (t1,t2), ct')
 
-debugIO :: Bool -> String -> TcPluginM ()
-debugIO False _ = return ()
-debugIO True s = tcPluginIO $ putStrLn s
+debugIO :: Debug -> String -> TcPluginM ()
+debugIO (Debug False) _ = return ()
+debugIO (Debug True) s = tcPluginIO $ putStrLn s
 
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the
 -- form (EqPred NomEq t1 t2)
