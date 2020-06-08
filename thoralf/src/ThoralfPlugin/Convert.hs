@@ -77,8 +77,8 @@ conv cts = do
     let deps = mconcat $ map snd convDisEqs ++ map snd convEqs
     decls <- convertDeps deps
 
-    let eqExprs = map (mkEqExpr . fst) convEqs
-    let disEqExprs = map (mkDisEqExpr . fst) convDisEqs
+    let eqExprs = map (uncurry SMT.eq . fst) convEqs
+    let disEqExprs = map (SMT.not . uncurry SMT.eq . fst) convDisEqs
     let matchingCts = map snd $ disEquals ++ equals
     --guard (length matchingCts == length (disEqExprs ++ eqExprs))
     let convPairs = zip (disEqExprs ++ eqExprs) matchingCts
@@ -89,12 +89,6 @@ conv cts = do
             (t1', deps1) <- convertType t1
             (t2', deps2) <- convertType t2
             return ((SMT.Atom t1', SMT.Atom t2'), deps1 <> deps2)
-
-        mkEqExpr :: (SExpr, SExpr) -> SExpr
-        mkEqExpr (s1, s2) = SMT.eq s1 s2
-
-        mkDisEqExpr :: (SExpr, SExpr) -> SExpr
-        mkDisEqExpr (s1, s2) = SMT.not $ SMT.eq s1 s2
 
         mapSome :: [ConvMonad a] -> ConvMonad [a]
         mapSome xs = do
