@@ -43,7 +43,6 @@ import Language.Haskell.Printf (s)
 
 import ThoralfPlugin.Encode.TheoryEncoding
     (TheoryEncoding(..), DecCont(..), KdConvCont(..), TyConvCont(..))
-import Data.Vec (vecMapAll)
 
 -- | The input needed to convert 'Ct' into smt expressions.  We need the class
 -- for dis equality, and an encoding of a collection of theories.
@@ -216,8 +215,8 @@ tryConvTheory ty = do
     let tyConvs = typeConvs theories
     case tryFns tyConvs ty of
         Just (TyConvCont tys kds cont decs) -> do
-            recurTys <- vecMapAll convertType tys
-            recurKds <- vecMapAll convertKind kds
+            recurTys <- traverse convertType tys
+            recurKds <- traverse convertKind kds
             (decls, decKds) <- convDecConts decs
             let convTys = fst <$> recurTys
             let convKds = fst <$> recurKds
@@ -241,7 +240,7 @@ convDecConts dcs = do
     where
         convDecCont :: DecCont -> ConvMonad (Decl, [KdVar])
         convDecCont (DecCont kholes declName cont) = do
-            recur <- vecMapAll convertKind kholes
+            recur <- traverse convertKind kholes
             let kConvs = fst <$> recur
             let declKey = (declName, fold kConvs)
             let kdVars = foldMap snd recur
@@ -292,7 +291,7 @@ convKindTheories kind = do
     case tryFns kindConvFns kind of
         Nothing -> return ("Type", []) -- Kind defaulting
         Just (KdConvCont kholes kContin) -> do
-            recur <- vecMapAll convertKind kholes
+            recur <- traverse convertKind kholes
             let convHoles = fst <$> recur
             let holeVars = foldMap snd recur
             return (kContin convHoles, holeVars)
