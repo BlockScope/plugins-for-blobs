@@ -100,15 +100,13 @@ extractDisEq cls = mapMaybe (maybeExtractTyDisEq cls)
 
 maybeExtractTyDisEq :: Class -> Ct -> Maybe ((Type, Type), Ct)
 maybeExtractTyDisEq disEqCls ct = do
-    let predTree = classifyPredType $ ctPred ct
-    ClassPred class' (_: t1 : t2 : _) <- return predTree
+    ClassPred class' (_: t1 : t2 : _) <- return (classifyPredType $ ctPred ct)
     guard (class' == disEqCls)
     return ((t1, t2), ct)
 
 maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)
-maybeExtractTyEq ct = do
-    let predTree = classifyPredType $ ctPred ct
-    case predTree of
+maybeExtractTyEq ct =
+    case classifyPredType $ ctPred ct of
         EqPred NomEq t1 t2 -> return ((t1, t2), ct)
         _ -> Nothing
 
