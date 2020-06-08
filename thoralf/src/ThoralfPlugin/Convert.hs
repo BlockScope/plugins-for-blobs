@@ -210,8 +210,7 @@ tyVarConv ty = do
 tryConvTheory :: Type -> ConvMonad ConvertedType
 tryConvTheory ty = do
     EncodingData _ theories <- ask
-    let tyConvs = typeConvs theories
-    case tryFns tyConvs ty of
+    case tryFns (typeConvs theories) ty of
         Just (TyConvCont tys kds cont decs) -> do
             recurTys <- traverse convertType tys
             recurKds <- traverse convertKind kds
@@ -285,8 +284,7 @@ convertKind kind =
 convKindTheories :: Kind -> ConvMonad (String, [KdVar])
 convKindTheories kind = do
     EncodingData _ theories <- ask
-    let kindConvFns = kindConvs theories
-    case tryFns kindConvFns kind of
+    case tryFns (kindConvs theories) kind of
         Nothing -> return ("Type", []) -- Kind defaulting
         Just (KdConvCont kholes kContin) -> do
             recur <- traverse convertKind kholes
