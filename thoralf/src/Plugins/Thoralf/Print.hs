@@ -1,35 +1,38 @@
+{-# LANGUAGE QuasiQuotes, NamedFieldPuns #-}
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Plugins.Thoralf.Print (Debug(..), printCts, showList) where
 
 import Prelude hiding (showList)
+import Language.Haskell.Printf (s)
 import Data.List (intercalate)
 import qualified SimpleSMT as SMT (showsSExpr)
 import GHC.Corroborate
 
 import ThoralfPlugin.Convert (SExpr, maybeExtractTyEq)
 
-newtype Debug = Debug Bool
+data Debug = Debug{cts :: Bool, smt :: Bool}
 
 printParsedInputs :: Bool -> [SExpr] -> SExpr -> [SExpr] -> TcPluginM ()
 printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
-    putStrLn $ "Given SExpr: \n" ++ show (map (`SMT.showsSExpr` "") gSExpr)
-    putStrLn $ "Wanted SExpr: \n" ++ SMT.showsSExpr wSExpr ""
-    putStrLn $ "Variable Decs: \n" ++ show (map (`SMT.showsSExpr` "") parseDeclrs)
+    putStrLn . [s|Given SExpr:\n%?|] $ (`SMT.showsSExpr` "") <$> gSExpr
+    putStrLn . [s|Wanted SExpr:\n%s|] $ SMT.showsSExpr wSExpr ""
+    putStrLn . [s|Variable Decs:\n%?|] $ (`SMT.showsSExpr` "") <$> parseDeclrs
 printParsedInputs False _ _ _ = return ()
 
 printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
-printCts (Debug True) bool gs ws ds = do
-    let iffail = "\n\n" ++ if bool then "Parse Failure" else "Solver call start" ++ "\n\n"
-    tcPluginIO $ do
-        putStrLn "\n\n  ----- Plugin Call HERE !!! ------\n\n"
-        putStrLn iffail
-        putStrLn ("\tGivens: \n" ++ showList gs)
-        putStrLn ("\tWanteds: \n" ++ showList ws)
-        putStrLn ("\tDesireds: \n" ++ showList ds)
-    return $ TcPluginOk [] []
-printCts (Debug False) _ _ _ _ = return $ TcPluginOk [] []
+printCts Debug{cts} bool gs ws ds
+    | cts == True = do
+        let iffail = "\n\n" ++ if bool then "Parse Failure" else "Solver call start" ++ "\n\n"
+        tcPluginIO $ do
+            putStrLn "\n\n  ----- Plugin Call HERE !!! ------\n\n"
+            putStrLn iffail
+            putStrLn ("\tGivens: \n" ++ showList gs)
+            putStrLn ("\tWanteds: \n" ++ showList ws)
+            putStrLn ("\tDesireds: \n" ++ showList ds)
+        return $ TcPluginOk [] []
+    | otherwise = return $ TcPluginOk [] []
 
 -- *  Printing
 instance Show Type where
@@ -65,6 +68,7 @@ showTupList xs =
         mkEquality (a, b) = show a ++ " ~ " ++ show b
 
 showList :: Show a => [a] -> String
+showList [] = "[]"
 showList xs = "[\n" ++ intercalate "\n" (map show xs) ++ "\n]"
 
 instance Show Ct where

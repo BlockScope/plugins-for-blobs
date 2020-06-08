@@ -26,28 +26,26 @@ data ThoralfState =
         }
 
 thoralfPlugin :: PkgModuleName -> TcPluginM TheoryEncoding -> Debug -> TcPlugin
-thoralfPlugin pkgModuleName seed debug =
+thoralfPlugin pkgModuleName seed dbg@Debug{smt} =
     TcPlugin
-        { tcPluginInit = mkThoralfInit pkgModuleName seed debug
-        , tcPluginSolve = thoralfSolver debug
+        { tcPluginInit = mkThoralfInit pkgModuleName seed smt
+        , tcPluginSolve = thoralfSolver dbg
         , tcPluginStop = thoralfStop
         }
 
 solverWithLevel :: Bool -> IO SMT.Solver
-solverWithLevel debug = do
-    let logLevel = if debug then 0 else 1
-    logger <- SMT.newLogger logLevel
-    grabSMTsolver logger
-    where
-        grabSMTsolver :: SMT.Logger -> IO SMT.Solver
-        grabSMTsolver logger = SMT.newSolver "z3" ["-smt2", "-in"] (Just logger)
+solverWithLevel False = grabSMTsolver Nothing
+solverWithLevel True = grabSMTsolver . Just =<< SMT.newLogger 0
+
+grabSMTsolver :: Maybe SMT.Logger -> IO SMT.Solver
+grabSMTsolver logger = SMT.newSolver "z3" ["-smt2", "-in"] logger
 
 mkThoralfInit
     :: PkgModuleName
     -> TcPluginM TheoryEncoding
-    -> Debug
+    -> Bool
     -> TcPluginM ThoralfState
-mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed (Debug debug) = do
+mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
     encoding <- seed
     Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
     disEq <- divulgeClass disEqModule "DisEquality"
@@ -77,7 +75,7 @@ thoralfSolver
     -> [Ct]
     -> TcPluginM TcPluginResult
 thoralfSolver
-    debug
+    dbg@Debug{smt = debugSMT}
     ThoralfState
         { smtSolver = smtRef
         , theoryEncoding = encode
@@ -85,7 +83,7 @@ thoralfSolver
         }
     gs' ws' ds' = do
     -- Refresh the solver
-    _ <- refresh encode smtRef debug
+    _ <- refresh encode smtRef debugSMT
     smt <- unsafeTcPluginTcM $ readMutVar smtRef
 
     -- Preprocessing
@@ -93,7 +91,7 @@ thoralfSolver
     let gs = filt gs'
     let ws = filt ws'
     let ds = filt ds'
-    _ <- printCts debug False gs ws ds
+    _ <- printCts dbg False gs ws ds
 
     -- Define reused functions
     --let print = tcPluginIO . putStrLn . show
@@ -104,9 +102,9 @@ thoralfSolver
 
     case (convertor gs, convertor $ ws ++ ds) of
         (Just (ConvCts gExprs decs1), Just (ConvCts wExprs decs2)) -> do
-            debugIO debug $ "\nDecs:" ++ showList (decs1 ++ decs2)
-            debugIO debug $ "\nGivens :" ++ showList gExprs
-            debugIO debug $ "\nWanteds :" ++ showList wExprs
+            debugIO dbg $ "\nDecs:" ++ showList (decs1 ++ decs2)
+            debugIO dbg $ "\nGivens :" ++ showList gExprs
+            debugIO dbg $ "\nWanteds :" ++ showList wExprs
 
             let decs2' = decs2 \\ decs1
             let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)
@@ -140,10 +138,10 @@ thoralfSolver
 
                         SMT.Sat -> tcPluginIO pop >> noSolving
 
-        _ -> printCts debug True gs ws ds
+        _ -> printCts dbg True gs ws ds
 
-refresh :: TheoryEncoding -> IORef SMT.Solver -> Debug -> TcPluginM ()
-refresh encoding solverRef (Debug debug) = do
+refresh :: TheoryEncoding -> IORef SMT.Solver -> Bool -> TcPluginM ()
+refresh encoding solverRef debug = do
     solver <- unsafeTcPluginTcM $ readMutVar solverRef
     _ <- tcPluginIO $ SMT.stop solver
     let decs = startDecs encoding
@@ -180,8 +178,9 @@ addEvTerm ct = do
     return (makeEqEvidence "Fm Plugin" (t1,t2), ct')
 
 debugIO :: Debug -> String -> TcPluginM ()
-debugIO (Debug False) _ = return ()
-debugIO (Debug True) s = tcPluginIO $ putStrLn s
+debugIO Debug{cts} s
+    | cts == True = tcPluginIO $ putStrLn s
+    | otherwise = return ()
 
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the
 -- form (EqPred NomEq t1 t2)
