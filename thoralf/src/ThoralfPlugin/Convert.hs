@@ -110,19 +110,24 @@ maybeExtractTyEq ct =
         EqPred NomEq t1 t2 -> return ((t1, t2), ct)
         _ -> Nothing
 
+nubX :: Ord a => [a] -> [a]
+nubX = S.toList . S.fromList
+
+nubKV :: Ord a => [(a, b)] -> [(a, b)]
+nubKV = M.toList . M.fromList
+
 convertDeps :: ConvDependencies -> ConvMonad [SExpr]
 convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
-    let nub = S.toList . S.fromList
-    let tyvars = nub tyvars'
-    let kdvars = nub kdvars'
-    let defvars = nub defvars'
+    let tyvars = nubX tyvars'
+    let kdvars = nubX kdvars'
+    let defvars = nubX defvars'
     (EncodingData _ theories) <- ask
     let mkPred = tyVarPreds theories
     let tvPreds = foldMap (fmap SMT.Atom) $ mapMaybe mkPred tyvars
 
     convertedTyVars <- traverse convertTyVars tyvars
     let tyVarExprs = fst <$> convertedTyVars
-    let kindVars = nub $ concatMap snd convertedTyVars ++ kdvars
+    let kindVars = nubX $ concatMap snd convertedTyVars ++ kdvars
     let kindExprs = mkSMTSort <$> kindVars
     let defExprs = mkDefaultSMTVar <$> defvars
     decExprs <- convertDecs decs
@@ -138,7 +143,7 @@ showUnique = show . getUnique
 -- | Converting Local Declarations
 convertDecs :: [Decl] -> ConvMonad [SExpr]
 convertDecs ds = return $ SMT.Atom <$>
-    (foldMap snd . M.toList . M.fromList $ (\(Decl k v) -> (k, v)) <$> ds)
+    (foldMap snd . nubKV $ (\(Decl k v) -> (k, v)) <$> ds)
 
 mkDefaultSMTVar :: TyVar -> SExpr
 mkDefaultSMTVar = SMT.Atom . [s|(declare-const %? Type)|] . getUnique
