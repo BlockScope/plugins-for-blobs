@@ -70,10 +70,10 @@ conv cts = do
     EncodingData disEqClass _ <- ask
     let disEquals = extractDisEq disEqClass cts
     let equals = extractEq cts
-    convDisEqs <- mapSome $ convPair . fst <$> disEquals
-    convEqs <- mapSome $ convPair . fst <$> equals
+    convDisEqs <- traverse (convPair . fst) disEquals
+    convEqs <- traverse (convPair . fst) equals
 
-    let deps = mconcat $ map snd convDisEqs ++ map snd convEqs
+    let deps = mconcat $ (snd <$> convDisEqs) ++ (snd <$> convEqs)
     decls <- convertDeps deps
 
     let eqExprs = uncurry SMT.eq . fst <$> convEqs
@@ -88,11 +88,6 @@ conv cts = do
             (t1', deps1) <- convertType t1
             (t2', deps2) <- convertType t2
             return ((SMT.Atom t1', SMT.Atom t2'), deps1 <> deps2)
-
-        mapSome :: [ConvMonad a] -> ConvMonad [a]
-        mapSome xs = do
-            state <- ask
-            return $ mapMaybe (`runReaderT` state) xs
 
 extractEq :: [Ct] -> [((Type, Type), Ct)]
 extractEq = mapMaybe maybeExtractTyEq
