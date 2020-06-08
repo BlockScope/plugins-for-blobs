@@ -6,7 +6,7 @@ import Prelude hiding (maybe, either)
 import GHC.Corroborate
 import GHC.Corroborate.Divulge (divulgeTyCon)
 import Data.Hashable (hash)
-import Language.Haskell.Printf
+import Language.Haskell.Printf (s)
 
 import ThoralfPlugin.Encode.Convert (One, Two, Three, mkConvert, kindArgConvert)
 import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule)
@@ -112,7 +112,7 @@ declarefun :: String -> String -> String
 declarefun f x = let m = maybe x in [s|(declare-fun %s (%s %s) %s)|] f m m m
 
 eitherDec :: Vec One String -> [String]
-eitherDec (valKd :> VNil) = let either = [s|either%s|] (show $ hash valKd) in
+eitherDec (valKd :> VNil) = let either = [s|either%?|] (hash valKd) in
     [ declarefun either valKd
 
     , [s|(assert (%s (= (%s (as nothing %s) y) y)))|]
@@ -136,7 +136,7 @@ bothDec (valKd :> VNil) =
         (forallxy valKd) just just both
     ]
     where
-        both = [s|both%s|] (show $ hash valKd)
+        both = [s|both%?|] $ hash valKd
         nothing = [s|(as nothing %s)|] (maybe valKd)
         just = [s|(just (%s) %s)|] valKd (maybe valKd)
 
@@ -154,7 +154,7 @@ deleteString (fm :> key :> VNil) (valKd :> VNil) =
 
 opString :: String -> Vec Two String -> Vec One String -> String
 opString op (m1 :> m2 :> VNil) (valKd :> VNil) =
-    [s|( (_ map %s%s) %s %s)|] op (show $ hash valKd) m1 m2
+    [s|( (_ map %s%?) %s %s)|] op (hash valKd) m1 m2
 
 fmConvert :: TyCon -> Type -> Maybe KdConvCont
 fmConvert = kindArgConvert $ \case

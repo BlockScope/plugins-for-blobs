@@ -149,10 +149,10 @@ convertDecs ds = do
     return $ map SMT.Atom uniqueDecs
 
 mkDefaultSMTVar :: TyVar -> SExpr
-mkDefaultSMTVar = SMT.Atom . [s|(declare-const %s Type)|] . showUnique
+mkDefaultSMTVar = SMT.Atom . [s|(declare-const %? Type)|] . getUnique
 
 mkSMTSort :: TyVar -> SExpr
-mkSMTSort = SMT.Atom . [s|(declare-sort Sort%s)|] . showUnique
+mkSMTSort = SMT.Atom . [s|(declare-sort Sort%?)|] . getUnique
 
 -- | Kind variables are just type variables
 type KdVar = TyVar
@@ -160,7 +160,7 @@ type KdVar = TyVar
 convertTyVars :: TyVar -> ConvMonad (SExpr, [KdVar])
 convertTyVars tv = do
     (smtSort, kdVars) <- convertKind $ tyVarKind tv
-    return (SMT.Atom $ [s|(declare-const %s %s)|] (showUnique tv) smtSort, kdVars)
+    return (SMT.Atom $ [s|(declare-const %? %s)|] (getUnique tv) smtSort, kdVars)
 
 -- | A Type is converted into a string which is a valid SMT term, if the
 -- dependencies are converted properly and sent to the solver before the term
@@ -266,10 +266,7 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
         (fn, arg) <- splitFunTy_maybe ty
         (fnStr, tv1) <- defConvTy fn
         (argStr, tv2) <- defConvTy arg
-        return (fnDef fnStr argStr, tv1 ++ tv2)
-
-    fnDef :: String -> String -> String
-    fnDef= [s|(apply (apply (lit "->") %s) %s)|]
+        return ([s|(apply (apply (lit "->") %s) %s)|] fnStr argStr, tv1 ++ tv2)
 
     defTyConApp :: Type -> Maybe (String, [TyVar])
     defTyConApp ty = do
@@ -277,18 +274,15 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
         recur <- traverse defConvTy tys
         let defConvTys = map fst recur
         let tvars = foldMap snd recur
-        let convTcon = [s|(lit "%s")|] (show $ getUnique tcon)
-        let converted = foldl appDef convTcon defConvTys
+        let convTcon = [s|(lit "%?")|] $ getUnique tcon
+        let converted = foldl [s|(apply %s %s)|] convTcon defConvTys
         return (converted, tvars)
-
-    appDef :: String -> String -> String
-    appDef = [s|(apply %s %s)|]
 
 -- | Converts a Kind into a String and some kind variables
 convertKind :: Kind -> ConvMonad (String, [KdVar])
 convertKind kind =
     case getTyVar_maybe kind of
-        Just tvar -> return ([s|Sort%s|] $ showUnique tvar, [tvar])
+        Just tvar -> return ([s|Sort%?|] $ getUnique tvar, [tvar])
         Nothing -> convKindTheories kind
 
 convKindTheories :: Kind -> ConvMonad (String, [KdVar])

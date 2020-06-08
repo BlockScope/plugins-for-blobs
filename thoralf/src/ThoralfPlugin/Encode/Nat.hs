@@ -3,7 +3,7 @@
 module ThoralfPlugin.Encode.Nat (natTheory) where
 
 import GHC.Corroborate
-import Language.Haskell.Printf
+import Language.Haskell.Printf (s)
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeArgConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
@@ -42,8 +42,7 @@ opString op (a :> b :> VNil)  VNil = [s|(%s %s %s)|] op a b
 assertIntIsNat :: TyVar -> Maybe [String]
 assertIntIsNat tv = do
     KdConvCont _ _ <- natConvert (tyVarKind tv)
-    let name = show $ getUnique tv
-    return [[s|(assert (<= 0 %s))|] name]
+    return [[s|(assert (<= 0 %?))|] $ getUnique tv]
 
 natConvert :: Type -> Maybe KdConvCont
 natConvert = kindConvert "Int" typeNatKindCon

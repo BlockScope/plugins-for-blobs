@@ -4,7 +4,7 @@ module ThoralfPlugin.Encode.UoM (uomTheory) where
 
 import GHC.Corroborate
 import GHC.Corroborate.Divulge (divulgeTyCon)
-import Language.Haskell.Printf
+import Language.Haskell.Printf (s)
 
 import ThoralfPlugin.Encode.Convert (Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule)
