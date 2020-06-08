@@ -121,7 +121,8 @@ convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
     let tyvars = nubX tyvars'
     let kdvars = nubX kdvars'
     let defvars = nubX defvars'
-    (EncodingData _ theories) <- ask
+
+    EncodingData _ theories <- ask
     let mkPred = tyVarPreds theories
     let tvPreds = foldMap (fmap SMT.Atom) $ mapMaybe mkPred tyvars
 
@@ -131,11 +132,10 @@ convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
     let kindExprs = mkSMTSort <$> kindVars
     let defExprs = mkDefaultSMTVar <$> defvars
     decExprs <- convertDecs decs
-    -- Order matters:
+
+    -- WARNING: Order matters when putting these expressions together.
     let varExprs = kindExprs ++ tyVarExprs ++ defExprs
-    let otherExprs = decExprs ++ tvPreds
-    let exprs = varExprs ++ otherExprs
-    return exprs
+    return $ varExprs ++ decExprs ++ tvPreds
 
 showUnique :: TyVar -> String
 showUnique = show . getUnique
