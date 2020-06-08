@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeFamilies, TypeInType, GADTs, CPP #-}
 
-module Data.Vec where
+module Data.Vec (Vec(..), Nat(..), vecMapAll) where
 
 #if MIN_VERSION_base(4,9,0) && !MIN_VERSION_base(4,11,0)
 import Data.Monoid ((<>))
@@ -34,11 +34,3 @@ vecMapAll f (x :> xs) = do
     b <- f x
     bs <- vecMapAll f xs
     return (b :> bs)
-
-vecMapList :: (a -> b) -> Vec n a -> [b]
-vecMapList _ VNil = []
-vecMapList f (x :> xs) = f x : vecMapList f xs
-
-vecMap :: (a -> b) -> Vec n a -> Vec n b
-vecMap _ VNil = VNil
-vecMap f (x :> xs) = f x :> vecMap f xs
