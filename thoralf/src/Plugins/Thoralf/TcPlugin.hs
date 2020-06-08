@@ -51,8 +51,7 @@ mkThoralfInit
     -> TcPluginM ThoralfState
 mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
     encoding <- seed
-    let findModule = findImportedModule
-    (Found _ disEqModule) <- findModule disEqName (Just pkgName)
+    Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
     disEq <- divulgeClass disEqModule "DisEquality"
     z3Solver <- tcPluginIO $ do
         z3Solver <- solverWithLevel debug
