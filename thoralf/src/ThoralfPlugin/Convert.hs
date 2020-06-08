@@ -141,11 +141,8 @@ showUnique = show . getUnique
 
 -- | Converting Local Declarations
 convertDecs :: [Decl] -> ConvMonad [SExpr]
-convertDecs ds = do
-    let assocList = map (\(Decl k v) -> (k, v)) ds
-    let ourMap = M.fromList assocList
-    let uniqueDecs = foldMap snd $ M.toList ourMap
-    return $ map SMT.Atom uniqueDecs
+convertDecs ds = return $ SMT.Atom <$>
+    (foldMap snd . M.toList . M.fromList $ (\(Decl k v) -> (k, v)) <$> ds)
 
 mkDefaultSMTVar :: TyVar -> SExpr
 mkDefaultSMTVar = SMT.Atom . [s|(declare-const %? Type)|] . getUnique
