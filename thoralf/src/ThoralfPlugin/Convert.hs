@@ -71,15 +71,15 @@ conv cts = do
     EncodingData disEqClass _ <- ask
     let disEquals = extractDisEq disEqClass cts
     let equals = extractEq cts
-    convDisEqs <- mapSome $ fmap convPair (map fst disEquals)
-    convEqs <- mapSome $ fmap convPair (map fst equals)
+    convDisEqs <- mapSome $ convPair . fst <$> disEquals
+    convEqs <- mapSome $ convPair . fst <$> equals
 
     let deps = mconcat $ map snd convDisEqs ++ map snd convEqs
     decls <- convertDeps deps
 
-    let eqExprs = map (uncurry SMT.eq . fst) convEqs
-    let disEqExprs = map (SMT.not . uncurry SMT.eq . fst) convDisEqs
-    let matchingCts = map snd $ disEquals ++ equals
+    let eqExprs = uncurry SMT.eq . fst <$> convEqs
+    let disEqExprs = SMT.not . uncurry SMT.eq . fst <$> convDisEqs
+    let matchingCts = snd <$> disEquals ++ equals
     --guard (length matchingCts == length (disEqExprs ++ eqExprs))
     let convPairs = zip (disEqExprs ++ eqExprs) matchingCts
     return $ ConvCts convPairs decls
@@ -126,10 +126,10 @@ convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
     let tvPreds = foldMap (fmap SMT.Atom) $ mapMaybe mkPred tyvars
 
     convertedTyVars <- traverse convertTyVars tyvars
-    let tyVarExprs = map fst convertedTyVars
+    let tyVarExprs = fst <$> convertedTyVars
     let kindVars = nub $ concatMap snd convertedTyVars ++ kdvars
-    let kindExprs = map mkSMTSort kindVars
-    let defExprs = map mkDefaultSMTVar defvars
+    let kindExprs = mkSMTSort <$> kindVars
+    let defExprs = mkDefaultSMTVar <$> defvars
     decExprs <- convertDecs decs
     -- Order matters:
     let varExprs = kindExprs ++ tyVarExprs ++ defExprs
@@ -219,8 +219,8 @@ tryConvTheory ty = do
             recurTys <- vecMapAll convertType tys
             recurKds <- vecMapAll convertKind kds
             (decls, decKds) <- convDecConts decs
-            let convTys = fmap fst recurTys
-            let convKds = fmap fst recurKds
+            let convTys = fst <$> recurTys
+            let convKds = fst <$> recurKds
             let converted = cont convTys convKds
             let tyDeps = foldMap snd recurTys
             let kdVars = foldMap snd recurKds ++ decKds
@@ -235,14 +235,14 @@ addDepParts (ConvDeps t k d decl) ks decls =
 convDecConts :: [DecCont] -> ConvMonad ([Decl], [KdVar])
 convDecConts dcs = do
     decConts <- traverse convDecCont dcs
-    let decls = map fst decConts
+    let decls = fst <$> decConts
     let kdVars = concatMap snd decConts
     return (decls, kdVars)
     where
         convDecCont :: DecCont -> ConvMonad (Decl, [KdVar])
         convDecCont (DecCont kholes declName cont) = do
             recur <- vecMapAll convertKind kholes
-            let kConvs = fmap fst recur
+            let kConvs = fst <$> recur
             let declKey = (declName, fold kConvs)
             let kdVars = foldMap snd recur
             let decl = Decl declKey (cont kConvs)
@@ -272,7 +272,7 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
     defTyConApp ty = do
         (tcon, tys) <- splitTyConApp_maybe ty
         recur <- traverse defConvTy tys
-        let defConvTys = map fst recur
+        let defConvTys = fst <$> recur
         let tvars = foldMap snd recur
         let convTcon = [s|(lit "%?")|] $ getUnique tcon
         let converted = foldl [s|(apply %s %s)|] convTcon defConvTys
@@ -293,7 +293,7 @@ convKindTheories kind = do
         Nothing -> return ("Type", []) -- Kind defaulting
         Just (KdConvCont kholes kContin) -> do
             recur <- vecMapAll convertKind kholes
-            let convHoles = fmap fst recur
+            let convHoles = fst <$> recur
             let holeVars = foldMap snd recur
             return (kContin convHoles, holeVars)
 
