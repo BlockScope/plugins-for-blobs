@@ -1,3 +1,5 @@
+{-# LANGUAGE CPP #-}
+
 -- | This module defines a typechecker plugin that solves equations
 -- involving units of measure.  To use it, add
 --
@@ -23,5 +25,7 @@ plugin =
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "uom-plugin" tc
-            , pluginRecompile = const $ return NoForceRecompile
+#if __GLASGOW_HASKELL__ >= 806
+            , pluginRecompile = purePlugin
+#endif
             }
