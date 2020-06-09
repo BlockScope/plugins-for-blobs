@@ -45,7 +45,7 @@ printCts Debug{ctsGHC} parseFailed gs ws ds
 
             putStrLn . [s|>>> GHC-Givens = %s|] $ showList gs
             putStrLn . [s|>>> GHC-Wanteds = %s|] $ showList ws
-            putStrLn . [s|>>> GHC-Desireds = %s|] $ showList ds
+            putStrLn . [s|>>> GHC-Derived = %s|] $ showList ds
         return $ TcPluginOk [] []
     | otherwise = return $ TcPluginOk [] []
 
