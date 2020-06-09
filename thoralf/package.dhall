@@ -84,7 +84,7 @@ in    defs
                   , "tasty-th"
                   ]
               , ghc-options =
-                  [ "-Wall", "-fplugin Plugins.Thoralf" ]
+                  [ "-Wall" ]
               , other-modules =
                   [ "UoM" ]
               , main =
