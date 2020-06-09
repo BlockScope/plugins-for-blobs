@@ -2,15 +2,18 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-module Plugins.Thoralf.Print (Debug(..), printCts, showList) where
+module Plugins.Thoralf.Print
+    ( ConvCtsStep(..), Debug(..)
+    , printCts, showList, pprSExprList, pprStep, debugIO
+    ) where
 
 import Prelude hiding (showList)
 import Language.Haskell.Printf (s)
 import Data.List (intercalate)
-import qualified SimpleSMT as SMT (showsSExpr)
+import qualified SimpleSMT as SMT (showsSExpr, ppSExpr)
 import GHC.Corroborate
 
-import ThoralfPlugin.Convert (SExpr, maybeExtractTyEq)
+import ThoralfPlugin.Convert (ConvCts(..), SExpr, maybeExtractTyEq)
 
 data Debug = Debug{cts :: Bool, smt :: Bool}
 
@@ -69,7 +72,7 @@ showTupList xs =
 
 showList :: Show a => [a] -> String
 showList [] = "[]"
-showList xs = "[\n" ++ intercalate "\n" (map show xs) ++ "\n]"
+showList xs = "[\n" ++ intercalate "\n" (show <$> xs) ++ "\n]"
 
 instance Show Ct where
     show ct = case maybeExtractTyEq ct of
@@ -81,3 +84,29 @@ instance Show WantedConstraints where
 
 instance Show EvTerm where
   show = showSDocUnsafe . ppr
+
+data ConvCtsStep = ConvCtsStep {givens :: ConvCts, wanted :: ConvCts }
+
+pprStep :: ConvCtsStep -> [String]
+pprStep ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
+    [ [s|+++ GHC-Decs-Given = %s|] $ (showList gCts)
+    , [s|+++ GHC-Decs-Wanted = %s|] $ (showList wCts)
+    , [s|+++ SMT-Decs = %s|] $ pprSExprList (ds1 ++ ds2)
+    , [s|+++ SMT-Given = %s|] $ (pprSExprList gSs)
+    , [s|+++ SMT-Wanteds = %s|] $ (pprSExprList wSs)
+    ]
+    where
+        (gSs, gCts) = unzip gs
+        (wSs, wCts) = unzip ws
+
+pprSExprList :: [SExpr] -> String
+pprSExprList [] = "[]"
+pprSExprList es =
+    showString "[\n"
+    . foldr (\e m -> SMT.ppSExpr e . showChar '\n' . m) (showChar ']') es
+    $ []
+
+debugIO :: Debug -> String -> TcPluginM ()
+debugIO Debug{cts} s'
+    | cts = tcPluginIO $ putStrLn s'
+    | otherwise = return ()

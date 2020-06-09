@@ -3,7 +3,6 @@
 module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
 
 import Prelude hiding (showList)
-import Language.Haskell.Printf (s)
 import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
@@ -17,7 +16,7 @@ import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Thoralf.Print (Debug(..), printCts, showList)
+import Plugins.Thoralf.Print (ConvCtsStep(..), Debug(..), debugIO, printCts, pprStep)
 
 data ThoralfState =
     ThoralfState
@@ -102,10 +101,8 @@ thoralfSolver
     let convertor = convert (EncodingData deCls encode)
 
     case (convertor gs, convertor $ ws ++ ds) of
-        (Just (ConvCts gExprs decs1), Just (ConvCts wExprs decs2)) -> do
-            debugIO dbg . [s|+++ SMT-Decs = %s|] $ showList (decs1 ++ decs2)
-            debugIO dbg . [s|+++ SMT-Givens = %s|] $ showList gExprs
-            debugIO dbg . [s|+++ SMT-Wanteds = %s|] $ showList wExprs
+        (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
+            sequence_ $ debugIO dbg <$> (pprStep $ ConvCtsStep gCCs wCCs)
 
             let decs2' = decs2 \\ decs1
             let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)
@@ -177,11 +174,6 @@ addEvTerm ct = do
     ((t1, t2), ct') <- maybeExtractTyEq ct
     -- We never have a wanted disequality.
     return (makeEqEvidence "Fm Plugin" (t1,t2), ct')
-
-debugIO :: Debug -> String -> TcPluginM ()
-debugIO Debug{cts} s'
-    | cts = tcPluginIO $ putStrLn s'
-    | otherwise = return ()
 
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the
 -- form (EqPred NomEq t1 t2)
