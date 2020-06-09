@@ -20,4 +20,8 @@ plugin =
         mSyntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
         pkg = fsLit "uom-plugin"
         tc = uomPlugin mTheory mSyntax pkg
-    in defaultPlugin{tcPlugin = const . Just $ tracePlugin "uom-plugin" tc}
+    in
+        defaultPlugin
+            { tcPlugin = const . Just $ tracePlugin "uom-plugin" tc
+            , pluginRecompile = const $ return NoForceRecompile
+            }
