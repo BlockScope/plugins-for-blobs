@@ -24,5 +24,8 @@ plugin =
                 }
 
         tyCheck = thoralfPlugin pm thoralfTheories dbg
-
-    in defaultPlugin{tcPlugin = const $ Just tyCheck}
+    in
+        defaultPlugin
+            { tcPlugin = const $ Just tyCheck
+            , pluginRecompile = const $ return NoForceRecompile
+            }
