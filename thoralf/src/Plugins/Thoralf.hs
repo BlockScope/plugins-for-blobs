@@ -10,5 +10,6 @@ import Plugins.Thoralf.Print (Debug(..))
 plugin :: Plugin
 plugin =
     let pm = PkgModuleName (mkModuleName "Data.Theory.DisEq") (fsLit "thoralf-plugin")
-        tyCheck = thoralfPlugin pm thoralfTheories Debug{cts = False, smt = False}
+        dbg = Debug{ctsGHC = False, ctsSMT = False, smt = False}
+        tyCheck = thoralfPlugin pm thoralfTheories dbg
     in defaultPlugin{tcPlugin = const $ Just tyCheck}

@@ -1,4 +1,4 @@
-{-# LANGUAGE QuasiQuotes, NamedFieldPuns #-}
+{-# LANGUAGE QuasiQuotes, NamedFieldPuns, RecordWildCards #-}
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
@@ -15,7 +15,12 @@ import GHC.Corroborate
 
 import ThoralfPlugin.Convert (ConvCts(..), SExpr, maybeExtractTyEq)
 
-data Debug = Debug{cts :: Bool, smt :: Bool}
+data Debug =
+    Debug
+        { ctsGHC :: Bool -- ^ Trace GHC constraints carried through conversion and solving
+        , ctsSMT :: Bool -- ^ Trace conversions to SMT notation
+        , smt :: Bool -- ^ Trace the conversation with the SMT solver
+        }
 
 printParsedInputs :: Bool -> [SExpr] -> SExpr -> [SExpr] -> TcPluginM ()
 printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
@@ -25,8 +30,8 @@ printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
 printParsedInputs False _ _ _ = return ()
 
 printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
-printCts Debug{cts} parseFailed gs ws ds
-    | cts = do
+printCts Debug{ctsGHC} parseFailed gs ws ds
+    | ctsGHC = do
         tcPluginIO $ do
             putStrLn . [s|>>> Plugin Call (%s)|] $
                 if parseFailed then "Parse Failed" else "Solving"
@@ -76,7 +81,7 @@ showList xs = "[\n" ++ intercalate "\n" (show <$> xs) ++ "\n]"
 
 instance Show Ct where
     show ct = case maybeExtractTyEq ct of
-        Just ((t1,t2),_) -> show (t1, t2)
+        Just ((t1, t2),_) -> show (t1, t2)
         Nothing -> showSDocUnsafe $ ppr ct
 
 instance Show WantedConstraints where
@@ -87,17 +92,25 @@ instance Show EvTerm where
 
 data ConvCtsStep = ConvCtsStep {givens :: ConvCts, wanted :: ConvCts }
 
-pprStep :: ConvCtsStep -> [String]
-pprStep ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
-    [ [s|+++ GHC-Decs-Given = %s|] $ (showList gCts)
-    , [s|+++ GHC-Decs-Wanted = %s|] $ (showList wCts)
-    , [s|+++ SMT-Decs = %s|] $ pprSExprList (ds1 ++ ds2)
-    , [s|+++ SMT-Given = %s|] $ (pprSExprList gSs)
-    , [s|+++ SMT-Wanteds = %s|] $ (pprSExprList wSs)
-    ]
+pprStep :: Debug -> ConvCtsStep -> [String]
+pprStep Debug{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
+    ghcLines ++ smtLines
     where
         (gSs, gCts) = unzip gs
         (wSs, wCts) = unzip ws
+
+        ghcLines =
+            if not ctsGHC then [] else
+            [ [s|+++ GHC-Decs-Given = %s|] $ (showList gCts)
+            , [s|+++ GHC-Decs-Wanted = %s|] $ (showList wCts)
+            ]
+
+        smtLines =
+            if not ctsSMT then [] else
+            [ [s|+++ SMT-Decs = %s|] $ pprSExprList (ds1 ++ ds2)
+            , [s|+++ SMT-Given = %s|] $ (pprSExprList gSs)
+            , [s|+++ SMT-Wanteds = %s|] $ (pprSExprList wSs)
+            ]
 
 pprSExprList :: [SExpr] -> String
 pprSExprList [] = "[]"
@@ -107,6 +120,6 @@ pprSExprList es =
     $ []
 
 debugIO :: Debug -> String -> TcPluginM ()
-debugIO Debug{cts} s'
-    | cts = tcPluginIO $ putStrLn s'
+debugIO Debug{ctsGHC, ctsSMT} s'
+    | ctsGHC || ctsSMT = tcPluginIO $ putStrLn s'
     | otherwise = return ()

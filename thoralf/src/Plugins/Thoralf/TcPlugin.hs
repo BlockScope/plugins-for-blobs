@@ -102,7 +102,7 @@ thoralfSolver
 
     case (convertor gs, convertor $ ws ++ ds) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
-            sequence_ $ debugIO dbg <$> (pprStep $ ConvCtsStep gCCs wCCs)
+            sequence_ $ debugIO dbg <$> (pprStep dbg $ ConvCtsStep gCCs wCCs)
 
             let decs2' = decs2 \\ decs1
             let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)
