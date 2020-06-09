@@ -4,7 +4,7 @@
 
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), Debug(..)
-    , printCts, showList, pprSExprList, pprStep, debugIO
+    , printCts, showList, pprSExprList, pprStep, pprSolverCallCount, debugIO
     ) where
 
 import Prelude hiding (showList)
@@ -17,7 +17,8 @@ import ThoralfPlugin.Convert (ConvCts(..), SExpr, maybeExtractTyEq)
 
 data Debug =
     Debug
-        { ctsGHC :: Bool -- ^ Trace GHC constraints
+        { callCount :: Bool -- ^ Trace TcPlugin call count
+        , ctsGHC :: Bool -- ^ Trace GHC constraints
         , carryGHC :: Bool -- ^ Trace GHC constraints carried through conversion and solving
         , convSMT :: Bool -- ^ Trace conversions to SMT notation
         , smt :: Bool -- ^ Trace the conversation with the SMT solver
@@ -29,6 +30,11 @@ printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
     putStrLn . [s|Wanted SExpr:\n%s|] $ SMT.showsSExpr wSExpr ""
     putStrLn . [s|Variable Decs:\n%?|] $ (`SMT.showsSExpr` "") <$> parseDeclrs
 printParsedInputs False _ _ _ = return ()
+
+pprSolverCallCount :: Debug -> Int -> String
+pprSolverCallCount Debug{callCount} n
+    | callCount = [s|>>> GHC-TcPlugin #%d|] n
+    | otherwise = ""
 
 printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
 printCts Debug{ctsGHC} parseFailed gs ws ds
@@ -122,5 +128,5 @@ pprSExprList es =
 
 debugIO :: Debug -> String -> TcPluginM ()
 debugIO Debug{..} s'
-    | ctsGHC || carryGHC || convSMT = tcPluginIO $ putStrLn s'
+    | callCount || ctsGHC || carryGHC || convSMT = tcPluginIO $ putStrLn s'
     | otherwise = return ()

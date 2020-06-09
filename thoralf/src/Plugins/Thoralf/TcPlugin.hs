@@ -16,11 +16,12 @@ import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Thoralf.Print (ConvCtsStep(..), Debug(..), debugIO, printCts, pprStep)
+import Plugins.Thoralf.Print
+    (ConvCtsStep(..), Debug(..), debugIO, printCts, pprStep, pprSolverCallCount)
 
 data ThoralfState =
     ThoralfState
-        { smtSolver :: IORef SMT.Solver
+        { smtSolver :: IORef (SMT.Solver, Int)
         , theoryEncoding :: TheoryEncoding
         , disEqClass :: Class
         }
@@ -53,7 +54,7 @@ mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
         z3Solver <- solverWithLevel debug
         SMT.push z3Solver
         return z3Solver
-    solverRef <- unsafeTcPluginTcM $ newMutVar z3Solver
+    solverRef <- unsafeTcPluginTcM $ newMutVar (z3Solver, 0)
     return
         ThoralfState
             { smtSolver = solverRef
@@ -63,7 +64,7 @@ mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
 
 thoralfStop :: ThoralfState -> TcPluginM ()
 thoralfStop ThoralfState{smtSolver = solverRef} = do
-    solver <- unsafeTcPluginTcM $ readMutVar solverRef
+    (solver, _) <- unsafeTcPluginTcM $ readMutVar solverRef
     _ <- tcPluginIO (SMT.stop solver)
     return ()
 
@@ -84,7 +85,8 @@ thoralfSolver
     gs' ws' ds' = do
     -- Refresh the solver
     _ <- refresh encode smtRef debugSMT
-    smt <- unsafeTcPluginTcM $ readMutVar smtRef
+    (smt, callCount) <- unsafeTcPluginTcM $ readMutVar smtRef
+    _ <- debugIO dbg $ pprSolverCallCount dbg callCount
 
     -- Preprocessing
     let filt = filter $ isEqCt deCls
@@ -138,9 +140,9 @@ thoralfSolver
 
         _ -> printCts dbg True gs ws ds
 
-refresh :: TheoryEncoding -> IORef SMT.Solver -> Bool -> TcPluginM ()
+refresh :: TheoryEncoding -> IORef (SMT.Solver, Int) -> Bool -> TcPluginM ()
 refresh encoding solverRef debug = do
-    solver <- unsafeTcPluginTcM $ readMutVar solverRef
+    (solver, n) <- unsafeTcPluginTcM $ readMutVar solverRef
     _ <- tcPluginIO $ SMT.stop solver
     let decs = startDecs encoding
 
@@ -151,7 +153,7 @@ refresh encoding solverRef debug = do
         SMT.push z3Solver
         return z3Solver
 
-    unsafeTcPluginTcM $ writeMutVar solverRef z3Solver
+    unsafeTcPluginTcM $ writeMutVar solverRef (z3Solver, n + 1)
     where
         typeDataType =
             SMT.Atom
