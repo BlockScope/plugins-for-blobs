@@ -17,8 +17,9 @@ import ThoralfPlugin.Convert (ConvCts(..), SExpr, maybeExtractTyEq)
 
 data Debug =
     Debug
-        { ctsGHC :: Bool -- ^ Trace GHC constraints carried through conversion and solving
-        , ctsSMT :: Bool -- ^ Trace conversions to SMT notation
+        { ctsGHC :: Bool -- ^ Trace GHC constraints
+        , carryGHC :: Bool -- ^ Trace GHC constraints carried through conversion and solving
+        , convSMT :: Bool -- ^ Trace conversions to SMT notation
         , smt :: Bool -- ^ Trace the conversation with the SMT solver
         }
 
@@ -33,7 +34,7 @@ printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
 printCts Debug{ctsGHC} parseFailed gs ws ds
     | ctsGHC = do
         tcPluginIO $ do
-            putStrLn . [s|>>> Plugin Call (%s)|] $
+            putStrLn . [s|>>> GHC-TcPlugin-Called (%s)|] $
                 if parseFailed then "Parse Failed" else "Solving"
 
             putStrLn . [s|>>> GHC-Givens = %s|] $ showList gs
@@ -100,13 +101,13 @@ pprStep Debug{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} 
         (wSs, wCts) = unzip ws
 
         ghcLines =
-            if not ctsGHC then [] else
+            if not carryGHC then [] else
             [ [s|+++ GHC-Decs-Given = %s|] $ (showList gCts)
             , [s|+++ GHC-Decs-Wanted = %s|] $ (showList wCts)
             ]
 
         smtLines =
-            if not ctsSMT then [] else
+            if not convSMT then [] else
             [ [s|+++ SMT-Decs = %s|] $ pprSExprList (ds1 ++ ds2)
             , [s|+++ SMT-Given = %s|] $ (pprSExprList gSs)
             , [s|+++ SMT-Wanteds = %s|] $ (pprSExprList wSs)
@@ -120,6 +121,6 @@ pprSExprList es =
     $ []
 
 debugIO :: Debug -> String -> TcPluginM ()
-debugIO Debug{ctsGHC, ctsSMT} s'
-    | ctsGHC || ctsSMT = tcPluginIO $ putStrLn s'
+debugIO Debug{..} s'
+    | ctsGHC || carryGHC || convSMT = tcPluginIO $ putStrLn s'
     | otherwise = return ()
