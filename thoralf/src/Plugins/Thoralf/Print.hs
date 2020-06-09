@@ -108,15 +108,15 @@ pprStep Debug{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} 
 
         ghcLines =
             if not carryGHC then [] else
-            [ [s|+++ GHC-Decs-Given = %s|] $ (showList gCts)
-            , [s|+++ GHC-Decs-Wanted = %s|] $ (showList wCts)
+            [ [s|+++ GHC-Decs-Given = %s|] $ showList gCts
+            , [s|+++ GHC-Decs-Wanted = %s|] $ showList wCts
             ]
 
         smtLines =
             if not convSMT then [] else
             [ [s|+++ SMT-Decs = %s|] $ pprSExprList (ds1 ++ ds2)
-            , [s|+++ SMT-Given = %s|] $ (pprSExprList gSs)
-            , [s|+++ SMT-Wanteds = %s|] $ (pprSExprList wSs)
+            , [s|+++ SMT-Given = %s|] $ pprSExprList gSs
+            , [s|+++ SMT-Wanteds = %s|] $ pprSExprList wSs
             ]
 
 pprSExprList :: [SExpr] -> String
