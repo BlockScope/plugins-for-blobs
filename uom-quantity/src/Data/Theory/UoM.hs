@@ -38,6 +38,6 @@ type family (u :: Unit) /: (v :: Unit) :: Unit where {}
 -- | Exponentiation (to a positive power) for units of measure;
 -- negative exponents are not yet supported (they require an Integer kind)
 type family (u :: Unit) ^: (n :: Nat)  :: Unit where
-  u ^: 0 = One
-  u ^: 1 = u
-  u ^: n = u *: (u ^: (n-1))
+    u ^: 0 = One
+    u ^: 1 = u
+    u ^: n = u *: (u ^: (n - 1))
