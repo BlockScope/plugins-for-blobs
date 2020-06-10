@@ -131,8 +131,8 @@ pprStep Debug{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} 
         smtLines =
             if not convSMT then [] else
             [ [s|+++ SMT-Decs = %s|] $ pprSExprList (ds1 ++ ds2)
-            , [s|+++ SMT-Given = %s|] $ pprSExprList gSs
-            , [s|+++ SMT-Wanteds = %s|] $ pprSExprList wSs
+            , [s|+++ SMT-Given = %s|] $ pprGivens gSs
+            , [s|+++ SMT-Wanteds = %s|] $ pprWanteds wSs
             ]
 
 pprSExprList :: [SExpr] -> String
@@ -140,6 +140,36 @@ pprSExprList [] = "[]"
 pprSExprList es =
     showString "[\n"
     . foldr (\e m -> SMT.ppSExpr e . showChar '\n' . m) (showChar ']') es
+    $ []
+
+pprGivens :: [SExpr] -> String
+pprGivens [] = "[]"
+pprGivens es =
+    showString "[\n"
+    . foldr
+        (\e m ->
+            showString "(assert "
+            . SMT.ppSExpr e
+            . showChar ')'
+            . showChar '\n'
+            . m)
+        (showChar ']')
+        es
+    $ []
+
+pprWanteds :: [SExpr] -> String
+pprWanteds [] = "[]"
+pprWanteds es =
+    showString "[\n"
+    . foldr
+        (\e m ->
+            showString "(assert (or false (not "
+            . SMT.ppSExpr e
+            . showString ")))"
+            . showChar '\n'
+            . m)
+        (showChar ']')
+        es
     $ []
 
 debugIO :: Debug -> String -> TcPluginM ()
