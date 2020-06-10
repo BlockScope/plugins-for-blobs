@@ -9,6 +9,7 @@ module Plugins.Thoralf.Print
 
 import Prelude hiding (showList)
 import Language.Haskell.Printf (s)
+import Data.Foldable (traverse_)
 import Data.List (intercalate)
 import qualified SimpleSMT as SMT (showsSExpr, ppSExpr)
 import GHC.Corroborate
@@ -40,14 +41,19 @@ printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
 printCts Debug{ctsGHC} parseFailed gs ws ds
     | ctsGHC = do
         tcPluginIO $ do
-            putStrLn . [s|>>> GHC-TcPlugin-Called (%s)|] $
-                if parseFailed then "Parse Failed" else "Solving"
+            let p = [s|>>> GHC-TcPlugin-Called (%s)|] $
+                    if parseFailed then "Parse Failed" else "Solving"
+            traverse_ putStrLn $ p : pprCts gs ws ds
 
-            putStrLn . [s|>>> GHC-Givens = %s|] $ showList gs
-            putStrLn . [s|>>> GHC-Wanteds = %s|] $ showList ws
-            putStrLn . [s|>>> GHC-Derived = %s|] $ showList ds
         return $ TcPluginOk [] []
     | otherwise = return $ TcPluginOk [] []
+
+pprCts :: [Ct] -> [Ct] -> [Ct] -> [String]
+pprCts gs ws ds =
+    [ [s|>>> GHC-Givens = %s|] $ showList gs
+    , [s|>>> GHC-Wanteds = %s|] $ showList ws
+    , [s|>>> GHC-Derived = %s|] $ showList ds
+    ]
 
 -- *  Printing
 instance Show Type where
