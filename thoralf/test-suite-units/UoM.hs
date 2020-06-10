@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, GADTs, DataKinds #-}
+{-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
 
@@ -9,42 +9,42 @@ import Data.Singletons.TypeLits hiding (SSymbol)
 import ThoralfPlugin.Singletons.Symbol (SSymbol)
 import Data.Theory.UoM
 
-data Unit :: UoM -> Type where
-  MkUnit :: Double -> Unit m
+data Quantity :: Unit -> Type where
+    MkQuantity :: Double -> Quantity m
 
-instance Show (Unit a) where
-    show (MkUnit x) = show x
+instance Show (Quantity a) where
+    show (MkQuantity x) = show x
 
-scalar :: Double -> Unit One
-scalar = MkUnit
+scalar :: Double -> Quantity One
+scalar = MkQuantity
 
-mkUnit :: IsBase s n b => Double -> SSymbol s -> SNat n -> Unit b
-mkUnit d _ _ = MkUnit d
+mkQuantity :: IsBase s n b => Double -> SSymbol s -> SNat n -> Quantity b
+mkQuantity d _ _ = MkQuantity d
 
-add :: Unit a -> Unit a -> Unit a
-add (MkUnit x) (MkUnit y) = MkUnit (x + y)
+add :: Quantity a -> Quantity a -> Quantity a
+add (MkQuantity x) (MkQuantity y) = MkQuantity (x + y)
 
-negate :: Unit a -> Unit a
-negate (MkUnit x) = MkUnit (-x)
+negate :: Quantity a -> Quantity a
+negate (MkQuantity x) = MkQuantity (-x)
 
-mult :: IsProd a b c => Unit a -> Unit b -> Unit c
-mult (MkUnit x) (MkUnit y) = MkUnit (x * y)
+mult :: IsProd a b c => Quantity a -> Quantity b -> Quantity c
+mult (MkQuantity x) (MkQuantity y) = MkQuantity (x * y)
 
-div :: IsDiv a b c => Unit a -> Unit b -> Unit c
-div (MkUnit x) (MkUnit y) = MkUnit (x / y)
+div :: IsDiv a b c => Quantity a -> Quantity b -> Quantity c
+div (MkQuantity x) (MkQuantity y) = MkQuantity (x / y)
 
-extract :: Unit a -> Double
-extract (MkUnit d) = d
+extract :: Quantity a -> Double
+extract (MkQuantity d) = d
 
 -- velocity: m/s
 -- time: s
 -- distance = velocity * time
-type Meters  = FromList '[ '("meters", 1) ]
-type Seconds = FromList '[ '("secs",   1) ]
+type M = FromList '[ '("m", 1)] -- metre
+type S = FromList '[ '("s", 1)] -- second
+type MpS = M /: S -- metres per second
 
-calcDistance
-    :: IsDiv Meters Seconds metPerSec
-    => Unit metPerSec
-    -> Unit Seconds
-    -> Unit Meters
-calcDistance = mult
+metres :: Quantity MpS-> Quantity S -> Quantity M
+metres = mult
+
+distance :: IsDiv M S mps => Quantity mps -> Quantity S -> Quantity M
+distance = mult
