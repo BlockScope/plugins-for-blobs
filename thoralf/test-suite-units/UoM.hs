@@ -18,7 +18,7 @@ instance Show (Quantity a) where
 scalar :: Double -> Quantity One
 scalar = MkQuantity
 
-mkQuantity :: IsBase s n b => Double -> SSymbol s -> SNat n -> Quantity b
+mkQuantity :: IsExp s n b => Double -> SSymbol s -> SNat n -> Quantity b
 mkQuantity d _ _ = MkQuantity d
 
 add :: Quantity a -> Quantity a -> Quantity a

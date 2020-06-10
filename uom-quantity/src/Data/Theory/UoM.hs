@@ -15,7 +15,7 @@ module Data.Theory.UoM
     , type (^:)
     ) where
 
-import GHC.TypeLits (Symbol, Nat, type (-))
+import GHC.TypeLits (type (-), Symbol, Nat)
 
 infixl 7 *:, /:
 infixr 8 ^:
