@@ -8,8 +8,8 @@
 module Data.Theory.UoM
     ( -- * Type-level units of measure
       Unit
-    , type One
-    , type Base
+    , One
+    , Base
     , type (*:)
     , type (/:)
     , type (^:)

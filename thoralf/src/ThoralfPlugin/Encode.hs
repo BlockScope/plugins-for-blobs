@@ -14,9 +14,9 @@ thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
     let pkg = fsLit "thoralf-plugin"
         fm = PkgModuleName (mkModuleName "Data.Theory.FiniteMap") pkg
-        uom = PkgModuleName (mkModuleName "Data.Theory.UoM") pkg
         bool = PkgModuleName (mkModuleName "Data.Theory.Bool") pkg
         nats = PkgModuleName (mkModuleName "GHC.TypeNats") (fsLit "base")
+        uom = PkgModuleName (mkModuleName "Data.Theory.UoM") (fsLit "uom-quantity")
     in
         sumEncodings
             [ natTheory

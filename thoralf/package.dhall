@@ -26,6 +26,7 @@ in    defs
             , "mtl"
             , "simple-smt"
             , "th-printf"
+            , "uom-quantity"
             ]
       , library =
           { source-dirs =
@@ -38,7 +39,6 @@ in    defs
               , "Data.Theory.Bool"
               , "Data.Theory.DisEq"
               , "Data.Theory.FiniteMap"
-              , "Data.Theory.UoM"
               , "Data.UnitsOfMeasure.Constraint"
               , "Plugins.Thoralf"
               , "Plugins.Thoralf.TcPlugin"
@@ -83,6 +83,7 @@ in    defs
                   , "tasty-hunit"
                   , "tasty-quickcheck"
                   , "tasty-th"
+                  , "uom-quantity"
                   ]
               , ghc-options =
                   [ "-Wall" ]

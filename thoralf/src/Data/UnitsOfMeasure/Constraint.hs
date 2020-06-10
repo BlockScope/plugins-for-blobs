@@ -11,7 +11,8 @@ module Data.UnitsOfMeasure.Constraint
 
 import Data.Kind (Constraint)
 import GHC.TypeLits (Symbol, Nat)
-import Data.Theory.UoM (Unit, Base, type (*:), type (/:), type (^:), Exp)
+import Data.Theory.UoM (Unit, Base, type (*:), type (/:), type (^:))
+import Data.UnitsOfMeasure.Syntax (Exp)
 
 type family IsBase (measure :: Symbol) (b :: Unit) :: Constraint where
     IsBase m b = (b ~ Base m)

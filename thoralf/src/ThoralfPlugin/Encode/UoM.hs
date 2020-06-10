@@ -21,7 +21,7 @@ uomTheory theory = do
   o <- f "One"
   m <- f "*:"
   d <- f "/:"
-  e <- f "/:"
+  e <- f "^:"
   return $ mkUoMEncoding u b o d m e
 
 mkUoMEncoding :: TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TheoryEncoding

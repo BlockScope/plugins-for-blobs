@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 07c26229561cdc73dd933bf4ad2e4578e2bee9370d128c4d4176ce89205c792a
+-- hash: 4ff99ac8343dad93dd078bda966f880c739ccb00b706184ff022a4584581abfe
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -40,7 +40,6 @@ library
       Data.Theory.Bool
       Data.Theory.DisEq
       Data.Theory.FiniteMap
-      Data.Theory.UoM
       Data.UnitsOfMeasure.Constraint
       Plugins.Thoralf
       Plugins.Thoralf.TcPlugin
@@ -66,6 +65,7 @@ library
     , mtl
     , simple-smt
     , th-printf
+    , uom-quantity
 
 test-suite hlint
   type: exitcode-stdio-1.0
@@ -85,6 +85,7 @@ test-suite hlint
     , mtl
     , simple-smt
     , th-printf
+    , uom-quantity
   default-language: Haskell2010
 
 test-suite rows
@@ -107,6 +108,7 @@ test-suite rows
     , simple-smt
     , th-printf
     , thoralf-plugin
+    , uom-quantity
   default-language: Haskell2010
 
 test-suite units
@@ -134,4 +136,5 @@ test-suite units
     , template-haskell
     , th-printf
     , thoralf-plugin
+    , uom-quantity
   default-language: Haskell2010
