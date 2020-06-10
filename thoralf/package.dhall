@@ -39,6 +39,7 @@ in    defs
               , "Data.Theory.DisEq"
               , "Data.Theory.FiniteMap"
               , "Data.Theory.UoM"
+              , "Data.UnitsOfMeasure.Constraint"
               , "Plugins.Thoralf"
               , "Plugins.Thoralf.TcPlugin"
               ]

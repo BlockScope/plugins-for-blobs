@@ -9,9 +9,8 @@
 module Data.UnitsOfMeasure.Syntax
     ( -- * Syntactic representation of units
       UnitSyntax(..)
-    , Unpack
-    , Pack
-    , Prod
+    , Unpack, Pack
+    , Prod, Exp
 
       -- * Internal
     , type (~~)
@@ -19,7 +18,7 @@ module Data.UnitsOfMeasure.Syntax
     ) where
 
 import GHC.Exts (Constraint)
-import GHC.TypeLits (Symbol)
+import GHC.TypeLits (Symbol, Nat)
 import Data.Theory.UoM
 
 infix 4 ~~
@@ -27,8 +26,7 @@ infix 4 ~~
 -- | Syntactic representation of a unit as a pair of lists of base
 -- units, for example 'One' is represented as @[] ':/' []@ and
 -- @'Base' "m" '/:' 'Base' "s" ^: 2@ is represented as @["m"] ':/' ["s","s"]@.
-data UnitSyntax s = [s] :/ [s]
-  deriving (Eq, Show)
+data UnitSyntax s = [s] :/ [s] deriving (Eq, Show)
 
 -- | Pack up a syntactic representation of a unit as a unit.  For example:
 --
@@ -41,12 +39,19 @@ data UnitSyntax s = [s] :/ [s]
 -- not a right inverse (because there are multiple list
 -- representations of the same unit).
 type family Pack (u :: UnitSyntax Symbol) :: Unit where
-  Pack (xs :/ ys) = Prod xs /: Prod ys
+    Pack (xs :/ ys) = Prod xs /: Prod ys
 
 -- | Take the product of a list of base units.
 type family Prod (xs :: [Symbol]) :: Unit where
-  Prod '[]       = One
-  Prod (x ': xs) = Base x *: Prod xs
+    Prod '[] = One
+    Prod (x ': xs) = Base x *: Prod xs
+
+-- | Take the product of a list of units with explicit powers.
+type family Exp (xs :: [(Symbol, Nat)]) :: Unit where
+    Exp '[] = One
+    Exp ('(u, 0) ': ys) = One *: Exp ys
+    Exp ('(u, 1) ': ys) = Base u *: Exp ys
+    Exp ('(u, i) ': ys) = (Base u ^: i) *: Exp ys
 
 -- | Unpack a unit as a syntactic representation, where the order of
 -- units is deterministic.  For example:

@@ -8,6 +8,7 @@ import Data.Kind (Type)
 import Data.Singletons.TypeLits hiding (SSymbol)
 import ThoralfPlugin.Singletons.Symbol (SSymbol)
 import Data.Theory.UoM
+import Data.UnitsOfMeasure.Constraint
 
 data Quantity :: Unit -> Type where
     MkQuantity :: Double -> Quantity m
@@ -39,8 +40,8 @@ extract (MkQuantity d) = d
 -- velocity: m/s
 -- time: s
 -- distance = velocity * time
-type M = FromList '[ '("m", 1)] -- metre
-type S = FromList '[ '("s", 1)] -- second
+type M = Exp '[ '("m", 1)] -- metre
+type S = Exp '[ '("s", 1)] -- second
 type MpS = M /: S -- metres per second
 
 metres :: Quantity MpS-> Quantity S -> Quantity M
