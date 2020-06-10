@@ -15,23 +15,23 @@ uomTheory :: PkgModuleName -> TcPluginM TheoryEncoding
 uomTheory theory = do
   uomModule <- findModule theory
   let f = divulgeTyCon uomModule
-  baseTyCon <- f "Base"
-  oneTyCon <- f "One"
-  divTyCon <- f "/:"
-  mulTyCon <- f "*:"
-  uomTyCon <- f "UoM"
-  return $ mkUoMEncoding baseTyCon oneTyCon divTyCon mulTyCon uomTyCon
+  u <- f "Unit"
+  b <- f "Base"
+  o <- f "One"
+  m <- f "*:"
+  d <- f "/:"
+  return $ mkUoMEncoding u b o d m
 
 mkUoMEncoding :: TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TheoryEncoding
-mkUoMEncoding base one div' mult uom =
+mkUoMEncoding u b o d m =
     emptyTheory
         { typeConvs =
-            [ f baseString base
-            , typeConvert oneString one
-            , f (opString "-") div'
-            , f (opString "+") mult
+            [ f baseString b
+            , typeConvert oneString o
+            , f (opString "-") d
+            , f (opString "+") m
             ]
-        , kindConvs = [kindConvert "(Array String Int)" uom]
+        , kindConvs = [kindConvert "(Array String Int)" u]
         }
     where
         f s' = typeArgConvert $ \case

@@ -154,15 +154,17 @@ lookupUnitDefs :: ModuleName -> ModuleName -> FastString -> TcPluginM UnitDefs
 lookupUnitDefs theory syntax pkgName = do
     mT <- lookupModule theory pkgName
     mS <- lookupModule syntax pkgName
-    u <- divulgeTyCon mT "Unit"
-    b <- divulgeTyCon mT "Base"
-    o <- divulgeTyCon mT "One"
-    m <- divulgeTyCon mT "*:"
-    d <- divulgeTyCon mT "/:"
-    e <- divulgeTyCon mT "^:"
-    x <- divulgeTyCon mS "Unpack"
-    i <- divulgeTyCon mS "UnitSyntax"
-    c <- divulgeTyCon mS "~~"
+    let f = divulgeTyCon mT
+    let g = divulgeTyCon mS
+    u <- f "Unit"
+    b <- f "Base"
+    o <- f "One"
+    m <- f "*:"
+    d <- f "/:"
+    e <- f "^:"
+    x <- g "Unpack"
+    i <- g "UnitSyntax"
+    c <- g "~~"
     return $ UnitDefs u b o m d e x i (getDataCon i ":/") c
     where
         getDataCon u s =
