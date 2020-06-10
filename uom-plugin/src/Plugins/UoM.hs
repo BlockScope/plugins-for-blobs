@@ -13,6 +13,7 @@ module Plugins.UoM (plugin) where
 import GHC.Corroborate
 
 import Plugins.UoM.TcPlugin (uomPlugin)
+import Plugins.UoM.Print (Debug(..))
 
 -- | The plugin that GHC will load when this module is used with the
 -- @-fplugin@ option.
@@ -21,7 +22,8 @@ plugin =
     let mTheory = mkModuleName "Data.Theory.UoM"
         mSyntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
         pkg = fsLit "uom-plugin"
-        tc = uomPlugin mTheory mSyntax pkg
+        dbg = Debug{callCount = False, ctsGHC = True}
+        tc = uomPlugin dbg mTheory mSyntax pkg
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "uom-plugin" tc

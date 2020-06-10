@@ -30,11 +30,12 @@ in    defs
               [ "doc", "src" ]
           , dependencies =
                 defs.dependencies
-              # [ "deepseq >=1.3 && <1.5"
+              # [ "containers >=0.5"
+                , "deepseq >=1.3 && <1.5"
                 , "ghc-tcplugins-extra >=0.5"
                 , "ghc-corroborate"
                 , "template-haskell >=2.9"
-                , "containers >=0.5"
+                , "th-printf"
                 , "uom-quantity"
                 , "units-parser >=0.1"
                 ]
@@ -45,7 +46,10 @@ in    defs
               , "Plugins.UoM"
               ]
           , other-modules =
-              [ "Data.UnitsOfMeasure.TH", "Plugins.UoM.TcPlugin" ]
+              [ "Data.UnitsOfMeasure.TH"
+              , "Plugins.UoM.TcPlugin"
+              , "Plugins.UoM.Print"
+              ]
           }
       , tests =
           { units =
