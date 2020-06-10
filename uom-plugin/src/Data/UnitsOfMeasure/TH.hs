@@ -53,10 +53,10 @@ import Data.UnitsOfMeasure.Convert (HasCanonicalBaseUnit(..))
 --
 u :: QuasiQuoter
 u = QuasiQuoter
-      { quoteExp  = uExp
-      , quotePat  = uPat
+      { quoteExp = uExp
+      , quotePat = uPat
       , quoteType = uType
-      , quoteDec  = uDec
+      , quoteDec = uDec
       }
 
 -- | Parse a unit expression optionally preceded by a literal, and
@@ -64,14 +64,17 @@ u = QuasiQuoter
 -- to the literal if one is present).
 uExp :: String -> Q Exp
 uExp s
-  | Just (ei, s') <- readNumber s = mkLiteral ei =<< parseUnitQ s'
-  | otherwise                     = mkConversion =<< parseUnitQ s
-  where
-    mkLiteral (Left  0) Unity = [| zero |]
-    mkLiteral (Right 0) Unity = [| MkQuantity 0.0 |]
-    mkLiteral ei        expr  = [| (MkQuantity :: a -> Quantity a $(reifyUnit expr))
-                                                                  $(litE (either integerL rationalL ei)) |]
-    mkConversion expr = [|  MkQuantity :: a -> Quantity a $(reifyUnit expr) |]
+    | Just (ei, s') <- readNumber s = mkLiteral ei =<< parseUnitQ s'
+    | otherwise = mkConversion =<< parseUnitQ s
+    where
+        mkLiteral (Left  0) Unity = [| zero |]
+        mkLiteral (Right 0) Unity = [| MkQuantity 0.0 |]
+        mkLiteral ei expr =
+            [| (MkQuantity :: a -> Quantity a $(reifyUnit expr))
+               $(litE (either integerL rationalL ei))
+            |]
+
+        mkConversion expr = [| MkQuantity :: a -> Quantity a $(reifyUnit expr) |]
 
 -- | Parse an integer or rational literal followed by a unit
 -- expression, and create a pattern match on @'Quantity' 'Integer' u@
@@ -79,11 +82,11 @@ uExp s
 -- support arbitrary representation types.
 uPat :: String -> Q Pat
 uPat s
-  | Just (Left  i, s') <- readNumber s  = mkPat (integerL  i) [t|Integer |] s'
-  | Just (Right r, s') <- readNumber s  = mkPat (rationalL r) [t|Rational|] s'
-  | otherwise                           = error "unable to parse literal"
-  where
-    mkPat l t s' = [p| MkQuantity $(litP l) |] `sigP` [t| Quantity $t $(uType s') |]
+    | Just (Left  i, s') <- readNumber s = mkPat (integerL i) [t| Integer |] s'
+    | Just (Right r, s') <- readNumber s = mkPat (rationalL r) [t| Rational |] s'
+    | otherwise = error "unable to parse literal"
+    where
+        mkPat l t s' = [p| MkQuantity $(litP l) |] `sigP` [t| Quantity $t $(uType s') |]
 
 -- | Parse a unit expression and convert it into the corresponding type.
 uType :: String -> Q Type
@@ -91,29 +94,31 @@ uType s = reifyUnit =<< parseUnitQ s
 
 parseUnitQ :: String -> Q (UnitExp () String)
 parseUnitQ s = case parseUnit universalSymbolTable s of
-                 Right expr -> return expr
-                 Left  err  -> fail ("unable to parse unit expression \"" ++ s ++ "\": " ++ err)
+    Right expr -> return expr
+    Left err  -> fail ("unable to parse unit expression \"" ++ s ++ "\": " ++ err)
 
 -- | Convert a unit expression into the corresponding type.
 reifyUnit :: UnitExp () String -> Q Type
-reifyUnit Unity        = [t| One |]
-reifyUnit (Unit _ s)   = [t| MkUnit $(litT (strTyLit s))            |]
-reifyUnit (u `Mult` v) = [t| $(reifyUnit u) *: $(reifyUnit v)       |]
-reifyUnit (u `Div`  v) = [t| $(reifyUnit u) /: $(reifyUnit v)       |]
-reifyUnit (u `Pow`  n) | n >= 0    = [t| $(reifyUnit u) ^: $(litT (numTyLit n)) |]
-                       | otherwise = [t| One /: $(reifyUnit u) ^: $(litT (numTyLit (- n))) |]
+reifyUnit Unity = [t| One |]
+reifyUnit (Unit _ s) = [t| MkUnit $(litT (strTyLit s)) |]
+reifyUnit (u `Mult` v) = [t| $(reifyUnit u) *: $(reifyUnit v) |]
+reifyUnit (u `Div`  v) = [t| $(reifyUnit u) /: $(reifyUnit v) |]
+reifyUnit (u `Pow`  n)
+    | n >= 0 = [t| $(reifyUnit u) ^: $(litT (numTyLit n)) |]
+    | otherwise = [t| One /: $(reifyUnit u) ^: $(litT (numTyLit (- n))) |]
 
 
 -- | Parse the string as a mixture of base units and derived units,
 -- and create corresponding 'MkUnit' type instance declarations.
 uDec :: String -> Q [Dec]
 uDec s = case parseUnitDecs s of
-           Just xs -> concat <$> mapM (uncurry declareUnit) xs
-           Nothing -> reportError ("unable to parse unit declarations: " ++ s) >> return []
+    Just xs -> concat <$> mapM (uncurry declareUnit) xs
+    Nothing -> reportError ("unable to parse unit declarations: " ++ s) >> return []
 
-data UnitDecl = BaseUnit
-              | DefinedUnit    (UnitExp () String)
-              | ConversionUnit Rational (UnitExp () String)
+data UnitDecl
+    = BaseUnit
+    | DefinedUnit (UnitExp () String)
+    | ConversionUnit Rational (UnitExp () String)
 
 -- | Parse a comma-separated list of unit declarations, for example:
 --
@@ -122,41 +127,57 @@ parseUnitDecs :: String -> Maybe [(String, UnitDecl)]
 parseUnitDecs = go
   where
     go [] = Just []
+
     go (c:xs) | isSpace c || c == ',' = go xs
+
     go xs = case span isAlpha xs of
-              ([], _) -> Nothing
-              (u, ys) -> go' u ys
+        ([], _) -> Nothing
+        (u, ys) -> go' u ys
 
     go' u [] = Just [(u, BaseUnit)]
-    go' u (c:xs) | isSpace c = go' u xs
-    go' u (',':xs) = ((u, BaseUnit) :) <$> go xs
-    go' u ('=':xs) = let (d, ys) = break (== ',') xs
-                     in case readNumber d of
-                          Just (ei, s)
-                            | not (all isSpace s) -- parse "x = 1" as DefinedUnit, not ConversionUnit
-                              -> case parseUnit universalSymbolTable s of
-                                   Right e -> ((u, ConversionUnit (either fromInteger id ei) e) :) <$> go ys
-                                   _                -> Nothing
-                          _   -> case parseUnit universalSymbolTable d of
-                                   Right e -> ((u, DefinedUnit e) :) <$> go ys
-                                   Left  _ -> Nothing
-    go' _ _        = Nothing
+
+    go' u (c : xs) | isSpace c = go' u xs
+
+    go' u (',' : xs) = ((u, BaseUnit) :) <$> go xs
+
+    go' u ('=' : xs) = let (d, ys) = break (== ',') xs in case readNumber d of
+        Just (ei, s)
+            -- parse "x = 1" as DefinedUnit, not ConversionUnit
+            | not (all isSpace s) ->
+                case parseUnit universalSymbolTable s of
+                    Right e -> ((u, ConversionUnit (either fromInteger id ei) e) :) <$> go ys
+                    _ -> Nothing
+
+        _ ->
+            case parseUnit universalSymbolTable d of
+                Right e -> ((u, DefinedUnit e) :) <$> go ys
+                Left  _ -> Nothing
+
+    go' _ _ = Nothing
 
 -- | Given a unit name and an optional definition, create an
 -- appropriate instance of the 'MkUnit' type family.
 declareUnit :: String -> UnitDecl -> Q [Dec]
 declareUnit s ud = case ud of
-  BaseUnit           -> [d| type instance MkUnit $(litT (strTyLit s)) = Base $(litT (strTyLit s))
-                            instance HasCanonicalBaseUnit $(litT (strTyLit s))
-                          |]
-  DefinedUnit u      -> [d| type instance MkUnit $(litT (strTyLit s)) = $(reifyUnit u) |]
-  ConversionUnit _ (Unit Nothing s') | s == s'
-                     -> reportError ("cannot define cyclic convertible unit: " ++ s) >> return []
-  ConversionUnit r u -> [d| type instance MkUnit $(litT (strTyLit s)) = Base $(litT (strTyLit s))
-                            instance HasCanonicalBaseUnit $(litT (strTyLit s)) where
-                              type CanonicalBaseUnit $(litT (strTyLit s)) = $(reifyUnit u)
-                              conversionBase _ = MkQuantity $(litE (rationalL (recip r)))
-                          |]
+    BaseUnit ->
+        [d|
+            type instance MkUnit $(litT (strTyLit s)) = Base $(litT (strTyLit s))
+            instance HasCanonicalBaseUnit $(litT (strTyLit s))
+        |]
+
+    DefinedUnit u ->
+        [d| type instance MkUnit $(litT (strTyLit s)) = $(reifyUnit u) |]
+
+    ConversionUnit _ (Unit Nothing s') | s == s' ->
+        reportError ("cannot define cyclic convertible unit: " ++ s) >> return []
+
+    ConversionUnit r u ->
+        [d|
+            type instance MkUnit $(litT (strTyLit s)) = Base $(litT (strTyLit s))
+            instance HasCanonicalBaseUnit $(litT (strTyLit s)) where
+                type CanonicalBaseUnit $(litT (strTyLit s)) = $(reifyUnit u)
+                conversionBase _ = MkQuantity $(litE (rationalL (recip r)))
+        |]
 
 -- | Declare a canonical base unit of the given name, which must not
 -- contain any spaces, e.g.
@@ -172,7 +193,6 @@ declareUnit s ud = case ud of
 declareBaseUnit :: String -> Q [Dec]
 declareBaseUnit s = declareUnit s BaseUnit
 
-
 -- | Declare a derived unit with the given name and definition, e.g.
 --
 -- > declareDerivedUnit "N" "kg m / s^2"
@@ -184,8 +204,8 @@ declareBaseUnit s = declareUnit s BaseUnit
 -- This can also be written @['u'| N = kg m / s^2 |]@.
 declareDerivedUnit :: String -> String -> Q [Dec]
 declareDerivedUnit s d = case parseUnit universalSymbolTable d of
-                           Right e -> declareUnit s (DefinedUnit e)
-                           Left _  -> reportError ("unable to parse derived unit: " ++ d) >> return []
+    Right e -> declareUnit s (DefinedUnit e)
+    Left _ -> reportError ("unable to parse derived unit: " ++ d) >> return []
 
 -- | Declare a base unit of the given name, which is convertible to
 -- the canonical base unit, e.g.
@@ -202,16 +222,16 @@ declareDerivedUnit s d = case parseUnit universalSymbolTable d of
 -- This can also be written @['u'| kilobyte = 1024 byte |]@.
 -- See "Data.UnitsOfMeasure.Convert" for more information about conversions.
 declareConvertibleUnit :: String -> Rational -> String -> Q [Dec]
-declareConvertibleUnit derived r base =  case parseUnit universalSymbolTable base of
+declareConvertibleUnit derived r base = case parseUnit universalSymbolTable base of
     Right e -> declareUnit derived (ConversionUnit r e)
-    Left _  -> reportError ("unable to parse convertible unit: " ++ base) >> return []
+    Left _ -> reportError ("unable to parse convertible unit: " ++ base) >> return []
 
 
 -- | Read either an integer or a rational from a string, if possible,
 -- and return the remainder of the string.
 readNumber :: String -> Maybe (Either Integer Rational, String)
 readNumber s
-  | [(r, s')] <- reads s                = Just (Right r, s')
-  | [(i, s')] <- reads s                = Just (Left i , s')
+  | [(r, s')] <- reads s = Just (Right r, s')
+  | [(i, s')] <- reads s = Just (Left i, s')
   | [(r, s')] <- readSigned readFloat s = Just (Right r, s')
-  | otherwise                           = Nothing
+  | otherwise = Nothing
