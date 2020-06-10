@@ -71,9 +71,9 @@ thoralfStop ThoralfState{smtSolver = solverRef} = do
 thoralfSolver
     :: Debug
     -> ThoralfState
-    -> [Ct]
-    -> [Ct]
-    -> [Ct]
+    -> [Ct] -- ^ Given constraints
+    -> [Ct] -- ^ Derived constraints
+    -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 thoralfSolver
     dbg@Debug{smt = debugSMT}
@@ -82,7 +82,7 @@ thoralfSolver
         , theoryEncoding = encode
         , disEqClass = deCls
         }
-    gs' ws' ds' = do
+    gs' ds' ws' = do
     -- Refresh the solver
     _ <- refresh encode smtRef debugSMT
     (smt, callCount) <- unsafeTcPluginTcM $ readMutVar smtRef
@@ -91,9 +91,9 @@ thoralfSolver
     -- Preprocessing
     let filt = filter $ isEqCt deCls
     let gs = filt gs'
-    let ws = filt ws'
     let ds = filt ds'
-    _ <- printCts dbg False gs ws ds
+    let ws = filt ws'
+    _ <- printCts dbg False gs ds ws
 
     -- Define reused functions
     --let print = tcPluginIO . putStrLn . show

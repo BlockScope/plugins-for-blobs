@@ -37,22 +37,32 @@ pprSolverCallCount Debug{callCount} n
     | callCount = [s|>>> GHC-TcPlugin #%d|] n
     | otherwise = ""
 
-printCts :: Debug -> Bool -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
-printCts Debug{ctsGHC} parseFailed gs ws ds
+printCts
+    :: Debug
+    -> Bool
+    -> [Ct] -- ^ Given constraints
+    -> [Ct] -- ^ Derived constraints
+    -> [Ct] -- ^ Wanted constraints
+    -> TcPluginM TcPluginResult
+printCts Debug{ctsGHC} parseFailed gs ds ws
     | ctsGHC = do
         tcPluginIO $ do
             let p = [s|>>> GHC-TcPlugin-Called (%s)|] $
                     if parseFailed then "Parse Failed" else "Solving"
-            traverse_ putStrLn $ p : pprCts gs ws ds
+            traverse_ putStrLn $ p : pprCts gs ds ws
 
         return $ TcPluginOk [] []
     | otherwise = return $ TcPluginOk [] []
 
-pprCts :: [Ct] -> [Ct] -> [Ct] -> [String]
-pprCts gs ws ds =
+pprCts
+    :: [Ct] -- ^ Given constraints
+    -> [Ct] -- ^ Derived constraints
+    -> [Ct] -- ^ Wanted constraints
+    -> [String]
+pprCts gs ds ws =
     [ [s|>>> GHC-Givens = %s|] $ showList gs
-    , [s|>>> GHC-Wanteds = %s|] $ showList ws
     , [s|>>> GHC-Derived = %s|] $ showList ds
+    , [s|>>> GHC-Wanteds = %s|] $ showList ws
     ]
 
 -- *  Printing
