@@ -22,7 +22,7 @@ plugin =
     let mTheory = mkModuleName "Data.Theory.UoM"
         mSyntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
         pkg = fsLit "uom-plugin"
-        dbg = Debug{callCount = False, ctsGHC = True}
+        dbg = Debug{callCount = False, ctsGHC = False}
         tc = uomPlugin dbg mTheory mSyntax pkg
     in
         defaultPlugin
