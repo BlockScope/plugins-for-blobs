@@ -74,85 +74,96 @@ import Data.UnitsOfMeasure.Singleton (KnownUnit, SUnit(..), SList(..), unitSing)
 import GHC.Exts (Constraint)
 import GHC.TypeLits (Symbol)
 
-
 -- | Class to capture the dimensions to which base units belong.  For
 -- a canonical base unit, the class instance can be left empty.
-class IsCanonical (Unpack (CanonicalBaseUnit b))
+class
+    IsCanonical (Unpack (CanonicalBaseUnit b))
     => HasCanonicalBaseUnit (b :: Symbol) where
-  -- | The canonical base unit for this base unit.  If @b@ is
-  -- canonical, then @'CanonicalBaseUnit' b = b@.  Otherwise,
-  -- @'CanonicalBaseUnit' b@ must itself be canonical.
-  type CanonicalBaseUnit b :: Unit
-  type CanonicalBaseUnit b = Base b
+    -- | The canonical base unit for this base unit.  If @b@ is
+    -- canonical, then @'CanonicalBaseUnit' b = b@.  Otherwise,
+    -- @'CanonicalBaseUnit' b@ must itself be canonical.
+    type CanonicalBaseUnit b :: Unit
+    type CanonicalBaseUnit b = Base b
 
-  -- | The conversion ratio between this base unit and its canonical
-  -- base unit.  If @b@ is canonical then this ratio is @1@.
-  conversionBase :: proxy b -> Quantity Rational (Base b /: CanonicalBaseUnit b)
-  default conversionBase :: (Base b ~ CanonicalBaseUnit b) => proxy b -> Quantity Rational (Base b /: CanonicalBaseUnit b)
-  conversionBase _ = 1
+    -- | The conversion ratio between this base unit and its canonical
+    -- base unit.  If @b@ is canonical then this ratio is @1@.
+    conversionBase :: proxy b -> Quantity Rational (Base b /: CanonicalBaseUnit b)
+    default conversionBase
+        :: (Base b ~ CanonicalBaseUnit b)
+        => proxy b
+        -> Quantity Rational (Base b /: CanonicalBaseUnit b)
+    conversionBase _ = 1
 
 -- | Convert a unit into its canonical representation, where units are
 -- represented syntactically.
 type family ToCBU (u :: UnitSyntax Symbol) :: Unit where
-  ToCBU (xs :/ ys) = ListToCBU xs /: ListToCBU ys
+    ToCBU (xs :/ ys) = ListToCBU xs /: ListToCBU ys
 
 type family ListToCBU (xs :: [Symbol]) :: Unit where
-  ListToCBU '[]       = One
-  ListToCBU (x ': xs) = CanonicalBaseUnit x *: ListToCBU xs
+    ListToCBU '[] = One
+    ListToCBU (x ': xs) = CanonicalBaseUnit x *: ListToCBU xs
 
 -- | This constraint will be satisfied if all the base units in a
 -- syntactically represented unit have associated canonical
 -- representations.
 type family HasCanonical (u :: UnitSyntax Symbol) :: Constraint where
-  HasCanonical (xs :/ ys) = (AllHasCanonical xs, AllHasCanonical ys)
+    HasCanonical (xs :/ ys) = (AllHasCanonical xs, AllHasCanonical ys)
 
 type family AllHasCanonical (xs :: [Symbol]) :: Constraint where
-  AllHasCanonical '[] = ()
-  AllHasCanonical (x ': xs) = (HasCanonicalBaseUnit x, AllHasCanonical xs)
+    AllHasCanonical '[] = ()
+    AllHasCanonical (x ': xs) = (HasCanonicalBaseUnit x, AllHasCanonical xs)
 
 -- | This constraint will be satisfied if all the base units in a
 -- syntactically represented unit are in their canonical form.
 type family IsCanonical (u :: UnitSyntax Symbol) :: Constraint where
-  IsCanonical (xs :/ ys) = (AllIsCanonical xs, AllIsCanonical ys)
+    IsCanonical (xs :/ ys) = (AllIsCanonical xs, AllIsCanonical ys)
 
 type family AllIsCanonical (xs :: [Symbol]) :: Constraint where
-  AllIsCanonical '[] = ()
-  AllIsCanonical (x ': xs) = (CanonicalBaseUnit x ~ Base x, AllIsCanonical xs)
+    AllIsCanonical '[] = ()
+    AllIsCanonical (x ': xs) = (CanonicalBaseUnit x ~ Base x, AllIsCanonical xs)
 
-
-conversionRatio :: forall proxy u . Good u
-               => proxy u -> Quantity Rational (u /: ToCBU (Unpack u))
+conversionRatio
+    :: forall proxy u
+    . Good u
+    => proxy u
+    -> Quantity Rational (u /: ToCBU (Unpack u))
 conversionRatio _ = help (unitSing :: SUnit (Unpack u))
 
 help :: forall u . HasCanonical u => SUnit u -> Quantity Rational (Pack u /: ToCBU u)
 help (SUnit xs ys) = help' xs /: help' ys
 
 help' :: forall xs . AllHasCanonical xs => SList xs -> Quantity Rational (Prod xs /: ListToCBU xs)
-help' SNil         = 1
+help' SNil = 1
 help' (SCons p xs) = conversionBase p *: help' xs
-
 
 -- | A unit is "good" if all its base units have been defined, and
 -- have associated canonical base units.
-type Good            u = (u ~ Pack (Unpack u), KnownUnit (Unpack u), HasCanonical (Unpack u))
+type Good u = (u ~ Pack (Unpack u), KnownUnit (Unpack u), HasCanonical (Unpack u))
 
 -- | Two units are convertible if they are both 'Good' and they have
 -- the same canonical units (and hence the same dimension).
-type Convertible   u v = (Good u, Good v, ToCanonicalUnit u ~ ToCanonicalUnit v)
+type Convertible u v = (Good u, Good v, ToCanonicalUnit u ~ ToCanonicalUnit v)
 
 -- | Converts a unit to the corresponding canonical representation.
 type ToCanonicalUnit u = ToCBU (Unpack u)
 
 -- | Automatically convert a quantity with units @u@ so that its units
 -- are @v@, provided @u@ and @v@ have the same dimension.
-convert :: forall a u v . (Fractional a, Convertible u v) => Quantity a u -> Quantity a v
+convert
+    :: forall a u v
+    . (Fractional a, Convertible u v)
+    => Quantity a u
+    -> Quantity a v
 convert = (ratio (undefined :: proxy' (proxy v)) (undefined :: proxy' (proxy u)) *:)
 
 -- | Calculate the conversion ratio between two units with the same
 -- dimension.  The slightly unusual proxy arguments allow this to be
 -- called using quasiquoters to specify the units, for example
 -- @'ratio' [u| ft |] [u| m |]@.
-ratio :: forall a u v (proxy :: Unit -> *) proxy' .
-         (Fractional a, Convertible u v)
-      => proxy' (proxy u) -> proxy' (proxy v) -> Quantity a (u /: v)
+ratio
+    :: forall a u v (proxy :: Unit -> *) proxy'
+    . (Fractional a, Convertible u v)
+    => proxy' (proxy u)
+    -> proxy' (proxy v)
+    -> Quantity a (u /: v)
 ratio _ _ = fromRational' $ conversionRatio (undefined :: proxy u) /: conversionRatio (undefined :: proxy v)
