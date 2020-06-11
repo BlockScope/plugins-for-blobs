@@ -43,19 +43,18 @@ data TheoryEncoding where
 
 -- $theoryEncoding
 --
--- To encode a theory into SMT, we essentially need to provide functions
--- that can take a GHC type (that is not a type variable) and turn it
--- into a SMT expression. To blend theories, this is done with
--- continuations. Each conversion function only converts part of a type,
--- and provides a pair of subterms and a function to use the converted subterms.
+-- To encode a theory into SMT, we essentially need to provide functions that
+-- can take a GHC type (that is not a type variable) and turn it into a SMT
+-- expression. To blend theories, this is done with continuations. Each
+-- conversion function only converts part of a type, and provides a pair of
+-- subterms and a function to use the converted subterms.
 --
--- Encoding a theory also requires converting GHC variables to SMT
--- variables. This needs conversion functions that convert the GHC Kind of
--- a variable into a valid SMT sort, again using
--- continuations. Lastly, some type conversions require SMT functions over
--- generic SMT data types. Since SMT doesn't support polymorhphic
--- functions, these functions need to be unique per the kind of their
--- arguments. These are continuations in 'DecCont'.
+-- Encoding a theory also requires converting GHC variables to SMT variables.
+-- This needs conversion functions that convert the GHC Kind of a variable into
+-- a valid SMT sort, again using continuations. Lastly, some type conversions
+-- require SMT functions over generic SMT data types. Since SMT doesn't support
+-- polymorhphic functions, these functions need to be unique per the kind of
+-- their arguments. These are continuations in 'DecCont'.
 
 -- | A Kind Conversion Continuation
 data KdConvCont where
