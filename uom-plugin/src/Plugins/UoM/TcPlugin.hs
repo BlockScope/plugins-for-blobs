@@ -165,12 +165,24 @@ lookupUnitDefs theory syntax pkgName = do
     x <- g "Unpack"
     i <- g "UnitSyntax"
     c <- g "~~"
-    return $ UnitDefs u b o m d e x i (getDataCon i ":/") c
+    return
+        UnitDefs
+            { unitKindCon = u
+            , unitBaseTyCon = b
+            , unitOneTyCon = o
+            , mulTyCon = m
+            , divTyCon = d
+            , expTyCon = e
+            , unpackTyCon = x
+            , unitSyntaxTyCon = i
+            , unitSyntaxPromotedDataCon = getDataCon i ":/"
+            , equivTyCon = c
+            }
     where
         getDataCon u s =
             case [ dc | dc <- tyConDataCons u, occNameFS (occName (dataConName dc)) == fsLit s ] of
                 [d] -> promoteDataCon d
-                _   -> error $ "lookupUnitDefs/getDataCon: missing " ++ s
+                _ -> error $ "lookupUnitDefs/getDataCon: missing " ++ s
 
 -- | Produce bogus evidence for a constraint, including actual
 -- equality constraints and our fake '(~~)' equality constraints.
@@ -179,7 +191,7 @@ evMagic uds ct = case classifyPredType $ ctEvPred $ ctEvidence ct of
     EqPred NomEq t1 t2 -> evByFiat "units" t1 t2
 
     IrredPred t
-      | Just (tc, [t1,t2]) <- splitTyConApp_maybe t
-      , tc == equivTyCon uds -> mkFunnyEqEvidence "units" t t1 t2
+        | Just (tc, [t1,t2]) <- splitTyConApp_maybe t
+        , tc == equivTyCon uds -> mkFunnyEqEvidence "units" t t1 t2
 
     _ -> error "evMagic"

@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase, QuasiQuotes #-}
+{-# LANGUAGE TypeFamilies, TypeInType, LambdaCase, QuasiQuotes, NamedFieldPuns #-}
 
 module ThoralfPlugin.Encode.UoM (uomTheory) where
 
@@ -8,33 +8,63 @@ import Language.Haskell.Printf (s)
 
 import ThoralfPlugin.Encode.Convert
     (One, Two, kindConvert, typeConvert, typeArgConvert)
-import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule)
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
+import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs(..))
 
-uomTheory :: PkgModuleName -> TcPluginM TheoryEncoding
-uomTheory theory = do
-  uomModule <- findModule theory
-  let f = divulgeTyCon uomModule
-  u <- f "Unit"
-  b <- f "Base"
-  o <- f "One"
-  m <- f "*:"
-  d <- f "/:"
-  e <- f "^:"
-  return $ mkUoMEncoding u b o d m e
+uomTheory :: ModuleName -> ModuleName -> FastString -> TcPluginM TheoryEncoding
+uomTheory theory syntax pkgName = do
+    mT <- lookupModule theory pkgName
+    mS <- lookupModule syntax pkgName
+    let f = divulgeTyCon mT
+    let g = divulgeTyCon mS
+    u <- f "Unit"
+    b <- f "Base"
+    o <- f "One"
+    m <- f "*:"
+    d <- f "/:"
+    e <- f "^:"
+    x <- g "Unpack"
+    i <- g "UnitSyntax"
+    c <- g "~~"
+    return . mkUoMEncoding $
+        UnitDefs
+            { unitKindCon = u
+            , unitBaseTyCon = b
+            , unitOneTyCon = o
+            , mulTyCon = m
+            , divTyCon = d
+            , expTyCon = e
+            , unpackTyCon = x
+            , unitSyntaxTyCon = i
+            , unitSyntaxPromotedDataCon = getDataCon i ":/"
+            , equivTyCon = c
+            }
+    where
+        getDataCon u s' =
+            case [ dc | dc <- tyConDataCons u, occNameFS (occName (dataConName dc)) == fsLit s' ] of
+                [d] -> promoteDataCon d
+                _ -> error $ "lookupUnitDefs/getDataCon: missing " ++ s'
 
-mkUoMEncoding :: TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TyCon -> TheoryEncoding
-mkUoMEncoding u b o d m e =
+mkUoMEncoding :: UnitDefs -> TheoryEncoding
+mkUoMEncoding
+    UnitDefs
+        { unitKindCon
+        , unitBaseTyCon
+        , unitOneTyCon
+        , mulTyCon
+        , divTyCon
+        , expTyCon
+        } =
     emptyTheory
         { typeConvs =
-            [ f baseString b
-            , typeConvert oneString o
-            , g (opString "-") d
-            , g (opString "+") m
-            , g expString e
+            [ f baseString unitBaseTyCon
+            , typeConvert oneString unitOneTyCon
+            , g (opString "-") divTyCon
+            , g (opString "+") mulTyCon
+            , g expString expTyCon
             ]
-        , kindConvs = [kindConvert "(Array String Int)" u]
+        , kindConvs = [kindConvert "(Array String Int)" unitKindCon]
         }
     where
         g s' = typeArgConvert $ \case

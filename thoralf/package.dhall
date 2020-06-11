@@ -1,5 +1,7 @@
     let defs = ./defaults.dhall
 
+in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
+
 in    defs
     ⫽ { name =
           "thoralf-plugin"
@@ -20,28 +22,32 @@ in    defs
       , dependencies =
             defs.dependencies
           # [ "containers"
+            , "ghc-tcplugins-extra >=0.5"
             , "ghc-corroborate"
+            , "template-haskell >=2.9"
             , "ghc-prim"
             , "hashable"
             , "mtl"
             , "simple-smt"
             , "th-printf"
             , "uom-quantity"
+            , "units-parser >=0.1"
             ]
       , library =
           { source-dirs =
               "src"
           , exposed-modules =
-              [ "ThoralfPlugin.Convert"
-              , "ThoralfPlugin.Variables"
-              , "ThoralfPlugin.Singletons.Symbol"
-              , "ThoralfPlugin.Singletons.Nat"
-              , "Data.Theory.Bool"
+              [ "Data.Theory.Bool"
               , "Data.Theory.DisEq"
               , "Data.Theory.FiniteMap"
+              , "Data.UnitsOfMeasure"
               , "Data.UnitsOfMeasure.Constraint"
               , "Plugins.Thoralf"
               , "Plugins.Thoralf.TcPlugin"
+              , "ThoralfPlugin.Convert"
+              , "ThoralfPlugin.Variables"
+              , "ThoralfPlugin.Singletons.Symbol"
+              , "ThoralfPlugin.Singletons.Nat"
               ]
           , other-modules =
               [ "ThoralfPlugin.Encode"
@@ -64,7 +70,7 @@ in    defs
               { dependencies =
                   [ "base", "thoralf-plugin" ]
               , ghc-options =
-                  [ "-Wall", "-fplugin Plugins.Thoralf" ]
+                  testopts # [ "-fplugin Plugins.Thoralf" ]
               , other-modules =
                   [ "FiniteMaps", "Nat", "RowTypes" ]
               , main =
@@ -72,25 +78,40 @@ in    defs
               , source-dirs =
                   "test-suite-rows"
               }
-          , units =
+          , uom =
               { dependencies =
                   [ "base"
                   , "QuickCheck"
                   , "singletons"
-                  , "thoralf-plugin"
                   , "template-haskell"
                   , "tasty"
                   , "tasty-hunit"
                   , "tasty-quickcheck"
                   , "tasty-th"
+                  , "thoralf-plugin"
                   , "uom-quantity"
                   ]
               , ghc-options =
-                  [ "-Wall" ]
+                  testopts # [ "-fplugin Plugins.Thoralf" ]
               , other-modules =
                   [ "UoM" ]
               , main =
                   "Main.hs"
+              , source-dirs =
+                  "test-suite-uom"
+              }
+          , units =
+              { dependencies =
+                  [ "base"
+                  , "tasty"
+                  , "tasty-hunit"
+                  , "thoralf-plugin"
+                  , "uom-quantity"
+                  ]
+              , ghc-options =
+                  testopts # [ "-fplugin Plugins.Thoralf" ]
+              , main =
+                  "Tests.hs"
               , source-dirs =
                   "test-suite-units"
               }

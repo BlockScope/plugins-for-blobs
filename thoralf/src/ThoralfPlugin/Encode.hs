@@ -12,16 +12,19 @@ import ThoralfPlugin.Encode.Bool (boolTheory)
 
 thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
-    let pkg = fsLit "thoralf-plugin"
-        fm = PkgModuleName (mkModuleName "Data.Theory.FiniteMap") pkg
-        bool = PkgModuleName (mkModuleName "Data.Theory.Bool") pkg
+    let tPkg = fsLit "thoralf-plugin"
+        fm = PkgModuleName (mkModuleName "Data.Theory.FiniteMap") tPkg
+        bool = PkgModuleName (mkModuleName "Data.Theory.Bool") tPkg
         nats = PkgModuleName (mkModuleName "GHC.TypeNats") (fsLit "base")
-        uom = PkgModuleName (mkModuleName "Data.Theory.UoM") (fsLit "uom-quantity")
+
     in
         sumEncodings
             [ natTheory
             , fmTheory fm
             , symbolTheory
             , boolTheory nats bool
-            , uomTheory uom
+            , uomTheory
+                (mkModuleName "Data.Theory.UoM")
+                (mkModuleName "Data.UnitsOfMeasure.Syntax")
+                (fsLit "uom-quantity")
             ]
