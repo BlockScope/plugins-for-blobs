@@ -16,7 +16,7 @@ type family IsBase (measure :: Symbol) (b :: Unit) :: Constraint where
     IsBase m b = (b ~ Base m)
 
 type family IsEnc (measure :: Symbol) (power :: Nat) (b :: Unit) :: Constraint where
-    IsEnc m i b = (b ~ (Enc m i))
+    IsEnc m i b = (b ~ Enc m i)
 
 type family IsProd (a :: Unit) (b :: Unit) (aTimesb :: Unit) :: Constraint where
     IsProd a b c = (c ~ (a *: b))
