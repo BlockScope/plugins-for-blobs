@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: dbab77e263eb5af885d52467a9b1dcc3a905a8da8c63581900e540505459311f
+-- hash: f094fa6fa2087fd1c2af50adaaf559e60620c5e37860b76e2e51da690ae50ea7
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -128,7 +128,7 @@ test-suite units
       Paths_thoralf_plugin
   hs-source-dirs:
       test-suite-units
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -154,7 +154,7 @@ test-suite uom
       UoM
   hs-source-dirs:
       test-suite-uom
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base

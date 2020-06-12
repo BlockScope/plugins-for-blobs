@@ -91,8 +91,7 @@ in    defs
                   , "thoralf-plugin"
                   , "uom-quantity"
                   ]
-              , ghc-options =
-                  testopts # [ "-fplugin Plugins.Thoralf" ]
+              , ghc-options = testopts
               , other-modules =
                   [ "UoM" ]
               , main =
@@ -108,8 +107,7 @@ in    defs
                   , "thoralf-plugin"
                   , "uom-quantity"
                   ]
-              , ghc-options =
-                  testopts # [ "-fplugin Plugins.Thoralf" ]
+              , ghc-options = testopts
               , main =
                   "Tests.hs"
               , source-dirs =
