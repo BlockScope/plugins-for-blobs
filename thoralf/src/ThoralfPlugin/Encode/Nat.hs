@@ -37,7 +37,7 @@ subConvert = flip typeArgConvert typeNatSubTyCon $ \case
     _ -> Nothing
 
 opString :: String -> Vec Two String -> Vec 'Zero String -> String
-opString op (a :> b :> VNil)  VNil = [s|(%s %s %s)|] op a b
+opString op (a :> b :> VNil) VNil = [s|(%s %s %s)|] op a b
 
 assertIntIsNat :: TyVar -> Maybe [String]
 assertIntIsNat tv = do

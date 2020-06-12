@@ -13,6 +13,7 @@ module Data.Theory.UoM
     , type (*:)
     , type (/:)
     , type (^:)
+    , Enc
     ) where
 
 import GHC.TypeLits (type (-), Symbol, Nat)
@@ -28,6 +29,9 @@ type family One :: Unit where {}
 
 -- | Base unit
 type family Base (b :: Symbol) :: Unit where {}
+
+-- | An encoding that covers both s and s^n.
+type family Enc (s :: Symbol) (n :: Nat) :: Unit where {}
 
 -- | Multiplication for units of measure
 type family (u :: Unit) *: (v :: Unit) :: Unit where {}

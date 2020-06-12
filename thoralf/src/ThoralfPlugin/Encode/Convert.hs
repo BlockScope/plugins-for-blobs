@@ -40,7 +40,7 @@ typeArgConvert
 typeArgConvert f c ty = do
     (c', xs) <- splitTyConApp_maybe ty
     if c' /= c then Nothing else
-        (\(vecTy, vecS) -> TyConvCont vecTy VNil vecS []) <$> f xs
+        (\(vecTy, s) -> TyConvCont vecTy VNil s []) <$> f xs
 
 mkConvert
     :: ([Type]

@@ -9,6 +9,7 @@ import Data.Singletons.TypeLits hiding (SSymbol)
 import ThoralfPlugin.Singletons.Symbol (SSymbol)
 import Data.Theory.UoM
 import Data.UnitsOfMeasure.Constraint
+import Data.UnitsOfMeasure.Syntax (Exp)
 
 data Quantity :: Unit -> Type where
     MkQuantity :: Double -> Quantity m
@@ -19,7 +20,7 @@ instance Show (Quantity a) where
 scalar :: Double -> Quantity One
 scalar = MkQuantity
 
-mkQuantity :: IsExp s n b => Double -> SSymbol s -> SNat n -> Quantity b
+mkQuantity :: IsEnc s n b => Double -> SSymbol s -> SNat n -> Quantity b
 mkQuantity d _ _ = MkQuantity d
 
 add :: Quantity a -> Quantity a -> Quantity a
