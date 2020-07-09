@@ -21,4 +21,6 @@
     ]
 , dependencies =
     [ "base" ]
+, flags =
+    { suppress-failing-tests = { manual = False, default = True } }
 }

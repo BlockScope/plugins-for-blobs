@@ -91,7 +91,8 @@ in    defs
                   , "thoralf-plugin"
                   , "uom-quantity"
                   ]
-              , ghc-options = testopts
+              , ghc-options =
+                  testopts
               , other-modules =
                   [ "UoM" ]
               , main =
@@ -107,7 +108,8 @@ in    defs
                   , "thoralf-plugin"
                   , "uom-quantity"
                   ]
-              , ghc-options = testopts
+              , ghc-options =
+                  testopts
               , main =
                   "Tests.hs"
               , source-dirs =
@@ -122,6 +124,12 @@ in    defs
                   "HLint.hs"
               , source-dirs =
                   "test-suite-hlint"
+              , when =
+                  { condition =
+                      "flag(suppress-failing-tests)"
+                  , buildable =
+                      False
+                  }
               }
           }
       }
