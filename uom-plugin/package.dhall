@@ -62,6 +62,8 @@ in    defs
                   testopts
               , main =
                   "Tests.hs"
+              , other-modules =
+                  [ "Data.UnitsOfMeasure.Defs", "Defs", "ErrorTests", "Z" ]
               , source-dirs =
                   "test-suite-units"
               , when =

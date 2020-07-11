@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9e19c1ebd49449558321248df1203de1fc7dec38dabb0a49e7ded656c6149e59
+-- hash: 69935f9fc877726abbdc7363da8ecab5d028cfcc8808eaf182deb900b582e6d7
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -91,7 +91,6 @@ test-suite units
       Defs
       ErrorTests
       Z
-      Paths_uom_plugin
   hs-source-dirs:
       test-suite-units
   ghc-options: -Wall -fno-warn-unticked-promoted-constructors -rtsopts -threaded -with-rtsopts=-N
