@@ -4,9 +4,9 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
 
 in    defs
     ⫽ { name =
-          "uom-plugin"
+          "uom-th"
       , synopsis =
-          "Units of measure as a GHC typechecker plugin"
+          "Conversions and TH for units of measure"
       , description =
           ''
           The @uom-plugin@ library adds support for units of measure to GHC
@@ -27,7 +27,7 @@ in    defs
           [ "CHANGELOG.md", "README.md", "LICENSE" ]
       , library =
           { source-dirs =
-              [ "doc", "src" ]
+              "src"
           , dependencies =
                 defs.dependencies
               # [ "containers >=0.5"
@@ -37,37 +37,15 @@ in    defs
                 , "template-haskell >=2.9"
                 , "th-printf"
                 , "uom-quantity"
-                , "uom-th"
                 , "units-parser >=0.1"
                 ]
           , exposed-modules =
-              [ "Data.UnitsOfMeasure"
-              , "Data.UnitsOfMeasure.Convert"
-              , "Data.UnitsOfMeasure.Tutorial"
-              , "Plugins.UoM"
-              ]
+              [ "Data.UnitsOfMeasure.Canonical", "Data.UnitsOfMeasure.TH" ]
           , other-modules =
-              [ "Plugins.UoM.TcPlugin", "Plugins.UoM.Print" ]
+              [] : List Text
           }
       , tests =
-          { units =
-              { dependencies =
-                  [ "base"
-                  , "tasty"
-                  , "tasty-hunit"
-                  , "uom-quantity"
-                  , "uom-plugin"
-                  ]
-              , ghc-options =
-                  testopts
-              , main =
-                  "Tests.hs"
-              , source-dirs =
-                  "test-suite-units"
-              , when =
-                  { condition = "impl(ghc >= 8.4.0)", buildable = False }
-              }
-          , hlint =
+          { hlint =
               { dependencies =
                   "base"
               , ghc-options =

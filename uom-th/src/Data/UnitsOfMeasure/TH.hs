@@ -27,7 +27,7 @@ import Language.Haskell.TH.Quote
 import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
 import Data.UnitsOfMeasure.Syntax (MkUnit)
 import Data.Theory.UoM (type (^:), type (*:), type (/:), One, Base)
-import Data.UnitsOfMeasure.Convert (HasCanonicalBaseUnit(..))
+import Data.UnitsOfMeasure.Canonical (HasCanonicalBaseUnit(..))
 
 -- | The 'u' quasiquoter may be used to create units or quantities;
 -- its meaning depends on the context:
