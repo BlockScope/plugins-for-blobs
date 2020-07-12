@@ -31,6 +31,7 @@ in    defs
             , "simple-smt"
             , "th-printf"
             , "uom-quantity"
+            , "uom-th"
             , "units-parser >=0.1"
             ]
       , library =
@@ -59,6 +60,8 @@ in    defs
               , "ThoralfPlugin.Encode.Symbol"
               , "ThoralfPlugin.Encode.UoM"
               , "ThoralfPlugin.Encode.Bool"
+              , "Plugins.Print.Constraints"
+              , "Plugins.Print.SMT"
               , "Plugins.Thoralf.Print"
               , "Data.Vec"
               ]
@@ -90,6 +93,7 @@ in    defs
                   , "tasty-th"
                   , "thoralf-plugin"
                   , "uom-quantity"
+                  , "uom-th"
                   ]
               , ghc-options =
                   testopts
@@ -105,13 +109,15 @@ in    defs
                   [ "base"
                   , "tasty"
                   , "tasty-hunit"
-                  , "thoralf-plugin"
                   , "uom-quantity"
+                  , "thoralf-plugin"
                   ]
               , ghc-options =
                   testopts
               , main =
                   "Tests.hs"
+              , other-modules =
+                  [ "Data.UnitsOfMeasure.Defs", "Defs" ]
               , source-dirs =
                   "test-suite-units"
               }

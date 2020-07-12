@@ -12,6 +12,7 @@ import Data.UnitsOfMeasure
 import Test.Tasty
 import Test.Tasty.HUnit
 
+import Defs ()
 sum' :: [Quantity Double u] -> Quantity Double u
 sum' = foldr (+:) zero
 

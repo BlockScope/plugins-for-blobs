@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c1474cb94bf13805b274cf4d0f15cc7b59d06ca56228fa36c5b28ef64c116320
+-- hash: a6c43c844e1b4186013f7fad127851ebe7798068f9f9e60bd0251d0165700eab
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -58,6 +58,8 @@ library
       ThoralfPlugin.Encode.Symbol
       ThoralfPlugin.Encode.UoM
       ThoralfPlugin.Encode.Bool
+      Plugins.Print.Constraints
+      Plugins.Print.SMT
       Plugins.Thoralf.Print
       Data.Vec
   other-extensions: TypeFamilies TypeInType GADTs RecordWildCards
@@ -74,6 +76,7 @@ library
     , th-printf
     , units-parser >=0.1
     , uom-quantity
+    , uom-th
 
 test-suite hlint
   type: exitcode-stdio-1.0
@@ -97,6 +100,7 @@ test-suite hlint
     , th-printf
     , units-parser >=0.1
     , uom-quantity
+    , uom-th
   if flag(suppress-failing-tests)
     buildable: False
   default-language: Haskell2010
@@ -125,13 +129,15 @@ test-suite rows
     , thoralf-plugin
     , units-parser >=0.1
     , uom-quantity
+    , uom-th
   default-language: Haskell2010
 
 test-suite units
   type: exitcode-stdio-1.0
   main-is: Tests.hs
   other-modules:
-      Paths_thoralf_plugin
+      Data.UnitsOfMeasure.Defs
+      Defs
   hs-source-dirs:
       test-suite-units
   ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
@@ -151,6 +157,7 @@ test-suite units
     , thoralf-plugin
     , units-parser >=0.1
     , uom-quantity
+    , uom-th
   default-language: Haskell2010
 
 test-suite uom
@@ -181,4 +188,5 @@ test-suite uom
     , thoralf-plugin
     , units-parser >=0.1
     , uom-quantity
+    , uom-th
   default-language: Haskell2010

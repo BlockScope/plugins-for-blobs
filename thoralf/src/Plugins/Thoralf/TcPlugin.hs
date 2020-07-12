@@ -17,7 +17,8 @@ import ThoralfPlugin.Convert
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
-    (ConvCtsStep(..), Debug(..), debugIO, printCts, pprStep, pprSolverCallCount)
+    (ConvCtsStep(..), DebugPlugin(..), TraceSmtConversation(..), debugIO, pprStep)
+import Plugins.Print.Constraints (printCts, pprSolverCallCount)
 
 data ThoralfState =
     ThoralfState
@@ -26,17 +27,17 @@ data ThoralfState =
         , disEqClass :: Class
         }
 
-thoralfPlugin :: PkgModuleName -> TcPluginM TheoryEncoding -> Debug -> TcPlugin
-thoralfPlugin pkgModuleName seed dbg@Debug{smt} =
+thoralfPlugin :: PkgModuleName -> TcPluginM TheoryEncoding -> DebugPlugin -> TcPlugin
+thoralfPlugin pkgModuleName seed dbg@DebugPlugin{traceSmtConversation} =
     TcPlugin
-        { tcPluginInit = mkThoralfInit pkgModuleName seed smt
+        { tcPluginInit = mkThoralfInit pkgModuleName seed traceSmtConversation
         , tcPluginSolve = thoralfSolver dbg
         , tcPluginStop = thoralfStop
         }
 
-solverWithLevel :: Bool -> IO SMT.Solver
-solverWithLevel False = grabSMTsolver Nothing
-solverWithLevel True = grabSMTsolver . Just =<< SMT.newLogger 0
+solverWithLevel :: TraceSmtConversation -> IO SMT.Solver
+solverWithLevel (TraceSmtConversation False) = grabSMTsolver Nothing
+solverWithLevel (TraceSmtConversation True) = grabSMTsolver . Just =<< SMT.newLogger 0
 
 grabSMTsolver :: Maybe SMT.Logger -> IO SMT.Solver
 grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"]
@@ -44,7 +45,7 @@ grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"]
 mkThoralfInit
     :: PkgModuleName
     -> TcPluginM TheoryEncoding
-    -> Bool
+    -> TraceSmtConversation
     -> TcPluginM ThoralfState
 mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
     encoding <- seed
@@ -69,14 +70,14 @@ thoralfStop ThoralfState{smtSolver = solverRef} = do
     return ()
 
 thoralfSolver
-    :: Debug
+    :: DebugPlugin
     -> ThoralfState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 thoralfSolver
-    dbg@Debug{smt = debugSMT}
+    dbg@DebugPlugin{traceCallCount, traceCts, traceSmtConversation}
     ThoralfState
         { smtSolver = smtRef
         , theoryEncoding = encode
@@ -84,16 +85,16 @@ thoralfSolver
         }
     gs' ds' ws' = do
     -- Refresh the solver
-    _ <- refresh encode smtRef debugSMT
-    (smt, callCount) <- unsafeTcPluginTcM $ readMutVar smtRef
-    _ <- debugIO dbg $ pprSolverCallCount dbg callCount
+    _ <- refresh encode smtRef traceSmtConversation
+    (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
+    _ <- debugIO dbg $ pprSolverCallCount traceCallCount calls
 
     -- Preprocessing
     let filt = filter $ isEqCt deCls
     let gs = filt gs'
     let ds = filt ds'
     let ws = filt ws'
-    _ <- printCts dbg False gs ds ws
+    _ <- printCts traceCts False gs ds ws
 
     -- Define reused functions
     --let print = tcPluginIO . putStrLn . show
@@ -138,9 +139,13 @@ thoralfSolver
 
                         SMT.Sat -> tcPluginIO pop >> noSolving
 
-        _ -> printCts dbg True gs ws ds
+        _ -> printCts traceCts True gs ws ds
 
-refresh :: TheoryEncoding -> IORef (SMT.Solver, Int) -> Bool -> TcPluginM ()
+refresh
+    :: TheoryEncoding
+    -> IORef (SMT.Solver, Int)
+    -> TraceSmtConversation
+    -> TcPluginM ()
 refresh encoding solverRef debug = do
     (solver, n) <- unsafeTcPluginTcM $ readMutVar solverRef
     _ <- tcPluginIO $ SMT.stop solver

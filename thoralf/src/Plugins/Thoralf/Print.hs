@@ -1,178 +1,65 @@
-{-# LANGUAGE QuasiQuotes, NamedFieldPuns, RecordWildCards #-}
-{-# OPTIONS_GHC -Wno-unused-top-binds #-}
-{-# OPTIONS_GHC -Wno-orphans #-}
+{-# LANGUAGE QuasiQuotes, RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), Debug(..)
-    , printCts, showList, pprSExprList, pprStep, pprSolverCallCount, debugIO
+    ( ConvCtsStep(..), DebugPlugin(..)
+    , TraceCarry(..), TraceSmtConversation(..)
+    , pprStep, debugIO
     ) where
 
 import Prelude hiding (showList)
+import Data.Coerce (coerce)
 import Language.Haskell.Printf (s)
-import Data.Foldable (traverse_)
-import Data.List (intercalate)
-import qualified SimpleSMT as SMT (showsSExpr, ppSExpr)
-import GHC.Corroborate
+import GHC.Corroborate (TcPluginM, tcPluginIO)
 
-import ThoralfPlugin.Convert (ConvCts(..), SExpr, maybeExtractTyEq)
+import ThoralfPlugin.Convert (ConvCts(..))
+import Plugins.Print.Constraints
+    (ConvCtsStep(..), TraceCallCount(..), TraceCts(..), showList)
+import Plugins.Print.SMT
+    (TraceConvertCtsToSmt(..), pprSmtGivens, pprSmtWanteds, pprSmtList)
 
-data Debug =
-    Debug
-        { callCount :: Bool -- ^ Trace TcPlugin call count
-        , ctsGHC :: Bool -- ^ Trace GHC constraints
-        , carryGHC :: Bool -- ^ Trace GHC constraints carried through conversion and solving
-        , convSMT :: Bool -- ^ Trace conversions to SMT notation
-        , smt :: Bool -- ^ Trace the conversation with the SMT solver
+newtype TraceCarry = TraceCarry Bool
+newtype TraceSmtConversation = TraceSmtConversation Bool
+
+data DebugPlugin =
+    DebugPlugin
+        { traceCallCount :: TraceCallCount
+        -- ^ Trace TcPlugin call count
+        , traceCts :: TraceCts
+        -- ^ Trace GHC constraints
+        , traceCarry :: TraceCarry
+        -- ^ Trace GHC constraints carried through conversion and solving
+        , traceConvertCtsToSmt :: TraceConvertCtsToSmt
+        -- ^ Trace conversions to SMT notation
+        , traceSmtConversation :: TraceSmtConversation
+        -- ^ Trace the conversation with the SMT solver
         }
 
-printParsedInputs :: Bool -> [SExpr] -> SExpr -> [SExpr] -> TcPluginM ()
-printParsedInputs True gSExpr wSExpr parseDeclrs = tcPluginIO $ do
-    putStrLn . [s|Given SExpr:\n%?|] $ (`SMT.showsSExpr` "") <$> gSExpr
-    putStrLn . [s|Wanted SExpr:\n%s|] $ SMT.showsSExpr wSExpr ""
-    putStrLn . [s|Variable Decs:\n%?|] $ (`SMT.showsSExpr` "") <$> parseDeclrs
-printParsedInputs False _ _ _ = return ()
-
-pprSolverCallCount :: Debug -> Int -> String
-pprSolverCallCount Debug{callCount} n
-    | callCount = [s|>>> GHC-TcPlugin #%d|] n
-    | otherwise = ""
-
-printCts
-    :: Debug
-    -> Bool
-    -> [Ct] -- ^ Given constraints
-    -> [Ct] -- ^ Derived constraints
-    -> [Ct] -- ^ Wanted constraints
-    -> TcPluginM TcPluginResult
-printCts Debug{ctsGHC} parseFailed gs ds ws
-    | ctsGHC = do
-        tcPluginIO $ do
-            let p = [s|>>> GHC-TcPlugin-Called (%s)|] $
-                    if parseFailed then "Parse Failed" else "Solving"
-            traverse_ putStrLn $ p : pprCts gs ds ws
-
-        return $ TcPluginOk [] []
-    | otherwise = return $ TcPluginOk [] []
-
-pprCts
-    :: [Ct] -- ^ Given constraints
-    -> [Ct] -- ^ Derived constraints
-    -> [Ct] -- ^ Wanted constraints
-    -> [String]
-pprCts gs ds ws =
-    [ [s|>>> GHC-Givens = %s|] $ showList gs
-    , [s|>>> GHC-Derived = %s|] $ showList ds
-    , [s|>>> GHC-Wanteds = %s|] $ showList ws
-    ]
-
--- *  Printing
-instance Show Type where
-    show ty = case splitTyConApp_maybe ty of
-        Just (tcon, tys) -> show tcon ++ " " ++ show tys
-        Nothing -> case getTyVar_maybe ty of
-            Just var -> show var
-            Nothing -> showSDocUnsafe $ ppr ty
-
-instance Show TyCon where
-    show = occNameString . getOccName
-
-instance Show Var where
-    show v =
-        let nicename = varOccName v ++ ";" ++ varUnique v in
-        nicename ++ ":" ++ classifyVar v
-
-varOccName :: Var -> String
-varOccName = showSDocUnsafe . ppr . getOccName
-
-varUnique :: Var -> String
-varUnique = show . getUnique
-
-classifyVar :: Var -> String
-classifyVar v
-    | isTcTyVar v = if isMetaTyVar v then "t" else "s"
-    | otherwise = "irr"
-
-showTupList :: (Show a, Show b) => [(a, b)] -> String
-showTupList xs =
-    "[\n" ++ intercalate "\n" (map mkEquality xs) ++ "\n]"
-    where
-        mkEquality (a, b) = show a ++ " ~ " ++ show b
-
-showList :: Show a => [a] -> String
-showList [] = "[]"
-showList xs = "[\n" ++ intercalate "\n" (show <$> xs) ++ "\n]"
-
-instance Show Ct where
-    show ct = case maybeExtractTyEq ct of
-        Just ((t1, t2),_) -> show (t1, t2)
-        Nothing -> showSDocUnsafe $ ppr ct
-
-instance Show WantedConstraints where
-  show = showSDocUnsafe . ppr
-
-instance Show EvTerm where
-  show = showSDocUnsafe . ppr
-
-data ConvCtsStep = ConvCtsStep {givens :: ConvCts, wanted :: ConvCts }
-
-pprStep :: Debug -> ConvCtsStep -> [String]
-pprStep Debug{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
+pprStep :: DebugPlugin -> ConvCtsStep -> [String]
+pprStep DebugPlugin{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
     ghcLines ++ smtLines
     where
         (gSs, gCts) = unzip gs
         (wSs, wCts) = unzip ws
 
         ghcLines =
-            if not carryGHC then [] else
+            if not (coerce traceCarry) then [] else
             [ [s|+++ GHC-Decs-Given = %s|] $ showList gCts
             , [s|+++ GHC-Decs-Wanted = %s|] $ showList wCts
             ]
 
         smtLines =
-            if not convSMT then [] else
-            [ [s|+++ SMT-Decs = %s|] $ pprSExprList (ds1 ++ ds2)
-            , [s|+++ SMT-Given = %s|] $ pprGivens gSs
-            , [s|+++ SMT-Wanteds = %s|] $ pprWanteds wSs
+            if not (coerce traceConvertCtsToSmt) then [] else
+            [ [s|+++ SMT-Decs = %s|] $ pprSmtList (ds1 ++ ds2)
+            , [s|+++ SMT-Given = %s|] $ pprSmtGivens gSs
+            , [s|+++ SMT-Wanteds = %s|] $ pprSmtWanteds wSs
             ]
 
-pprSExprList :: [SExpr] -> String
-pprSExprList [] = "[]"
-pprSExprList es =
-    showString "[\n"
-    . foldr (\e m -> SMT.ppSExpr e . showChar '\n' . m) (showChar ']') es
-    $ []
+debugIO :: DebugPlugin -> String -> TcPluginM ()
+debugIO DebugPlugin{..} s'
+    | coerce traceCallCount
+        || coerce traceCts
+        || coerce traceCarry
+        || coerce traceConvertCtsToSmt =
+            tcPluginIO $ putStrLn s'
 
-pprGivens :: [SExpr] -> String
-pprGivens [] = "[]"
-pprGivens es =
-    showString "[\n"
-    . foldr
-        (\e m ->
-            showString "(assert "
-            . SMT.ppSExpr e
-            . showChar ')'
-            . showChar '\n'
-            . m)
-        (showChar ']')
-        es
-    $ []
-
-pprWanteds :: [SExpr] -> String
-pprWanteds [] = "[]"
-pprWanteds es =
-    showString "[\n"
-    . foldr
-        (\e m ->
-            showString "(assert (or false (not "
-            . SMT.ppSExpr e
-            . showString ")))"
-            . showChar '\n'
-            . m)
-        (showChar ']')
-        es
-    $ []
-
-debugIO :: Debug -> String -> TcPluginM ()
-debugIO Debug{..} s'
-    | callCount || ctsGHC || carryGHC || convSMT = tcPluginIO $ putStrLn s'
     | otherwise = return ()

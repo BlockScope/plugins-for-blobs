@@ -7,7 +7,9 @@ import GHC.Corroborate
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
-import Plugins.Thoralf.Print (Debug(..))
+import Plugins.Thoralf.Print (DebugPlugin(..), TraceCarry(..), TraceSmtConversation(..))
+import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..))
+import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
 
 plugin :: Plugin
 plugin =
@@ -17,12 +19,12 @@ plugin =
                 (fsLit "thoralf-plugin")
 
         dbg =
-            Debug
-                { callCount = False
-                , ctsGHC = False
-                , carryGHC = False
-                , convSMT = False
-                , smt = False
+            DebugPlugin
+                { traceCallCount = TraceCallCount False
+                , traceCts = TraceCts False
+                , traceCarry = TraceCarry False
+                , traceConvertCtsToSmt = TraceConvertCtsToSmt False
+                , traceSmtConversation = TraceSmtConversation False
                 }
 
         tyCheck = thoralfPlugin pm thoralfTheories dbg
