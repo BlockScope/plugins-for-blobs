@@ -1,3 +1,5 @@
+{-# LANGUAGE NamedFieldPuns #-}
+
 -- | This module defines a typechecker plugin that solves equations
 -- involving units of measure.  To use it, add
 --
@@ -15,30 +17,49 @@ import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
 import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
 import Data.Either (partitionEithers)
 import Data.List (genericReplicate)
+import Data.IORef (IORef)
 
 import Data.UnitsOfMeasure.Unsafe.Convert
 import Data.UnitsOfMeasure.Unsafe.Unify
 import Plugins.Print (DebugPlugin(..), pprCtsStep, tracePlugin)
+import Plugins.Print.Constraints (pprSolverCallCount)
+
+data UomState =
+    UomState
+        { unitDefs :: UnitDefs
+        , callsRef :: IORef Int
+        }
 
 uomPlugin :: DebugPlugin -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomPlugin dbg theory syntax pkg =
     TcPlugin
-        { tcPluginInit  = lookupUnitDefs theory syntax pkg
+        { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
         , tcPluginSolve = unitsOfMeasureSolver dbg
         , tcPluginStop  = const $ return ()
         }
 
+mkUoMInit :: UnitDefs -> TcPluginM UomState
+mkUoMInit u = do
+    calls <- unsafeTcPluginTcM $ newMutVar 0
+    return $ UomState { unitDefs = u, callsRef = calls }
+
 unitsOfMeasureSolver
     :: DebugPlugin
-    -> UnitDefs
+    -> UomState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
-unitsOfMeasureSolver dbgPlugin uds givens deriveds wanteds
+unitsOfMeasureSolver
+    dbgPlugin@DebugPlugin{traceCallCount}
+    UomState{unitDefs, callsRef}
+    givens deriveds wanteds
 
     | null wanteds = do
-        -- TODO: Add tracing of plugin call count.
+        calls <- unsafeTcPluginTcM $ readMutVar callsRef
+        unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
+        _ <- tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
+
         sequence_
             $ tracePlugin dbgPlugin
             <$> pprCtsStep dbgPlugin givens deriveds []
@@ -47,31 +68,34 @@ unitsOfMeasureSolver dbgPlugin uds givens deriveds wanteds
         let (unit_givens, _) = partitionEithers $ zipWith foo givens $ map toUE zonked_cts
 
         if null unit_givens then return $ TcPluginOk [] [] else do
-            sr <- simplifyUnits uds $ map snd unit_givens
+            sr <- simplifyUnits unitDefs $ map snd unit_givens
             tcPluginTrace "unitsOfMeasureSolver simplified givens only" $ ppr sr
             case sr of
                 -- Simplified tvs [] evs eqs -> TcPluginOk (map (solvedGiven . fst) unit_givens) []
                 Simplified _ -> return $ TcPluginOk [] []
-                Impossible eq _ -> reportContradiction uds eq
+                Impossible eq _ -> reportContradiction unitDefs eq
 
     | otherwise = do
-        -- TODO: Add tracing of plugin call count.
+        calls <- unsafeTcPluginTcM $ readMutVar callsRef
+        unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
+        _ <- tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
+
         sequence_
             $ tracePlugin dbgPlugin
             <$> pprCtsStep dbgPlugin givens deriveds wanteds
 
-        xs <- lookForUnpacks uds givens wanteds
+        xs <- lookForUnpacks unitDefs givens wanteds
 
         if not $ null xs then return $ TcPluginOk [] xs else do
             let (unit_wanteds, _) = partitionEithers $ map toUE wanteds
             if null unit_wanteds then return $ TcPluginOk [] [] else do
                 (unit_givens, _) <- partitionEithers . map toUE <$> mapM zonkCt givens
-                sr <- simplifyUnits uds unit_givens
+                sr <- simplifyUnits unitDefs unit_givens
                 tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
                 case sr of
-                    Impossible eq _ -> reportContradiction uds eq
+                    Impossible eq _ -> reportContradiction unitDefs eq
                     Simplified ss -> do
-                        sr' <- simplifyUnits uds $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
+                        sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
                         tcPluginTrace "unitsOfMeasureSolver simplified wanteds" $ ppr sr'
                         case sr' of
                             Impossible _eq _ ->
@@ -80,13 +104,13 @@ unitsOfMeasureSolver dbgPlugin uds givens deriveds wanteds
 
                             Simplified ss' ->
                                 TcPluginOk
-                                    [ (evMagic uds ct, ct)
+                                    [ (evMagic unitDefs ct, ct)
                                     | eq <- simplifySolved ss'
                                     , let ct = fromUnitEquality eq
                                     ]
                                     <$>
                                         mapM
-                                            (substItemToCt uds)
+                                            (substItemToCt unitDefs)
                                             (filter
                                                 (isWanted . ctEvidence . siCt)
                                                 (substsSubst
@@ -95,7 +119,7 @@ unitsOfMeasureSolver dbgPlugin uds givens deriveds wanteds
                                             )
     where
         -- solvedGiven ct = (ctEvTerm (ctEvidence ct), ct)
-        toUE = toUnitEquality uds
+        toUE = toUnitEquality unitDefs
 
         foo :: Ct -> Either UnitEquality Ct -> Either (Ct, UnitEquality) Ct
         foo ct (Left x) = Left (ct, x)

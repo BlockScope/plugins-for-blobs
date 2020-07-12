@@ -26,9 +26,9 @@ plugin =
 
         dbg =
             DebugPlugin
-                { traceCallCount = TraceCallCount False
-                , traceCts = TraceCts False
-                , traceCarry = TraceCarry False
+                { traceCallCount = TraceCallCount True
+                , traceCts = TraceCts True
+                , traceCarry = TraceCarry True
                 }
 
         tc = uomPlugin dbg mTheory mSyntax pkg
