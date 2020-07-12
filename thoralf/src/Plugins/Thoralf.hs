@@ -7,7 +7,8 @@ import GHC.Corroborate
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
-import Plugins.Thoralf.Print (DebugPlugin(..), TraceCarry(..), TraceSmtConversation(..))
+import Plugins.Thoralf.Print
+    (DebugPlugin(..), DebugSmt(..), TraceCarry(..), TraceSmtConversation(..))
 import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..))
 import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
 
@@ -18,16 +19,20 @@ plugin =
                 (mkModuleName "Data.Theory.DisEq")
                 (fsLit "thoralf-plugin")
 
-        dbg =
+        dbgPlugin =
             DebugPlugin
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
                 , traceCarry = TraceCarry False
-                , traceConvertCtsToSmt = TraceConvertCtsToSmt False
+                }
+
+        dbgSmt =
+            DebugSmt
+                { traceConvertCtsToSmt = TraceConvertCtsToSmt False
                 , traceSmtConversation = TraceSmtConversation False
                 }
 
-        tyCheck = thoralfPlugin pm thoralfTheories dbg
+        tyCheck = thoralfPlugin dbgPlugin dbgSmt pm thoralfTheories
     in
         defaultPlugin
             { tcPlugin = const $ Just tyCheck

@@ -1,7 +1,7 @@
 {-# LANGUAGE QuasiQuotes, RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugPlugin(..)
+    ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..)
     , TraceCarry(..), TraceSmtConversation(..)
     , pprStep, debugIO
     ) where
@@ -28,14 +28,21 @@ data DebugPlugin =
         -- ^ Trace GHC constraints
         , traceCarry :: TraceCarry
         -- ^ Trace GHC constraints carried through conversion and solving
-        , traceConvertCtsToSmt :: TraceConvertCtsToSmt
+        }
+
+data DebugSmt =
+    DebugSmt
+        { traceConvertCtsToSmt :: TraceConvertCtsToSmt
         -- ^ Trace conversions to SMT notation
         , traceSmtConversation :: TraceSmtConversation
         -- ^ Trace the conversation with the SMT solver
         }
 
-pprStep :: DebugPlugin -> ConvCtsStep -> [String]
-pprStep DebugPlugin{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
+pprStep :: DebugPlugin -> DebugSmt -> ConvCtsStep -> [String]
+pprStep
+    DebugPlugin{..}
+    DebugSmt{..}
+    ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
     ghcLines ++ smtLines
     where
         (gSs, gCts) = unzip gs
@@ -54,8 +61,8 @@ pprStep DebugPlugin{..} ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws
             , [s|+++ SMT-Wanteds = %s|] $ pprSmtWanteds wSs
             ]
 
-debugIO :: DebugPlugin -> String -> TcPluginM ()
-debugIO DebugPlugin{..} s'
+debugIO :: DebugPlugin -> DebugSmt -> String -> TcPluginM ()
+debugIO DebugPlugin{..} DebugSmt{..} s'
     | coerce traceCallCount
         || coerce traceCts
         || coerce traceCarry

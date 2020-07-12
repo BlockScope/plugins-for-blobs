@@ -17,7 +17,9 @@ import ThoralfPlugin.Convert
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
-    (ConvCtsStep(..), DebugPlugin(..), TraceSmtConversation(..), debugIO, pprStep)
+    ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..), TraceSmtConversation(..)
+    , debugIO, pprStep
+    )
 import Plugins.Print.Constraints (printCts, pprSolverCallCount)
 
 data ThoralfState =
@@ -27,11 +29,16 @@ data ThoralfState =
         , disEqClass :: Class
         }
 
-thoralfPlugin :: PkgModuleName -> TcPluginM TheoryEncoding -> DebugPlugin -> TcPlugin
-thoralfPlugin pkgModuleName seed dbg@DebugPlugin{traceSmtConversation} =
+thoralfPlugin
+    :: DebugPlugin
+    -> DebugSmt
+    -> PkgModuleName
+    -> TcPluginM TheoryEncoding
+    -> TcPlugin
+thoralfPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtConversation} pkgModuleName seed =
     TcPlugin
         { tcPluginInit = mkThoralfInit pkgModuleName seed traceSmtConversation
-        , tcPluginSolve = thoralfSolver dbg
+        , tcPluginSolve = thoralfSolver dbgPlugin dbgSmt
         , tcPluginStop = thoralfStop
         }
 
@@ -71,13 +78,15 @@ thoralfStop ThoralfState{smtSolver = solverRef} = do
 
 thoralfSolver
     :: DebugPlugin
+    -> DebugSmt
     -> ThoralfState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 thoralfSolver
-    dbg@DebugPlugin{traceCallCount, traceCts, traceSmtConversation}
+    dbgPlugin@DebugPlugin{traceCallCount, traceCts}
+    dbgSmt@DebugSmt{traceSmtConversation}
     ThoralfState
         { smtSolver = smtRef
         , theoryEncoding = encode
@@ -87,7 +96,7 @@ thoralfSolver
     -- Refresh the solver
     _ <- refresh encode smtRef traceSmtConversation
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
-    _ <- debugIO dbg $ pprSolverCallCount traceCallCount calls
+    _ <- debugIO dbgPlugin dbgSmt $ pprSolverCallCount traceCallCount calls
 
     -- Preprocessing
     let filt = filter $ isEqCt deCls
@@ -105,7 +114,9 @@ thoralfSolver
 
     case (convertor gs, convertor $ ws ++ ds) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
-            sequence_ $ debugIO dbg <$> pprStep dbg (ConvCtsStep gCCs wCCs)
+            sequence_
+                $ debugIO dbgPlugin dbgSmt
+                <$> pprStep dbgPlugin dbgSmt (ConvCtsStep gCCs wCCs)
 
             let decs2' = decs2 \\ decs1
             let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)
