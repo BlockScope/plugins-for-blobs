@@ -12,23 +12,14 @@ import Language.Haskell.Printf (s)
 import GHC.Corroborate (TcPluginM, tcPluginIO)
 
 import ThoralfPlugin.Convert (ConvCts(..))
-import Plugins.Print.Constraints
-    (ConvCtsStep(..), TraceCallCount(..), TraceCts(..), showList)
+import Plugins.Print (DebugPlugin(..), TraceCarry(..), tracePlugin)
+import Plugins.Print.Constraints (showList)
 import Plugins.Print.SMT
     (TraceConvertCtsToSmt(..), pprSmtGivens, pprSmtWanteds, pprSmtList)
 
-newtype TraceCarry = TraceCarry Bool
-newtype TraceSmtConversation = TraceSmtConversation Bool
+data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
 
-data DebugPlugin =
-    DebugPlugin
-        { traceCallCount :: TraceCallCount
-        -- ^ Trace TcPlugin call count
-        , traceCts :: TraceCts
-        -- ^ Trace GHC constraints
-        , traceCarry :: TraceCarry
-        -- ^ Trace GHC constraints carried through conversion and solving
-        }
+newtype TraceSmtConversation = TraceSmtConversation Bool
 
 data DebugSmt =
     DebugSmt
@@ -62,14 +53,6 @@ pprSmtStep
     where
         (gSs, _gCts) = unzip gs
         (wSs, _wCts) = unzip ws
-
-
-tracePlugin :: DebugPlugin -> String -> TcPluginM ()
-tracePlugin DebugPlugin{..} s'
-    | coerce traceCallCount || coerce traceCts || coerce traceCarry =
-            tcPluginIO $ putStrLn s'
-
-    | otherwise = return ()
 
 traceSmt :: DebugSmt -> String -> TcPluginM ()
 traceSmt DebugSmt{..} s'

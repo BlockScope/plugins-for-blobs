@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Plugins.Print.Constraints
-    ( TraceCallCount(..), TraceCts(..), ConvCtsStep(..)
+    ( TraceCallCount(..), TraceCts(..)
     , printCts, showList, pprSolverCallCount
     ) where
 
@@ -11,8 +11,6 @@ import Language.Haskell.Printf (s)
 import Data.Foldable (traverse_)
 import Data.List (intercalate)
 import GHC.Corroborate
-
-import ThoralfPlugin.Convert (ConvCts(..), maybeExtractTyEq)
 
 newtype TraceCallCount = TraceCallCount Bool
 newtype TraceCts = TraceCts Bool
@@ -49,6 +47,12 @@ pprCts gs ds ws =
     , [s|>>> GHC-Derived = %s|] $ showList ds
     , [s|>>> GHC-Wanteds = %s|] $ showList ws
     ]
+
+maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)
+maybeExtractTyEq ct =
+    case classifyPredType $ ctPred ct of
+        EqPred NomEq t1 t2 -> return ((t1, t2), ct)
+        _ -> Nothing
 
 -- *  Printing
 instance Show Type where
@@ -87,9 +91,7 @@ instance Show Ct where
         Nothing -> showSDocUnsafe $ ppr ct
 
 instance Show WantedConstraints where
-  show = showSDocUnsafe . ppr
+    show = showSDocUnsafe . ppr
 
 instance Show EvTerm where
-  show = showSDocUnsafe . ppr
-
-data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
+    show = showSDocUnsafe . ppr

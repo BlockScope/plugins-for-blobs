@@ -23,6 +23,7 @@ in    defs
             defs.dependencies
           # [ "containers"
             , "ghc-tcplugins-extra >=0.5"
+            , "ghc-tcplugins-trace"
             , "ghc-corroborate"
             , "template-haskell >=2.9"
             , "ghc-prim"
@@ -60,7 +61,6 @@ in    defs
               , "ThoralfPlugin.Encode.Symbol"
               , "ThoralfPlugin.Encode.UoM"
               , "ThoralfPlugin.Encode.Bool"
-              , "Plugins.Print.Constraints"
               , "Plugins.Print.SMT"
               , "Plugins.Thoralf.Print"
               , "Data.Vec"
