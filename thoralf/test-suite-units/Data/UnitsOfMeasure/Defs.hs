@@ -12,8 +12,6 @@
 -- to change or be moved to a separate package.
 module Data.UnitsOfMeasure.Defs () where
 
-import Data.UnitsOfMeasure
-
 -- The SI base units
 -- http://www.bipm.org/en/measurement-units/
 -- TODO: The definition of meters using quasiquotes fails with:
@@ -22,4 +20,7 @@ import Data.UnitsOfMeasure
 --        arising from the superclasses of an instance declaration
 --    • In the instance declaration for
 --        ‘Data.UnitsOfMeasure.Canonical.HasCanonicalBaseUnit "m"’
+--
+-- import Data.UnitsOfMeasure
+--
 -- [u| m |]
