@@ -33,6 +33,7 @@ in    defs
               # [ "containers >=0.5"
                 , "deepseq >=1.3 && <1.5"
                 , "ghc-tcplugins-extra >=0.5"
+                , "ghc-tcplugins-trace"
                 , "ghc-corroborate"
                 , "template-haskell >=2.9"
                 , "th-printf"
@@ -47,7 +48,7 @@ in    defs
               , "Plugins.UoM"
               ]
           , other-modules =
-              [ "Plugins.UoM.TcPlugin", "Plugins.UoM.Print" ]
+              [ "Plugins.UoM.TcPlugin" ]
           }
       , tests =
           { units =

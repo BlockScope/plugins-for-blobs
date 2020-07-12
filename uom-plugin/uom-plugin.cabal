@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 69935f9fc877726abbdc7363da8ecab5d028cfcc8808eaf182deb900b582e6d7
+-- hash: 678bd51ada209f35a5f389a62438c880f0545626492bda44e4cbb0e65c066ecf
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -41,7 +41,6 @@ library
       Plugins.UoM
   other-modules:
       Plugins.UoM.TcPlugin
-      Plugins.UoM.Print
   hs-source-dirs:
       doc
       src
@@ -52,6 +51,7 @@ library
     , deepseq >=1.3 && <1.5
     , ghc-corroborate
     , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-trace
     , template-haskell >=2.9
     , th-printf
     , units-parser >=0.1

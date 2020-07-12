@@ -13,7 +13,8 @@ module Plugins.UoM (plugin) where
 import GHC.Corroborate
 
 import Plugins.UoM.TcPlugin (uomPlugin)
-import Plugins.UoM.Print (Debug(..))
+import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..))
+import Plugins.Print (DebugPlugin(..), TraceCarry(..))
 
 -- | The plugin that GHC will load when this module is used with the
 -- @-fplugin@ option.
@@ -24,9 +25,10 @@ plugin =
         pkg = fsLit "uom-plugin"
 
         dbg =
-            Debug
-                { callCount = False
-                , ctsGHC = False
+            DebugPlugin
+                { traceCallCount = TraceCallCount False
+                , traceCts = TraceCts False
+                , traceCarry = TraceCarry False
                 }
 
         tc = uomPlugin dbg mTheory mSyntax pkg

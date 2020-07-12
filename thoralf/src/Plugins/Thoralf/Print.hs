@@ -3,7 +3,7 @@
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..)
     , TraceCarry(..), TraceSmtConversation(..)
-    , pprPluginStep, pprSmtStep, tracePlugin, traceSmt
+    , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
     ) where
 
 import Prelude hiding (showList)
@@ -29,8 +29,8 @@ data DebugSmt =
         -- ^ Trace the conversation with the SMT solver
         }
 
-pprPluginStep :: DebugPlugin -> ConvCtsStep -> [String]
-pprPluginStep
+pprConvCtsStep :: DebugPlugin -> ConvCtsStep -> [String]
+pprConvCtsStep
     DebugPlugin{..}
     ConvCtsStep{givens = ConvCts gs _ds1, wanted = ConvCts ws _ds2} =
     if not (coerce traceCarry) then [] else

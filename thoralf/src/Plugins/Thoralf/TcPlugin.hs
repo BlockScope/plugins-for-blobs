@@ -18,7 +18,7 @@ import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..), TraceSmtConversation(..)
-    , tracePlugin, traceSmt, pprPluginStep, pprSmtStep
+    , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
 import Plugins.Print.Constraints (printCts, pprSolverCallCount)
 
@@ -116,7 +116,7 @@ thoralfSolver
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprPluginStep dbgPlugin (ConvCtsStep gCCs wCCs)
+                <$> pprConvCtsStep dbgPlugin (ConvCtsStep gCCs wCCs)
 
             sequence_
                 $ traceSmt dbgSmt

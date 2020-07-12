@@ -8,7 +8,7 @@
 -- import this module.
 module Plugins.UoM.TcPlugin (uomPlugin) where
 
-import GHC.Corroborate
+import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeTyCon)
 import GHC.Corroborate.Type (collectType)
 import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
@@ -18,9 +18,9 @@ import Data.List (genericReplicate)
 
 import Data.UnitsOfMeasure.Unsafe.Convert
 import Data.UnitsOfMeasure.Unsafe.Unify
-import Plugins.UoM.Print (Debug(..), debugIO, printCts, pprStep)
+import Plugins.Print (DebugPlugin(..), pprCtsStep, tracePlugin)
 
-uomPlugin :: Debug -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomPlugin :: DebugPlugin -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = lookupUnitDefs theory syntax pkg
@@ -29,16 +29,19 @@ uomPlugin dbg theory syntax pkg =
         }
 
 unitsOfMeasureSolver
-    :: Debug
+    :: DebugPlugin
     -> UnitDefs
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
-unitsOfMeasureSolver dbg uds givens deriveds wanteds
+unitsOfMeasureSolver dbgPlugin uds givens deriveds wanteds
+
     | null wanteds = do
-        _ <- printCts dbg False givens deriveds []
-        sequence_ $ debugIO dbg <$> pprStep dbg givens deriveds []
+        -- TODO: Add tracing of plugin call count.
+        sequence_
+            $ tracePlugin dbgPlugin
+            <$> pprCtsStep dbgPlugin givens deriveds []
 
         zonked_cts <- mapM zonkCt givens
         let (unit_givens, _) = partitionEithers $ zipWith foo givens $ map toUE zonked_cts
@@ -52,8 +55,11 @@ unitsOfMeasureSolver dbg uds givens deriveds wanteds
                 Impossible eq _ -> reportContradiction uds eq
 
     | otherwise = do
-        _ <- printCts dbg False givens deriveds wanteds
-        sequence_ $ debugIO dbg <$> pprStep dbg givens deriveds wanteds
+        -- TODO: Add tracing of plugin call count.
+        sequence_
+            $ tracePlugin dbgPlugin
+            <$> pprCtsStep dbgPlugin givens deriveds wanteds
+
         xs <- lookForUnpacks uds givens wanteds
 
         if not $ null xs then return $ TcPluginOk [] xs else do
