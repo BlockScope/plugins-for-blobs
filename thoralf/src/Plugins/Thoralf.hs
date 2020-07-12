@@ -21,15 +21,15 @@ plugin =
 
         dbgPlugin =
             DebugPlugin
-                { traceCallCount = TraceCallCount False
-                , traceCts = TraceCts False
-                , traceCarry = TraceCarry False
+                { traceCallCount = TraceCallCount True
+                , traceCts = TraceCts True
+                , traceCarry = TraceCarry True
                 }
 
         dbgSmt =
             DebugSmt
-                { traceConvertCtsToSmt = TraceConvertCtsToSmt False
-                , traceSmtConversation = TraceSmtConversation False
+                { traceConvertCtsToSmt = TraceConvertCtsToSmt True
+                , traceSmtConversation = TraceSmtConversation True
                 }
 
         tyCheck = thoralfPlugin dbgPlugin dbgSmt pm thoralfTheories

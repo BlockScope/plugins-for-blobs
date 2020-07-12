@@ -9,7 +9,7 @@ import Data.List ((\\))
 import qualified SimpleSMT as SMT
 import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
-import GHC.Corroborate
+import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeClass)
 
 import ThoralfPlugin.Convert
@@ -18,7 +18,7 @@ import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..), TraceSmtConversation(..)
-    , debugIO, pprStep
+    , tracePlugin, traceSmt, pprPluginStep, pprSmtStep
     )
 import Plugins.Print.Constraints (printCts, pprSolverCallCount)
 
@@ -96,7 +96,7 @@ thoralfSolver
     -- Refresh the solver
     _ <- refresh encode smtRef traceSmtConversation
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
-    _ <- debugIO dbgPlugin dbgSmt $ pprSolverCallCount traceCallCount calls
+    _ <- tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
 
     -- Preprocessing
     let filt = filter $ isEqCt deCls
@@ -115,8 +115,12 @@ thoralfSolver
     case (convertor gs, convertor $ ws ++ ds) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
             sequence_
-                $ debugIO dbgPlugin dbgSmt
-                <$> pprStep dbgPlugin dbgSmt (ConvCtsStep gCCs wCCs)
+                $ tracePlugin dbgPlugin
+                <$> pprPluginStep dbgPlugin (ConvCtsStep gCCs wCCs)
+
+            sequence_
+                $ traceSmt dbgSmt
+                <$> pprSmtStep dbgSmt (ConvCtsStep gCCs wCCs)
 
             let decs2' = decs2 \\ decs1
             let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)

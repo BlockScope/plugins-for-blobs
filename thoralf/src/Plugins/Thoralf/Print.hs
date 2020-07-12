@@ -3,7 +3,7 @@
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..)
     , TraceCarry(..), TraceSmtConversation(..)
-    , pprStep, debugIO
+    , pprPluginStep, pprSmtStep, tracePlugin, traceSmt
     ) where
 
 import Prelude hiding (showList)
@@ -38,35 +38,40 @@ data DebugSmt =
         -- ^ Trace the conversation with the SMT solver
         }
 
-pprStep :: DebugPlugin -> DebugSmt -> ConvCtsStep -> [String]
-pprStep
+pprPluginStep :: DebugPlugin -> ConvCtsStep -> [String]
+pprPluginStep
     DebugPlugin{..}
+    ConvCtsStep{givens = ConvCts gs _ds1, wanted = ConvCts ws _ds2} =
+    if not (coerce traceCarry) then [] else
+        [ [s|+++ GHC-Decs-Given = %s|] $ showList gCts
+        , [s|+++ GHC-Decs-Wanted = %s|] $ showList wCts
+        ]
+    where
+        (_gSs, gCts) = unzip gs
+        (_WSs, wCts) = unzip ws
+
+pprSmtStep :: DebugSmt -> ConvCtsStep -> [String]
+pprSmtStep
     DebugSmt{..}
     ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
-    ghcLines ++ smtLines
+    if not (coerce traceConvertCtsToSmt) then [] else
+        [ [s|+++ SMT-Decs = %s|] $ pprSmtList (ds1 ++ ds2)
+        , [s|+++ SMT-Given = %s|] $ pprSmtGivens gSs
+        , [s|+++ SMT-Wanteds = %s|] $ pprSmtWanteds wSs
+        ]
     where
-        (gSs, gCts) = unzip gs
-        (wSs, wCts) = unzip ws
+        (gSs, _gCts) = unzip gs
+        (wSs, _wCts) = unzip ws
 
-        ghcLines =
-            if not (coerce traceCarry) then [] else
-            [ [s|+++ GHC-Decs-Given = %s|] $ showList gCts
-            , [s|+++ GHC-Decs-Wanted = %s|] $ showList wCts
-            ]
 
-        smtLines =
-            if not (coerce traceConvertCtsToSmt) then [] else
-            [ [s|+++ SMT-Decs = %s|] $ pprSmtList (ds1 ++ ds2)
-            , [s|+++ SMT-Given = %s|] $ pprSmtGivens gSs
-            , [s|+++ SMT-Wanteds = %s|] $ pprSmtWanteds wSs
-            ]
-
-debugIO :: DebugPlugin -> DebugSmt -> String -> TcPluginM ()
-debugIO DebugPlugin{..} DebugSmt{..} s'
-    | coerce traceCallCount
-        || coerce traceCts
-        || coerce traceCarry
-        || coerce traceConvertCtsToSmt =
+tracePlugin :: DebugPlugin -> String -> TcPluginM ()
+tracePlugin DebugPlugin{..} s'
+    | coerce traceCallCount || coerce traceCts || coerce traceCarry =
             tcPluginIO $ putStrLn s'
 
+    | otherwise = return ()
+
+traceSmt :: DebugSmt -> String -> TcPluginM ()
+traceSmt DebugSmt{..} s'
+    | coerce traceConvertCtsToSmt = tcPluginIO $ putStrLn s'
     | otherwise = return ()
