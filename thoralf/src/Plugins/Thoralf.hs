@@ -7,10 +7,10 @@ import GHC.Corroborate
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
-import Plugins.Thoralf.Print
-    (DebugPlugin(..), DebugSmt(..), TraceCarry(..), TraceSmtConversation(..))
+import Plugins.Thoralf.Print (DebugSmt(..), TraceSmtConversation(..))
 import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..))
 import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
+import Plugins.Print (DebugPlugin(..), TraceCarry(..), TraceSolution(..))
 
 plugin :: Plugin
 plugin =
@@ -24,6 +24,7 @@ plugin =
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
                 , traceCarry = TraceCarry False
+                , traceSolution = TraceSolution False
                 }
 
         dbgSmt =

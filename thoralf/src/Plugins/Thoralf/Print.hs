@@ -1,8 +1,8 @@
 {-# LANGUAGE QuasiQuotes, RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..)
-    , TraceCarry(..), TraceSmtConversation(..)
+    ( ConvCtsStep(..), DebugSmt(..)
+    , TraceSmtConversation(..)
     , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
     ) where
 

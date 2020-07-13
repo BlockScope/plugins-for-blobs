@@ -17,11 +17,11 @@ import ThoralfPlugin.Convert
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..), TraceSmtConversation(..)
+    ( ConvCtsStep(..), DebugSmt(..), TraceSmtConversation(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
 import Plugins.Print.Constraints (pprSolverCallCount)
-import Plugins.Print (pprCtsStep)
+import Plugins.Print (DebugPlugin(..), pprCtsStepProblem, pprCtsStepSolution)
 
 data ThoralfState =
     ThoralfState
@@ -104,8 +104,8 @@ thoralfSolver
     let gs = filt gs'
     let ds = filt ds'
     let ws = filt ws'
-    logCts (Just "Constraints-AsIs") gs' ds' ws'
-    logCts (Just "Constraints-Filtered") gs ds ws
+    logCtsProblem (Just "Constraints-AsIs") gs' ds' ws'
+    logCtsProblem (Just "Constraints-Filtered") gs ds ws
 
     -- Define reused functions
     let hideError = flip catchIOError (const $ return SMT.Sat)
@@ -140,11 +140,11 @@ thoralfSolver
 
                     case wantedCheck of
                         SMT.Unsat -> do
-                            let wCtsWithEv = mapMaybe (addEvTerm . snd) wExprs
-                            --let print = tcPluginIO . putStrLn . show
-                            --print wCtsWithEv
                             tcPluginIO pop
-                            return (TcPluginOk wCtsWithEv [])
+
+                            let ok = TcPluginOk (mapMaybe (addEvTerm . snd) wExprs) []
+                            logCtsSolution ok
+                            return ok
 
                         SMT.Unknown -> tcPluginIO pop >> noSolving
 
@@ -153,8 +153,11 @@ thoralfSolver
         _ -> tcPluginIO (putStrLn "Parse Failed") >> noSolving
 
     where
-        logCts msg gs ds ws = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStep dbgPlugin msg gs ds ws
+        logCtsProblem msg gs ds ws = sequence_ $
+            tracePlugin dbgPlugin <$> pprCtsStepProblem dbgPlugin msg gs ds ws
+
+        logCtsSolution x = sequence_ $
+            tracePlugin dbgPlugin <$> pprCtsStepSolution dbgPlugin x
 
         logConvCts step = sequence_ $
             tracePlugin dbgPlugin <$> pprConvCtsStep dbgPlugin step
@@ -203,7 +206,7 @@ addEvTerm :: Ct -> Maybe (EvTerm, Ct)
 addEvTerm ct = do
     ((t1, t2), ct') <- maybeExtractTyEq ct
     -- We never have a wanted disequality.
-    return (makeEqEvidence "Fm Plugin" (t1,t2), ct')
+    return (makeEqEvidence "thoralf" (t1,t2), ct')
 
 -- | Make EvTerms for any two types.  Give the types inside a Predtree of the
 -- form (EqPred NomEq t1 t2)

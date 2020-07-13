@@ -21,7 +21,7 @@ import Data.IORef (IORef)
 
 import Data.UnitsOfMeasure.Unsafe.Convert
 import Data.UnitsOfMeasure.Unsafe.Unify
-import Plugins.Print (DebugPlugin(..), pprCtsStep, tracePlugin)
+import Plugins.Print (DebugPlugin(..), pprCtsStepProblem, pprCtsStepSolution, tracePlugin)
 import Plugins.Print.Constraints (pprSolverCallCount)
 
 data UomState =
@@ -57,7 +57,7 @@ unitsOfMeasureSolver
 
     | null wanteds = do
         logCalls
-        logCts []
+        logCtsProblem []
 
         zonked_cts <- mapM zonkCt givens
         let (unit_givens, _) = partitionEithers $ zipWith foo givens $ map toUE zonked_cts
@@ -68,11 +68,15 @@ unitsOfMeasureSolver
             case sr of
                 -- Simplified tvs [] evs eqs -> TcPluginOk (map (solvedGiven . fst) unit_givens) []
                 Simplified _ -> return $ TcPluginOk [] []
-                Impossible eq _ -> reportContradiction unitDefs eq
+                Impossible eq _ -> do
+                    contra <- reportContradiction unitDefs eq
+                    logCtsSolution contra
+                    return contra
+
 
     | otherwise = do
         logCalls
-        logCts wanteds
+        logCtsProblem wanteds
 
         xs <- lookForUnpacks unitDefs givens wanteds
 
@@ -82,8 +86,13 @@ unitsOfMeasureSolver
                 (unit_givens, _) <- partitionEithers . map toUE <$> mapM zonkCt givens
                 sr <- simplifyUnits unitDefs unit_givens
                 tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
+
                 case sr of
-                    Impossible eq _ -> reportContradiction unitDefs eq
+                    Impossible eq _ -> do
+                        contra <- reportContradiction unitDefs eq
+                        logCtsSolution contra
+                        return contra
+
                     Simplified ss -> do
                         sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
                         tcPluginTrace "unitsOfMeasureSolver simplified wanteds" $ ppr sr'
@@ -92,12 +101,15 @@ unitsOfMeasureSolver
                                 -- Don't report a contradiction, see #22
                                 return $ TcPluginOk [] []
 
-                            Simplified ss' ->
-                                TcPluginOk
-                                    [ (evMagic unitDefs ct, ct)
-                                    | eq <- simplifySolved ss'
-                                    , let ct = fromUnitEquality eq
-                                    ]
+                            Simplified ss' -> do
+                                let solvedCts =
+                                        [ (evMagic unitDefs ct, ct)
+                                        | eq <- simplifySolved ss'
+                                        , let ct = fromUnitEquality eq
+                                        ]
+
+                                ok <-
+                                    (TcPluginOk solvedCts)
                                     <$>
                                         mapM
                                             (substItemToCt unitDefs)
@@ -107,6 +119,9 @@ unitsOfMeasureSolver
                                                     (simplifyUnsubst ss)
                                                     (simplifySubst ss'))
                                             )
+
+                                logCtsSolution ok
+                                return ok
     where
         -- solvedGiven ct = (ctEvTerm (ctEvidence ct), ct)
         toUE = toUnitEquality unitDefs
@@ -120,13 +135,19 @@ unitsOfMeasureSolver
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
             tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
 
-        logCts ws =
+        logCtsProblem ws =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStep dbgPlugin Nothing givens deriveds ws
+                <$> pprCtsStepProblem dbgPlugin Nothing givens deriveds ws
+
+        logCtsSolution x =
+            sequence_
+                $ tracePlugin dbgPlugin
+                <$> pprCtsStepSolution dbgPlugin x
 
 reportContradiction :: UnitDefs -> UnitEquality -> TcPluginM TcPluginResult
-reportContradiction uds eq = TcPluginContradiction . pure <$> fromUnitEqualityForContradiction uds eq
+reportContradiction uds eq =
+    TcPluginContradiction . pure <$> fromUnitEqualityForContradiction uds eq
 
 -- See #22 for why we need this
 fromUnitEqualityForContradiction :: UnitDefs -> UnitEquality -> TcPluginM Ct
@@ -218,10 +239,10 @@ lookupUnitDefs theory syntax pkgName = do
 -- equality constraints and our fake '(~~)' equality constraints.
 evMagic :: UnitDefs -> Ct -> EvTerm
 evMagic uds ct = case classifyPredType $ ctEvPred $ ctEvidence ct of
-    EqPred NomEq t1 t2 -> evByFiat "units" t1 t2
+    EqPred NomEq t1 t2 -> evByFiat "uom" t1 t2
 
     IrredPred t
         | Just (tc, [t1,t2]) <- splitTyConApp_maybe t
-        , tc == equivTyCon uds -> mkFunnyEqEvidence "units" t t1 t2
+        , tc == equivTyCon uds -> mkFunnyEqEvidence "uom" t t1 t2
 
     _ -> error "evMagic"

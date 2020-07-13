@@ -14,7 +14,7 @@ import GHC.Corroborate
 
 import Plugins.UoM.TcPlugin (uomPlugin)
 import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..))
-import Plugins.Print (DebugPlugin(..), TraceCarry(..))
+import Plugins.Print (DebugPlugin(..), TraceCarry(..), TraceSolution(..))
 
 -- | The plugin that GHC will load when this module is used with the
 -- @-fplugin@ option.
@@ -29,6 +29,7 @@ plugin =
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
                 , traceCarry = TraceCarry False
+                , traceSolution = TraceSolution False
                 }
 
         tc = uomPlugin dbg mTheory mSyntax pkg
