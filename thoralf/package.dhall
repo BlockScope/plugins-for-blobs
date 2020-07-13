@@ -104,6 +104,23 @@ in    defs
               , source-dirs =
                   "test-suite-uom"
               }
+          , defs =
+              { dependencies =
+                  [ "base"
+                  , "tasty"
+                  , "tasty-hunit"
+                  , "uom-quantity"
+                  , "thoralf-plugin"
+                  ]
+              , ghc-options =
+                  testopts
+              , main =
+                  "Tests.hs"
+              , other-modules =
+                  [ "Defs" ]
+              , source-dirs =
+                  "test-suite-defs"
+              }
           , units =
               { dependencies =
                   [ "base"
