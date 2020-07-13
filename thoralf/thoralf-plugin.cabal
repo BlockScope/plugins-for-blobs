@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3a56a2497091c03faf954b0d182fceab5aeb01746f8369b2578084215be72a60
+-- hash: fa97b585e3a1aae8a0a33c02e37406ca602716dd344a4eb3903d2ca3ca3ab000
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -113,7 +113,7 @@ test-suite hlint
       Paths_thoralf_plugin
   hs-source-dirs:
       test-suite-hlint
-  ghc-options: -Wall -fno-warn-partial-type-signatures -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -122,7 +122,6 @@ test-suite hlint
     , ghc-tcplugins-extra >=0.5
     , ghc-tcplugins-trace
     , hashable
-    , hlint
     , mtl
     , simple-smt
     , template-haskell >=2.9
@@ -130,7 +129,17 @@ test-suite hlint
     , units-parser >=0.1
     , uom-quantity
     , uom-th
-  if flag(suppress-failing-tests)
+  if impl(ghc >= 8.6.0)
+    build-depends:
+        hlint
+    buildable: True
+  if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
+    build-depends:
+        hlint <2.1.18
+    buildable: True
+  if impl(ghc < 8.4.0)
+    build-depends:
+        hlint
     buildable: False
   default-language: Haskell2010
 

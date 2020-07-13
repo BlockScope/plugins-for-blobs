@@ -10,6 +10,7 @@ arguments =
     , "src"
     , "test-suite-rows"
     , "test-suite-units"
+    , "test-suite-defs"
     , "test-suite-hlint"
     ]
 

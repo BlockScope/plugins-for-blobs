@@ -2,10 +2,13 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
+
+#if IS_CANONICAL
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+#endif
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
