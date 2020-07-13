@@ -51,7 +51,26 @@ in    defs
               [ "Plugins.UoM.TcPlugin" ]
           }
       , tests =
-          { units =
+          { defs =
+              { dependencies =
+                  [ "base"
+                  , "tasty"
+                  , "tasty-hunit"
+                  , "uom-quantity"
+                  , "uom-plugin"
+                  ]
+              , ghc-options =
+                  testopts
+              , main =
+                  "Tests.hs"
+              , other-modules =
+                  [ "Defs" ]
+              , source-dirs =
+                  "test-suite-defs"
+              , when =
+                  { condition = "impl(ghc >= 8.4.0)", buildable = False }
+              }
+          , units =
               { dependencies =
                   [ "base"
                   , "tasty"
