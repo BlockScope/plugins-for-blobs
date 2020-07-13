@@ -40,7 +40,7 @@ uomPlugin dbg theory syntax pkg =
 
 mkUoMInit :: UnitDefs -> TcPluginM UomState
 mkUoMInit u = do
-    calls <- unsafeTcPluginTcM $ newMutVar 0
+    calls <- unsafeTcPluginTcM $ newMutVar 1
     return $ UomState { unitDefs = u, callsRef = calls }
 
 unitsOfMeasureSolver
