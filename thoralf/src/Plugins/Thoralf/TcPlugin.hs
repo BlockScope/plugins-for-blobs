@@ -119,10 +119,6 @@ thoralfSolver
             logConvCts step
             logSmt step
 
-            let decs2' = decs2 \\ decs1
-            let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)
-            let wCtsWithEv = mapMaybe (addEvTerm . snd) wExprs
-
             givenCheck <- tcPluginIO $ hideError $ do
                 SMT.push smt
                 traverse_ (SMT.ackCommand smt) decs1
@@ -138,12 +134,13 @@ thoralfSolver
 
                 SMT.Sat -> do
                     wantedCheck <- tcPluginIO $ hideError $ do
-                        traverse_ (SMT.ackCommand smt) decs2'
-                        SMT.assert smt wSExpr
+                        traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
+                        SMT.assert smt (smtWanted wExprs)
                         SMT.check smt
 
                     case wantedCheck of
                         SMT.Unsat -> do
+                            let wCtsWithEv = mapMaybe (addEvTerm . snd) wExprs
                             --let print = tcPluginIO . putStrLn . show
                             --print wCtsWithEv
                             tcPluginIO pop
@@ -164,6 +161,8 @@ thoralfSolver
 
         logSmt step = sequence_ $
             traceSmt dbgSmt <$> pprSmtStep dbgSmt step
+
+        smtWanted ws = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) ws)
 
 refresh
     :: TheoryEncoding
