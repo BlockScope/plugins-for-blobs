@@ -20,7 +20,7 @@ import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugPlugin(..), DebugSmt(..), TraceSmtConversation(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
-import Plugins.Print.Constraints (printCts, pprSolverCallCount)
+import Plugins.Print.Constraints (pprSolverCallCount)
 import Plugins.Print (pprCtsStep)
 
 data ThoralfState =
@@ -86,7 +86,7 @@ thoralfSolver
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 thoralfSolver
-    dbgPlugin@DebugPlugin{traceCallCount, traceCts}
+    dbgPlugin@DebugPlugin{traceCallCount}
     dbgSmt@DebugSmt{traceSmtConversation}
     ThoralfState
         { smtRef
@@ -104,7 +104,8 @@ thoralfSolver
     let gs = filt gs'
     let ds = filt ds'
     let ws = filt ws'
-    _ <- printCts traceCts False gs ds ws
+    logCts (Just "Constraints-AsIs") gs' ds' ws'
+    logCts (Just "Constraints-Filtered") gs ds ws
 
     -- Define reused functions
     let hideError = flip catchIOError (const $ return SMT.Sat)
@@ -115,7 +116,6 @@ thoralfSolver
     case (convertor gs, convertor $ ws ++ ds) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
             let step = ConvCtsStep gCCs wCCs
-            logCts gs' ds' ws'
             logConvCts step
             logSmt step
 
@@ -129,7 +129,7 @@ thoralfSolver
                 SMT.Unknown -> tcPluginIO pop >> noSolving
 
                 SMT.Unsat -> do
-                    tcPluginIO $ putStrLn "\nInconsistent Givens" >> pop
+                    tcPluginIO $ putStrLn "Inconsistent Givens" >> pop
                     return $ TcPluginContradiction []
 
                 SMT.Sat -> do
@@ -150,11 +150,11 @@ thoralfSolver
 
                         SMT.Sat -> tcPluginIO pop >> noSolving
 
-        _ -> printCts traceCts True gs ws ds
+        _ -> tcPluginIO (putStrLn "Parse Failed") >> noSolving
 
     where
-        logCts gs ds ws = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStep dbgPlugin gs ds ws
+        logCts msg gs ds ws = sequence_ $
+            tracePlugin dbgPlugin <$> pprCtsStep dbgPlugin msg gs ds ws
 
         logConvCts step = sequence_ $
             tracePlugin dbgPlugin <$> pprConvCtsStep dbgPlugin step

@@ -123,7 +123,7 @@ unitsOfMeasureSolver
         logCts ws =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStep dbgPlugin givens deriveds ws
+                <$> pprCtsStep dbgPlugin Nothing givens deriveds ws
 
 reportContradiction :: UnitDefs -> UnitEquality -> TcPluginM TcPluginResult
 reportContradiction uds eq = TcPluginContradiction . pure <$> fromUnitEqualityForContradiction uds eq
