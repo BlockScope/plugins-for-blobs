@@ -56,13 +56,8 @@ unitsOfMeasureSolver
     givens deriveds wanteds
 
     | null wanteds = do
-        calls <- unsafeTcPluginTcM $ readMutVar callsRef
-        unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
-        _ <- tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
-
-        sequence_
-            $ tracePlugin dbgPlugin
-            <$> pprCtsStep dbgPlugin givens deriveds []
+        logCalls
+        logCts []
 
         zonked_cts <- mapM zonkCt givens
         let (unit_givens, _) = partitionEithers $ zipWith foo givens $ map toUE zonked_cts
@@ -76,13 +71,8 @@ unitsOfMeasureSolver
                 Impossible eq _ -> reportContradiction unitDefs eq
 
     | otherwise = do
-        calls <- unsafeTcPluginTcM $ readMutVar callsRef
-        unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
-        _ <- tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
-
-        sequence_
-            $ tracePlugin dbgPlugin
-            <$> pprCtsStep dbgPlugin givens deriveds wanteds
+        logCalls
+        logCts wanteds
 
         xs <- lookForUnpacks unitDefs givens wanteds
 
@@ -124,6 +114,16 @@ unitsOfMeasureSolver
         foo :: Ct -> Either UnitEquality Ct -> Either (Ct, UnitEquality) Ct
         foo ct (Left x) = Left (ct, x)
         foo _ (Right ct') = Right ct'
+
+        logCalls = do
+            calls <- unsafeTcPluginTcM $ readMutVar callsRef
+            unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
+            tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
+
+        logCts ws =
+            sequence_
+                $ tracePlugin dbgPlugin
+                <$> pprCtsStep dbgPlugin givens deriveds ws
 
 reportContradiction :: UnitDefs -> UnitEquality -> TcPluginM TcPluginResult
 reportContradiction uds eq = TcPluginContradiction . pure <$> fromUnitEqualityForContradiction uds eq
