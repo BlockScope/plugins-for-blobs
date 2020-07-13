@@ -2,36 +2,36 @@
 {-# LANGUAGE TupleSections #-}
 
 module Data.UnitsOfMeasure.Unsafe.NormalForm
-  ( Atom(..)
-  , BaseUnit
-  , NormUnit
+    ( Atom(..)
+    , BaseUnit
+    , NormUnit
     -- * Constructors
-  , one
-  , varUnit
-  , baseUnit
-  , famUnit
-  , mkNormUnit
+    , one
+    , varUnit
+    , baseUnit
+    , famUnit
+    , mkNormUnit
 
     -- * Algebraic operations
-  , (*:)
-  , (/:)
-  , (^:)
-  , invert
+    , (*:)
+    , (/:)
+    , (^:)
+    , invert
 
     -- * Predicates
-  , isOne
-  , isConstant
-  , maybeConstant
-  , isBase
-  , divisible
-  , occurs
+    , isOne
+    , isConstant
+    , maybeConstant
+    , isBase
+    , divisible
+    , occurs
 
     -- * Destructors
-  , ascending
-  , leftover
-  , divideExponents
-  , substUnit
-  ) where
+    , ascending
+    , leftover
+    , divideExponents
+    , substUnit
+    ) where
 
 #if __GLASGOW_HASKELL__ >= 804
 import Prelude hiding ((<>))
@@ -60,23 +60,25 @@ type BaseUnit = FastString
 data Atom = BaseAtom Type | VarAtom TyVar | FamAtom TyCon [Type]
 
 instance Eq Atom where
-  a == b = a == b
+    a == b = a == b
 
 -- TODO: using cmpTypes here probably isn't ideal, but does it matter?
 instance Ord Atom where
-  compare (BaseAtom x)    (BaseAtom y)      = cmpType x y
-  compare (BaseAtom _)    _                 = LT
-  compare (VarAtom  _)    (BaseAtom _)      = GT
-  compare (VarAtom  a)    (VarAtom  b)      = compare a b
-  compare (VarAtom  _)    (FamAtom _ _)     = LT
-  compare (FamAtom f tys) (FamAtom f' tys') = cmpTyCon f f' `thenCmp` cmpTypes tys tys'
-  compare (FamAtom _ _)   _                 = GT
+    compare (BaseAtom x) (BaseAtom y) = cmpType x y
+    compare (BaseAtom _) _ = LT
+    compare (VarAtom _) (BaseAtom _) = GT
+    compare (VarAtom a) (VarAtom  b) = compare a b
+    compare (VarAtom _) (FamAtom _ _) = LT
+
+    compare (FamAtom f tys) (FamAtom f' tys') =
+        cmpTyCon f f' `thenCmp` cmpTypes tys tys'
+
+    compare (FamAtom _ _) _ = GT
 
 instance Outputable Atom where
-  ppr (BaseAtom b) = ppr b
-  ppr (VarAtom  v) = ppr v
-  ppr (FamAtom tc tys) = ppr tc <> text " " <> ppr tys
-
+    ppr (BaseAtom b) = ppr b
+    ppr (VarAtom v) = ppr v
+    ppr (FamAtom tc tys) = ppr tc <> text " " <> ppr tys
 
 -- | A unit normal form is a signed multiset of atoms; we maintain the
 -- invariant that the map does not contain any zero values.
@@ -84,7 +86,6 @@ newtype NormUnit = NormUnit { _NormUnit :: Map.Map Atom Integer }
 
 instance Outputable NormUnit where
     ppr = ppr . Map.map show . _NormUnit
-
 
 -- | The group identity, representing the dimensionless unit
 one :: NormUnit
@@ -116,7 +117,6 @@ mkNormUnit = mkNormUnitMap . Map.fromList
 mkNormUnitMap :: Map.Map Atom Integer -> NormUnit
 mkNormUnitMap =  NormUnit . Map.filter (/= 0)
 
-
 -- | Multiplication of normalised units
 (*:) :: NormUnit -> NormUnit -> NormUnit
 u *: v = mkNormUnitMap $ Map.unionWith (+) (_NormUnit u) (_NormUnit v)
@@ -137,7 +137,6 @@ infixr 8 ^:
 invert :: NormUnit -> NormUnit
 invert = NormUnit . Map.map negate . _NormUnit
 
-
 -- | Test whether a unit is dimensionless
 isOne :: NormUnit -> Bool
 isOne = Map.null . _NormUnit
@@ -149,20 +148,20 @@ isConstant = all isBaseLiteral . Map.keys . _NormUnit
 -- | Extract the base units if a unit is constant
 maybeConstant :: NormUnit -> Maybe [(BaseUnit, Integer)]
 maybeConstant = mapM getBase . Map.toList . _NormUnit
-  where
-    getBase (BaseAtom ty, i) = (, i) <$> isStrLitTy ty
-    getBase _                = Nothing
+    where
+        getBase (BaseAtom ty, i) = (, i) <$> isStrLitTy ty
+        getBase _ = Nothing
 
 -- | Test whether an atom is a base unit (but not necessarily a
 -- *literal*, e.g. it could be @Base b@ for some variable @b@)
 isBase :: Atom -> Bool
 isBase (BaseAtom _) = True
-isBase _            = False
+isBase _ = False
 
 -- | Test whether an atom is a literal base unit
 isBaseLiteral :: Atom -> Bool
 isBaseLiteral (BaseAtom ty) = isJust $ isStrLitTy ty
-isBaseLiteral _             = False
+isBaseLiteral _ = False
 
 -- | Test whether all exponents in a unit are divisble by an integer
 divisible :: Integer -> NormUnit -> Bool
@@ -172,11 +171,10 @@ divisible i = Foldable.all (\ j -> j `rem` i == 0) . _NormUnit
 -- type family application)
 occurs :: TyVar -> NormUnit -> Bool
 occurs a = any occursAtom . Map.keys . _NormUnit
-  where
-    occursAtom (BaseAtom ty)   = elemVarSet a $ tyVarsOfType ty
-    occursAtom (VarAtom b)     = a == b
-    occursAtom (FamAtom _ tys) = elemVarSet a $ tyVarsOfTypes tys
-
+    where
+        occursAtom (BaseAtom ty) = elemVarSet a $ tyVarsOfType ty
+        occursAtom (VarAtom b) = a == b
+        occursAtom (FamAtom _ tys) = elemVarSet a $ tyVarsOfTypes tys
 
 -- | View a unit as a list of atoms in order of ascending absolute exponent
 ascending :: NormUnit -> [(Atom, Integer)]
@@ -193,5 +191,5 @@ divideExponents i = mkNormUnitMap . Map.map (`quot` i) . _NormUnit
 -- | Substitute the first unit for the variable in the second unit
 substUnit :: TyVar -> NormUnit -> NormUnit -> NormUnit
 substUnit a v u = case Map.lookup (VarAtom a) $ _NormUnit u of
-                    Nothing -> u
-                    Just i  -> (v ^: i) *: leftover a u
+    Nothing -> u
+    Just i  -> (v ^: i) *: leftover a u
