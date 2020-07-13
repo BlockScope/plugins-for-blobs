@@ -21,10 +21,11 @@ import Plugins.Thoralf.Print
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
 import Plugins.Print.Constraints (printCts, pprSolverCallCount)
+import Plugins.Print (pprCtsStep)
 
 data ThoralfState =
     ThoralfState
-        { smtSolver :: IORef (SMT.Solver, Int)
+        { smtRef :: IORef (SMT.Solver, Int)
         , theoryEncoding :: TheoryEncoding
         , disEqClass :: Class
         }
@@ -65,14 +66,14 @@ mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
     solverRef <- unsafeTcPluginTcM $ newMutVar (z3Solver, 0)
     return
         ThoralfState
-            { smtSolver = solverRef
+            { smtRef = solverRef
             , theoryEncoding = encoding
             , disEqClass = disEq
             }
 
 thoralfStop :: ThoralfState -> TcPluginM ()
-thoralfStop ThoralfState{smtSolver = solverRef} = do
-    (solver, _) <- unsafeTcPluginTcM $ readMutVar solverRef
+thoralfStop ThoralfState{smtRef} = do
+    (solver, _) <- unsafeTcPluginTcM $ readMutVar smtRef
     _ <- tcPluginIO (SMT.stop solver)
     return ()
 
@@ -88,18 +89,18 @@ thoralfSolver
     dbgPlugin@DebugPlugin{traceCallCount, traceCts}
     dbgSmt@DebugSmt{traceSmtConversation}
     ThoralfState
-        { smtSolver = smtRef
-        , theoryEncoding = encode
-        , disEqClass = deCls
+        { smtRef
+        , theoryEncoding
+        , disEqClass
         }
     gs' ds' ws' = do
     -- Refresh the solver
-    _ <- refresh encode smtRef traceSmtConversation
+    _ <- refresh theoryEncoding smtRef traceSmtConversation
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
     _ <- tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
 
     -- Preprocessing
-    let filt = filter $ isEqCt deCls
+    let filt = filter $ isEqCt disEqClass
     let gs = filt gs'
     let ds = filt ds'
     let ws = filt ws'
@@ -110,10 +111,14 @@ thoralfSolver
     let hideError = flip catchIOError (const $ return SMT.Sat)
     let pop = SMT.pop smt
     let noSolving = return $ TcPluginOk [] []
-    let convertor = convert (EncodingData deCls encode)
+    let convertor = convert (EncodingData disEqClass theoryEncoding)
 
     case (convertor gs, convertor $ ws ++ ds) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
+            sequence_
+                $ tracePlugin dbgPlugin
+                <$> pprCtsStep dbgPlugin gs' ds' ws'
+
             sequence_
                 $ tracePlugin dbgPlugin
                 <$> pprConvCtsStep dbgPlugin (ConvCtsStep gCCs wCCs)
