@@ -107,7 +107,6 @@ thoralfSolver
     _ <- printCts traceCts False gs ds ws
 
     -- Define reused functions
-    --let print = tcPluginIO . putStrLn . show
     let hideError = flip catchIOError (const $ return SMT.Sat)
     let pop = SMT.pop smt
     let noSolving = return $ TcPluginOk [] []
@@ -115,21 +114,15 @@ thoralfSolver
 
     case (convertor gs, convertor $ ws ++ ds) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
-            sequence_
-                $ tracePlugin dbgPlugin
-                <$> pprCtsStep dbgPlugin gs' ds' ws'
-
-            sequence_
-                $ tracePlugin dbgPlugin
-                <$> pprConvCtsStep dbgPlugin (ConvCtsStep gCCs wCCs)
-
-            sequence_
-                $ traceSmt dbgSmt
-                <$> pprSmtStep dbgSmt (ConvCtsStep gCCs wCCs)
+            let step = ConvCtsStep gCCs wCCs
+            logCts gs' ds' ws'
+            logConvCts step
+            logSmt step
 
             let decs2' = decs2 \\ decs1
             let wSExpr = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) wExprs)
             let wCtsWithEv = mapMaybe (addEvTerm . snd) wExprs
+
             givenCheck <- tcPluginIO $ hideError $ do
                 SMT.push smt
                 traverse_ (SMT.ackCommand smt) decs1
@@ -151,6 +144,7 @@ thoralfSolver
 
                     case wantedCheck of
                         SMT.Unsat -> do
+                            --let print = tcPluginIO . putStrLn . show
                             --print wCtsWithEv
                             tcPluginIO pop
                             return (TcPluginOk wCtsWithEv [])
@@ -160,6 +154,16 @@ thoralfSolver
                         SMT.Sat -> tcPluginIO pop >> noSolving
 
         _ -> printCts traceCts True gs ws ds
+
+    where
+        logCts gs ds ws = sequence_ $
+            tracePlugin dbgPlugin <$> pprCtsStep dbgPlugin gs ds ws
+
+        logConvCts step = sequence_ $
+            tracePlugin dbgPlugin <$> pprConvCtsStep dbgPlugin step
+
+        logSmt step = sequence_ $
+            traceSmt dbgSmt <$> pprSmtStep dbgSmt step
 
 refresh
     :: TheoryEncoding
