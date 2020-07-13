@@ -68,11 +68,7 @@ unitsOfMeasureSolver
             case sr of
                 -- Simplified tvs [] evs eqs -> TcPluginOk (map (solvedGiven . fst) unit_givens) []
                 Simplified _ -> return $ TcPluginOk [] []
-                Impossible eq _ -> do
-                    contra <- reportContradiction unitDefs eq
-                    logCtsSolution contra
-                    return contra
-
+                Impossible eq _ -> contradiction eq
 
     | otherwise = do
         logCalls
@@ -88,10 +84,7 @@ unitsOfMeasureSolver
                 tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
 
                 case sr of
-                    Impossible eq _ -> do
-                        contra <- reportContradiction unitDefs eq
-                        logCtsSolution contra
-                        return contra
+                    Impossible eq _ -> contradiction eq
 
                     Simplified ss -> do
                         sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
@@ -109,7 +102,7 @@ unitsOfMeasureSolver
                                         ]
 
                                 ok <-
-                                    (TcPluginOk solvedCts)
+                                    TcPluginOk solvedCts
                                     <$>
                                         mapM
                                             (substItemToCt unitDefs)
@@ -144,6 +137,11 @@ unitsOfMeasureSolver
             sequence_
                 $ tracePlugin dbgPlugin
                 <$> pprCtsStepSolution dbgPlugin x
+
+        contradiction eq = do
+            contra <- reportContradiction unitDefs eq
+            logCtsSolution contra
+            return contra
 
 reportContradiction :: UnitDefs -> UnitEquality -> TcPluginM TcPluginResult
 reportContradiction uds eq =
