@@ -19,8 +19,14 @@ import Data.Either (partitionEithers)
 import Data.List (genericReplicate)
 import Data.IORef (IORef)
 
-import Data.UnitsOfMeasure.Unsafe.Convert
+import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs(..), reifyUnit)
 import Data.UnitsOfMeasure.Unsafe.Unify
+    ( UnitEquality(..), SubstItem(..), SimplifyResult(..)
+    , fromUnitEquality, toUnitEquality
+    , simplifySubst, simplifyUnsubst
+    , simplifyUnits, simplifySolved
+    , substsSubst, substsUnitEquality
+    )
 import Plugins.Print (DebugPlugin(..), pprCtsStepProblem, pprCtsStepSolution, tracePlugin)
 import Plugins.Print.Constraints (pprSolverCallCount)
 
