@@ -136,4 +136,5 @@ type family (u :: Unit) ~~ (v :: Unit) :: Constraint where {}
 type family MkUnit (s :: Symbol) :: Unit
 
 -- $setup
+-- >>> :set -XExplicitNamespaces -XDataKinds -XTypeOperators -XOverloadedStrings
 -- >>> import Data.Type.Equality (type (:~:), type (:~~:))
