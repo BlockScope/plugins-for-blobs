@@ -76,6 +76,9 @@ deriving instance Storable a => Storable (Quantity a u)
 deriving instance NFData a => NFData (Quantity a u)
 
 -- | Extract the underlying value of a quantity
+--
+-- >>> unQuantity (1 :: Quantity Double One)
+-- 1.0
 unQuantity :: Quantity a u -> a
 unQuantity (MkQuantity x) = x
 
@@ -139,3 +142,6 @@ toRational' (MkQuantity x) = MkQuantity (toRational x)
 -- to be a square.  Fractional units are not currently supported.
 sqrt' :: (Floating a, w ~~ u ^: 2) => Quantity a w -> Quantity a u
 sqrt' (MkQuantity x) = MkQuantity (sqrt x)
+
+-- $setup
+-- >>> import Data.UnitsOfMeasure.Show
