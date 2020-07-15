@@ -93,6 +93,9 @@ type family Exp (xs :: [(Symbol, Nat)]) :: Unit where
 --
 -- >>> :kind Unpack (Base "s" *: Base "m")
 -- Unpack (Base "s" *: Base "m") :: UnitSyntax Symbol
+--
+-- >>> :kind Unpack (Base "m" /: (Base "s" *: Base "s")) :~: '["m"] :/ '["s", "s"]
+-- Unpack (Base "m" /: (Base "s" *: Base "s")) :~: '["m"] :/ '["s", "s"] :: *
 type family Unpack (u :: Unit) :: UnitSyntax Symbol where {}
 
 -- | This is a bit of a hack, honestly, but a good hack.  Constraints @u ~~ v@
@@ -113,3 +116,6 @@ type family (u :: Unit) ~~ (v :: Unit) :: Constraint where {}
 -- >>> :kind MkUnit "m"
 -- MkUnit "m" :: Unit
 type family MkUnit (s :: Symbol) :: Unit
+
+-- $setup
+-- >>> import Data.Type.Equality (type (:~:))
