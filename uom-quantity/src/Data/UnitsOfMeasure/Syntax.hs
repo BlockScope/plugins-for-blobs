@@ -26,6 +26,12 @@ infix 4 ~~
 -- | Syntactic representation of a unit as a pair of lists of base units, for
 -- example 'One' is represented as @[] ':/' []@ and @'Base' "m" '/:' 'Base' "s"
 -- ^: 2@ is represented as @["m"] ':/' ["s","s"]@.
+--
+-- >>> [] :/ []
+-- [] :/ []
+--
+-- >>> ["m"] :/ ["s", "s"]
+-- ["m"] :/ ["s","s"]
 data UnitSyntax s = [s] :/ [s] deriving (Eq, Show)
 
 -- | Pack up a syntactic representation of a unit as a unit.  For example:
@@ -63,6 +69,12 @@ type family Exp (xs :: [(Symbol, Nat)]) :: Unit where
 -- the unit is entirely constant, and it does not allow the structure of the
 -- unit to be observed.  The reduction behaviour is implemented by the plugin,
 -- because we cannot define it otherwise.
+--
+-- >>> :kind Unpack One
+-- Unpack One :: UnitSyntax Symbol
+--
+-- >>> :kind Unpack (Base "s" *: Base "m")
+-- Unpack (Base "s" *: Base "m") :: UnitSyntax Symbol
 type family Unpack (u :: Unit) :: UnitSyntax Symbol where {}
 
 -- | This is a bit of a hack, honestly, but a good hack.  Constraints @u ~~ v@
@@ -76,4 +88,7 @@ type family (u :: Unit) ~~ (v :: Unit) :: Constraint where {}
 --
 -- The instances displayed by Haddock are available only if
 -- "Data.UnitsOfMeasure.Defs" is imported.
+--
+-- >>> :kind MkUnit "m"
+-- MkUnit "m" :: Unit
 type family MkUnit (s :: Symbol) :: Unit

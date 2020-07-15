@@ -7,6 +7,7 @@ arguments =
     [ "-isrc"
     , "src/Data/Theory/UoM.hs"
     , "src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs"
+    , "src/Data/UnitsOfMeasure/Syntax.hs"
 
     , "-XDataKinds"
     , "-XDeriveFunctor"
