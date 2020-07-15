@@ -48,7 +48,8 @@ in    defs
               , "Data.UnitsOfMeasure.Unsafe.NormalForm"
               , "Data.UnitsOfMeasure.Unsafe.Quantity"
               ]
-          , other-modules = [] : List Text
+          , other-modules =
+              [] : List Text
           }
       , when =
           [ { condition =
@@ -171,6 +172,24 @@ in    defs
                   "HLint.hs"
               , source-dirs =
                   "test-suite-hlint"
+              }
+          , doctest =
+              { dependencies =
+                    defs.dependencies
+                  # [ "deepseq >=1.3 && <1.5"
+                    , "template-haskell >=2.9"
+                    , "containers >=0.5"
+                    , "ghc-corroborate"
+                    , "units-parser >=0.1"
+                    , "doctest"
+                    , "QuickCheck"
+                    ]
+              , ghc-options =
+                  [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
+              , main =
+                  "DocTest.hs"
+              , source-dirs =
+                  [ "src", "test-suite-doctest" ]
               }
           }
       }

@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 18d33b8ced3ccefc327d666b63359fd7a0d3923c9b28f95f4a80f754144a57b9
+-- hash: ec6096373399137c3d73e48c98b54183cc818bd7f5c7043c6aa419912ab83dbe
 
 name:           uom-quantity
 version:        0.3.0.1
@@ -104,6 +104,107 @@ library
       , ghc (TcRnTypes as Constraint)
       , ghc (Type as Predicate)
   if impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)
+    hs-source-dirs:
+        src-ghc-8.0
+    build-depends:
+        ghc >=8.0 && <8.2
+    mixins:
+        ghc hiding ()
+      , ghc (TcRnTypes as TcRnTypes)
+      , ghc (Type as Type)
+      , ghc (TcRnTypes as Constraint)
+      , ghc (Type as Predicate)
+  default-language: Haskell2010
+
+test-suite doctest
+  type: exitcode-stdio-1.0
+  main-is: DocTest.hs
+  other-modules:
+      Data.Theory.UoM
+      Data.UnitsOfMeasure.Read
+      Data.UnitsOfMeasure.Show
+      Data.UnitsOfMeasure.Singleton
+      Data.UnitsOfMeasure.Syntax
+      Data.UnitsOfMeasure.Unsafe.Convert
+      Data.UnitsOfMeasure.Unsafe.NormalForm
+      Data.UnitsOfMeasure.Unsafe.Quantity
+      Data.UnitsOfMeasure.Unsafe.Unify
+      Paths_uom_quantity
+  hs-source-dirs:
+      src
+      test-suite-doctest
+  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base >=4.9.1.0 && <5
+    , containers >=0.5
+    , deepseq >=1.3 && <1.5
+    , doctest
+    , ghc-corroborate
+    , template-haskell >=2.9
+    , units-parser >=0.1
+  if impl(ghc >= 8.10.0)
+    other-modules:
+        GHC.Corroborate.Type
+    hs-source-dirs:
+        src-ghc-8.10
+    build-depends:
+        ghc >=8.10 && <8.12
+  if impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)
+    other-modules:
+        GHC.Corroborate.Type
+    hs-source-dirs:
+        src-ghc-8.8
+    build-depends:
+        ghc >=8.8 && <8.10
+    mixins:
+        ghc hiding ()
+      , ghc (TcRnTypes as TcRnTypes)
+      , ghc (Type as Type)
+      , ghc (TcRnTypes as Constraint)
+      , ghc (Type as Predicate)
+  if impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)
+    other-modules:
+        GHC.Corroborate.Type
+    hs-source-dirs:
+        src-ghc-8.6
+    build-depends:
+        ghc >=8.6 && <8.8
+    mixins:
+        ghc hiding ()
+      , ghc (TcRnTypes as TcRnTypes)
+      , ghc (Type as Type)
+      , ghc (TcRnTypes as Constraint)
+      , ghc (Type as Predicate)
+  if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
+    other-modules:
+        GHC.Corroborate.Type
+    hs-source-dirs:
+        src-ghc-8.4
+    build-depends:
+        ghc >=8.4 && <8.6
+    mixins:
+        ghc hiding ()
+      , ghc (TcRnTypes as TcRnTypes)
+      , ghc (Type as Type)
+      , ghc (TcRnTypes as Constraint)
+      , ghc (Type as Predicate)
+  if impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)
+    other-modules:
+        GHC.Corroborate.Type
+    hs-source-dirs:
+        src-ghc-8.2
+    build-depends:
+        ghc >=8.2 && <8.4
+    mixins:
+        ghc hiding ()
+      , ghc (TcRnTypes as TcRnTypes)
+      , ghc (Type as Type)
+      , ghc (TcRnTypes as Constraint)
+      , ghc (Type as Predicate)
+  if impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)
+    other-modules:
+        GHC.Corroborate.Type
     hs-source-dirs:
         src-ghc-8.0
     build-depends:

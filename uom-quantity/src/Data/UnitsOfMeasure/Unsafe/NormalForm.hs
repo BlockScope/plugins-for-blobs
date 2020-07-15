@@ -82,12 +82,14 @@ instance Outputable Atom where
 
 -- | A unit normal form is a signed multiset of atoms; we maintain the
 -- invariant that the map does not contain any zero values.
-newtype NormUnit = NormUnit { _NormUnit :: Map.Map Atom Integer }
+newtype NormUnit = NormUnit { _NormUnit :: Map.Map Atom Integer } deriving Eq
 
 instance Outputable NormUnit where
     ppr = ppr . Map.map show . _NormUnit
 
 -- | The group identity, representing the dimensionless unit
+-- >>> showSDocUnsafe $ ppr one
+-- "[]"
 one :: NormUnit
 one = NormUnit Map.empty
 
@@ -134,10 +136,14 @@ infixl 7 *:, /:
 infixr 8 ^:
 
 -- | Invert a normalised unit
+-- >>> one == invert one
+-- True
 invert :: NormUnit -> NormUnit
 invert = NormUnit . Map.map negate . _NormUnit
 
 -- | Test whether a unit is dimensionless
+-- >>> isOne one
+-- True
 isOne :: NormUnit -> Bool
 isOne = Map.null . _NormUnit
 
@@ -193,3 +199,6 @@ substUnit :: TyVar -> NormUnit -> NormUnit -> NormUnit
 substUnit a v u = case Map.lookup (VarAtom a) $ _NormUnit u of
     Nothing -> u
     Just i  -> (v ^: i) *: leftover a u
+
+-- $setup
+-- >>> import GHC.Corroborate (showSDocUnsafe)
