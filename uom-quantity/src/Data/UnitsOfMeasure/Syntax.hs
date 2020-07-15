@@ -70,6 +70,21 @@ type family Prod (xs :: [Symbol]) :: Unit where
     Prod (x ': xs) = Base x *: Prod xs
 
 -- | Take the product of a list of units with explicit powers.
+--
+-- >>> :kind Exp '[]
+-- Exp '[] :: Unit
+--
+-- >>> :kind Exp ('("s", 0) ': '[])
+-- Exp ('("s", 0) ': '[]) :: Unit
+--
+-- >>> :kind Exp '[ '("s", 0)]
+-- Exp '[ '("s", 0)] :: Unit
+--
+-- >>> :kind Exp '[ '("s", 1)]
+-- Exp '[ '("s", 1)] :: Unit
+--
+-- >>> :kind Exp '[ '("s", 2)]
+-- Exp '[ '("s", 2)] :: Unit
 type family Exp (xs :: [(Symbol, Nat)]) :: Unit where
     Exp '[] = One
     Exp ('(u, 0) ': ys) = One *: Exp ys
