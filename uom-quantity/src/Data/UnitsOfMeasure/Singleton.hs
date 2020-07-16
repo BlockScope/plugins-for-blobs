@@ -25,6 +25,7 @@ module Data.UnitsOfMeasure.Singleton
       -- * Singletons for lists
     , SList(..)
     , KnownList(..)
+    , forgetSList
     ) where
 
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
