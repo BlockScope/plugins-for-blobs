@@ -141,6 +141,12 @@ testEquivalentSUnit su sv
 --
 -- >>> normaliseUnitSyntax (["m"] :/ ["s", "s"])
 -- fromList [("m",1),("s",-2)]
+--
+-- >>> normaliseUnitSyntax (["m", "m"] :/ []) == normaliseUnitSyntax (["m", "m"] :/ ["m", "m"])
+-- False
+--
+-- >>> normaliseUnitSyntax (["m"] :/ []) == normaliseUnitSyntax (["m"] :/ ["m", "m"])
+-- False
 normaliseUnitSyntax :: UnitSyntax String -> Map.Map String Integer
 normaliseUnitSyntax (xs :/ ys) =
     Map.filter
