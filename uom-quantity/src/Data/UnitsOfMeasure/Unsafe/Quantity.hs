@@ -85,6 +85,9 @@ unQuantity (MkQuantity x) = x
 -- | Zero is polymorphic in its units: this is required because the
 -- 'Num' instance constrains the quantity to be dimensionless, so
 -- @0 :: Quantity a u@ is not well typed.
+--
+-- >>> unQuantity zero == 0
+-- True
 zero :: Num a => Quantity a u
 zero = MkQuantity 0
 
