@@ -29,7 +29,7 @@ import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
 import Data.UnitsOfMeasure.Syntax (Pack, Unpack, UnitSyntax((:/)))
 import Data.UnitsOfMeasure.Singleton
     ( SUnit(..), SList(..), KnownUnit
-    , unitSing, forgetSUnit, testEquivalentSUnit, forgetSList)
+    , unitSing, forgetSUnit, testEquivalentSUnit)
 
 -- | Represents a quantity whose units have a syntactic representation
 -- that is known statically and at runtime.
@@ -161,6 +161,7 @@ expToUnitSyntax (u `Pow` n)
 
 -- $setup
 -- >>> :set -XFlexibleInstances
+-- >>> import Data.UnitsOfMeasure.Singleton (forgetSList)
 --
 -- >>> :{
 -- instance Show (Some SUnit) where
