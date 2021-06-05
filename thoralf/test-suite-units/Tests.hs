@@ -74,7 +74,7 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "uom-plugin"
+tests = testGroup "thoralf-plugin:units"
   [ testGroup "Get the underlying value with unQuantity"
     [ testCase "unQuantity 1"                  $ unQuantity (mk 1)                @?= 1
     ]

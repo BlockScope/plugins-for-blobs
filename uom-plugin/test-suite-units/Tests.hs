@@ -206,7 +206,7 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "uom-plugin"
+tests = testGroup "uom-plugin:units"
   [ testGroup "Get the underlying value with unQuantity"
     [ testCase "unQuantity 3 m"                $ unQuantity [u| 3 m |]            @?= 3
     , testCase "unQuantity 3 s^2"              $ unQuantity [u| 3 s^2 |]          @?= 3
