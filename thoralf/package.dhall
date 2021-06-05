@@ -126,8 +126,9 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                       [ "base"
                       , "tasty"
                       , "tasty-hunit"
-                      , "uom-quantity"
                       , "thoralf-plugin"
+                      , "uom-quantity"
+                      , "uom-th"
                       ]
                   , ghc-options =
                       testopts
