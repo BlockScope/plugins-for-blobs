@@ -106,6 +106,9 @@ type family Exp (xs :: [(Symbol, Nat)]) :: Unit where
 -- >>> :kind Unpack One
 -- Unpack One :: UnitSyntax Symbol
 --
+-- >>> :kind Unpack (Base "m")
+-- Unpack (Base "m") :: UnitSyntax Symbol
+--
 -- >>> :kind Unpack (Base "s" *: Base "m")
 -- Unpack (Base "s" *: Base "m") :: UnitSyntax Symbol
 --
