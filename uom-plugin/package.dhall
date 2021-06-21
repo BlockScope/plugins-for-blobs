@@ -40,7 +40,7 @@ in  let testopts =
                     , "th-printf"
                     , "uom-quantity"
                     , "uom-th"
-                    , "units-parser >=0.1"
+                    , "units-parser >=0.1.1.4"
                     ]
               , exposed-modules =
                   [ "Data.UnitsOfMeasure"

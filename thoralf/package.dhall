@@ -33,7 +33,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "th-printf"
                 , "uom-quantity"
                 , "uom-th"
-                , "units-parser >=0.1"
+                , "units-parser >=0.1.1.4"
                 ]
           , library =
               { source-dirs =

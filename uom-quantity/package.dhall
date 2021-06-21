@@ -35,7 +35,7 @@ in  let testopts =
                     , "template-haskell >=2.9"
                     , "containers >=0.5"
                     , "ghc-corroborate"
-                    , "units-parser >=0.1"
+                    , "units-parser >=0.1.1.4"
                     ]
               , exposed-modules =
                   [ "GHC.Corroborate.Type"

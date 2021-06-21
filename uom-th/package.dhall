@@ -38,7 +38,7 @@ in  let testopts =
                     , "template-haskell >=2.9"
                     , "th-printf"
                     , "uom-quantity"
-                    , "units-parser >=0.1"
+                    , "units-parser >=0.1.1.4"
                     ]
               , exposed-modules =
                   [ "Data.UnitsOfMeasure.Canonical", "Data.UnitsOfMeasure.TH" ]

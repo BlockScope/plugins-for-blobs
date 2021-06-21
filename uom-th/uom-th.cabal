@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.31.0.
+-- This file has been generated from package.dhall by hpack version 0.34.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6a8ec5a4f6378cea46476fb4df869755c70876fdde55eafda0ba1fbae92c8ed3
+-- hash: d0da80c4a6cfea481ec5ebc0994b98efb1c005f27f317145f88ffbd52b3c33cc
 
 name:           uom-th
 version:        0.3.0.1
@@ -48,7 +48,7 @@ library
     , ghc-tcplugins-extra >=0.5
     , template-haskell >=2.9
     , th-printf
-    , units-parser >=0.1
+    , units-parser >=0.1.1.4
     , uom-quantity
   default-language: Haskell2010
 

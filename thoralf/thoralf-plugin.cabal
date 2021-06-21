@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fa97b585e3a1aae8a0a33c02e37406ca602716dd344a4eb3903d2ca3ca3ab000
+-- hash: d404508e211ad7bc994880415870d33f453397e4d339584a5541fc91080513c5
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -74,7 +74,7 @@ library
     , simple-smt
     , template-haskell >=2.9
     , th-printf
-    , units-parser >=0.1
+    , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
 
@@ -101,7 +101,7 @@ test-suite defs
     , template-haskell >=2.9
     , th-printf
     , thoralf-plugin
-    , units-parser >=0.1
+    , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
   default-language: Haskell2010
@@ -126,7 +126,7 @@ test-suite hlint
     , simple-smt
     , template-haskell >=2.9
     , th-printf
-    , units-parser >=0.1
+    , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
   if impl(ghc >= 8.6.0)
@@ -166,7 +166,7 @@ test-suite rows
     , template-haskell >=2.9
     , th-printf
     , thoralf-plugin
-    , units-parser >=0.1
+    , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
   default-language: Haskell2010
@@ -195,7 +195,7 @@ test-suite units
     , template-haskell >=2.9
     , th-printf
     , thoralf-plugin
-    , units-parser >=0.1
+    , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
   default-language: Haskell2010
@@ -227,7 +227,7 @@ test-suite uom
     , template-haskell
     , th-printf
     , thoralf-plugin
-    , units-parser >=0.1
+    , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
   default-language: Haskell2010
