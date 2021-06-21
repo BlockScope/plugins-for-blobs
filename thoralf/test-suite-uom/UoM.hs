@@ -5,7 +5,7 @@
 module UoM where
 
 import Data.Kind (Type)
-import Data.Singletons.TypeLits hiding (SSymbol)
+import ThoralfPlugin.Singletons.Nat (SNat(..))
 import ThoralfPlugin.Singletons.Symbol (SSymbol)
 import Data.Theory.UoM
 import Data.UnitsOfMeasure.Constraint

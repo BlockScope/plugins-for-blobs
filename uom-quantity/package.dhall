@@ -54,7 +54,21 @@ in  let testopts =
               }
           , when =
               [ { condition =
-                    "impl(ghc >= 8.10.0)"
+                    "impl(ghc >= 9.0)"
+                , source-dirs =
+                    "src-ghc-9.0"
+                , dependencies =
+                    [ { name =
+                          "ghc"
+                      , version =
+                          ">=9.0 && <9.2"
+                      , mixin =
+                          [] : List Text
+                      }
+                    ]
+                }
+              , { condition =
+                    "impl(ghc >= 8.10.0) && impl(ghc < 9.0)"
                 , source-dirs =
                     "src-ghc-8.10"
                 , dependencies =

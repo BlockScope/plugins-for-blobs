@@ -259,7 +259,11 @@ defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
 
     defFn :: Type -> Maybe (String, [TyVar])
     defFn ty = do
+#if __GLASGOW_HASKELL__ < 900
         (fn, arg) <- splitFunTy_maybe ty
+#else
+        (fn, arg, _) <- splitFunTy_maybe ty
+#endif
         (fnStr, tv1) <- defConvTy fn
         (argStr, tv2) <- defConvTy arg
         return ([s|(apply (apply (lit "->") %s) %s)|] fnStr argStr, tv1 ++ tv2)
