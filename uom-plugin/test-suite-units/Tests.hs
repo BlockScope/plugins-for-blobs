@@ -213,6 +213,8 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
+tests = Z.tests
+{-
 tests = testGroup "uom-plugin"
   [ testGroup "Get the underlying value with unQuantity"
     [ testCase "unQuantity 3 m"                $ unQuantity [u| 3 m |]            @?= 3
@@ -354,6 +356,7 @@ tests = testGroup "uom-plugin"
         (read "[u| 1 m |]" :: Quantity Double [u| m/m^2 |]) `throws` noParse
     ]
   ]
+  -}
 
 -- | Assert that evaluation of the first argument (to WHNF) will throw
 -- an exception whose string representation contains one of the given

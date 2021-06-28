@@ -1,4 +1,5 @@
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE TupleSections, LambdaCase #-}
+-- {-# OPTIONS_GHC -ddump-tc-trace #-}
 
 -- | This module defines a typechecker plugin that solves equations
 -- involving units of measure.  To use it, add
@@ -12,6 +13,12 @@ module Data.UnitsOfMeasure.Plugin
   ( plugin
   ) where
 
+import qualified Print.Constraints as PrintCts
+import GHC.Driver.Session (unsafeGlobalDynFlags)
+import GHC.Utils.Outputable (showSDoc)
+import GHC.Tc.Types.Constraint (pprCts)
+import GHC.Data.Bag (listToBag)
+import Debug.Trace
 import GhcApi
 import GhcApi.Shim
     ( mkEqPred, mkFunnyEqEvidence
@@ -21,6 +28,7 @@ import GhcApi.Wrap (newGivenCt, newWantedCt)
 import Control.Applicative
 import Data.Either
 import Data.Maybe
+import qualified Data.List as List
 
 import Data.UnitsOfMeasure.Plugin.Convert
 import Data.UnitsOfMeasure.Plugin.NormalForm
@@ -43,8 +51,10 @@ uomPlugin = tracePlugin
 
 
 unitsOfMeasureSolver :: UnitDefs -> [Ct] -> [Ct] -> [Ct] -> TcPluginM TcPluginResult
-unitsOfMeasureSolver uds givens _deriveds []      = do
-    zonked_cts <- mapM zonkCt givens
+unitsOfMeasureSolver uds givens deriveds []      = do
+    zonked_cts <-
+      trace ("AA-Givens: " ++ showSDoc unsafeGlobalDynFlags (pprCts (listToBag givens))) $
+        mapM zonkCt givens
     let (unit_givens , _) = partitionEithers $ zipWith foo givens $ map (toUnitEquality uds) zonked_cts
     case unit_givens of
       []    -> return $ TcPluginOk [] []
@@ -63,8 +73,12 @@ unitsOfMeasureSolver uds givens _deriveds []      = do
     -- solvedGiven ct = (ctEvTerm (ctEvidence ct), ct)
 
 
-unitsOfMeasureSolver uds givens _deriveds wanteds = do
-  mb <- lookForUnpacks uds wanteds
+unitsOfMeasureSolver uds givens deriveds wanteds = do
+  mb <-
+    trace ("BB-Givens: " ++ showSDoc unsafeGlobalDynFlags (pprCts (listToBag givens))) $
+    trace ("BB-Deriveds: " ++ showSDoc unsafeGlobalDynFlags (pprCts (listToBag deriveds))) $
+    trace ("BB-Wanteds: " ++ showSDoc unsafeGlobalDynFlags (pprCts (listToBag wanteds))) $
+    lookForUnpacks uds wanteds
   case mb of
    Just (new_cts, solved_cts) -> return $ TcPluginOk solved_cts new_cts
    Nothing -> do
@@ -123,11 +137,36 @@ substItemToCt uds si
 -- All this should become much simpler when plugins can define type family
 -- reductions directly.
 lookForUnpacks :: UnitDefs -> [Ct] -> TcPluginM (Maybe ([Ct], [(EvTerm, Ct)]))
-lookForUnpacks uds = lookForReductions (reduceType match_unpack)
+lookForUnpacks uds cts = do
+  --let dflags = unsafeGlobalDynFlags
+  --trace (showSDoc dflags (pprCts (listToBag cts))) $
+    lookForReductions (reduceType match_unpack') cts
   where
+    match_unpack' :: TyCon -> [Type] -> Maybe Type
+    match_unpack' tc as = match_pack_unpack_base tc as <|> match_unpack tc as
+      
+    match_pack_unpack_base :: TyCon -> [Type] -> Maybe Type
+    match_pack_unpack_base tc as
+      | Just (TyConApp tcPack asPack) <- List.find (\case {TyConApp tcPack _ -> tcPack == packTyCon uds; _ -> False}) as
+      , [TyConApp tcUnpack [aUnpack]] <- asPack
+      , tcUnpack == unpackTyCon uds
+      , TyConApp tcBase [aBase] <- aUnpack
+      , tcBase == unitBaseTyCon uds =
+        trace ("AAA-Pack: (" ++ PrintCts.showList as ++ ", " ++ PrintCts.showList asPack ++ ")") $
+        reifyUnitUnpacked uds <$> (maybeConstant =<< normaliseUnit uds aUnpack)
+
+      | otherwise =
+        trace ("AAA-???: " ++ PrintCts.showList as) $
+        Nothing
+
+    match_unpack :: TyCon -> [Type] -> Maybe Type
     match_unpack tc as
-      | [a] <- as, tc == unpackTyCon uds = reifyUnitUnpacked uds <$> (maybeConstant =<< normaliseUnit uds a)
-      | otherwise                        = Nothing
+      | [a] <- as, tc == unpackTyCon uds =
+        --trace ("A") $
+        reifyUnitUnpacked uds <$> (maybeConstant =<< normaliseUnit uds a)
+      | otherwise =
+        --trace ("B: " ++ PrintCts.showList as) $
+        Nothing
 
 -- | Look for constraints whose types can be simplified by the reduction
 -- function.  If there are any, emit new wanteds and solve the existing wanteds
@@ -186,10 +225,11 @@ lookupUnitDefs = do
     m <- look md "*:"
     d <- look md "/:"
     e <- look md "^:"
+    p <- look md "Pack"
     x <- look md "Unpack"
     i <- look md "UnitSyntax"
     c <- look md "~~"
-    return $ UnitDefs u b o m d e x i (getDataCon i ":/") c
+    return $ UnitDefs u b o m d e p x i (getDataCon i ":/") c
   where
     getDataCon u s = case [ dc | dc <- tyConDataCons u, occNameFS (occName (dataConName dc)) == fsLit s ] of
                        [d] -> promoteDataCon d

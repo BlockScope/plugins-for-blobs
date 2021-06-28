@@ -22,6 +22,7 @@ data UnitDefs = UnitDefs
     , mulTyCon      :: TyCon -- ^ The '(*:)' type family
     , divTyCon      :: TyCon -- ^ The '(/:)' type family
     , expTyCon      :: TyCon -- ^ The '(^:)' type family
+    , packTyCon     :: TyCon -- ^ The 'Pack' type family
     , unpackTyCon     :: TyCon -- ^ The 'Unpack' type family
     , unitSyntaxTyCon :: TyCon -- ^ The 'UnitSyntax' type constructor, to be promoted to a kind
     , unitSyntaxPromotedDataCon :: TyCon -- ^ The data constructor of 'UnitSyntax', promoted to a type constructor
