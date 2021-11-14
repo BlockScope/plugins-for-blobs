@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6e5288cc72038802368e21e1e5200ea952b1a89cd3058ad200a9b940f92ef09f
+-- hash: d2a65167dadc4314433c7653e94647176bdf7a0d83e0ec5683179c372a1340fc
 
 name:           uom-plugin-tutorial
 version:        0.3.0.1
@@ -30,13 +30,17 @@ test-suite doctest
   hs-source-dirs:
       test-suite-doctest
       doc
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.UoM
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.UoM
   build-depends:
       base >=4.9.1.0 && <5
     , doctest >=0.13.0
     , uom-plugin
     , uom-plugin-defs
     , uom-quantity
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc < 8.2.2) || impl(ghc > 8.2.2)
     buildable: False
   default-language: Haskell2010

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c413ece5e365f6b5e8c6000630013cadfc4a132fd201fbc832df2fde1d9e1134
+-- hash: d77a19d9939dfaef881c138bd1db01a165f394dfd756018ca8f2033cd7305f92
 
 name:           uom-plugin-defs
 version:        0.3.0.1
@@ -38,10 +38,13 @@ library
       Paths_uom_plugin_defs
   hs-source-dirs:
       src
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   build-depends:
       base >=4.9.1.0 && <5
     , template-haskell >=2.9
     , uom-plugin
     , uom-quantity
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010

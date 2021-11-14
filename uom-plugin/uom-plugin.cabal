@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6bbc70a454d399493527f33d5a710e3e015b9dfc841cf07c5da19f45687393a0
+-- hash: a7644c923b34c7f89c282552a2945d805c30bda1bb5df3c61a4c8b46ecf1268c
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -45,7 +45,6 @@ library
   hs-source-dirs:
       doc
       src
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   build-depends:
       base >=4.9.1.0 && <5
     , containers >=0.5
@@ -58,6 +57,10 @@ library
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite defs
@@ -67,13 +70,17 @@ test-suite defs
       Defs
   hs-source-dirs:
       test-suite-defs
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , tasty
     , tasty-hunit
     , uom-plugin
     , uom-quantity
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4.0)
     buildable: False
   default-language: Haskell2010
@@ -85,9 +92,13 @@ test-suite hlint
       Paths_uom_plugin
   hs-source-dirs:
       test-suite-hlint
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.6.0)
     build-depends:
         hlint
@@ -112,13 +123,17 @@ test-suite units
       Z
   hs-source-dirs:
       test-suite-units
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , tasty
     , tasty-hunit
     , uom-plugin
     , uom-quantity
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4.0)
     buildable: False
   default-language: Haskell2010

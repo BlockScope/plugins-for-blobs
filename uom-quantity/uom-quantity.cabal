@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e0cb62f880a267ad97012858a875dd077ea091e80d5fefc9f38fef71f150890a
+-- hash: 49a2221a1de6caf67d72b165af1b7f3cff516eb6f75ab65a35f2a00ffc7b5db3
 
 name:           uom-quantity
 version:        0.3.0.1
@@ -47,7 +47,6 @@ library
       Data.UnitsOfMeasure.Unsafe.Quantity
   hs-source-dirs:
       src
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   build-depends:
       base >=4.9.1.0 && <5
     , containers >=0.5
@@ -139,7 +138,7 @@ test-suite doctest
   hs-source-dirs:
       src
       test-suite-doctest
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base >=4.9.1.0 && <5
@@ -237,7 +236,7 @@ test-suite hlint
       Paths_uom_quantity
   hs-source-dirs:
       test-suite-hlint
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , hlint
