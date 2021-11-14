@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.31.0.
+-- This file has been generated from package.dhall by hpack version 0.34.5.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 69db40af0517228de43dc964b32c60ee8267cb86419ec4aae6ee79930e9a8440
+-- hash: c413ece5e365f6b5e8c6000630013cadfc4a132fd201fbc832df2fde1d9e1134
 
 name:           uom-plugin-defs
 version:        0.3.0.1
@@ -21,7 +21,8 @@ maintainer:     Adam Gundry <adam@well-typed.com>
 copyright:      Copyright (c) 2014-2018, Adam Gundry
 license:        BSD3
 license-file:   LICENSE
-tested-with:    GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
+tested-with:
+    GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
 build-type:     Simple
 extra-source-files:
     LICENSE
@@ -37,7 +38,7 @@ library
       Paths_uom_plugin_defs
   hs-source-dirs:
       src
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   build-depends:
       base >=4.9.1.0 && <5
     , template-haskell >=2.9

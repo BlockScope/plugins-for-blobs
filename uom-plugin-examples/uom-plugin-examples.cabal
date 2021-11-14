@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.31.0.
+-- This file has been generated from package.dhall by hpack version 0.34.5.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c6eaacfe1ea84d5febc1ab5a7dde4d5a34964190c6962c02fdf1587685f401f7
+-- hash: 84749f53fa7d93b757850490032c8db9ece6f656a071e2c3d29096efe01c92bf
 
 name:           uom-plugin-examples
 version:        0.3.0.1
@@ -14,7 +14,8 @@ author:         Adam Gundry <adam@well-typed.com>
 maintainer:     Adam Gundry <adam@well-typed.com>
 copyright:      Copyright (c) 2014-2018, Adam Gundry
 license:        PublicDomain
-tested-with:    GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
+tested-with:
+    GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
 build-type:     Simple
 extra-source-files:
     package.dhall
@@ -25,7 +26,7 @@ executable uom-plugin-examples
       RationalExamples
       Paths_uom_plugin_examples
   hs-source-dirs:
-      ./.
+      ./
   ghc-options: -dcore-lint
   build-depends:
       base >=4.9.1.0 && <5

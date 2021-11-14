@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.2.
+-- This file has been generated from package.dhall by hpack version 0.34.5.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d404508e211ad7bc994880415870d33f453397e4d339584a5541fc91080513c5
+-- hash: 1464b4e576f0aa56ab09fe81516b2d6b42f42b60f1424ccc54e714534f0df426
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -20,7 +20,8 @@ category:            Development
 homepage:            https://github.com/bgamari/the-thoralf-plugin#readme
 bug-reports:         https://github.com/bgamari/the-thoralf-plugin/issues
 build-type:          Simple
-tested-with:         GHC == 8.4.4
+tested-with:
+    GHC == 8.4.4
 
 source-repository head
   type: git
@@ -61,7 +62,11 @@ library
       Plugins.Print.SMT
       Plugins.Thoralf.Print
       Data.Vec
-  other-extensions: TypeFamilies TypeInType GADTs RecordWildCards
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
   build-depends:
       base
     , containers
