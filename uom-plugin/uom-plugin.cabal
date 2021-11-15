@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a7644c923b34c7f89c282552a2945d805c30bda1bb5df3c61a4c8b46ecf1268c
+-- hash: 4eecd4eba6c45e48aec1a77eb1b8fd54a96aea47acc8a5903fe4061ef7c9f60a
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -99,17 +99,29 @@ test-suite hlint
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  if impl(ghc >= 8.6.0)
+  if impl(ghc >= 9.0.0)
     build-depends:
-        hlint
+        hlint >=3.3.4
+    buildable: True
+  if impl(ghc >= 8.10.0) && impl(ghc < 9.0.0)
+    build-depends:
+        hlint >=3.2.7
+    buildable: True
+  if impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)
+    build-depends:
+        hlint >=3.1.6
+    buildable: True
+  if impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)
+    build-depends:
+        hlint >=2.1.26
     buildable: True
   if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
     build-depends:
-        hlint <2.1.18
+        hlint >=2.1.11
     buildable: True
   if impl(ghc < 8.4.0)
     build-depends:
-        hlint
+        hlint <=2.1.10
     buildable: False
   default-language: Haskell2010
 

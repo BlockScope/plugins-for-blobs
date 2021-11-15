@@ -66,16 +66,28 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "HLint.hs"
               , source-dirs = "test-suite-hlint"
               , when =
-                [ { condition = "impl(ghc >= 8.6.0)"
-                  , dependencies = "hlint"
+                [ { condition = "impl(ghc >= 9.0.0)"
+                  , dependencies = "hlint >= 3.3.4"
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.10.0) && impl(ghc < 9.0.0)"
+                  , dependencies = "hlint >= 3.2.7"
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)"
+                  , dependencies = "hlint >= 3.1.6"
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)"
+                  , dependencies = "hlint >= 2.1.26"
                   , buildable = True
                   }
                 , { condition = "impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)"
-                  , dependencies = "hlint < 2.1.18"
+                  , dependencies = "hlint >= 2.1.11"
                   , buildable = True
                   }
                 , { condition = "impl(ghc < 8.4.0)"
-                  , dependencies = "hlint"
+                  , dependencies = "hlint <= 2.1.10"
                   , buildable = False
                   }
                 ]
