@@ -1,5 +1,5 @@
 packages:
-    ghc-corroborate
+    ghc-corroborate/ghc-corroborate
     ghc-tcplugins-extra
     ghc-tcplugins-trace
     thoralf
