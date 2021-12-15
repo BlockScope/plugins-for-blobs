@@ -15,9 +15,9 @@ jobs:
         cabal: ["3.4"]
         ghc:
           - "8.2.2"
-          - "8.8.4"
-          - "8.10.7"
-          - "9.0.1"
+          #- "8.8.4"
+          #- "8.10.7"
+          #- "9.0.1"
 
     steps:
     - uses: actions/checkout@v2
@@ -29,6 +29,11 @@ jobs:
       with:
         ghc-version: ${{ matrix.ghc }}
         cabal-version: ${{ matrix.cabal }}
+
+    - uses: rwe/actions-hlint-setup@v1
+    - name: Set up HLint
+      with:
+        version: '3.3.4'
 
     - uses: actions/cache@v2
       name: cache ~/.cabal/store
@@ -53,11 +58,36 @@ jobs:
       if: ${{ matrix.ghc == '8.2.2' }}
       run: cabal v2-build uom-plugin-examples
 
-    - name: test uom-plugin
-      run: cabal v2-test uom-plugin --test-show-details=direct --test-option="--color=always"
+    - name: test thoralf:defs
+      run: cabal v2-test thoralf-plugin:defs --test-show-details=direct --test-option="--color=always"
 
-    - name: test thoralf rows
-      run: cabal v2-test thoralf:rows --test-show-details=direct --test-option="--color=always"
+    - name: test thoralf-plugin:rows
+      run: cabal v2-test thoralf-plugin:rows --test-show-details=direct --test-option="--color=always"
 
-    - name: test thoralf units
-      run: cabal v2-test thoralf:units --test-show-details=direct --test-option="--color=always"
+    - name: test thoralf-plugin:units
+      run: cabal v2-test thoralf-plugin:units --test-show-details=direct --test-option="--color=always"
+
+    - name: test thoralf-plugin:uom
+      run: cabal v2-test thoralf-plugin:uom --test-show-details=direct --test-option="--color=always"
+
+    - name: test uom-plugin:defs
+      run: cabal v2-test uom-plugin:defs --test-show-details=direct --test-option="--color=always"
+
+    - name: test uom-plugin:units
+      run: cabal v2-test uom-plugin:units --test-show-details=direct --test-option="--color=always"
+
+    - name: test uom-plugin-tutorial:doctest
+      run: cabal v2-test uom-plugin-tutorial:doctest --test-show-details=direct --test-option="--color=always"
+
+    - name: hlint 
+      uses: rwe/actions-hlint-run@v2
+      with:
+        path:
+        - thoralf
+        - uom-plugin
+        - uom-plugin-defs
+        - uom-plugin-examples
+        - uom-plugin-tutorial
+        - uom-quantity
+        - uom-th
+        fail-on: suggestion

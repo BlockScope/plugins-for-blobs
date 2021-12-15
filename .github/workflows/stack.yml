@@ -14,11 +14,11 @@ jobs:
         cabal: ["3.4"]
         ghc:
           - "8.2.2"
-          - "8.4.4"
-          - "8.6.5"
-          - "8.8.4"
-          - "8.10.7"
-          - "9.0.1"
+          #- "8.4.4"
+          #- "8.6.5"
+          #- "8.8.4"
+          #- "8.10.7"
+          #- "9.0.1"
 
     steps:
     - uses: actions/checkout@v2
@@ -31,6 +31,11 @@ jobs:
         enable-stack: true
         stack-version: 'latest'
         cabal-version: ${{ matrix.cabal }}
+
+    - uses: rwe/actions-hlint-setup@v1
+    - name: Set up HLint
+      with:
+        version: '3.3.4'
 
     - uses: pavpanchekha/setup-z3@1.2.2
       name: setup z3
@@ -46,11 +51,36 @@ jobs:
     - name: build tests
       run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test uom-plugin-tutorial
-      run: stack test uom-plugin-tutorial --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+    - name: test thoralf-plugin:defs
+      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test uom-plugin
+    - name: test thoralf-plugin:rows
+      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+    - name: test thoralf-plugin:units
+      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+    - name: test thoralf-plugin:uom
+      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+    - name: test uom-plugin:defs
       run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test thoralf-plugin
-      run: stack test thoralf-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+    - name: test uom-plugin:units
+      run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+    - name: test uom-plugin-tutorial:doctest
+      run: stack test uom-plugin-tutorial:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+    - name: hlint 
+      uses: rwe/actions-hlint-run@v2
+      with:
+        path:
+        - thoralf
+        - uom-plugin
+        - uom-plugin-defs
+        - uom-plugin-examples
+        - uom-plugin-tutorial
+        - uom-quantity
+        - uom-th
+        fail-on: suggestion

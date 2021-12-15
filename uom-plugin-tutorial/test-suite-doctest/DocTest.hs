@@ -6,6 +6,7 @@ arguments :: [String]
 arguments =
     [ "-isrc"
     , "./doc/Data/UnitsOfMeasure/Tutorial.hs"
+    , "-fplugin Plugins.UoM"
     ]
 
 main :: IO ()
