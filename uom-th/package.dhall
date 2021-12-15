@@ -34,25 +34,4 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               [ "Data.UnitsOfMeasure.Canonical", "Data.UnitsOfMeasure.TH" ]
             , other-modules = [] : List Text
             }
-          , tests.hlint
-            =
-            { dependencies = "base"
-            , ghc-options = testopts
-            , main = "HLint.hs"
-            , source-dirs = "test-suite-hlint"
-            , when =
-              [ { condition = "impl(ghc >= 8.6.0)"
-                , dependencies = "hlint"
-                , buildable = True
-                }
-              , { condition = "impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)"
-                , dependencies = "hlint < 2.1.18"
-                , buildable = True
-                }
-              , { condition = "impl(ghc < 8.4.0)"
-                , dependencies = "hlint"
-                , buildable = False
-                }
-              ]
-            }
           }

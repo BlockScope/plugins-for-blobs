@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 49a2221a1de6caf67d72b165af1b7f3cff516eb6f75ab65a35f2a00ffc7b5db3
+-- hash: 3eb6ac7c217c83e78e64362f20c4ac49cd441a4584c0a81af7ae7d5bd1b6376f
 
 name:           uom-quantity
 version:        0.3.0.1
@@ -148,99 +148,6 @@ test-suite doctest
     , ghc-corroborate
     , template-haskell >=2.9
     , units-parser >=0.1
-  if impl(ghc >= 9.0)
-    other-modules:
-        GHC.Corroborate.Type
-    hs-source-dirs:
-        src-ghc-9.0
-    build-depends:
-        ghc >=9.0 && <9.2
-  if impl(ghc >= 8.10.0) && impl(ghc < 9.0)
-    other-modules:
-        GHC.Corroborate.Type
-    hs-source-dirs:
-        src-ghc-8.10
-    build-depends:
-        ghc >=8.10 && <8.12
-  if impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)
-    other-modules:
-        GHC.Corroborate.Type
-    hs-source-dirs:
-        src-ghc-8.8
-    build-depends:
-        ghc >=8.8 && <8.10
-    mixins:
-        ghc hiding ()
-      , ghc (TcRnTypes as TcRnTypes)
-      , ghc (Type as Type)
-      , ghc (TcRnTypes as Constraint)
-      , ghc (Type as Predicate)
-  if impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)
-    other-modules:
-        GHC.Corroborate.Type
-    hs-source-dirs:
-        src-ghc-8.6
-    build-depends:
-        ghc >=8.6 && <8.8
-    mixins:
-        ghc hiding ()
-      , ghc (TcRnTypes as TcRnTypes)
-      , ghc (Type as Type)
-      , ghc (TcRnTypes as Constraint)
-      , ghc (Type as Predicate)
-  if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
-    other-modules:
-        GHC.Corroborate.Type
-    hs-source-dirs:
-        src-ghc-8.4
-    build-depends:
-        ghc >=8.4 && <8.6
-    mixins:
-        ghc hiding ()
-      , ghc (TcRnTypes as TcRnTypes)
-      , ghc (Type as Type)
-      , ghc (TcRnTypes as Constraint)
-      , ghc (Type as Predicate)
-  if impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)
-    other-modules:
-        GHC.Corroborate.Type
-    hs-source-dirs:
-        src-ghc-8.2
-    build-depends:
-        ghc >=8.2 && <8.4
-    mixins:
-        ghc hiding ()
-      , ghc (TcRnTypes as TcRnTypes)
-      , ghc (Type as Type)
-      , ghc (TcRnTypes as Constraint)
-      , ghc (Type as Predicate)
-  if impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)
-    other-modules:
-        GHC.Corroborate.Type
-    hs-source-dirs:
-        src-ghc-8.0
-    build-depends:
-        ghc >=8.0 && <8.2
-    mixins:
-        ghc hiding ()
-      , ghc (TcRnTypes as TcRnTypes)
-      , ghc (Type as Type)
-      , ghc (TcRnTypes as Constraint)
-      , ghc (Type as Predicate)
-  default-language: Haskell2010
-
-test-suite hlint
-  type: exitcode-stdio-1.0
-  main-is: HLint.hs
-  other-modules:
-      Paths_uom_quantity
-  hs-source-dirs:
-      test-suite-hlint
-  ghc-options: -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      base
-    , hlint
-    , uom-quantity
   if impl(ghc >= 9.0)
     other-modules:
         GHC.Corroborate.Type

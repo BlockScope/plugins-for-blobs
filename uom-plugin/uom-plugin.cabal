@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e8610b8a8c37c3c32566311e636fd014cc1f43586c8b96881a723ebc1d88dc6c
+-- hash: f9c25b76d8f16dba163aa07b24176265a3e0c1cb92614c46e704539ed95197db
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -82,46 +82,6 @@ test-suite defs
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4.0)
-    buildable: False
-  default-language: Haskell2010
-
-test-suite hlint
-  type: exitcode-stdio-1.0
-  main-is: HLint.hs
-  other-modules:
-      Paths_uom_plugin
-  hs-source-dirs:
-      test-suite-hlint
-  ghc-options: -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      base
-  if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
-  else
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  if impl(ghc >= 9.0.0)
-    build-depends:
-        hlint >=3.3.4
-    buildable: True
-  if impl(ghc >= 8.10.0) && impl(ghc < 9.0.0)
-    build-depends:
-        hlint >=3.2.7
-    buildable: True
-  if impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)
-    build-depends:
-        hlint >=3.1.6
-    buildable: True
-  if impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)
-    build-depends:
-        hlint >=2.1.26
-    buildable: True
-  if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
-    build-depends:
-        hlint >=2.1.11
-    buildable: True
-  if impl(ghc < 8.4.0)
-    build-depends:
-        hlint <=2.1.10
     buildable: False
   default-language: Haskell2010
 
