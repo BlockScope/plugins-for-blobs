@@ -21,66 +21,65 @@ jobs:
           #- "9.0.1"
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
 
-    - uses: haskell/actions/setup@v1
-      name: Setup Stack
-      with:
-        enable-stack: true
-        stack-version: 'latest'
-        cabal-version: ${{ matrix.cabal }}
+      - uses: haskell/actions/setup@v1
+        name: Setup Stack
+        with:
+          enable-stack: true
+          stack-version: "latest"
+          cabal-version: ${{ matrix.cabal }}
 
-    - uses: rwe/actions-hlint-setup@v1
-    - name: Set up HLint
-      with:
-        version: '3.3.4'
+      - uses: rwe/actions-hlint-setup@v1
+        name: Set up HLint
+        with:
+          version: "3.3.4"
 
-    - uses: pavpanchekha/setup-z3@1.2.2
-      name: setup z3
-      with:
-        version: "4.8.7"
+      - uses: pavpanchekha/setup-z3@1.2.2
+        name: setup z3
+        with:
+          version: "4.8.7"
 
-    - uses: actions/cache@v2
-      name: Cache ~/.stack
-      with:
-        path: ~/.stack
-        key: ${{ runner.os }}-${{ matrix.ghc }}-stack
+      - uses: actions/cache@v2
+        name: Cache ~/.stack
+        with:
+          path: ~/.stack
+          key: ${{ runner.os }}-${{ matrix.ghc }}-stack
 
-    - name: build tests
-      run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: build tests
+        run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test thoralf-plugin:defs
-      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin:defs
+        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test thoralf-plugin:rows
-      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin:rows
+        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test thoralf-plugin:units
-      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin:units
+        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test thoralf-plugin:uom
-      run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin:uom
+        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test uom-plugin:defs
-      run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test uom-plugin:defs
+        run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test uom-plugin:units
-      run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test uom-plugin:units
+        run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test uom-plugin-tutorial:doctest
-      run: stack test uom-plugin-tutorial:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test uom-plugin-tutorial:doctest
+        run: stack test uom-plugin-tutorial:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: hlint 
-      uses: rwe/actions-hlint-run@v2
-      with:
-        path:
-        - thoralf
-        - uom-plugin
-        - uom-plugin-defs
-        - uom-plugin-examples
-        - uom-plugin-tutorial
-        - uom-quantity
-        - uom-th
-        fail-on: suggestion
+      - uses: rwe/actions-hlint-run@v2
+        name: hlint
+        with:
+          path: thoralf
+            uom-plugin
+            uom-plugin-defs
+            uom-plugin-examples
+            uom-plugin-tutorial
+            uom-quantity
+            uom-th
+          fail-on: suggestion
