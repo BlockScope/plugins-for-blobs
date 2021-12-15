@@ -28,7 +28,6 @@ executable build-plugins-for-blobs
   build-depends:
       ansi-terminal
     , base
-    , dhall
     , raw-strings-qq
     , shake
     , text
