@@ -76,8 +76,8 @@ jobs:
       - name: test uom-plugin:units
         run: cabal v2-test uom-plugin:units --test-show-details=direct --test-option="--color=always"
 
-      - name: test uom-plugin-tutorial:doctest
-        run: cabal v2-test uom-plugin-tutorial:doctest --test-show-details=direct --test-option="--color=always"
+      #- name: test uom-plugin-tutorial:doctest
+      #  run: cabal v2-test uom-plugin-tutorial:doctest --test-show-details=direct --test-option="--color=always"
 
       - uses: rwe/actions-hlint-run@v2
         name: hlint
