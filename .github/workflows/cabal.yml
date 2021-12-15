@@ -51,7 +51,7 @@ jobs:
           cabal v2-update
           cabal v2-build all:libs
           cabal v2-build thoralf-plugin --enable-tests
-          cabal v2-build uom-plugins --enable-tests
+          cabal v2-build uom-plugin --enable-tests
 
       - name: build examples
         if: ${{ matrix.ghc == '8.2.2' }}
