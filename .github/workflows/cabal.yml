@@ -50,15 +50,14 @@ jobs:
         run: |
           cabal v2-update
           cabal v2-build all:libs
-          cabal v2-build thoralf-plugin:rows --enable-tests
-          cabal v2-build thoralf-plugin:units --enable-tests
-          cabal v2-build uom-plugin:tests --enable-tests
+          cabal v2-build thoralf-plugin --enable-tests
+          cabal v2-build uom-plugins --enable-tests
 
       - name: build examples
         if: ${{ matrix.ghc == '8.2.2' }}
         run: cabal v2-build uom-plugin-examples
 
-      - name: test thoralf:defs
+      - name: test thoralf-plugin:defs
         run: cabal v2-test thoralf-plugin:defs --test-show-details=direct --test-option="--color=always"
 
       - name: test thoralf-plugin:rows
@@ -71,9 +70,11 @@ jobs:
         run: cabal v2-test thoralf-plugin:uom --test-show-details=direct --test-option="--color=always"
 
       - name: test uom-plugin:defs
+        if: ${{ matrix.ghc == '8.2.2' }}
         run: cabal v2-test uom-plugin:defs --test-show-details=direct --test-option="--color=always"
 
       - name: test uom-plugin:units
+        if: ${{ matrix.ghc == '8.2.2' }}
         run: cabal v2-test uom-plugin:units --test-show-details=direct --test-option="--color=always"
 
       #- name: test uom-plugin-tutorial:doctest
