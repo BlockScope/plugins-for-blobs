@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1464b4e576f0aa56ab09fe81516b2d6b42f42b60f1424ccc54e714534f0df426
+-- hash: 41860fe6e80c4c54737f1e9227801cf96308459062215a489c657da22ff0a09f
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -72,7 +72,7 @@ library
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , hashable
     , mtl
@@ -96,7 +96,7 @@ test-suite defs
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , hashable
     , mtl
@@ -124,7 +124,7 @@ test-suite hlint
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , hashable
     , mtl
@@ -163,7 +163,7 @@ test-suite rows
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , hashable
     , mtl
@@ -190,7 +190,7 @@ test-suite units
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , hashable
     , mtl
@@ -219,7 +219,7 @@ test-suite uom
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , hashable
     , mtl

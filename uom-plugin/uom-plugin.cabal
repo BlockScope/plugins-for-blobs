@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4eecd4eba6c45e48aec1a77eb1b8fd54a96aea47acc8a5903fe4061ef7c9f60a
+-- hash: e8610b8a8c37c3c32566311e636fd014cc1f43586c8b96881a723ebc1d88dc6c
 
 name:           uom-plugin
 version:        0.3.0.1
@@ -50,7 +50,7 @@ library
     , containers >=0.5
     , deepseq >=1.3 && <1.5
     , ghc-corroborate
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , template-haskell >=2.9
     , th-printf

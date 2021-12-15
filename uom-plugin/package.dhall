@@ -23,7 +23,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                   defs.dependencies
                 # [ "containers >=0.5"
                   , "deepseq >=1.3 && <1.5"
-                  , "ghc-tcplugins-extra >=0.5"
+                  , "ghc-tcplugins-extra"
                   , "ghc-tcplugins-trace"
                   , "ghc-corroborate"
                   , "template-haskell >=2.9"
