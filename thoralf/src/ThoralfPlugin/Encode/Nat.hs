@@ -45,4 +45,4 @@ assertIntIsNat tv = do
     return [[s|(assert (<= 0 %?))|] $ getUnique tv]
 
 natConvert :: Type -> Maybe KdConvCont
-natConvert = kindConvert "Int" typeNatKindCon
+natConvert = kindConvert "Int" naturalTyCon
