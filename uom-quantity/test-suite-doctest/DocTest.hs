@@ -9,6 +9,7 @@ arguments =
     , "src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs"
     , "src/Data/UnitsOfMeasure/Unsafe/Quantity.hs"
     , "src/Data/UnitsOfMeasure/Read.hs"
+    , "src/Data/UnitsOfMeasure/Show.hs"
     , "src/Data/UnitsOfMeasure/Singleton.hs"
     , "src/Data/UnitsOfMeasure/Syntax.hs"
     ]

@@ -69,12 +69,17 @@ jobs:
         run: cabal v2-test thoralf-plugin:uom --test-show-details=direct --test-option="--color=always"
 
       - name: test uom-plugin:defs
-        if: ${{ matrix.ghc == '8.2.2' }}
+        if: |
+          ${{ matrix.ghc == '8.2.2' }} ||
+          ${{ matrix.ghc == '9.2.1' }}
         run: cabal v2-test uom-plugin:defs --test-show-details=direct --test-option="--color=always"
 
       - name: test uom-plugin:units
         if: ${{ matrix.ghc == '8.2.2' }}
         run: cabal v2-test uom-plugin:units --test-show-details=direct --test-option="--color=always"
+
+      - name: test uom-quantity:doctest
+        run: cabal v2-test uom-quantity:doctest --test-show-details=direct --test-option="--color=always"
 
       #- name: test uom-plugin-tutorial:doctest
       #  run: cabal v2-test uom-plugin-tutorial:doctest --test-show-details=direct --test-option="--color=always"

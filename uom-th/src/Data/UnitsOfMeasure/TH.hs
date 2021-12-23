@@ -107,7 +107,6 @@ reifyUnit (u `Pow`  n)
     | n >= 0 = [t| $(reifyUnit u) ^: $(litT (numTyLit n)) |]
     | otherwise = [t| One /: $(reifyUnit u) ^: $(litT (numTyLit (- n))) |]
 
-
 -- | Parse the string as a mixture of base units and derived units,
 -- and create corresponding 'MkUnit' type instance declarations.
 uDec :: String -> Q [Dec]
@@ -225,7 +224,6 @@ declareConvertibleUnit :: String -> Rational -> String -> Q [Dec]
 declareConvertibleUnit derived r base = case parseUnit universalSymbolTable base of
     Right e -> declareUnit derived (ConversionUnit r e)
     Left _ -> reportError ("unable to parse convertible unit: " ++ base) >> return []
-
 
 -- | Read either an integer or a rational from a string, if possible,
 -- and return the remainder of the string.

@@ -48,7 +48,10 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "Tests.hs"
               , other-modules = [ "Defs" ]
               , source-dirs = "test-suite-defs"
-              , when = { condition = "impl(ghc >= 8.4.0)", buildable = False }
+              , when =
+                { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
+                , buildable = False
+                }
               }
             , units =
               { dependencies =
@@ -58,7 +61,10 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , other-modules =
                 [ "Data.UnitsOfMeasure.Defs", "Defs", "ErrorTests", "Z" ]
               , source-dirs = "test-suite-units"
-              , when = { condition = "impl(ghc >= 8.4.0)", buildable = False }
+              , when =
+                { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
+                , buildable = False
+                }
               }
             }
           }

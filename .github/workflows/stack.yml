@@ -64,10 +64,17 @@ jobs:
         run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test uom-plugin:defs
+        if: |
+          ${{ matrix.ghc == '8.2.2' }} ||
+          ${{ matrix.ghc == '9.2.1' }}
         run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test uom-plugin:units
+        if: ${{ matrix.ghc == '8.2.2' }}
         run: stack test uom-plugin --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+      - name: test uom-quantity:doctest
+        run: stack test uom-quantity:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       #- name: test uom-plugin-tutorial:doctest
       #  run: stack test uom-plugin-tutorial:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml

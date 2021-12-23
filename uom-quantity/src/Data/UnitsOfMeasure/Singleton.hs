@@ -143,6 +143,9 @@ testEquivalentSUnit su sv
 -- >>> normaliseUnitSyntax (["m"] :/ ["s", "s"])
 -- fromList [("m",1),("s",-2)]
 --
+-- >>> normaliseUnitSyntax (["kg", "m"] :/ ["s", "s"])
+-- fromList [("kg",1),("m",1),("s",-2)]
+--
 -- >>> normaliseUnitSyntax (["m", "m"] :/ []) == normaliseUnitSyntax (["m", "m"] :/ ["m", "m"])
 -- False
 --
