@@ -2,9 +2,9 @@ name: stack
 
 on:
   push:
-    branches: [ci-stack]
+    branches: [ci-stack, wip/thoralf]
   pull_request:
-    branches: [master]
+    branches: [master, main]
 
 jobs:
   build:
