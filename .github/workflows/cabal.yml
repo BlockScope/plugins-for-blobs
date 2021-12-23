@@ -12,11 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        cabal: ["3.4"]
+        cabal: ["3.6"]
         ghc:
           - "8.2.2"
           - "8.10.7"
           - "9.0.1"
+          - "9.2.1"
 
     steps:
       - uses: actions/checkout@v2
@@ -68,10 +69,12 @@ jobs:
       - name: test thoralf-plugin:uom
         run: cabal v2-test thoralf-plugin:uom --test-show-details=direct --test-option="--color=always"
 
-      - name: test uom-plugin:defs
-        if: |
-          ${{ matrix.ghc == '8.2.2' }} ||
-          ${{ matrix.ghc == '9.2.1' }}
+      - name: test uom-plugin:defs with ghc-8.2.2
+        if: ${{ matrix.ghc == '8.2.2' }}
+        run: cabal v2-test uom-plugin:defs --test-show-details=direct --test-option="--color=always"
+
+      - name: test uom-plugin:defs with ghc-9.2.1
+        if: ${{ matrix.ghc == '9.2.1' }}
         run: cabal v2-test uom-plugin:defs --test-show-details=direct --test-option="--color=always"
 
       - name: test uom-plugin:units
