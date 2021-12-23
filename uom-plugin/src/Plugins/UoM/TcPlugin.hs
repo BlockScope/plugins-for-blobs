@@ -27,8 +27,8 @@ import Data.UnitsOfMeasure.Unsafe.Unify
     , simplifyUnits, simplifySolved
     , substsSubst, substsUnitEquality
     )
-import Plugins.Print (DebugPlugin(..), pprCtsStepProblem, pprCtsStepSolution, tracePlugin)
-import Plugins.Print.Constraints (pprSolverCallCount)
+import Plugins.Print (TracingFlags(..), pprCtsStepProblem, pprCtsStepSolution, tracePlugin)
+import Plugins.Print (pprSolverCallCount)
 
 data UomState =
     UomState
@@ -36,7 +36,7 @@ data UomState =
         , callsRef :: IORef Int
         }
 
-uomPlugin :: DebugPlugin -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
@@ -50,14 +50,14 @@ mkUoMInit u = do
     return $ UomState { unitDefs = u, callsRef = calls }
 
 unitsOfMeasureSolver
-    :: DebugPlugin
+    :: TracingFlags
     -> UomState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 unitsOfMeasureSolver
-    dbgPlugin@DebugPlugin{traceCallCount}
+    dbgPlugin@TracingFlags{traceCallCount}
     UomState{unitDefs, callsRef}
     givens deriveds wanteds
 

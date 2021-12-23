@@ -11,6 +11,8 @@ import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeClass)
+import Plugins.Print
+    (TracingFlags(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
 
 import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
@@ -20,8 +22,6 @@ import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), TraceSmtConversation(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
-import Plugins.Print.Constraints (pprSolverCallCount)
-import Plugins.Print (DebugPlugin(..), pprCtsStepProblem, pprCtsStepSolution)
 
 data ThoralfState =
     ThoralfState
@@ -31,7 +31,7 @@ data ThoralfState =
         }
 
 thoralfPlugin
-    :: DebugPlugin
+    :: TracingFlags
     -> DebugSmt
     -> PkgModuleName
     -> TcPluginM TheoryEncoding
@@ -78,7 +78,7 @@ thoralfStop ThoralfState{smtRef} = do
     return ()
 
 thoralfSolver
-    :: DebugPlugin
+    :: TracingFlags
     -> DebugSmt
     -> ThoralfState
     -> [Ct] -- ^ Given constraints
@@ -86,7 +86,7 @@ thoralfSolver
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 thoralfSolver
-    dbgPlugin@DebugPlugin{traceCallCount}
+    dbgPlugin@TracingFlags{traceCallCount}
     dbgSmt@DebugSmt{traceSmtConversation}
     ThoralfState
         { smtRef

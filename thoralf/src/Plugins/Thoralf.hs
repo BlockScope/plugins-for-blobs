@@ -3,14 +3,13 @@
 module Plugins.Thoralf (plugin) where
 
 import GHC.Corroborate
+import Plugins.Print
 
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
 import Plugins.Thoralf.Print (DebugSmt(..), TraceSmtConversation(..))
-import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..))
 import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
-import Plugins.Print (DebugPlugin(..), TraceCarry(..), TraceSolution(..))
 
 plugin :: Plugin
 plugin =
@@ -20,7 +19,7 @@ plugin =
                 (fsLit "thoralf-plugin")
 
         dbgPlugin =
-            DebugPlugin
+            TracingFlags
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
                 , traceCarry = TraceCarry False
