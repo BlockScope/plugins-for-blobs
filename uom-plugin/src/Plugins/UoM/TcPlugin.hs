@@ -10,14 +10,18 @@
 -- import this module.
 module Plugins.UoM.TcPlugin (uomPlugin) where
 
+import Data.Either (partitionEithers)
+import Data.List (genericReplicate)
+import Data.IORef (IORef)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeTyCon)
 import GHC.Corroborate.Type (collectType)
 import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
 import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
-import Data.Either (partitionEithers)
-import Data.List (genericReplicate)
-import Data.IORef (IORef)
+import Plugins.Print
+    ( TracingFlags(..)
+    , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
+    )
 
 import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs(..), reifyUnit)
 import Data.UnitsOfMeasure.Unsafe.Unify
@@ -27,8 +31,6 @@ import Data.UnitsOfMeasure.Unsafe.Unify
     , simplifyUnits, simplifySolved
     , substsSubst, substsUnitEquality
     )
-import Plugins.Print (TracingFlags(..), pprCtsStepProblem, pprCtsStepSolution, tracePlugin)
-import Plugins.Print (pprSolverCallCount)
 
 data UomState =
     UomState
