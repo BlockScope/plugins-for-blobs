@@ -24,7 +24,6 @@ plugin :: Plugin
 plugin =
     let mTheory = mkModuleName "Data.Theory.UoM"
         mSyntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
-        pkg = fsLit "uom-plugin"
 
         dbg =
             TracingFlags
@@ -34,7 +33,7 @@ plugin =
                 , traceSolution = TraceSolution False
                 }
 
-        tc = uomPlugin dbg mTheory mSyntax pkg
+        tc = uomPlugin dbg mTheory mSyntax (fsLit "uom-quantity")
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "uom-plugin" tc
