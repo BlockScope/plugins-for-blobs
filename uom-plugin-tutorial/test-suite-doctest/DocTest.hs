@@ -4,7 +4,9 @@ import Test.DocTest (doctest)
 
 arguments :: [String]
 arguments =
-    [ "-isrc"
+    [ "-idoc"
+    , "-isrc"
+    , "./src/Data/UnitsOfMeasure/Defs.hs"
     , "./doc/Data/UnitsOfMeasure/Tutorial.hs"
     , "-fplugin Plugins.UoM"
     ]

@@ -18,14 +18,13 @@ in  let testopts =
             =
             { dependencies =
                   defs.dependencies
-                # [ "doctest >= 0.13.0"
-                  , "uom-quantity"
-                  , "uom-plugin"
-                  , "uom-plugin-defs"
-                  ]
+                # [ "doctest >= 0.13.0", "uom-quantity", "uom-plugin" ]
             , ghc-options = testopts
             , main = "DocTest.hs"
-            , source-dirs = [ "test-suite-doctest", "doc" ]
+            , source-dirs = [ "test-suite-doctest", "doc", "src" ]
+            , exposed-modules = [] : List Text
+            , other-modules =
+              [ "Data.UnitsOfMeasure.Defs", "Data.UnitsOfMeasure.Tutorial" ]
             , when =
               { condition = "impl(ghc < 8.2.2) || impl(ghc > 8.2.2)"
               , buildable = False

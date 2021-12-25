@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.5.
+-- This file has been generated from package.dhall by hpack version 0.34.6.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d77a19d9939dfaef881c138bd1db01a165f394dfd756018ca8f2033cd7305f92
+-- hash: 638020941f9f3f271f3b2e7e5f3077cd03911512c65a3057485261c61ddc585f
 
 name:           uom-plugin-defs
 version:        0.3.0.1
@@ -34,8 +34,6 @@ source-repository head
 library
   exposed-modules:
       Data.UnitsOfMeasure.Defs
-  other-modules:
-      Paths_uom_plugin_defs
   hs-source-dirs:
       src
   build-depends:
