@@ -3,14 +3,16 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
 
 module Main where
 
-import Data.UnitsOfMeasure
-import Data.UnitsOfMeasure.Defs ()
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-th" Data.UnitsOfMeasure.TH
+import Plugins.Thoralf.UnitDefs ()
 import Test.Tasty
 import Test.Tasty.HUnit
 

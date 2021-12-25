@@ -33,8 +33,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                   , "units-parser >=0.1.1.4"
                   ]
             , exposed-modules =
-              [ "Data.UnitsOfMeasure"
-              , "Data.UnitsOfMeasure.Convert"
+              [ "Data.UnitsOfMeasure.Convert"
               , "Data.UnitsOfMeasure.Tutorial"
               , "Plugins.UoM"
               ]
@@ -43,7 +42,13 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , tests =
             { defs =
               { dependencies =
-                [ "base", "tasty", "tasty-hunit", "uom-quantity", "uom-plugin" ]
+                [ "base"
+                , "tasty"
+                , "tasty-hunit"
+                , "uom-quantity"
+                , "uom-th"
+                , "uom-plugin"
+                ]
               , ghc-options = testopts
               , main = "Tests.hs"
               , other-modules = [ "Defs" ]
@@ -55,11 +60,17 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               }
             , units =
               { dependencies =
-                [ "base", "tasty", "tasty-hunit", "uom-quantity", "uom-plugin" ]
+                [ "base"
+                , "tasty"
+                , "tasty-hunit"
+                , "uom-quantity"
+                , "uom-th"
+                , "uom-plugin"
+                ]
               , ghc-options = testopts
               , main = "Tests.hs"
               , other-modules =
-                [ "Data.UnitsOfMeasure.Defs", "Defs", "ErrorTests", "Z" ]
+                [ "UnitDefs", "UnitDefsTests", "ErrorTests", "Z" ]
               , source-dirs = "test-suite-units"
               , when =
                 { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"

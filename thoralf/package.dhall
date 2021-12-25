@@ -36,7 +36,6 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               [ "Data.Theory.Bool"
               , "Data.Theory.DisEq"
               , "Data.Theory.FiniteMap"
-              , "Data.UnitsOfMeasure"
               , "Data.UnitsOfMeasure.Constraint"
               , "Plugins.Thoralf"
               , "Plugins.Thoralf.TcPlugin"
@@ -95,6 +94,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "tasty"
                 , "tasty-hunit"
                 , "uom-quantity"
+                , "uom-th"
                 , "thoralf-plugin"
                 ]
               , ghc-options = testopts
@@ -113,7 +113,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               , ghc-options = testopts
               , main = "Tests.hs"
-              , other-modules = [ "Data.UnitsOfMeasure.Defs", "Defs" ]
+              , other-modules = [ "Plugins.Thoralf.UnitDefs", "Defs" ]
               , source-dirs = "test-suite-units"
               }
             }

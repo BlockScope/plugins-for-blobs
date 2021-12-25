@@ -1,12 +1,13 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module Z (z) where
 
-import Data.UnitsOfMeasure.Convert (convert)
+import "uom-plugin" Data.UnitsOfMeasure.Convert (convert)
 
 
 -- Inferring this type used to lead to unit equations with occur-check

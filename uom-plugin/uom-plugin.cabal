@@ -34,7 +34,6 @@ source-repository head
 
 library
   exposed-modules:
-      Data.UnitsOfMeasure
       Data.UnitsOfMeasure.Convert
       Data.UnitsOfMeasure.Tutorial
       Plugins.UoM
@@ -75,6 +74,7 @@ test-suite defs
     , tasty-hunit
     , uom-plugin
     , uom-quantity
+    , uom-th
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
@@ -87,8 +87,8 @@ test-suite units
   type: exitcode-stdio-1.0
   main-is: Tests.hs
   other-modules:
-      Data.UnitsOfMeasure.Defs
-      Defs
+      UnitDefs
+      UnitDefsTests
       ErrorTests
       Z
   hs-source-dirs:
@@ -100,6 +100,7 @@ test-suite units
     , tasty-hunit
     , uom-plugin
     , uom-quantity
+    , uom-th
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else

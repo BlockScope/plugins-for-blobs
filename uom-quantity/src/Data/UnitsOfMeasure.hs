@@ -43,17 +43,6 @@ module Data.UnitsOfMeasure
       -- * Unit-safe 'Floating' operations
     , sqrt'
 
-      -- * TH constructor for quantities/units
-    , u
-
-      -- * Declaring units
-    , declareBaseUnit
-    , declareDerivedUnit
-    , declareConvertibleUnit
-
-      -- * Automatic unit conversions
-    , convert
-
       -- * Pay no attention to that man behind the curtain
     , MkUnit
     , Pack
@@ -61,11 +50,9 @@ module Data.UnitsOfMeasure
     , KnownUnit
     ) where
 
-import Data.UnitsOfMeasure.Convert
 import Data.UnitsOfMeasure.Read ()
 import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Singleton
-import Data.UnitsOfMeasure.TH
 import Data.UnitsOfMeasure.Unsafe.Quantity
 import Data.UnitsOfMeasure.Syntax
 import Data.Theory.UoM

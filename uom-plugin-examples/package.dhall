@@ -13,7 +13,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             =
             { dependencies =
                   defs.dependencies
-                # [ "uom-quantity", "uom-plugin", "uom-plugin-defs" ]
+                # [ "uom-quantity", "uom-th", "uom-plugin", "uom-plugin-defs" ]
             , source-dirs = "."
             , main = "Examples.hs"
             , when = { condition = "impl(ghc >= 8.4.0)", buildable = False }

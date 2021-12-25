@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.5.
+-- This file has been generated from package.dhall by hpack version 0.34.6.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4d506ea4de8481f35a63fe50e368129eb6da55b0f98cc74b86464d5295353959
+-- hash: 33b590ff6bcdad4a53f94f5d87a6a6cc8fc273ba4eca89c40c9df5bd12930cb0
 
 name:           uom-plugin-examples
 version:        0.3.0.1
@@ -33,6 +33,7 @@ executable uom-plugin-examples
     , uom-plugin
     , uom-plugin-defs
     , uom-quantity
+    , uom-th
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else

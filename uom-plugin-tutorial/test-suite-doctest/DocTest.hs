@@ -6,8 +6,9 @@ arguments :: [String]
 arguments =
     [ "-idoc"
     , "-isrc"
-    , "./src/Data/UnitsOfMeasure/Defs.hs"
+    , "./src/Plugins/UoM/UnitDefs.hs"
     , "./doc/Data/UnitsOfMeasure/Tutorial.hs"
+    , "-XPackageImports"
     , "-fplugin Plugins.UoM"
     ]
 

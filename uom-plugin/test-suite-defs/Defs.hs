@@ -5,13 +5,14 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Defs where
 
-import Data.UnitsOfMeasure
+import "uom-th" Data.UnitsOfMeasure.TH
 
 -- Declarations.
 declareBaseUnit "byte"

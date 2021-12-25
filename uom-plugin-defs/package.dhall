@@ -16,10 +16,14 @@ in    defs
       , extra-source-files = [ "LICENSE" ]
       , library =
         { source-dirs = "src"
-        , exposed-modules = "Data.UnitsOfMeasure.Defs"
+        , exposed-modules = "Plugins.UoM.UnitDefs"
         , other-modules = [] : List Text
         , dependencies =
               defs.dependencies
-            # [ "template-haskell >=2.9", "uom-quantity", "uom-plugin" ]
+            # [ "template-haskell >=2.9"
+              , "uom-quantity"
+              , "uom-th"
+              , "uom-plugin"
+              ]
         }
       }

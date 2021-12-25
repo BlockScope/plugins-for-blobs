@@ -6,6 +6,7 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
@@ -16,15 +17,17 @@
 
 module Main (main) where
 
-import Data.UnitsOfMeasure
-import Data.UnitsOfMeasure.Show
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-quantity" Data.UnitsOfMeasure.Show
+import "uom-th" Data.UnitsOfMeasure.TH
+import "uom-plugin" Data.UnitsOfMeasure.Convert
 import Data.List
 import qualified RationalExamples as RE
 
 -- We could make some base units and derived units like this ...
 -- [u| ft = 0.3048 m, kg, m, s, km = 1000 m, N = kg * m/s^2 |]
--- Pull in those units instead from Data.UnitsOfMeasure.Defs.
-import Data.UnitsOfMeasure.Defs ()
+-- Pull in those units instead from Plugins.UoM.UnitDefs.
+import Plugins.UoM.UnitDefs ()
 
 -- An integer constant quantity with units
 myMass = [u| 65 kg |]

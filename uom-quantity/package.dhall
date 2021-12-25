@@ -38,6 +38,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , "Data.UnitsOfMeasure.Unsafe.Unify"
               , "Data.UnitsOfMeasure.Unsafe.NormalForm"
               , "Data.UnitsOfMeasure.Unsafe.Quantity"
+              , "Data.UnitsOfMeasure"
               ]
             , other-modules = [] : List Text
             }

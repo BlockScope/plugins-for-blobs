@@ -43,6 +43,7 @@ library
       Data.UnitsOfMeasure.Unsafe.Unify
       Data.UnitsOfMeasure.Unsafe.NormalForm
       Data.UnitsOfMeasure.Unsafe.Quantity
+      Data.UnitsOfMeasure
   hs-source-dirs:
       src
   build-depends:
@@ -129,6 +130,7 @@ test-suite doctest
   main-is: DocTest.hs
   other-modules:
       Data.Theory.UoM
+      Data.UnitsOfMeasure
       Data.UnitsOfMeasure.Read
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton

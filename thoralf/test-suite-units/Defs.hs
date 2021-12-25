@@ -8,6 +8,7 @@
 #if IS_CANONICAL
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE PackageImports #-}
 #endif
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
@@ -15,9 +16,11 @@
 
 module Defs where
 
-import Data.UnitsOfMeasure.Defs ()
+import Plugins.Thoralf.UnitDefs ()
 
 #if IS_CANONICAL
+import "uom-th" Data.UnitsOfMeasure.TH
+
 -- Declarations.
 declareBaseUnit "byte"
 declareDerivedUnit "bps" "byte / s"

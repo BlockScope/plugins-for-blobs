@@ -3,16 +3,19 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module RationalExamples (dump) where
 
-import Data.UnitsOfMeasure
-import Data.UnitsOfMeasure.Show ()
-import Data.UnitsOfMeasure.Defs ()
-import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..), toRational')
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-quantity" Data.UnitsOfMeasure.Show ()
+import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..), toRational')
+import "uom-th" Data.UnitsOfMeasure.TH
+import "uom-plugin-defs" Plugins.UoM.UnitDefs ()
+import "uom-plugin" Data.UnitsOfMeasure.Convert (convert)
 
 -- A nautical mile.
 [u| NM = 1852 m |]

@@ -8,6 +8,7 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 
@@ -54,11 +55,6 @@ module Main
     , dimensionless
     ) where
 
-import Data.UnitsOfMeasure
-import Data.UnitsOfMeasure.Convert
-import Data.UnitsOfMeasure.Defs ()
-import Data.UnitsOfMeasure.Show
-
 import Control.Monad (unless)
 import Control.Exception
 import Data.List
@@ -67,7 +63,13 @@ import Data.Ratio ((%))
 import Test.Tasty
 import Test.Tasty.HUnit
 
-import Defs ()
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-th" Data.UnitsOfMeasure.TH (u)
+import "uom-plugin" Data.UnitsOfMeasure.Convert
+import "uom-quantity" Data.UnitsOfMeasure.Show
+
+import UnitDefs ()
+import UnitDefsTests ()
 import ErrorTests
 import Z (z)
 

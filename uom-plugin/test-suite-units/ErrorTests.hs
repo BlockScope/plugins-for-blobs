@@ -5,6 +5,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fdefer-type-errors #-}
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
@@ -15,8 +16,9 @@
 
 module ErrorTests where
 
-import Data.UnitsOfMeasure
-import Data.UnitsOfMeasure.Defs ()
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-th" Data.UnitsOfMeasure.TH
+import UnitDefs ()
 
 mismatch1 :: Quantity Double [u| s/m |]
 mismatch1 = [u| 3 m/s |]

@@ -3,17 +3,19 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 
 -- | This module exports some example definitions of base and derived
 -- units, for demonstration purposes.
-module Data.UnitsOfMeasure.Defs
+module Plugins.UoM.UnitDefs
     ( MkUnit
     ) where
 
-import Data.UnitsOfMeasure
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-th" Data.UnitsOfMeasure.TH
 
 -- The SI base units
 -- http://www.bipm.org/en/measurement-units/

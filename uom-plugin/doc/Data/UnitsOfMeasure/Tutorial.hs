@@ -1,3 +1,4 @@
+{-# LANGUAGE PackageImports #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- | This module gives a brief introduction to the @uom-plugin@
@@ -47,10 +48,11 @@ module Data.UnitsOfMeasure.Tutorial
   -- $reading
   ) where
 
-import Data.UnitsOfMeasure
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-th" Data.UnitsOfMeasure.TH
 
 -- $setup
--- >>> import Data.UnitsOfMeasure.Defs ()
+-- >>> import Plugins.UoM.UnitDefs ()
 
 -- $intro
 --
@@ -64,8 +66,9 @@ import Data.UnitsOfMeasure
 -- GHC aware of the plugin and enabling language extensions.
 --
 -- >>> {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
--- >>> {-# LANGUAGE DataKinds, QuasiQuotes, TypeOperators #-}
--- >>> import Data.UnitsOfMeasure
+-- >>> {-# LANGUAGE DataKinds, QuasiQuotes, TypeOperators, PackageImports #-}
+-- >>> import "uom-quantity" Data.UnitsOfMeasure
+-- >>> import "uom-th" Data.UnitsOfMeasure.TH
 --
 -- In a module that imports the library but has not enabled the plugin or
 -- enabled the required extensions you will likely get mysterious unsolved
@@ -77,8 +80,9 @@ import Data.UnitsOfMeasure
 -- To start experimenting with @uom-plugin@ in GHCi you will need to do the
 -- equivalent setup.
 --
--- >>> :seti -fplugin Plugins.UoM -XDataKinds -XQuasiQuotes -XTypeOperators
--- >>> import Data.UnitsOfMeasure
+-- >>> :seti -fplugin Plugins.UoM -XDataKinds -XQuasiQuotes -XTypeOperators -XPackageImports
+-- >>> import "uom-quantity" Data.UnitsOfMeasure
+-- >>> import "uom-th" Data.UnitsOfMeasure.TH
 
 -- $units
 --

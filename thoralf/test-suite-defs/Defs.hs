@@ -8,6 +8,7 @@
 #if IS_CANONICAL
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE PackageImport #-}
 #endif
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
@@ -16,7 +17,7 @@
 module Defs where
 
 #if IS_CANONICAL
-import Data.UnitsOfMeasure
+import "uom-th" Data.UnitsOfMeasure.TH (declareBaseUnit)
 
 -- Declarations.
 declareBaseUnit "byte"
