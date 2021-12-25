@@ -74,8 +74,9 @@ jobs:
       - name: test uom-quantity:doctest
         run: stack test uom-quantity:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-      #- name: test uom-plugin-tutorial:doctest
-      #  run: stack test uom-plugin-tutorial:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test uom-plugin-tutorial:doctest
+        if: ${{ matrix.ghc == '8.2.2' }}
+        run: stack test uom-plugin-tutorial:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - uses: rwe/actions-hlint-run@v2
         name: hlint
