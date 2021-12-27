@@ -55,6 +55,7 @@
 -- a unit synonym for @1@ that does not require conversion.
 module Data.UnitsOfMeasure.Convert (convert, ratio) where
 
+import Data.Kind (Type)
 import Data.UnitsOfMeasure.Unsafe.Quantity ((*:), (/:), Quantity, fromRational')
 import Data.UnitsOfMeasure.Syntax (Pack, Unpack, Prod)
 import Data.Theory.UoM (type (/:), Unit)
@@ -94,7 +95,7 @@ convert = (ratio (undefined :: proxy' (proxy v)) (undefined :: proxy' (proxy u))
 -- called using quasiquoters to specify the units, for example
 -- @'ratio' [u| ft |] [u| m |]@.
 ratio
-    :: forall a u v (proxy :: Unit -> *) proxy'
+    :: forall a u v (proxy :: Unit -> Type) proxy'
     . (Fractional a, Convertible u v)
     => proxy' (proxy u)
     -> proxy' (proxy v)
