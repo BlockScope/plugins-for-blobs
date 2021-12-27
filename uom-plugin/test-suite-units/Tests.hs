@@ -66,7 +66,6 @@ import Test.Tasty.HUnit
 import "uom-quantity" Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 import "uom-plugin" Data.UnitsOfMeasure.Convert
-import "uom-quantity" Data.UnitsOfMeasure.Show
 
 import UnitDefs ()
 import UnitDefsTests ()
@@ -75,17 +74,8 @@ import Z (z)
 
 -- Some basic examples
 
-myMass :: Quantity Double (Base "kg")
-myMass = [u| 65 kg |]
-
-gravityOnEarth :: Quantity Double [u| m/s^2 |]
-gravityOnEarth = [u| 9.808 m/(s*s) |]
-
 readMass :: Read a => String -> Quantity a (Base "kg")
 readMass = fmap [u| kg |] read
-
-forceOnGround :: Quantity Double [u| N |]
-forceOnGround = gravityOnEarth *: myMass
 
 inMetresPerSecond :: a -> Quantity a [u| m/s |]
 inMetresPerSecond = [u| m/s |]
@@ -303,11 +293,6 @@ tests = testGroup "uom-plugin:units"
       , testCase "a = Int" $ op_d2 `throws` opErrors "GHC.Real.Ratio Integer" "Int" "Int"
       , testCase "a = Integer" $ op_d3 `throws` opErrors "GHC.Real.Ratio Integer" "Integer" "Integer"
       ]
-    ]
-  , testGroup "showQuantity"
-    [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
-    , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"
-    , testCase "forceOnGround"  $ showQuantity forceOnGround  @?= "637.52 kg m / s^2"
     ]
   , testGroup "convert"
     [ testCase "10m in ft"     $ convert [u| 10m |]   @?= [u| 32.8 ft |]

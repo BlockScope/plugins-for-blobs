@@ -77,5 +77,23 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , buildable = False
                 }
               }
+            , force =
+              { dependencies =
+                [ "base"
+                , "tasty"
+                , "tasty-hunit"
+                , "uom-quantity"
+                , "uom-th"
+                , "uom-plugin"
+                ]
+              , ghc-options = testopts
+              , main = "Tests.hs"
+              , other-modules = [ "UnitDefs" ]
+              , source-dirs = "test-suite-force"
+              , when =
+                { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
+                , buildable = False
+                }
+              }
             }
           }
