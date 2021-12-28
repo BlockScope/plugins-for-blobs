@@ -12,7 +12,7 @@ import Data.IORef (IORef)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeClass)
 import Plugins.Print
-    (TracingFlags(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
+    (TracingFlags(..), Indent(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
 
 import ThoralfPlugin.Convert
     (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
@@ -104,8 +104,8 @@ thoralfSolver
     let gs = filt gs'
     let ds = filt ds'
     let ws = filt ws'
-    logCtsProblem (Just "Constraints-AsIs") gs' ds' ws'
-    logCtsProblem (Just "Constraints-Filtered") gs ds ws
+    logCtsProblem (Just "  [constraints-as-is]") gs' ds' ws'
+    logCtsProblem (Just "  [constraints-filtered]") gs ds ws
 
     -- Define reused functions
     let hideError = flip catchIOError (const $ return SMT.Sat)
@@ -153,17 +153,19 @@ thoralfSolver
         _ -> tcPluginIO (putStrLn "Parse Failed") >> noSolving
 
     where
+        indent = Indent 1
+
         logCtsProblem msg gs ds ws = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepProblem dbgPlugin msg gs ds ws
+            tracePlugin dbgPlugin <$> pprCtsStepProblem indent dbgPlugin msg gs ds ws
 
         logCtsSolution x = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepSolution dbgPlugin x
+            tracePlugin dbgPlugin <$> pprCtsStepSolution indent dbgPlugin x
 
         logConvCts step = sequence_ $
-            tracePlugin dbgPlugin <$> pprConvCtsStep dbgPlugin step
+            tracePlugin dbgPlugin <$> pprConvCtsStep indent dbgPlugin step
 
         logSmt step = sequence_ $
-            traceSmt dbgSmt <$> pprSmtStep dbgSmt step
+            traceSmt dbgSmt <$> pprSmtStep indent dbgSmt step
 
         smtWanted ws = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) ws)
 

@@ -19,7 +19,7 @@ import GHC.Corroborate.Type (collectType)
 import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
 import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
 import Plugins.Print
-    ( TracingFlags(..)
+    ( TracingFlags(..), Indent(..)
     , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
     )
 
@@ -131,6 +131,8 @@ unitsOfMeasureSolver
         foo ct (Left x) = Left (ct, x)
         foo _ (Right ct') = Right ct'
 
+        indent = Indent 1
+
         logCalls = do
             calls <- unsafeTcPluginTcM $ readMutVar callsRef
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
@@ -139,12 +141,12 @@ unitsOfMeasureSolver
         logCtsProblem ws =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStepProblem dbgPlugin Nothing givens deriveds ws
+                <$> pprCtsStepProblem indent dbgPlugin Nothing givens deriveds ws
 
         logCtsSolution x =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStepSolution dbgPlugin x
+                <$> pprCtsStepSolution indent dbgPlugin x
 
         contradiction eq = do
             contra <- reportContradiction unitDefs eq

@@ -7,9 +7,8 @@ module Plugins.Thoralf.Print
     ) where
 
 import Data.Coerce (coerce)
-import Language.Haskell.Printf (s)
 import GHC.Corroborate (TcPluginM, tcPluginIO)
-import Plugins.Print (TracingFlags(..), TraceCarry(..), tracePlugin, pprList)
+import Plugins.Print (TracingFlags(..), TraceCarry(..), Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..))
 import Plugins.Print.SMT
@@ -27,28 +26,43 @@ data DebugSmt =
         -- ^ Trace the conversation with the SMT solver
         }
 
-pprConvCtsStep :: TracingFlags -> ConvCtsStep -> [String]
+pprConvCtsStep :: Indent -> TracingFlags -> ConvCtsStep -> [String]
 pprConvCtsStep
+    indent
     TracingFlags{..}
     ConvCtsStep{givens = ConvCts gs _ds1, wanted = ConvCts ws _ds2} =
-    if not (coerce traceCarry) then [] else
-        [ [s|+++ GHC-Decs-Given = %s|] $ pprList gCts
-        , [s|+++ GHC-Decs-Wanted = %s|] $ pprList wCts
-        ]
+    if not (coerce traceCarry) then [] else pprCts indent gCts [] wCts
     where
         (_gSs, gCts) = unzip gs
         (_WSs, wCts) = unzip ws
 
-pprSmtStep :: DebugSmt -> ConvCtsStep -> [String]
+pprSmtStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
 pprSmtStep
+    indent@(Indent i)
     DebugSmt{..}
     ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
     if not (coerce traceConvertCtsToSmt) then [] else
-        [ [s|+++ SMT-Decs = %s|] $ pprSmtList (ds1 ++ ds2)
-        , [s|+++ SMT-Given = %s|] $ pprSmtGivens gSs
-        , [s|+++ SMT-Wanteds = %s|] $ pprSmtWanteds wSs
-        ]
+    [
+        ( tab
+        . showString "[smt-step]"
+        . showString "\n"
+        . tabtab
+        . showString "smt-decs = "
+        . pprSmtList j (ds1 ++ ds2)
+        . showString "\n"
+        . tabtab
+        . showString "smt-given = "
+        . pprSmtGivens j gSs
+        . showString "\n"
+        . tabtab
+        . showString "smt-wanted = "
+        . pprSmtWanteds j wSs)
+        ""
+    ]
     where
+        tab = showString $ replicate (2 * i) ' '
+        tabtab = showString $ replicate (2 * (i + 1)) ' '
+        j = indent + 1
         (gSs, _gCts) = unzip gs
         (wSs, _wCts) = unzip ws
 
