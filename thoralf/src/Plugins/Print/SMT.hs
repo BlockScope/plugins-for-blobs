@@ -8,7 +8,7 @@ module Plugins.Print.SMT
     , pprSmtWanteds
     ) where
 
-import qualified SimpleSMT as SMT (showsSExpr, ppSExpr)
+import qualified SimpleSMT as SMT (ppSExpr)
 import Plugins.Print (Indent(..))
 
 import ThoralfPlugin.Convert (SExpr)
@@ -23,23 +23,23 @@ pprSmtInputs
     -> [SExpr]
     -> ShowS
 pprSmtInputs
-    _indent@(Indent i)
+    indent@(Indent i)
     (TraceConvertCtsToSmt True)
     gSExprs
     wSExprs
     dSExprs
     = 
     ( tab
-    . showString "given-sexpr = "
-    . shows ((`SMT.showsSExpr` "") <$> gSExprs)
+    . showString "sexpr-decs = "
+    . pprSmtList indent dSExprs
     . showChar '\n'
     . tab
-    . showString "wanted-sexpr = "
-    . shows ((`SMT.showsSExpr` "") <$> wSExprs)
+    . showString "sexpr-given = "
+    . pprSmtList indent gSExprs
     . showChar '\n'
     . tab
-    . showString "variables-sexpr = "
-    . shows ((`SMT.showsSExpr` "") <$> dSExprs)
+    . showString "sexpr-wanted = "
+    . pprSmtList indent wSExprs
     )
     where
         tab = showString $ replicate (2 * i) ' '
