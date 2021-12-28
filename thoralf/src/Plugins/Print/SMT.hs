@@ -2,33 +2,58 @@
 
 module Plugins.Print.SMT
     ( TraceConvertCtsToSmt(..)
-    , printSmtInputs
+    , pprSmtInputs
     , pprSmtList
     , pprSmtGivens
     , pprSmtWanteds
     ) where
 
-import Language.Haskell.Printf (s)
 import qualified SimpleSMT as SMT (showsSExpr, ppSExpr)
-import GHC.Corroborate
 import Plugins.Print (Indent(..))
 
 import ThoralfPlugin.Convert (SExpr)
 
 newtype TraceConvertCtsToSmt = TraceConvertCtsToSmt Bool
 
-printSmtInputs :: Indent -> TraceConvertCtsToSmt -> [SExpr] -> SExpr -> [SExpr] -> TcPluginM ()
-printSmtInputs _ (TraceConvertCtsToSmt True) gSExpr wSExpr parseDeclrs = tcPluginIO $ do
-    putStrLn . [s|Given SExpr:\n%?|] $ (`SMT.showsSExpr` "") <$> gSExpr
-    putStrLn . [s|Wanted SExpr:\n%s|] $ SMT.showsSExpr wSExpr ""
-    putStrLn . [s|Variable Decs:\n%?|] $ (`SMT.showsSExpr` "") <$> parseDeclrs
-printSmtInputs _ (TraceConvertCtsToSmt False) _ _ _ = return ()
+pprSmtInputs
+    :: Indent
+    -> TraceConvertCtsToSmt
+    -> [SExpr]
+    -> [SExpr]
+    -> [SExpr]
+    -> ShowS
+pprSmtInputs
+    _indent@(Indent i)
+    (TraceConvertCtsToSmt True)
+    gSExprs
+    wSExprs
+    dSExprs
+    = 
+    ( tab
+    . showString "given-sexpr = "
+    . shows ((`SMT.showsSExpr` "") <$> gSExprs)
+    . showChar '\n'
+    . tab
+    . showString "wanted-sexpr = "
+    . shows ((`SMT.showsSExpr` "") <$> wSExprs)
+    . showChar '\n'
+    . tab
+    . showString "variables-sexpr = "
+    . shows ((`SMT.showsSExpr` "") <$> dSExprs)
+    )
+    where
+        tab = showString $ replicate (2 * i) ' '
+
+pprSmtInputs _ (TraceConvertCtsToSmt False) _ _ _ = const ""
 
 pprSmtList :: Indent -> [SExpr] -> ShowS
 pprSmtList _ [] = showString "[]"
 pprSmtList _ es =
     showString "[\n"
-    . foldr (\e m -> SMT.ppSExpr e . showChar '\n' . m) (showChar ']') es
+    . foldr
+        (\e m -> SMT.ppSExpr e . showChar '\n' . m)
+        (showChar ']')
+        es
 
 pprSmtGivens :: Indent -> [SExpr] -> ShowS
 pprSmtGivens _ [] = showString "[]"
