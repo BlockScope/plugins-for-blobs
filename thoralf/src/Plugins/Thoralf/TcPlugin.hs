@@ -104,8 +104,8 @@ thoralfSolver
     let gs = filt gs'
     let ds = filt ds'
     let ws = filt ws'
-    logCtsProblem (Just "  [constraints-as-is]") gs' ds' ws'
-    logCtsProblem (Just "  [constraints-filtered]") gs ds ws
+    logCtsProblem (Just constraintAsIs) gs' ds' ws'
+    logCtsProblem (Just constraintFiltered) gs ds ws
 
     -- Define reused functions
     let hideError = flip catchIOError (const $ return SMT.Sat)
@@ -153,19 +153,25 @@ thoralfSolver
         _ -> tcPluginIO (putStrLn "Parse Failed") >> noSolving
 
     where
-        indent = Indent 1
+        iIndent@(Indent i) = Indent 1
+        tab = showString $ replicate (2 * i) ' '
+
+        jIndent = iIndent + 1
+
+        constraintAsIs = (tab . showString "[constraints-as-is]") ""
+        constraintFiltered = (tab . showString "[constraints-filtered]") ""
 
         logCtsProblem msg gs ds ws = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepProblem indent dbgPlugin msg gs ds ws
+            tracePlugin dbgPlugin <$> pprCtsStepProblem jIndent dbgPlugin msg gs ds ws
 
         logCtsSolution x = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepSolution indent dbgPlugin x
+            tracePlugin dbgPlugin <$> pprCtsStepSolution jIndent dbgPlugin x
 
         logConvCts step = sequence_ $
-            tracePlugin dbgPlugin <$> pprConvCtsStep indent dbgPlugin step
+            tracePlugin dbgPlugin <$> pprConvCtsStep jIndent dbgPlugin step
 
         logSmt step = sequence_ $
-            traceSmt dbgSmt <$> pprSmtStep indent dbgSmt step
+            traceSmt dbgSmt <$> pprSmtStep jIndent dbgSmt step
 
         smtWanted ws = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) ws)
 
