@@ -1,5 +1,3 @@
-{-# LANGUAGE QuasiQuotes #-}
-
 module Plugins.Print.SMT
     ( TraceConvertCtsToSmt(..)
     , pprSmtInputs
@@ -29,7 +27,7 @@ pprSmtInputs
     wSExprs
     dSExprs
     = 
-    ( tab
+    tab
     . showString "sexpr-decs = "
     . pprSmtList jIndent dSExprs
     . showChar '\n'
@@ -40,7 +38,6 @@ pprSmtInputs
     . tab
     . showString "sexpr-wanted = "
     . pprSmtList jIndent wSExprs
-    )
     where
         tab = showString $ replicate (2 * i) ' '
         jIndent = iIndent + 1

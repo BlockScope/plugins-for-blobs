@@ -1,4 +1,4 @@
-{-# LANGUAGE QuasiQuotes, RecordWildCards #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..)
@@ -41,7 +41,6 @@ pprSmtStep
     indent@(Indent i)
     DebugSmt{..}
     ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
-    if not (coerce traceConvertCtsToSmt) then [] else
     [
         ( tab
         . showString "[smt-step]"
@@ -58,6 +57,7 @@ pprSmtStep
         . showString "smt-wanted = "
         . pprSmtWanteds j wSs)
         ""
+    | coerce traceConvertCtsToSmt
     ]
     where
         tab = showString $ replicate (2 * i) ' '

@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType, TypeOperators, GADTs, QuasiQuotes #-}
+{-# LANGUAGE TypeFamilies, TypeInType, GADTs #-}
 
 module ThoralfPlugin.Encode.Symbol (symbolTheory) where
 
