@@ -136,7 +136,7 @@ unitsOfMeasureSolver
         logCalls = do
             calls <- unsafeTcPluginTcM $ readMutVar callsRef
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
-            tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
+            tracePlugin dbgPlugin $ pprSolverCallCount indent traceCallCount calls
 
         logCtsProblem ws =
             sequence_

@@ -98,7 +98,7 @@ thoralfSolver
     -- Refresh the solver
     _ <- refresh theoryEncoding smtRef traceSmtConversation
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
-    _ <- tracePlugin dbgPlugin $ pprSolverCallCount traceCallCount calls
+    _ <- tracePlugin dbgPlugin $ pprSolverCallCount iIndent traceCallCount calls
 
     -- Preprocessing
     let filt = filter $ isEqCt disEqClass
