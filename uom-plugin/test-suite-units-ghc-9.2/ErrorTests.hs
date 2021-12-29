@@ -112,6 +112,7 @@ op_d2 = (1 :: Quantity Int One) *: ([u| 1 m |] :: (Quantity Rational (Base "m"))
 op_d3 :: Quantity Rational [u| m |]
 op_d3 = (1 :: Quantity Integer One) *: ([u| 1 m |] :: (Quantity Rational (Base "m")))
 
+{-# ANN opErrorsExpectA_ActualC "HLint: ignore Use camelCase" #-}
 opErrorsExpectA_ActualC :: String -> String -> String -> [[String]]
 opErrorsExpectA_ActualC a b c =
   [ [ "Couldn't match type ‘" ++ b ++ "’ with ‘" ++ a ++ "’"
@@ -120,6 +121,7 @@ opErrorsExpectA_ActualC a b c =
     ]
   ]
 
+{-# ANN opErrorsExpectC_ActualB "HLint: ignore Use camelCase" #-}
 opErrorsExpectC_ActualB :: String -> String -> String -> [[String]]
 opErrorsExpectC_ActualB a b c =
   [ [ "Couldn't match type ‘" ++ b ++ "’ with ‘" ++ a ++ "’"

@@ -114,6 +114,7 @@ op_d2 = (1 :: Quantity Int One) *: ([u| 1 m |] :: (Quantity Rational (Base "m"))
 op_d3 :: Quantity Rational [u| m |]
 op_d3 = (1 :: Quantity Integer One) *: ([u| 1 m |] :: (Quantity Rational (Base "m")))
 
+{-# ANN opErrorsExpectA_ActualC "HLint: ignore Use camelCase" #-}
 opErrorsExpectA_ActualC :: String -> String -> String -> [[String]]
 opErrorsExpectA_ActualC a b c =
 #if __GLASGOW_HASKELL__ > 710 
