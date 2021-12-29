@@ -7,7 +7,7 @@ arguments =
     [ "-idoc"
     , "-isrc"
     , "./src/Plugins/UoM/UnitDefs.hs"
-    , "./doc/Data/UnitsOfMeasure/Tutorial.hs"
+    , "./doc-ghc-8.2/Data/UnitsOfMeasure/Tutorial.hs"
     , "-XPackageImports"
     , "-fplugin Plugins.UoM"
     ]

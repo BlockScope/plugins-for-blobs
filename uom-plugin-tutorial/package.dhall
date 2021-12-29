@@ -25,13 +25,18 @@ in  let testopts =
                   ]
             , ghc-options = testopts
             , main = "DocTest.hs"
-            , source-dirs = [ "test-suite-doctest", "doc", "src" ]
+            , source-dirs = [ "src" ]
             , exposed-modules = [] : List Text
-            , other-modules =
-              [ "Plugins.UoM.UnitDefs", "Data.UnitsOfMeasure.Tutorial" ]
+            , other-modules = [ "Plugins.UoM.UnitDefs" ]
             , when =
-              { condition = "impl(ghc < 8.2.2) || impl(ghc > 8.2.2)"
-              , buildable = False
-              }
+              [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
+                , source-dirs = [ "doc-ghc-9.2", "test-suite-doctest-ghc-9.2" ]
+                , other-modules = [ "Data.UnitsOfMeasure.Tutorial" ]
+                }
+              , { condition = "impl(ghc >= 8.2) && impl(ghc < 9.2)"
+                , source-dirs = [ "doc-ghc-8.2", "test-suite-doctest-ghc-8.2" ]
+                , other-modules = [ "Data.UnitsOfMeasure.Tutorial" ]
+                }
+              ]
             }
           }

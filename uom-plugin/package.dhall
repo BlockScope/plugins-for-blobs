@@ -18,7 +18,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , stability = "experimental"
           , extra-source-files = [ "CHANGELOG.md", "README.md", "LICENSE" ]
           , library =
-            { source-dirs = [ "doc", "src" ]
+            { source-dirs = [ "src" ]
             , dependencies =
                   defs.dependencies
                 # [ "containers >=0.5"
@@ -38,6 +38,14 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , "Plugins.UoM"
               ]
             , other-modules = [ "Plugins.UoM.TcPlugin" ]
+            , when =
+              [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
+                , source-dirs = [ "doc-ghc-9.2" ]
+                }
+              , { condition = "impl(ghc >= 8.2) && impl(ghc < 9.2)"
+                , source-dirs = [ "doc-ghc-8.2" ]
+                }
+              ]
             }
           , tests =
             { defs =

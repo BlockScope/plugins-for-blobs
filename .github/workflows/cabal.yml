@@ -86,15 +86,8 @@ jobs:
       - name: test uom-quantity:doctest
         run: cabal v2-test uom-quantity:doctest --test-show-details=direct --test-option="--color=always"
 
-      # WARNING: Not getting this problem with stack or with cabal locally.
-      # when testing uom-plugin-tutorial:doctest:
-      #
-      # Ambiguous module name ‘Data.UnitsOfMeasure’: it was found in multiple packages:
-      # thoralf-plugin-0.1.0.0 uom-plugin-0.3.0.1
-      #
-      # - name: test uom-plugin-tutorial:doctest
-      #  if: ${{ matrix.ghc == '8.2.2' }}
-      #  run: cabal v2-test uom-plugin-tutorial:doctest --test-show-details=direct --test-option="--color=always"
+      - name: test uom-plugin-tutorial:doctest
+        run: cabal v2-test uom-plugin-tutorial:doctest --test-show-details=direct --test-option="--color=always"
 
       - uses: rwe/actions-hlint-run@v2
         name: hlint
