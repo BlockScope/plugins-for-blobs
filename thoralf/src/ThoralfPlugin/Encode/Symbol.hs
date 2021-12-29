@@ -2,7 +2,7 @@
 
 module ThoralfPlugin.Encode.Symbol (symbolTheory) where
 
-import GHC.Corroborate
+import GHC.Corroborate
 import Language.Haskell.Printf (s)
 
 import ThoralfPlugin.Encode.Convert (kindConvert)
