@@ -70,6 +70,7 @@ import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
 import Z (z)
+import qualified Z (tests)
 
 -- Some basic examples
 
@@ -296,6 +297,7 @@ tests = testGroup "uom-plugin:units"
     , testCase "2.4 l/h in m" $ convert [u| 2.4 l/ha |] @?= [u| 2.4e-7 m |]
     , testCase "1 m^4 in l m" $ convert [u| 1 m^4 |] @?= [u| 1000 l m |]
     ]
+  , Z.tests
   , errorsTestGroup
   , testGroup "read . show"
     [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
