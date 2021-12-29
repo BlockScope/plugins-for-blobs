@@ -19,24 +19,24 @@ errorsWhenTestGroup :: TestTree
 errorsWhenTestGroup =
   testGroup "errors when a /= b, (1 :: Quantity a One) (*:) Quantity b u"
     [ testGroup "b = Double"
-      [ testCase "a = Int" $ op_a1 `throws` opErrors "Double" "Int" "Int"
-      , testCase "a = Integer" $ op_a2 `throws` opErrors "Double" "Integer" "Integer"
-      , testCase "a = Rational" $ op_a3 `throws` opErrors "Double" "GHC.Real.Ratio Integer" "Rational"
+      [ testCase "a = Int" $ op_a1 `throws` opErrorsExpectA_ActualC "Double" "Int" "Int"
+      , testCase "a = Integer" $ op_a2 `throws` opErrorsExpectA_ActualC "Double" "Integer" "Integer"
+      , testCase "a = Rational" $ op_a3 `throws` opErrorsExpectA_ActualC "Double" "GHC.Real.Ratio Integer" "Rational"
       ]
     , testGroup "b = Int"
-      [ testCase "a = Double" $ op_b1 `throws` opErrors "Int" "Double" "Double"
-      , testCase "a = Integer" $ op_b2 `throws` opErrors "Int" "Integer" "Integer"
-      , testCase "a = Rational" $ op_b3 `throws` opErrors "Int" "GHC.Real.Ratio Integer" "Rational"
+      [ testCase "a = Double" $ op_b1 `throws` opErrorsExpectA_ActualC "Int" "Double" "Double"
+      , testCase "a = Integer" $ op_b2 `throws` opErrorsExpectA_ActualC "Int" "Integer" "Integer"
+      , testCase "a = Rational" $ op_b3 `throws` opErrorsExpectA_ActualC "Int" "GHC.Real.Ratio Integer" "Rational"
       ]
     , testGroup "b = Integer"
-      [ testCase "a = Double" $ op_c1 `throws` opErrors "Integer" "Double" "Double"
-      , testCase "a = Int" $ op_c2 `throws` opErrors "Integer" "Int" "Int"
-      , testCase "a = Rational" $ op_c3 `throws` opErrors "Integer" "GHC.Real.Ratio Integer" "Rational"
+      [ testCase "a = Double" $ op_c1 `throws` opErrorsExpectA_ActualC "Integer" "Double" "Double"
+      , testCase "a = Int" $ op_c2 `throws` opErrorsExpectA_ActualC "Integer" "Int" "Int"
+      , testCase "a = Rational" $ op_c3 `throws` opErrorsExpectA_ActualC "Integer" "GHC.Real.Ratio Integer" "Rational"
       ]
     , testGroup "b = Rational"
-      [ testCase "a = Double" $ op_d1 `throws` opErrors "GHC.Real.Ratio Integer" "Double" "Double"
-      , testCase "a = Int" $ op_d2 `throws` opErrors "GHC.Real.Ratio Integer" "Int" "Int"
-      , testCase "a = Integer" $ op_d3 `throws` opErrors "GHC.Real.Ratio Integer" "Integer" "Integer"
+      [ testCase "a = Double" $ op_d1 `throws` opErrorsExpectA_ActualC "GHC.Real.Ratio Integer" "Double" "Double"
+      , testCase "a = Int" $ op_d2 `throws` opErrorsExpectA_ActualC "GHC.Real.Ratio Integer" "Int" "Int"
+      , testCase "a = Integer" $ op_d3 `throws` opErrorsExpectA_ActualC "GHC.Real.Ratio Integer" "Integer" "Integer"
       ]
     ]
 

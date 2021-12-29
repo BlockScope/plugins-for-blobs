@@ -77,18 +77,25 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               , ghc-options = testopts
               , main = "Tests.hs"
-              , other-modules =
-                [ "UnitDefs"
-                , "UnitDefsTests"
-                , "ErrorTestGroups"
-                , "ErrorTests"
-                , "Z"
-                ]
+              , other-modules = [ "UnitDefs", "UnitDefsTests", "Z" ]
               , source-dirs = "test-suite-units"
               , when =
-                { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
-                , buildable = False
-                }
+                [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
+                  , source-dirs = [ "test-suite-units-ghc-9.2" ]
+                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.2) && impl(ghc < 9.2)"
+                  , source-dirs = [ "test-suite-units-ghc-8.2" ]
+                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
+                  , source-dirs = [] : List Text
+                  , other-modules = [] : List Text
+                  , buildable = False
+                  }
+                ]
               }
             , force =
               { dependencies =

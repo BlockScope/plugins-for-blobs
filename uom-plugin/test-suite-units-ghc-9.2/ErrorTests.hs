@@ -24,10 +24,8 @@ mismatch1 :: Quantity Double [u| s/m |]
 mismatch1 = [u| 3 m/s |]
 
 mismatch1_errors :: [[String]]
-mismatch1_errors = [ [ "Couldn't match type ‘Base \"s\" /: Base \"m\"’"
-                     , "with ‘Base \"m\" /: Base \"s\"’" ]
-                   , [ "Couldn't match type ‘Base \"m\" /: Base \"s\"’"
-                     , "with ‘Base \"s\" /: Base \"m\"’" ]
+mismatch1_errors = [ [ "Couldn't match type: Base \"m\" /: Base \"s\""
+                     , "with: Base \"s\" /: Base \"m\"" ]
                    ]
 
 
@@ -35,8 +33,8 @@ mismatch2 :: Quantity Int [u| s |]
 mismatch2 = [u| 2 m |] +: ([u| 2 s |] :: Quantity Int [u| s |])
 
 mismatch2_errors :: [[String]]
-mismatch2_errors = [ [ "Couldn't match type ‘Base \"s\"’ with ‘Base \"m\"’" ]
-                   , [ "Couldn't match type ‘Base \"m\"’ with ‘Base \"s\"’" ]
+mismatch2_errors = [ [ "Couldn't match type: Base \"m\""
+                     , "with: Base \"s\"" ]
                    ]
 
 
@@ -114,15 +112,18 @@ op_d2 = (1 :: Quantity Int One) *: ([u| 1 m |] :: (Quantity Rational (Base "m"))
 op_d3 :: Quantity Rational [u| m |]
 op_d3 = (1 :: Quantity Integer One) *: ([u| 1 m |] :: (Quantity Rational (Base "m")))
 
-opErrors :: String -> String -> String -> [[String]]
-opErrors a b c =
-#if __GLASGOW_HASKELL__ > 710 
-  [ [ "Couldn't match type ‘" ++ a ++ "’ with ‘" ++ b ++ "’"
-    , "Expected type: Quantity " ++ c ++ " (Base \"m\")"
-    ]
-  ]
-#else
+opErrorsExpectA_ActualC :: String -> String -> String -> [[String]]
+opErrorsExpectA_ActualC a b c =
   [ [ "Couldn't match type ‘" ++ b ++ "’ with ‘" ++ a ++ "’"
+    , "Expected: Quantity " ++ a ++ " One"
+    , "Actual: Quantity " ++ c ++ " One"
     ]
   ]
-#endif
+
+opErrorsExpectC_ActualB :: String -> String -> String -> [[String]]
+opErrorsExpectC_ActualB a b c =
+  [ [ "Couldn't match type ‘" ++ b ++ "’ with ‘" ++ a ++ "’"
+    , "Expected: Quantity " ++ c ++ " One"
+    , "Actual: Quantity " ++ b ++ " One"
+    ]
+  ]

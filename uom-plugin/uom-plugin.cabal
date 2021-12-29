@@ -117,8 +117,6 @@ test-suite units
   other-modules:
       UnitDefs
       UnitDefsTests
-      ErrorTestGroups
-      ErrorTests
       Z
   hs-source-dirs:
       test-suite-units
@@ -134,6 +132,20 @@ test-suite units
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 9.2) && impl(ghc < 9.4)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        test-suite-units-ghc-9.2
+    buildable: True
+  if impl(ghc >= 8.2) && impl(ghc < 9.2)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        test-suite-units-ghc-8.2
+    buildable: True
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
   default-language: Haskell2010
