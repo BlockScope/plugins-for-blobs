@@ -2,7 +2,7 @@ name: cabal
 
 on:
   push:
-    branches: [ci-cabal, wip/thoralf]
+    branches: [ci-cabal, wip/thoralf, fix/thoralf-trace]
   pull_request:
     branches: [master, main]
 
