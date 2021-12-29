@@ -78,7 +78,12 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , ghc-options = testopts
               , main = "Tests.hs"
               , other-modules =
-                [ "UnitDefs", "UnitDefsTests", "ErrorTests", "Z" ]
+                [ "UnitDefs"
+                , "UnitDefsTests"
+                , "ErrorTestGroups"
+                , "ErrorTests"
+                , "Z"
+                ]
               , source-dirs = "test-suite-units"
               , when =
                 { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
