@@ -1,0 +1,37 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.dhall by hpack version 0.34.6.
+--
+-- see: https://github.com/sol/hpack
+
+name:           uom-plugin-core-lint
+version:        0.3.0.1
+synopsis:       Examples of the use of uom-plugin
+description:    This package provides examples of the use of uom-plugin
+author:         Adam Gundry <adam@well-typed.com>
+maintainer:     Adam Gundry <adam@well-typed.com>
+copyright:      Copyright (c) 2014-2018, Adam Gundry
+license:        PublicDomain
+build-type:     Simple
+tested-with:
+    GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
+extra-source-files:
+    package.dhall
+
+executable CoreLintRepro
+  main-is: CoreLintRepro.hs
+  other-modules:
+      UnitDefs
+  hs-source-dirs:
+      ./
+  ghc-options: -dcore-lint
+  build-depends:
+      base >=4.9.1.0 && <5
+    , uom-plugin
+  if impl(ghc < 8.4)
+    buildable: True
+  if impl(ghc >= 9.2.1)
+    buildable: True
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
+    buildable: False
+  default-language: Haskell2010

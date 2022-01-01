@@ -4,6 +4,7 @@ packages:
     uom-plugin-defs
     uom-plugin-tutorial
     uom-plugin-examples
+    uom-plugin-core-lint
     build
 tests: True
 write-ghc-environment-files: always

@@ -30,6 +30,7 @@ dhallCabal =
     [ ("uom-plugin", "uom-plugin")
     , ("uom-plugin-defs", "uom-plugin-defs")
     , ("uom-plugin-examples", "uom-plugin-examples")
+    , ("uom-plugin-core-lint", "uom-plugin-core-lint")
     , ("uom-plugin-tutorial", "uom-plugin-tutorial")
     , ("build", "build-uom-plugin")
     ]
