@@ -1,6 +1,6 @@
 {-# LANGUAGE CPP #-}
 
-module Plugins.Thoralf (plugin) where
+module Plugins.Thoralf.UoM (plugin) where
 
 import GHC.Corroborate
 import Plugins.Print

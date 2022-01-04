@@ -31,6 +31,8 @@ dhallCabal =
     , ("thoralf-theory", "thoralf-theory")
     , ("thoralf-encode", "thoralf-encode")
     , ("thoralf", "thoralf-plugin")
+    , ("smt-rows-plugin", "smt-rows-plugin")
+    , ("smt-uom-plugin", "smt-uom-plugin")
     , ("uom-plugin", "uom-plugin")
     , ("uom-plugin-defs", "uom-plugin-defs")
     , ("uom-plugin-examples", "uom-plugin-examples")

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 51036e6ed213600a7d0ab0b601624e56cbfbc40453a40f8b1f3293fc455cc4fb
+-- hash: ec60cb0690a7730c4d6b22694214b2fd37f31b6d8f97691c54da7775686c31d9
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -38,16 +38,11 @@ library
   ghc-options: -Wall -fno-warn-partial-type-signatures
   default-language: Haskell2010
   exposed-modules:
-      Plugins.Thoralf
       Plugins.Thoralf.TcPlugin
+      Plugins.Thoralf.Print
+      Plugins.Print.SMT
       ThoralfPlugin.Convert
       ThoralfPlugin.Variables
-      ThoralfPlugin.Singletons.Symbol
-      ThoralfPlugin.Singletons.Nat
-  other-modules:
-      ThoralfPlugin.Encode
-      Plugins.Print.SMT
-      Plugins.Thoralf.Print
   other-extensions:
       TypeFamilies
       TypeInType
@@ -70,128 +65,3 @@ library
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
-
-test-suite defs
-  type: exitcode-stdio-1.0
-  main-is: Tests.hs
-  other-modules:
-      Defs
-  hs-source-dirs:
-      test-suite-defs
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      base
-    , containers
-    , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
-    , ghc-tcplugins-trace
-    , hashable
-    , mtl
-    , simple-smt
-    , tasty
-    , tasty-hunit
-    , template-haskell >=2.9
-    , th-printf
-    , thoralf-encode
-    , thoralf-plugin
-    , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
-  default-language: Haskell2010
-
-test-suite rows
-  type: exitcode-stdio-1.0
-  main-is: Main.hs
-  other-modules:
-      FiniteMaps
-      Nat
-      RowTypes
-  hs-source-dirs:
-      test-suite-rows
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf
-  build-depends:
-      base
-    , containers
-    , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
-    , ghc-tcplugins-trace
-    , hashable
-    , mtl
-    , simple-smt
-    , template-haskell >=2.9
-    , th-printf
-    , thoralf-encode
-    , thoralf-plugin
-    , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
-  default-language: Haskell2010
-
-test-suite units
-  type: exitcode-stdio-1.0
-  main-is: Tests.hs
-  other-modules:
-      Plugins.Thoralf.UnitDefs
-      Defs
-  hs-source-dirs:
-      test-suite-units
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      base
-    , containers
-    , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
-    , ghc-tcplugins-trace
-    , hashable
-    , mtl
-    , simple-smt
-    , tasty
-    , tasty-hunit
-    , template-haskell >=2.9
-    , th-printf
-    , thoralf-encode
-    , thoralf-plugin
-    , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
-  default-language: Haskell2010
-
-test-suite uom
-  type: exitcode-stdio-1.0
-  main-is: Main.hs
-  other-modules:
-      UoM
-  hs-source-dirs:
-      test-suite-uom
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      QuickCheck
-    , base
-    , containers
-    , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
-    , ghc-tcplugins-trace
-    , hashable
-    , mtl
-    , simple-smt
-    , singletons
-    , tasty
-    , tasty-hunit
-    , tasty-quickcheck
-    , tasty-th
-    , template-haskell
-    , th-printf
-    , thoralf-encode
-    , thoralf-plugin
-    , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
-  default-language: Haskell2010

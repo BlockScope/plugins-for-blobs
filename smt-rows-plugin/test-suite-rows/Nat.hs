@@ -5,7 +5,7 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE RankNTypes #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.Rows #-}
 
 module Nat where
 

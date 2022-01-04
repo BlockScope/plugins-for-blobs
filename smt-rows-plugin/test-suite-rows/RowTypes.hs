@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeInType, TypeApplications, GADTs #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.Rows #-}
 
 module RowTypes where
 

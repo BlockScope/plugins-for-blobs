@@ -1,0 +1,164 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.dhall by hpack version 0.34.6.
+--
+-- see: https://github.com/sol/hpack
+
+name:           smt-uom-plugin
+version:        0.1.0.0
+synopsis:       An extensible GHC typechecker plugin based on Z3
+description:    Thoralf is a small yet extensible typechecker plugin based on the
+                Z3 SMT solver. It is designed to be easy to extend with new
+                theories.
+category:       Development
+homepage:       https://github.com/bgamari/the-thoralf-plugin#readme
+bug-reports:    https://github.com/bgamari/the-thoralf-plugin/issues
+author:         Divesh Otwani
+maintainer:     Ben Gamari
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+tested-with:
+    GHC == 8.4.4
+
+source-repository head
+  type: git
+  location: https://github.com/bgamari/the-thoralf-plugin
+  subdir: thoralf
+
+flag suppress-failing-tests
+  manual: False
+  default: True
+
+library
+  exposed-modules:
+      Plugins.Thoralf.UoM
+      ThoralfPlugin.Singletons.Symbol
+      ThoralfPlugin.Singletons.Nat
+  other-modules:
+      ThoralfPlugin.Encode
+  hs-source-dirs:
+      src
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
+  ghc-options: -Wall -fno-warn-partial-type-signatures
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf
+    , thoralf-encode
+    , thoralf-plugin
+    , thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom-quantity
+    , uom-th
+  default-language: Haskell2010
+
+test-suite defs
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Defs
+  hs-source-dirs:
+      test-suite-defs
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , smt-uom-plugin
+    , tasty
+    , tasty-hunit
+    , template-haskell >=2.9
+    , th-printf
+    , thoralf-encode
+    , thoralf-plugin
+    , thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom-quantity
+    , uom-th
+  default-language: Haskell2010
+
+test-suite units
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Plugins.Thoralf.UnitDefs
+      Defs
+  hs-source-dirs:
+      test-suite-units
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , smt-uom-plugin
+    , tasty
+    , tasty-hunit
+    , template-haskell >=2.9
+    , th-printf
+    , thoralf-encode
+    , thoralf-plugin
+    , thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom-quantity
+    , uom-th
+  default-language: Haskell2010
+
+test-suite uom
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      UoM
+  hs-source-dirs:
+      test-suite-uom
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , singletons
+    , smt-uom-plugin
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+    , tasty-th
+    , template-haskell
+    , th-printf
+    , thoralf-encode
+    , thoralf-plugin
+    , thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom-quantity
+    , uom-th
+  default-language: Haskell2010

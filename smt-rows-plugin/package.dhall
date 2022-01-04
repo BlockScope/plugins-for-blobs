@@ -3,7 +3,7 @@ let defs = ./defaults.dhall
 in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
 
     in    defs
-        ⫽ { name = "thoralf-plugin"
+        ⫽ { name = "smt-rows-plugin"
           , synopsis = "An extensible GHC typechecker plugin based on Z3"
           , description =
               ''
@@ -26,23 +26,27 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "mtl"
                 , "simple-smt"
                 , "th-printf"
-                , "uom-quantity"
-                , "uom-th"
-                , "units-parser >=0.1.1.4"
                 , "thoralf-theory"
                 , "thoralf-encode"
+                , "thoralf-plugin"
                 ]
           , library =
             { source-dirs = "src"
             , exposed-modules =
-              [ "Plugins.Thoralf.TcPlugin"
-              , "Plugins.Thoralf.Print"
-              , "Plugins.Print.SMT"
-              , "ThoralfPlugin.Convert"
-              , "ThoralfPlugin.Variables"
+              [ "Plugins.Thoralf.Rows"
+              , "ThoralfPlugin.Singletons.Symbol"
+              , "ThoralfPlugin.Singletons.Nat"
               ]
-            , other-modules = [] : List Text
+            , other-modules = [ "ThoralfPlugin.Encode" ]
             , other-extensions =
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
+            }
+          , tests.rows
+            =
+            { dependencies = [ "base", "smt-rows-plugin" ]
+            , ghc-options = testopts # [ "-fplugin Plugins.Thoralf.Rows" ]
+            , other-modules = [ "FiniteMaps", "Nat", "RowTypes" ]
+            , main = "Main.hs"
+            , source-dirs = "test-suite-rows"
             }
           }

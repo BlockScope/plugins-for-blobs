@@ -4,6 +4,8 @@ packages:
     thoralf-theory
     thoralf-encode
     thoralf
+    smt-rows-plugin
+    smt-uom-plugin
     uom-quantity
     uom-plugin
     uom-plugin-defs

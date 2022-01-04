@@ -11,7 +11,7 @@
 {-# LANGUAGE PackageImports #-}
 #endif
 
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Defs where
