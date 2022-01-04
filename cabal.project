@@ -1,6 +1,8 @@
 packages:
     ghc-corroborate/ghc-corroborate
     ghc-tcplugins-trace/ghc-tcplugins-trace
+    thoralf-theory
+    thoralf-encode
     thoralf
     uom-quantity
     uom-plugin

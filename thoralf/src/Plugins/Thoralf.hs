@@ -16,7 +16,7 @@ plugin =
     let pm =
             PkgModuleName
                 (mkModuleName "Data.Theory.DisEq")
-                (fsLit "thoralf-plugin")
+                (fsLit "thoralf-theory")
 
         dbgPlugin =
             TracingFlags

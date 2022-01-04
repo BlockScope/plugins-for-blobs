@@ -29,15 +29,13 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "uom-quantity"
                 , "uom-th"
                 , "units-parser >=0.1.1.4"
+                , "thoralf-theory"
+                , "thoralf-encode"
                 ]
           , library =
             { source-dirs = "src"
             , exposed-modules =
-              [ "Data.Theory.Bool"
-              , "Data.Theory.DisEq"
-              , "Data.Theory.FiniteMap"
-              , "Data.UnitsOfMeasure.Constraint"
-              , "Plugins.Thoralf"
+              [ "Plugins.Thoralf"
               , "Plugins.Thoralf.TcPlugin"
               , "ThoralfPlugin.Convert"
               , "ThoralfPlugin.Variables"
@@ -46,17 +44,8 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               ]
             , other-modules =
               [ "ThoralfPlugin.Encode"
-              , "ThoralfPlugin.Encode.Convert"
-              , "ThoralfPlugin.Encode.Find"
-              , "ThoralfPlugin.Encode.TheoryEncoding"
-              , "ThoralfPlugin.Encode.Nat"
-              , "ThoralfPlugin.Encode.FiniteMap"
-              , "ThoralfPlugin.Encode.Symbol"
-              , "ThoralfPlugin.Encode.UoM"
-              , "ThoralfPlugin.Encode.Bool"
               , "Plugins.Print.SMT"
               , "Plugins.Thoralf.Print"
-              , "Data.Vec"
               ]
             , other-extensions =
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]

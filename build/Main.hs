@@ -28,6 +28,8 @@ dhallPkgs = fst <$> dhallCabal
 dhallCabal :: [(Folder, Pkg)]
 dhallCabal =
     [ ("build", "build-plugins-for-blobs")
+    , ("thoralf-theory", "thoralf-theory")
+    , ("thoralf-encode", "thoralf-encode")
     , ("thoralf", "thoralf-plugin")
     , ("uom-plugin", "uom-plugin")
     , ("uom-plugin-defs", "uom-plugin-defs")
