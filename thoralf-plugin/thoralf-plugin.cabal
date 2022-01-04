@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ec60cb0690a7730c4d6b22694214b2fd37f31b6d8f97691c54da7775686c31d9
+-- hash: 89013c234b19b4a69e037703f82b31d3f83a01f6ef307a5aa53f40efa127bd66
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -43,6 +43,7 @@ library
       Plugins.Print.SMT
       ThoralfPlugin.Convert
       ThoralfPlugin.Variables
+      ThoralfPlugin.Singletons.Symbol
   other-extensions:
       TypeFamilies
       TypeInType

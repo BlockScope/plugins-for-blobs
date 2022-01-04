@@ -40,6 +40,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , "Plugins.Print.SMT"
               , "ThoralfPlugin.Convert"
               , "ThoralfPlugin.Variables"
+              , "ThoralfPlugin.Singletons.Symbol"
               ]
             , other-modules = [] : List Text
             , other-extensions =

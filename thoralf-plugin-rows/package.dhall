@@ -33,13 +33,9 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , library =
             { source-dirs = "src"
             , exposed-modules =
-              [ "Data.Theory.FiniteMap"
-              , "Plugins.Thoralf.Rows"
-              , "ThoralfPlugin.Singletons.Symbol"
-              , "ThoralfPlugin.Singletons.Nat"
-              , "ThoralfPlugin.Encode.FiniteMap"
-              ]
-            , other-modules = [ "ThoralfPlugin.Encode" ]
+              [ "Plugins.Thoralf.Rows", "Data.Theory.FiniteMap" ]
+            , other-modules =
+              [ "ThoralfPlugin.Encode", "ThoralfPlugin.Encode.FiniteMap" ]
             , other-extensions =
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
             }
