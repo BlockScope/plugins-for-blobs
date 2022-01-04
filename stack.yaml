@@ -3,7 +3,11 @@ packages:
 - build
 - ghc-corroborate/ghc-corroborate
 - ghc-tcplugins-trace/ghc-tcplugins-trace
-- thoralf
+- thoralf-theory
+- thoralf-encode
+- thoralf-plugin
+- thoralf-plugin-rows
+- thoralf-plugin-uom
 - uom-th
 - uom-quantity
 - uom-plugin

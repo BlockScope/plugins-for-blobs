@@ -47,15 +47,19 @@ jobs:
         run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-rows:rows
+        if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-rows:rows --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:defs
+        if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:units
+        if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:uom
+        if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-uom:uom --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test uom-plugin:defs

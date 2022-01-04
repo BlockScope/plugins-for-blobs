@@ -2,7 +2,11 @@ resolver: lts-9.21
 packages:
 - ../ghc-tcplugins-trace/ghc-tcplugins-trace
 - ../ghc-corroborate/ghc-corroborate
-- ../thoralf
+- ../thoralf-theory
+- ../thoralf-encode
+- ../thoralf-plugin
+- ../thoralf-plugin-rows
+- ../thoralf-plugin-uom
 - ../uom-th
 - ../uom-quantity
 - ../uom-plugin
