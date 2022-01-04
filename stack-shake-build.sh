@@ -2,5 +2,5 @@
 
 #set +v
 
-stack install build-plugins-for-blobs
-build-plugins-for-blobs $@
+stack build build-plugins-for-blobs
+stack exec build-plugins-for-blobs $@

@@ -3,7 +3,7 @@ let defs = ./defaults.dhall
 in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
 
     in    defs
-        ⫽ { name = "smt-uom-plugin"
+        ⫽ { name = "thoralf-plugin-uom"
           , synopsis = "An extensible GHC typechecker plugin based on Z3"
           , description =
               ''
@@ -55,7 +55,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "tasty-hunit"
                 , "tasty-quickcheck"
                 , "tasty-th"
-                , "smt-uom-plugin"
+                , "thoralf-plugin-uom"
                 , "uom-quantity"
                 , "uom-th"
                 ]
@@ -71,7 +71,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "tasty-hunit"
                 , "uom-quantity"
                 , "uom-th"
-                , "smt-uom-plugin"
+                , "thoralf-plugin-uom"
                 ]
               , ghc-options = testopts
               , main = "Tests.hs"
@@ -83,7 +83,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 [ "base"
                 , "tasty"
                 , "tasty-hunit"
-                , "smt-uom-plugin"
+                , "thoralf-plugin-uom"
                 , "uom-quantity"
                 , "uom-th"
                 ]

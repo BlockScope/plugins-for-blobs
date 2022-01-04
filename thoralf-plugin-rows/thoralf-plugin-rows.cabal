@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 
-name:           smt-uom-plugin
+name:           thoralf-plugin-rows
 version:        0.1.0.0
 synopsis:       An extensible GHC typechecker plugin based on Z3
 description:    Thoralf is a small yet extensible typechecker plugin based on the
@@ -32,7 +32,7 @@ flag suppress-failing-tests
 
 library
   exposed-modules:
-      Plugins.Thoralf.UoM
+      Plugins.Thoralf.Rows
       ThoralfPlugin.Singletons.Symbol
       ThoralfPlugin.Singletons.Nat
   other-modules:
@@ -60,85 +60,20 @@ library
     , thoralf-encode
     , thoralf-plugin
     , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
   default-language: Haskell2010
 
-test-suite defs
-  type: exitcode-stdio-1.0
-  main-is: Tests.hs
-  other-modules:
-      Defs
-  hs-source-dirs:
-      test-suite-defs
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      base
-    , containers
-    , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
-    , ghc-tcplugins-trace
-    , hashable
-    , mtl
-    , simple-smt
-    , smt-uom-plugin
-    , tasty
-    , tasty-hunit
-    , template-haskell >=2.9
-    , th-printf
-    , thoralf-encode
-    , thoralf-plugin
-    , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
-  default-language: Haskell2010
-
-test-suite units
-  type: exitcode-stdio-1.0
-  main-is: Tests.hs
-  other-modules:
-      Plugins.Thoralf.UnitDefs
-      Defs
-  hs-source-dirs:
-      test-suite-units
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      base
-    , containers
-    , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
-    , ghc-tcplugins-trace
-    , hashable
-    , mtl
-    , simple-smt
-    , smt-uom-plugin
-    , tasty
-    , tasty-hunit
-    , template-haskell >=2.9
-    , th-printf
-    , thoralf-encode
-    , thoralf-plugin
-    , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
-  default-language: Haskell2010
-
-test-suite uom
+test-suite rows
   type: exitcode-stdio-1.0
   main-is: Main.hs
   other-modules:
-      UoM
+      FiniteMaps
+      Nat
+      RowTypes
   hs-source-dirs:
-      test-suite-uom
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+      test-suite-rows
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf.Rows
   build-depends:
-      QuickCheck
-    , base
+      base
     , containers
     , ghc-corroborate
     , ghc-prim
@@ -147,18 +82,10 @@ test-suite uom
     , hashable
     , mtl
     , simple-smt
-    , singletons
-    , smt-uom-plugin
-    , tasty
-    , tasty-hunit
-    , tasty-quickcheck
-    , tasty-th
-    , template-haskell
+    , template-haskell >=2.9
     , th-printf
     , thoralf-encode
     , thoralf-plugin
+    , thoralf-plugin-rows
     , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
   default-language: Haskell2010

@@ -3,7 +3,7 @@ let defs = ./defaults.dhall
 in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
 
     in    defs
-        ⫽ { name = "smt-rows-plugin"
+        ⫽ { name = "thoralf-plugin-rows"
           , synopsis = "An extensible GHC typechecker plugin based on Z3"
           , description =
               ''
@@ -43,7 +43,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             }
           , tests.rows
             =
-            { dependencies = [ "base", "smt-rows-plugin" ]
+            { dependencies = [ "base", "thoralf-plugin-rows" ]
             , ghc-options = testopts # [ "-fplugin Plugins.Thoralf.Rows" ]
             , other-modules = [ "FiniteMaps", "Nat", "RowTypes" ]
             , main = "Main.hs"

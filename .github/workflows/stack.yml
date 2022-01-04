@@ -46,17 +46,17 @@ jobs:
       - name: build tests
         run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-      - name: test thoralf-plugin:defs
-        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin-rows:rows
+        run: stack test thoralf-plugin-rows:rows --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-      - name: test thoralf-plugin:rows
-        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin-uom:defs
+        run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-      - name: test thoralf-plugin:units
-        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin-uom:units
+        run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-      - name: test thoralf-plugin:uom
-        run: stack test thoralf-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      - name: test thoralf-plugin-uom:uom
+        run: stack test thoralf-plugin-uom:uom --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test uom-plugin:defs
         if: ${{ matrix.ghc == '8.2.2' }} ||
@@ -76,5 +76,5 @@ jobs:
       - uses: rwe/actions-hlint-run@v2
         name: hlint
         with:
-          path: '["thoralf", "uom-plugin", "uom-plugin-defs", "uom-plugin-examples", "uom-plugin-tutorial", "uom-quantity", "uom-th"]'
+          path: '["thoralf-theory", "thoralf-encode", "thoralf-plugin", "thoralf-plugin-rows", "thoralf-plugin-uom", "uom-plugin", "uom-plugin-defs", "uom-plugin-examples", "uom-plugin-tutorial", "uom-quantity", "uom-th"]'
           fail-on: suggestion
