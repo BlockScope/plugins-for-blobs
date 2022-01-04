@@ -32,9 +32,11 @@ flag suppress-failing-tests
 
 library
   exposed-modules:
+      Data.UnitsOfMeasure.Constraint
       Plugins.Thoralf.UoM
       ThoralfPlugin.Singletons.Symbol
       ThoralfPlugin.Singletons.Nat
+      ThoralfPlugin.Encode.UoM
   other-modules:
       ThoralfPlugin.Encode
   hs-source-dirs:

@@ -11,9 +11,8 @@ import ThoralfPlugin.Encode.Bool (boolTheory)
 
 thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
-    let tPkg = fsLit "thoralf-theory"
-        fm = PkgModuleName (mkModuleName "Data.Theory.FiniteMap") tPkg
-        bool = PkgModuleName (mkModuleName "Data.Theory.Bool") tPkg
+    let fm = PkgModuleName (mkModuleName "Data.Theory.FiniteMap") (fsLit "thoralf-plugin-rows")
+        bool = PkgModuleName (mkModuleName "Data.Theory.Bool") (fsLit "thoralf-theory")
         nats = PkgModuleName (mkModuleName "GHC.TypeNats") (fsLit "base")
 
     in

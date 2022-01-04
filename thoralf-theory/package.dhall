@@ -32,12 +32,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
           , library =
             { source-dirs = "src"
-            , exposed-modules =
-              [ "Data.Theory.Bool"
-              , "Data.Theory.DisEq"
-              , "Data.Theory.FiniteMap"
-              , "Data.UnitsOfMeasure.Constraint"
-              ]
+            , exposed-modules = [ "Data.Theory.Bool", "Data.Theory.DisEq" ]
             , other-modules = [] : List Text
             , other-extensions =
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]

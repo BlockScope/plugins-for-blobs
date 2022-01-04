@@ -33,9 +33,11 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , library =
             { source-dirs = "src"
             , exposed-modules =
-              [ "Plugins.Thoralf.Rows"
+              [ "Data.Theory.FiniteMap"
+              , "Plugins.Thoralf.Rows"
               , "ThoralfPlugin.Singletons.Symbol"
               , "ThoralfPlugin.Singletons.Nat"
+              , "ThoralfPlugin.Encode.FiniteMap"
               ]
             , other-modules = [ "ThoralfPlugin.Encode" ]
             , other-extensions =

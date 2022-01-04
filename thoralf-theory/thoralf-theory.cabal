@@ -34,8 +34,6 @@ library
   exposed-modules:
       Data.Theory.Bool
       Data.Theory.DisEq
-      Data.Theory.FiniteMap
-      Data.UnitsOfMeasure.Constraint
   hs-source-dirs:
       src
   other-extensions:

@@ -39,9 +39,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , "ThoralfPlugin.Encode.Find"
               , "ThoralfPlugin.Encode.TheoryEncoding"
               , "ThoralfPlugin.Encode.Nat"
-              , "ThoralfPlugin.Encode.FiniteMap"
               , "ThoralfPlugin.Encode.Symbol"
-              , "ThoralfPlugin.Encode.UoM"
               , "ThoralfPlugin.Encode.Bool"
               ]
             , other-modules = [] : List Text

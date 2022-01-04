@@ -37,9 +37,7 @@ library
       ThoralfPlugin.Encode.Find
       ThoralfPlugin.Encode.TheoryEncoding
       ThoralfPlugin.Encode.Nat
-      ThoralfPlugin.Encode.FiniteMap
       ThoralfPlugin.Encode.Symbol
-      ThoralfPlugin.Encode.UoM
       ThoralfPlugin.Encode.Bool
   hs-source-dirs:
       src
