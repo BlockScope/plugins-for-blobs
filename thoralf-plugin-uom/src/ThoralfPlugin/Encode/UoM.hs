@@ -11,44 +11,14 @@ import ThoralfPlugin.Encode.Convert
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
+import Data.UnitsOfMeasure.Unsafe.Convert (lookupUnitDefs)
 
 uomTheory :: ModuleName -> ModuleName -> FastString -> TcPluginM TheoryEncoding
 uomTheory theory syntax pkgName = do
+    uds <- lookupUnitDefs theory syntax pkgName
     mT <- lookupModule theory pkgName
-    mS <- lookupModule syntax pkgName
-    let f = divulgeTyCon mT
-    let g = divulgeTyCon mS
-
-    unit <- f "Unit"
-    base <- f "Base"
-    one <- f "One"
-    enc <- f "Enc"
-
-    m <- f "*:"
-    d <- f "/:"
-    e <- f "^:"
-
-    x <- g "Unpack"
-    i <- g "UnitSyntax"
-    c <- g "~~"
-    return . mkUoMEncoding enc $
-        UnitDefs
-            { unitKindCon = unit
-            , unitBaseTyCon = base
-            , unitOneTyCon = one
-            , mulTyCon = m
-            , divTyCon = d
-            , expTyCon = e
-            , unpackTyCon = x
-            , unitSyntaxTyCon = i
-            , unitSyntaxPromotedDataCon = getDataCon i ":/"
-            , equivTyCon = c
-            }
-    where
-        getDataCon u s' =
-            case [ dc | dc <- tyConDataCons u, occNameFS (occName (dataConName dc)) == fsLit s' ] of
-                [d] -> promoteDataCon d
-                _ -> error $ "lookupUnitDefs/getDataCon: missing " ++ s'
+    enc <- divulgeTyCon mT "Enc"
+    return $ mkUoMEncoding enc uds
 
 mkUoMEncoding :: TyCon -> UnitDefs -> TheoryEncoding
 mkUoMEncoding
