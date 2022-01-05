@@ -33,17 +33,19 @@ source-repository head
 
 library
   exposed-modules:
-      GHC.Corroborate.Type
       Data.Theory.UoM
       Data.UnitsOfMeasure.Read
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton
       Data.UnitsOfMeasure.Syntax
+      Data.UnitsOfMeasure.Unsafe.UnitDefs
       Data.UnitsOfMeasure.Unsafe.Convert
       Data.UnitsOfMeasure.Unsafe.Unify
       Data.UnitsOfMeasure.Unsafe.NormalForm
       Data.UnitsOfMeasure.Unsafe.Quantity
       Data.UnitsOfMeasure
+  other-modules:
+      Internal.Unit.Type
   hs-source-dirs:
       src
   build-depends:
@@ -139,6 +141,7 @@ test-suite doctest
       Data.UnitsOfMeasure.Unsafe.NormalForm
       Data.UnitsOfMeasure.Unsafe.Quantity
       Data.UnitsOfMeasure.Unsafe.Unify
+      Data.UnitsOfMeasure.Unsafe.UnitDefs
       Paths_uom_quantity
   autogen-modules:
       Paths_uom_quantity
@@ -157,28 +160,28 @@ test-suite doctest
     , units-parser >=0.1
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-9.0
     build-depends:
         ghc >=9.2 && <9.4
   if impl(ghc >= 9.0) && impl(ghc < 9.2)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-9.0
     build-depends:
         ghc >=9.0 && <9.2
   if impl(ghc >= 8.10.0) && impl(ghc < 9.0)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-8.10
     build-depends:
         ghc >=8.10 && <8.12
   if impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-8.8
     build-depends:
@@ -191,7 +194,7 @@ test-suite doctest
       , ghc (Type as Predicate)
   if impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-8.6
     build-depends:
@@ -204,7 +207,7 @@ test-suite doctest
       , ghc (Type as Predicate)
   if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-8.4
     build-depends:
@@ -217,7 +220,7 @@ test-suite doctest
       , ghc (Type as Predicate)
   if impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-8.2
     build-depends:
@@ -230,7 +233,7 @@ test-suite doctest
       , ghc (Type as Predicate)
   if impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)
     other-modules:
-        GHC.Corroborate.Type
+        Internal.Unit.Type
     hs-source-dirs:
         src-ghc-8.0
     build-depends:

@@ -1,8 +1,8 @@
-module GHC.Corroborate.Type (collectType) where
+module Internal.Unit.Type (collectType) where
 
 import TyCoRep (Type(..))
 
-import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs, eqTc, collectKindOrType)
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs, eqTc, collectKindOrType)
 import Data.UnitsOfMeasure.Unsafe.NormalForm (BaseUnit)
 
 collectType :: UnitDefs -> a -> Type -> [(a, Type, [(BaseUnit, Integer)])]

@@ -1,14 +1,9 @@
-{-# LANGUAGE PatternSynonyms #-}
+module Internal.Unit.Type (collectType) where
 
-module GHC.Corroborate.Type (collectType) where
+import TyCoRep (Type(..))
 
-import TyCoRep (Type(..), TyBinder(Anon))
-
-import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs, eqTc, collectKindOrType)
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs, eqTc, collectKindOrType)
 import Data.UnitsOfMeasure.Unsafe.NormalForm (BaseUnit)
-
-pattern FunTy :: Type -> Type -> Type
-pattern FunTy t v = ForAllTy (Anon t) v
 
 collectType :: UnitDefs -> a -> Type -> [(a, Type, [(BaseUnit, Integer)])]
 collectType uds ct (AppTy f s) = collectType uds ct f ++ collectType uds ct s

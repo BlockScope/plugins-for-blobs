@@ -1,54 +1,23 @@
 module Data.UnitsOfMeasure.Unsafe.Convert
-  ( UnitDefs(..)
-  , eqTc
-  , collectKindOrType
-  , unitKind
+  ( unitKind
   , isUnitKind
-  , normaliseUnit
   , reifyUnit
+  , lookForUnpacks
+  , lookupUnitDefs
   ) where
 
 import GHC.Corroborate
-import GHC.Corroborate.Shim (promoteTyCon)
-import Data.List (partition)
+import GHC.Corroborate.Divulge (divulgeTyCon)
+import GHC.Corroborate.Shim (promoteTyCon, mkEqPred)
+import GHC.Corroborate.Wrap (newGivenCt)
+import Data.List (partition, genericReplicate)
 
 import Data.UnitsOfMeasure.Unsafe.NormalForm
     ( (^:), (*:), (/:), Atom(..), NormUnit, BaseUnit
     , one, baseUnit, varUnit, famUnit, maybeConstant, ascending
     )
-
--- | Contains references to the basic unit constructors declared in
--- "Data.UnitsOfMeasure", as loaded inside GHC.
-data UnitDefs = UnitDefs
-    { unitKindCon :: TyCon
-    -- ^ The 'Unit' type constructor, to be promoted to a kind
-    , unitBaseTyCon :: TyCon
-    -- ^ The 'Base' data constructor of 'Unit', promoted to a type constructor
-    , unitOneTyCon :: TyCon
-    -- ^ The 'One'  type family
-    , mulTyCon :: TyCon
-    -- ^ The '(*:)' type family
-    , divTyCon :: TyCon
-    -- ^ The '(/:)' type family
-    , expTyCon :: TyCon
-    -- ^ The '(^:)' type family
-    , unpackTyCon :: TyCon
-    -- ^ The 'Unpack' type family
-    , unitSyntaxTyCon :: TyCon
-    -- ^ The 'UnitSyntax' type constructor, to be promoted to a kind
-    , unitSyntaxPromotedDataCon :: TyCon
-    -- ^ The data constructor of 'UnitSyntax', promoted to a type constructor
-    , equivTyCon :: TyCon
-    -- ^ The '(~~)' type family
-    }
-
-eqTc :: UnitDefs -> TyCon -> Bool
-eqTc = (==) . unpackTyCon
-
-collectKindOrType :: UnitDefs -> a -> Type -> [(a, Type, [(BaseUnit, Integer)])]
-collectKindOrType uds ct a = case maybeConstant =<< normaliseUnit uds a of
-    Just xs -> [(ct, a, xs)]
-    _ -> []
+import Data.UnitsOfMeasure.Unsafe.UnitDefs
+import Internal.Unit.Type (collectType)
 
 -- | 'Unit' promoted to a kind
 unitKind :: UnitDefs -> Kind
@@ -59,31 +28,6 @@ isUnitKind :: UnitDefs -> Kind -> Bool
 isUnitKind uds ty
     | Just (tc, _) <- tcSplitTyConApp_maybe ty = tc == unitKindCon uds
     | otherwise = False
-
--- | Try to convert a type to a unit normal form; this does not check
--- the type has kind 'Unit', and may fail even if it does.
-normaliseUnit :: UnitDefs -> Type -> Maybe NormUnit
-normaliseUnit uds ty | Just ty1 <- coreView ty = normaliseUnit uds ty1
-normaliseUnit _ (TyVarTy v) = pure $ varUnit v
-normaliseUnit uds (TyConApp tc tys)
-    | tc == unitOneTyCon uds =
-        pure one
-
-    | tc == unitBaseTyCon uds, [x] <- tys =
-        pure $ baseUnit x
-
-    | tc == mulTyCon uds, [u, v] <- tys =
-        (*:) <$> normaliseUnit uds u <*> normaliseUnit uds v
-
-    | tc == divTyCon uds, [u, v] <- tys =
-        (/:) <$> normaliseUnit uds u <*> normaliseUnit uds v
-
-    | tc == expTyCon uds, [u, n] <- tys, Just i <- isNumLitTy n =
-        (^:) <$> normaliseUnit uds u <*> pure i
-
-    | isFamilyTyCon tc = pure $ famUnit tc tys
-
-normaliseUnit _ _ = Nothing
 
 -- | Convert a unit normal form to a type expression of kind 'Unit'
 reifyUnit :: UnitDefs -> NormUnit -> Type
@@ -109,3 +53,66 @@ reifyUnit uds u
         reifyAtom (BaseAtom s) = mkTyConApp (unitBaseTyCon uds) [s]
         reifyAtom (VarAtom v) = mkTyVarTy v
         reifyAtom (FamAtom f tys) = mkTyConApp f tys
+
+lookForUnpacks :: UnitDefs -> [Ct] -> [Ct] -> TcPluginM [Ct]
+lookForUnpacks
+    uds@UnitDefs{unpackTyCon = tyConUnpack, unitSyntaxPromotedDataCon = tyConSyntax}
+    givens wanteds = mapM unpackCt unpacks where
+    unpacks = concatMap collectCt $ givens ++ wanteds
+
+    collectCt ct = collectType uds ct $ ctEvPred $ ctEvidence ct
+
+    unpackCt (ct,a,xs) =
+        newGivenCt loc (mkEqPred ty1 ty2) (evByFiat "units" ty1 ty2)
+        where
+            ty1 = TyConApp tyConUnpack [a]
+
+            ty2 = mkTyConApp tyConSyntax
+                   [ typeSymbolKind
+                   , foldr promoter nil ys
+                   , foldr promoter nil zs
+                   ]
+
+            loc = ctLoc ct
+
+            ys = concatMap (\ (s, i) -> if i > 0 then genericReplicate i s else []) xs
+            zs = concatMap (\ (s, i) -> if i < 0 then genericReplicate (abs i) s else []) xs
+
+    nil = mkTyConApp (promoteDataCon nilDataCon) [typeSymbolKind]
+
+    promoter x t = mkTyConApp cons_tycon [typeSymbolKind, mkStrLitTy x, t]
+    cons_tycon = promoteDataCon consDataCon
+
+lookupUnitDefs :: ModuleName -> ModuleName -> FastString -> TcPluginM UnitDefs
+lookupUnitDefs theory syntax pkgName = do
+    mT <- lookupModule theory pkgName
+    mS <- lookupModule syntax pkgName
+    let f = divulgeTyCon mT
+    let g = divulgeTyCon mS
+    u <- f "Unit"
+    b <- f "Base"
+    o <- f "One"
+    m <- f "*:"
+    d <- f "/:"
+    e <- f "^:"
+    x <- g "Unpack"
+    i <- g "UnitSyntax"
+    c <- g "~~"
+    return
+        UnitDefs
+            { unitKindCon = u
+            , unitBaseTyCon = b
+            , unitOneTyCon = o
+            , mulTyCon = m
+            , divTyCon = d
+            , expTyCon = e
+            , unpackTyCon = x
+            , unitSyntaxTyCon = i
+            , unitSyntaxPromotedDataCon = getDataCon i ":/"
+            , equivTyCon = c
+            }
+    where
+        getDataCon u s =
+            case [ dc | dc <- tyConDataCons u, occNameFS (occName (dataConName dc)) == fsLit s ] of
+                [d] -> promoteDataCon d
+                _ -> error $ "lookupUnitDefs/getDataCon: missing " ++ s

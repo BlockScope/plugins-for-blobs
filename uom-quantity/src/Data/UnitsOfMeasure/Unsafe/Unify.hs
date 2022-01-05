@@ -13,8 +13,8 @@ module Data.UnitsOfMeasure.Unsafe.Unify
     ) where
 
 import GHC.Corroborate
-import Data.UnitsOfMeasure.Unsafe.Convert
-    (UnitDefs, isUnitKind, normaliseUnit, equivTyCon, unitKind)
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..), normaliseUnit)
+import Data.UnitsOfMeasure.Unsafe.Convert (isUnitKind, unitKind)
 import Data.UnitsOfMeasure.Unsafe.NormalForm
     ( NormUnit, Atom(..), (^:), (*:), (/:)
     , mkNormUnit, varUnit, substUnit

@@ -28,19 +28,19 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                   , "units-parser >=0.1.1.4"
                   ]
             , exposed-modules =
-              [ "GHC.Corroborate.Type"
-              , "Data.Theory.UoM"
+              [ "Data.Theory.UoM"
               , "Data.UnitsOfMeasure.Read"
               , "Data.UnitsOfMeasure.Show"
               , "Data.UnitsOfMeasure.Singleton"
               , "Data.UnitsOfMeasure.Syntax"
+              , "Data.UnitsOfMeasure.Unsafe.UnitDefs"
               , "Data.UnitsOfMeasure.Unsafe.Convert"
               , "Data.UnitsOfMeasure.Unsafe.Unify"
               , "Data.UnitsOfMeasure.Unsafe.NormalForm"
               , "Data.UnitsOfMeasure.Unsafe.Quantity"
               , "Data.UnitsOfMeasure"
               ]
-            , other-modules = [] : List Text
+            , other-modules = [ "Internal.Unit.Type" ]
             }
           , when =
             [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
