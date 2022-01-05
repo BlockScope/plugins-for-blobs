@@ -10,7 +10,7 @@ import ThoralfPlugin.Encode.Convert
     (One, Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
-import Data.UnitsOfMeasure.Unsafe.Convert (UnitDefs(..))
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 
 uomTheory :: ModuleName -> ModuleName -> FastString -> TcPluginM TheoryEncoding
 uomTheory theory syntax pkgName = do
