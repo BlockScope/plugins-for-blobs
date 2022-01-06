@@ -103,6 +103,7 @@ test-suite units
   other-modules:
       Plugins.Thoralf.UnitDefs
       Defs
+      UnQuantity
   hs-source-dirs:
       test-suite-units
   ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N

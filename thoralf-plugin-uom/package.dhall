@@ -90,7 +90,8 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               , ghc-options = testopts
               , main = "Tests.hs"
-              , other-modules = [ "Plugins.Thoralf.UnitDefs", "Defs" ]
+              , other-modules =
+                [ "Plugins.Thoralf.UnitDefs", "Defs", "UnQuantity" ]
               , source-dirs = "test-suite-units"
               }
             }
