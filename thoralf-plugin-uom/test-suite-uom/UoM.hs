@@ -1,15 +1,17 @@
-{-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds #-}
+{-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds, PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
 
 module UoM where
 
 import Data.Kind (Type)
-import ThoralfPlugin.Singletons.Nat (SNat(..))
-import ThoralfPlugin.Singletons.Symbol (SSymbol)
-import Data.Theory.UoM
-import Data.UnitsOfMeasure.Constraint
-import Data.UnitsOfMeasure.Syntax (Exp)
+
+import "uom-quantity" Data.Theory.UoM (type (/:), Unit, One)
+import "uom-quantity" Data.UnitsOfMeasure.Syntax (Exp)
+import "thoralf-plugin" ThoralfPlugin.Singletons.Symbol (SSymbol)
+
+import "thoralf-plugin-uom" Data.UnitsOfMeasure.Constraint (IsProd, IsDiv, IsEnc)
+import "thoralf-plugin-uom" ThoralfPlugin.Singletons.Nat (SNat(..))
 
 data Quantity :: Unit -> Type where
     MkQuantity :: Double -> Quantity m

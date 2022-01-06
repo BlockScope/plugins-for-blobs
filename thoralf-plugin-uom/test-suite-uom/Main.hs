@@ -2,8 +2,8 @@
 
 module Main where
 
-import Test.Tasty.TH
-import Test.Tasty.QuickCheck
+import Test.Tasty.TH (defaultMainGenerator)
+import Test.Tasty.QuickCheck (testProperty)
 import Text.Printf (printf)
 import UoM (Quantity(..), extract, metres, distance)
 
