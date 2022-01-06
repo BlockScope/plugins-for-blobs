@@ -158,6 +158,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                   , "template-haskell >=2.9"
                   , "containers >=0.5"
                   , "ghc-corroborate"
+                  , "ghc-tcplugins-trace"
                   , "units-parser >=0.1"
                   , "doctest"
                   , "QuickCheck"
