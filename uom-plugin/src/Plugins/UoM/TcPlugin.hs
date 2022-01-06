@@ -8,7 +8,7 @@
 -- above the module header of your source files, or in the
 -- @ghc-options@ field of your @.cabal@ file.  You do not need to
 -- import this module.
-module Plugins.UoM.TcPlugin (uomPlugin) where
+module Plugins.UoM.TcPlugin (uomPlugin, uomUnpackPlugin, uomSolvePlugin) where
 
 import Data.Either (partitionEithers)
 import Data.IORef (IORef)
@@ -40,7 +40,27 @@ uomPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
-        , tcPluginSolve = unitsOfMeasureSolver dbg
+        , tcPluginSolve = \s gs ds ws -> do
+            unpacks <- unitsUnpack dbg s gs ds ws
+            unitsSolve dbg unpacks s gs ds ws
+        , tcPluginStop  = const $ return ()
+        }
+
+uomUnpackPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomUnpackPlugin dbg theory syntax pkg =
+    TcPlugin
+        { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
+        , tcPluginSolve = \s gs ds ws -> do
+            unpacks <- unitsUnpack dbg s gs ds ws
+            return $ TcPluginOk [] unpacks
+        , tcPluginStop  = const $ return ()
+        }
+
+uomSolvePlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomSolvePlugin dbg theory syntax pkg =
+    TcPlugin
+        { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
+        , tcPluginSolve = \s gs ds ws -> unitsSolve dbg [] s gs ds ws
         , tcPluginStop  = const $ return ()
         }
 
@@ -49,15 +69,37 @@ mkUoMInit u = do
     calls <- unsafeTcPluginTcM $ newMutVar 1
     return $ UomState { unitDefs = u, callsRef = calls }
 
-unitsOfMeasureSolver
+unitsUnpack
     :: TracingFlags
     -> UomState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
-    -> TcPluginM TcPluginResult
-unitsOfMeasureSolver
+    -> TcPluginM [Ct]
+unitsUnpack
     dbgPlugin@TracingFlags{traceCallCount}
+    UomState{unitDefs, callsRef}
+    givens _deriveds wanteds
+
+    | null wanteds = do logCalls; return []
+    | otherwise = do logCalls; lookForUnpacks unitDefs givens wanteds
+    where
+        logCalls = do
+            calls <- unsafeTcPluginTcM $ readMutVar callsRef
+            unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
+            tracePlugin dbgPlugin $ pprSolverCallCount (Indent 1) traceCallCount calls
+
+unitsSolve
+    :: TracingFlags
+    -> [Ct] -- ^ Unpacked given units
+    -> UomState
+    -> [Ct] -- ^ Given constraints
+    -> [Ct] -- ^ Derived constraints
+    -> [Ct] -- ^ Wanted constraints
+    -> TcPluginM TcPluginResult
+unitsSolve
+    dbgPlugin@TracingFlags{traceCallCount}
+    unpacks
     UomState{unitDefs, callsRef}
     givens deriveds wanteds
 
@@ -80,9 +122,7 @@ unitsOfMeasureSolver
         logCalls
         logCtsProblem wanteds
 
-        xs <- lookForUnpacks unitDefs givens wanteds
-
-        if not $ null xs then return $ TcPluginOk [] xs else do
+        if not $ null unpacks then return $ TcPluginOk [] unpacks else do
             let (unit_wanteds, _) = partitionEithers $ map toUE wanteds
             if null unit_wanteds then return $ TcPluginOk [] [] else do
                 (unit_givens, _) <- partitionEithers . map toUE <$> mapM zonkCt givens

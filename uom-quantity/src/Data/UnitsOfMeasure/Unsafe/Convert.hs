@@ -54,7 +54,15 @@ reifyUnit uds u
         reifyAtom (VarAtom v) = mkTyVarTy v
         reifyAtom (FamAtom f tys) = mkTyConApp f tys
 
-lookForUnpacks :: UnitDefs -> [Ct] -> [Ct] -> TcPluginM [Ct]
+lookForUnpacks
+    :: UnitDefs
+    -> [Ct]
+    -- ^ The given constraints.
+    -> [Ct]
+    -- ^ The wanted constraints.
+    -> TcPluginM [Ct]
+    -- ^ The unpacked units as constraints to be introduced as new work for
+    -- typechecking constraint solver.
 lookForUnpacks
     uds@UnitDefs{unpackTyCon = tyConUnpack, unitSyntaxPromotedDataCon = tyConSyntax}
     givens wanteds = mapM unpackCt unpacks where
