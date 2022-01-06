@@ -5,13 +5,11 @@
 
 module UnQuantity where
 
-import "uom-quantity" Data.UnitsOfMeasure
-import "uom-th" Data.UnitsOfMeasure.TH
-import Plugins.Thoralf.UnitDefs ()
-import Test.Tasty
-import Test.Tasty.HUnit
+import Test.Tasty (TestTree, testGroup)
+import Test.Tasty.HUnit ((@?=), testCase)
 
-import Defs ()
+import "uom-quantity" Data.UnitsOfMeasure (mk, unQuantity)
+import "uom-th" Data.UnitsOfMeasure.TH (u)
 
 testsUnQuantity :: TestTree
 testsUnQuantity = testGroup "Get the underlying value with unQuantity"
