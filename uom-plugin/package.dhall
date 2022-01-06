@@ -35,16 +35,11 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             , exposed-modules =
               [ "Data.UnitsOfMeasure.Convert"
               , "Data.UnitsOfMeasure.Tutorial"
-              , "Plugins.UoM.Unpack"
               , "Plugins.UoM.Solve"
               , "Plugins.UoM"
               ]
             , other-modules =
-              [ "Plugins.UoM.State"
-              , "Plugins.UoM.Unpack.TcPlugin"
-              , "Plugins.UoM.Solve.TcPlugin"
-              , "Plugins.UoM.TcPlugin"
-              ]
+              [ "Plugins.UoM.Solve.TcPlugin", "Plugins.UoM.TcPlugin" ]
             , when =
               [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
                 , source-dirs = [ "doc-ghc-9.2" ]
@@ -82,7 +77,42 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "uom-th"
                 , "uom-plugin"
                 ]
-              , ghc-options = testopts
+              , ghc-options = testopts # [ "-fplugin=Plugins.UoM" ]
+              , main = "Tests.hs"
+              , other-modules = [ "UnitDefs", "UnitDefsTests", "Z" ]
+              , source-dirs = "test-suite-units"
+              , when =
+                [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
+                  , source-dirs = [ "test-suite-units-ghc-9.2" ]
+                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.2) && impl(ghc < 9.2)"
+                  , source-dirs = [ "test-suite-units-ghc-8.2" ]
+                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
+                  , source-dirs = [] : List Text
+                  , other-modules = [] : List Text
+                  , buildable = False
+                  }
+                ]
+              }
+            , unpack-solve =
+              { dependencies =
+                [ "base"
+                , "tasty"
+                , "tasty-hunit"
+                , "uom-quantity"
+                , "uom-th"
+                , "uom-plugin"
+                ]
+              , ghc-options =
+                    testopts
+                  # [ "-fplugin=Plugins.UoM.Unpack"
+                    , "-fplugin=Plugins.UoM.Solve"
+                    ]
               , main = "Tests.hs"
               , other-modules = [ "UnitDefs", "UnitDefsTests", "Z" ]
               , source-dirs = "test-suite-units"

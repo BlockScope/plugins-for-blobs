@@ -1,11 +1,9 @@
-{-# LANGUAGE PackageImports #-}
-
 module Plugins.UoM.State (UomState(..), mkUoMInit) where
 
 import Data.IORef (IORef)
 import GHC.Corroborate
 
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 
 data UomState =
     UomState

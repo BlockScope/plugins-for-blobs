@@ -36,12 +36,9 @@ library
   exposed-modules:
       Data.UnitsOfMeasure.Convert
       Data.UnitsOfMeasure.Tutorial
-      Plugins.UoM.Unpack
       Plugins.UoM.Solve
       Plugins.UoM
   other-modules:
-      Plugins.UoM.State
-      Plugins.UoM.Unpack.TcPlugin
       Plugins.UoM.Solve.TcPlugin
       Plugins.UoM.TcPlugin
   hs-source-dirs:
@@ -125,7 +122,46 @@ test-suite units
       Z
   hs-source-dirs:
       test-suite-units
-  ghc-options: -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N -fplugin=Plugins.UoM
+  build-depends:
+      base
+    , tasty
+    , tasty-hunit
+    , uom-plugin
+    , uom-quantity
+    , uom-th
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 9.2) && impl(ghc < 9.4)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        test-suite-units-ghc-9.2
+    buildable: True
+  if impl(ghc >= 8.2) && impl(ghc < 9.2)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        test-suite-units-ghc-8.2
+    buildable: True
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
+    buildable: False
+  default-language: Haskell2010
+
+test-suite unpack-solve
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      UnitDefs
+      UnitDefsTests
+      Z
+  hs-source-dirs:
+      test-suite-units
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N -fplugin=Plugins.UoM.Unpack -fplugin=Plugins.UoM.Solve
   build-depends:
       base
     , tasty

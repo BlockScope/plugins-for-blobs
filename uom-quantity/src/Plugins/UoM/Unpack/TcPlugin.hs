@@ -1,11 +1,11 @@
-{-# LANGUAGE NamedFieldPuns, PackageImports #-}
+{-# LANGUAGE NamedFieldPuns #-}
 
 module Plugins.UoM.Unpack.TcPlugin (uomUnpackPlugin, unitsUnpack) where
 
 import GHC.Corroborate hiding (tracePlugin)
 import Plugins.Print (TracingFlags(..), Indent(..), tracePlugin, pprSolverCallCount)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Convert (lookupUnitDefs, lookForUnpacks)
 
+import Data.UnitsOfMeasure.Unsafe.Convert (lookupUnitDefs, lookForUnpacks)
 import Plugins.UoM.State (UomState(..), mkUoMInit)
 
 uomUnpackPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin

@@ -7,7 +7,6 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE PackageImports #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module UnitDefsTests where
