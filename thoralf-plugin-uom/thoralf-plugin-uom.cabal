@@ -102,6 +102,7 @@ test-suite units
   main-is: Tests.hs
   other-modules:
       Plugins.Thoralf.UnitDefs
+      Abelian
       Defs
       UnQuantity
   hs-source-dirs:
