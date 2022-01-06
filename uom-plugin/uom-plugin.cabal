@@ -36,8 +36,13 @@ library
   exposed-modules:
       Data.UnitsOfMeasure.Convert
       Data.UnitsOfMeasure.Tutorial
+      Plugins.UoM.Unpack
+      Plugins.UoM.Solve
       Plugins.UoM
   other-modules:
+      Plugins.UoM.State
+      Plugins.UoM.Unpack.TcPlugin
+      Plugins.UoM.Solve.TcPlugin
       Plugins.UoM.TcPlugin
   hs-source-dirs:
       src

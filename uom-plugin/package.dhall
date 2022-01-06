@@ -35,9 +35,16 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             , exposed-modules =
               [ "Data.UnitsOfMeasure.Convert"
               , "Data.UnitsOfMeasure.Tutorial"
+              , "Plugins.UoM.Unpack"
+              , "Plugins.UoM.Solve"
               , "Plugins.UoM"
               ]
-            , other-modules = [ "Plugins.UoM.TcPlugin" ]
+            , other-modules =
+              [ "Plugins.UoM.State"
+              , "Plugins.UoM.Unpack.TcPlugin"
+              , "Plugins.UoM.Solve.TcPlugin"
+              , "Plugins.UoM.TcPlugin"
+              ]
             , when =
               [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
                 , source-dirs = [ "doc-ghc-9.2" ]
