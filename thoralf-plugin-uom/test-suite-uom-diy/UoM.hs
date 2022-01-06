@@ -47,7 +47,7 @@ type M = Exp '[ '("m", 1)] -- metre
 type S = Exp '[ '("s", 1)] -- second
 type MpS = M /: S -- metres per second
 
-metres :: Quantity MpS-> Quantity S -> Quantity M
+metres :: Quantity MpS -> Quantity S -> Quantity M
 metres = mult
 
 distance :: IsDiv M S mps => Quantity mps -> Quantity S -> Quantity M

@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
@@ -15,7 +14,7 @@
 
 module Defs where
 
-import "uom-th" Data.UnitsOfMeasure.TH (declareBaseUnit)
+import "uom-th" Data.UnitsOfMeasure.TH
 
 -- Declarations.
-declareBaseUnit "byte"
+[u| m, s |]

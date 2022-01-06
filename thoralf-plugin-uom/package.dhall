@@ -46,7 +46,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
             }
           , tests =
-            { uom =
+            { uom-diy =
               { dependencies =
                 [ "base"
                 , "QuickCheck"
@@ -63,7 +63,26 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , ghc-options = testopts
               , other-modules = [ "UoM" ]
               , main = "Main.hs"
-              , source-dirs = "test-suite-uom"
+              , source-dirs = "test-suite-uom-diy"
+              }
+            , uom-quantity =
+              { dependencies =
+                [ "base"
+                , "QuickCheck"
+                , "singletons"
+                , "template-haskell"
+                , "tasty"
+                , "tasty-hunit"
+                , "tasty-quickcheck"
+                , "tasty-th"
+                , "thoralf-plugin-uom"
+                , "uom-quantity"
+                , "uom-th"
+                ]
+              , ghc-options = testopts
+              , other-modules = [ "Defs", "UoM" ]
+              , main = "Main.hs"
+              , source-dirs = "test-suite-uom-quantity"
               }
             , defs =
               { dependencies =
