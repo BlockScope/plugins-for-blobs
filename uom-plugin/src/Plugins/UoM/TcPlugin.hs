@@ -5,11 +5,11 @@ module Plugins.UoM.TcPlugin (uomPlugin) where
 import GHC.Corroborate hiding (tracePlugin)
 import Plugins.Print (TracingFlags)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
+import "uom-quantity" Plugins.UoM.State (mkUoMInit)
+import "uom-quantity" Plugins.UoM.Eq.TcPlugin (unitsEq)
+import "uom-quantity" Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 
-import Plugins.UoM.State (mkUoMInit)
 import Plugins.UoM.Solve.TcPlugin (unitsSolve)
-import Plugins.UoM.Eq.TcPlugin (unitsEq)
-import Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 
 uomPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomPlugin dbg theory syntax pkg =

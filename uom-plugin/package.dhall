@@ -66,15 +66,12 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , exposed-modules =
                   [ "Data.UnitsOfMeasure.Convert"
                   , "Data.UnitsOfMeasure.Tutorial"
-                  , "Plugins.UoM.Eq"
                   , "Plugins.UoM.Solve"
                   , "Plugins.UoM.Simplify"
-                  , "Plugins.UoM.UnpackEq"
                   , "Plugins.UoM"
                   ]
                 , other-modules =
-                  [ "Plugins.UoM.Eq.TcPlugin"
-                  , "Plugins.UoM.Simplify.TcPlugin"
+                  [ "Plugins.UoM.Simplify.TcPlugin"
                   , "Plugins.UoM.Solve.TcPlugin"
                   , "Plugins.UoM.TcPlugin"
                   ]

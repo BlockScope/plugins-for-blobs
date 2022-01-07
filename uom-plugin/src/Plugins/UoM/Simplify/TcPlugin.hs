@@ -22,8 +22,8 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
     , substsSubst, substsUnitEquality
     )
 
-import Plugins.UoM.Eq.TcPlugin (evMagic)
-import Plugins.UoM.State (UomState(..), mkUoMInit)
+import "uom-quantity" Plugins.UoM.Eq.TcPlugin (evMagic)
+import "uom-quantity" Plugins.UoM.State (UomState(..), mkUoMInit)
 
 uomSimplifyPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomSimplifyPlugin dbg theory syntax pkg =

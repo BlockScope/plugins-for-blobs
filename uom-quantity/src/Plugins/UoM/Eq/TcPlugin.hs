@@ -8,12 +8,12 @@ import GHC.Corroborate.Shim (mkFunnyEqEvidence)
 import Plugins.Print
     ( TracingFlags(..), Indent(..), tracePlugin, pprSolverCallCount )
 
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
+import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
+import Data.UnitsOfMeasure.Unsafe.Unify
     ( UnitEquality(..), fromUnitEquality, toUnitEquality )
 
-import "uom-quantity" Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
+import Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 import Plugins.UoM.State (UomState(..), mkUoMInit)
 
 uomEqPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin

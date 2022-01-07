@@ -46,8 +46,11 @@ library
       Data.UnitsOfMeasure.Unsafe.UnitDefs
       Data.UnitsOfMeasure
       Plugins.UoM.State
+      Plugins.UoM.Eq
+      Plugins.UoM.Eq.TcPlugin
       Plugins.UoM.Unpack
       Plugins.UoM.Unpack.TcPlugin
+      Plugins.UoM.UnpackEq
   other-modules:
       Internal.Unit.Type
   hs-source-dirs:
@@ -148,9 +151,12 @@ test-suite doctest
       Data.UnitsOfMeasure.Unsafe.Quantity
       Data.UnitsOfMeasure.Unsafe.Unify
       Data.UnitsOfMeasure.Unsafe.UnitDefs
+      Plugins.UoM.Eq
+      Plugins.UoM.Eq.TcPlugin
       Plugins.UoM.State
       Plugins.UoM.Unpack
       Plugins.UoM.Unpack.TcPlugin
+      Plugins.UoM.UnpackEq
       Paths_uom_quantity
   autogen-modules:
       Paths_uom_quantity

@@ -42,8 +42,11 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , "Data.UnitsOfMeasure.Unsafe.UnitDefs"
               , "Data.UnitsOfMeasure"
               , "Plugins.UoM.State"
+              , "Plugins.UoM.Eq"
+              , "Plugins.UoM.Eq.TcPlugin"
               , "Plugins.UoM.Unpack"
               , "Plugins.UoM.Unpack.TcPlugin"
+              , "Plugins.UoM.UnpackEq"
               ]
             , other-modules = [ "Internal.Unit.Type" ]
             }
