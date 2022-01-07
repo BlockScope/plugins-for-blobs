@@ -1,6 +1,6 @@
 {-# LANGUAGE NamedFieldPuns, PackageImports #-}
 
-module Plugins.UoM.Solve.TcPlugin (uomSolvePlugin, unitsSolve) where
+module Plugins.UoM.Simplify.TcPlugin (uomSimplifyPlugin, unitsSimplify) where
 
 import Data.Either (partitionEithers)
 import GHC.Corroborate hiding (tracePlugin)
@@ -16,42 +16,46 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Kind (reifyUnit)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
     ( UnitEquality(..), SubstItem(..), SimplifyResult(..)
-    , fromUnitEquality
+    , fromUnitEquality, toUnitEquality
     , simplifySubst, simplifyUnsubst
     , simplifyUnits, simplifySolved
     , substsSubst, substsUnitEquality
     )
 
-import Plugins.UoM.Eq.TcPlugin (unitsEq, evMagic)
+import Plugins.UoM.Eq.TcPlugin (evMagic)
 import Plugins.UoM.State (UomState(..), mkUoMInit)
 
-uomSolvePlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
-uomSolvePlugin dbg theory syntax pkg =
+uomSimplifyPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomSimplifyPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
-        , tcPluginSolve = \s gs ds ws -> do
-            eqs <- unitsEq dbg [] s gs ds ws
-            unitsSolve dbg [] eqs s gs ds ws
+        , tcPluginSolve = unitsSimplify dbg
         , tcPluginStop  = const $ return ()
         }
 
-unitsSolve
+unitsSimplify
     :: TracingFlags
-    -> [Ct] -- ^ Unpacked given units
-    -> ([UnitEquality], [UnitEquality]) -- ^ Unit givens and unit wanteds
     -> UomState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
-unitsSolve
-    dbgPlugin@TracingFlags{traceCallCount}
-    unpacks
-    (unit_givens, unit_wanteds)
-    UomState{unitDefs, callsRef}
-    givens deriveds wanteds
+unitsSimplify dbg s@UomState{unitDefs} gs ds ws = unitsSimplify' dbg s (f gs) ds (f ws) where
+    f = fst . partitionEithers . map (toUnitEquality unitDefs)
 
-    | null wanteds = do
+unitsSimplify'
+    :: TracingFlags
+    -> UomState
+    -> [UnitEquality]
+    -> [Ct]
+    -> [UnitEquality]
+    -> TcPluginM TcPluginResult
+unitsSimplify'
+    dbgPlugin@TracingFlags{traceCallCount}
+    UomState{unitDefs, callsRef}
+    unit_givens deriveds unit_wanteds
+
+    | null unit_wanteds = do
         logCalls
         logCtsProblem []
 
@@ -68,45 +72,44 @@ unitsSolve
         logCalls
         logCtsProblem wanteds
 
-        if not $ null unpacks then return $ TcPluginOk [] unpacks else do
-            if null unit_wanteds then return $ TcPluginOk [] [] else do
-                sr <- simplifyUnits unitDefs unit_givens
-                tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
+        sr <- simplifyUnits unitDefs unit_givens
+        tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
 
-                case sr of
-                    Impossible eq _ -> contradiction eq
+        case sr of
+            Impossible eq _ -> contradiction eq
 
-                    Simplified ss -> do
-                        sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
-                        tcPluginTrace "unitsOfMeasureSolver simplified wanteds" $ ppr sr'
-                        case sr' of
-                            Impossible _eq _ ->
-                                -- Don't report a contradiction, see #22
-                                return $ TcPluginOk [] []
+            Simplified ss -> do
+                sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
+                tcPluginTrace "unitsOfMeasureSolver simplified wanteds" $ ppr sr'
+                case sr' of
+                    Impossible _eq _ ->
+                        -- Don't report a contradiction, see #22
+                        return $ TcPluginOk [] []
 
-                            Simplified ss' -> do
-                                let solvedCts =
-                                        [ (evMagic "uom-solve" unitDefs ct, ct)
-                                        | eq <- simplifySolved ss'
-                                        , let ct = fromUnitEquality eq
-                                        ]
+                    Simplified ss' -> do
+                        let solvedCts =
+                                [ (evMagic "uom-solve" unitDefs ct, ct)
+                                | eq <- simplifySolved ss'
+                                , let ct = fromUnitEquality eq
+                                ]
 
-                                ok <-
-                                    TcPluginOk solvedCts
-                                    <$>
-                                        mapM
-                                            (substItemToCt unitDefs)
-                                            (filter
-                                                (isWanted . ctEvidence . siCt)
-                                                (substsSubst
-                                                    (simplifyUnsubst ss)
-                                                    (simplifySubst ss'))
-                                            )
+                        ok <-
+                            TcPluginOk solvedCts
+                            <$>
+                                mapM
+                                    (substItemToCt unitDefs)
+                                    (filter
+                                        (isWanted . ctEvidence . siCt)
+                                        (substsSubst
+                                            (simplifyUnsubst ss)
+                                            (simplifySubst ss'))
+                                    )
 
-                                logCtsSolution ok
-                                return ok
+                        logCtsSolution ok
+                        return ok
     where
-        -- solvedGiven ct = (ctEvTerm (ctEvidence ct), ct)
+        givens = fromUnitEquality <$> unit_givens
+        wanteds = fromUnitEquality <$> unit_wanteds
 
         foo :: Ct -> Either UnitEquality Ct -> Either (Ct, UnitEquality) Ct
         foo ct (Left x) = Left (ct, x)

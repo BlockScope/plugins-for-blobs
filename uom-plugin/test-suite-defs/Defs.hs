@@ -7,7 +7,22 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE PackageImports #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.UoM #-}
+-- UoM works.
+-- {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
+
+-- Unpack then Solve works.
+-- {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
+-- {-# OPTIONS_GHC -fplugin Plugins.UoM.Solve #-}
+
+-- Unpack, Eq, Solve works.
+{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM.Eq #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM.Simplify #-}
+
+-- UnpackEq then Simplify fails.
+-- {-# OPTIONS_GHC -fplugin Plugins.UoM.UnpackEq #-}
+-- {-# OPTIONS_GHC -fplugin Plugins.UoM.Simplify #-}
+
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Defs where

@@ -66,11 +66,18 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , exposed-modules =
                   [ "Data.UnitsOfMeasure.Convert"
                   , "Data.UnitsOfMeasure.Tutorial"
+                  , "Plugins.UoM.Eq"
                   , "Plugins.UoM.Solve"
+                  , "Plugins.UoM.Simplify"
+                  , "Plugins.UoM.UnpackEq"
                   , "Plugins.UoM"
                   ]
                 , other-modules =
-                  [ "Plugins.UoM.Solve.TcPlugin", "Plugins.UoM.TcPlugin" ]
+                  [ "Plugins.UoM.Eq.TcPlugin"
+                  , "Plugins.UoM.Simplify.TcPlugin"
+                  , "Plugins.UoM.Solve.TcPlugin"
+                  , "Plugins.UoM.TcPlugin"
+                  ]
                 , when =
                   [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
                     , source-dirs = [ "doc-ghc-9.2" ]

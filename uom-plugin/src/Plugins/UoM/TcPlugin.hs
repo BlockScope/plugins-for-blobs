@@ -8,6 +8,7 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 
 import Plugins.UoM.State (mkUoMInit)
 import Plugins.UoM.Solve.TcPlugin (unitsSolve)
+import Plugins.UoM.Eq.TcPlugin (unitsEq)
 import Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 
 uomPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
@@ -16,6 +17,7 @@ uomPlugin dbg theory syntax pkg =
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
         , tcPluginSolve = \s gs ds ws -> do
             unpacks <- unitsUnpack dbg s gs ds ws
-            unitsSolve dbg unpacks s gs ds ws
+            eqs <- unitsEq dbg unpacks s gs ds ws
+            unitsSolve dbg unpacks eqs s gs ds ws
         , tcPluginStop  = const $ return ()
         }
