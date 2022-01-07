@@ -46,6 +46,11 @@ number of unit tests.
 * Pulled unit definitions out of `uom-plugin` and put these into
   `uom-plugin-defs`.
 * Rearranged the modules of each plugin for similarity between both.
+* Added two standalone plugins, one for each phase of the `uom-plugin`.
+* Split the units of measure features of the thoralf plugin from the rest so
+  that we have `thoralf-plugin-uom` for units and `thoralf-plugin-rows` for the
+  rest. I've also split the guts of the internals into separate packages;
+  `thoralf-theory`, `thoralf-encode` and `thoralf-plugin`.
 
 ## Changes in Use
 
@@ -63,16 +68,18 @@ I've shortened names of the plugins.
 
 ## Split Phases
 
-There were two phases to solving with the uom-plugin, unpacking and solving.
-I've separated these so that the unpacking step can be used with the
-thoralf-plugin-uom. The `Plugins.UoM` combines both steps.
+There are two phases to solving with the uom-plugin, unpacking and solving
+constraints. The plugin `Plugins.UoM` does both. It will unpack if there any of
+that work to do and only when the unpacks are discharged will it solve.  I've
+separated these steps so that the unpacking can be used with the
+thoralf-plugin-uom. 
 
-```haskell
+```
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Solve #-}
 ```
 
-```haskell
+```
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
 ```
