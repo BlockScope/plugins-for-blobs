@@ -58,9 +58,13 @@ jobs:
         if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-      - name: test thoralf-plugin-uom:uom
+      - name: test thoralf-plugin-uom:uom-diy
         if: ${{ matrix.ghc != '9.2.1' }}
-        run: stack test thoralf-plugin-uom:uom --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-uom:uom-diy --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+      - name: test thoralf-plugin-uom:uom-quantity
+        if: ${{ matrix.ghc != '9.2.1' }}
+        run: stack test thoralf-plugin-uom:uom-quantity --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test uom-plugin:defs
         if: ${{ matrix.ghc == '8.2.2' }} ||
