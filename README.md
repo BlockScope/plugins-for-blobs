@@ -66,7 +66,7 @@ I've shortened names of the plugins.
 ++ {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
 ```
 
-## Split Phases
+## Unpack First
 
 There are two phases to solving with the uom-plugin, unpacking and solving
 constraints. The plugin `Plugins.UoM` does both. It will unpack if there is any
