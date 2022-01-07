@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, PackageImports #-}
+{-# LANGUAGE NamedFieldPuns #-}
 
 module Plugins.UoM.Eq.TcPlugin (uomEqPlugin, uomUnpackEqPlugin, unitsEq, evMagic) where
 
