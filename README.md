@@ -101,7 +101,7 @@ __ | declareBaseUnit "byte"
 To format `**/package.dhall` files and generate `**/*.cabal` files:
 
 ```
-> ./stack-shake-build.sh cabal-files
+> ./cabal-shake-build.sh cabal-files
 ```
 
 ## Testing
