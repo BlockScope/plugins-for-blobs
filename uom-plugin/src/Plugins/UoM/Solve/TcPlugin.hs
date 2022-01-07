@@ -1,6 +1,12 @@
 {-# LANGUAGE NamedFieldPuns, PackageImports #-}
 
-module Plugins.UoM.Solve.TcPlugin (uomSolvePlugin, unitsSolve) where
+module Plugins.UoM.Solve.TcPlugin
+    ( uomSolvePlugin
+    , unitsSolve
+    , reportContradiction
+    , fromUnitEqualityForContradiction
+    , substItemToCt
+    ) where
 
 import Data.Either (partitionEithers)
 import GHC.Corroborate hiding (tracePlugin)

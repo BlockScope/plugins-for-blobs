@@ -4,16 +4,12 @@ module Plugins.UoM.Simplify.TcPlugin (uomSimplifyPlugin, unitsSimplify) where
 
 import Data.Either (partitionEithers)
 import GHC.Corroborate hiding (tracePlugin)
-import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
-import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
 import Plugins.Print
     ( TracingFlags(..), Indent(..)
     , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
     )
 
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Kind (reifyUnit)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
     ( UnitEquality(..), SubstItem(..), SimplifyResult(..)
     , fromUnitEquality, toUnitEquality
@@ -24,6 +20,7 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
 
 import "uom-quantity" Plugins.UoM.Eq.TcPlugin (evMagic)
 import "uom-quantity" Plugins.UoM.State (UomState(..), mkUoMInit)
+import Plugins.UoM.Solve.TcPlugin (reportContradiction, substItemToCt)
 
 uomSimplifyPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomSimplifyPlugin dbg theory syntax pkg =
@@ -136,35 +133,3 @@ unitsSimplify'
             contra <- reportContradiction unitDefs eq
             logCtsSolution contra
             return contra
-
-reportContradiction :: UnitDefs -> UnitEquality -> TcPluginM TcPluginResult
-reportContradiction uds eq =
-    TcPluginContradiction . pure <$> fromUnitEqualityForContradiction uds eq
-
--- See #22 for why we need this
-fromUnitEqualityForContradiction :: UnitDefs -> UnitEquality -> TcPluginM Ct
-fromUnitEqualityForContradiction uds (UnitEquality ct u v) =
-    case classifyPredType $ ctEvPred $ ctEvidence ct of
-        EqPred NomEq _ _ -> return ct
-        _
-            | isGivenCt ct ->
-                newGivenCt
-                    (ctLoc ct)
-                    (mkEqPred u' v')
-                    (mkFunnyEqEvidence "units" (ctPred ct) u' v')
-
-            | otherwise -> newWantedCt (ctLoc ct) (mkEqPred u' v')
-    where
-        u' = reifyUnit uds u
-        v' = reifyUnit uds v
-
-substItemToCt :: UnitDefs -> SubstItem -> TcPluginM Ct
-substItemToCt uds si
-    | isGiven (ctEvidence ct) = newGivenCt loc prd $ evByFiat "units" ty1 ty2
-    | otherwise = newWantedCt loc prd
-    where
-        prd = mkEqPred ty1 ty2
-        ty1 = mkTyVarTy (siVar si)
-        ty2 = reifyUnit uds (siUnit si)
-        ct = siCt si
-        loc = ctLoc ct
