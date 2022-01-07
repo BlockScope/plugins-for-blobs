@@ -4,7 +4,7 @@ module Plugins.UoM.TcPlugin (uomPlugin) where
 
 import GHC.Corroborate hiding (tracePlugin)
 import Plugins.Print (TracingFlags)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Convert (lookupUnitDefs)
+import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 
 import Plugins.UoM.State (mkUoMInit)
 import Plugins.UoM.Solve.TcPlugin (unitsSolve)

@@ -38,11 +38,12 @@ library
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton
       Data.UnitsOfMeasure.Syntax
-      Data.UnitsOfMeasure.Unsafe.UnitDefs
-      Data.UnitsOfMeasure.Unsafe.Convert
-      Data.UnitsOfMeasure.Unsafe.Unify
+      Data.UnitsOfMeasure.Unsafe.Find
+      Data.UnitsOfMeasure.Unsafe.Kind
       Data.UnitsOfMeasure.Unsafe.NormalForm
       Data.UnitsOfMeasure.Unsafe.Quantity
+      Data.UnitsOfMeasure.Unsafe.Unify
+      Data.UnitsOfMeasure.Unsafe.UnitDefs
       Data.UnitsOfMeasure
       Plugins.UoM.State
       Plugins.UoM.Unpack
@@ -141,7 +142,8 @@ test-suite doctest
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton
       Data.UnitsOfMeasure.Syntax
-      Data.UnitsOfMeasure.Unsafe.Convert
+      Data.UnitsOfMeasure.Unsafe.Find
+      Data.UnitsOfMeasure.Unsafe.Kind
       Data.UnitsOfMeasure.Unsafe.NormalForm
       Data.UnitsOfMeasure.Unsafe.Quantity
       Data.UnitsOfMeasure.Unsafe.Unify

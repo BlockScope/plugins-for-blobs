@@ -6,12 +6,12 @@ import GHC.Corroborate
 import GHC.Corroborate.Divulge (divulgeTyCon)
 import Language.Haskell.Printf (s)
 
+import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import ThoralfPlugin.Encode.Convert
     (One, Two, kindConvert, typeConvert, typeArgConvert)
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
-import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
-import Data.UnitsOfMeasure.Unsafe.Convert (lookupUnitDefs)
 
 uomTheory :: ModuleName -> ModuleName -> FastString -> TcPluginM TheoryEncoding
 uomTheory theory syntax pkgName = do

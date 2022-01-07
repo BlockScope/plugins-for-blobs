@@ -5,7 +5,7 @@ module Plugins.UoM.Unpack.TcPlugin (uomUnpackPlugin, unitsUnpack) where
 import GHC.Corroborate hiding (tracePlugin)
 import Plugins.Print (TracingFlags(..), Indent(..), tracePlugin, pprSolverCallCount)
 
-import Data.UnitsOfMeasure.Unsafe.Convert (lookupUnitDefs, lookForUnpacks)
+import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs, lookForUnpacks)
 import Plugins.UoM.State (UomState(..), mkUoMInit)
 
 uomUnpackPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin

@@ -14,7 +14,7 @@ module Data.UnitsOfMeasure.Unsafe.Unify
 
 import GHC.Corroborate
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..), normaliseUnit)
-import Data.UnitsOfMeasure.Unsafe.Convert (isUnitKind, unitKind)
+import Data.UnitsOfMeasure.Unsafe.Kind (isUnitKind, unitKind)
 import Data.UnitsOfMeasure.Unsafe.NormalForm
     ( NormUnit, Atom(..), (^:), (*:), (/:)
     , mkNormUnit, varUnit, substUnit

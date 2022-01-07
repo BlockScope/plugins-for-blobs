@@ -11,8 +11,9 @@ import Plugins.Print
     , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
     )
 
+import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Convert (reifyUnit, lookupUnitDefs)
+import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Kind (reifyUnit)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
     ( UnitEquality(..), SubstItem(..), SimplifyResult(..)
     , fromUnitEquality, toUnitEquality
