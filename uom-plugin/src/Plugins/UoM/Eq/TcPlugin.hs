@@ -73,7 +73,7 @@ unitsEq
 
         if not $ null unpacks then return ([], []) else do
             let (unit_wanteds, _) = partitionEithers $ map toUE wanteds
-            if null unit_wanteds then return $ ([], []) else do
+            if null unit_wanteds then return ([], []) else do
                 (unit_givens, _) <- partitionEithers . map toUE <$> mapM zonkCt givens
                 return (unit_givens, unit_wanteds)
     where
