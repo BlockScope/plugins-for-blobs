@@ -49,6 +49,8 @@ number of unit tests.
 
 ## Changes in Use
 
+I've shortened names of the plugins.
+
 ```diff
 -- {-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
 ++ {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
@@ -57,6 +59,34 @@ number of unit tests.
 ```diff
 -- {-# OPTIONS_GHC -fplugin ThoralfPlugin.Plugin #-}
 ++ {-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
+```
+
+## Split Phases
+
+There were two phases to solving with the uom-plugin, unpacking and solving.
+I've separated these so that the unpacking step can be used with the
+thoralf-plugin-uom. The `Plugins.UoM` combines both steps.
+
+```haskell
+{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
+{-# OPTIONS_GHC -fplugin Plugins.UoM.Solve #-}
+```
+
+```haskell
+{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
+```
+
+With this, we're able to use the `u` quasiquoter with the thoralf-plugin-uom.
+Without the unpacking, trying to declare units would fail with:
+
+```
+    • Could not deduce: IsCanonical (Unpack (Base "byte"))
+        arising from the superclasses of an instance declaration
+    • In the instance declaration for ‘HasCanonicalBaseUnit "byte"’
+   |
+__ | declareBaseUnit "byte"
+   | ^
 ```
 
 ## Building
