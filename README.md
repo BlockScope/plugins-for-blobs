@@ -69,8 +69,8 @@ I've shortened names of the plugins.
 ## Split Phases
 
 There are two phases to solving with the uom-plugin, unpacking and solving
-constraints. The plugin `Plugins.UoM` does both. It will unpack if there any of
-that work to do and only when the unpacks are discharged will it solve.  I've
+constraints. The plugin `Plugins.UoM` does both. It will unpack if there is any
+of that work to do. Only when the unpacks are discharged will it solve. I've
 separated these steps so that the unpacking can be used with the
 thoralf-plugin-uom. 
 
