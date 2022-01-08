@@ -43,14 +43,15 @@ number of unit tests.
 * Moved the quasiquoter of the `uom-plugin` to `uom-th`.
 * Moved the units of measure (UoM) theory from the `thoralf-plugin` and much of
   the `uom-plugin` internals to `uom-quantity`.
-* Pulled unit definitions out of `uom-plugin` and put these into
-  `uom-plugin-defs`.
 * Rearranged the modules of each plugin for similarity between both.
 * Added two standalone plugins, one for each phase of the `uom-plugin`.
 * Split the units of measure features of the thoralf plugin from the rest so
   that we have `thoralf-plugin-uom` for units and `thoralf-plugin-rows` for the
   rest. I've also split the guts of the internals into separate packages;
   `thoralf-theory`, `thoralf-encode` and `thoralf-plugin`.
+* Pulled unit definitions out of `uom-plugin` and put these into
+  `uom-plugin-defs`. Also added a similar `thoralf-plugin-defs` package with the
+  same set of unit definitions.
 
 ## Changes in Use
 

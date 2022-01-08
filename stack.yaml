@@ -8,6 +8,7 @@ packages:
 - thoralf-plugin
 - thoralf-plugin-rows
 - thoralf-plugin-uom
+- thoralf-plugin-defs
 - uom-th
 - uom-quantity
 - uom-plugin
