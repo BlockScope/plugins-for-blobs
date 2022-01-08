@@ -66,6 +66,10 @@ jobs:
         if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-uom:uom-quantity --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
+      - name: build thoralf-plugin-defs
+        if: ${{ matrix.ghc != '9.2.1' }}
+        run: stack build thoralf-plugin-defs
+
       - name: test uom-plugin:defs
         if: ${{ matrix.ghc == '8.2.2' }} ||
         run: stack test uom-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml

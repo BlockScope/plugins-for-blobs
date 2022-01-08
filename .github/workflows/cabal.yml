@@ -74,6 +74,10 @@ jobs:
         if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:uom-quantity --test-show-details=direct --test-option="--color=always"
 
+      - name: build thoralf-plugin-defs
+        if: ${{ matrix.ghc != '9.2.1' }}
+        run: cabal build thoralf-plugin-defs
+
       - name: test uom-plugin:defs with ghc-8.2.2
         if: ${{ matrix.ghc == '8.2.2' }}
         run: cabal v2-test uom-plugin:defs --test-show-details=direct --test-option="--color=always"
