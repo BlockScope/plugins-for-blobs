@@ -3,14 +3,12 @@ cabal-version: 1.12
 -- This file has been generated from package.dhall by hpack version 0.34.6.
 --
 -- see: https://github.com/sol/hpack
---
--- hash: d4351f55d549548d09090408e4ba568c8b1518b83556b4b427a888a66d174c85
 
-name:           uom-plugin-defs
+name:           thoralf-plugin-defs
 version:        0.3.0.1
 synopsis:       Units of measure definitions
-description:    The @uom-plugin@ library adds support for units of measure to GHC
-                using the new experimental facility for typechecker plugins. This
+description:    The @thoralf-plugin-uom@ library adds support for units of measure to
+                GHC using the new experimental facility for typechecker plugins. This
                 package adds some unit definitions.
 category:       Type System
 stability:      experimental
@@ -21,9 +19,9 @@ maintainer:     Adam Gundry <adam@well-typed.com>
 copyright:      Copyright (c) 2014-2018, Adam Gundry
 license:        BSD3
 license-file:   LICENSE
+build-type:     Simple
 tested-with:
     GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
-build-type:     Simple
 extra-source-files:
     LICENSE
 
@@ -33,13 +31,13 @@ source-repository head
 
 library
   exposed-modules:
-      Plugins.UoM.UnitDefs
+      Plugins.Thoralf.UnitDefs
   hs-source-dirs:
       src
   build-depends:
       base >=4.9.1.0 && <5
     , template-haskell >=2.9
-    , uom-plugin
+    , thoralf-plugin-uom
     , uom-quantity
     , uom-th
   if impl(ghc >= 8.8.0)

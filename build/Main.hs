@@ -33,6 +33,7 @@ dhallCabal =
     , ("thoralf-plugin", "thoralf-plugin")
     , ("thoralf-plugin-rows", "thoralf-plugin-rows")
     , ("thoralf-plugin-uom", "thoralf-plugin-uom")
+    , ("thoralf-plugin-defs", "thoralf-plugin-defs")
     , ("uom-plugin", "uom-plugin")
     , ("uom-plugin-defs", "uom-plugin-defs")
     , ("uom-plugin-examples", "uom-plugin-examples")

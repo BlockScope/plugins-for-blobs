@@ -11,7 +11,7 @@
 
 -- | This module exports some example definitions of base and derived
 -- units, for demonstration purposes.
-module Plugins.UoM.UnitDefs
+module Plugins.Thoralf.UnitDefs
     ( MkUnit
     ) where
 

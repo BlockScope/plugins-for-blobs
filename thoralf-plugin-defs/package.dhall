@@ -16,7 +16,7 @@ in    defs
       , extra-source-files = [ "LICENSE" ]
       , library =
         { source-dirs = "src"
-        , exposed-modules = "Plugins.UoM.UnitDefs"
+        , exposed-modules = "Plugins.Thoralf.UnitDefs"
         , other-modules = [] : List Text
         , dependencies =
               defs.dependencies
