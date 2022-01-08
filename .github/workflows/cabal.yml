@@ -45,10 +45,9 @@ jobs:
         with:
           version: "4.8.7"
 
-      - name: build
+      - name: update
         run: |
           cabal v2-update
-          cabal v2-build all:libs
 
       - name: build examples
         if: ${{ matrix.ghc == '8.2.2' }}
