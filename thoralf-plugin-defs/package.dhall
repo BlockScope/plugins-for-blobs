@@ -23,6 +23,9 @@ in    defs
             # [ "template-haskell >=2.9"
               , "uom-quantity"
               , "uom-th"
+              , "thoralf-theory"
+              , "thoralf-encode"
+              , "thoralf-plugin"
               , "thoralf-plugin-uom"
               ]
         }
