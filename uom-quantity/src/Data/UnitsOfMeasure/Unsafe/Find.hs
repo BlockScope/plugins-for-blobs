@@ -32,26 +32,30 @@ lookForUnpacks
 
     collectCt ct = collectType uds ct $ ctEvPred $ ctEvidence ct
 
-    unpackCt (ct,a,xs) =
+    unpackCt (ct, a, xs) =
         newGivenCt loc (mkEqPred ty1 ty2) (evByFiat "units" ty1 ty2)
         where
             ty1 = TyConApp tyConUnpack [a]
-
-            ty2 = mkTyConApp tyConSyntax
-                   [ typeSymbolKind
-                   , foldr promoter nil ys
-                   , foldr promoter nil zs
-                   ]
-
+            ty2 = reifyUnitUnpacked tyConSyntax xs
             loc = ctLoc ct
 
-            ys = concatMap (\ (s, i) -> if i > 0 then genericReplicate i s else []) xs
-            zs = concatMap (\ (s, i) -> if i < 0 then genericReplicate (abs i) s else []) xs
+-- | Convert a constant unit normal form into a type expression of kind
+-- @UnitSyntax Symbol@.
+reifyUnitUnpacked  :: TyCon  -> [(BaseUnit, Integer)] -> Type
+reifyUnitUnpacked tyConSyntax xs =
+    mkTyConApp tyConSyntax
+            [ typeSymbolKind
+            , foldr promoter nil ys
+            , foldr promoter nil zs
+            ]
+    where
+        ys = concatMap (\ (s, i) -> if i > 0 then genericReplicate i s else []) xs
+        zs = concatMap (\ (s, i) -> if i < 0 then genericReplicate (abs i) s else []) xs
 
-    nil = mkTyConApp (promoteDataCon nilDataCon) [typeSymbolKind]
+        nil = mkTyConApp (promoteDataCon nilDataCon) [typeSymbolKind]
 
-    promoter x t = mkTyConApp cons_tycon [typeSymbolKind, mkStrLitTy x, t]
-    cons_tycon = promoteDataCon consDataCon
+        promoter x t = mkTyConApp cons_tycon [typeSymbolKind, mkStrLitTy x, t]
+        cons_tycon = promoteDataCon consDataCon
 
 lookupUnitDefs :: ModuleName -> ModuleName -> FastString -> TcPluginM UnitDefs
 lookupUnitDefs theory syntax pkgName = do
