@@ -103,6 +103,20 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , other-modules = [ "Defs" ]
               , source-dirs = "test-suite-defs"
               }
+            , force =
+              { dependencies =
+                [ "base"
+                , "tasty"
+                , "tasty-hunit"
+                , "uom-quantity"
+                , "uom-th"
+                , "thoralf-plugin-uom"
+                ]
+              , ghc-options = testopts
+              , main = "Tests.hs"
+              , other-modules = [ "UnitDefs" ]
+              , source-dirs = "test-suite-force"
+              }
             , units =
               { dependencies =
                 [ "base"

@@ -103,6 +103,37 @@ test-suite defs
     , uom-th
   default-language: Haskell2010
 
+test-suite force
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      UnitDefs
+  hs-source-dirs:
+      test-suite-force
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , tasty
+    , tasty-hunit
+    , template-haskell >=2.9
+    , th-printf
+    , thoralf-encode
+    , thoralf-plugin
+    , thoralf-plugin-uom
+    , thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom-quantity
+    , uom-th
+  default-language: Haskell2010
+
 test-suite units
   type: exitcode-stdio-1.0
   main-is: Tests.hs
