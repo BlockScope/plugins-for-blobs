@@ -37,7 +37,7 @@ plugin =
         tc = uomUnpackEqPlugin dbg mTheory mSyntax (fsLit "uom-quantity")
     in
         defaultPlugin
-            { tcPlugin = const . Just $ tracePlugin "uom-eq-plugin" tc
+            { tcPlugin = const . Just $ tracePlugin "uom-unpack-eq-plugin" tc
 #if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
 #endif

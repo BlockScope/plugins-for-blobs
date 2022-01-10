@@ -4,6 +4,9 @@ module Plugins.Thoralf.UoM (plugin) where
 
 import GHC.Corroborate
 import Plugins.Print
+    ( TracingFlags(..)
+    , TraceCarry(..), TraceSolution(..), TraceCallCount(..), TraceCts(..)
+    )
 
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
@@ -32,10 +35,10 @@ plugin =
                 , traceSmtConversation = TraceSmtConversation False
                 }
 
-        tyCheck = thoralfPlugin dbgPlugin dbgSmt pm thoralfTheories
+        tc = thoralfPlugin dbgPlugin dbgSmt pm thoralfTheories
     in
         defaultPlugin
-            { tcPlugin = const $ Just tyCheck
+            { tcPlugin = const . Just $ tracePlugin "thoralf-uom-plugin" tc
 #if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
 #endif
