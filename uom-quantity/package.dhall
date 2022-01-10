@@ -184,6 +184,17 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                   ]
             , ghc-options = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             , main = "DocTest.hs"
-            , source-dirs = [ "src", "test-suite-doctest" ]
+            , source-dirs = [ "src" ]
+            , when =
+              { condition = "impl(ghc >= 8.10.1)"
+              , `then` =
+                { source-dirs = "test-suite-doctest-StandaloneKindSignatures"
+                , other-modules = [] : List Text
+                }
+              , `else` =
+                { source-dirs = "test-suite-doctest-NoStandaloneKindSignatures"
+                , other-modules = [] : List Text
+                }
+              }
             }
           }
