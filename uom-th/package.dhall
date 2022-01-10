@@ -31,5 +31,10 @@ in    defs
         , exposed-modules =
           [ "Data.UnitsOfMeasure.Canonical", "Data.UnitsOfMeasure.TH" ]
         , other-modules = [] : List Text
+        , when =
+          { condition = "impl(ghc >= 8.10.1)"
+          , `then`.source-dirs = "src-StandaloneKindSignatures"
+          , `else`.source-dirs = "src-NoStandaloneKindSignatures"
+          }
         }
       }

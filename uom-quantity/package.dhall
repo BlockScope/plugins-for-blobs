@@ -52,7 +52,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             }
           , when =
             [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
-              , source-dirs = "src-ghc-9.0"
+              , source-dirs = [ "src-ghc-9.0", "src-StandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=9.2 && <9.4"
@@ -61,7 +61,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               }
             , { condition = "impl(ghc >= 9.0) && impl(ghc < 9.2)"
-              , source-dirs = "src-ghc-9.0"
+              , source-dirs = [ "src-ghc-9.0", "src-StandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=9.0 && <9.2"
@@ -69,8 +69,18 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                   }
                 ]
               }
-            , { condition = "impl(ghc >= 8.10.0) && impl(ghc < 9.0)"
-              , source-dirs = "src-ghc-8.10"
+            , { condition = "impl(ghc >= 8.10.1) && impl(ghc < 9.0)"
+              , source-dirs = [ "src-ghc-8.10", "src-StandaloneKindSignatures" ]
+              , dependencies =
+                [ { name = "ghc"
+                  , version = ">=8.10 && <8.12"
+                  , mixin = [] : List Text
+                  }
+                ]
+              }
+            , { condition = "impl(ghc >= 8.10.0) && impl(ghc < 8.10.1)"
+              , source-dirs =
+                [ "src-ghc-8.10", "src-NoStandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=8.10 && <8.12"
@@ -79,7 +89,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               }
             , { condition = "impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)"
-              , source-dirs = "src-ghc-8.8"
+              , source-dirs =
+                [ "src-ghc-8.8", "src-NoStandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=8.8 && <8.10"
@@ -94,7 +105,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               }
             , { condition = "impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)"
-              , source-dirs = "src-ghc-8.6"
+              , source-dirs =
+                [ "src-ghc-8.6", "src-NoStandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=8.6 && <8.8"
@@ -109,7 +121,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               }
             , { condition = "impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)"
-              , source-dirs = "src-ghc-8.4"
+              , source-dirs =
+                [ "src-ghc-8.4", "src-NoStandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=8.4 && <8.6"
@@ -124,7 +137,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               }
             , { condition = "impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)"
-              , source-dirs = "src-ghc-8.2"
+              , source-dirs =
+                [ "src-ghc-8.2", "src-NoStandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=8.2 && <8.4"
@@ -139,7 +153,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               }
             , { condition = "impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)"
-              , source-dirs = "src-ghc-8.0"
+              , source-dirs =
+                [ "src-ghc-8.0", "src-NoStandaloneKindSignatures" ]
               , dependencies =
                 [ { name = "ghc"
                   , version = ">=8.0 && <8.2"

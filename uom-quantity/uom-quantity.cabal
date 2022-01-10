@@ -66,21 +66,31 @@ library
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     hs-source-dirs:
         src-ghc-9.0
+        src-StandaloneKindSignatures
     build-depends:
         ghc >=9.2 && <9.4
   if impl(ghc >= 9.0) && impl(ghc < 9.2)
     hs-source-dirs:
         src-ghc-9.0
+        src-StandaloneKindSignatures
     build-depends:
         ghc >=9.0 && <9.2
-  if impl(ghc >= 8.10.0) && impl(ghc < 9.0)
+  if impl(ghc >= 8.10.1) && impl(ghc < 9.0)
     hs-source-dirs:
         src-ghc-8.10
+        src-StandaloneKindSignatures
+    build-depends:
+        ghc >=8.10 && <8.12
+  if impl(ghc >= 8.10.0) && impl(ghc < 8.10.1)
+    hs-source-dirs:
+        src-ghc-8.10
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.10 && <8.12
   if impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)
     hs-source-dirs:
         src-ghc-8.8
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.8 && <8.10
     mixins:
@@ -92,6 +102,7 @@ library
   if impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)
     hs-source-dirs:
         src-ghc-8.6
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.6 && <8.8
     mixins:
@@ -103,6 +114,7 @@ library
   if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
     hs-source-dirs:
         src-ghc-8.4
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.4 && <8.6
     mixins:
@@ -114,6 +126,7 @@ library
   if impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)
     hs-source-dirs:
         src-ghc-8.2
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.2 && <8.4
     mixins:
@@ -125,6 +138,7 @@ library
   if impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)
     hs-source-dirs:
         src-ghc-8.0
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.0 && <8.2
     mixins:
@@ -139,12 +153,10 @@ test-suite doctest
   type: exitcode-stdio-1.0
   main-is: DocTest.hs
   other-modules:
-      Data.Theory.UoM
       Data.UnitsOfMeasure
       Data.UnitsOfMeasure.Read
       Data.UnitsOfMeasure.Show
       Data.UnitsOfMeasure.Singleton
-      Data.UnitsOfMeasure.Syntax
       Data.UnitsOfMeasure.Unsafe.Find
       Data.UnitsOfMeasure.Unsafe.Kind
       Data.UnitsOfMeasure.Unsafe.NormalForm
@@ -177,29 +189,51 @@ test-suite doctest
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-9.0
+        src-StandaloneKindSignatures
     build-depends:
         ghc >=9.2 && <9.4
   if impl(ghc >= 9.0) && impl(ghc < 9.2)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-9.0
+        src-StandaloneKindSignatures
     build-depends:
         ghc >=9.0 && <9.2
-  if impl(ghc >= 8.10.0) && impl(ghc < 9.0)
+  if impl(ghc >= 8.10.1) && impl(ghc < 9.0)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-8.10
+        src-StandaloneKindSignatures
+    build-depends:
+        ghc >=8.10 && <8.12
+  if impl(ghc >= 8.10.0) && impl(ghc < 8.10.1)
+    other-modules:
+        Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
+    hs-source-dirs:
+        src-ghc-8.10
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.10 && <8.12
   if impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-8.8
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.8 && <8.10
     mixins:
@@ -211,8 +245,11 @@ test-suite doctest
   if impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-8.6
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.6 && <8.8
     mixins:
@@ -224,8 +261,11 @@ test-suite doctest
   if impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-8.4
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.4 && <8.6
     mixins:
@@ -237,8 +277,11 @@ test-suite doctest
   if impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-8.2
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.2 && <8.4
     mixins:
@@ -250,8 +293,11 @@ test-suite doctest
   if impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)
     other-modules:
         Internal.Unit.Type
+        Data.Theory.UoM
+        Data.UnitsOfMeasure.Syntax
     hs-source-dirs:
         src-ghc-8.0
+        src-NoStandaloneKindSignatures
     build-depends:
         ghc >=8.0 && <8.2
     mixins:
