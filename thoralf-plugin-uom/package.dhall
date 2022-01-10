@@ -44,6 +44,11 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               [ "ThoralfPlugin.Encode", "ThoralfPlugin.Encode.UoM" ]
             , other-extensions =
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
+            , when =
+              { condition = "impl(ghc >= 8.10.1)"
+              , `then`.source-dirs = "src-StandaloneKindSignatures"
+              , `else`.source-dirs = "src-NoStandaloneKindSignatures"
+              }
             }
           , tests =
             { uom-diy =
