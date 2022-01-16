@@ -59,7 +59,7 @@ unitsSimplify'
         if null unit_givens then return $ TcPluginOk [] [] else do
             let (unit_givens', _) = partitionEithers $ zipWith foo givens (Left <$> unit_givens)
             sr <- simplifyUnits unitDefs $ map snd unit_givens'
-            tcPluginTrace "unitsOfMeasureSolver simplified givens only" $ ppr sr
+            tcPluginTrace "uom-solve simplified givens only" $ ppr sr
             case sr of
                 -- Simplified tvs [] evs eqs -> TcPluginOk (map (solvedGiven . fst) unit_givens) []
                 Simplified _ -> return $ TcPluginOk [] []
@@ -70,14 +70,14 @@ unitsSimplify'
         logCtsProblem wanteds
 
         sr <- simplifyUnits unitDefs unit_givens
-        tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
+        tcPluginTrace "uom-solve simplified givens" $ ppr sr
 
         case sr of
             Impossible eq _ -> contradiction eq
 
             Simplified ss -> do
                 sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
-                tcPluginTrace "unitsOfMeasureSolver simplified wanteds" $ ppr sr'
+                tcPluginTrace "uom-solve simplified wanteds" $ ppr sr'
                 case sr' of
                     Impossible _eq _ ->
                         -- Don't report a contradiction, see #22

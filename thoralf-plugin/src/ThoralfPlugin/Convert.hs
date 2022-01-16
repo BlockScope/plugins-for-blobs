@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP, QuasiQuotes #-}
+{-# LANGUAGE CPP, NamedFieldPuns, QuasiQuotes #-}
 
 module ThoralfPlugin.Convert
     (
@@ -11,7 +11,7 @@ module ThoralfPlugin.Convert
     -- * Convert Function
     , convert, conv
     -- ** Extraction
-    , extractEq, extractDisEq, maybeExtractTyDisEq, maybeExtractTyEq
+    , ExtractEq(..)
     -- ** Converting the Dependencies
     , convertDeps, convertDecs, mkDefaultSMTVar, mkSMTSort, KdVar, convertTyVars
 
@@ -62,11 +62,11 @@ type ConvMonad a = ReaderT EncodingData Maybe a
 -- | The type of smt expressions.
 type SExpr = SMT.SExpr
 
-convert :: EncodingData -> [Ct] -> Maybe ConvCts
-convert encodingData cts = runReaderT (conv cts) encodingData
+convert :: ExtractEq -> EncodingData -> [Ct] -> Maybe ConvCts
+convert extract encodingData cts = runReaderT (conv extract cts) encodingData
 
-conv :: [Ct] -> ConvMonad ConvCts
-conv cts = do
+conv :: ExtractEq -> [Ct] -> ConvMonad ConvCts
+conv ExtractEq{extractEq, extractDisEq} cts = do
     EncodingData disEqClass _ <- ask
 
     let disEquals = extractDisEq disEqClass cts
@@ -92,23 +92,11 @@ conv cts = do
             (t2', deps2) <- convertType t2
             return ((SMT.Atom t1', SMT.Atom t2'), deps1 <> deps2)
 
-extractEq :: [Ct] -> [((Type, Type), Ct)]
-extractEq = mapMaybe maybeExtractTyEq
-
-extractDisEq :: Class -> [Ct] -> [((Type, Type), Ct)]
-extractDisEq cls = mapMaybe (maybeExtractTyDisEq cls)
-
-maybeExtractTyDisEq :: Class -> Ct -> Maybe ((Type, Type), Ct)
-maybeExtractTyDisEq disEqCls ct = do
-    ClassPred class' (_: t1 : t2 : _) <- return (classifyPredType $ ctPred ct)
-    guard (class' == disEqCls)
-    return ((t1, t2), ct)
-
-maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)
-maybeExtractTyEq ct =
-    case classifyPredType $ ctPred ct of
-        EqPred NomEq t1 t2 -> return ((t1, t2), ct)
-        _ -> Nothing
+data ExtractEq =
+    ExtractEq
+        { extractEq :: [Ct] -> [((Type, Type), Ct)]
+        , extractDisEq :: Class -> [Ct] -> [((Type, Type), Ct)]
+        }
 
 nubX :: Ord a => [a] -> [a]
 nubX = S.toList . S.fromList

@@ -1,4 +1,4 @@
-module ThoralfPlugin.Encode (thoralfTheories) where
+module ThoralfPlugin.Encode (thoralfUoMTheories) where
 
 import GHC.Corroborate
 
@@ -9,8 +9,8 @@ import ThoralfPlugin.Encode.UoM (uomTheory)
 import ThoralfPlugin.Encode.Symbol (symbolTheory)
 import ThoralfPlugin.Encode.Bool (boolTheory)
 
-thoralfTheories :: TcPluginM TheoryEncoding
-thoralfTheories =
+thoralfUoMTheories :: TcPluginM TheoryEncoding
+thoralfUoMTheories =
     let bool = PkgModuleName (mkModuleName "Data.Theory.Bool") (fsLit "thoralf-theory")
         nats = PkgModuleName (mkModuleName "GHC.TypeNats") (fsLit "base")
 

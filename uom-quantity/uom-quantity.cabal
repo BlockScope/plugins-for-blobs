@@ -51,7 +51,6 @@ library
       Plugins.UoM.Unpack
       Plugins.UoM.Unpack.TcPlugin
       Plugins.UoM.UnpackEq
-  other-modules:
       Internal.Unit.Type
   hs-source-dirs:
       src

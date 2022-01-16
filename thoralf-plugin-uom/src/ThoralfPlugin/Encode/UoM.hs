@@ -30,6 +30,8 @@ mkUoMEncoding
         , mulTyCon
         , divTyCon
         , expTyCon
+        -- TODO: Use equivTyCon
+        -- , equivTyCon
         } =
     emptyTheory
         { startDecs =

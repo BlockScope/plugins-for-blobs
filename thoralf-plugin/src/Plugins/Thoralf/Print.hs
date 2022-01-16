@@ -7,12 +7,15 @@ module Plugins.Thoralf.Print
     ) where
 
 import Data.Coerce (coerce)
-import GHC.Corroborate (TcPluginM, tcPluginIO)
+import GHC.Corroborate hiding (tracePlugin)
 import Plugins.Print (TracingFlags(..), TraceCarry(..), Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..))
 import Plugins.Print.SMT
-    (TraceConvertCtsToSmt(..), pprSmtGivens, pprSmtWanteds, pprSmtList)
+    ( TraceConvertCtsToSmt(..)
+    , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
+    , pprSmtGivens, pprSmtWanteds, pprSmtDecls
+    )
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
 
@@ -47,15 +50,15 @@ pprSmtStep
         . showString "\n"
         . tabtab
         . showString "smt-decs = "
-        . pprSmtList j (ds1 ++ ds2)
+        . pprSmtDecls j (SmtDecls $ ds1 ++ ds2)
         . showString "\n"
         . tabtab
         . showString "smt-given = "
-        . pprSmtGivens j gSs
+        . pprSmtGivens j (SmtGivens gSs)
         . showString "\n"
         . tabtab
         . showString "smt-wanted = "
-        . pprSmtWanteds j wSs)
+        . pprSmtWanteds j (SmtWanteds wSs))
         ""
     | coerce traceConvertCtsToSmt
     ]
@@ -70,3 +73,15 @@ traceSmt :: DebugSmt -> String -> TcPluginM ()
 traceSmt DebugSmt{..} s'
     | coerce traceConvertCtsToSmt = tcPluginIO $ putStrLn s'
     | otherwise = return ()
+
+instance Outputable ConvCtsStep where
+    ppr ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
+        text "smt-decs = "
+        <+> ppr (SmtDecls $ ds1 ++ ds2)
+        <+> text "smt-given = "
+        <+> ppr (SmtGivens gSs)
+        <+> text "smt-wanted = "
+        <+> ppr (SmtWanteds wSs)
+        where
+            (gSs, _gCts) = unzip gs
+            (wSs, _wCts) = unzip ws

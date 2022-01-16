@@ -1,31 +1,42 @@
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 module Plugins.Print.SMT
     ( TraceConvertCtsToSmt(..)
+    , SmtDecls(..)
+    , SmtGivens(..)
+    , SmtWanteds(..)
     , pprSmtInputs
     , pprSmtList
+    , pprSmtDecls
     , pprSmtGivens
     , pprSmtWanteds
     ) where
 
+import GHC.Corroborate
+import SimpleSMT (SExpr(..))
 import qualified SimpleSMT as SMT (ppSExpr)
 import Plugins.Print (Indent(..))
 
-import ThoralfPlugin.Convert (SExpr)
+import ThoralfPlugin.Convert (ConvCts(..))
 
 newtype TraceConvertCtsToSmt = TraceConvertCtsToSmt Bool
+newtype SmtDecls = SmtDecls [SExpr]
+newtype SmtWanteds = SmtWanteds [SExpr]
+newtype SmtGivens = SmtGivens [SExpr]
 
 pprSmtInputs
     :: Indent
     -> TraceConvertCtsToSmt
-    -> [SExpr]
-    -> [SExpr]
-    -> [SExpr]
+    -> SmtGivens
+    -> SmtWanteds
+    -> SmtDecls
     -> ShowS
 pprSmtInputs
     iIndent@(Indent i)
     (TraceConvertCtsToSmt True)
-    gSExprs
-    wSExprs
-    dSExprs
+    (SmtGivens gSExprs)
+    (SmtWanteds wSExprs)
+    (SmtDecls dSExprs)
     = 
     tab
     . showString "sexpr-decs = "
@@ -54,9 +65,39 @@ pprSmtList (Indent i) es = let tab = replicate (2 * i) ' ' in
         (showString tab . showChar ']')
         es
 
-pprSmtGivens :: Indent -> [SExpr] -> ShowS
-pprSmtGivens _ [] = showString "[]"
-pprSmtGivens (Indent i) es = let tab = replicate (2 * i) ' ' in
+pprSmtDecls :: Indent -> SmtDecls -> ShowS
+pprSmtDecls i (SmtDecls es) = pprSmtList i es
+
+instance Outputable SExpr where
+    ppr e = text $ SMT.ppSExpr e ""
+
+instance Outputable SmtDecls where
+    ppr (SmtDecls es) =
+        text "["
+        <+> vcat (ppr <$> es)
+        <+> text "]"
+
+instance Outputable SmtGivens where
+    ppr (SmtGivens es) =
+        text "["
+        <+> vcat (ppr <$> es)
+        <+> text "]"
+
+instance Outputable SmtWanteds where
+    ppr (SmtWanteds es) =
+        text "["
+        <+> vcat (ppr <$> es)
+        <+> text "]"
+
+instance Outputable ConvCts where
+    ppr (ConvCts eqs deps) =
+        ppr (SmtDecls $ fst <$> eqs)
+        <+> ppr (snd <$> eqs)
+        <+> ppr deps
+
+pprSmtGivens :: Indent -> SmtGivens -> ShowS
+pprSmtGivens _ (SmtGivens []) = showString "[]"
+pprSmtGivens (Indent i) (SmtGivens es) = let tab = replicate (2 * i) ' ' in
     showChar '['
     . showChar '\n'
     . foldr
@@ -70,9 +111,9 @@ pprSmtGivens (Indent i) es = let tab = replicate (2 * i) ' ' in
         (showString tab . showChar ']')
         es
 
-pprSmtWanteds :: Indent -> [SExpr] -> ShowS
-pprSmtWanteds _ [] = showString "[]"
-pprSmtWanteds (Indent i) es = let tab = replicate (2 * i) ' ' in
+pprSmtWanteds :: Indent -> SmtWanteds -> ShowS
+pprSmtWanteds _ (SmtWanteds []) = showString "[]"
+pprSmtWanteds (Indent i) (SmtWanteds es) = let tab = replicate (2 * i) ' ' in
     showChar '['
     . showChar '\n'
     . foldr

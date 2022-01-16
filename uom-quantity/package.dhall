@@ -47,8 +47,9 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , "Plugins.UoM.Unpack"
               , "Plugins.UoM.Unpack.TcPlugin"
               , "Plugins.UoM.UnpackEq"
+              , "Internal.Unit.Type"
               ]
-            , other-modules = [ "Internal.Unit.Type" ]
+            , other-modules = [] : List Text
             }
           , when =
             [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"

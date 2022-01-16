@@ -38,6 +38,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               [ "Plugins.Thoralf.TcPlugin"
               , "Plugins.Thoralf.Print"
               , "Plugins.Print.SMT"
+              , "ThoralfPlugin.Extract"
               , "ThoralfPlugin.Convert"
               , "ThoralfPlugin.Variables"
               , "ThoralfPlugin.Singletons.Symbol"

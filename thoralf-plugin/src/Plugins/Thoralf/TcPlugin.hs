@@ -1,6 +1,13 @@
 {-# LANGUAGE TypeFamilies, TypeInType, NamedFieldPuns #-}
 
-module Plugins.Thoralf.TcPlugin (thoralfPlugin) where
+module Plugins.Thoralf.TcPlugin
+    ( ThoralfState(..)
+    , mkThoralfInit
+    , thoralfStop
+    , thoralfSolver
+    , thoralfPlugin
+    , isEqCt
+    ) where
 
 import Prelude hiding (showList)
 import Data.Foldable (traverse_)
@@ -14,11 +21,12 @@ import GHC.Corroborate.Divulge (divulgeClass)
 import Plugins.Print
     (TracingFlags(..), Indent(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
 
-import ThoralfPlugin.Convert
-    (EncodingData(..), ConvCts(..), maybeExtractTyEq, maybeExtractTyDisEq, convert)
+import ThoralfPlugin.Extract (maybeExtractTyEq, maybeExtractTyDisEq)
+import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
+import ThoralfPlugin.Convert (ExtractEq(..), EncodingData(..), ConvCts(..), convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Print.SMT (pprSmtInputs)
+import Plugins.Print.SMT (SmtGivens(..), SmtWanteds(..), SmtDecls(..), pprSmtInputs)
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), TraceSmtConversation(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
@@ -29,6 +37,7 @@ data ThoralfState =
         { smtRef :: IORef (SMT.Solver, Int)
         , theoryEncoding :: TheoryEncoding
         , disEqClass :: Class
+        , extract :: ExtractEq
         }
 
 thoralfPlugin
@@ -70,6 +79,7 @@ mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
             { smtRef = solverRef
             , theoryEncoding = encoding
             , disEqClass = disEq
+            , extract = ExtractEq Ex.extractEq Ex.extractDisEq
             }
 
 thoralfStop :: ThoralfState -> TcPluginM ()
@@ -93,6 +103,7 @@ thoralfSolver
         { smtRef
         , theoryEncoding
         , disEqClass
+        , extract
         }
     gs' ds' ws' = do
     -- Refresh the solver
@@ -112,12 +123,19 @@ thoralfSolver
     let hideError = flip catchIOError (const $ return SMT.Sat)
     let pop = SMT.pop smt
     let noSolving = return $ TcPluginOk [] []
-    let convertor = convert (EncodingData disEqClass theoryEncoding)
+    let convertor = convert extract (EncodingData disEqClass theoryEncoding)
 
-    case (convertor gs, convertor $ ws ++ ds) of
+    let gsConvCts = convertor gs
+    let wsConvCts = convertor $ ws ++ ds
+    tcPluginTrace "thoralf-solve gsConvCts" $ ppr gsConvCts
+    tcPluginTrace "thoralf-solve wsConvCts" $ ppr wsConvCts
+    case (gsConvCts, wsConvCts) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
             let step = ConvCtsStep gCCs wCCs
-            logSmtInputs (fst <$> gExprs) (fst <$> wExprs) (decs1 ++ decs2)
+            logSmtInputs
+                (SmtGivens $ fst <$> gExprs)
+                (SmtWanteds $ fst <$> wExprs)
+                (SmtDecls $ decs1 ++ decs2)
             logConvCts step
             logSmt step
 
@@ -127,6 +145,13 @@ thoralfSolver
                 traverse_ (SMT.assert smt . fst) gExprs
                 SMT.check smt
 
+            tcPluginTrace "thoralf-solve decls" $ ppr ds'
+            tcPluginTrace "thoralf-solve decls filtered" $ ppr ds
+            tcPluginTrace "thoralf-solve givens" $ ppr gs'
+            tcPluginTrace "thoralf-solve givens filtered" $ ppr gs
+            tcPluginTrace "thoralf-solve wanteds" $ ppr ws'
+            tcPluginTrace "thoralf-solve wanteds filtered" $ ppr ws
+            tcPluginTrace "thoralf-solve simplified given sexprs" $ ppr gExprs
             case givenCheck of
                 SMT.Unknown -> tcPluginIO pop >> noSolving
 
@@ -144,7 +169,9 @@ thoralfSolver
                         SMT.Unsat -> do
                             tcPluginIO pop
 
-                            let ok = TcPluginOk (mapMaybe (addEvTerm . snd) wExprs) []
+                            let solvedCts = mapMaybe (addEvTerm . snd) wExprs
+                            let ok = TcPluginOk solvedCts []
+                            tcPluginTrace "thoralf-solve simplified wanteds" $ ppr solvedCts
                             logCtsSolution ok
                             return ok
 

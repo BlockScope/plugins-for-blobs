@@ -32,6 +32,8 @@ flag suppress-failing-tests
 
 library
   exposed-modules:
+      Plugins.Thoralf.DisEq
+      Plugins.Thoralf.DisEq.TcPlugin
       Plugins.Thoralf.UoM
       Data.UnitsOfMeasure.Constraint
       ThoralfPlugin.Singletons.Nat
