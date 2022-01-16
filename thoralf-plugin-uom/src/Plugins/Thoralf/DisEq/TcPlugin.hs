@@ -3,7 +3,7 @@
 module Plugins.Thoralf.DisEq.TcPlugin (disEqPlugin, unitsDisEq) where
 
 import GHC.Corroborate hiding (tracePlugin)
-import Plugins.Print (TracingFlags(..), Indent(..), tracePlugin, pprSolverCallCount)
+import Plugins.Print (DebugCts(..), Indent(..), tracePlugin, pprSolverCallCount)
 
 import GHC.Corroborate.Divulge (divulgeClass)
 import GHC.Corroborate.Shim (mkEqPred)
@@ -29,7 +29,7 @@ mkDisEqInit PkgModuleName{moduleName = disEqName, pkgName} ud = do
     return $ DisEqState { uomState = uomState, disEqClass = disEq }
 
 disEqPlugin
-    :: TracingFlags
+    :: DebugCts
     -> PkgModuleName
     -> ModuleName
     -> ModuleName
@@ -45,14 +45,14 @@ disEqPlugin dbg pkgDisEq theory syntax pkg =
         }
 
 unitsDisEq
-    :: TracingFlags
+    :: DebugCts
     -> DisEqState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM [Ct]
 unitsDisEq
-    dbgPlugin@TracingFlags{traceCallCount}
+    dbgPlugin@DebugCts{traceCallCount}
     s@DisEqState{uomState = UomState{callsRef}}
     givens _deriveds wanteds
 

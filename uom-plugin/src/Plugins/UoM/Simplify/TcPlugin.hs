@@ -5,7 +5,7 @@ module Plugins.UoM.Simplify.TcPlugin (uomSimplifyPlugin, unitsSimplify) where
 import Data.Either (partitionEithers)
 import GHC.Corroborate hiding (tracePlugin)
 import Plugins.Print
-    ( TracingFlags(..), Indent(..)
+    ( DebugCts(..), Indent(..)
     , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
     )
 
@@ -22,7 +22,7 @@ import "uom-quantity" Plugins.UoM.Eq.TcPlugin (evMagic)
 import "uom-quantity" Plugins.UoM.State (UomState(..), mkUoMInit)
 import Plugins.UoM.Solve.TcPlugin (reportContradiction, substItemToCt)
 
-uomSimplifyPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomSimplifyPlugin :: DebugCts -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomSimplifyPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
@@ -31,7 +31,7 @@ uomSimplifyPlugin dbg theory syntax pkg =
         }
 
 unitsSimplify
-    :: TracingFlags
+    :: DebugCts
     -> UomState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
@@ -41,14 +41,14 @@ unitsSimplify dbg s@UomState{unitDefs} gs ds ws = unitsSimplify' dbg s (f gs) ds
     f = fst . partitionEithers . map (toUnitEquality unitDefs)
 
 unitsSimplify'
-    :: TracingFlags
+    :: DebugCts
     -> UomState
     -> [UnitEquality]
     -> [Ct]
     -> [UnitEquality]
     -> TcPluginM TcPluginResult
 unitsSimplify'
-    dbgPlugin@TracingFlags{traceCallCount}
+    dbgPlugin@DebugCts{traceCallCount}
     UomState{unitDefs, callsRef}
     unit_givens deriveds unit_wanteds
 

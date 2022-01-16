@@ -8,7 +8,7 @@ module Plugins.Thoralf.Print
 
 import Data.Coerce (coerce)
 import GHC.Corroborate hiding (tracePlugin)
-import Plugins.Print (TracingFlags(..), TraceCarry(..), Indent(..), tracePlugin, pprCts)
+import Plugins.Print (DebugCts(..), TraceCarry(..), Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..))
 import Plugins.Print.SMT
@@ -29,10 +29,10 @@ data DebugSmt =
         -- ^ Trace the conversation with the SMT solver
         }
 
-pprConvCtsStep :: Indent -> TracingFlags -> ConvCtsStep -> [String]
+pprConvCtsStep :: Indent -> DebugCts -> ConvCtsStep -> [String]
 pprConvCtsStep
     indent
-    TracingFlags{..}
+    DebugCts{..}
     ConvCtsStep{givens = ConvCts gs _ds1, wanted = ConvCts ws _ds2} =
     if not (coerce traceCarry) then [] else pprCts indent gCts [] wCts
     where

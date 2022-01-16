@@ -19,7 +19,7 @@ plugin =
                 (fsLit "thoralf-theory")
 
         dbgPlugin =
-            TracingFlags
+            DebugCts
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
                 , traceCarry = TraceCarry False

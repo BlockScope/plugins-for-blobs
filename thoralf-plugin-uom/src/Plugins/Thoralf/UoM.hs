@@ -6,7 +6,7 @@ import Data.Maybe (mapMaybe)
 import Control.Monad.Reader (guard)
 import GHC.Corroborate
 import Plugins.Print
-    ( TracingFlags(..)
+    ( DebugCts(..)
     , TraceCarry(..), TraceSolution(..), TraceCallCount(..), TraceCts(..)
     )
 
@@ -29,16 +29,16 @@ plugin =
                 (fsLit "thoralf-theory")
 
         dbgPlugin =
-            TracingFlags
+            DebugCts
                 { traceCallCount = TraceCallCount False
-                , traceCts = TraceCts False
+                , traceCts = TraceCts True
                 , traceCarry = TraceCarry False
-                , traceSolution = TraceSolution False
+                , traceSolution = TraceSolution True
                 }
 
         dbgSmt =
             DebugSmt
-                { traceConvertCtsToSmt = TraceConvertCtsToSmt False
+                { traceConvertCtsToSmt = TraceConvertCtsToSmt True
                 , traceSmtConversation = TraceSmtConversation False
                 }
 
@@ -52,7 +52,7 @@ plugin =
             }
 
 thoralfUoMPlugin
-    :: TracingFlags
+    :: DebugCts
     -> DebugSmt
     -> PkgModuleName
     -> TcPluginM TheoryEncoding

@@ -6,7 +6,7 @@ import Data.Either (partitionEithers)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Shim (mkFunnyEqEvidence)
 import Plugins.Print
-    ( TracingFlags(..), Indent(..), tracePlugin, pprSolverCallCount )
+    ( DebugCts(..), Indent(..), tracePlugin, pprSolverCallCount )
 
 import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
@@ -16,7 +16,7 @@ import Data.UnitsOfMeasure.Unsafe.Unify
 import Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 import Plugins.UoM.State (UomState(..), mkUoMInit)
 
-uomEqPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomEqPlugin :: DebugCts -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomEqPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
@@ -31,7 +31,7 @@ uomEqPlugin dbg theory syntax pkg =
         , tcPluginStop  = const $ return ()
         }
 
-uomUnpackEqPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomUnpackEqPlugin :: DebugCts -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomUnpackEqPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
@@ -48,7 +48,7 @@ uomUnpackEqPlugin dbg theory syntax pkg =
         }
 
 unitsEq
-    :: TracingFlags
+    :: DebugCts
     -> [Ct] -- ^ Unpacked given units
     -> UomState
     -> [Ct] -- ^ Given constraints
@@ -56,7 +56,7 @@ unitsEq
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM ([UnitEquality], [UnitEquality]) -- ^ Unit givens and unit wanteds
 unitsEq
-    dbgPlugin@TracingFlags{traceCallCount}
+    dbgPlugin@DebugCts{traceCallCount}
     unpacks
     UomState{unitDefs, callsRef}
     givens _deriveds wanteds

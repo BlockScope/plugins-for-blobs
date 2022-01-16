@@ -3,12 +3,12 @@
 module Plugins.UoM.Unpack.TcPlugin (uomUnpackPlugin, unitsUnpack) where
 
 import GHC.Corroborate hiding (tracePlugin)
-import Plugins.Print (TracingFlags(..), Indent(..), tracePlugin, pprSolverCallCount)
+import Plugins.Print (DebugCts(..), Indent(..), tracePlugin, pprSolverCallCount)
 
 import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs, lookForUnpacks)
 import Plugins.UoM.State (UomState(..), mkUoMInit)
 
-uomUnpackPlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomUnpackPlugin :: DebugCts -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomUnpackPlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
@@ -19,14 +19,14 @@ uomUnpackPlugin dbg theory syntax pkg =
         }
 
 unitsUnpack
-    :: TracingFlags
+    :: DebugCts
     -> UomState
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM [Ct]
 unitsUnpack
-    dbgPlugin@TracingFlags{traceCallCount}
+    dbgPlugin@DebugCts{traceCallCount}
     UomState{unitDefs, callsRef}
     givens _deriveds wanteds
 

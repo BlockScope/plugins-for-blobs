@@ -13,7 +13,7 @@ import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Shim (mkEqPred, mkFunnyEqEvidence)
 import GHC.Corroborate.Wrap (newGivenCt, newWantedCt)
 import Plugins.Print
-    ( TracingFlags(..), Indent(..)
+    ( DebugCts(..), Indent(..)
     , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
     )
 
@@ -31,7 +31,7 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
 import "uom-quantity" Plugins.UoM.Eq.TcPlugin (unitsEq, evMagic)
 import "uom-quantity" Plugins.UoM.State (UomState(..), mkUoMInit)
 
-uomSolvePlugin :: TracingFlags -> ModuleName -> ModuleName -> FastString -> TcPlugin
+uomSolvePlugin :: DebugCts -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomSolvePlugin dbg theory syntax pkg =
     TcPlugin
         { tcPluginInit  = mkUoMInit =<< lookupUnitDefs theory syntax pkg
@@ -42,7 +42,7 @@ uomSolvePlugin dbg theory syntax pkg =
         }
 
 unitsSolve
-    :: TracingFlags
+    :: DebugCts
     -> [Ct] -- ^ Unpacked given units
     -> ([UnitEquality], [UnitEquality]) -- ^ Unit givens and unit wanteds
     -> UomState
@@ -51,7 +51,7 @@ unitsSolve
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 unitsSolve
-    dbgPlugin@TracingFlags{traceCallCount}
+    dbgPlugin@DebugCts{traceCallCount}
     unpacks
     (unit_givens, unit_wanteds)
     UomState{unitDefs, callsRef}

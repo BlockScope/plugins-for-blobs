@@ -19,7 +19,7 @@ import Data.IORef (IORef)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeClass)
 import Plugins.Print
-    (TracingFlags(..), Indent(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
+    (DebugCts(..), Indent(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
 
 import ThoralfPlugin.Extract (maybeExtractTyEq, maybeExtractTyDisEq)
 import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
@@ -41,7 +41,7 @@ data ThoralfState =
         }
 
 thoralfPlugin
-    :: TracingFlags
+    :: DebugCts
     -> DebugSmt
     -> PkgModuleName
     -> TcPluginM TheoryEncoding
@@ -89,7 +89,7 @@ thoralfStop ThoralfState{smtRef} = do
     return ()
 
 thoralfSolver
-    :: TracingFlags
+    :: DebugCts
     -> DebugSmt
     -> ThoralfState
     -> [Ct] -- ^ Given constraints
@@ -97,7 +97,7 @@ thoralfSolver
     -> [Ct] -- ^ Wanted constraints
     -> TcPluginM TcPluginResult
 thoralfSolver
-    dbgPlugin@TracingFlags{traceCallCount}
+    dbgPlugin@DebugCts{traceCallCount}
     dbgSmt@DebugSmt{traceConvertCtsToSmt, traceSmtConversation}
     ThoralfState
         { smtRef

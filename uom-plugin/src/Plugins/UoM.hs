@@ -12,7 +12,7 @@ module Plugins.UoM (plugin) where
 
 import GHC.Corroborate
 import Plugins.Print
-    ( TracingFlags(..)
+    ( DebugCts(..)
     , TraceCarry(..), TraceSolution(..), TraceCallCount(..), TraceCts(..)
     )
 
@@ -26,7 +26,7 @@ plugin =
         mSyntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
 
         dbg =
-            TracingFlags
+            DebugCts
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
                 , traceCarry = TraceCarry False
