@@ -10,3 +10,5 @@ dist-newstyle/
 hie.yaml
 *.swn
 .hie/
+*.txt
+*.smt2
