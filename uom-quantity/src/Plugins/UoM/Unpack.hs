@@ -11,10 +11,7 @@
 module Plugins.UoM.Unpack (plugin) where
 
 import GHC.Corroborate
-import Plugins.Print
-    ( DebugCts(..)
-    , TraceCarry(..), TraceSolution(..), TraceCallCount(..), TraceCts(..)
-    )
+import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), TraceCts(..))
 
 import Plugins.UoM.Unpack.TcPlugin (uomUnpackPlugin)
 
@@ -29,7 +26,6 @@ plugin =
             DebugCts
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
-                , traceCarry = TraceCarry False
                 , traceSolution = TraceSolution False
                 }
 

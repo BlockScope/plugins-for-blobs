@@ -2,13 +2,13 @@
 
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..)
-    , TraceSmtConversation(..)
+    , TraceCarry(..), TraceSmtConversation(..)
     , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
     ) where
 
 import Data.Coerce (coerce)
 import GHC.Corroborate hiding (tracePlugin)
-import Plugins.Print (DebugCts(..), TraceCarry(..), Indent(..), tracePlugin, pprCts)
+import Plugins.Print (Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..))
 import Plugins.Print.SMT
@@ -19,22 +19,30 @@ import Plugins.Print.SMT
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
 
+-- | Flag for controlling the two-way conversation with the SMT solver.
 newtype TraceSmtConversation = TraceSmtConversation Bool
+
+-- | Flag for controlling tracing of the carry.
+newtype TraceCarry = TraceCarry Bool
 
 data DebugSmt =
     DebugSmt
-        { traceConvertCtsToSmt :: TraceConvertCtsToSmt
+        { traceCarry :: TraceCarry
+        -- ^ Trace GHC constraints carried through conversion and solving.
+        , traceConvertCtsToSmt :: TraceConvertCtsToSmt
         -- ^ Trace conversions to SMT notation
         , traceSmtConversation :: TraceSmtConversation
         -- ^ Trace the conversation with the SMT solver
         }
 
-pprConvCtsStep :: Indent -> DebugCts -> ConvCtsStep -> [String]
+pprConvCtsStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
 pprConvCtsStep
     indent
-    DebugCts{..}
+    DebugSmt{..}
     ConvCtsStep{givens = ConvCts gs _ds1, wanted = ConvCts ws _ds2} =
-    if not (coerce traceCarry) then [] else pprCts indent gCts [] wCts
+    if not (coerce traceCarry)
+        then []
+        else pprCts "cts-carried" indent gCts [] wCts
     where
         (_gSs, gCts) = unzip gs
         (_WSs, wCts) = unzip ws

@@ -5,10 +5,7 @@ module Plugins.Thoralf.UoM (plugin) where
 import Data.Maybe (mapMaybe)
 import Control.Monad.Reader (guard)
 import GHC.Corroborate
-import Plugins.Print
-    ( DebugCts(..)
-    , TraceCarry(..), TraceSolution(..), TraceCallCount(..), TraceCts(..)
-    )
+import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), TraceCts(..))
 
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode (thoralfUoMTheories )
@@ -16,7 +13,7 @@ import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import ThoralfPlugin.Convert (ExtractEq(..))
 import Plugins.Thoralf.TcPlugin
     (ThoralfState(..), mkThoralfInit, thoralfStop, thoralfSolver)
-import Plugins.Thoralf.Print (DebugSmt(..), TraceSmtConversation(..))
+import Plugins.Thoralf.Print (DebugSmt(..), TraceCarry(..), TraceSmtConversation(..))
 import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
@@ -31,14 +28,14 @@ plugin =
         dbgPlugin =
             DebugCts
                 { traceCallCount = TraceCallCount False
-                , traceCts = TraceCts True
-                , traceCarry = TraceCarry False
-                , traceSolution = TraceSolution True
+                , traceCts = TraceCts False
+                , traceSolution = TraceSolution False
                 }
 
         dbgSmt =
             DebugSmt
-                { traceConvertCtsToSmt = TraceConvertCtsToSmt True
+                { traceCarry = TraceCarry False
+                , traceConvertCtsToSmt = TraceConvertCtsToSmt False
                 , traceSmtConversation = TraceSmtConversation False
                 }
 

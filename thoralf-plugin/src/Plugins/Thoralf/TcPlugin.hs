@@ -194,13 +194,13 @@ thoralfSolver
             tracePlugin dbgPlugin $ pprSmtInputs jIndent traceConvertCtsToSmt gs ds ws ""
 
         logCtsProblem msg gs ds ws = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepProblem jIndent dbgPlugin msg gs ds ws
+            tracePlugin dbgPlugin <$> pprCtsStepProblem "cts-problem" jIndent dbgPlugin msg gs ds ws
 
         logCtsSolution x = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepSolution jIndent dbgPlugin x
+            tracePlugin dbgPlugin <$> pprCtsStepSolution "cts-solution" jIndent dbgPlugin x
 
         logConvCts step = sequence_ $
-            tracePlugin dbgPlugin <$> pprConvCtsStep jIndent dbgPlugin step
+            tracePlugin dbgPlugin <$> pprConvCtsStep jIndent dbgSmt step
 
         logSmt step = sequence_ $
             traceSmt dbgSmt <$> pprSmtStep jIndent dbgSmt step

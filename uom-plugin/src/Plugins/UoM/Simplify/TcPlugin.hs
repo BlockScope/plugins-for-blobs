@@ -122,12 +122,12 @@ unitsSimplify'
         logCtsProblem ws =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStepProblem indent dbgPlugin Nothing givens deriveds ws
+                <$> pprCtsStepProblem "cts-problem" indent dbgPlugin Nothing givens deriveds ws
 
         logCtsSolution x =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStepSolution indent dbgPlugin x
+                <$> pprCtsStepSolution "cts-solution" indent dbgPlugin x
 
         contradiction eq = do
             contra <- reportContradiction unitDefs eq

@@ -5,8 +5,7 @@ module Plugins.UoM.Eq.TcPlugin (uomEqPlugin, uomUnpackEqPlugin, unitsEq, evMagic
 import Data.Either (partitionEithers)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Shim (mkFunnyEqEvidence)
-import Plugins.Print
-    ( DebugCts(..), Indent(..), tracePlugin, pprSolverCallCount )
+import Plugins.Print (DebugCts(..), Indent(..), tracePlugin, pprSolverCallCount)
 
 import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))

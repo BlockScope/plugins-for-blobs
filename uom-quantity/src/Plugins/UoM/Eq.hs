@@ -13,10 +13,7 @@
 module Plugins.UoM.Eq (plugin) where
 
 import GHC.Corroborate
-import Plugins.Print
-    ( DebugCts(..)
-    , TraceCarry(..), TraceSolution(..), TraceCallCount(..), TraceCts(..)
-    )
+import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), TraceCts(..))
 
 import Plugins.UoM.Eq.TcPlugin (uomEqPlugin)
 
@@ -31,7 +28,6 @@ plugin =
             DebugCts
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
-                , traceCarry = TraceCarry False
                 , traceSolution = TraceSolution False
                 }
 

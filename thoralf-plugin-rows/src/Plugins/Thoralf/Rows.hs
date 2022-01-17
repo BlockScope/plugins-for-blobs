@@ -8,7 +8,7 @@ import Plugins.Print
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
-import Plugins.Thoralf.Print (DebugSmt(..), TraceSmtConversation(..))
+import Plugins.Thoralf.Print (DebugSmt(..), TraceCarry(..), TraceSmtConversation(..))
 import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
 
 plugin :: Plugin
@@ -22,13 +22,13 @@ plugin =
             DebugCts
                 { traceCallCount = TraceCallCount False
                 , traceCts = TraceCts False
-                , traceCarry = TraceCarry False
                 , traceSolution = TraceSolution False
                 }
 
         dbgSmt =
             DebugSmt
-                { traceConvertCtsToSmt = TraceConvertCtsToSmt False
+                { traceCarry = TraceCarry False
+                , traceConvertCtsToSmt = TraceConvertCtsToSmt False
                 , traceSmtConversation = TraceSmtConversation False
                 }
 

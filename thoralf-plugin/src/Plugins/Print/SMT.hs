@@ -19,7 +19,9 @@ import Plugins.Print (Indent(..))
 
 import ThoralfPlugin.Convert (ConvCts(..))
 
+-- | Flag for controlling conversion of constraints to SMT s-expressions.
 newtype TraceConvertCtsToSmt = TraceConvertCtsToSmt Bool
+
 newtype SmtDecls = SmtDecls [SExpr]
 newtype SmtWanteds = SmtWanteds [SExpr]
 newtype SmtGivens = SmtGivens [SExpr]
