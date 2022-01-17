@@ -14,8 +14,8 @@ import ThoralfPlugin.Convert (ExtractEq(..))
 import Plugins.Thoralf.TcPlugin
     (ThoralfState(..), mkThoralfInit, thoralfStop, thoralfSolver)
 import Plugins.Thoralf.Print
-    (DebugSmt(..), TraceCarry(..), DebugSmtConversation(..), TraceSmtConversation(..))
-import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
+    (DebugSmt(..), TraceCarry(..), DebugSmtTalk(..), TraceSmtTalk(..))
+import Plugins.Print.SMT (TraceSmtCts(..))
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 
@@ -36,10 +36,10 @@ plugin =
         dbgSmt =
             DebugSmt
                 { traceCarry = TraceCarry False
-                , traceConvertCtsToSmt = TraceConvertCtsToSmt False
-                , traceSmtConversation =
-                    TraceSmtConversation
-                        DebugSmtConversation
+                , traceSmtCts = TraceSmtCts False
+                , traceSmtTalk =
+                    TraceSmtTalk
+                        DebugSmtTalk
                             { traceSend = False
                             , traceRecv = False
                             , traceErr = False
@@ -62,13 +62,13 @@ thoralfUoMPlugin
     -> PkgModuleName
     -> TcPluginM TheoryEncoding
     -> TcPlugin
-thoralfUoMPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtConversation} pkgModuleName seed =
+thoralfUoMPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtTalk} pkgModuleName seed =
     TcPlugin
         { tcPluginInit = do
             let theory = mkModuleName "Data.Theory.UoM"
             let syntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
             uds <- lookupUnitDefs theory syntax (fsLit "uom-quantity")
-            s <- mkThoralfInit pkgModuleName seed traceSmtConversation
+            s <- mkThoralfInit pkgModuleName seed traceSmtTalk
 
             let ExtractEq{extractEq = _exEq, extractDisEq = _exDisEq} = extract s
 

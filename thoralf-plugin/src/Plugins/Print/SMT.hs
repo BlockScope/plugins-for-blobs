@@ -4,9 +4,9 @@
 
 module Plugins.Print.SMT
     ( TraceCarry(..)
-    , TraceSmtConversation(..)
-    , TraceConvertCtsToSmt(..)
-    , DebugSmtConversation(..)
+    , TraceSmtTalk(..)
+    , TraceSmtCts(..)
+    , DebugSmtTalk(..)
     , DebugSmt(..)
     , SmtDecls(..)
     , SmtGivens(..)
@@ -26,22 +26,22 @@ import Plugins.Print (Indent(..))
 import ThoralfPlugin.Convert (ConvCts(..))
 
 -- | Flag for controlling tracing constraints as SMT s-expressions.
-newtype TraceConvertCtsToSmt = TraceConvertCtsToSmt Bool
+newtype TraceSmtCts = TraceSmtCts Bool
 
-data DebugSmtConversation =
-    DebugSmtConversation
+data DebugSmtTalk =
+    DebugSmtTalk
         { traceSend :: Bool
         , traceRecv :: Bool
         , traceErr :: Bool
         , traceOther :: Bool
         }
 
-isSilenced :: DebugSmtConversation -> Bool
-isSilenced DebugSmtConversation{..} =
+isSilenced :: DebugSmtTalk -> Bool
+isSilenced DebugSmtTalk{..} =
     not traceSend && not traceRecv && not traceErr && not traceOther
 
 -- | Flag for controlling the two-way conversation with the SMT solver.
-newtype TraceSmtConversation = TraceSmtConversation DebugSmtConversation
+newtype TraceSmtTalk = TraceSmtTalk DebugSmtTalk
 
 -- | Flag for controlling tracing of the carry.
 newtype TraceCarry = TraceCarry Bool
@@ -50,9 +50,9 @@ data DebugSmt =
     DebugSmt
         { traceCarry :: TraceCarry
         -- ^ Trace GHC constraints carried through conversion and solving.
-        , traceConvertCtsToSmt :: TraceConvertCtsToSmt
+        , traceSmtCts :: TraceSmtCts
         -- ^ Trace conversions to SMT notation
-        , traceSmtConversation :: TraceSmtConversation
+        , traceSmtTalk :: TraceSmtTalk
         -- ^ Trace the conversation with the SMT solver
         }
 

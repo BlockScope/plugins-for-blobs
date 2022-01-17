@@ -1,8 +1,8 @@
 {-# LANGUAGE RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtConversation(..)
-    , TraceCarry(..), TraceSmtConversation(..)
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..)
+    , TraceCarry(..), TraceSmtTalk(..)
     , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
     ) where
 
@@ -12,8 +12,8 @@ import Plugins.Print (Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..))
 import Plugins.Print.SMT
-    ( DebugSmt(..), DebugSmtConversation(..)
-    , TraceCarry(..), TraceSmtConversation(..), TraceConvertCtsToSmt(..)
+    ( DebugSmt(..), DebugSmtTalk(..)
+    , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , pprSmtGivens, pprSmtWanteds, pprSmtDecls
     )
@@ -57,7 +57,7 @@ pprSmtStep
         . showString "smt-wanteds = "
         . pprSmtWanteds j (SmtWanteds wSs))
         ""
-    | coerce traceConvertCtsToSmt
+    | coerce traceSmtCts
     ]
     where
         tab = showString $ replicate (2 * i) ' '
@@ -68,7 +68,7 @@ pprSmtStep
 
 traceSmt :: DebugSmt -> String -> TcPluginM ()
 traceSmt DebugSmt{..} s'
-    | coerce traceConvertCtsToSmt = tcPluginIO $ putStrLn s'
+    | coerce traceSmtCts = tcPluginIO $ putStrLn s'
     | otherwise = return ()
 
 instance Outputable ConvCtsStep where

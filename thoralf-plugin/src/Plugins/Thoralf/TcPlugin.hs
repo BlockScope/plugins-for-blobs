@@ -31,7 +31,7 @@ import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT (isSilenced)
 import Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtConversation(..), TraceSmtConversation(..)
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..), TraceSmtTalk(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
 
@@ -49,16 +49,16 @@ thoralfPlugin
     -> PkgModuleName
     -> TcPluginM TheoryEncoding
     -> TcPlugin
-thoralfPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtConversation} pkgModuleName seed =
+thoralfPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtTalk} pkgModuleName seed =
     TcPlugin
-        { tcPluginInit = mkThoralfInit pkgModuleName seed traceSmtConversation
+        { tcPluginInit = mkThoralfInit pkgModuleName seed traceSmtTalk
         , tcPluginSolve = thoralfSolver dbgPlugin dbgSmt
         , tcPluginStop = thoralfStop
         }
 
 -- TODO: Contribute upstream to SimpleSMT to avoid matching on string prefixes.
-solverWithLevel :: TraceSmtConversation -> IO SMT.Solver
-solverWithLevel (TraceSmtConversation dbg)
+solverWithLevel :: TraceSmtTalk -> IO SMT.Solver
+solverWithLevel (TraceSmtTalk dbg)
     | isSilenced dbg = grabSMTsolver Nothing
     | otherwise = do
         logger@Logger{logMessage = logMsg} <- SMT.newLogger 0
@@ -96,7 +96,7 @@ grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"]
 mkThoralfInit
     :: PkgModuleName
     -> TcPluginM TheoryEncoding
-    -> TraceSmtConversation
+    -> TraceSmtTalk
     -> TcPluginM ThoralfState
 mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
     encoding <- seed
@@ -131,7 +131,7 @@ thoralfSolver
     -> TcPluginM TcPluginResult
 thoralfSolver
     dbgPlugin@DebugCts{traceCallCount}
-    dbgSmt@DebugSmt{traceSmtConversation}
+    dbgSmt@DebugSmt{traceSmtTalk}
     ThoralfState
         { smtRef
         , theoryEncoding
@@ -140,7 +140,7 @@ thoralfSolver
         }
     gs' ds' ws' = do
     -- Refresh the solver
-    _ <- refresh theoryEncoding smtRef traceSmtConversation
+    _ <- refresh theoryEncoding smtRef traceSmtTalk
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
     _ <- tracePlugin
             dbgPlugin
@@ -246,7 +246,7 @@ thoralfSolver
 refresh
     :: TheoryEncoding
     -> IORef (SMT.Solver, Int)
-    -> TraceSmtConversation
+    -> TraceSmtTalk
     -> TcPluginM ()
 refresh encoding solverRef debug = do
     (solver, n) <- unsafeTcPluginTcM $ readMutVar solverRef
