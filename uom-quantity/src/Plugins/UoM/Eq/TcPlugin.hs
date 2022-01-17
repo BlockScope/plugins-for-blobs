@@ -81,7 +81,9 @@ unitsEq
         logCalls = do
             calls <- unsafeTcPluginTcM $ readMutVar callsRef
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
-            tracePlugin dbgPlugin $ pprSolverCallCount (Indent 1) traceCallCount calls
+            tracePlugin
+                dbgPlugin
+                (pprSolverCallCount "ghc-tcplugin-uom-eq" (Indent 1) traceCallCount calls)
 
 -- | Produce bogus evidence for a constraint, including actual
 -- equality constraints and our fake '(~~)' equality constraints.

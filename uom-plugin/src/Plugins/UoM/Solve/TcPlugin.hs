@@ -123,7 +123,9 @@ unitsSolve
         logCalls = do
             calls <- unsafeTcPluginTcM $ readMutVar callsRef
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
-            tracePlugin dbgPlugin $ pprSolverCallCount indent traceCallCount calls
+            tracePlugin
+                dbgPlugin
+                (pprSolverCallCount "ghc-tcplugin-uom-solve" indent traceCallCount calls)
 
         logCtsProblem ws =
             sequence_

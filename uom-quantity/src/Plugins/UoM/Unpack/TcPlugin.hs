@@ -36,4 +36,6 @@ unitsUnpack
         logCalls = do
             calls <- unsafeTcPluginTcM $ readMutVar callsRef
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
-            tracePlugin dbgPlugin $ pprSolverCallCount (Indent 1) traceCallCount calls
+            tracePlugin
+                dbgPlugin
+                (pprSolverCallCount "ghc-tcplugin-uom-unpack" (Indent 1) traceCallCount calls)
