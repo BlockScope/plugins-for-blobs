@@ -1,3 +1,5 @@
+{-# LANGUAGE CPP #-}
+
 -- | This module defines a typechecker plugin that unpacks units of measure.  To
 -- use it, add
 --
@@ -31,5 +33,7 @@ plugin =
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "uom-unpack-plugin" tc
+#if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
+#endif
             }

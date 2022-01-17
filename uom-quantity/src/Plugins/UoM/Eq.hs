@@ -1,3 +1,5 @@
+{-# LANGUAGE CPP #-}
+
 -- | This module defines a typechecker plugin that does only the equality part. 
 -- To use it, add
 --
@@ -33,5 +35,7 @@ plugin =
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "uom-eq-plugin" tc
+#if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
+#endif
             }

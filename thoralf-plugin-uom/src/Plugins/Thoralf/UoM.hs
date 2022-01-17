@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, ScopedTypeVariables #-}
+{-# LANGUAGE CPP, NamedFieldPuns, ScopedTypeVariables #-}
 
 module Plugins.Thoralf.UoM (plugin) where
 
@@ -51,7 +51,9 @@ plugin =
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "thoralf-uom-plugin" tc
+#if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
+#endif
             }
 
 thoralfUoMPlugin

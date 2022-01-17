@@ -1,3 +1,5 @@
+{-# LANGUAGE CPP #-}
+
 module Plugins.Thoralf.Rows (plugin) where
 
 import GHC.Corroborate
@@ -42,5 +44,7 @@ plugin =
     in
         defaultPlugin
             { tcPlugin = const $ Just tyCheck
+#if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
+#endif
             }
