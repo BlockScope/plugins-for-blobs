@@ -1,5 +1,3 @@
-{-# LANGUAGE CPP #-}
-
 -- | This module defines a typechecker plugin that does only the simplification
 -- part.  To use it, add
 --
@@ -35,7 +33,5 @@ plugin =
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "uom-simplify-plugin" tc
-#if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
-#endif
             }
