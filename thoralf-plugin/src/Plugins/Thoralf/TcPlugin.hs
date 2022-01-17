@@ -28,8 +28,7 @@ import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
 import ThoralfPlugin.Convert (ExtractEq(..), EncodingData(..), ConvCts(..), convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Print.SMT
-    (SmtGivens(..), SmtWanteds(..), SmtDecls(..), pprSmtInputs, isSilenced)
+import Plugins.Print.SMT (isSilenced)
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtConversation(..), TraceSmtConversation(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
@@ -167,10 +166,6 @@ thoralfSolver
     case (gsConvCts, wsConvCts) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
             let step = ConvCtsStep gCCs wCCs
-            logSmtInputs
-                (SmtGivens $ fst <$> gExprs)
-                (SmtWanteds $ fst <$> wExprs)
-                (SmtDecls $ decs1 ++ decs2)
             logConvCts step
             logSmt step
 
@@ -224,10 +219,6 @@ thoralfSolver
 
         constraintAsIs = (tab . showString "[constraints-as-is]") ""
         constraintFiltered = (tab . showString "[constraints-filtered]") ""
-
-        logSmtInputs gs ds ws =
-            traceSmt dbgSmt
-            $ pprSmtInputs dbgSmt "smt-inputs" jIndent gs ds ws ""
 
         logCtsProblem msg gs ds ws =
             sequence_

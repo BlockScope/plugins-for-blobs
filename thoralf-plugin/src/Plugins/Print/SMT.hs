@@ -11,7 +11,6 @@ module Plugins.Print.SMT
     , SmtDecls(..)
     , SmtGivens(..)
     , SmtWanteds(..)
-    , pprSmtInputs
     , pprSmtList
     , pprSmtDecls
     , pprSmtGivens
@@ -26,7 +25,7 @@ import Plugins.Print (Indent(..))
 
 import ThoralfPlugin.Convert (ConvCts(..))
 
--- | Flag for controlling conversion of constraints to SMT s-expressions.
+-- | Flag for controlling tracing constraints as SMT s-expressions.
 newtype TraceConvertCtsToSmt = TraceConvertCtsToSmt Bool
 
 data DebugSmtConversation =
@@ -60,46 +59,6 @@ data DebugSmt =
 newtype SmtDecls = SmtDecls [SExpr]
 newtype SmtWanteds = SmtWanteds [SExpr]
 newtype SmtGivens = SmtGivens [SExpr]
-
-pprSmtInputs
-    :: DebugSmt
-    -> String
-    -> Indent
-    -> SmtGivens
-    -> SmtWanteds
-    -> SmtDecls
-    -> ShowS
-pprSmtInputs
-    DebugSmt{traceConvertCtsToSmt = TraceConvertCtsToSmt True}
-    title
-    iIndent@(Indent i)
-    (SmtGivens gSExprs)
-    (SmtWanteds wSExprs)
-    (SmtDecls dSExprs)
-    =
-    tab
-    . showChar '['
-    . showString title
-    . showChar ']'
-    . showChar '\n'
-    . tabtab
-    . showString "sexpr-decs = "
-    . pprSmtList jIndent dSExprs
-    . showChar '\n'
-    . tabtab
-    . showString "sexpr-given = "
-    . pprSmtList jIndent gSExprs
-    . showChar '\n'
-    . tabtab
-    . showString "sexpr-wanted = "
-    . pprSmtList jIndent wSExprs
-    where
-        tab = showString $ replicate (2 * i) ' '
-        tabtab = showString $ replicate (2 * (i + 1)) ' '
-        jIndent = iIndent + 1
-
-pprSmtInputs DebugSmt{traceConvertCtsToSmt = TraceConvertCtsToSmt False} _ _ _ _ _ =
-    const ""
 
 pprSmtList :: Indent -> [SExpr] -> ShowS
 pprSmtList _ [] = showString "[]"

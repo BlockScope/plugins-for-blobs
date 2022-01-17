@@ -39,18 +39,22 @@ pprSmtStep
     ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
     [
         ( tab
-        . showString "[smt-step]"
+        . showString "[cts-as-smt]"
         . showString "\n"
         . tabtab
-        . showString "smt-decs = "
-        . pprSmtDecls j (SmtDecls $ ds1 ++ ds2)
+        . showString "smt-givens-decs = "
+        . pprSmtDecls j (SmtDecls ds1)
         . showString "\n"
         . tabtab
-        . showString "smt-given = "
+        . showString "smt-givens = "
         . pprSmtGivens j (SmtGivens gSs)
         . showString "\n"
         . tabtab
-        . showString "smt-wanted = "
+        . showString "smt-wanteds-decs = "
+        . pprSmtDecls j (SmtDecls ds2)
+        . showString "\n"
+        . tabtab
+        . showString "smt-wanteds = "
         . pprSmtWanteds j (SmtWanteds wSs))
         ""
     | coerce traceConvertCtsToSmt
