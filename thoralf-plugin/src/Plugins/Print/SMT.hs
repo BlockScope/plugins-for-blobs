@@ -36,6 +36,7 @@ data DebugSmtTalk =
         , traceErr :: Bool
         , traceOther :: Bool
         , traceArrow :: Bool
+        , traceCtsComments :: Bool
         }
 
 data DebugSmtRecv
@@ -48,7 +49,13 @@ data DebugSmtRecv
 
 isSilencedTalk :: DebugSmtTalk -> Bool
 isSilencedTalk DebugSmtTalk{..} =
-    not traceSend && isSilencedRecv traceRecv && not traceErr && not traceOther
+    not traceSend
+    && isSilencedRecv traceRecv
+    && not traceErr
+    && not traceOther
+    -- NOTE: traceArrow = false does not silence anything but only change the
+    -- inclusion of the arrow prefixes.
+    && not traceCtsComments
 
 isSilencedRecv :: DebugSmtRecv -> Bool
 isSilencedRecv (DebugSmtRecvAll b) = b

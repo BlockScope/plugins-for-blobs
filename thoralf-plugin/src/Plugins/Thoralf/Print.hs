@@ -1,9 +1,9 @@
-{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE NamedFieldPuns, RecordWildCards #-}
 
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..), DebugSmtTalk(..)
     , TraceCarry(..), TraceSmtTalk(..)
-    , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
+    , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, tracePlugin, traceSmt
     ) where
 
 import Data.Coerce (coerce)
@@ -15,7 +15,7 @@ import Plugins.Print.SMT
     ( DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..)
     , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
-    , pprSmtGivens, pprSmtWanteds, pprSmtDecls
+    , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk
     )
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
@@ -66,17 +66,51 @@ pprSmtStep
         (gSs, _gCts) = unzip gs
         (wSs, _wCts) = unzip ws
 
+pprCommentList :: Show a => [a] -> ShowS
+pprCommentList [] = showString "; []"
+pprCommentList [y] = showString "; " . shows y
+pprCommentList (y : ys) =
+        showString "; "
+        . shows y
+        . foldr
+            (\e m -> showChar '\n' . showString "; " . shows e . m)
+            (showString "")
+            ys
+
+pprAsSmtCommentCts :: DebugSmt -> ConvCtsStep -> [String]
+pprAsSmtCommentCts
+    DebugSmt{traceSmtTalk = TraceSmtTalk DebugSmtTalk{traceCtsComments}}
+    ConvCtsStep{givens = ConvCts gs _, wanted = ConvCts ws _} =
+        [
+            ( showString "\n; GIVENS"
+            . showString "\n"
+            . pprCommentList gCts
+            . showString "\n"
+            . showString "; WANTEDS"
+            . showString "\n"
+            . pprCommentList wCts)
+            ""
+        | traceCtsComments
+        ]
+    where
+        (_gSs, gCts) = unzip gs
+        (_wSs, wCts) = unzip ws
+
 traceSmt :: DebugSmt -> String -> TcPluginM ()
-traceSmt DebugSmt{..} s'
-    | coerce traceSmtCts = tcPluginIO $ putStrLn s'
+traceSmt DebugSmt{traceSmtTalk = TraceSmtTalk talk, ..} s'
+    | coerce traceCarry
+        || coerce traceSmtCts
+        || not (isSilencedTalk talk)= tcPluginIO $ putStrLn s'
     | otherwise = return ()
 
 instance Outputable ConvCtsStep where
     ppr ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
-        text "smt-decs = "
-        <+> ppr (SmtDecls $ ds1 ++ ds2)
+        text "smt-givens-decs = "
+        <+> ppr (SmtDecls ds1)
         <+> text "smt-given = "
         <+> ppr (SmtGivens gSs)
+        <+> text "smt-wanteds-decs = "
+        <+> ppr (SmtDecls ds2)
         <+> text "smt-wanted = "
         <+> ppr (SmtWanteds wSs)
         where

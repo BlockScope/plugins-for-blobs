@@ -38,6 +38,7 @@ plugin =
                             , traceErr = False
                             , traceOther = False
                             , traceArrow = False
+                            , traceCtsComments = True
                             }
                 }
 

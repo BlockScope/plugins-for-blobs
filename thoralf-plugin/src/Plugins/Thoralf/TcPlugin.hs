@@ -32,7 +32,7 @@ import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT (isSilencedTalk)
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..), TraceSmtTalk(..)
-    , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
+    , tracePlugin, traceSmt, pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep
     )
 
 data ThoralfState =
@@ -211,7 +211,8 @@ thoralfSolver
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
             let step = ConvCtsStep gCCs wCCs
             logConvCts step
-            logSmt step
+            logSmtComments step
+            logSmtCts step
 
             givenCheck <- tcPluginIO $ hideError $ do
                 SMT.push smt
@@ -279,10 +280,13 @@ thoralfSolver
             $ tracePlugin dbgPlugin
             <$> pprConvCtsStep jIndent dbgSmt step
 
-        logSmt step =
+        logSmtComments step =
             sequence_
-            $ traceSmt dbgSmt
-            <$> pprSmtStep dbgSmt jIndent step
+            $ traceSmt dbgSmt <$> pprAsSmtCommentCts dbgSmt step
+
+        logSmtCts step =
+            sequence_
+            $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
 
         smtWanted ws = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) ws)
 
