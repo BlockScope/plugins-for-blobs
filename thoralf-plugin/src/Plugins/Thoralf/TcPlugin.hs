@@ -14,6 +14,7 @@ import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
 import Data.List.Split (split, onSublist, dropBlanks)
+import Control.Monad (when)
 import qualified SimpleSMT as SMT
 import SimpleSMT (Logger(..))
 import System.IO.Error (catchIOError)
@@ -82,9 +83,9 @@ solverWithLevel (TraceSmtConversation dbg)
                                    | dbgRecv -> logMsg msg
                                    | otherwise -> return ()
                             (_, _, "[stderr] " : _) ->
-                                if traceErr dbg then logMsg s else return ()
+                                when (traceErr dbg) $ logMsg s
                             _ ->
-                                if traceOther dbg then logMsg s else return ()
+                                when (traceOther dbg) $ logMsg s
                     }
 
         grabSMTsolver (Just logger')
