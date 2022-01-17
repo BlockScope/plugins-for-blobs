@@ -35,8 +35,8 @@ mkUoMEncoding
         } =
     emptyTheory
         { startDecs =
-            [ "(declare-const n1 Int)"
-            , "(assert (= n1 1))"
+            [ "(declare-const one Int)"
+            , "(assert (= one 1))"
             , "(declare-const base (Array String Int))"
             , "(declare-const enc (Array String Int))"
             , "(declare-const exp (Array String Int))"
@@ -70,7 +70,7 @@ encString (measure :> power :> VNil) VNil =
 
 baseString :: Vec One String -> Vec 'Zero String -> String
 baseString (measure :> VNil) VNil =
-    [s|(store base %s n1)|] measure
+    [s|(store base %s one)|] measure
 
 expString :: Vec Two String -> Vec 'Zero String -> String
 expString (measure :> power :> VNil) VNil =
