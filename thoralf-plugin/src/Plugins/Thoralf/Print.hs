@@ -1,9 +1,9 @@
 {-# LANGUAGE RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..)
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtConversation(..)
     , TraceCarry(..), TraceSmtConversation(..)
-    , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
+    , isSilenced, pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
     ) where
 
 import Data.Coerce (coerce)
@@ -19,8 +19,20 @@ import Plugins.Print.SMT
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
 
+data DebugSmtConversation =
+    DebugSmtConversation
+        { traceSend :: Bool
+        , traceRecv :: Bool
+        , traceErr :: Bool
+        , traceOther :: Bool
+        }
+
+isSilenced :: DebugSmtConversation -> Bool
+isSilenced DebugSmtConversation{..} =
+    not traceSend && not traceRecv && not traceErr && not traceOther
+
 -- | Flag for controlling the two-way conversation with the SMT solver.
-newtype TraceSmtConversation = TraceSmtConversation Bool
+newtype TraceSmtConversation = TraceSmtConversation DebugSmtConversation
 
 -- | Flag for controlling tracing of the carry.
 newtype TraceCarry = TraceCarry Bool

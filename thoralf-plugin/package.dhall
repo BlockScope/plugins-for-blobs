@@ -25,6 +25,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "hashable"
                 , "mtl"
                 , "simple-smt"
+                , "split"
                 , "th-printf"
                 , "uom-quantity"
                 , "uom-th"

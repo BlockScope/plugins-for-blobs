@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4c62a4b47011825a527a6a04589c4aeed7268b65d1f23838cea5a1baf31fa6b0
+-- hash: aa6fde22d03990cf631d6ebfc1c691289a2707388d9f584f369bfb9f9947f5d4
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -60,6 +60,7 @@ library
     , hashable
     , mtl
     , simple-smt
+    , split
     , template-haskell >=2.9
     , th-printf
     , thoralf-encode

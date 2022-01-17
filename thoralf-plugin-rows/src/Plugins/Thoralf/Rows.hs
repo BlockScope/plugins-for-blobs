@@ -8,7 +8,8 @@ import Plugins.Print
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
-import Plugins.Thoralf.Print (DebugSmt(..), TraceCarry(..), TraceSmtConversation(..))
+import Plugins.Thoralf.Print
+    (DebugSmt(..), TraceCarry(..), DebugSmtConversation(..), TraceSmtConversation(..))
 import Plugins.Print.SMT (TraceConvertCtsToSmt(..))
 
 plugin :: Plugin
@@ -29,7 +30,14 @@ plugin =
             DebugSmt
                 { traceCarry = TraceCarry False
                 , traceConvertCtsToSmt = TraceConvertCtsToSmt False
-                , traceSmtConversation = TraceSmtConversation False
+                , traceSmtConversation =
+                    TraceSmtConversation
+                        DebugSmtConversation
+                            { traceSend = False
+                            , traceRecv = False
+                            , traceErr = False
+                            , traceOther = False
+                            }
                 }
 
         tyCheck = thoralfPlugin dbgPlugin dbgSmt pm thoralfTheories

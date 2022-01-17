@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeInType, NamedFieldPuns #-}
+{-# LANGUAGE MultiWayIf, TypeFamilies, TypeInType, NamedFieldPuns #-}
 
 module Plugins.Thoralf.TcPlugin
     ( ThoralfState(..)
@@ -13,7 +13,9 @@ import Prelude hiding (showList)
 import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
+import Data.List.Split (split, onSublist, dropBlanks)
 import qualified SimpleSMT as SMT
+import SimpleSMT (Logger(..))
 import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
 import GHC.Corroborate hiding (tracePlugin)
@@ -28,8 +30,8 @@ import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT (SmtGivens(..), SmtWanteds(..), SmtDecls(..), pprSmtInputs)
 import Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), TraceSmtConversation(..)
-    , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtConversation(..), TraceSmtConversation(..)
+    , isSilenced, tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
 
 data ThoralfState =
@@ -53,9 +55,39 @@ thoralfPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtConversation} pkgModuleName seed
         , tcPluginStop = thoralfStop
         }
 
+-- TODO: Contribute upstream to SimpleSMT to avoid matching on string prefixes.
 solverWithLevel :: TraceSmtConversation -> IO SMT.Solver
-solverWithLevel (TraceSmtConversation False) = grabSMTsolver Nothing
-solverWithLevel (TraceSmtConversation True) = grabSMTsolver . Just =<< SMT.newLogger 0
+solverWithLevel (TraceSmtConversation dbg)
+    | isSilenced dbg = grabSMTsolver Nothing
+    | otherwise = do
+        logger@Logger{logMessage = logMsg} <- SMT.newLogger 0
+        let logger' =
+                logger
+                    { logMessage = \s -> do
+
+                        let sends = split (dropBlanks $ onSublist "[send->] ") s
+                        let recvs = split (dropBlanks $ onSublist "[<-recv] ") s
+                        let errs = split (dropBlanks $ onSublist "[stderr] ") s
+
+                        let dbgSend = traceSend dbg
+                        let dbgRecv = traceRecv dbg
+
+                        case (recvs, sends, errs) of
+                            (_, "[send->] " : [msg], _) ->
+                                if | dbgSend && dbgRecv -> logMsg s
+                                   | dbgSend -> logMsg msg
+                                   | otherwise -> return ()
+                            ("[<-recv] " : [msg], _, _) ->
+                                if | dbgSend && dbgRecv -> logMsg s
+                                   | dbgRecv -> logMsg msg
+                                   | otherwise -> return ()
+                            (_, _, "[stderr] " : _) ->
+                                if traceErr dbg then logMsg s else return ()
+                            _ ->
+                                if traceOther dbg then logMsg s else return ()
+                    }
+
+        grabSMTsolver (Just logger')
 
 grabSMTsolver :: Maybe SMT.Logger -> IO SMT.Solver
 grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"]
