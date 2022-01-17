@@ -1,7 +1,13 @@
+{-# LANGUAGE RecordWildCards #-}
+
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Plugins.Print.SMT
-    ( TraceConvertCtsToSmt(..)
+    ( TraceCarry(..)
+    , TraceSmtConversation(..)
+    , TraceConvertCtsToSmt(..)
+    , DebugSmtConversation(..)
+    , DebugSmt(..)
     , SmtDecls(..)
     , SmtGivens(..)
     , SmtWanteds(..)
@@ -10,6 +16,7 @@ module Plugins.Print.SMT
     , pprSmtDecls
     , pprSmtGivens
     , pprSmtWanteds
+    , isSilenced
     ) where
 
 import GHC.Corroborate
@@ -22,40 +29,77 @@ import ThoralfPlugin.Convert (ConvCts(..))
 -- | Flag for controlling conversion of constraints to SMT s-expressions.
 newtype TraceConvertCtsToSmt = TraceConvertCtsToSmt Bool
 
+data DebugSmtConversation =
+    DebugSmtConversation
+        { traceSend :: Bool
+        , traceRecv :: Bool
+        , traceErr :: Bool
+        , traceOther :: Bool
+        }
+
+isSilenced :: DebugSmtConversation -> Bool
+isSilenced DebugSmtConversation{..} =
+    not traceSend && not traceRecv && not traceErr && not traceOther
+
+-- | Flag for controlling the two-way conversation with the SMT solver.
+newtype TraceSmtConversation = TraceSmtConversation DebugSmtConversation
+
+-- | Flag for controlling tracing of the carry.
+newtype TraceCarry = TraceCarry Bool
+
+data DebugSmt =
+    DebugSmt
+        { traceCarry :: TraceCarry
+        -- ^ Trace GHC constraints carried through conversion and solving.
+        , traceConvertCtsToSmt :: TraceConvertCtsToSmt
+        -- ^ Trace conversions to SMT notation
+        , traceSmtConversation :: TraceSmtConversation
+        -- ^ Trace the conversation with the SMT solver
+        }
+
 newtype SmtDecls = SmtDecls [SExpr]
 newtype SmtWanteds = SmtWanteds [SExpr]
 newtype SmtGivens = SmtGivens [SExpr]
 
 pprSmtInputs
-    :: Indent
-    -> TraceConvertCtsToSmt
+    :: DebugSmt
+    -> String
+    -> Indent
     -> SmtGivens
     -> SmtWanteds
     -> SmtDecls
     -> ShowS
 pprSmtInputs
+    DebugSmt{traceConvertCtsToSmt = TraceConvertCtsToSmt True}
+    title
     iIndent@(Indent i)
-    (TraceConvertCtsToSmt True)
     (SmtGivens gSExprs)
     (SmtWanteds wSExprs)
     (SmtDecls dSExprs)
-    = 
+    =
     tab
+    . showChar '['
+    . showString title
+    . showChar ']'
+    . showChar '\n'
+    . tabtab
     . showString "sexpr-decs = "
     . pprSmtList jIndent dSExprs
     . showChar '\n'
-    . tab
+    . tabtab
     . showString "sexpr-given = "
     . pprSmtList jIndent gSExprs
     . showChar '\n'
-    . tab
+    . tabtab
     . showString "sexpr-wanted = "
     . pprSmtList jIndent wSExprs
     where
         tab = showString $ replicate (2 * i) ' '
+        tabtab = showString $ replicate (2 * (i + 1)) ' '
         jIndent = iIndent + 1
 
-pprSmtInputs _ (TraceConvertCtsToSmt False) _ _ _ = const ""
+pprSmtInputs DebugSmt{traceConvertCtsToSmt = TraceConvertCtsToSmt False} _ _ _ _ _ =
+    const ""
 
 pprSmtList :: Indent -> [SExpr] -> ShowS
 pprSmtList _ [] = showString "[]"

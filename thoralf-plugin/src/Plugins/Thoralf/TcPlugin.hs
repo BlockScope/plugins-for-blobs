@@ -28,10 +28,11 @@ import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
 import ThoralfPlugin.Convert (ExtractEq(..), EncodingData(..), ConvCts(..), convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Print.SMT (SmtGivens(..), SmtWanteds(..), SmtDecls(..), pprSmtInputs)
+import Plugins.Print.SMT
+    (SmtGivens(..), SmtWanteds(..), SmtDecls(..), pprSmtInputs, isSilenced)
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtConversation(..), TraceSmtConversation(..)
-    , isSilenced, tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
+    , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
 
 data ThoralfState =
@@ -130,7 +131,7 @@ thoralfSolver
     -> TcPluginM TcPluginResult
 thoralfSolver
     dbgPlugin@DebugCts{traceCallCount}
-    dbgSmt@DebugSmt{traceConvertCtsToSmt, traceSmtConversation}
+    dbgSmt@DebugSmt{traceSmtConversation}
     ThoralfState
         { smtRef
         , theoryEncoding
@@ -143,7 +144,7 @@ thoralfSolver
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
     _ <- tracePlugin
             dbgPlugin
-            (pprSolverCallCount "ghc-tcplugin-thoralf" iIndent traceCallCount calls)
+            (pprSolverCallCount traceCallCount "ghc-tcplugin-thoralf" iIndent calls)
 
     -- Preprocessing
     let filt = filter $ isEqCt disEqClass
@@ -225,19 +226,28 @@ thoralfSolver
         constraintFiltered = (tab . showString "[constraints-filtered]") ""
 
         logSmtInputs gs ds ws =
-            tracePlugin dbgPlugin $ pprSmtInputs jIndent traceConvertCtsToSmt gs ds ws ""
+            traceSmt dbgSmt
+            $ pprSmtInputs dbgSmt "smt-inputs" jIndent gs ds ws ""
 
-        logCtsProblem msg gs ds ws = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepProblem "cts-problem" jIndent dbgPlugin msg gs ds ws
+        logCtsProblem msg gs ds ws =
+            sequence_
+            $ tracePlugin dbgPlugin
+            <$> pprCtsStepProblem dbgPlugin "cts-problem" jIndent msg gs ds ws
 
-        logCtsSolution x = sequence_ $
-            tracePlugin dbgPlugin <$> pprCtsStepSolution "cts-solution" jIndent dbgPlugin x
+        logCtsSolution x =
+            sequence_
+            $ tracePlugin dbgPlugin
+            <$> pprCtsStepSolution dbgPlugin "cts-solution" jIndent x
 
-        logConvCts step = sequence_ $
-            tracePlugin dbgPlugin <$> pprConvCtsStep jIndent dbgSmt step
+        logConvCts step =
+            sequence_
+            $ tracePlugin dbgPlugin
+            <$> pprConvCtsStep jIndent dbgSmt step
 
-        logSmt step = sequence_ $
-            traceSmt dbgSmt <$> pprSmtStep jIndent dbgSmt step
+        logSmt step =
+            sequence_
+            $ traceSmt dbgSmt
+            <$> pprSmtStep dbgSmt jIndent step
 
         smtWanted ws = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) ws)
 

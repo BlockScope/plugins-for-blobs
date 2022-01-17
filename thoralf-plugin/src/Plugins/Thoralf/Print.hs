@@ -3,7 +3,7 @@
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtConversation(..)
     , TraceCarry(..), TraceSmtConversation(..)
-    , isSilenced, pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
+    , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
     ) where
 
 import Data.Coerce (coerce)
@@ -12,40 +12,13 @@ import Plugins.Print (Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..))
 import Plugins.Print.SMT
-    ( TraceConvertCtsToSmt(..)
+    ( DebugSmt(..), DebugSmtConversation(..)
+    , TraceCarry(..), TraceSmtConversation(..), TraceConvertCtsToSmt(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , pprSmtGivens, pprSmtWanteds, pprSmtDecls
     )
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
-
-data DebugSmtConversation =
-    DebugSmtConversation
-        { traceSend :: Bool
-        , traceRecv :: Bool
-        , traceErr :: Bool
-        , traceOther :: Bool
-        }
-
-isSilenced :: DebugSmtConversation -> Bool
-isSilenced DebugSmtConversation{..} =
-    not traceSend && not traceRecv && not traceErr && not traceOther
-
--- | Flag for controlling the two-way conversation with the SMT solver.
-newtype TraceSmtConversation = TraceSmtConversation DebugSmtConversation
-
--- | Flag for controlling tracing of the carry.
-newtype TraceCarry = TraceCarry Bool
-
-data DebugSmt =
-    DebugSmt
-        { traceCarry :: TraceCarry
-        -- ^ Trace GHC constraints carried through conversion and solving.
-        , traceConvertCtsToSmt :: TraceConvertCtsToSmt
-        -- ^ Trace conversions to SMT notation
-        , traceSmtConversation :: TraceSmtConversation
-        -- ^ Trace the conversation with the SMT solver
-        }
 
 pprConvCtsStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
 pprConvCtsStep
@@ -59,10 +32,10 @@ pprConvCtsStep
         (_gSs, gCts) = unzip gs
         (_WSs, wCts) = unzip ws
 
-pprSmtStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
+pprSmtStep :: DebugSmt -> Indent -> ConvCtsStep -> [String]
 pprSmtStep
-    indent@(Indent i)
     DebugSmt{..}
+    indent@(Indent i)
     ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
     [
         ( tab

@@ -38,4 +38,4 @@ unitsUnpack
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
             tracePlugin
                 dbgPlugin
-                (pprSolverCallCount "ghc-tcplugin-uom-unpack" (Indent 1) traceCallCount calls)
+                (pprSolverCallCount traceCallCount "ghc-tcplugin-uom-unpack" (Indent 1) calls)

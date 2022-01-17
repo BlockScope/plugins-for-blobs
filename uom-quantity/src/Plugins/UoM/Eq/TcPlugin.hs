@@ -83,7 +83,7 @@ unitsEq
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
             tracePlugin
                 dbgPlugin
-                (pprSolverCallCount "ghc-tcplugin-uom-eq" (Indent 1) traceCallCount calls)
+                (pprSolverCallCount traceCallCount "ghc-tcplugin-uom-eq" (Indent 1) calls)
 
 -- | Produce bogus evidence for a constraint, including actual
 -- equality constraints and our fake '(~~)' equality constraints.

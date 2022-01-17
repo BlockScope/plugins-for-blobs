@@ -64,7 +64,7 @@ unitsDisEq
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
             tracePlugin
                 dbgPlugin
-                (pprSolverCallCount "ghc-tcplugin-thoralf-uom-diseq" (Indent 1) traceCallCount calls)
+                (pprSolverCallCount traceCallCount "ghc-tcplugin-thoralf-uom-diseq" (Indent 1) calls)
 
 lookForDisEqs
     :: DisEqState

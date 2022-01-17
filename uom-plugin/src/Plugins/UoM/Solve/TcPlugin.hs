@@ -125,17 +125,17 @@ unitsSolve
             unsafeTcPluginTcM $ writeMutVar callsRef (calls + 1)
             tracePlugin
                 dbgPlugin
-                (pprSolverCallCount "ghc-tcplugin-uom-solve" indent traceCallCount calls)
+                (pprSolverCallCount traceCallCount "ghc-tcplugin-uom-solve" indent calls)
 
         logCtsProblem ws =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStepProblem "cts-problem" indent dbgPlugin Nothing givens deriveds ws
+                <$> pprCtsStepProblem dbgPlugin "cts-problem" indent Nothing givens deriveds ws
 
         logCtsSolution x =
             sequence_
                 $ tracePlugin dbgPlugin
-                <$> pprCtsStepSolution "cts-solution" indent dbgPlugin x
+                <$> pprCtsStepSolution dbgPlugin "cts-solution" indent x
 
         contradiction eq = do
             contra <- reportContradiction unitDefs eq
