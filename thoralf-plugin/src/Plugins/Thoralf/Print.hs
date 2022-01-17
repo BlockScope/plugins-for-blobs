@@ -1,7 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..)
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..), DebugSmtTalk(..)
     , TraceCarry(..), TraceSmtTalk(..)
     , pprConvCtsStep, pprSmtStep, tracePlugin, traceSmt
     ) where
@@ -12,7 +12,7 @@ import Plugins.Print (Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..))
 import Plugins.Print.SMT
-    ( DebugSmt(..), DebugSmtTalk(..)
+    ( DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..)
     , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , pprSmtGivens, pprSmtWanteds, pprSmtDecls

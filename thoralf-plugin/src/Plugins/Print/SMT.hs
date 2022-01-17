@@ -7,6 +7,7 @@ module Plugins.Print.SMT
     , TraceSmtTalk(..)
     , TraceSmtCts(..)
     , DebugSmtTalk(..)
+    , DebugSmtRecv(..)
     , DebugSmt(..)
     , SmtDecls(..)
     , SmtGivens(..)
@@ -15,7 +16,7 @@ module Plugins.Print.SMT
     , pprSmtDecls
     , pprSmtGivens
     , pprSmtWanteds
-    , isSilenced
+    , isSilencedTalk, isSilencedRecv
     ) where
 
 import GHC.Corroborate
@@ -31,14 +32,27 @@ newtype TraceSmtCts = TraceSmtCts Bool
 data DebugSmtTalk =
     DebugSmtTalk
         { traceSend :: Bool
-        , traceRecv :: Bool
+        , traceRecv :: DebugSmtRecv
         , traceErr :: Bool
         , traceOther :: Bool
+        , traceArrow :: Bool
         }
 
-isSilenced :: DebugSmtTalk -> Bool
-isSilenced DebugSmtTalk{..} =
-    not traceSend && not traceRecv && not traceErr && not traceOther
+data DebugSmtRecv
+    = DebugSmtRecvAll Bool
+    | DebugSmtRecvSome
+        { traceSuccess :: Bool
+        , traceCheckSat :: Bool
+        }
+    deriving Eq
+
+isSilencedTalk :: DebugSmtTalk -> Bool
+isSilencedTalk DebugSmtTalk{..} =
+    not traceSend && isSilencedRecv traceRecv && not traceErr && not traceOther
+
+isSilencedRecv :: DebugSmtRecv -> Bool
+isSilencedRecv (DebugSmtRecvAll b) = b
+isSilencedRecv DebugSmtRecvSome{..} = not traceSuccess && not traceCheckSat
 
 -- | Flag for controlling the two-way conversation with the SMT solver.
 newtype TraceSmtTalk = TraceSmtTalk DebugSmtTalk

@@ -14,7 +14,7 @@ import ThoralfPlugin.Convert (ExtractEq(..))
 import Plugins.Thoralf.TcPlugin
     (ThoralfState(..), mkThoralfInit, thoralfStop, thoralfSolver)
 import Plugins.Thoralf.Print
-    (DebugSmt(..), TraceCarry(..), DebugSmtTalk(..), TraceSmtTalk(..))
+    (DebugSmt(..), TraceCarry(..), DebugSmtTalk(..), DebugSmtRecv(..), TraceSmtTalk(..))
 import Plugins.Print.SMT (TraceSmtCts(..))
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
@@ -40,10 +40,16 @@ plugin =
                 , traceSmtTalk =
                     TraceSmtTalk
                         DebugSmtTalk
-                            { traceSend = False
-                            , traceRecv = False
+                            { traceSend = True
+                            -- , traceRecv = DebugSmtRecvAll False
+                            , traceRecv =
+                                DebugSmtRecvSome
+                                    { traceSuccess = False
+                                    , traceCheckSat = True
+                                    }
                             , traceErr = False
                             , traceOther = False
+                            , traceArrow = False
                             }
                 }
 

@@ -29,9 +29,9 @@ import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
 import ThoralfPlugin.Convert (ExtractEq(..), EncodingData(..), ConvCts(..), convert)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Print.SMT (isSilenced)
+import Plugins.Print.SMT (isSilencedTalk)
 import Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..), TraceSmtTalk(..)
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..), TraceSmtTalk(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprSmtStep
     )
 
@@ -59,7 +59,7 @@ thoralfPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtTalk} pkgModuleName seed =
 -- TODO: Contribute upstream to SimpleSMT to avoid matching on string prefixes.
 solverWithLevel :: TraceSmtTalk -> IO SMT.Solver
 solverWithLevel (TraceSmtTalk dbg)
-    | isSilenced dbg = grabSMTsolver Nothing
+    | isSilencedTalk dbg = grabSMTsolver Nothing
     | otherwise = do
         logger@Logger{logMessage = logMsg} <- SMT.newLogger 0
         let logger' =
@@ -70,21 +70,64 @@ solverWithLevel (TraceSmtTalk dbg)
                         let recvs = split (dropBlanks $ onSublist "[<-recv] ") s
                         let errs = split (dropBlanks $ onSublist "[stderr] ") s
 
+                        let dbgArrow = traceArrow dbg
                         let dbgSend = traceSend dbg
-                        let dbgRecv = traceRecv dbg
+
+                        let dbgRecvCheckSat =
+                                case traceRecv dbg of
+                                    DebugSmtRecvSome{traceCheckSat = b} -> b
+                                    _ -> False
+
+                        let dbgRecvSuccess =
+                                case traceRecv dbg of
+                                    DebugSmtRecvSome{traceSuccess = b} -> b
+                                    _ -> False
+
+                        let dbgRecvAll = DebugSmtRecvAll True == traceRecv dbg
 
                         case (recvs, sends, errs) of
                             (_, "[send->] " : [msg], _) ->
-                                if | dbgSend && dbgRecv -> logMsg s
+                                if | dbgSend && dbgArrow -> logMsg s
                                    | dbgSend -> logMsg msg
                                    | otherwise -> return ()
-                            ("[<-recv] " : [msg], _, _) ->
-                                if | dbgSend && dbgRecv -> logMsg s
-                                   | dbgRecv -> logMsg msg
-                                   | otherwise -> return ()
+
+                            -- NOTE: :print-success can print success | unsupported | error _.
+                            ("[<-recv] " : msgContent, _, _) ->
+                                case msgContent of
+                                    [msg@"sat"] ->
+                                        if | dbgRecvCheckSat && dbgArrow -> logMsg s
+                                           | dbgRecvCheckSat -> logMsg msg
+                                           | otherwise -> return ()
+
+                                    [msg@"unsat"] ->
+                                        if | dbgRecvCheckSat && dbgArrow -> logMsg s
+                                           | dbgRecvCheckSat -> logMsg msg
+                                           | otherwise -> return ()
+
+                                    [msg@"success"] ->
+                                        if | dbgRecvSuccess && dbgArrow -> logMsg s
+                                           | dbgRecvSuccess -> logMsg msg
+                                           | otherwise -> return ()
+
+                                    [msg@"unsupported"] ->
+                                        if | dbgRecvSuccess && dbgArrow -> logMsg s
+                                           | dbgRecvSuccess -> logMsg msg
+                                           | otherwise -> return ()
+
+                                    "error" : _ ->
+                                        if | dbgRecvSuccess && dbgArrow -> logMsg s
+                                           | dbgRecvSuccess -> logMsg $ drop (length "[<-recv] error ") s
+                                           | otherwise -> return ()
+
+                                    _msgs ->
+                                        if | dbgRecvAll && dbgArrow -> logMsg s
+                                           | dbgRecvAll -> logMsg s
+                                           | otherwise -> return ()
+
                             (_, _, "[stderr] " : _) ->
                                 when (traceErr dbg) $ logMsg s
-                            _ ->
+
+                            (_, _, _) ->
                                 when (traceOther dbg) $ logMsg s
                     }
 
