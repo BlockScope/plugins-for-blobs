@@ -38,7 +38,7 @@ import Plugins.Thoralf.Print
 
 data ThoralfState =
     ThoralfState
-        { smtRef :: IORef (SMT.Solver, Int)
+        { smtSolverRef :: IORef (SMT.Solver, Int)
         , theoryEncoding :: TheoryEncoding
         , disEqClass :: Class
         , extract :: ExtractEq
@@ -50,9 +50,9 @@ thoralfPlugin
     -> PkgModuleName
     -> TcPluginM TheoryEncoding
     -> TcPlugin
-thoralfPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtTalk} pkgModuleName seed =
+thoralfPlugin dbgPlugin dbgSmt pkgModuleName seed =
     TcPlugin
-        { tcPluginInit = mkThoralfInit pkgModuleName seed traceSmtTalk
+        { tcPluginInit = mkThoralfInit pkgModuleName seed dbgSmt
         , tcPluginSolve = thoralfSolver dbgPlugin dbgSmt
         , tcPluginStop = thoralfStop
         }
@@ -140,28 +140,38 @@ grabSMTsolver =
 mkThoralfInit
     :: PkgModuleName
     -> TcPluginM TheoryEncoding
-    -> TraceSmtTalk
+    -> DebugSmt
     -> TcPluginM ThoralfState
-mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed debug = do
-    encoding <- seed
+mkThoralfInit
+    PkgModuleName{moduleName = disEqName, pkgName}
+    seed
+    DebugSmt{traceSmtTalk} = do
+
+    theoryEncoding <- seed
     Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
     disEq <- divulgeClass disEqModule "DisEquality"
+
     z3Solver <- tcPluginIO $ do
-        z3Solver <- solverWithLevel debug
+        z3Solver <- solverWithLevel traceSmtTalk
         SMT.push z3Solver
         return z3Solver
-    solverRef <- unsafeTcPluginTcM $ newMutVar (z3Solver, 0)
+
+    smtSolverRef <- unsafeTcPluginTcM $ newMutVar (z3Solver, 0)
+
+    -- TODO: Rename refresh now that I'm calling it at initialization.
+    _ <- refresh theoryEncoding smtSolverRef traceSmtTalk
+
     return
         ThoralfState
-            { smtRef = solverRef
-            , theoryEncoding = encoding
+            { smtSolverRef = smtSolverRef
+            , theoryEncoding = theoryEncoding
             , disEqClass = disEq
             , extract = ExtractEq Ex.extractEq Ex.extractDisEq
             }
 
 thoralfStop :: ThoralfState -> TcPluginM ()
-thoralfStop ThoralfState{smtRef} = do
-    (solver, _) <- unsafeTcPluginTcM $ readMutVar smtRef
+thoralfStop ThoralfState{smtSolverRef} = do
+    (solver, _) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
     _ <- tcPluginIO (SMT.stop solver)
     return ()
 
@@ -175,17 +185,15 @@ thoralfSolver
     -> TcPluginM TcPluginResult
 thoralfSolver
     dbgPlugin@DebugCts{traceCallCount}
-    dbgSmt@DebugSmt{traceSmtTalk}
+    dbgSmt
     ThoralfState
-        { smtRef
+        { smtSolverRef
         , theoryEncoding
         , disEqClass
         , extract
         }
     gs' ds' ws' = do
-    -- Refresh the solver
-    _ <- refresh theoryEncoding smtRef traceSmtTalk
-    (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtRef
+    (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
     _ <- tracePlugin
             dbgPlugin
             (pprSolverCallCount traceCallCount "ghc-tcplugin-thoralf" iIndent calls)
@@ -291,13 +299,14 @@ thoralfSolver
 
         smtWanted ws = foldl SMT.or (justReadSExpr "false") (map (SMT.not . fst) ws)
 
+-- TODO: Rename refresh now that I'm calling it at initialization.
 refresh
     :: TheoryEncoding
     -> IORef (SMT.Solver, Int)
     -> TraceSmtTalk
     -> TcPluginM ()
-refresh encoding solverRef debug = do
-    (solver, n) <- unsafeTcPluginTcM $ readMutVar solverRef
+refresh encoding smtSolverRef debug = do
+    (solver, n) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
     _ <- tcPluginIO $ SMT.stop solver
     let decs = startDecs encoding
 
@@ -308,7 +317,7 @@ refresh encoding solverRef debug = do
         SMT.push z3Solver
         return z3Solver
 
-    unsafeTcPluginTcM $ writeMutVar solverRef (z3Solver, n + 1)
+    unsafeTcPluginTcM $ writeMutVar smtSolverRef (z3Solver, n + 1)
     where
         typeDataType =
             justReadSExpr

@@ -69,13 +69,13 @@ thoralfUoMPlugin
     -> PkgModuleName
     -> TcPluginM TheoryEncoding
     -> TcPlugin
-thoralfUoMPlugin dbgPlugin dbgSmt@DebugSmt{traceSmtTalk} pkgModuleName seed =
+thoralfUoMPlugin dbgPlugin dbgSmt pkgModuleName seed =
     TcPlugin
         { tcPluginInit = do
             let theory = mkModuleName "Data.Theory.UoM"
             let syntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
             uds <- lookupUnitDefs theory syntax (fsLit "uom-quantity")
-            s <- mkThoralfInit pkgModuleName seed traceSmtTalk
+            s <- mkThoralfInit pkgModuleName seed dbgSmt
 
             let ExtractEq{extractEq = _exEq, extractDisEq = _exDisEq} = extract s
 
