@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP, NamedFieldPuns, ScopedTypeVariables #-}
+{-# LANGUAGE CPP, ScopedTypeVariables #-}
 
 module Plugins.Thoralf.UoM (plugin) where
 
