@@ -26,7 +26,8 @@ import Plugins.Print
 
 import ThoralfPlugin.Extract (maybeExtractTyEq, maybeExtractTyDisEq)
 import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
-import ThoralfPlugin.Convert (ExtractEq(..), EncodingData(..), ConvCts(..), convert)
+import ThoralfPlugin.Convert
+    (ExtractEq(..), EncodingData(..), ConvCts(..), convert, justReadSExpr)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT (isSilencedTalk)
@@ -134,7 +135,7 @@ solverWithLevel (TraceSmtTalk dbg)
         grabSMTsolver (Just logger')
 
 grabSMTsolver :: Maybe SMT.Logger -> IO SMT.Solver
-grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"]
+grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"] SMT.ppSExpr
 
 mkThoralfInit
     :: PkgModuleName
@@ -288,7 +289,7 @@ thoralfSolver
             sequence_
             $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
 
-        smtWanted ws = foldl SMT.or (SMT.Atom "false") (map (SMT.not . fst) ws)
+        smtWanted ws = foldl SMT.or (justReadSExpr "false") (map (SMT.not . fst) ws)
 
 refresh
     :: TheoryEncoding
@@ -303,14 +304,14 @@ refresh encoding solverRef debug = do
     z3Solver <- tcPluginIO $ do
         z3Solver <- solverWithLevel debug
         SMT.ackCommand z3Solver typeDataType
-        traverse_ (SMT.ackCommand z3Solver . SMT.Atom) decs
+        traverse_ (SMT.ackCommand z3Solver . justReadSExpr) decs
         SMT.push z3Solver
         return z3Solver
 
     unsafeTcPluginTcM $ writeMutVar solverRef (z3Solver, n + 1)
     where
         typeDataType =
-            SMT.Atom
+            justReadSExpr
                 -- WARNING: As one long line to avoid problems with CPP and string gaps.
                 "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
 

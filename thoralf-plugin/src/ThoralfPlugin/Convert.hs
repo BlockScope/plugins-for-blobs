@@ -13,7 +13,8 @@ module ThoralfPlugin.Convert
     -- ** Extraction
     , ExtractEq(..)
     -- ** Converting the Dependencies
-    , convertDeps, convertDecs, mkDefaultSMTVar, mkSMTSort, KdVar, convertTyVars
+    , convertDeps, convertDecs, mkDefaultSMTVar, mkSMTSort
+    , KdVar, convertTyVars, justReadSExpr
 
     -- * Converting A Single Type
     -- ** Type Conversion Data
@@ -36,7 +37,7 @@ import Data.Foldable (fold)
 import Data.Maybe (mapMaybe)
 import qualified Data.Map as M (fromList, toList)
 import qualified Data.Set as S (fromList, toList)
-import qualified SimpleSMT as SMT (SExpr(Atom), not, eq)
+import qualified SimpleSMT as SMT (SExpr, not, eq, readSExpr)
 import Control.Monad.Reader (ReaderT(..), lift, ask, guard)
 import GHC.Corroborate hiding ((<>))
 import Language.Haskell.Printf (s)
@@ -90,7 +91,7 @@ conv ExtractEq{extractEq, extractDisEq} cts = do
         convPair (t1, t2) = do
             (t1', deps1) <- convertType t1
             (t2', deps2) <- convertType t2
-            return ((SMT.Atom t1', SMT.Atom t2'), deps1 <> deps2)
+            return ((justReadSExpr t1', justReadSExpr t2'), deps1 <> deps2)
 
 data ExtractEq =
     ExtractEq
@@ -119,7 +120,7 @@ convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
     decExprs <- convertDecs decs
 
     EncodingData _ theories <- ask
-    let tvPreds = foldMap (fmap SMT.Atom) $ mapMaybe (tyVarPreds theories) tyvars
+    let tvPreds = foldMap (fmap justReadSExpr) $ mapMaybe (tyVarPreds theories) tyvars
 
     -- WARNING: Order matters when putting these expressions together.
     let varExprs = kindExprs ++ tyVarExprs ++ defExprs
@@ -130,14 +131,14 @@ showUnique = show . getUnique
 
 -- | Converting Local Declarations
 convertDecs :: [Decl] -> ConvMonad [SExpr]
-convertDecs ds = return $ SMT.Atom <$>
+convertDecs ds = return $ justReadSExpr <$>
     (foldMap snd . nubKV $ (\(Decl k v) -> (k, v)) <$> ds)
 
 mkDefaultSMTVar :: TyVar -> SExpr
-mkDefaultSMTVar = SMT.Atom . [s|(declare-const %? Type)|] . getUnique
+mkDefaultSMTVar = justReadSExpr . [s|(declare-const %? Type)|] . getUnique
 
 mkSMTSort :: TyVar -> SExpr
-mkSMTSort = SMT.Atom . [s|(declare-sort Sort%?)|] . getUnique
+mkSMTSort = justReadSExpr . [s|(declare-sort Sort%?)|] . getUnique
 
 -- | Kind variables are just type variables
 type KdVar = TyVar
@@ -145,7 +146,7 @@ type KdVar = TyVar
 convertTyVars :: TyVar -> ConvMonad (SExpr, [KdVar])
 convertTyVars tv = do
     (smtSort, kdVars) <- convertKind $ tyVarKind tv
-    return (SMT.Atom $ [s|(declare-const %? %s)|] (getUnique tv) smtSort, kdVars)
+    return (justReadSExpr $ [s|(declare-const %? %s)|] (getUnique tv) smtSort, kdVars)
 
 -- | A Type is converted into a string which is a valid SMT term, if the
 -- dependencies are converted properly and sent to the solver before the term
@@ -290,3 +291,6 @@ tryFns [] _ = Nothing
 tryFns (f : fs) a = case f a of
     Nothing -> tryFns fs a
     Just b -> Just b
+
+justReadSExpr :: String -> SExpr
+justReadSExpr sexpr = let Just (e, _) = SMT.readSExpr sexpr in e
