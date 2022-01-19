@@ -12,6 +12,8 @@ module Plugins.Print.SMT
     , SmtDecls(..)
     , SmtGivens(..)
     , SmtWanteds(..)
+    , SmtCommentGivens(..)
+    , SmtCommentWanteds(..)
     , pprSmtList
     , pprSmtDecls
     , pprSmtGivens
@@ -78,8 +80,11 @@ data DebugSmt =
         }
 
 newtype SmtDecls = SmtDecls [SExpr]
-newtype SmtWanteds = SmtWanteds [SExpr]
 newtype SmtGivens = SmtGivens [SExpr]
+newtype SmtWanteds = SmtWanteds [SExpr]
+
+newtype SmtCommentGivens = SmtCommentGivens [Ct]
+newtype SmtCommentWanteds = SmtCommentWanteds [Ct]
 
 pprSmtList :: Indent -> [SExpr] -> ShowS
 pprSmtList _ [] = showString "[]"
@@ -120,6 +125,16 @@ instance Outputable ConvCts where
         ppr (SmtDecls $ fst <$> eqs)
         <+> ppr (snd <$> eqs)
         <+> ppr deps
+
+instance Outputable SmtCommentWanteds where
+    ppr (SmtCommentWanteds cts)
+        | null cts = text "; []"
+        | otherwise = vcat [text "; " <+> ppr ct | ct <- cts]
+
+instance Outputable SmtCommentGivens where
+    ppr (SmtCommentGivens cts)
+        | null cts = text "; []"
+        | otherwise = vcat [text "; " <+> ppr ct | ct <- cts]
 
 pprSmtGivens :: Indent -> SmtGivens -> ShowS
 pprSmtGivens _ (SmtGivens []) = showString "[]"

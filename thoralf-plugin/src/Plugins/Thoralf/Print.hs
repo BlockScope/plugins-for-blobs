@@ -15,6 +15,7 @@ import Plugins.Print.SMT
     ( DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..)
     , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
+    , SmtCommentGivens(..), SmtCommentWanteds(..)
     , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk
     )
 
@@ -82,17 +83,32 @@ pprAsSmtCommentCts
     DebugSmt{traceSmtTalk = TraceSmtTalk DebugSmtTalk{traceCtsComments}}
     ConvCtsStep{givens = ConvCts gs _, wanted = ConvCts ws _} =
         [
-            ( showString "\n; GIVENS"
+            ( showString "\n; GIVENS (GHC style)"
+            . showString "\n"
+            . pprSDoc (SmtCommentGivens gCts)
+            . showString "\n;\n"
+            . showString "; WANTEDS (GHC style)"
+            . showString "\n"
+            . pprSDoc (SmtCommentWanteds wCts))
+            ""
+        | traceCtsComments
+        ]
+        ++
+        [
+            ( showString "\n; GIVENS (Thoralf style)"
             . showString "\n"
             . pprCommentList gCts
+            . showString "\n;\n"
+            . showString "; WANTEDS (Thoralf style)"
             . showString "\n"
-            . showString "; WANTEDS"
-            . showString "\n"
-            . pprCommentList wCts)
+            . pprCommentList wCts
+            . showString "\n")
             ""
         | traceCtsComments
         ]
     where
+        pprSDoc x = showString . showSDocUnsafe $ ppr x
+
         (_gSs, gCts) = unzip gs
         (_wSs, wCts) = unzip ws
 
