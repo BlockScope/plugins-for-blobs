@@ -87,6 +87,7 @@
   a1BE) a1BG) :named a1BG=a1BA/a1BE))
 (assert
    (= a1BG a1u1))
+(echo "checkpoint #1")
 (check-sat)
 ; sat
 ; (assert false)
@@ -135,6 +136,7 @@
   a1Cm) a1Cv) :named a1Cv=a1Cl/a1Cm))
 (assert
    (! (= a1Cv a1Cn) :named a1Cn=a1Cv))
+(echo "checkpoint #2")
 (check-sat)
 ; sat
 ; (assert false)
@@ -183,6 +185,7 @@
   a1CV) a1D8) :named a1D8=a1CU*a1CV))
 (assert
    (! (= a1D8 a1CW) :named a1CW=a1D8))
+(echo "checkpoint #3")
 (check-sat)
 ; sat
 ; (assert false)
@@ -222,9 +225,10 @@
 (declare-const a1Ej (Array String Int))
 (assert (! (<= 0 a1E6) :named a1E6>0))
 (assert
-   (! (= (store enc a1E5 a1E6) a1Ej) :named a1Ej=a1E6))
+   (! (= (store enc a1E5 a1E6) a1Ej) :named a1Ej=enc@a1E5=a1E6))
 (assert
    (! (= a1Ej a1E7) :named a1E7=a1Ej))
+(echo "checkpoint #4")
 (check-sat)
 ; sat
 ; (assert false)
@@ -259,7 +263,7 @@
 ; (*: [Base ["m"],One []],*: [/: [*: [Base ["m"],One []],*: [Base ["s"],One []]],*: [Base ["s"],One []]])
 
 ; (push 1)
-(check-sat)
+; (check-sat)
 ; sat
 (assert
    (or
@@ -324,6 +328,7 @@
          const
          (Array String Int))
       0)))))))
+(echo "checkpoint #5")
 (check-sat)
 ; unsat
 ; (pop 1)
@@ -369,6 +374,7 @@
   a1EC) a1GO) :named a1GO=a1EB/a1EC))
 (assert
    (! (= a1GO a1ED) :named a1ED=a1GO))
+(echo "checkpoint #6")
 (check-sat)
 ; sat
 ; (assert false)
@@ -417,6 +423,7 @@
   a1ES) a1GX) :named a1GX=a1ER*a1ES))
 (assert
    (! (= a1GX a1ET) :named a1ET=a1GX))
+(echo "checkpoint #7")
 (check-sat)
 ; sat
 ; (assert false)
@@ -502,6 +509,7 @@
   a1He) a1Hg) :named a1Hg=a1Ha/a1He))
 (assert
    (! (= a1Hg a1Fi) :named a1Fi=a1Hg))
+(echo "checkpoint #8")
 (check-sat)
 ; sat
 ; (assert false)
@@ -589,7 +597,7 @@
 ;   a1He) a1Hg) :named a1Hg=a1Ha/a1He))
 ; (assert
 ;    (! (= a1Hg a1Fi) :named a1Fi=a1Hg))
-(check-sat)
+; (check-sat)
 ; sat
 (assert
    (or
@@ -625,6 +633,7 @@
        const
        (Array String Int))
     0))))))
+(echo "checkpoint #9")
 (check-sat)
 ; unsat
 ; (pop 1)
@@ -664,6 +673,7 @@
    (! (= (store enc a1FE a1FF) a1Hx) :named a1Hx=enc@a1FE=a1FF))
 (assert
    (! (= a1Hx a1FG) :named a1FG=a1Hx))
+(echo "checkpoint #10")
 (check-sat)
 ; sat
 ; (assert false)
