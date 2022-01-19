@@ -86,7 +86,7 @@
   a1BA
   a1BE) a1BG) :named a1BG=a1BA/a1BE))
 (assert
-   (= a1BG a1u1))
+   (! (= a1BG a1u1) :named a1u1=a1BG))
 (echo "checkpoint #1")
 (check-sat)
 ; sat
