@@ -11,13 +11,6 @@ packages:
       sha256: 739b83c92d537075203f3d4964fa74135c8dda63c27602f27e1001e7d0b7c45e
   original:
     hackage: units-parser-0.1.1.4
-- completed:
-    hackage: simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
-    pantry-tree:
-      size: 253
-      sha256: f03c5f3b6601b8d9939f1f1bc6e593117f0633da1689a7ff13f7201b42394e38
-  original:
-    hackage: simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
 snapshots:
 - completed:
     size: 534126

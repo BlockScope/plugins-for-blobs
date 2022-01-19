@@ -1,5 +1,6 @@
 resolver: lts-16.31
 packages:
+- ../simple-smt
 - ../ghc-tcplugins-trace/ghc-tcplugins-trace
 - ../ghc-corroborate/ghc-corroborate
 - ../thoralf-theory
@@ -16,4 +17,3 @@ packages:
 - ../uom-plugin-examples
 extra-deps:
 - units-parser-0.1.1.4
-- simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
