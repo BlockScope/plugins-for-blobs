@@ -128,13 +128,13 @@ instance Outputable ConvCts where
 
 instance Outputable SmtCommentWanteds where
     ppr (SmtCommentWanteds cts)
-        | null cts = text "; []"
-        | otherwise = vcat [text "; " <+> ppr ct | ct <- cts]
+        | null cts = text "[]"
+        | otherwise = vcat [ppr ct | ct <- cts]
 
 instance Outputable SmtCommentGivens where
     ppr (SmtCommentGivens cts)
-        | null cts = text "; []"
-        | otherwise = vcat [text "; " <+> ppr ct | ct <- cts]
+        | null cts = text "[]"
+        | otherwise = vcat [ppr ct | ct <- cts]
 
 pprSmtGivens :: Indent -> SmtGivens -> ShowS
 pprSmtGivens _ (SmtGivens []) = showString "[]"

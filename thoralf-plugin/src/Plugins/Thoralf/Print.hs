@@ -68,14 +68,14 @@ pprSmtStep
         (wSs, _wCts) = unzip ws
 
 pprCommentList :: Show a => [a] -> ShowS
-pprCommentList [] = showString "; []"
-pprCommentList [y] = showString "; " . shows y
+pprCommentList [] = showString "; []\n"
+pprCommentList [y] = showString "; " . shows y . showChar '\n'
 pprCommentList (y : ys) =
         showString "; "
         . shows y
         . foldr
             (\e m -> showChar '\n' . showString "; " . shows e . m)
-            (showString "")
+            (showString "\n")
             ys
 
 pprAsSmtCommentCts :: DebugSmt -> ConvCtsStep -> [String]
@@ -83,31 +83,28 @@ pprAsSmtCommentCts
     DebugSmt{traceSmtTalk = TraceSmtTalk DebugSmtTalk{traceCtsComments}}
     ConvCtsStep{givens = ConvCts gs _, wanted = ConvCts ws _} =
         [
-            ( showString "\n; GIVENS (GHC style)"
-            . showString "\n"
+            ( showString "\n; GIVENS (GHC style)\n"
             . pprSDoc (SmtCommentGivens gCts)
-            . showString "\n;\n"
-            . showString "; WANTEDS (GHC style)"
-            . showString "\n"
+            . showString "\n; WANTEDS (GHC style)\n"
             . pprSDoc (SmtCommentWanteds wCts))
             ""
         | traceCtsComments
         ]
         ++
         [
-            ( showString "\n; GIVENS (Thoralf style)"
-            . showString "\n"
+            ( showString "; GIVENS (Thoralf style)\n"
             . pprCommentList gCts
-            . showString "\n;\n"
-            . showString "; WANTEDS (Thoralf style)"
-            . showString "\n"
-            . pprCommentList wCts
-            . showString "\n")
+            . showString "\n; WANTEDS (Thoralf style)\n"
+            . pprCommentList wCts)
             ""
         | traceCtsComments
         ]
     where
-        pprSDoc x = showString . showSDocUnsafe $ ppr x
+        pprSDoc x =
+            -- WARNING: Some lines are wrapped when printed so I'm adding the
+            -- comment leader to each line once I have the lines.
+            showString
+            $ unlines [ "; " ++ line | line <- lines . showSDocUnsafe $ ppr x]
 
         (_gSs, gCts) = unzip gs
         (_wSs, wCts) = unzip ws
