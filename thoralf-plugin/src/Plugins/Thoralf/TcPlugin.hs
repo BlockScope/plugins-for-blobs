@@ -135,7 +135,10 @@ solverWithLevel (TraceSmtTalk dbg)
         grabSMTsolver (Just logger')
 
 grabSMTsolver :: Maybe SMT.Logger -> IO SMT.Solver
-grabSMTsolver = SMT.newSolver "z3" ["-smt2", "-in"] SMT.ppSExpr
+grabSMTsolver =
+    -- NOTE: If you don't want the s-expressions pretty printed then substitute
+    -- SMT.showsSExpr for SMT.ppSExpr.
+    SMT.newSolver "z3" ["-smt2", "-in"] SMT.ppSExpr
 
 mkThoralfInit
     :: PkgModuleName
