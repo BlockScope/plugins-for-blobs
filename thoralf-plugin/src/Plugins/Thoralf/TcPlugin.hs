@@ -1,4 +1,4 @@
-{-# LANGUAGE MultiWayIf, NamedFieldPuns, TypeFamilies, TypeInType #-}
+{-# LANGUAGE MultiWayIf, NamedFieldPuns, ParallelListComp, TypeFamilies, TypeInType #-}
 
 module Plugins.Thoralf.TcPlugin
     ( ThoralfState(..)
@@ -9,7 +9,7 @@ module Plugins.Thoralf.TcPlugin
     , isEqCt
     ) where
 
-import Prelude hiding (showList)
+import Prelude hiding (showList, cycle)
 import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
@@ -208,7 +208,8 @@ thoralfSolver
 
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
     unsafeTcPluginTcM $ writeMutVar smtSolverRef (smt, calls + 1)
-    tcPluginIO . SMT.echo smt $ "solver-start-cycle-" ++ show calls
+    let cycle = show calls
+    tcPluginIO . SMT.echo smt $ "solver-start-cycle-" ++ cycle
 
     _ <- tracePlugin
             dbgPlugin
@@ -241,13 +242,18 @@ thoralfSolver
             logSmtCts step
 
             givenCheck <- tcPluginIO $ do
-                SMT.echo smt $ "givens-start-cycle-" ++ show calls
+                SMT.echo smt $ "givens-start-cycle-" ++ cycle
                 check <- hideError $ do
                     SMT.push smt
                     traverse_ (SMT.ackCommand smt) decs1
-                    traverse_ (SMT.assert smt . fst) gExprs
+                    sequence_ $
+                        [ SMT.assert smt $ SMT.named name e
+                        | (e, _) <- gExprs
+                        | nth <- [1 :: Int ..]
+                        , let name = "given-" ++ cycle ++ "." ++ show nth
+                        ]
                     SMT.check smt
-                SMT.echo smt $ "givens-finish-cycle-" ++ show calls
+                SMT.echo smt $ "givens-finish-cycle-" ++ cycle
                 return check
 
             tcPluginTrace "thoralf-solve decls" $ ppr ds'
@@ -266,12 +272,13 @@ thoralfSolver
 
                 SMT.Sat -> do
                     wantedCheck <- tcPluginIO $ do
-                        SMT.echo smt $ "wanteds-start-cycle-" ++ show calls
+                        SMT.echo smt $ "wanteds-start-cycle-" ++ cycle
                         check <- hideError $ do
                             traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
-                            SMT.assert smt (smtWanted wExprs)
+                            let name = "wanted-" ++ cycle 
+                            SMT.assert smt $ SMT.named name (smtWanted wExprs)
                             SMT.check smt
-                        SMT.echo smt $ "wanteds-finish-cycle-" ++ show calls
+                        SMT.echo smt $ "wanteds-finish-cycle-" ++ cycle
                         return check
 
                     case wantedCheck of
@@ -290,7 +297,7 @@ thoralfSolver
 
         _ -> tcPluginIO (putStrLn "Parse Failed") >> noSolving
 
-    tcPluginIO . SMT.echo smt $ "solver-finish-cycle-" ++ show calls
+    tcPluginIO . SMT.echo smt $ "solver-finish-cycle-" ++ cycle
     return ctSolving
 
     where
