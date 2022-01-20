@@ -1,4 +1,4 @@
-{-# LANGUAGE MultiWayIf, TypeFamilies, TypeInType, NamedFieldPuns #-}
+{-# LANGUAGE MultiWayIf, NamedFieldPuns, TypeFamilies, TypeInType #-}
 
 module Plugins.Thoralf.TcPlugin
     ( ThoralfState(..)
@@ -164,14 +164,11 @@ mkThoralfInit
     Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
     disEq <- divulgeClass disEqModule "DisEquality"
 
-    z3Solver <- tcPluginIO $ do
-        z3Solver <- solverWithLevel traceSmtTalk
-        return z3Solver
+    smtSolver <- tcPluginIO $ solverWithLevel traceSmtTalk
+    smtSolverRef <- unsafeTcPluginTcM $ newMutVar (smtSolver, 0)
 
-    smtSolverRef <- unsafeTcPluginTcM $ newMutVar (z3Solver, 0)
-
-    tcPluginIO $ sequence_ [ SMT.setOption z3Solver o "true" | o <- options ]
-    tcPluginIO $ SMT.echo z3Solver "options are set, initialized"
+    tcPluginIO $ sequence_ [ SMT.setOption smtSolver o "true" | o <- options ]
+    tcPluginIO $ SMT.echo smtSolver "options are set, initialized"
 
     -- TODO: Rename refresh now that I'm calling it at initialization.
     _ <- refresh theoryEncoding smtSolverRef traceSmtTalk
@@ -211,6 +208,7 @@ thoralfSolver
 
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
     unsafeTcPluginTcM $ writeMutVar smtSolverRef (smt, calls + 1)
+    tcPluginIO . SMT.echo smt $ "solver-start-cycle-" ++ show calls
 
     _ <- tracePlugin
             dbgPlugin
@@ -234,18 +232,23 @@ thoralfSolver
     let wsConvCts = convertor $ ws ++ ds
     tcPluginTrace "thoralf-solve gsConvCts" $ ppr gsConvCts
     tcPluginTrace "thoralf-solve wsConvCts" $ ppr wsConvCts
-    case (gsConvCts, wsConvCts) of
+
+    ctSolving <- case (gsConvCts, wsConvCts) of
         (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
             let step = ConvCtsStep gCCs wCCs
             logConvCts step
             logSmtComments step
             logSmtCts step
 
-            givenCheck <- tcPluginIO $ hideError $ do
-                SMT.push smt
-                traverse_ (SMT.ackCommand smt) decs1
-                traverse_ (SMT.assert smt . fst) gExprs
-                SMT.check smt
+            givenCheck <- tcPluginIO $ do
+                SMT.echo smt $ "givens-start-cycle-" ++ show calls
+                check <- hideError $ do
+                    SMT.push smt
+                    traverse_ (SMT.ackCommand smt) decs1
+                    traverse_ (SMT.assert smt . fst) gExprs
+                    SMT.check smt
+                SMT.echo smt $ "givens-finish-cycle-" ++ show calls
+                return check
 
             tcPluginTrace "thoralf-solve decls" $ ppr ds'
             tcPluginTrace "thoralf-solve decls filtered" $ ppr ds
@@ -262,11 +265,14 @@ thoralfSolver
                     return $ TcPluginContradiction []
 
                 SMT.Sat -> do
-                    wantedCheck <- tcPluginIO $ hideError $ do
-                        traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
-                        SMT.assert smt (smtWanted wExprs)
-                        SMT.echo smt $ "checkpoint-#" ++ show calls
-                        SMT.check smt
+                    wantedCheck <- tcPluginIO $ do
+                        SMT.echo smt $ "wanteds-start-cycle-" ++ show calls
+                        check <- hideError $ do
+                            traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
+                            SMT.assert smt (smtWanted wExprs)
+                            SMT.check smt
+                        SMT.echo smt $ "wanteds-finish-cycle-" ++ show calls
+                        return check
 
                     case wantedCheck of
                         SMT.Unsat -> do
@@ -283,6 +289,9 @@ thoralfSolver
                         SMT.Sat -> tcPluginIO pop >> noSolving
 
         _ -> tcPluginIO (putStrLn "Parse Failed") >> noSolving
+
+    tcPluginIO . SMT.echo smt $ "solver-finish-cycle-" ++ show calls
+    return ctSolving
 
     where
         iIndent@(Indent i) = Indent 1
