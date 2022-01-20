@@ -33,8 +33,13 @@ plugin =
                 , traceSmtTalk =
                     TraceSmtTalk
                         DebugSmtTalk
-                            { traceSend = False
-                            , traceRecv = DebugSmtRecvAll False
+                            { traceSend = True
+                            -- , traceRecv = DebugSmtRecvAll False
+                            , traceRecv =
+                                DebugSmtRecvSome
+                                    { traceSuccess = False
+                                    , traceCheckSat = True
+                                    }
                             , traceErr = False
                             , traceOther = False
                             , traceArrow = False
