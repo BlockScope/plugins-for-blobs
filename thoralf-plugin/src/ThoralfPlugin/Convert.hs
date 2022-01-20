@@ -1,4 +1,6 @@
-{-# LANGUAGE CPP, NamedFieldPuns, QuasiQuotes #-}
+{-# LANGUAGE CPP, NamedFieldPuns, PartialTypeSignatures, ScopedTypeVariables, QuasiQuotes #-}
+
+-- {-# OPTIONS_GHC -fno-warn-partial-type-signatures #-}
 
 module ThoralfPlugin.Convert
     (
@@ -43,7 +45,7 @@ import GHC.Corroborate hiding ((<>))
 import Language.Haskell.Printf (s)
 
 import ThoralfPlugin.Encode.TheoryEncoding
-    (TheoryEncoding(..), DecCont(..), KdConvCont(..), TyConvCont(..))
+    (TheoryEncoding(..), DecCont(..), KdConvCont(..), TyConvCont(..), Vec(..))
 
 -- | The input needed to convert 'Ct' into smt expressions.  We need the class
 -- for dis equality, and an encoding of a collection of theories.
@@ -53,7 +55,13 @@ data EncodingData = EncodingData {encDisEq :: Class, encTheory :: TheoryEncoding
 -- constraints as well as a list of declarations. These declarations are
 -- variable declarations as well as function symbols with accompanying defining
 -- assert statements.
-data ConvCts = ConvCts {convEquals :: [(SExpr, Ct)], convDeps :: [SExpr]}
+data ConvCts =
+    ConvCts
+        { convEquals :: [(SExpr, Ct)]
+        -- ^ A list of converted constraints.
+        , convDeps :: [SExpr]
+        -- ^ A list of declarations.
+        }
 
 -- | Since our encoding data is passed around as a constant state, we put it in
 -- a reader monad. Of course, conversion could fail, so we transform from
@@ -89,8 +97,8 @@ conv ExtractEq{extractEq, extractDisEq} cts = do
     where
         convPair :: (Type, Type) -> ConvMonad ((SExpr, SExpr), ConvDependencies)
         convPair (t1, t2) = do
-            (t1', deps1) <- convertType t1
-            (t2', deps2) <- convertType t2
+            ConvertedType t1' deps1 <- convertType t1
+            ConvertedType t2' deps2 <- convertType t2
             return ((justReadSExpr t1', justReadSExpr t2'), deps1 <> deps2)
 
 data ExtractEq =
@@ -146,12 +154,16 @@ type KdVar = TyVar
 convertTyVars :: TyVar -> ConvMonad (SExpr, [KdVar])
 convertTyVars tv = do
     (smtSort, kdVars) <- convertKind $ tyVarKind tv
-    return (justReadSExpr $ [s|(declare-const %? %s)|] (getUnique tv) smtSort, kdVars)
+    return (justReadSExpr $ [s|(declare-const %? %s) ; comment goes here|] (getUnique tv) smtSort, kdVars)
 
 -- | A Type is converted into a string which is a valid SMT term, if the
 -- dependencies are converted properly and sent to the solver before the term
 -- is mentioned.
-type ConvertedType = (String, ConvDependencies)
+data ConvertedType =
+    ConvertedType
+        { convTySmt :: String -- ^ The SMT term.
+        , convTyDeps :: ConvDependencies -- ^ The dependencies of the term.
+        }
 
 -- | These are pieces of a type that need to be converted into SMT declarations
 -- or definitions in order for the converted type to be well sorted or correct.
@@ -185,7 +197,12 @@ instance Monoid ConvDependencies where
 convertType :: Type -> ConvMonad ConvertedType
 convertType ty =
     case tyVarConv ty of
-        Just (smtVar, tyvar) -> return (smtVar, noDeps {convTyVars = [tyvar]})
+        Just (smtVar, tyvar) ->
+            return
+                ConvertedType
+                    { convTySmt = smtVar
+                    , convTyDeps = noDeps{convTyVars = [tyvar]}
+                    }
         Nothing -> tryConvTheory ty
 
 tyVarConv :: Type -> Maybe (String, TyVar)
@@ -201,16 +218,20 @@ tryConvTheory ty = do
     EncodingData _ theories <- ask
     case tryFns (typeConvs theories) ty of
         Just (TyConvCont tys kds cont decs) -> do
-            recurTys <- traverse convertType tys
-            recurKds <- traverse convertKind kds
-            (decls, decKds) <- convDecConts decs
-            let convTys = fst <$> recurTys
-            let convKds = fst <$> recurKds
-            let converted = cont convTys convKds
-            let tyDeps = foldMap snd recurTys
-            let kdVars = foldMap snd recurKds ++ decKds
-            let deps = addDepParts tyDeps kdVars decls
-            return (converted, deps)
+            recurTys :: Vec _ ConvertedType <- traverse convertType tys
+            recurKds :: Vec _ (String, [KdVar]) <- traverse convertKind kds
+            (decls :: [Decl], decKds :: [KdVar]) <- convDecConts decs
+
+            let convTys :: Vec _ String = convTySmt <$> recurTys
+            let convKds :: Vec _ String = fst <$> recurKds
+            let converted :: String = cont convTys convKds
+
+            let tyDeps :: ConvDependencies = foldMap convTyDeps recurTys
+            let kdVars :: [KdVar] = foldMap snd recurKds ++ decKds
+            let deps :: ConvDependencies = addDepParts tyDeps kdVars decls
+
+            return $ ConvertedType converted deps
+
         Nothing -> defaultConvTy ty
 
 addDepParts :: ConvDependencies -> [KdVar] -> [Decl] -> ConvDependencies
@@ -236,7 +257,11 @@ convDecConts dcs = do
 defaultConvTy :: Type -> ConvMonad ConvertedType
 defaultConvTy ty = do
     (convertedTy, defVars) <- lift (defConvTy ty)
-    return (convertedTy, noDeps {convDefVar = defVars})
+    return
+        ConvertedType
+            { convTySmt = convertedTy
+            , convTyDeps = noDeps{convDefVar = defVars}
+            }
 
 defConvTy :: Type -> Maybe (String, [TyVar])
 defConvTy = tryFns [defTyVar, defFn, defTyConApp] where
