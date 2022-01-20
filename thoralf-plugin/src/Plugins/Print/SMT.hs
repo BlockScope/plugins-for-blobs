@@ -26,7 +26,7 @@ import SimpleSMT (SExpr(..))
 import qualified SimpleSMT as SMT (ppSExpr)
 import Plugins.Print (Indent(..))
 
-import ThoralfPlugin.Convert (ConvCts(..))
+import ThoralfPlugin.Convert (ConvCts(..), ConvEq(..))
 
 -- | Flag for controlling tracing constraints as SMT s-expressions.
 newtype TraceSmtCts = TraceSmtCts Bool
@@ -122,8 +122,8 @@ instance Outputable SmtWanteds where
 
 instance Outputable ConvCts where
     ppr (ConvCts eqs deps) =
-        ppr (SmtDecls $ fst <$> eqs)
-        <+> ppr (snd <$> eqs)
+        ppr (SmtDecls $ eqSExpr <$> eqs)
+        <+> ppr (eqCt <$> eqs)
         <+> ppr deps
 
 instance Outputable SmtCommentWanteds where

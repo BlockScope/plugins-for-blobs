@@ -3,14 +3,15 @@
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..), DebugSmtTalk(..)
     , TraceCarry(..), TraceSmtTalk(..)
-    , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, tracePlugin, traceSmt
+    , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
+    , tracePlugin, traceSmt
     ) where
 
 import Data.Coerce (coerce)
 import GHC.Corroborate hiding (tracePlugin)
 import Plugins.Print (Indent(..), tracePlugin, pprCts)
 
-import ThoralfPlugin.Convert (ConvCts(..))
+import ThoralfPlugin.Convert (ConvCts(..), ConvEq(..))
 import Plugins.Print.SMT
     ( DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..)
     , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
@@ -30,8 +31,8 @@ pprConvCtsStep
         then []
         else pprCts "cts-carried" indent gCts [] wCts
     where
-        (_gSs, gCts) = unzip gs
-        (_WSs, wCts) = unzip ws
+        gCts = eqCt <$> gs
+        wCts = eqCt <$> ws
 
 pprSmtStep :: DebugSmt -> Indent -> ConvCtsStep -> [String]
 pprSmtStep
@@ -64,8 +65,8 @@ pprSmtStep
         tab = showString $ replicate (2 * i) ' '
         tabtab = showString $ replicate (2 * (i + 1)) ' '
         j = indent + 1
-        (gSs, _gCts) = unzip gs
-        (wSs, _wCts) = unzip ws
+        gSs = eqSExpr <$> gs
+        wSs = eqSExpr <$> ws
 
 pprCommentList :: Show a => [a] -> ShowS
 pprCommentList [] = showString "; []\n"
@@ -100,14 +101,15 @@ pprAsSmtCommentCts
         | traceCtsComments
         ]
     where
-        pprSDoc x =
-            -- WARNING: Some lines are wrapped when printed so I'm adding the
-            -- comment leader to each line once I have the lines.
-            showString
-            $ unlines [ "; " ++ line | line <- lines . showSDocUnsafe $ ppr x]
+        gCts = eqCt <$> gs
+        wCts = eqCt <$> ws
 
-        (_gSs, gCts) = unzip gs
-        (_wSs, wCts) = unzip ws
+pprSDoc :: Outputable a => a -> ShowS
+pprSDoc x =
+    -- WARNING: Some lines are wrapped when printed so I'm adding the
+    -- comment leader to each line once I have the lines.
+    showString
+    $ unlines [ "; " ++ line | line <- lines . showSDocUnsafe $ ppr x]
 
 traceSmt :: DebugSmt -> String -> TcPluginM ()
 traceSmt DebugSmt{traceSmtTalk = TraceSmtTalk talk, ..} s'
@@ -127,5 +129,5 @@ instance Outputable ConvCtsStep where
         <+> text "smt-wanted = "
         <+> ppr (SmtWanteds wSs)
         where
-            (gSs, _gCts) = unzip gs
-            (wSs, _wCts) = unzip ws
+            gSs = eqSExpr <$> gs
+            wSs = eqSExpr <$> ws

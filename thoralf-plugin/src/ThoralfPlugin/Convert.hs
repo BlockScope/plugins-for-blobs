@@ -1,4 +1,5 @@
-{-# LANGUAGE CPP, NamedFieldPuns, PartialTypeSignatures, ScopedTypeVariables, QuasiQuotes #-}
+{-# LANGUAGE CPP, NamedFieldPuns, ParallelListComp, PartialTypeSignatures #-}
+{-# LANGUAGE QuasiQuotes, ScopedTypeVariables #-}
 
 -- {-# OPTIONS_GHC -fno-warn-partial-type-signatures #-}
 
@@ -6,7 +7,7 @@ module ThoralfPlugin.Convert
     (
     -- * Data Definitions
     -- ** Core Types
-      EncodingData(..), ConvCts(..), ConvMonad
+      EncodingData(..), ConvCts(..), ConvEq(..), ConvMonad
     -- ** Basic Definitions
     , SExpr
 
@@ -20,7 +21,7 @@ module ThoralfPlugin.Convert
 
     -- * Converting A Single Type
     -- ** Type Conversion Data
-    , ConvertedType, ConvDependencies(..), noDeps, Decl(..), Hash
+    , ConvertedType, ConvDeps(..), noDeps, Decl(..), Hash
     -- ** Converting A Type
     , convertType, tyVarConv, tryConvTheory, addDepParts, convDecConts
     , defaultConvTy, defConvTy
@@ -39,7 +40,7 @@ import Data.Foldable (fold)
 import Data.Maybe (mapMaybe)
 import qualified Data.Map as M (fromList, toList)
 import qualified Data.Set as S (fromList, toList)
-import qualified SimpleSMT as SMT (SExpr, not, eq, readSExpr)
+import qualified SimpleSMT as SMT (SExpr, not, eq, readSExpr, ppSExpr)
 import Control.Monad.Reader (ReaderT(..), lift, ask, guard)
 import GHC.Corroborate hiding ((<>))
 import Language.Haskell.Printf (s)
@@ -51,13 +52,26 @@ import ThoralfPlugin.Encode.TheoryEncoding
 -- for dis equality, and an encoding of a collection of theories.
 data EncodingData = EncodingData {encDisEq :: Class, encTheory :: TheoryEncoding}
 
+data ConvEq =
+    ConvEq
+        { eqSExpr :: SExpr
+        , eqCt :: Ct
+        }
+
+instance Outputable ConvEq where
+    ppr (ConvEq e ct) = 
+        vcat
+            [ text "    " <+> ppr ct
+            , text " => " <+> text (SMT.ppSExpr e "")
+            ]
+
 -- | The output of converting constraints. We have a list of converted
 -- constraints as well as a list of declarations. These declarations are
 -- variable declarations as well as function symbols with accompanying defining
 -- assert statements.
 data ConvCts =
     ConvCts
-        { convEquals :: [(SExpr, Ct)]
+        { convEquals :: [ConvEq]
         -- ^ A list of converted constraints.
         , convDeps :: [SExpr]
         -- ^ A list of declarations.
@@ -80,25 +94,30 @@ conv ExtractEq{extractEq, extractDisEq} cts = do
 
     let disEquals = extractDisEq disEqClass cts
     let equals = extractEq cts
-    let matchingCts = snd <$> disEquals ++ equals
 
-    convDisEqs <- traverse (convPair . fst) disEquals
-    convEqs <- traverse (convPair . fst) equals
+    let matchingCts :: [Ct] = snd <$> disEquals ++ equals
 
-    let disEqExprs = SMT.not . uncurry SMT.eq . fst <$> convDisEqs
-    let eqExprs = uncurry SMT.eq . fst <$> convEqs
-    let convPairs = zip (disEqExprs ++ eqExprs) matchingCts
+    convDisEqs :: [((SExpr, SExpr), ConvDeps)] <- traverse (convPair . fst) disEquals
+    convEqs :: [((SExpr, SExpr), ConvDeps)] <- traverse (convPair . fst) equals
 
-    let deps = mconcat $ (snd <$> convDisEqs) ++ (snd <$> convEqs)
-    decls <- convertDeps deps
+    let disEqExprs :: [SExpr] = SMT.not . uncurry SMT.eq . fst <$> convDisEqs
+    let eqExprs :: [SExpr] = uncurry SMT.eq . fst <$> convEqs
+    let convPairs :: [ConvEq] =
+            [ ConvEq{eqSExpr = e, eqCt = ct}
+            | e <- disEqExprs ++ eqExprs
+            | ct <- matchingCts
+            ]
+
+    let deps :: ConvDeps = mconcat $ (snd <$> convDisEqs) ++ (snd <$> convEqs)
+    decls :: [SExpr] <- convertDeps deps
 
     --guard (length matchingCts == length (disEqExprs ++ eqExprs))
     return $ ConvCts convPairs decls
     where
-        convPair :: (Type, Type) -> ConvMonad ((SExpr, SExpr), ConvDependencies)
+        convPair :: (Type, Type) -> ConvMonad ((SExpr, SExpr), ConvDeps)
         convPair (t1, t2) = do
-            ConvertedType t1' deps1 <- convertType t1
-            ConvertedType t2' deps2 <- convertType t2
+            ConvertedType _ t1' deps1 <- convertType t1
+            ConvertedType _ t2' deps2 <- convertType t2
             return ((justReadSExpr t1', justReadSExpr t2'), deps1 <> deps2)
 
 data ExtractEq =
@@ -113,7 +132,7 @@ nubX = S.toList . S.fromList
 nubKV :: Ord a => [(a, b)] -> [(a, b)]
 nubKV = M.toList . M.fromList
 
-convertDeps :: ConvDependencies -> ConvMonad [SExpr]
+convertDeps :: ConvDeps -> ConvMonad [SExpr]
 convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
     let kdvars = nubX kdvars'
     let tyvars = nubX tyvars'
@@ -161,13 +180,14 @@ convertTyVars tv = do
 -- is mentioned.
 data ConvertedType =
     ConvertedType
-        { convTySmt :: String -- ^ The SMT term.
-        , convTyDeps :: ConvDependencies -- ^ The dependencies of the term.
+        { convTyDesc :: String -- ^ A description of the term.
+        , convTySmt :: String -- ^ The SMT term.
+        , convTyDeps :: ConvDeps -- ^ The dependencies of the term.
         }
 
 -- | These are pieces of a type that need to be converted into SMT declarations
 -- or definitions in order for the converted type to be well sorted or correct.
-data ConvDependencies =
+data ConvDeps =
     ConvDeps
         { convTyVars :: [TyVar] -- ^ Type variables for a known theory
         , convKdVars :: [TyVar] -- ^ Kind variables for unknown theories
@@ -175,7 +195,7 @@ data ConvDependencies =
         , convDecs   :: [Decl]  -- ^ SMT declarations specific to some converted type
         }
 
-noDeps :: ConvDependencies
+noDeps :: ConvDeps
 noDeps = mempty
 
 data Decl =
@@ -186,11 +206,11 @@ data Decl =
 
 type Hash = String
 
-instance Semigroup ConvDependencies where
+instance Semigroup ConvDeps where
     (ConvDeps a b c d) <> (ConvDeps e f g h) =
         ConvDeps (a ++ e) (b ++ f) (c ++ g) (d ++ h)
 
-instance Monoid ConvDependencies where
+instance Monoid ConvDeps where
     mempty = ConvDeps [] [] [] []
     mappend = (<>)
 
@@ -200,7 +220,8 @@ convertType ty =
         Just (smtVar, tyvar) ->
             return
                 ConvertedType
-                    { convTySmt = smtVar
+                    { convTyDesc = showSDocUnsafe $ ppr ty
+                    , convTySmt = smtVar
                     , convTyDeps = noDeps{convTyVars = [tyvar]}
                     }
         Nothing -> tryConvTheory ty
@@ -226,15 +247,16 @@ tryConvTheory ty = do
             let convKds :: Vec _ String = fst <$> recurKds
             let converted :: String = cont convTys convKds
 
-            let tyDeps :: ConvDependencies = foldMap convTyDeps recurTys
+            let tyDeps :: ConvDeps = foldMap convTyDeps recurTys
             let kdVars :: [KdVar] = foldMap snd recurKds ++ decKds
-            let deps :: ConvDependencies = addDepParts tyDeps kdVars decls
+            let deps :: ConvDeps = addDepParts tyDeps kdVars decls
 
-            return $ ConvertedType converted deps
+            let name = foldMap (showSDocUnsafe . ppr) convTys
+            return $ ConvertedType name converted deps
 
         Nothing -> defaultConvTy ty
 
-addDepParts :: ConvDependencies -> [KdVar] -> [Decl] -> ConvDependencies
+addDepParts :: ConvDeps -> [KdVar] -> [Decl] -> ConvDeps
 addDepParts (ConvDeps t k d decl) ks decls =
     ConvDeps t (k ++ ks) d (decl ++ decls)
 
@@ -259,7 +281,8 @@ defaultConvTy ty = do
     (convertedTy, defVars) <- lift (defConvTy ty)
     return
         ConvertedType
-            { convTySmt = convertedTy
+            { convTyDesc = showSDocUnsafe $ ppr ty
+            , convTySmt = convertedTy
             , convTyDeps = noDeps{convDefVar = defVars}
             }
 

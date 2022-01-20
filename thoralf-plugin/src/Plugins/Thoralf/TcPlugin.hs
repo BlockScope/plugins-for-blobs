@@ -27,13 +27,13 @@ import Plugins.Print
 import ThoralfPlugin.Extract (maybeExtractTyEq, maybeExtractTyDisEq)
 import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
 import ThoralfPlugin.Convert
-    (ExtractEq(..), EncodingData(..), ConvCts(..), convert, justReadSExpr)
+    (ExtractEq(..), EncodingData(..), ConvCts(..), ConvEq(..), convert, justReadSExpr)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT (isSilencedTalk)
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..), TraceSmtTalk(..)
-    , tracePlugin, traceSmt, pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep
+    , tracePlugin, traceSmt, pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
     )
 
 data ThoralfState =
@@ -243,12 +243,14 @@ thoralfSolver
 
             givenCheck <- tcPluginIO $ do
                 SMT.echo smt $ "givens-start-cycle-" ++ cycle
+                putStrLn "; GIVENS (conversions)"
+                sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
                 check <- hideError $ do
                     SMT.push smt
                     traverse_ (SMT.ackCommand smt) decs1
                     sequence_ $
                         [ SMT.assert smt $ SMT.named name e
-                        | (e, _) <- gExprs
+                        | e <- eqSExpr <$> gExprs
                         | nth <- [1 :: Int ..]
                         , let name = "given-" ++ cycle ++ "." ++ show nth
                         ]
@@ -273,6 +275,8 @@ thoralfSolver
                 SMT.Sat -> do
                     wantedCheck <- tcPluginIO $ do
                         SMT.echo smt $ "wanteds-start-cycle-" ++ cycle
+                        putStrLn "; WANTEDS (conversions)"
+                        sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
                         check <- hideError $ do
                             traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
                             let name = "wanted-" ++ cycle 
@@ -285,7 +289,7 @@ thoralfSolver
                         SMT.Unsat -> do
                             tcPluginIO pop
 
-                            let solvedCts = mapMaybe (addEvTerm . snd) wExprs
+                            let solvedCts = mapMaybe (addEvTerm . eqCt) wExprs
                             let ok = TcPluginOk solvedCts []
                             tcPluginTrace "thoralf-solve simplified wanteds" $ ppr solvedCts
                             logCtsSolution ok
@@ -332,7 +336,7 @@ thoralfSolver
             sequence_
             $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
 
-        smtWanted ws = foldl SMT.or (justReadSExpr "false") (map (SMT.not . fst) ws)
+        smtWanted ws = foldl SMT.or (justReadSExpr "false") (map (SMT.not . eqSExpr) ws)
 
 -- TODO: Rename refresh now that I'm calling it at initialization.
 refresh
