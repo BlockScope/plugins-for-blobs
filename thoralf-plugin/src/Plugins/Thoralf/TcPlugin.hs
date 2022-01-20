@@ -137,6 +137,19 @@ grabSMTsolver =
     -- SMT.showsSExpr for SMT.ppSExpr.
     SMT.newSolver "z3" ["-smt2", "-in"] SMT.ppSExpr
 
+options :: [String]
+options =
+    [ ":global-declarations"
+    , ":interactive-mode"
+    , ":print-success"
+    , ":produce-assertions"
+    , ":produce-assignments"
+    , ":produce-models"
+    , ":produce-proofs"
+    , ":produce-unsat-assumptions"
+    , ":produce-unsat-cores"
+    ]
+
 mkThoralfInit
     :: PkgModuleName
     -> TcPluginM TheoryEncoding
@@ -153,10 +166,12 @@ mkThoralfInit
 
     z3Solver <- tcPluginIO $ do
         z3Solver <- solverWithLevel traceSmtTalk
-        SMT.push z3Solver
         return z3Solver
 
     smtSolverRef <- unsafeTcPluginTcM $ newMutVar (z3Solver, 0)
+
+    tcPluginIO $ sequence_ [ SMT.setOption z3Solver o "true" | o <- options ]
+    tcPluginIO $ SMT.echo z3Solver "options are set, initialized"
 
     -- TODO: Rename refresh now that I'm calling it at initialization.
     _ <- refresh theoryEncoding smtSolverRef traceSmtTalk
@@ -193,7 +208,10 @@ thoralfSolver
         , extract
         }
     gs' ds' ws' = do
+
     (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
+    unsafeTcPluginTcM $ writeMutVar smtSolverRef (smt, calls + 1)
+
     _ <- tracePlugin
             dbgPlugin
             (pprSolverCallCount traceCallCount "ghc-tcplugin-thoralf" iIndent calls)
@@ -247,6 +265,7 @@ thoralfSolver
                     wantedCheck <- tcPluginIO $ hideError $ do
                         traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
                         SMT.assert smt (smtWanted wExprs)
+                        SMT.echo smt $ "checkpoint-#" ++ show calls
                         SMT.check smt
 
                     case wantedCheck of
