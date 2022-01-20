@@ -11,4 +11,3 @@ hie.yaml
 *.swn
 .hie/
 *.txt
-*.smt2
