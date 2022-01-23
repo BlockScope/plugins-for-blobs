@@ -183,8 +183,8 @@ mkThoralfInit
 
 thoralfStop :: ThoralfState -> TcPluginM ()
 thoralfStop ThoralfState{smtSolverRef} = do
-    (solver, _) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
-    _ <- tcPluginIO (SMT.stop solver)
+    (smtSolver, _) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
+    _ <- tcPluginIO (SMT.stop smtSolver)
     return ()
 
 thoralfSolver
@@ -206,10 +206,10 @@ thoralfSolver
         }
     gs' ds' ws' = do
 
-    (smt, calls) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
-    unsafeTcPluginTcM $ writeMutVar smtSolverRef (smt, calls + 1)
+    (smtSolver, calls) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
+    unsafeTcPluginTcM $ writeMutVar smtSolverRef (smtSolver, calls + 1)
     let cycle = show calls
-    tcPluginIO . SMT.echo smt $ "solver-start-cycle-" ++ cycle
+    tcPluginIO . SMT.echo smtSolver $ "solver-start-cycle-" ++ cycle
 
     _ <- tracePlugin
             dbgPlugin
@@ -225,7 +225,6 @@ thoralfSolver
 
     -- Define reused functions
     let hideError = flip catchIOError (const $ return SMT.Sat)
-    let pop = SMT.pop smt
     let noSolving = return $ TcPluginOk [] []
     let convertor = convert extract (EncodingData disEqClass theoryEncoding)
 
@@ -242,22 +241,22 @@ thoralfSolver
             logSmtCts step
 
             givenCheck <- tcPluginIO $ do
-                SMT.echo smt $ "givens-start-cycle-" ++ cycle
+                SMT.echo smtSolver $ "givens-start-cycle-" ++ cycle
                 putStrLn "; GIVENS (conversions)"
                 sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
                 putStrLn "; GIVENS (names)"
                 printAltNames ns1
                 check <- hideError $ do
-                    SMT.push smt
-                    traverse_ (SMT.ackCommand smt) decs1
+                    SMT.push smtSolver
+                    traverse_ (SMT.ackCommand smtSolver) decs1
                     sequence_ $
-                        [ SMT.assert smt $ SMT.named name e
+                        [ SMT.assert smtSolver $ SMT.named name e
                         | e <- eqSExpr <$> gExprs
                         | nth <- [1 :: Int ..]
                         , let name = "given-" ++ cycle ++ "." ++ show nth
                         ]
-                    SMT.check smt
-                SMT.echo smt $ "givens-finish-cycle-" ++ cycle
+                    SMT.check smtSolver
+                SMT.echo smtSolver $ "givens-finish-cycle-" ++ cycle
                 return check
 
             tcPluginTrace "thoralf-solve decls" $ ppr ds'
@@ -268,30 +267,30 @@ thoralfSolver
             tcPluginTrace "thoralf-solve wanteds filtered" $ ppr ws
             tcPluginTrace "thoralf-solve simplified given sexprs" $ ppr gExprs
             case givenCheck of
-                SMT.Unknown -> tcPluginIO pop >> noSolving
+                SMT.Unknown -> tcPluginIO (SMT.pop smtSolver) >> noSolving
 
                 SMT.Unsat -> do
-                    tcPluginIO $ putStrLn "Inconsistent Givens" >> pop
+                    tcPluginIO $ putStrLn "Inconsistent Givens" >> (SMT.pop smtSolver)
                     return $ TcPluginContradiction []
 
                 SMT.Sat -> do
                     wantedCheck <- tcPluginIO $ do
-                        SMT.echo smt $ "wanteds-start-cycle-" ++ cycle
+                        SMT.echo smtSolver $ "wanteds-start-cycle-" ++ cycle
                         putStrLn "; WANTEDS (conversions)"
                         sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
                         putStrLn "; WANTEDS (names)"
                         printAltNames ns2
                         check <- hideError $ do
-                            traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
+                            traverse_ (SMT.ackCommand smtSolver) (decs2 \\ decs1)
                             let name = "wanted-" ++ cycle 
-                            SMT.assert smt $ SMT.named name (smtWanted wExprs)
-                            SMT.check smt
-                        SMT.echo smt $ "wanteds-finish-cycle-" ++ cycle
+                            SMT.assert smtSolver $ SMT.named name (smtWanted wExprs)
+                            SMT.check smtSolver
+                        SMT.echo smtSolver $ "wanteds-finish-cycle-" ++ cycle
                         return check
 
                     case wantedCheck of
                         SMT.Unsat -> do
-                            tcPluginIO pop
+                            tcPluginIO (SMT.pop smtSolver)
 
                             let solvedCts = mapMaybe (addEvTerm . eqCt) wExprs
                             let ok = TcPluginOk solvedCts []
@@ -299,13 +298,13 @@ thoralfSolver
                             logCtsSolution ok
                             return ok
 
-                        SMT.Unknown -> tcPluginIO pop >> noSolving
+                        SMT.Unknown -> tcPluginIO (SMT.pop smtSolver) >> noSolving
 
-                        SMT.Sat -> tcPluginIO pop >> noSolving
+                        SMT.Sat -> tcPluginIO (SMT.pop smtSolver) >> noSolving
 
         _ -> tcPluginIO (putStrLn "Parse Failed") >> noSolving
 
-    tcPluginIO . SMT.echo smt $ "solver-finish-cycle-" ++ cycle
+    tcPluginIO . SMT.echo smtSolver $ "solver-finish-cycle-" ++ cycle
     return ctSolving
 
     where
@@ -355,8 +354,8 @@ refresh
     -> TraceSmtTalk
     -> TcPluginM ()
 refresh encoding smtSolverRef debug = do
-    (solver, n) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
-    _ <- tcPluginIO $ SMT.stop solver
+    (smtSolver, n) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
+    _ <- tcPluginIO $ SMT.stop smtSolver
     let decs = startDecs encoding
 
     z3Solver <- tcPluginIO $ do
