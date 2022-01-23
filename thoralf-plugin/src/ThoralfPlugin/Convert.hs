@@ -1,5 +1,5 @@
 {-# LANGUAGE CPP, NamedFieldPuns, ParallelListComp, PartialTypeSignatures #-}
-{-# LANGUAGE QuasiQuotes, ScopedTypeVariables #-}
+{-# LANGUAGE LambdaCase, QuasiQuotes, ScopedTypeVariables #-}
 
 -- {-# OPTIONS_GHC -fno-warn-partial-type-signatures #-}
 
@@ -27,7 +27,7 @@ module ThoralfPlugin.Convert
     , defaultConvTy, defConvTy
 
     -- * Converting A Single Kind
-    , convertKind, convKindTheories
+    , AltName, GhcName, ThoralfName, convertKind, convKindTheories
 
     -- * A Common Helper Function
     , tryFns
@@ -65,13 +65,25 @@ instance Outputable ConvEq where
             , text " => " <+> text (SMT.ppSExpr e "")
             ]
 
+newtype GhcName = GhcName String
+newtype ThoralfName = ThoralfName String
+type AltName = (GhcName, ThoralfName)
+
+instance Outputable GhcName where
+    ppr (GhcName n) = text n
+
+instance Outputable ThoralfName where
+    ppr (ThoralfName n) = text n
+
 -- | The output of converting constraints. We have a list of converted
 -- constraints as well as a list of declarations. These declarations are
 -- variable declarations as well as function symbols with accompanying defining
 -- assert statements.
 data ConvCts =
     ConvCts
-        { convEquals :: [ConvEq]
+        { convDescs :: [AltName]
+        -- ^ Decscription of the converted types.
+        , convEquals :: [ConvEq]
         -- ^ A list of converted constraints.
         , convDeps :: [SExpr]
         -- ^ A list of declarations.
@@ -111,8 +123,10 @@ conv ExtractEq{extractEq, extractDisEq} cts = do
     let deps :: ConvDeps = mconcat $ (snd <$> convDisEqs) ++ (snd <$> convEqs)
     decls :: [SExpr] <- convertDeps deps
 
+    let altNames = convertTyVarNames deps
+
     --guard (length matchingCts == length (disEqExprs ++ eqExprs))
-    return $ ConvCts convPairs decls
+    return $ ConvCts altNames convPairs decls
     where
         convPair :: (Type, Type) -> ConvMonad ((SExpr, SExpr), ConvDeps)
         convPair (t1, t2) = do
@@ -132,21 +146,34 @@ nubX = S.toList . S.fromList
 nubKV :: Ord a => [(a, b)] -> [(a, b)]
 nubKV = M.toList . M.fromList
 
+convertTyVarNames :: ConvDeps -> [(GhcName, ThoralfName)]
+convertTyVarNames (ConvDeps tyvars' _kdvars _defvars _decs) = let tyvars = nubX tyvars' in
+    (\tyvar ->
+        ( GhcName . showSDocUnsafe $ ppr tyvar
+        , ThoralfName . show $ getUnique tyvar))
+    <$> tyvars
+
 convertDeps :: ConvDeps -> ConvMonad [SExpr]
 convertDeps (ConvDeps tyvars' kdvars' defvars' decs) = do
     let kdvars = nubX kdvars'
     let tyvars = nubX tyvars'
     let defvars = nubX defvars'
 
+    -- TYVARS: [a1Fi,...]
     convertedTyVars <- traverse convertTyVars tyvars
     let kindVars = nubX $ concatMap snd convertedTyVars ++ kdvars
     let kindExprs = mkSMTSort <$> kindVars
+
+    -- TYVAREXPRS: ((declare-const a1Fi (Array String Int)) (declare-const ...))
     let tyVarExprs = fst <$> convertedTyVars
     let defExprs = mkDefaultSMTVar <$> defvars
 
     decExprs <- convertDecs decs
 
     EncodingData _ theories <- ask
+
+    -- TYVARS: [...,a1FF,...]
+    -- TVPREDS: ((assert (<= 0 a1FF)))
     let tvPreds = foldMap (fmap justReadSExpr) $ mapMaybe (tyVarPreds theories) tyvars
 
     -- WARNING: Order matters when putting these expressions together.
@@ -173,7 +200,7 @@ type KdVar = TyVar
 convertTyVars :: TyVar -> ConvMonad (SExpr, [KdVar])
 convertTyVars tv = do
     (smtSort, kdVars) <- convertKind $ tyVarKind tv
-    return (justReadSExpr $ [s|(declare-const %? %s) ; comment goes here|] (getUnique tv) smtSort, kdVars)
+    return (justReadSExpr $ [s|(declare-const %? %s)|] (getUnique tv) smtSort, kdVars)
 
 -- | A Type is converted into a string which is a valid SMT term, if the
 -- dependencies are converted properly and sent to the solver before the term
@@ -203,6 +230,7 @@ data Decl =
         { decKey :: (String, String) -- ^ A unique identifier
         , localDec :: [String]       -- ^ A list of local declarations
         }
+    deriving Show
 
 type Hash = String
 
@@ -243,6 +271,7 @@ tryConvTheory ty = do
             recurKds :: Vec _ (String, [KdVar]) <- traverse convertKind kds
             (decls :: [Decl], decKds :: [KdVar]) <- convDecConts decs
 
+            let convDescs :: Vec _ String = convTyDesc <$> recurTys
             let convTys :: Vec _ String = convTySmt <$> recurTys
             let convKds :: Vec _ String = fst <$> recurKds
             let converted :: String = cont convTys convKds
@@ -251,7 +280,7 @@ tryConvTheory ty = do
             let kdVars :: [KdVar] = foldMap snd recurKds ++ decKds
             let deps :: ConvDeps = addDepParts tyDeps kdVars decls
 
-            let name = foldMap (showSDocUnsafe . ppr) convTys
+            let name = foldMap (\case "" -> "_"; x -> x) convDescs
             return $ ConvertedType name converted deps
 
         Nothing -> defaultConvTy ty

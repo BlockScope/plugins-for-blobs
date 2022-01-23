@@ -26,7 +26,7 @@ pprConvCtsStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
 pprConvCtsStep
     indent
     DebugSmt{..}
-    ConvCtsStep{givens = ConvCts gs _ds1, wanted = ConvCts ws _ds2} =
+    ConvCtsStep{givens = ConvCts _ gs _ds1, wanted = ConvCts _ ws _ds2} =
     if not (coerce traceCarry)
         then []
         else pprCts "cts-carried" indent gCts [] wCts
@@ -38,7 +38,7 @@ pprSmtStep :: DebugSmt -> Indent -> ConvCtsStep -> [String]
 pprSmtStep
     DebugSmt{..}
     indent@(Indent i)
-    ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
+    ConvCtsStep{givens = ConvCts _ns1 gs ds1, wanted = ConvCts _ns2 ws ds2} =
     [
         ( tab
         . showString "[cts-as-smt]"
@@ -82,7 +82,7 @@ pprCommentList (y : ys) =
 pprAsSmtCommentCts :: DebugSmt -> ConvCtsStep -> [String]
 pprAsSmtCommentCts
     DebugSmt{traceSmtTalk = TraceSmtTalk DebugSmtTalk{traceCtsComments}}
-    ConvCtsStep{givens = ConvCts gs _, wanted = ConvCts ws _} =
+    ConvCtsStep{givens = ConvCts _ gs _, wanted = ConvCts _ ws _} =
         [
             ( showString "\n; GIVENS (GHC style)\n"
             . pprSDoc (SmtCommentGivens gCts)
@@ -119,15 +119,20 @@ traceSmt DebugSmt{traceSmtTalk = TraceSmtTalk talk, ..} s'
     | otherwise = return ()
 
 instance Outputable ConvCtsStep where
-    ppr ConvCtsStep{givens = ConvCts gs ds1, wanted = ConvCts ws ds2} =
+    ppr ConvCtsStep{givens = ConvCts ns1 gs ds1, wanted = ConvCts ns2 ws ds2} =
         text "smt-givens-decs = "
         <+> ppr (SmtDecls ds1)
+        <+> text "smt-givens-names = "
+        <+> vcat (pprNames <$> ns1)
         <+> text "smt-given = "
         <+> ppr (SmtGivens gSs)
         <+> text "smt-wanteds-decs = "
         <+> ppr (SmtDecls ds2)
+        <+> text "smt-wanteds-names = "
+        <+> vcat (pprNames <$> ns2)
         <+> text "smt-wanted = "
         <+> ppr (SmtWanteds wSs)
         where
             gSs = eqSExpr <$> gs
             wSs = eqSExpr <$> ws
+            pprNames (x, y) = ppr x <+> text " <=> " <+> ppr y

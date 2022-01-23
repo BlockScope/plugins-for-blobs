@@ -54,11 +54,15 @@
 ; []
 
 (echo "givens-start-cycle-1")
+; GIVENS (conversions)
+; GIVENS (names)
 (push 1)
 (check-sat)
 sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
+; WANTEDS (conversions)
+; WANTEDS (names)
 (assert
    (! false :named wanted-1))
 (check-sat)
@@ -72,7 +76,7 @@ unsat
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaGH} {2}:: One
+; [WD] hole{aaGw} {2}:: One
 ;                       ~
 ;                       (Base "byte" /: Base "byte") (CNonCanonical)
 
@@ -83,11 +87,51 @@ unsat
 ; (One [],/: [Base ["byte"],Base ["byte"]])
 
 (echo "givens-start-cycle-2")
+; GIVENS (conversions)
+;      [WD] hole{aaGw} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; GIVENS (names)
 (push 1)
 (check-sat)
 sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
+; WANTEDS (conversions)
+;      [WD] hole{aaGw} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; WANTEDS (names)
 (assert
    (!
       (or
@@ -115,6 +159,7 @@ unsat
 (pop 1)
 (echo "solver-finish-cycle-2")
 (exit)
+; [2 of 2] Compiling Main
 ; [1 of 2] Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -170,11 +215,15 @@ unsat
 ; []
 
 (echo "givens-start-cycle-1")
+; GIVENS (conversions)
+; GIVENS (names)
 (push 1)
 (check-sat)
 sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
+; WANTEDS (conversions)
+; WANTEDS (names)
 (assert
    (! false :named wanted-1))
 (check-sat)
@@ -199,11 +248,51 @@ unsat
 ; (One [],/: [Base ["byte"],Base ["byte"]])
 
 (echo "givens-start-cycle-2")
+; GIVENS (conversions)
+;      [WD] hole{aaGH} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; GIVENS (names)
 (push 1)
 (check-sat)
 sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
+; WANTEDS (conversions)
+;      [WD] hole{aaGH} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; WANTEDS (names)
 (assert
    (!
       (or

@@ -121,8 +121,9 @@ instance Outputable SmtWanteds where
         <+> text "]"
 
 instance Outputable ConvCts where
-    ppr (ConvCts eqs deps) =
-        ppr (SmtDecls $ eqSExpr <$> eqs)
+    ppr (ConvCts names eqs deps) =
+        ppr names
+        <+> ppr (SmtDecls $ eqSExpr <$> eqs)
         <+> ppr (eqCt <$> eqs)
         <+> ppr deps
 

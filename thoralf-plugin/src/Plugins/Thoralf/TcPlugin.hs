@@ -235,7 +235,7 @@ thoralfSolver
     tcPluginTrace "thoralf-solve wsConvCts" $ ppr wsConvCts
 
     ctSolving <- case (gsConvCts, wsConvCts) of
-        (Just gCCs@(ConvCts gExprs decs1), Just wCCs@(ConvCts wExprs decs2)) -> do
+        (Just gCCs@(ConvCts ns1 gExprs decs1), Just wCCs@(ConvCts ns2 wExprs decs2)) -> do
             let step = ConvCtsStep gCCs wCCs
             logConvCts step
             logSmtComments step
@@ -245,6 +245,8 @@ thoralfSolver
                 SMT.echo smt $ "givens-start-cycle-" ++ cycle
                 putStrLn "; GIVENS (conversions)"
                 sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                putStrLn "; GIVENS (names)"
+                printAltNames ns1
                 check <- hideError $ do
                     SMT.push smt
                     traverse_ (SMT.ackCommand smt) decs1
@@ -277,6 +279,8 @@ thoralfSolver
                         SMT.echo smt $ "wanteds-start-cycle-" ++ cycle
                         putStrLn "; WANTEDS (conversions)"
                         sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                        putStrLn "; WANTEDS (names)"
+                        printAltNames ns2
                         check <- hideError $ do
                             traverse_ (SMT.ackCommand smt) (decs2 \\ decs1)
                             let name = "wanted-" ++ cycle 
@@ -337,6 +341,12 @@ thoralfSolver
             $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
 
         smtWanted ws = foldl SMT.or (justReadSExpr "false") (map (SMT.not . eqSExpr) ws)
+
+        printAltNames ns =
+            sequence_
+                [ putStrLn $ showSDocUnsafe (ppr thoralfName <+> text " <= " <+> ppr ghcName)
+                | (ghcName, thoralfName) <- ns
+                ]
 
 -- TODO: Rename refresh now that I'm calling it at initialization.
 refresh
