@@ -89,8 +89,8 @@ solverWithLevel (TraceSmtTalk dbg)
             case (recvs, sends, errs) of
                 (_, "[send->] " : [msg], _) ->
                     if | dbgSend && dbgArrow -> logMsg s
-                        | dbgSend -> logMsg msg
-                        | otherwise -> return ()
+                       | dbgSend -> logMsg msg
+                       | otherwise -> return ()
 
                 -- NOTE: :print-success can print success | unsupported | error _.
                 ("[<-recv] " : msgContent, _, _) ->
