@@ -59,6 +59,15 @@ a1BC  <=  fsk_a1BC
 a1BE  <=  fsk_a1BE
 a1BG  <=  fsk_a1BG
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1BA (Array String Int))
+; (declare-const a1BC (Array String Int))
+; (declare-const a1BE (Array String Int))
+; (declare-const a1BG (Array String Int))
+; (declare-const a1Bw (Array String Int))
+; (declare-const a1By (Array String Int))
+; (declare-const a1u1 (Array String Int))
 (declare-const
    a1u1
    (Array String Int))
@@ -158,6 +167,8 @@ sat
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
@@ -189,6 +200,12 @@ a1Cm  <=  b
 a1Cn  <=  c
 a1Cv  <=  fsk_a1Cv
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1Cl (Array String Int))
+; (declare-const a1Cm (Array String Int))
+; (declare-const a1Cn (Array String Int))
+; (declare-const a1Cv (Array String Int))
 (declare-const
    a1Cl
    (Array String Int))
@@ -226,6 +243,8 @@ sat
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-2))
 (check-sat)
@@ -257,6 +276,12 @@ a1CV  <=  b
 a1CW  <=  c
 a1D8  <=  fsk_a1D8
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1CU (Array String Int))
+; (declare-const a1CV (Array String Int))
+; (declare-const a1CW (Array String Int))
+; (declare-const a1D8 (Array String Int))
 (declare-const
    a1CU
    (Array String Int))
@@ -294,6 +319,8 @@ sat
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-3))
 (check-sat)
@@ -325,6 +352,13 @@ a1E6  <=  n
 a1E7  <=  b
 a1Ej  <=  fsk_a1Ej
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a1E6))
+; (declare-const a1E5 String)
+; (declare-const a1E6 Int)
+; (declare-const a1E7 (Array String Int))
+; (declare-const a1Ej (Array String Int))
 (declare-const a1E5 String)
 (declare-const a1E6 Int)
 (declare-const
@@ -353,6 +387,8 @@ sat
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
@@ -447,6 +483,8 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
 sat
 (echo "givens-finish-cycle-5")
@@ -519,6 +557,8 @@ sat
 ;          0))))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -616,6 +656,12 @@ a1EC  <=  b
 a1ED  <=  c
 a1GO  <=  fsk_a1GO
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1EB (Array String Int))
+; (declare-const a1EC (Array String Int))
+; (declare-const a1ED (Array String Int))
+; (declare-const a1GO (Array String Int))
 (declare-const
    a1EB
    (Array String Int))
@@ -653,6 +699,8 @@ sat
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
@@ -684,6 +732,12 @@ a1ES  <=  b
 a1ET  <=  c
 a1GX  <=  fsk_a1GX
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1ER (Array String Int))
+; (declare-const a1ES (Array String Int))
+; (declare-const a1ET (Array String Int))
+; (declare-const a1GX (Array String Int))
 (declare-const
    a1ER
    (Array String Int))
@@ -721,6 +775,8 @@ sat
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
@@ -765,6 +821,15 @@ a1Hc  <=  fsk_a1Hc
 a1He  <=  fsk_a1He
 a1Hg  <=  fsk_a1Hg
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1Fi (Array String Int))
+; (declare-const a1H6 (Array String Int))
+; (declare-const a1H8 (Array String Int))
+; (declare-const a1Ha (Array String Int))
+; (declare-const a1Hc (Array String Int))
+; (declare-const a1He (Array String Int))
+; (declare-const a1Hg (Array String Int))
 (declare-const
    a1Fi
    (Array String Int))
@@ -864,6 +929,8 @@ sat
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-8))
 (check-sat)
@@ -946,6 +1013,15 @@ a1Hc  <=  fsk_a1Hc
 a1He  <=  fsk_a1He
 a1Hg  <=  fsk_a1Hg
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1Fi (Array String Int))
+; (declare-const a1H6 (Array String Int))
+; (declare-const a1H8 (Array String Int))
+; (declare-const a1Ha (Array String Int))
+; (declare-const a1Hc (Array String Int))
+; (declare-const a1He (Array String Int))
+; (declare-const a1Hg (Array String Int))
+; DECS1 (unseen) 
 (declare-const
    a1Fi
    (Array String Int))
@@ -1082,6 +1158,8 @@ sat
 
 ; WANTEDS (names)
 a1Fi  <=  mps
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -1150,6 +1228,13 @@ a1FF  <=  n
 a1FG  <=  b
 a1Hx  <=  fsk_a1Hx
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a1FF))
+; (declare-const a1FE String)
+; (declare-const a1FF Int)
+; (declare-const a1FG (Array String Int))
+; (declare-const a1Hx (Array String Int))
 (declare-const a1FE String)
 (declare-const a1FF Int)
 (declare-const
@@ -1178,6 +1263,8 @@ sat
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-10))
 (check-sat)
