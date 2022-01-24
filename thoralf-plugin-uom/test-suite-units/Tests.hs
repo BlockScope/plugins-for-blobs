@@ -74,6 +74,16 @@ main = defaultMain tests
 tests :: TestTree
 tests = testGroup "thoralf-plugin:units"
   [ testsUnQuantity
+  , testGroup "Showing constants"
+    [ testCase "show 3m"                 $ show [u| 3 m |]                @?= "[u| 3 m |]"
+    , testCase "show 3m/s"               $ show [u| 3 m/s |]              @?= "[u| 3 m / s |]"
+    , testCase "show 3.2 s^2"            $ show [u| 3.2 s^2 |]            @?= "[u| 3.2 s^2 |]"
+    , testCase "show 3.0 kg m^2 / m s^2" $ show [u| 3.0 kg m^2 / m s^2 |] @?= "[u| 3.0 kg m / s^2 |]"
+    , testCase "show 1"                  $ show (mk 1)                    @?= "[u| 1 |]"
+    , testCase "show 1 s^-1"             $ show [u| 1 s^-1 |]             @?= "[u| 1 s^-1 |]"
+    , testCase "show 2 1 / kg s"         $ show [u| 2 1 / kg s |]         @?= "[u| 2 kg^-1 s^-1 |]"
+    , testCase "show (1 % 2) kg"         $ show [u| 1 % 2 kg |]           @?= "[u| 0.5 kg |]"
+    ]
   , testGroup "read . show"
     [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
     , testCase "1.2 m/s" $ read (show [u| 1.2 m/s |]) @?= [u| 1.2 m/s |]
