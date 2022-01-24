@@ -174,6 +174,76 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         a1By)
+;      :named
+;      given-1.1)
+;   (!
+;      (=
+;         (store base "m" one)
+;         a1Bw)
+;      :named
+;      given-1.2)
+;   (!
+;      (=
+;         (store base "s" one)
+;         a1BC)
+;      :named
+;      given-1.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1Bw
+;           a1By)
+;         a1BA)
+;      :named
+;      given-1.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1BC
+;           a1By)
+;         a1BE)
+;      :named
+;      given-1.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           a1BA
+;           a1BE)
+;         a1BG)
+;      :named
+;      given-1.6)
+;   (!
+;      (= a1BG a1u1)
+;      :named
+;      given-1.7)
+;   (! false :named wanted-1))
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -250,6 +320,28 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           a1Cl
+;           a1Cm)
+;         a1Cv)
+;      :named
+;      given-2.1)
+;   (!
+;      (= a1Cv a1Cn)
+;      :named
+;      given-2.2)
+;   (! false :named wanted-2))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -326,6 +418,28 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-3")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1CU
+;           a1CV)
+;         a1D8)
+;      :named
+;      given-3.1)
+;   (!
+;      (= a1D8 a1CW)
+;      :named
+;      given-3.2)
+;   (! false :named wanted-3))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -394,6 +508,22 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (<= 0 a1E6)
+;   (!
+;      (=
+;         (store enc a1E5 a1E6)
+;         a1Ej)
+;      :named
+;      given-4.1)
+;   (!
+;      (= a1Ej a1E7)
+;      :named
+;      given-4.2)
+;   (! false :named wanted-4))
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -630,6 +760,77 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (_
+;                    map
+;                    (+
+;                       (Int Int)
+;                       Int))
+;                 (store base "m" one)
+;                 (
+;                   (as
+;                      const
+;                      (Array String Int))
+;                   0))
+;               (
+;                 (_
+;                    map
+;                    (+
+;                       (Int Int)
+;                       Int))
+;                 (
+;                   (_
+;                      map
+;                      (-
+;                         (Int Int)
+;                         Int))
+;                   (
+;                     (_
+;                        map
+;                        (+
+;                           (Int Int)
+;                           Int))
+;                     (store base "m" one)
+;                     (
+;                       (as
+;                          const
+;                          (Array String Int))
+;                       0))
+;                   (
+;                     (_
+;                        map
+;                        (+
+;                           (Int Int)
+;                           Int))
+;                     (store base "s" one)
+;                     (
+;                       (as
+;                          const
+;                          (Array String Int))
+;                       0)))
+;                 (
+;                   (_
+;                      map
+;                      (+
+;                         (Int Int)
+;                         Int))
+;                   (store base "s" one)
+;                   (
+;                     (as
+;                        const
+;                        (Array String Int))
+;                     0))))))
+;      :named
+;      wanted-5))
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
@@ -706,6 +907,28 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           a1EB
+;           a1EC)
+;         a1GO)
+;      :named
+;      given-6.1)
+;   (!
+;      (= a1GO a1ED)
+;      :named
+;      given-6.2)
+;   (! false :named wanted-6))
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -782,6 +1005,28 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1ER
+;           a1ES)
+;         a1GX)
+;      :named
+;      given-7.1)
+;   (!
+;      (= a1GX a1ET)
+;      :named
+;      given-7.2)
+;   (! false :named wanted-7))
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
@@ -936,6 +1181,76 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         a1H8)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (store base "m" one)
+;         a1H6)
+;      :named
+;      given-8.2)
+;   (!
+;      (=
+;         (store base "s" one)
+;         a1Hc)
+;      :named
+;      given-8.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1H6
+;           a1H8)
+;         a1Ha)
+;      :named
+;      given-8.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1Hc
+;           a1H8)
+;         a1He)
+;      :named
+;      given-8.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           a1Ha
+;           a1He)
+;         a1Hg)
+;      :named
+;      given-8.6)
+;   (!
+;      (= a1Hg a1Fi)
+;      :named
+;      given-8.7)
+;   (! false :named wanted-8))
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -1202,6 +1517,113 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         a1H8)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (store base "m" one)
+;         a1H6)
+;      :named
+;      given-9.2)
+;   (!
+;      (=
+;         (store base "s" one)
+;         a1Hc)
+;      :named
+;      given-9.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1H6
+;           a1H8)
+;         a1Ha)
+;      :named
+;      given-9.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           a1Hc
+;           a1H8)
+;         a1He)
+;      :named
+;      given-9.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           a1Ha
+;           a1He)
+;         a1Hg)
+;      :named
+;      given-9.6)
+;   (!
+;      (= a1Hg a1Fi)
+;      :named
+;      given-9.7)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (_
+;                    map
+;                    (+
+;                       (Int Int)
+;                       Int))
+;                 a1Fi
+;                 (
+;                   (_
+;                      map
+;                      (+
+;                         (Int Int)
+;                         Int))
+;                   (store base "s" one)
+;                   (
+;                     (as
+;                        const
+;                        (Array String Int))
+;                     0)))
+;               (
+;                 (_
+;                    map
+;                    (+
+;                       (Int Int)
+;                       Int))
+;                 (store base "m" one)
+;                 (
+;                   (as
+;                      const
+;                      (Array String Int))
+;                   0)))))
+;      :named
+;      wanted-9))
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -1270,6 +1692,22 @@
 (check-sat)
 ; unsat
 (echo "wanteds-finish-cycle-10")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (<= 0 a1FF)
+;   (!
+;      (=
+;         (store enc a1FE a1FF)
+;         a1Hx)
+;      :named
+;      given-10.1)
+;   (!
+;      (= a1Hx a1FG)
+;      :named
+;      given-10.2)
+;   (! false :named wanted-10))
 (pop 1)
 (echo "solver-finish-cycle-10")
 (exit)

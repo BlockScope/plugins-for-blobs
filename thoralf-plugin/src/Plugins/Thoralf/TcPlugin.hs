@@ -324,6 +324,8 @@ thoralfSolver
 
                         solveCheck <- case wantedCheck of
                             SMT.Unsat -> do
+                                assertions <- tcPluginIO $ getAssertions smtSolver
+                                tcPluginIO $ printAssertions assertions
                                 tcPluginIO (SMT.pop smtSolver)
 
                                 let solvedCts = mapMaybe (addEvTerm . eqCt) wExprs
@@ -357,6 +359,8 @@ thoralfSolver
 
         constraintAsIs = (tab . showString "[constraints-as-is]") ""
         constraintFiltered = (tab . showString "[constraints-filtered]") ""
+
+        getAssertions = flip SMT.command (SMT.List [ SMT.Atom "get-assertions" ])
 
         logCtsProblem msg gs ds ws =
             sequence_
@@ -394,6 +398,12 @@ thoralfSolver
             sequence_
                 [ putStrLn $ "; " ++ SMT.showsSExpr dec ""
                 | dec <- Set.toList decs
+                ]
+
+        printAssertions as =
+            sequence_
+                [ putStrLn $ "; " ++ line
+                | line <- lines $ SMT.ppSExpr as ""
                 ]
 
 isEqCt :: Class -> Ct -> Bool
