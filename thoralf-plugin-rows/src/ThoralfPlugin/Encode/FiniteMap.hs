@@ -32,7 +32,13 @@ fmTheory theory = do
 mkFmTheory :: FmTyCons -> TheoryEncoding
 mkFmTheory (nil, alter, delete, union, inter, fm) =
     emptyTheory
-        { startDecs = [maybeDef]
+        { startDecs =
+            -- Data and constant declarations
+            -- WARNING: Each as one long line to avoid problems with CPP and
+            -- string gaps.
+            [ "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
+            , "(declare-datatypes (T) ((Maybe nothing (just (fromJust T)))))"
+            ]
         , typeConvs =
             [ nilConvert nil
             , alterConvert alter
@@ -42,11 +48,6 @@ mkFmTheory (nil, alter, delete, union, inter, fm) =
             ]
         , kindConvs = [fmConvert fm]
         }
-
--- Data and constant declarations
--- TODO: eventually make this less of a hack.
-maybeDef :: String
-maybeDef = "(declare-datatypes (T) ((Maybe nothing (just (fromJust T)))))"
 
 nilConvert :: TyCon -> Type -> Maybe TyConvCont
 nilConvert = mkConvert $ \case

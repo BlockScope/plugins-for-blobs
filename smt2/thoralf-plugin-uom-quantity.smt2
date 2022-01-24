@@ -2,28 +2,12 @@
 ; [1 of 3] Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(declare-datatypes
-   ()
-   (
-     (Type
-        (apply
-           (fst Type)
-           (snd Type))
-        (lit
-           (getstr String)))))
 (declare-const one Int)
 (assert
    (= one 1))
@@ -38,7 +22,6 @@
    (Array String Int))
 (assert
    (= enc base))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
@@ -277,28 +260,12 @@ unsat
 ; [2 of 3] Compiling UoM
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(declare-datatypes
-   ()
-   (
-     (Type
-        (apply
-           (fst Type)
-           (snd Type))
-        (lit
-           (getstr String)))))
 (declare-const one Int)
 (assert
    (= one 1))
@@ -313,7 +280,6 @@ unsat
    (Array String Int))
 (assert
    (= enc base))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
@@ -1054,28 +1020,12 @@ unsat
 ; [3 of 3] Compiling Main
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(declare-datatypes
-   ()
-   (
-     (Type
-        (apply
-           (fst Type)
-           (snd Type))
-        (lit
-           (getstr String)))))
 (declare-const one Int)
 (assert
    (= one 1))
@@ -1090,7 +1040,6 @@ unsat
    (Array String Int))
 (assert
    (= enc base))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
@@ -1126,28 +1075,12 @@ unsat
 ; [1 of 3] Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(declare-datatypes
-   ()
-   (
-     (Type
-        (apply
-           (fst Type)
-           (snd Type))
-        (lit
-           (getstr String)))))
 (declare-const one Int)
 (assert
    (= one 1))
@@ -1162,7 +1095,6 @@ unsat
    (Array String Int))
 (assert
    (= enc base))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)

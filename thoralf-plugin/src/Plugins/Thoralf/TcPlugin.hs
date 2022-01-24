@@ -171,7 +171,6 @@ mkThoralfInit
 
     _ <- tcPluginIO $ do
         traverse_ (SMT.ackCommand smtSolver . justReadSExpr) startDecs
-        SMT.ackCommand smtSolver typeDataType
         return smtSolver
 
     return
@@ -181,11 +180,6 @@ mkThoralfInit
             , disEqClass = disEq
             , extract = ExtractEq Ex.extractEq Ex.extractDisEq
             }
-    where
-        typeDataType =
-            justReadSExpr
-                -- WARNING: As one long line to avoid problems with CPP and string gaps.
-                "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
 
 thoralfStop :: ThoralfState -> TcPluginM ()
 thoralfStop ThoralfState{smtSolverRef} = do

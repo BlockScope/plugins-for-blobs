@@ -22,15 +22,6 @@
    (Array String Int))
 (assert
    (= enc base))
-(declare-datatypes
-   ()
-   (
-     (Type
-        (apply
-           (fst Type)
-           (snd Type))
-        (lit
-           (getstr String)))))
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)

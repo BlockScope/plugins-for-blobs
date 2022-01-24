@@ -2,19 +2,12 @@
 ; [1 of 4] Compiling FiniteMaps
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -31,22 +24,14 @@
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -63,7 +48,6 @@
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
@@ -7207,19 +7191,12 @@ unsat
 ; [2 of 4] Compiling Nat
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -7236,22 +7213,14 @@ unsat
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -7268,7 +7237,6 @@ unsat
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
@@ -10298,19 +10266,12 @@ unsat
 ; [3 of 4] Compiling RowTypes
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -10327,22 +10288,14 @@ unsat
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -10359,7 +10312,6 @@ unsat
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
@@ -12949,19 +12901,12 @@ unsat
 ; [4 of 4] Compiling Main
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -12978,24 +12923,16 @@ unsat
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (exit)
 ; [2 of 4] Compiling Nat
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -13012,22 +12949,14 @@ unsat
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (set-option :print-success true)
 (set-option :produce-models true)
-(set-option :global-declarations true)
 (set-option :interactive-mode true)
-(set-option :print-success true)
 (set-option :produce-assertions true)
 (set-option :produce-assignments true)
-(set-option :produce-models true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
 (set-option :produce-unsat-cores true)
-(echo "options are set, initialized")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
 (declare-datatypes
    ()
    (
@@ -13044,7 +12973,6 @@ unsat
         nothing
         (just
            (fromJust T)))))
-(push 1)
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
