@@ -28,28 +28,11 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
 import UoM (mkMpS, mkS, metres, extract, distance)
 import Defs ()
 
--- TODO: Resolve ambiguity of fsk0 with distance:
---      • Couldn't match type ‘fsk0
---                             Data.Theory.UoM./: Data.Theory.UoM.Base "s"’
---                       with ‘Data.Theory.UoM.Base "s"’
---          arising from a use of ‘distance’
---        The type variable ‘fsk0’ is ambiguous
---      • In the second argument of ‘($)’, namely
---          ‘distance (mkMpS 3) (mkMpS 2)’
---        In the second argument of ‘printf’, namely
---          ‘(show $ distance (mkMpS 3) (mkMpS 2))’
---        In the second argument of ‘($)’, namely
---          ‘printf
---             "3 m/s for 2 s = %s m" (show $ distance (mkMpS 3) (mkMpS 2))’
---     |
---  35 |     putStrLn $ printf "3 m/s for 2 s = %s m" (show $ distance (mkMpS 3) (mkMpS 2))
---     |
-
 main :: IO ()
 main = do
     putStrLn "UoM examples"
     putStrLn $ printf "3 m/s for 3 s = %s m" (show $ metres (mkMpS 3) (mkS 3))
-    -- putStrLn $ printf "3 m/s for 2 s = %s m" (show $ distance (mkMpS 3) (mkMpS 2))
+    putStrLn $ printf "3 m/s for 2 s = %s m" (show $ distance (mkMpS 3) (mkS 2))
     $(defaultMainGenerator)
 
 prop_distance :: Double -> Double -> Bool
