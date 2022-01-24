@@ -24,46 +24,6 @@
 (assert
    (= enc base))
 (echo "solver-start-cycle-1")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-1")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-1")
-(echo "wanteds-start-cycle-1")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-1))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-1")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-1))
-(get-unsat-core)
-; (wanted-1)
-(pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
 
@@ -210,46 +170,6 @@
 (assert
    (= enc base))
 (echo "solver-start-cycle-1")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-1")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-1")
-(echo "wanteds-start-cycle-1")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-1))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-1")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-1))
-(get-unsat-core)
-; (wanted-1)
-(pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
 

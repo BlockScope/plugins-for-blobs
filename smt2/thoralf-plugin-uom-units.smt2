@@ -1735,7 +1735,7 @@
 (assert
    (= enc base))
 (exit)
-; [3 of 5] Compiling Defs
+; [3 of 5] Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -1760,46 +1760,6 @@
 (assert
    (= enc base))
 (echo "solver-start-cycle-1")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-1")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-1")
-(echo "wanteds-start-cycle-1")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-1))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-1")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-1))
-(get-unsat-core)
-; (wanted-1)
-(pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
 
@@ -1920,88 +1880,8 @@
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-3")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-3")
-(echo "wanteds-start-cycle-3")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-3))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-3")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-3))
-(get-unsat-core)
-; (wanted-3)
-(pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-4")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-4")
-(echo "wanteds-start-cycle-4")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-4))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-4")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-4))
-(get-unsat-core)
-; (wanted-4)
-(pop 1)
 (echo "solver-finish-cycle-4")
 (exit)
 ; [4 of 5] Compiling UnQuantity
@@ -2030,1362 +1910,6 @@
 (assert
    (= enc base))
 (echo "solver-start-cycle-1")
-
-; GIVENS (GHC style)
-; [G] cobox_aeE0 {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeCU {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCW {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCY {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD0 {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD2 {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD4 {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD6 {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD8 {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDa {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDc {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDe {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDg {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDi {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDk {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDm {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDo {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDq {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDs {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDu {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDw {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDy {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDA {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDC {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDE {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDG {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDI {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDK {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDM {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDO {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDQ {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDS {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDU {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDW {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDY {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCM {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeCO {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCK {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeE3 {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeE4 {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],aeDZ)
-; (*: [aeCy,aeCN],aeCT)
-; (*: [aeCy,aeCT],aeCV)
-; (*: [aeCy,aeCV],aeCX)
-; (*: [aeCy,aeCX],aeCZ)
-; (*: [aeCy,aeCZ],aeD1)
-; (*: [aeCy,aeD1],aeD3)
-; (*: [aeCy,aeD3],aeD5)
-; (*: [aeCy,aeD5],aeD7)
-; (*: [aeCy,aeD7],aeD9)
-; (*: [aeCy,aeD9],aeDb)
-; (*: [aeCy,aeDb],aeDd)
-; (*: [aeCy,aeDd],aeDf)
-; (*: [aeCy,aeDf],aeDh)
-; (*: [aeCy,aeDh],aeDj)
-; (*: [aeCy,aeDj],aeDl)
-; (*: [aeCy,aeDl],aeDn)
-; (*: [aeCy,aeDn],aeDp)
-; (*: [aeCy,aeDp],aeDr)
-; (*: [aeCy,aeDr],aeDt)
-; (*: [aeCy,aeDt],aeDv)
-; (*: [aeCy,aeDv],aeDx)
-; (*: [aeCy,aeDx],aeDz)
-; (*: [aeCy,aeDz],aeDB)
-; (*: [aeCy,aeDB],aeDD)
-; (*: [aeCy,aeDD],aeDF)
-; (*: [aeCy,aeDF],aeDH)
-; (*: [aeCy,aeDH],aeDJ)
-; (*: [aeCy,aeDJ],aeDL)
-; (*: [aeCy,aeDL],aeDN)
-; (*: [aeCy,aeDN],aeDP)
-; (*: [aeCy,aeDP],aeDR)
-; (*: [aeCy,aeDR],aeDT)
-; (*: [aeCy,aeDT],aeDV)
-; (*: [aeCy,aeDV],aeDX)
-; (*: [aeCy,aeCy],aeCL)
-; (*: [aeCy,aeCL],aeCN)
-; (*: [aeCx,aeCx],aeCJ)
-; (aeDX,aeDZ)
-; (aeCJ,aeCN)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-1")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeCx  <=  a
-;  aeCy  <=  b
-;  aeCJ  <=  fsk_aeCJ
-;  aeCL  <=  fsk_aeCL
-;  aeCN  <=  fsk_aeCN
-;  aeCT  <=  fsk_aeCT
-;  aeCV  <=  fsk_aeCV
-;  aeCX  <=  fsk_aeCX
-;  aeCZ  <=  fsk_aeCZ
-;  aeD1  <=  fsk_aeD1
-;  aeD3  <=  fsk_aeD3
-;  aeD5  <=  fsk_aeD5
-;  aeD7  <=  fsk_aeD7
-;  aeD9  <=  fsk_aeD9
-;  aeDb  <=  fsk_aeDb
-;  aeDd  <=  fsk_aeDd
-;  aeDf  <=  fsk_aeDf
-;  aeDh  <=  fsk_aeDh
-;  aeDj  <=  fsk_aeDj
-;  aeDl  <=  fsk_aeDl
-;  aeDn  <=  fsk_aeDn
-;  aeDp  <=  fsk_aeDp
-;  aeDr  <=  fsk_aeDr
-;  aeDt  <=  fsk_aeDt
-;  aeDv  <=  fsk_aeDv
-;  aeDx  <=  fsk_aeDx
-;  aeDz  <=  fsk_aeDz
-;  aeDB  <=  fsk_aeDB
-;  aeDD  <=  fsk_aeDD
-;  aeDF  <=  fsk_aeDF
-;  aeDH  <=  fsk_aeDH
-;  aeDJ  <=  fsk_aeDJ
-;  aeDL  <=  fsk_aeDL
-;  aeDN  <=  fsk_aeDN
-;  aeDP  <=  fsk_aeDP
-;  aeDR  <=  fsk_aeDR
-;  aeDT  <=  fsk_aeDT
-;  aeDV  <=  fsk_aeDV
-;  aeDX  <=  fsk_aeDX
-;  aeDZ  <=  fsk_aeDZ
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeCJ (Array String Int))
-; (declare-const aeCL (Array String Int))
-; (declare-const aeCN (Array String Int))
-; (declare-const aeCT (Array String Int))
-; (declare-const aeCV (Array String Int))
-; (declare-const aeCX (Array String Int))
-; (declare-const aeCZ (Array String Int))
-; (declare-const aeCx (Array String Int))
-; (declare-const aeCy (Array String Int))
-; (declare-const aeD1 (Array String Int))
-; (declare-const aeD3 (Array String Int))
-; (declare-const aeD5 (Array String Int))
-; (declare-const aeD7 (Array String Int))
-; (declare-const aeD9 (Array String Int))
-; (declare-const aeDB (Array String Int))
-; (declare-const aeDD (Array String Int))
-; (declare-const aeDF (Array String Int))
-; (declare-const aeDH (Array String Int))
-; (declare-const aeDJ (Array String Int))
-; (declare-const aeDL (Array String Int))
-; (declare-const aeDN (Array String Int))
-; (declare-const aeDP (Array String Int))
-; (declare-const aeDR (Array String Int))
-; (declare-const aeDT (Array String Int))
-; (declare-const aeDV (Array String Int))
-; (declare-const aeDX (Array String Int))
-; (declare-const aeDZ (Array String Int))
-; (declare-const aeDb (Array String Int))
-; (declare-const aeDd (Array String Int))
-; (declare-const aeDf (Array String Int))
-; (declare-const aeDh (Array String Int))
-; (declare-const aeDj (Array String Int))
-; (declare-const aeDl (Array String Int))
-; (declare-const aeDn (Array String Int))
-; (declare-const aeDp (Array String Int))
-; (declare-const aeDr (Array String Int))
-; (declare-const aeDt (Array String Int))
-; (declare-const aeDv (Array String Int))
-; (declare-const aeDx (Array String Int))
-; (declare-const aeDz (Array String Int))
-(declare-const
-   aeCx
-   (Array String Int))
-(declare-const
-   aeCy
-   (Array String Int))
-(declare-const
-   aeCJ
-   (Array String Int))
-(declare-const
-   aeCL
-   (Array String Int))
-(declare-const
-   aeCN
-   (Array String Int))
-(declare-const
-   aeCT
-   (Array String Int))
-(declare-const
-   aeCV
-   (Array String Int))
-(declare-const
-   aeCX
-   (Array String Int))
-(declare-const
-   aeCZ
-   (Array String Int))
-(declare-const
-   aeD1
-   (Array String Int))
-(declare-const
-   aeD3
-   (Array String Int))
-(declare-const
-   aeD5
-   (Array String Int))
-(declare-const
-   aeD7
-   (Array String Int))
-(declare-const
-   aeD9
-   (Array String Int))
-(declare-const
-   aeDb
-   (Array String Int))
-(declare-const
-   aeDd
-   (Array String Int))
-(declare-const
-   aeDf
-   (Array String Int))
-(declare-const
-   aeDh
-   (Array String Int))
-(declare-const
-   aeDj
-   (Array String Int))
-(declare-const
-   aeDl
-   (Array String Int))
-(declare-const
-   aeDn
-   (Array String Int))
-(declare-const
-   aeDp
-   (Array String Int))
-(declare-const
-   aeDr
-   (Array String Int))
-(declare-const
-   aeDt
-   (Array String Int))
-(declare-const
-   aeDv
-   (Array String Int))
-(declare-const
-   aeDx
-   (Array String Int))
-(declare-const
-   aeDz
-   (Array String Int))
-(declare-const
-   aeDB
-   (Array String Int))
-(declare-const
-   aeDD
-   (Array String Int))
-(declare-const
-   aeDF
-   (Array String Int))
-(declare-const
-   aeDH
-   (Array String Int))
-(declare-const
-   aeDJ
-   (Array String Int))
-(declare-const
-   aeDL
-   (Array String Int))
-(declare-const
-   aeDN
-   (Array String Int))
-(declare-const
-   aeDP
-   (Array String Int))
-(declare-const
-   aeDR
-   (Array String Int))
-(declare-const
-   aeDT
-   (Array String Int))
-(declare-const
-   aeDV
-   (Array String Int))
-(declare-const
-   aeDX
-   (Array String Int))
-(declare-const
-   aeDZ
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeDZ)
-      :named
-      given-1.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeCN)
-         aeCT)
-      :named
-      given-1.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeCT)
-         aeCV)
-      :named
-      given-1.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeCV)
-         aeCX)
-      :named
-      given-1.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeCX)
-         aeCZ)
-      :named
-      given-1.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeCZ)
-         aeD1)
-      :named
-      given-1.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeD1)
-         aeD3)
-      :named
-      given-1.7))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeD3)
-         aeD5)
-      :named
-      given-1.8))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeD5)
-         aeD7)
-      :named
-      given-1.9))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeD7)
-         aeD9)
-      :named
-      given-1.10))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeD9)
-         aeDb)
-      :named
-      given-1.11))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDb)
-         aeDd)
-      :named
-      given-1.12))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDd)
-         aeDf)
-      :named
-      given-1.13))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDf)
-         aeDh)
-      :named
-      given-1.14))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDh)
-         aeDj)
-      :named
-      given-1.15))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDj)
-         aeDl)
-      :named
-      given-1.16))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDl)
-         aeDn)
-      :named
-      given-1.17))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDn)
-         aeDp)
-      :named
-      given-1.18))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDp)
-         aeDr)
-      :named
-      given-1.19))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDr)
-         aeDt)
-      :named
-      given-1.20))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDt)
-         aeDv)
-      :named
-      given-1.21))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDv)
-         aeDx)
-      :named
-      given-1.22))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDx)
-         aeDz)
-      :named
-      given-1.23))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDz)
-         aeDB)
-      :named
-      given-1.24))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDB)
-         aeDD)
-      :named
-      given-1.25))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDD)
-         aeDF)
-      :named
-      given-1.26))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDF)
-         aeDH)
-      :named
-      given-1.27))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDH)
-         aeDJ)
-      :named
-      given-1.28))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDJ)
-         aeDL)
-      :named
-      given-1.29))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDL)
-         aeDN)
-      :named
-      given-1.30))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDN)
-         aeDP)
-      :named
-      given-1.31))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDP)
-         aeDR)
-      :named
-      given-1.32))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDR)
-         aeDT)
-      :named
-      given-1.33))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDT)
-         aeDV)
-      :named
-      given-1.34))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeDV)
-         aeDX)
-      :named
-      given-1.35))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeCy)
-         aeCL)
-      :named
-      given-1.36))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCy
-           aeCL)
-         aeCN)
-      :named
-      given-1.37))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeCx
-           aeCx)
-         aeCJ)
-      :named
-      given-1.38))
-(assert
-   (!
-      (= aeDX aeDZ)
-      :named
-      given-1.39))
-(assert
-   (!
-      (= aeCJ aeCN)
-      :named
-      given-1.40))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-1")
-(echo "wanteds-start-cycle-1")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-1))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-1")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeDZ)
-;      :named
-;      given-1.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCN)
-;         aeCT)
-;      :named
-;      given-1.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCT)
-;         aeCV)
-;      :named
-;      given-1.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCV)
-;         aeCX)
-;      :named
-;      given-1.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCX)
-;         aeCZ)
-;      :named
-;      given-1.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCZ)
-;         aeD1)
-;      :named
-;      given-1.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeD1)
-;         aeD3)
-;      :named
-;      given-1.7)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeD3)
-;         aeD5)
-;      :named
-;      given-1.8)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeD5)
-;         aeD7)
-;      :named
-;      given-1.9)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeD7)
-;         aeD9)
-;      :named
-;      given-1.10)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeD9)
-;         aeDb)
-;      :named
-;      given-1.11)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDb)
-;         aeDd)
-;      :named
-;      given-1.12)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDd)
-;         aeDf)
-;      :named
-;      given-1.13)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDf)
-;         aeDh)
-;      :named
-;      given-1.14)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDh)
-;         aeDj)
-;      :named
-;      given-1.15)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDj)
-;         aeDl)
-;      :named
-;      given-1.16)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDl)
-;         aeDn)
-;      :named
-;      given-1.17)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDn)
-;         aeDp)
-;      :named
-;      given-1.18)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDp)
-;         aeDr)
-;      :named
-;      given-1.19)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDr)
-;         aeDt)
-;      :named
-;      given-1.20)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDt)
-;         aeDv)
-;      :named
-;      given-1.21)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDv)
-;         aeDx)
-;      :named
-;      given-1.22)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDx)
-;         aeDz)
-;      :named
-;      given-1.23)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDz)
-;         aeDB)
-;      :named
-;      given-1.24)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDB)
-;         aeDD)
-;      :named
-;      given-1.25)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDD)
-;         aeDF)
-;      :named
-;      given-1.26)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDF)
-;         aeDH)
-;      :named
-;      given-1.27)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDH)
-;         aeDJ)
-;      :named
-;      given-1.28)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDJ)
-;         aeDL)
-;      :named
-;      given-1.29)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDL)
-;         aeDN)
-;      :named
-;      given-1.30)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDN)
-;         aeDP)
-;      :named
-;      given-1.31)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDP)
-;         aeDR)
-;      :named
-;      given-1.32)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDR)
-;         aeDT)
-;      :named
-;      given-1.33)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDT)
-;         aeDV)
-;      :named
-;      given-1.34)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDV)
-;         aeDX)
-;      :named
-;      given-1.35)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCy)
-;         aeCL)
-;      :named
-;      given-1.36)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCL)
-;         aeCN)
-;      :named
-;      given-1.37)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCx
-;           aeCx)
-;         aeCJ)
-;      :named
-;      given-1.38)
-;   (!
-;      (= aeDX aeDZ)
-;      :named
-;      given-1.39)
-;   (!
-;      (= aeCJ aeCN)
-;      :named
-;      given-1.40)
-;   (! false :named wanted-1))
-(get-unsat-core)
-; (wanted-1)
-(pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
 
@@ -3552,6 +2076,7 @@
 ;  aeDZ  <=  fsk_aeDZ
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const aeCJ (Array String Int))
 ; (declare-const aeCL (Array String Int))
 ; (declare-const aeCN (Array String Int))
@@ -3592,7 +2117,6 @@
 ; (declare-const aeDv (Array String Int))
 ; (declare-const aeDx (Array String Int))
 ; (declare-const aeDz (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    aeCx
    (Array String Int))
@@ -4363,6 +2887,34 @@
 ;           aeDT)
 ;         aeDV))
 ;   (define-fun
+;      given-2.6
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeCZ)
+;         aeD1))
+;   (define-fun
+;      given-2.30
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDL)
+;         aeDN))
+;   (define-fun
 ;      given-2.15
 ;      ()
 ;      Bool
@@ -4377,7 +2929,7 @@
 ;           aeDh)
 ;         aeDj))
 ;   (define-fun
-;      given-2.22
+;      given-2.36
 ;      ()
 ;      Bool
 ;      (=
@@ -4388,27 +2940,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDv)
-;         aeDx))
-;   (define-fun
-;      given-2.40
-;      ()
-;      Bool
-;      (= aeCJ aeCN))
-;   (define-fun
-;      given-2.32
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDP)
-;         aeDR))
+;           aeCy)
+;         aeCL))
 ;   (define-fun
 ;      aeDp
 ;      ()
@@ -4419,7 +2952,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.33
+;      given-2.24
 ;      ()
 ;      Bool
 ;      (=
@@ -4430,8 +2963,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDR)
-;         aeDT))
+;           aeDz)
+;         aeDB))
 ;   (define-fun
 ;      aeCX
 ;      ()
@@ -4460,7 +2993,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.35
+;      given-2.16
 ;      ()
 ;      Bool
 ;      (=
@@ -4471,10 +3004,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDV)
-;         aeDX))
+;           aeDj)
+;         aeDl))
 ;   (define-fun
-;      given-2.23
+;      given-2.19
 ;      ()
 ;      Bool
 ;      (=
@@ -4485,8 +3018,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDx)
-;         aeDz))
+;           aeDp)
+;         aeDr))
 ;   (define-fun
 ;      aeD5
 ;      ()
@@ -4529,6 +3062,71 @@
 ;      Int
 ;      1)
 ;   (define-fun
+;      given-2.40
+;      ()
+;      Bool
+;      (= aeCJ aeCN))
+;   (define-fun
+;      aeDh
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.23
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDx)
+;         aeDz))
+;   (define-fun
+;      given-2.10
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeD7)
+;         aeD9))
+;   (define-fun
+;      given-2.17
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDl)
+;         aeDn))
+;   (define-fun
+;      aeCJ
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
 ;      given-2.31
 ;      ()
 ;      Bool
@@ -4543,16 +3141,7 @@
 ;           aeDN)
 ;         aeDP))
 ;   (define-fun
-;      aeDh
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.12
+;      given-2.28
 ;      ()
 ;      Bool
 ;      (=
@@ -4563,70 +3152,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDb)
-;         aeDd))
-;   (define-fun
-;      given-2.1
-;      ()
-;      Bool
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeDZ))
-;   (define-fun
-;      given-2.7
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeD1)
-;         aeD3))
-;   (define-fun
-;      aeCJ
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.37
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCL)
-;         aeCN))
-;   (define-fun
-;      given-2.14
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDf)
-;         aeDh))
+;           aeDH)
+;         aeDJ))
 ;   (define-fun
 ;      aeDV
 ;      ()
@@ -4664,7 +3191,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.4
+;      given-2.11
 ;      ()
 ;      Bool
 ;      (=
@@ -4675,10 +3202,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeCV)
-;         aeCX))
+;           aeD9)
+;         aeDb))
 ;   (define-fun
-;      given-2.38
+;      given-2.20
 ;      ()
 ;      Bool
 ;      (=
@@ -4688,9 +3215,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCx
-;           aeCx)
-;         aeCJ))
+;           aeCy
+;           aeDr)
+;         aeDt))
 ;   (define-fun
 ;      aeDP
 ;      ()
@@ -4713,159 +3240,6 @@
 ;         "!0!"
 ;         (- 1)))
 ;   (define-fun
-;      given-2.6
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCZ)
-;         aeD1))
-;   (define-fun
-;      given-2.19
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDp)
-;         aeDr))
-;   (define-fun
-;      given-2.28
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDH)
-;         aeDJ))
-;   (define-fun
-;      aeDn
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.21
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDt)
-;         aeDv))
-;   (define-fun
-;      given-2.20
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDr)
-;         aeDt))
-;   (define-fun
-;      aeDf
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.9
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeD5)
-;         aeD7))
-;   (define-fun
-;      given-2.3
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeCT)
-;         aeCV))
-;   (define-fun
-;      given-2.24
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDz)
-;         aeDB))
-;   (define-fun
-;      given-2.30
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDL)
-;         aeDN))
-;   (define-fun
-;      aeD9
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
 ;      given-2.5
 ;      ()
 ;      Bool
@@ -4879,6 +3253,159 @@
 ;           aeCy
 ;           aeCX)
 ;         aeCZ))
+;   (define-fun
+;      given-2.32
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDP)
+;         aeDR))
+;   (define-fun
+;      given-2.29
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDJ)
+;         aeDL))
+;   (define-fun
+;      aeDn
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.12
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDb)
+;         aeDd))
+;   (define-fun
+;      given-2.13
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDd)
+;         aeDf))
+;   (define-fun
+;      aeDf
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.37
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeCL)
+;         aeCN))
+;   (define-fun
+;      given-2.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeCN)
+;         aeCT))
+;   (define-fun
+;      given-2.8
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeD3)
+;         aeD5))
+;   (define-fun
+;      given-2.22
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDv)
+;         aeDx))
+;   (define-fun
+;      aeD9
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.33
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDR)
+;         aeDT))
 ;   (define-fun
 ;      wanted-2
 ;      ()
@@ -4905,19 +3432,10 @@
 ;                 aeCy
 ;                 aeCy)))))
 ;   (define-fun
-;      given-2.29
+;      given-2.39
 ;      ()
 ;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDJ)
-;         aeDL))
+;      (= aeDX aeDZ))
 ;   (define-fun
 ;      aeDv
 ;      ()
@@ -4928,7 +3446,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.36
+;      given-2.14
 ;      ()
 ;      Bool
 ;      (=
@@ -4939,8 +3457,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeCy)
-;         aeCL))
+;           aeDf)
+;         aeDh))
 ;   (define-fun
 ;      aeCV
 ;      ()
@@ -4969,7 +3487,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.13
+;      given-2.18
 ;      ()
 ;      Bool
 ;      (=
@@ -4980,10 +3498,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDd)
-;         aeDf))
+;           aeDn)
+;         aeDp))
 ;   (define-fun
-;      given-2.2
+;      given-2.35
 ;      ()
 ;      Bool
 ;      (=
@@ -4994,8 +3512,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeCN)
-;         aeCT))
+;           aeDV)
+;         aeDX))
 ;   (define-fun
 ;      aeDF
 ;      ()
@@ -5042,7 +3560,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.10
+;      given-2.38
 ;      ()
 ;      Bool
 ;      (=
@@ -5052,11 +3570,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeD7)
-;         aeD9))
+;           aeCx
+;           aeCx)
+;         aeCJ))
 ;   (define-fun
-;      given-2.8
+;      given-2.27
 ;      ()
 ;      Bool
 ;      (=
@@ -5067,10 +3585,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeD3)
-;         aeD5))
+;           aeDF)
+;         aeDH))
 ;   (define-fun
-;      given-2.16
+;      given-2.21
 ;      ()
 ;      Bool
 ;      (=
@@ -5081,8 +3599,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDj)
-;         aeDl))
+;           aeDt)
+;         aeDv))
 ;   (define-fun
 ;      aeDN
 ;      ()
@@ -5093,7 +3611,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.11
+;      given-2.9
 ;      ()
 ;      Bool
 ;      (=
@@ -5104,8 +3622,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeD9)
-;         aeDb))
+;           aeD5)
+;         aeD7))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -5116,10 +3634,19 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      given-2.39
+;      given-2.25
 ;      ()
 ;      Bool
-;      (= aeDX aeDZ))
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeDB)
+;         aeDD))
 ;   (define-fun
 ;      base
 ;      ()
@@ -5166,7 +3693,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.17
+;      given-2.3
 ;      ()
 ;      Bool
 ;      (=
@@ -5177,8 +3704,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           aeCy
-;           aeDl)
-;         aeDn))
+;           aeCT)
+;         aeCV))
 ;   (define-fun
 ;      aeCx
 ;      ()
@@ -5198,76 +3725,18 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.18
+;      given-2.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDn)
-;         aeDp))
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         aeDZ))
 ;   (define-fun
 ;      aeDl
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.27
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDF)
-;         aeDH))
-;   (define-fun
-;      aeDb
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeCL
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.25
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeCy
-;           aeDB)
-;         aeDD))
-;   (define-fun
-;      aeDD
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -5290,6 +3759,61 @@
 ;           aeDD)
 ;         aeDF))
 ;   (define-fun
+;      aeDb
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      aeCL
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.7
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeD1)
+;         aeD3))
+;   (define-fun
+;      aeDD
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeCy
+;           aeCV)
+;         aeCX))
+;   (define-fun
 ;      exp
 ;      ()
 ;      (Array String Int)
@@ -5301,308 +3825,6 @@
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
-
-; GIVENS (GHC style)
-; [G] cobox_aeES {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeEM {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEO {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEQ {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEE {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeEG {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEC {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeEV {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeEW {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],aeER)
-; (*: [aeEq,aeEF],aeEL)
-; (*: [aeEq,aeEL],aeEN)
-; (*: [aeEq,aeEN],aeEP)
-; (*: [aeEq,aeEq],aeED)
-; (*: [aeEq,aeED],aeEF)
-; (*: [aeEp,aeEp],aeEB)
-; (aeEP,aeER)
-; (aeEB,aeEF)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-3")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeEp  <=  a
-;  aeEq  <=  b
-;  aeEB  <=  fsk_aeEB
-;  aeED  <=  fsk_aeED
-;  aeEF  <=  fsk_aeEF
-;  aeEL  <=  fsk_aeEL
-;  aeEN  <=  fsk_aeEN
-;  aeEP  <=  fsk_aeEP
-;  aeER  <=  fsk_aeER
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeEB (Array String Int))
-; (declare-const aeED (Array String Int))
-; (declare-const aeEF (Array String Int))
-; (declare-const aeEL (Array String Int))
-; (declare-const aeEN (Array String Int))
-; (declare-const aeEP (Array String Int))
-; (declare-const aeER (Array String Int))
-; (declare-const aeEp (Array String Int))
-; (declare-const aeEq (Array String Int))
-(declare-const
-   aeEp
-   (Array String Int))
-(declare-const
-   aeEq
-   (Array String Int))
-(declare-const
-   aeEB
-   (Array String Int))
-(declare-const
-   aeED
-   (Array String Int))
-(declare-const
-   aeEF
-   (Array String Int))
-(declare-const
-   aeEL
-   (Array String Int))
-(declare-const
-   aeEN
-   (Array String Int))
-(declare-const
-   aeEP
-   (Array String Int))
-(declare-const
-   aeER
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeER)
-      :named
-      given-3.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeEq
-           aeEF)
-         aeEL)
-      :named
-      given-3.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeEq
-           aeEL)
-         aeEN)
-      :named
-      given-3.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeEq
-           aeEN)
-         aeEP)
-      :named
-      given-3.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeEq
-           aeEq)
-         aeED)
-      :named
-      given-3.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeEq
-           aeED)
-         aeEF)
-      :named
-      given-3.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeEp
-           aeEp)
-         aeEB)
-      :named
-      given-3.7))
-(assert
-   (!
-      (= aeEP aeER)
-      :named
-      given-3.8))
-(assert
-   (!
-      (= aeEB aeEF)
-      :named
-      given-3.9))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-3")
-(echo "wanteds-start-cycle-3")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-3))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-3")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeER)
-;      :named
-;      given-3.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeEF)
-;         aeEL)
-;      :named
-;      given-3.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeEL)
-;         aeEN)
-;      :named
-;      given-3.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeEN)
-;         aeEP)
-;      :named
-;      given-3.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeEq)
-;         aeED)
-;      :named
-;      given-3.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeED)
-;         aeEF)
-;      :named
-;      given-3.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEp
-;           aeEp)
-;         aeEB)
-;      :named
-;      given-3.7)
-;   (!
-;      (= aeEP aeER)
-;      :named
-;      given-3.8)
-;   (!
-;      (= aeEB aeEF)
-;      :named
-;      given-3.9)
-;   (! false :named wanted-3))
-(get-unsat-core)
-; (wanted-3)
-(pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
 
@@ -5736,6 +3958,7 @@
 ;  aeER  <=  fsk_aeER
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const aeEB (Array String Int))
 ; (declare-const aeED (Array String Int))
 ; (declare-const aeEF (Array String Int))
@@ -5745,7 +3968,6 @@
 ; (declare-const aeER (Array String Int))
 ; (declare-const aeEp (Array String Int))
 ; (declare-const aeEq (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    aeEp
    (Array String Int))
@@ -6062,6 +4284,20 @@
 (get-model)
 ; (
 ;   (define-fun
+;      given-4.7
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeEp
+;           aeEp)
+;         aeEB))
+;   (define-fun
 ;      given-4.4
 ;      ()
 ;      Bool
@@ -6075,20 +4311,6 @@
 ;           aeEq
 ;           aeEN)
 ;         aeEP))
-;   (define-fun
-;      given-4.5
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeEq)
-;         aeED))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -6117,6 +4339,43 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
+;      given-4.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeEq
+;           aeEL)
+;         aeEN))
+;   (define-fun
+;      given-4.5
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeEq
+;           aeEq)
+;         aeED))
+;   (define-fun
+;      aeEN
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
 ;      given-4.6
 ;      ()
 ;      Bool
@@ -6131,67 +4390,10 @@
 ;           aeED)
 ;         aeEF))
 ;   (define-fun
-;      given-4.7
+;      given-4.9
 ;      ()
 ;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEp
-;           aeEp)
-;         aeEB))
-;   (define-fun
-;      aeEN
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-4.2
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeEF)
-;         aeEL))
-;   (define-fun
-;      given-4.1
-;      ()
-;      Bool
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeER))
-;   (define-fun
-;      given-4.8
-;      ()
-;      Bool
-;      (= aeEP aeER))
-;   (define-fun
-;      aeEB
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;      (= aeEB aeEF))
 ;   (define-fun
 ;      wanted-4
 ;      ()
@@ -6247,6 +4449,29 @@
 ;                    aeEq
 ;                    aeEq)))
 ;            a!1)))
+;   (define-fun
+;      aeEB
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-4.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeEq
+;           aeEF)
+;         aeEL))
 ;   (define-fun
 ;      aeEq
 ;      ()
@@ -6307,24 +4532,21 @@
 ;      Int
 ;      1)
 ;   (define-fun
-;      given-4.9
-;      ()
-;      Bool
-;      (= aeEB aeEF))
-;   (define-fun
-;      given-4.3
+;      given-4.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeEq
-;           aeEL)
-;         aeEN))
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         aeER))
+;   (define-fun
+;      given-4.8
+;      ()
+;      Bool
+;      (= aeEP aeER))
 ;   (define-fun
 ;      aeEu
 ;      ()
@@ -6349,267 +4571,8 @@
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
-
-; GIVENS (GHC style)
-; [G] cobox_aeFC {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeFA {0}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeFD {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],aeFB)
-; (*: [aeFr,aeFr],aeFz)
-; (aeFz,aeFB)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-5")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeFr  <=  a
-;  aeFz  <=  fsk_aeFz
-;  aeFB  <=  fsk_aeFB
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeFB (Array String Int))
-; (declare-const aeFr (Array String Int))
-; (declare-const aeFz (Array String Int))
-(declare-const
-   aeFr
-   (Array String Int))
-(declare-const
-   aeFz
-   (Array String Int))
-(declare-const
-   aeFB
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeFB)
-      :named
-      given-5.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeFr
-           aeFr)
-         aeFz)
-      :named
-      given-5.2))
-(assert
-   (!
-      (= aeFz aeFB)
-      :named
-      given-5.3))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-5")
-(echo "wanteds-start-cycle-5")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-5))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-5")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeFB)
-;      :named
-;      given-5.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeFr
-;           aeFr)
-;         aeFz)
-;      :named
-;      given-5.2)
-;   (!
-;      (= aeFz aeFB)
-;      :named
-;      given-5.3)
-;   (! false :named wanted-5))
-(get-unsat-core)
-; (wanted-5)
-(pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
-
-; GIVENS (GHC style)
-; [G] cobox_aeGf {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeGa {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeGb {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_aeGi {1}:: fsk0 ~ v (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (*: [aeFU,aeFU],aeGe)
-; (*: [aeFU,aeFV],aeG9)
-; (aeG9,aeFT)
-; (aeGe,aeFU)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-6")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeFT  <=  u
-;  aeFU  <=  v
-;  aeFV  <=  w
-;  aeG9  <=  fsk_aeG9
-;  aeGe  <=  fsk_aeGe
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeFT (Array String Int))
-; (declare-const aeFU (Array String Int))
-; (declare-const aeFV (Array String Int))
-; (declare-const aeG9 (Array String Int))
-; (declare-const aeGe (Array String Int))
-(declare-const
-   aeFT
-   (Array String Int))
-(declare-const
-   aeFU
-   (Array String Int))
-(declare-const
-   aeFV
-   (Array String Int))
-(declare-const
-   aeG9
-   (Array String Int))
-(declare-const
-   aeGe
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeFU
-           aeFU)
-         aeGe)
-      :named
-      given-6.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeFU
-           aeFV)
-         aeG9)
-      :named
-      given-6.2))
-(assert
-   (!
-      (= aeG9 aeFT)
-      :named
-      given-6.3))
-(assert
-   (!
-      (= aeGe aeFU)
-      :named
-      given-6.4))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-6")
-(echo "wanteds-start-cycle-6")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-6))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-6")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeFU
-;           aeFU)
-;         aeGe)
-;      :named
-;      given-6.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeFU
-;           aeFV)
-;         aeG9)
-;      :named
-;      given-6.2)
-;   (!
-;      (= aeG9 aeFT)
-;      :named
-;      given-6.3)
-;   (!
-;      (= aeGe aeFU)
-;      :named
-;      given-6.4)
-;   (! false :named wanted-6))
-(get-unsat-core)
-; (wanted-6)
-(pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
 
@@ -6667,12 +4630,12 @@
 ;  aeGe  <=  fsk_aeGe
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const aeFT (Array String Int))
 ; (declare-const aeFU (Array String Int))
 ; (declare-const aeFV (Array String Int))
 ; (declare-const aeG9 (Array String Int))
 ; (declare-const aeGe (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    aeFT
    (Array String Int))
@@ -6807,7 +4770,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        3))
+;        2))
 ;   (define-fun
 ;      base
 ;      ()
@@ -6816,7 +4779,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        3))
+;        2))
 ;   (define-fun
 ;      given-7.4
 ;      ()
@@ -6831,9 +4794,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           23675)
+;           28957)
 ;         "!0!"
-;         20162))
+;         8855))
 ;   (define-fun
 ;      given-7.1
 ;      ()
@@ -6866,9 +4829,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           23675)
+;           28957)
 ;         "!0!"
-;         20162))
+;         8855))
 ;   (define-fun
 ;      wanted-7
 ;      ()
@@ -6906,9 +4869,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           8855)
+;           2437)
 ;         "!0!"
-;         1))
+;         (- 1)))
 ;   (define-fun
 ;      given-7.3
 ;      ()
@@ -6923,9 +4886,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           23675)
+;           28957)
 ;         "!0!"
-;         20162))
+;         8855))
 ;   (define-fun
 ;      given-7.2
 ;      ()
@@ -6966,1362 +4929,6 @@
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
-
-; GIVENS (GHC style)
-; [G] cobox_aeKN {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeJH {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJJ {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJL {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJN {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJP {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJR {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJT {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJV {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJX {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJZ {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK1 {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK3 {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK5 {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK7 {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK9 {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKb {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKd {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKf {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKh {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKj {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKl {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKn {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKp {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKr {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKt {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKv {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKx {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKz {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKB {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKD {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKF {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKH {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKJ {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKL {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJz {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeJB {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJx {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeKQ {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeKR {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],aeKM)
-; (*: [aeGM,aeJA],aeJG)
-; (*: [aeGM,aeJG],aeJI)
-; (*: [aeGM,aeJI],aeJK)
-; (*: [aeGM,aeJK],aeJM)
-; (*: [aeGM,aeJM],aeJO)
-; (*: [aeGM,aeJO],aeJQ)
-; (*: [aeGM,aeJQ],aeJS)
-; (*: [aeGM,aeJS],aeJU)
-; (*: [aeGM,aeJU],aeJW)
-; (*: [aeGM,aeJW],aeJY)
-; (*: [aeGM,aeJY],aeK0)
-; (*: [aeGM,aeK0],aeK2)
-; (*: [aeGM,aeK2],aeK4)
-; (*: [aeGM,aeK4],aeK6)
-; (*: [aeGM,aeK6],aeK8)
-; (*: [aeGM,aeK8],aeKa)
-; (*: [aeGM,aeKa],aeKc)
-; (*: [aeGM,aeKc],aeKe)
-; (*: [aeGM,aeKe],aeKg)
-; (*: [aeGM,aeKg],aeKi)
-; (*: [aeGM,aeKi],aeKk)
-; (*: [aeGM,aeKk],aeKm)
-; (*: [aeGM,aeKm],aeKo)
-; (*: [aeGM,aeKo],aeKq)
-; (*: [aeGM,aeKq],aeKs)
-; (*: [aeGM,aeKs],aeKu)
-; (*: [aeGM,aeKu],aeKw)
-; (*: [aeGM,aeKw],aeKy)
-; (*: [aeGM,aeKy],aeKA)
-; (*: [aeGM,aeKA],aeKC)
-; (*: [aeGM,aeKC],aeKE)
-; (*: [aeGM,aeKE],aeKG)
-; (*: [aeGM,aeKG],aeKI)
-; (*: [aeGM,aeKI],aeKK)
-; (*: [aeGM,aeGM],aeJy)
-; (*: [aeGM,aeJy],aeJA)
-; (*: [aeGL,aeGL],aeJw)
-; (aeKK,aeKM)
-; (aeJw,aeJA)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-8")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeGL  <=  a
-;  aeGM  <=  b
-;  aeJw  <=  fsk_aeJw
-;  aeJy  <=  fsk_aeJy
-;  aeJA  <=  fsk_aeJA
-;  aeJG  <=  fsk_aeJG
-;  aeJI  <=  fsk_aeJI
-;  aeJK  <=  fsk_aeJK
-;  aeJM  <=  fsk_aeJM
-;  aeJO  <=  fsk_aeJO
-;  aeJQ  <=  fsk_aeJQ
-;  aeJS  <=  fsk_aeJS
-;  aeJU  <=  fsk_aeJU
-;  aeJW  <=  fsk_aeJW
-;  aeJY  <=  fsk_aeJY
-;  aeK0  <=  fsk_aeK0
-;  aeK2  <=  fsk_aeK2
-;  aeK4  <=  fsk_aeK4
-;  aeK6  <=  fsk_aeK6
-;  aeK8  <=  fsk_aeK8
-;  aeKa  <=  fsk_aeKa
-;  aeKc  <=  fsk_aeKc
-;  aeKe  <=  fsk_aeKe
-;  aeKg  <=  fsk_aeKg
-;  aeKi  <=  fsk_aeKi
-;  aeKk  <=  fsk_aeKk
-;  aeKm  <=  fsk_aeKm
-;  aeKo  <=  fsk_aeKo
-;  aeKq  <=  fsk_aeKq
-;  aeKs  <=  fsk_aeKs
-;  aeKu  <=  fsk_aeKu
-;  aeKw  <=  fsk_aeKw
-;  aeKy  <=  fsk_aeKy
-;  aeKA  <=  fsk_aeKA
-;  aeKC  <=  fsk_aeKC
-;  aeKE  <=  fsk_aeKE
-;  aeKG  <=  fsk_aeKG
-;  aeKI  <=  fsk_aeKI
-;  aeKK  <=  fsk_aeKK
-;  aeKM  <=  fsk_aeKM
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeGL (Array String Int))
-; (declare-const aeGM (Array String Int))
-; (declare-const aeJA (Array String Int))
-; (declare-const aeJG (Array String Int))
-; (declare-const aeJI (Array String Int))
-; (declare-const aeJK (Array String Int))
-; (declare-const aeJM (Array String Int))
-; (declare-const aeJO (Array String Int))
-; (declare-const aeJQ (Array String Int))
-; (declare-const aeJS (Array String Int))
-; (declare-const aeJU (Array String Int))
-; (declare-const aeJW (Array String Int))
-; (declare-const aeJY (Array String Int))
-; (declare-const aeJw (Array String Int))
-; (declare-const aeJy (Array String Int))
-; (declare-const aeK0 (Array String Int))
-; (declare-const aeK2 (Array String Int))
-; (declare-const aeK4 (Array String Int))
-; (declare-const aeK6 (Array String Int))
-; (declare-const aeK8 (Array String Int))
-; (declare-const aeKA (Array String Int))
-; (declare-const aeKC (Array String Int))
-; (declare-const aeKE (Array String Int))
-; (declare-const aeKG (Array String Int))
-; (declare-const aeKI (Array String Int))
-; (declare-const aeKK (Array String Int))
-; (declare-const aeKM (Array String Int))
-; (declare-const aeKa (Array String Int))
-; (declare-const aeKc (Array String Int))
-; (declare-const aeKe (Array String Int))
-; (declare-const aeKg (Array String Int))
-; (declare-const aeKi (Array String Int))
-; (declare-const aeKk (Array String Int))
-; (declare-const aeKm (Array String Int))
-; (declare-const aeKo (Array String Int))
-; (declare-const aeKq (Array String Int))
-; (declare-const aeKs (Array String Int))
-; (declare-const aeKu (Array String Int))
-; (declare-const aeKw (Array String Int))
-; (declare-const aeKy (Array String Int))
-(declare-const
-   aeGL
-   (Array String Int))
-(declare-const
-   aeGM
-   (Array String Int))
-(declare-const
-   aeJw
-   (Array String Int))
-(declare-const
-   aeJy
-   (Array String Int))
-(declare-const
-   aeJA
-   (Array String Int))
-(declare-const
-   aeJG
-   (Array String Int))
-(declare-const
-   aeJI
-   (Array String Int))
-(declare-const
-   aeJK
-   (Array String Int))
-(declare-const
-   aeJM
-   (Array String Int))
-(declare-const
-   aeJO
-   (Array String Int))
-(declare-const
-   aeJQ
-   (Array String Int))
-(declare-const
-   aeJS
-   (Array String Int))
-(declare-const
-   aeJU
-   (Array String Int))
-(declare-const
-   aeJW
-   (Array String Int))
-(declare-const
-   aeJY
-   (Array String Int))
-(declare-const
-   aeK0
-   (Array String Int))
-(declare-const
-   aeK2
-   (Array String Int))
-(declare-const
-   aeK4
-   (Array String Int))
-(declare-const
-   aeK6
-   (Array String Int))
-(declare-const
-   aeK8
-   (Array String Int))
-(declare-const
-   aeKa
-   (Array String Int))
-(declare-const
-   aeKc
-   (Array String Int))
-(declare-const
-   aeKe
-   (Array String Int))
-(declare-const
-   aeKg
-   (Array String Int))
-(declare-const
-   aeKi
-   (Array String Int))
-(declare-const
-   aeKk
-   (Array String Int))
-(declare-const
-   aeKm
-   (Array String Int))
-(declare-const
-   aeKo
-   (Array String Int))
-(declare-const
-   aeKq
-   (Array String Int))
-(declare-const
-   aeKs
-   (Array String Int))
-(declare-const
-   aeKu
-   (Array String Int))
-(declare-const
-   aeKw
-   (Array String Int))
-(declare-const
-   aeKy
-   (Array String Int))
-(declare-const
-   aeKA
-   (Array String Int))
-(declare-const
-   aeKC
-   (Array String Int))
-(declare-const
-   aeKE
-   (Array String Int))
-(declare-const
-   aeKG
-   (Array String Int))
-(declare-const
-   aeKI
-   (Array String Int))
-(declare-const
-   aeKK
-   (Array String Int))
-(declare-const
-   aeKM
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeKM)
-      :named
-      given-8.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJA)
-         aeJG)
-      :named
-      given-8.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJG)
-         aeJI)
-      :named
-      given-8.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJI)
-         aeJK)
-      :named
-      given-8.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJK)
-         aeJM)
-      :named
-      given-8.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJM)
-         aeJO)
-      :named
-      given-8.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJO)
-         aeJQ)
-      :named
-      given-8.7))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJQ)
-         aeJS)
-      :named
-      given-8.8))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJS)
-         aeJU)
-      :named
-      given-8.9))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJU)
-         aeJW)
-      :named
-      given-8.10))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJW)
-         aeJY)
-      :named
-      given-8.11))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJY)
-         aeK0)
-      :named
-      given-8.12))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK0)
-         aeK2)
-      :named
-      given-8.13))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK2)
-         aeK4)
-      :named
-      given-8.14))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK4)
-         aeK6)
-      :named
-      given-8.15))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK6)
-         aeK8)
-      :named
-      given-8.16))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK8)
-         aeKa)
-      :named
-      given-8.17))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKa)
-         aeKc)
-      :named
-      given-8.18))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKc)
-         aeKe)
-      :named
-      given-8.19))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKe)
-         aeKg)
-      :named
-      given-8.20))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKg)
-         aeKi)
-      :named
-      given-8.21))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKi)
-         aeKk)
-      :named
-      given-8.22))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKk)
-         aeKm)
-      :named
-      given-8.23))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKm)
-         aeKo)
-      :named
-      given-8.24))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKo)
-         aeKq)
-      :named
-      given-8.25))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKq)
-         aeKs)
-      :named
-      given-8.26))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKs)
-         aeKu)
-      :named
-      given-8.27))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKu)
-         aeKw)
-      :named
-      given-8.28))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKw)
-         aeKy)
-      :named
-      given-8.29))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKy)
-         aeKA)
-      :named
-      given-8.30))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKA)
-         aeKC)
-      :named
-      given-8.31))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKC)
-         aeKE)
-      :named
-      given-8.32))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKE)
-         aeKG)
-      :named
-      given-8.33))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKG)
-         aeKI)
-      :named
-      given-8.34))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKI)
-         aeKK)
-      :named
-      given-8.35))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeGM)
-         aeJy)
-      :named
-      given-8.36))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJy)
-         aeJA)
-      :named
-      given-8.37))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGL
-           aeGL)
-         aeJw)
-      :named
-      given-8.38))
-(assert
-   (!
-      (= aeKK aeKM)
-      :named
-      given-8.39))
-(assert
-   (!
-      (= aeJw aeJA)
-      :named
-      given-8.40))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-8")
-(echo "wanteds-start-cycle-8")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-8))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-8")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeKM)
-;      :named
-;      given-8.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJA)
-;         aeJG)
-;      :named
-;      given-8.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJG)
-;         aeJI)
-;      :named
-;      given-8.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJI)
-;         aeJK)
-;      :named
-;      given-8.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJK)
-;         aeJM)
-;      :named
-;      given-8.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJM)
-;         aeJO)
-;      :named
-;      given-8.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJO)
-;         aeJQ)
-;      :named
-;      given-8.7)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJQ)
-;         aeJS)
-;      :named
-;      given-8.8)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJS)
-;         aeJU)
-;      :named
-;      given-8.9)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJU)
-;         aeJW)
-;      :named
-;      given-8.10)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJW)
-;         aeJY)
-;      :named
-;      given-8.11)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJY)
-;         aeK0)
-;      :named
-;      given-8.12)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK0)
-;         aeK2)
-;      :named
-;      given-8.13)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK2)
-;         aeK4)
-;      :named
-;      given-8.14)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK4)
-;         aeK6)
-;      :named
-;      given-8.15)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK6)
-;         aeK8)
-;      :named
-;      given-8.16)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK8)
-;         aeKa)
-;      :named
-;      given-8.17)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKa)
-;         aeKc)
-;      :named
-;      given-8.18)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKc)
-;         aeKe)
-;      :named
-;      given-8.19)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKe)
-;         aeKg)
-;      :named
-;      given-8.20)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKg)
-;         aeKi)
-;      :named
-;      given-8.21)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKi)
-;         aeKk)
-;      :named
-;      given-8.22)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKk)
-;         aeKm)
-;      :named
-;      given-8.23)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKm)
-;         aeKo)
-;      :named
-;      given-8.24)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKo)
-;         aeKq)
-;      :named
-;      given-8.25)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKq)
-;         aeKs)
-;      :named
-;      given-8.26)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKs)
-;         aeKu)
-;      :named
-;      given-8.27)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKu)
-;         aeKw)
-;      :named
-;      given-8.28)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKw)
-;         aeKy)
-;      :named
-;      given-8.29)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKy)
-;         aeKA)
-;      :named
-;      given-8.30)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKA)
-;         aeKC)
-;      :named
-;      given-8.31)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKC)
-;         aeKE)
-;      :named
-;      given-8.32)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKE)
-;         aeKG)
-;      :named
-;      given-8.33)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKG)
-;         aeKI)
-;      :named
-;      given-8.34)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKI)
-;         aeKK)
-;      :named
-;      given-8.35)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeGM)
-;         aeJy)
-;      :named
-;      given-8.36)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJy)
-;         aeJA)
-;      :named
-;      given-8.37)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGL
-;           aeGL)
-;         aeJw)
-;      :named
-;      given-8.38)
-;   (!
-;      (= aeKK aeKM)
-;      :named
-;      given-8.39)
-;   (!
-;      (= aeJw aeJA)
-;      :named
-;      given-8.40)
-;   (! false :named wanted-8))
-(get-unsat-core)
-; (wanted-8)
-(pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
 
@@ -8469,6 +5076,7 @@
 ;  aeKM  <=  fsk_aeKM
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const aeGL (Array String Int))
 ; (declare-const aeGM (Array String Int))
 ; (declare-const aeJA (Array String Int))
@@ -8509,7 +5117,6 @@
 ; (declare-const aeKu (Array String Int))
 ; (declare-const aeKw (Array String Int))
 ; (declare-const aeKy (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    aeGL
    (Array String Int))
@@ -9721,350 +6328,48 @@
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
-; (given-9.35
+; (given-9.21
+;    given-9.20
+;    given-9.19
+;    given-9.18
+;    given-9.6
+;    given-9.17
+;    given-9.15
+;    given-9.3
+;    given-9.14
+;    given-9.12
+;    given-9.16
 ;    given-9.5
-;    given-9.34
-;    given-9.33
-;    given-9.37
-;    given-9.27
-;    given-9.32
-;    given-9.29
-;    given-9.36
-;    given-9.28
-;    given-9.23
+;    given-9.1
+;    given-9.9
+;    given-9.11
+;    given-9.10
 ;    given-9.4
+;    given-9.7
+;    given-9.8
+;    given-9.29
+;    given-9.30
+;    given-9.31
+;    given-9.28
+;    given-9.27
 ;    given-9.26
 ;    given-9.25
 ;    given-9.24
-;    given-9.17
-;    given-9.18
-;    given-9.19
-;    given-9.3
-;    given-9.20
-;    given-9.21
+;    given-9.23
 ;    given-9.22
-;    given-9.16
+;    wanted-9
+;    given-9.39
+;    given-9.37
+;    given-9.36
+;    given-9.35
+;    given-9.34
+;    given-9.33
 ;    given-9.2
 ;    given-9.13
-;    given-9.14
-;    given-9.15
-;    given-9.39
-;    wanted-9
-;    given-9.6
-;    given-9.1
-;    given-9.7
-;    given-9.8
-;    given-9.9
-;    given-9.10
-;    given-9.11
-;    given-9.12
-;    given-9.30
-;    given-9.31)
+;    given-9.32)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
-
-; GIVENS (GHC style)
-; [G] cobox_aeLi {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLc {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeLe {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeLg {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeL4 {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeL6 {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeL2 {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLl {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeLm {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],aeLh)
-; (*: [aeGU,aeL5],aeLb)
-; (*: [aeGU,aeLb],aeLd)
-; (*: [aeGU,aeLd],aeLf)
-; (*: [aeGU,aeGU],aeL3)
-; (*: [aeGU,aeL3],aeL5)
-; (*: [aeGT,aeGT],aeL1)
-; (aeLf,aeLh)
-; (aeL1,aeL5)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-10")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeGT  <=  a
-;  aeGU  <=  b
-;  aeL1  <=  fsk_aeL1
-;  aeL3  <=  fsk_aeL3
-;  aeL5  <=  fsk_aeL5
-;  aeLb  <=  fsk_aeLb
-;  aeLd  <=  fsk_aeLd
-;  aeLf  <=  fsk_aeLf
-;  aeLh  <=  fsk_aeLh
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeGT (Array String Int))
-; (declare-const aeGU (Array String Int))
-; (declare-const aeL1 (Array String Int))
-; (declare-const aeL3 (Array String Int))
-; (declare-const aeL5 (Array String Int))
-; (declare-const aeLb (Array String Int))
-; (declare-const aeLd (Array String Int))
-; (declare-const aeLf (Array String Int))
-; (declare-const aeLh (Array String Int))
-(declare-const
-   aeGT
-   (Array String Int))
-(declare-const
-   aeGU
-   (Array String Int))
-(declare-const
-   aeL1
-   (Array String Int))
-(declare-const
-   aeL3
-   (Array String Int))
-(declare-const
-   aeL5
-   (Array String Int))
-(declare-const
-   aeLb
-   (Array String Int))
-(declare-const
-   aeLd
-   (Array String Int))
-(declare-const
-   aeLf
-   (Array String Int))
-(declare-const
-   aeLh
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeLh)
-      :named
-      given-10.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeL5)
-         aeLb)
-      :named
-      given-10.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeLb)
-         aeLd)
-      :named
-      given-10.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeLd)
-         aeLf)
-      :named
-      given-10.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeGU)
-         aeL3)
-      :named
-      given-10.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeL3)
-         aeL5)
-      :named
-      given-10.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGT
-           aeGT)
-         aeL1)
-      :named
-      given-10.7))
-(assert
-   (!
-      (= aeLf aeLh)
-      :named
-      given-10.8))
-(assert
-   (!
-      (= aeL1 aeL5)
-      :named
-      given-10.9))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-10")
-(echo "wanteds-start-cycle-10")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-10))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-10")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeLh)
-;      :named
-;      given-10.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeL5)
-;         aeLb)
-;      :named
-;      given-10.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeLb)
-;         aeLd)
-;      :named
-;      given-10.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeLd)
-;         aeLf)
-;      :named
-;      given-10.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeGU)
-;         aeL3)
-;      :named
-;      given-10.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeL3)
-;         aeL5)
-;      :named
-;      given-10.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGT
-;           aeGT)
-;         aeL1)
-;      :named
-;      given-10.7)
-;   (!
-;      (= aeLf aeLh)
-;      :named
-;      given-10.8)
-;   (!
-;      (= aeL1 aeL5)
-;      :named
-;      given-10.9)
-;   (! false :named wanted-10))
-(get-unsat-core)
-; (wanted-10)
-(pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
 
@@ -10119,6 +6424,7 @@
 ;  aeLh  <=  fsk_aeLh
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const aeGT (Array String Int))
 ; (declare-const aeGU (Array String Int))
 ; (declare-const aeL1 (Array String Int))
@@ -10128,7 +6434,6 @@
 ; (declare-const aeLd (Array String Int))
 ; (declare-const aeLf (Array String Int))
 ; (declare-const aeLh (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    aeGT
    (Array String Int))
@@ -10410,135 +6715,19 @@
 ;      :named
 ;      wanted-11))
 (get-unsat-core)
-; (given-11.2
-;    given-11.1
-;    given-11.3
-;    given-11.4
-;    given-11.5
-;    given-11.6
-;    given-11.7
-;    given-11.8
+; (wanted-11
 ;    given-11.9
-;    wanted-11)
+;    given-11.8
+;    given-11.7
+;    given-11.6
+;    given-11.5
+;    given-11.4
+;    given-11.3
+;    given-11.1
+;    given-11.2)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
-
-; GIVENS (GHC style)
-; [G] cobox_aeLz {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLx {0}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLA {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],aeLy)
-; (*: [aeH1,aeH1],aeLw)
-; (aeLw,aeLy)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-12")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeH1  <=  a
-;  aeLw  <=  fsk_aeLw
-;  aeLy  <=  fsk_aeLy
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeH1 (Array String Int))
-; (declare-const aeLw (Array String Int))
-; (declare-const aeLy (Array String Int))
-(declare-const
-   aeH1
-   (Array String Int))
-(declare-const
-   aeLw
-   (Array String Int))
-(declare-const
-   aeLy
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeLy)
-      :named
-      given-12.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeH1
-           aeH1)
-         aeLw)
-      :named
-      given-12.2))
-(assert
-   (!
-      (= aeLw aeLy)
-      :named
-      given-12.3))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-12")
-(echo "wanteds-start-cycle-12")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-12))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-12")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeLy)
-;      :named
-;      given-12.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeH1
-;           aeH1)
-;         aeLw)
-;      :named
-;      given-12.2)
-;   (!
-;      (= aeLw aeLy)
-;      :named
-;      given-12.3)
-;   (! false :named wanted-12))
-(get-unsat-core)
-; (wanted-12)
-(pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
 
@@ -10575,10 +6764,10 @@
 ;  aeLy  <=  fsk_aeLy
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const aeH1 (Array String Int))
 ; (declare-const aeLw (Array String Int))
 ; (declare-const aeLy (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    aeH1
    (Array String Int))
@@ -10698,153 +6887,10 @@
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
-; (given-13.3 given-13.1 given-13.2 wanted-13)
+; (given-13.1 wanted-13 given-13.2 given-13.3)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-14")
-
-; GIVENS (GHC style)
-; [G] cobox_aeLO {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLJ {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLK {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_aeLR {1}:: fsk0 ~ v (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (*: [aeH8,aeH8],aeLN)
-; (*: [aeH8,aeH9],aeLI)
-; (aeLI,aeH7)
-; (aeLN,aeH8)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-14")
-; GIVENS (conversions)
-; GIVENS (names)
-;  aeH7  <=  u
-;  aeH8  <=  v
-;  aeH9  <=  w
-;  aeLI  <=  fsk_aeLI
-;  aeLN  <=  fsk_aeLN
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeH7 (Array String Int))
-; (declare-const aeH8 (Array String Int))
-; (declare-const aeH9 (Array String Int))
-; (declare-const aeLI (Array String Int))
-; (declare-const aeLN (Array String Int))
-(declare-const
-   aeH7
-   (Array String Int))
-(declare-const
-   aeH8
-   (Array String Int))
-(declare-const
-   aeH9
-   (Array String Int))
-(declare-const
-   aeLI
-   (Array String Int))
-(declare-const
-   aeLN
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeH8
-           aeH8)
-         aeLN)
-      :named
-      given-14.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeH8
-           aeH9)
-         aeLI)
-      :named
-      given-14.2))
-(assert
-   (!
-      (= aeLI aeH7)
-      :named
-      given-14.3))
-(assert
-   (!
-      (= aeLN aeH8)
-      :named
-      given-14.4))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-14")
-(echo "wanteds-start-cycle-14")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-14))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-14")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeH8
-;           aeH8)
-;         aeLN)
-;      :named
-;      given-14.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeH8
-;           aeH9)
-;         aeLI)
-;      :named
-;      given-14.2)
-;   (!
-;      (= aeLI aeH7)
-;      :named
-;      given-14.3)
-;   (!
-;      (= aeLN aeH8)
-;      :named
-;      given-14.4)
-;   (! false :named wanted-14))
-(get-unsat-core)
-; (wanted-14)
-(pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-15")
 
@@ -10879,12 +6925,12 @@
 ;  aeLN  <=  fsk_aeLN
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const aeH7 (Array String Int))
 ; (declare-const aeH8 (Array String Int))
 ; (declare-const aeH9 (Array String Int))
 ; (declare-const aeLI (Array String Int))
 ; (declare-const aeLN (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    aeH7
    (Array String Int))
@@ -11008,7 +7054,7 @@
 ;      :named
 ;      wanted-15))
 (get-unsat-core)
-; (given-15.3 given-15.4 given-15.1 wanted-15 given-15.2)
+; (given-15.2 given-15.3 given-15.4 wanted-15 given-15.1)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (exit)
@@ -12773,46 +8819,6 @@
 (assert
    (= enc base))
 (echo "solver-start-cycle-1")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-1")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-1")
-(echo "wanteds-start-cycle-1")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-1))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-1")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-1))
-(get-unsat-core)
-; (wanted-1)
-(pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
 
@@ -12933,88 +8939,8 @@
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-3")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-3")
-(echo "wanteds-start-cycle-3")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-3))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-3")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-3))
-(get-unsat-core)
-; (wanted-3)
-(pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-4")
-; GIVENS (conversions)
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-4")
-(echo "wanteds-start-cycle-4")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-4))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-4")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (! false :named wanted-4))
-(get-unsat-core)
-; (wanted-4)
-(pop 1)
 (echo "solver-finish-cycle-4")
 (exit)
 ; [5 of 5] Compiling Main
@@ -13042,1362 +8968,6 @@
 (assert
    (= enc base))
 (echo "solver-start-cycle-1")
-
-; GIVENS (GHC style)
-; [G] cobox_acEH {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acDB {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDD {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDF {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDH {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDJ {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDL {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDN {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDP {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDR {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDT {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDV {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDX {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDZ {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE1 {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE3 {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE5 {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE7 {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE9 {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEb {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEd {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEf {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEh {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEj {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEl {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEn {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEp {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEr {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEt {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEv {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEx {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEz {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEB {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acED {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEF {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDt {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acDv {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDr {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acEK {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acEL {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],acEG)
-; (*: [acDa,acDu],acDA)
-; (*: [acDa,acDA],acDC)
-; (*: [acDa,acDC],acDE)
-; (*: [acDa,acDE],acDG)
-; (*: [acDa,acDG],acDI)
-; (*: [acDa,acDI],acDK)
-; (*: [acDa,acDK],acDM)
-; (*: [acDa,acDM],acDO)
-; (*: [acDa,acDO],acDQ)
-; (*: [acDa,acDQ],acDS)
-; (*: [acDa,acDS],acDU)
-; (*: [acDa,acDU],acDW)
-; (*: [acDa,acDW],acDY)
-; (*: [acDa,acDY],acE0)
-; (*: [acDa,acE0],acE2)
-; (*: [acDa,acE2],acE4)
-; (*: [acDa,acE4],acE6)
-; (*: [acDa,acE6],acE8)
-; (*: [acDa,acE8],acEa)
-; (*: [acDa,acEa],acEc)
-; (*: [acDa,acEc],acEe)
-; (*: [acDa,acEe],acEg)
-; (*: [acDa,acEg],acEi)
-; (*: [acDa,acEi],acEk)
-; (*: [acDa,acEk],acEm)
-; (*: [acDa,acEm],acEo)
-; (*: [acDa,acEo],acEq)
-; (*: [acDa,acEq],acEs)
-; (*: [acDa,acEs],acEu)
-; (*: [acDa,acEu],acEw)
-; (*: [acDa,acEw],acEy)
-; (*: [acDa,acEy],acEA)
-; (*: [acDa,acEA],acEC)
-; (*: [acDa,acEC],acEE)
-; (*: [acDa,acDa],acDs)
-; (*: [acDa,acDs],acDu)
-; (*: [acD9,acD9],acDq)
-; (acEE,acEG)
-; (acDq,acDu)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-1")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acD9  <=  a
-;  acDa  <=  b
-;  acDq  <=  fsk_acDq
-;  acDs  <=  fsk_acDs
-;  acDu  <=  fsk_acDu
-;  acDA  <=  fsk_acDA
-;  acDC  <=  fsk_acDC
-;  acDE  <=  fsk_acDE
-;  acDG  <=  fsk_acDG
-;  acDI  <=  fsk_acDI
-;  acDK  <=  fsk_acDK
-;  acDM  <=  fsk_acDM
-;  acDO  <=  fsk_acDO
-;  acDQ  <=  fsk_acDQ
-;  acDS  <=  fsk_acDS
-;  acDU  <=  fsk_acDU
-;  acDW  <=  fsk_acDW
-;  acDY  <=  fsk_acDY
-;  acE0  <=  fsk_acE0
-;  acE2  <=  fsk_acE2
-;  acE4  <=  fsk_acE4
-;  acE6  <=  fsk_acE6
-;  acE8  <=  fsk_acE8
-;  acEa  <=  fsk_acEa
-;  acEc  <=  fsk_acEc
-;  acEe  <=  fsk_acEe
-;  acEg  <=  fsk_acEg
-;  acEi  <=  fsk_acEi
-;  acEk  <=  fsk_acEk
-;  acEm  <=  fsk_acEm
-;  acEo  <=  fsk_acEo
-;  acEq  <=  fsk_acEq
-;  acEs  <=  fsk_acEs
-;  acEu  <=  fsk_acEu
-;  acEw  <=  fsk_acEw
-;  acEy  <=  fsk_acEy
-;  acEA  <=  fsk_acEA
-;  acEC  <=  fsk_acEC
-;  acEE  <=  fsk_acEE
-;  acEG  <=  fsk_acEG
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acD9 (Array String Int))
-; (declare-const acDA (Array String Int))
-; (declare-const acDC (Array String Int))
-; (declare-const acDE (Array String Int))
-; (declare-const acDG (Array String Int))
-; (declare-const acDI (Array String Int))
-; (declare-const acDK (Array String Int))
-; (declare-const acDM (Array String Int))
-; (declare-const acDO (Array String Int))
-; (declare-const acDQ (Array String Int))
-; (declare-const acDS (Array String Int))
-; (declare-const acDU (Array String Int))
-; (declare-const acDW (Array String Int))
-; (declare-const acDY (Array String Int))
-; (declare-const acDa (Array String Int))
-; (declare-const acDq (Array String Int))
-; (declare-const acDs (Array String Int))
-; (declare-const acDu (Array String Int))
-; (declare-const acE0 (Array String Int))
-; (declare-const acE2 (Array String Int))
-; (declare-const acE4 (Array String Int))
-; (declare-const acE6 (Array String Int))
-; (declare-const acE8 (Array String Int))
-; (declare-const acEA (Array String Int))
-; (declare-const acEC (Array String Int))
-; (declare-const acEE (Array String Int))
-; (declare-const acEG (Array String Int))
-; (declare-const acEa (Array String Int))
-; (declare-const acEc (Array String Int))
-; (declare-const acEe (Array String Int))
-; (declare-const acEg (Array String Int))
-; (declare-const acEi (Array String Int))
-; (declare-const acEk (Array String Int))
-; (declare-const acEm (Array String Int))
-; (declare-const acEo (Array String Int))
-; (declare-const acEq (Array String Int))
-; (declare-const acEs (Array String Int))
-; (declare-const acEu (Array String Int))
-; (declare-const acEw (Array String Int))
-; (declare-const acEy (Array String Int))
-(declare-const
-   acD9
-   (Array String Int))
-(declare-const
-   acDa
-   (Array String Int))
-(declare-const
-   acDq
-   (Array String Int))
-(declare-const
-   acDs
-   (Array String Int))
-(declare-const
-   acDu
-   (Array String Int))
-(declare-const
-   acDA
-   (Array String Int))
-(declare-const
-   acDC
-   (Array String Int))
-(declare-const
-   acDE
-   (Array String Int))
-(declare-const
-   acDG
-   (Array String Int))
-(declare-const
-   acDI
-   (Array String Int))
-(declare-const
-   acDK
-   (Array String Int))
-(declare-const
-   acDM
-   (Array String Int))
-(declare-const
-   acDO
-   (Array String Int))
-(declare-const
-   acDQ
-   (Array String Int))
-(declare-const
-   acDS
-   (Array String Int))
-(declare-const
-   acDU
-   (Array String Int))
-(declare-const
-   acDW
-   (Array String Int))
-(declare-const
-   acDY
-   (Array String Int))
-(declare-const
-   acE0
-   (Array String Int))
-(declare-const
-   acE2
-   (Array String Int))
-(declare-const
-   acE4
-   (Array String Int))
-(declare-const
-   acE6
-   (Array String Int))
-(declare-const
-   acE8
-   (Array String Int))
-(declare-const
-   acEa
-   (Array String Int))
-(declare-const
-   acEc
-   (Array String Int))
-(declare-const
-   acEe
-   (Array String Int))
-(declare-const
-   acEg
-   (Array String Int))
-(declare-const
-   acEi
-   (Array String Int))
-(declare-const
-   acEk
-   (Array String Int))
-(declare-const
-   acEm
-   (Array String Int))
-(declare-const
-   acEo
-   (Array String Int))
-(declare-const
-   acEq
-   (Array String Int))
-(declare-const
-   acEs
-   (Array String Int))
-(declare-const
-   acEu
-   (Array String Int))
-(declare-const
-   acEw
-   (Array String Int))
-(declare-const
-   acEy
-   (Array String Int))
-(declare-const
-   acEA
-   (Array String Int))
-(declare-const
-   acEC
-   (Array String Int))
-(declare-const
-   acEE
-   (Array String Int))
-(declare-const
-   acEG
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acEG)
-      :named
-      given-1.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDu)
-         acDA)
-      :named
-      given-1.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDA)
-         acDC)
-      :named
-      given-1.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDC)
-         acDE)
-      :named
-      given-1.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDE)
-         acDG)
-      :named
-      given-1.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDG)
-         acDI)
-      :named
-      given-1.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDI)
-         acDK)
-      :named
-      given-1.7))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDK)
-         acDM)
-      :named
-      given-1.8))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDM)
-         acDO)
-      :named
-      given-1.9))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDO)
-         acDQ)
-      :named
-      given-1.10))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDQ)
-         acDS)
-      :named
-      given-1.11))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDS)
-         acDU)
-      :named
-      given-1.12))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDU)
-         acDW)
-      :named
-      given-1.13))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDW)
-         acDY)
-      :named
-      given-1.14))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDY)
-         acE0)
-      :named
-      given-1.15))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acE0)
-         acE2)
-      :named
-      given-1.16))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acE2)
-         acE4)
-      :named
-      given-1.17))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acE4)
-         acE6)
-      :named
-      given-1.18))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acE6)
-         acE8)
-      :named
-      given-1.19))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acE8)
-         acEa)
-      :named
-      given-1.20))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEa)
-         acEc)
-      :named
-      given-1.21))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEc)
-         acEe)
-      :named
-      given-1.22))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEe)
-         acEg)
-      :named
-      given-1.23))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEg)
-         acEi)
-      :named
-      given-1.24))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEi)
-         acEk)
-      :named
-      given-1.25))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEk)
-         acEm)
-      :named
-      given-1.26))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEm)
-         acEo)
-      :named
-      given-1.27))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEo)
-         acEq)
-      :named
-      given-1.28))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEq)
-         acEs)
-      :named
-      given-1.29))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEs)
-         acEu)
-      :named
-      given-1.30))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEu)
-         acEw)
-      :named
-      given-1.31))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEw)
-         acEy)
-      :named
-      given-1.32))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEy)
-         acEA)
-      :named
-      given-1.33))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEA)
-         acEC)
-      :named
-      given-1.34))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acEC)
-         acEE)
-      :named
-      given-1.35))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDa)
-         acDs)
-      :named
-      given-1.36))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acDa
-           acDs)
-         acDu)
-      :named
-      given-1.37))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acD9
-           acD9)
-         acDq)
-      :named
-      given-1.38))
-(assert
-   (!
-      (= acEE acEG)
-      :named
-      given-1.39))
-(assert
-   (!
-      (= acDq acDu)
-      :named
-      given-1.40))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-1")
-(echo "wanteds-start-cycle-1")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-1))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-1")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acEG)
-;      :named
-;      given-1.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDu)
-;         acDA)
-;      :named
-;      given-1.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDA)
-;         acDC)
-;      :named
-;      given-1.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDC)
-;         acDE)
-;      :named
-;      given-1.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDE)
-;         acDG)
-;      :named
-;      given-1.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDG)
-;         acDI)
-;      :named
-;      given-1.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDI)
-;         acDK)
-;      :named
-;      given-1.7)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDK)
-;         acDM)
-;      :named
-;      given-1.8)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDM)
-;         acDO)
-;      :named
-;      given-1.9)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDO)
-;         acDQ)
-;      :named
-;      given-1.10)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDQ)
-;         acDS)
-;      :named
-;      given-1.11)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDS)
-;         acDU)
-;      :named
-;      given-1.12)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDU)
-;         acDW)
-;      :named
-;      given-1.13)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDW)
-;         acDY)
-;      :named
-;      given-1.14)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDY)
-;         acE0)
-;      :named
-;      given-1.15)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE0)
-;         acE2)
-;      :named
-;      given-1.16)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE2)
-;         acE4)
-;      :named
-;      given-1.17)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE4)
-;         acE6)
-;      :named
-;      given-1.18)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE6)
-;         acE8)
-;      :named
-;      given-1.19)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE8)
-;         acEa)
-;      :named
-;      given-1.20)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEa)
-;         acEc)
-;      :named
-;      given-1.21)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEc)
-;         acEe)
-;      :named
-;      given-1.22)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEe)
-;         acEg)
-;      :named
-;      given-1.23)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEg)
-;         acEi)
-;      :named
-;      given-1.24)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEi)
-;         acEk)
-;      :named
-;      given-1.25)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEk)
-;         acEm)
-;      :named
-;      given-1.26)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEm)
-;         acEo)
-;      :named
-;      given-1.27)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEo)
-;         acEq)
-;      :named
-;      given-1.28)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEq)
-;         acEs)
-;      :named
-;      given-1.29)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEs)
-;         acEu)
-;      :named
-;      given-1.30)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEu)
-;         acEw)
-;      :named
-;      given-1.31)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEw)
-;         acEy)
-;      :named
-;      given-1.32)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEy)
-;         acEA)
-;      :named
-;      given-1.33)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEA)
-;         acEC)
-;      :named
-;      given-1.34)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEC)
-;         acEE)
-;      :named
-;      given-1.35)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDa)
-;         acDs)
-;      :named
-;      given-1.36)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDs)
-;         acDu)
-;      :named
-;      given-1.37)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acD9
-;           acD9)
-;         acDq)
-;      :named
-;      given-1.38)
-;   (!
-;      (= acEE acEG)
-;      :named
-;      given-1.39)
-;   (!
-;      (= acDq acDu)
-;      :named
-;      given-1.40)
-;   (! false :named wanted-1))
-(get-unsat-core)
-; (wanted-1)
-(pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
 
@@ -14564,6 +9134,7 @@
 ;  acEG  <=  fsk_acEG
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const acD9 (Array String Int))
 ; (declare-const acDA (Array String Int))
 ; (declare-const acDC (Array String Int))
@@ -14604,7 +9175,6 @@
 ; (declare-const acEu (Array String Int))
 ; (declare-const acEw (Array String Int))
 ; (declare-const acEy (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    acD9
    (Array String Int))
@@ -15366,6 +9936,34 @@
 ;           acEA)
 ;         acEC))
 ;   (define-fun
+;      given-2.6
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acDG)
+;         acDI))
+;   (define-fun
+;      given-2.30
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acEs)
+;         acEu))
+;   (define-fun
 ;      given-2.15
 ;      ()
 ;      Bool
@@ -15379,25 +9977,6 @@
 ;           acDa
 ;           acDY)
 ;         acE0))
-;   (define-fun
-;      given-2.22
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEc)
-;         acEe))
-;   (define-fun
-;      given-2.40
-;      ()
-;      Bool
-;      (= acDq acDu))
 ;   (define-fun
 ;      acDQ
 ;      ()
@@ -15426,7 +10005,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.32
+;      given-2.36
 ;      ()
 ;      Bool
 ;      (=
@@ -15437,8 +10016,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acEw)
-;         acEy))
+;           acDa)
+;         acDs))
 ;   (define-fun
 ;      acEy
 ;      ()
@@ -15449,7 +10028,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.33
+;      given-2.24
 ;      ()
 ;      Bool
 ;      (=
@@ -15460,10 +10039,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acEy)
-;         acEA))
+;           acEg)
+;         acEi))
 ;   (define-fun
-;      given-2.35
+;      given-2.16
 ;      ()
 ;      Bool
 ;      (=
@@ -15474,10 +10053,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acEC)
-;         acEE))
+;           acE0)
+;         acE2))
 ;   (define-fun
-;      given-2.23
+;      given-2.19
 ;      ()
 ;      Bool
 ;      (=
@@ -15488,8 +10067,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acEe)
-;         acEg))
+;           acE6)
+;         acE8))
 ;   (define-fun
 ;      acDC
 ;      ()
@@ -15514,19 +10093,10 @@
 ;      Int
 ;      1)
 ;   (define-fun
-;      given-2.31
+;      given-2.40
 ;      ()
 ;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEu)
-;         acEw))
+;      (= acDq acDu))
 ;   (define-fun
 ;      acEA
 ;      ()
@@ -15537,7 +10107,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.12
+;      given-2.23
 ;      ()
 ;      Bool
 ;      (=
@@ -15548,8 +10118,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDS)
-;         acDU))
+;           acEe)
+;         acEg))
 ;   (define-fun
 ;      acDS
 ;      ()
@@ -15569,16 +10139,19 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.1
+;      given-2.10
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acEG))
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acDO)
+;         acDQ))
 ;   (define-fun
 ;      acDM
 ;      ()
@@ -15589,7 +10162,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.7
+;      given-2.17
 ;      ()
 ;      Bool
 ;      (=
@@ -15600,8 +10173,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDI)
-;         acDK))
+;           acE2)
+;         acE4))
 ;   (define-fun
 ;      acDa
 ;      ()
@@ -15612,7 +10185,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.37
+;      given-2.31
 ;      ()
 ;      Bool
 ;      (=
@@ -15623,10 +10196,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDs)
-;         acDu))
+;           acEu)
+;         acEw))
 ;   (define-fun
-;      given-2.14
+;      given-2.28
 ;      ()
 ;      Bool
 ;      (=
@@ -15637,8 +10210,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDW)
-;         acDY))
+;           acEo)
+;         acEq))
 ;   (define-fun
 ;      acDO
 ;      ()
@@ -15685,7 +10258,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.4
+;      given-2.11
 ;      ()
 ;      Bool
 ;      (=
@@ -15696,10 +10269,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDC)
-;         acDE))
+;           acDQ)
+;         acDS))
 ;   (define-fun
-;      given-2.38
+;      given-2.20
 ;      ()
 ;      Bool
 ;      (=
@@ -15709,9 +10282,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acD9
-;           acD9)
-;         acDq))
+;           acDa
+;           acE8)
+;         acEa))
 ;   (define-fun
 ;      acEG
 ;      ()
@@ -15785,150 +10358,6 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.6
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDG)
-;         acDI))
-;   (define-fun
-;      acEm
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.19
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE6)
-;         acE8))
-;   (define-fun
-;      given-2.28
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEo)
-;         acEq))
-;   (define-fun
-;      acDs
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-2.21
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEa)
-;         acEc))
-;   (define-fun
-;      given-2.20
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE8)
-;         acEa))
-;   (define-fun
-;      given-2.9
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDM)
-;         acDO))
-;   (define-fun
-;      given-2.3
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acDA)
-;         acDC))
-;   (define-fun
-;      given-2.24
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEg)
-;         acEi))
-;   (define-fun
-;      given-2.30
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEs)
-;         acEu))
-;   (define-fun
 ;      given-2.5
 ;      ()
 ;      Bool
@@ -15942,6 +10371,150 @@
 ;           acDa
 ;           acDE)
 ;         acDG))
+;   (define-fun
+;      acEm
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.32
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acEw)
+;         acEy))
+;   (define-fun
+;      given-2.29
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acEq)
+;         acEs))
+;   (define-fun
+;      acDs
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-2.12
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acDS)
+;         acDU))
+;   (define-fun
+;      given-2.13
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acDU)
+;         acDW))
+;   (define-fun
+;      given-2.37
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acDs)
+;         acDu))
+;   (define-fun
+;      given-2.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acDu)
+;         acDA))
+;   (define-fun
+;      given-2.8
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acDK)
+;         acDM))
+;   (define-fun
+;      given-2.22
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acEc)
+;         acEe))
+;   (define-fun
+;      given-2.33
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acEy)
+;         acEA))
 ;   (define-fun
 ;      wanted-2
 ;      ()
@@ -15968,19 +10541,10 @@
 ;                 acDa
 ;                 acDa)))))
 ;   (define-fun
-;      given-2.29
+;      given-2.39
 ;      ()
 ;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acEq)
-;         acEs))
+;      (= acEE acEG))
 ;   (define-fun
 ;      acDu
 ;      ()
@@ -15991,7 +10555,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.36
+;      given-2.14
 ;      ()
 ;      Bool
 ;      (=
@@ -16002,8 +10566,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDa)
-;         acDs))
+;           acDW)
+;         acDY))
 ;   (define-fun
 ;      acE6
 ;      ()
@@ -16023,7 +10587,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.13
+;      given-2.18
 ;      ()
 ;      Bool
 ;      (=
@@ -16034,10 +10598,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDU)
-;         acDW))
+;           acE4)
+;         acE6))
 ;   (define-fun
-;      given-2.2
+;      given-2.35
 ;      ()
 ;      Bool
 ;      (=
@@ -16048,8 +10612,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDu)
-;         acDA))
+;           acEC)
+;         acEE))
 ;   (define-fun
 ;      acDK
 ;      ()
@@ -16060,7 +10624,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.10
+;      given-2.38
 ;      ()
 ;      Bool
 ;      (=
@@ -16070,11 +10634,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDO)
-;         acDQ))
+;           acD9
+;           acD9)
+;         acDq))
 ;   (define-fun
-;      given-2.8
+;      given-2.27
 ;      ()
 ;      Bool
 ;      (=
@@ -16085,10 +10649,10 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDK)
-;         acDM))
+;           acEm)
+;         acEo))
 ;   (define-fun
-;      given-2.16
+;      given-2.21
 ;      ()
 ;      Bool
 ;      (=
@@ -16099,8 +10663,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acE0)
-;         acE2))
+;           acEa)
+;         acEc))
 ;   (define-fun
 ;      acDI
 ;      ()
@@ -16111,7 +10675,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.11
+;      given-2.9
 ;      ()
 ;      Bool
 ;      (=
@@ -16122,8 +10686,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acDQ)
-;         acDS))
+;           acDM)
+;         acDO))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -16134,10 +10698,19 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      given-2.39
+;      given-2.25
 ;      ()
 ;      Bool
-;      (= acEE acEG))
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acDa
+;           acEi)
+;         acEk))
 ;   (define-fun
 ;      base
 ;      ()
@@ -16175,7 +10748,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.17
+;      given-2.3
 ;      ()
 ;      Bool
 ;      (=
@@ -16186,22 +10759,19 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acE2)
-;         acE4))
+;           acDA)
+;         acDC))
 ;   (define-fun
-;      given-2.18
+;      given-2.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acDa
-;           acE4)
-;         acE6))
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         acEG))
 ;   (define-fun
 ;      acEC
 ;      ()
@@ -16221,7 +10791,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.27
+;      given-2.26
 ;      ()
 ;      Bool
 ;      (=
@@ -16232,8 +10802,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acEm)
-;         acEo))
+;           acEk)
+;         acEm))
 ;   (define-fun
 ;      acEq
 ;      ()
@@ -16244,7 +10814,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      given-2.25
+;      given-2.7
 ;      ()
 ;      Bool
 ;      (=
@@ -16255,8 +10825,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acEi)
-;         acEk))
+;           acDI)
+;         acDK))
 ;   (define-fun
 ;      acE4
 ;      ()
@@ -16288,7 +10858,7 @@
 ;         "!0!"
 ;         (- 1)))
 ;   (define-fun
-;      given-2.26
+;      given-2.4
 ;      ()
 ;      Bool
 ;      (=
@@ -16299,8 +10869,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acDa
-;           acEk)
-;         acEm))
+;           acDC)
+;         acDE))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -16313,308 +10883,6 @@
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
-
-; GIVENS (GHC style)
-; [G] cobox_acFz {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acFt {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFv {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFx {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFl {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acFn {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFj {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acFC {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acFD {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],acFy)
-; (*: [acF7,acFm],acFs)
-; (*: [acF7,acFs],acFu)
-; (*: [acF7,acFu],acFw)
-; (*: [acF7,acF7],acFk)
-; (*: [acF7,acFk],acFm)
-; (*: [acF6,acF6],acFi)
-; (acFw,acFy)
-; (acFi,acFm)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-3")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acF6  <=  a
-;  acF7  <=  b
-;  acFi  <=  fsk_acFi
-;  acFk  <=  fsk_acFk
-;  acFm  <=  fsk_acFm
-;  acFs  <=  fsk_acFs
-;  acFu  <=  fsk_acFu
-;  acFw  <=  fsk_acFw
-;  acFy  <=  fsk_acFy
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acF6 (Array String Int))
-; (declare-const acF7 (Array String Int))
-; (declare-const acFi (Array String Int))
-; (declare-const acFk (Array String Int))
-; (declare-const acFm (Array String Int))
-; (declare-const acFs (Array String Int))
-; (declare-const acFu (Array String Int))
-; (declare-const acFw (Array String Int))
-; (declare-const acFy (Array String Int))
-(declare-const
-   acF6
-   (Array String Int))
-(declare-const
-   acF7
-   (Array String Int))
-(declare-const
-   acFi
-   (Array String Int))
-(declare-const
-   acFk
-   (Array String Int))
-(declare-const
-   acFm
-   (Array String Int))
-(declare-const
-   acFs
-   (Array String Int))
-(declare-const
-   acFu
-   (Array String Int))
-(declare-const
-   acFw
-   (Array String Int))
-(declare-const
-   acFy
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acFy)
-      :named
-      given-3.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acF7
-           acFm)
-         acFs)
-      :named
-      given-3.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acF7
-           acFs)
-         acFu)
-      :named
-      given-3.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acF7
-           acFu)
-         acFw)
-      :named
-      given-3.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acF7
-           acF7)
-         acFk)
-      :named
-      given-3.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acF7
-           acFk)
-         acFm)
-      :named
-      given-3.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acF6
-           acF6)
-         acFi)
-      :named
-      given-3.7))
-(assert
-   (!
-      (= acFw acFy)
-      :named
-      given-3.8))
-(assert
-   (!
-      (= acFi acFm)
-      :named
-      given-3.9))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-3")
-(echo "wanteds-start-cycle-3")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-3))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-3")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acFy)
-;      :named
-;      given-3.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF7
-;           acFm)
-;         acFs)
-;      :named
-;      given-3.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF7
-;           acFs)
-;         acFu)
-;      :named
-;      given-3.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF7
-;           acFu)
-;         acFw)
-;      :named
-;      given-3.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF7
-;           acF7)
-;         acFk)
-;      :named
-;      given-3.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF7
-;           acFk)
-;         acFm)
-;      :named
-;      given-3.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF6
-;           acF6)
-;         acFi)
-;      :named
-;      given-3.7)
-;   (!
-;      (= acFw acFy)
-;      :named
-;      given-3.8)
-;   (!
-;      (= acFi acFm)
-;      :named
-;      given-3.9)
-;   (! false :named wanted-3))
-(get-unsat-core)
-; (wanted-3)
-(pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
 
@@ -16748,6 +11016,7 @@
 ;  acFy  <=  fsk_acFy
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const acF6 (Array String Int))
 ; (declare-const acF7 (Array String Int))
 ; (declare-const acFi (Array String Int))
@@ -16757,7 +11026,6 @@
 ; (declare-const acFu (Array String Int))
 ; (declare-const acFw (Array String Int))
 ; (declare-const acFy (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    acF6
    (Array String Int))
@@ -17074,7 +11342,7 @@
 (get-model)
 ; (
 ;   (define-fun
-;      given-4.4
+;      given-4.7
 ;      ()
 ;      Bool
 ;      (=
@@ -17084,9 +11352,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acF7
-;           acFu)
-;         acFw))
+;           acF6
+;           acF6)
+;         acFi))
 ;   (define-fun
 ;      acFk
 ;      ()
@@ -17127,7 +11395,7 @@
 ;         "!0!"
 ;         (- 1)))
 ;   (define-fun
-;      given-4.5
+;      given-4.4
 ;      ()
 ;      Bool
 ;      (=
@@ -17138,8 +11406,8 @@
 ;                 (Int Int)
 ;                 Int))
 ;           acF7
-;           acF7)
-;         acFk))
+;           acFu)
+;         acFw))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -17177,6 +11445,34 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
+;      given-4.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acF7
+;           acFs)
+;         acFu))
+;   (define-fun
+;      given-4.5
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acF7
+;           acF7)
+;         acFk))
+;   (define-fun
 ;      given-4.6
 ;      ()
 ;      Bool
@@ -17191,58 +11487,10 @@
 ;           acFk)
 ;         acFm))
 ;   (define-fun
-;      given-4.7
+;      given-4.9
 ;      ()
 ;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF6
-;           acF6)
-;         acFi))
-;   (define-fun
-;      given-4.2
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF7
-;           acFm)
-;         acFs))
-;   (define-fun
-;      given-4.1
-;      ()
-;      Bool
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acFy))
-;   (define-fun
-;      given-4.8
-;      ()
-;      Bool
-;      (= acFw acFy))
-;   (define-fun
-;      acFm
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;      (= acFi acFm))
 ;   (define-fun
 ;      wanted-4
 ;      ()
@@ -17299,6 +11547,29 @@
 ;                    acF7)))
 ;            a!1)))
 ;   (define-fun
+;      acFm
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-4.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           acF7
+;           acFm)
+;         acFs))
+;   (define-fun
 ;      acFw
 ;      ()
 ;      (Array String Int)
@@ -17322,24 +11593,21 @@
 ;      Int
 ;      1)
 ;   (define-fun
-;      given-4.9
-;      ()
-;      Bool
-;      (= acFi acFm))
-;   (define-fun
-;      given-4.3
+;      given-4.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acF7
-;           acFs)
-;         acFu))
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         acFy))
+;   (define-fun
+;      given-4.8
+;      ()
+;      Bool
+;      (= acFw acFy))
 ;   (define-fun
 ;      acFs
 ;      ()
@@ -17361,267 +11629,8 @@
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
-
-; GIVENS (GHC style)
-; [G] cobox_acGj {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acGh {0}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acGk {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],acGi)
-; (*: [acG8,acG8],acGg)
-; (acGg,acGi)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-5")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acG8  <=  a
-;  acGg  <=  fsk_acGg
-;  acGi  <=  fsk_acGi
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acG8 (Array String Int))
-; (declare-const acGg (Array String Int))
-; (declare-const acGi (Array String Int))
-(declare-const
-   acG8
-   (Array String Int))
-(declare-const
-   acGg
-   (Array String Int))
-(declare-const
-   acGi
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acGi)
-      :named
-      given-5.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acG8
-           acG8)
-         acGg)
-      :named
-      given-5.2))
-(assert
-   (!
-      (= acGg acGi)
-      :named
-      given-5.3))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-5")
-(echo "wanteds-start-cycle-5")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-5))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-5")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acGi)
-;      :named
-;      given-5.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acG8
-;           acG8)
-;         acGg)
-;      :named
-;      given-5.2)
-;   (!
-;      (= acGg acGi)
-;      :named
-;      given-5.3)
-;   (! false :named wanted-5))
-(get-unsat-core)
-; (wanted-5)
-(pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
-
-; GIVENS (GHC style)
-; [G] cobox_acGW {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_acGR {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_acGS {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_acGZ {1}:: fsk0 ~ v (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (*: [acGB,acGB],acGV)
-; (*: [acGB,acGC],acGQ)
-; (acGQ,acGA)
-; (acGV,acGB)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-6")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acGA  <=  u
-;  acGB  <=  v
-;  acGC  <=  w
-;  acGQ  <=  fsk_acGQ
-;  acGV  <=  fsk_acGV
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acGA (Array String Int))
-; (declare-const acGB (Array String Int))
-; (declare-const acGC (Array String Int))
-; (declare-const acGQ (Array String Int))
-; (declare-const acGV (Array String Int))
-(declare-const
-   acGA
-   (Array String Int))
-(declare-const
-   acGB
-   (Array String Int))
-(declare-const
-   acGC
-   (Array String Int))
-(declare-const
-   acGQ
-   (Array String Int))
-(declare-const
-   acGV
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acGB
-           acGB)
-         acGV)
-      :named
-      given-6.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acGB
-           acGC)
-         acGQ)
-      :named
-      given-6.2))
-(assert
-   (!
-      (= acGQ acGA)
-      :named
-      given-6.3))
-(assert
-   (!
-      (= acGV acGB)
-      :named
-      given-6.4))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-6")
-(echo "wanteds-start-cycle-6")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-6))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-6")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acGB
-;           acGB)
-;         acGV)
-;      :named
-;      given-6.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acGB
-;           acGC)
-;         acGQ)
-;      :named
-;      given-6.2)
-;   (!
-;      (= acGQ acGA)
-;      :named
-;      given-6.3)
-;   (!
-;      (= acGV acGB)
-;      :named
-;      given-6.4)
-;   (! false :named wanted-6))
-(get-unsat-core)
-; (wanted-6)
-(pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
 
@@ -17679,12 +11688,12 @@
 ;  acGV  <=  fsk_acGV
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const acGA (Array String Int))
 ; (declare-const acGB (Array String Int))
 ; (declare-const acGC (Array String Int))
 ; (declare-const acGQ (Array String Int))
 ; (declare-const acGV (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    acGA
    (Array String Int))
@@ -17820,9 +11829,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           23675)
+;           28957)
 ;         "!0!"
-;         20162))
+;         8855))
 ;   (define-fun
 ;      acGH
 ;      ()
@@ -17832,9 +11841,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           8855)
+;           2437)
 ;         "!0!"
-;         1))
+;         (- 1)))
 ;   (define-fun
 ;      acGV
 ;      ()
@@ -17852,7 +11861,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        3))
+;        2))
 ;   (define-fun
 ;      base
 ;      ()
@@ -17861,7 +11870,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        3))
+;        2))
 ;   (define-fun
 ;      given-7.4
 ;      ()
@@ -17918,9 +11927,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           23675)
+;           28957)
 ;         "!0!"
-;         20162))
+;         8855))
 ;   (define-fun
 ;      acGA
 ;      ()
@@ -17930,9 +11939,9 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           23675)
+;           28957)
 ;         "!0!"
-;         20162))
+;         8855))
 ;   (define-fun
 ;      given-7.3
 ;      ()
@@ -17978,1362 +11987,6 @@
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
-
-; GIVENS (GHC style)
-; [G] cobox_acLw {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acKq {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKs {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKu {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKw {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKy {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKA {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKC {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKE {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKG {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKI {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKK {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKM {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKO {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKQ {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKS {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKU {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKW {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKY {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL0 {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL2 {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL4 {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL6 {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL8 {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLa {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLc {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLe {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLg {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLi {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLk {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLm {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLo {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLq {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLs {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLu {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKi {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acKk {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKg {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acLz {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acLA {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],acLv)
-; (*: [acHw,acKj],acKp)
-; (*: [acHw,acKp],acKr)
-; (*: [acHw,acKr],acKt)
-; (*: [acHw,acKt],acKv)
-; (*: [acHw,acKv],acKx)
-; (*: [acHw,acKx],acKz)
-; (*: [acHw,acKz],acKB)
-; (*: [acHw,acKB],acKD)
-; (*: [acHw,acKD],acKF)
-; (*: [acHw,acKF],acKH)
-; (*: [acHw,acKH],acKJ)
-; (*: [acHw,acKJ],acKL)
-; (*: [acHw,acKL],acKN)
-; (*: [acHw,acKN],acKP)
-; (*: [acHw,acKP],acKR)
-; (*: [acHw,acKR],acKT)
-; (*: [acHw,acKT],acKV)
-; (*: [acHw,acKV],acKX)
-; (*: [acHw,acKX],acKZ)
-; (*: [acHw,acKZ],acL1)
-; (*: [acHw,acL1],acL3)
-; (*: [acHw,acL3],acL5)
-; (*: [acHw,acL5],acL7)
-; (*: [acHw,acL7],acL9)
-; (*: [acHw,acL9],acLb)
-; (*: [acHw,acLb],acLd)
-; (*: [acHw,acLd],acLf)
-; (*: [acHw,acLf],acLh)
-; (*: [acHw,acLh],acLj)
-; (*: [acHw,acLj],acLl)
-; (*: [acHw,acLl],acLn)
-; (*: [acHw,acLn],acLp)
-; (*: [acHw,acLp],acLr)
-; (*: [acHw,acLr],acLt)
-; (*: [acHw,acHw],acKh)
-; (*: [acHw,acKh],acKj)
-; (*: [acHv,acHv],acKf)
-; (acLt,acLv)
-; (acKf,acKj)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-8")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acHv  <=  a
-;  acHw  <=  b
-;  acKf  <=  fsk_acKf
-;  acKh  <=  fsk_acKh
-;  acKj  <=  fsk_acKj
-;  acKp  <=  fsk_acKp
-;  acKr  <=  fsk_acKr
-;  acKt  <=  fsk_acKt
-;  acKv  <=  fsk_acKv
-;  acKx  <=  fsk_acKx
-;  acKz  <=  fsk_acKz
-;  acKB  <=  fsk_acKB
-;  acKD  <=  fsk_acKD
-;  acKF  <=  fsk_acKF
-;  acKH  <=  fsk_acKH
-;  acKJ  <=  fsk_acKJ
-;  acKL  <=  fsk_acKL
-;  acKN  <=  fsk_acKN
-;  acKP  <=  fsk_acKP
-;  acKR  <=  fsk_acKR
-;  acKT  <=  fsk_acKT
-;  acKV  <=  fsk_acKV
-;  acKX  <=  fsk_acKX
-;  acKZ  <=  fsk_acKZ
-;  acL1  <=  fsk_acL1
-;  acL3  <=  fsk_acL3
-;  acL5  <=  fsk_acL5
-;  acL7  <=  fsk_acL7
-;  acL9  <=  fsk_acL9
-;  acLb  <=  fsk_acLb
-;  acLd  <=  fsk_acLd
-;  acLf  <=  fsk_acLf
-;  acLh  <=  fsk_acLh
-;  acLj  <=  fsk_acLj
-;  acLl  <=  fsk_acLl
-;  acLn  <=  fsk_acLn
-;  acLp  <=  fsk_acLp
-;  acLr  <=  fsk_acLr
-;  acLt  <=  fsk_acLt
-;  acLv  <=  fsk_acLv
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acHv (Array String Int))
-; (declare-const acHw (Array String Int))
-; (declare-const acKB (Array String Int))
-; (declare-const acKD (Array String Int))
-; (declare-const acKF (Array String Int))
-; (declare-const acKH (Array String Int))
-; (declare-const acKJ (Array String Int))
-; (declare-const acKL (Array String Int))
-; (declare-const acKN (Array String Int))
-; (declare-const acKP (Array String Int))
-; (declare-const acKR (Array String Int))
-; (declare-const acKT (Array String Int))
-; (declare-const acKV (Array String Int))
-; (declare-const acKX (Array String Int))
-; (declare-const acKZ (Array String Int))
-; (declare-const acKf (Array String Int))
-; (declare-const acKh (Array String Int))
-; (declare-const acKj (Array String Int))
-; (declare-const acKp (Array String Int))
-; (declare-const acKr (Array String Int))
-; (declare-const acKt (Array String Int))
-; (declare-const acKv (Array String Int))
-; (declare-const acKx (Array String Int))
-; (declare-const acKz (Array String Int))
-; (declare-const acL1 (Array String Int))
-; (declare-const acL3 (Array String Int))
-; (declare-const acL5 (Array String Int))
-; (declare-const acL7 (Array String Int))
-; (declare-const acL9 (Array String Int))
-; (declare-const acLb (Array String Int))
-; (declare-const acLd (Array String Int))
-; (declare-const acLf (Array String Int))
-; (declare-const acLh (Array String Int))
-; (declare-const acLj (Array String Int))
-; (declare-const acLl (Array String Int))
-; (declare-const acLn (Array String Int))
-; (declare-const acLp (Array String Int))
-; (declare-const acLr (Array String Int))
-; (declare-const acLt (Array String Int))
-; (declare-const acLv (Array String Int))
-(declare-const
-   acHv
-   (Array String Int))
-(declare-const
-   acHw
-   (Array String Int))
-(declare-const
-   acKf
-   (Array String Int))
-(declare-const
-   acKh
-   (Array String Int))
-(declare-const
-   acKj
-   (Array String Int))
-(declare-const
-   acKp
-   (Array String Int))
-(declare-const
-   acKr
-   (Array String Int))
-(declare-const
-   acKt
-   (Array String Int))
-(declare-const
-   acKv
-   (Array String Int))
-(declare-const
-   acKx
-   (Array String Int))
-(declare-const
-   acKz
-   (Array String Int))
-(declare-const
-   acKB
-   (Array String Int))
-(declare-const
-   acKD
-   (Array String Int))
-(declare-const
-   acKF
-   (Array String Int))
-(declare-const
-   acKH
-   (Array String Int))
-(declare-const
-   acKJ
-   (Array String Int))
-(declare-const
-   acKL
-   (Array String Int))
-(declare-const
-   acKN
-   (Array String Int))
-(declare-const
-   acKP
-   (Array String Int))
-(declare-const
-   acKR
-   (Array String Int))
-(declare-const
-   acKT
-   (Array String Int))
-(declare-const
-   acKV
-   (Array String Int))
-(declare-const
-   acKX
-   (Array String Int))
-(declare-const
-   acKZ
-   (Array String Int))
-(declare-const
-   acL1
-   (Array String Int))
-(declare-const
-   acL3
-   (Array String Int))
-(declare-const
-   acL5
-   (Array String Int))
-(declare-const
-   acL7
-   (Array String Int))
-(declare-const
-   acL9
-   (Array String Int))
-(declare-const
-   acLb
-   (Array String Int))
-(declare-const
-   acLd
-   (Array String Int))
-(declare-const
-   acLf
-   (Array String Int))
-(declare-const
-   acLh
-   (Array String Int))
-(declare-const
-   acLj
-   (Array String Int))
-(declare-const
-   acLl
-   (Array String Int))
-(declare-const
-   acLn
-   (Array String Int))
-(declare-const
-   acLp
-   (Array String Int))
-(declare-const
-   acLr
-   (Array String Int))
-(declare-const
-   acLt
-   (Array String Int))
-(declare-const
-   acLv
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acLv)
-      :named
-      given-8.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKj)
-         acKp)
-      :named
-      given-8.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKp)
-         acKr)
-      :named
-      given-8.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKr)
-         acKt)
-      :named
-      given-8.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKt)
-         acKv)
-      :named
-      given-8.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKv)
-         acKx)
-      :named
-      given-8.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKx)
-         acKz)
-      :named
-      given-8.7))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKz)
-         acKB)
-      :named
-      given-8.8))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKB)
-         acKD)
-      :named
-      given-8.9))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKD)
-         acKF)
-      :named
-      given-8.10))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKF)
-         acKH)
-      :named
-      given-8.11))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKH)
-         acKJ)
-      :named
-      given-8.12))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKJ)
-         acKL)
-      :named
-      given-8.13))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKL)
-         acKN)
-      :named
-      given-8.14))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKN)
-         acKP)
-      :named
-      given-8.15))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKP)
-         acKR)
-      :named
-      given-8.16))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKR)
-         acKT)
-      :named
-      given-8.17))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKT)
-         acKV)
-      :named
-      given-8.18))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKV)
-         acKX)
-      :named
-      given-8.19))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKX)
-         acKZ)
-      :named
-      given-8.20))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKZ)
-         acL1)
-      :named
-      given-8.21))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL1)
-         acL3)
-      :named
-      given-8.22))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL3)
-         acL5)
-      :named
-      given-8.23))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL5)
-         acL7)
-      :named
-      given-8.24))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL7)
-         acL9)
-      :named
-      given-8.25))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL9)
-         acLb)
-      :named
-      given-8.26))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLb)
-         acLd)
-      :named
-      given-8.27))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLd)
-         acLf)
-      :named
-      given-8.28))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLf)
-         acLh)
-      :named
-      given-8.29))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLh)
-         acLj)
-      :named
-      given-8.30))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLj)
-         acLl)
-      :named
-      given-8.31))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLl)
-         acLn)
-      :named
-      given-8.32))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLn)
-         acLp)
-      :named
-      given-8.33))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLp)
-         acLr)
-      :named
-      given-8.34))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLr)
-         acLt)
-      :named
-      given-8.35))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acHw)
-         acKh)
-      :named
-      given-8.36))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKh)
-         acKj)
-      :named
-      given-8.37))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHv
-           acHv)
-         acKf)
-      :named
-      given-8.38))
-(assert
-   (!
-      (= acLt acLv)
-      :named
-      given-8.39))
-(assert
-   (!
-      (= acKf acKj)
-      :named
-      given-8.40))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-8")
-(echo "wanteds-start-cycle-8")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-8))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-8")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acLv)
-;      :named
-;      given-8.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKj)
-;         acKp)
-;      :named
-;      given-8.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKp)
-;         acKr)
-;      :named
-;      given-8.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKr)
-;         acKt)
-;      :named
-;      given-8.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKt)
-;         acKv)
-;      :named
-;      given-8.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKv)
-;         acKx)
-;      :named
-;      given-8.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKx)
-;         acKz)
-;      :named
-;      given-8.7)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKz)
-;         acKB)
-;      :named
-;      given-8.8)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKB)
-;         acKD)
-;      :named
-;      given-8.9)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKD)
-;         acKF)
-;      :named
-;      given-8.10)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKF)
-;         acKH)
-;      :named
-;      given-8.11)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKH)
-;         acKJ)
-;      :named
-;      given-8.12)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKJ)
-;         acKL)
-;      :named
-;      given-8.13)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKL)
-;         acKN)
-;      :named
-;      given-8.14)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKN)
-;         acKP)
-;      :named
-;      given-8.15)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKP)
-;         acKR)
-;      :named
-;      given-8.16)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKR)
-;         acKT)
-;      :named
-;      given-8.17)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKT)
-;         acKV)
-;      :named
-;      given-8.18)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKV)
-;         acKX)
-;      :named
-;      given-8.19)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKX)
-;         acKZ)
-;      :named
-;      given-8.20)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKZ)
-;         acL1)
-;      :named
-;      given-8.21)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL1)
-;         acL3)
-;      :named
-;      given-8.22)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL3)
-;         acL5)
-;      :named
-;      given-8.23)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL5)
-;         acL7)
-;      :named
-;      given-8.24)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL7)
-;         acL9)
-;      :named
-;      given-8.25)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL9)
-;         acLb)
-;      :named
-;      given-8.26)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLb)
-;         acLd)
-;      :named
-;      given-8.27)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLd)
-;         acLf)
-;      :named
-;      given-8.28)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLf)
-;         acLh)
-;      :named
-;      given-8.29)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLh)
-;         acLj)
-;      :named
-;      given-8.30)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLj)
-;         acLl)
-;      :named
-;      given-8.31)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLl)
-;         acLn)
-;      :named
-;      given-8.32)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLn)
-;         acLp)
-;      :named
-;      given-8.33)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLp)
-;         acLr)
-;      :named
-;      given-8.34)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLr)
-;         acLt)
-;      :named
-;      given-8.35)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acHw)
-;         acKh)
-;      :named
-;      given-8.36)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKh)
-;         acKj)
-;      :named
-;      given-8.37)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHv
-;           acHv)
-;         acKf)
-;      :named
-;      given-8.38)
-;   (!
-;      (= acLt acLv)
-;      :named
-;      given-8.39)
-;   (!
-;      (= acKf acKj)
-;      :named
-;      given-8.40)
-;   (! false :named wanted-8))
-(get-unsat-core)
-; (wanted-8)
-(pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
 
@@ -19481,6 +12134,7 @@
 ;  acLv  <=  fsk_acLv
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const acHv (Array String Int))
 ; (declare-const acHw (Array String Int))
 ; (declare-const acKB (Array String Int))
@@ -19521,7 +12175,6 @@
 ; (declare-const acLr (Array String Int))
 ; (declare-const acLt (Array String Int))
 ; (declare-const acLv (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    acHv
    (Array String Int))
@@ -20733,350 +13386,48 @@
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
-; (given-9.35
+; (given-9.21
+;    given-9.20
+;    given-9.19
+;    given-9.18
+;    given-9.6
+;    given-9.17
+;    given-9.15
+;    given-9.3
+;    given-9.14
+;    given-9.12
+;    given-9.16
 ;    given-9.5
-;    given-9.34
-;    given-9.33
-;    given-9.37
-;    given-9.27
-;    given-9.32
-;    given-9.29
-;    given-9.36
-;    given-9.28
-;    given-9.23
+;    given-9.1
+;    given-9.9
+;    given-9.11
+;    given-9.10
 ;    given-9.4
+;    given-9.7
+;    given-9.8
+;    given-9.29
+;    given-9.30
+;    given-9.31
+;    given-9.28
+;    given-9.27
 ;    given-9.26
 ;    given-9.25
 ;    given-9.24
-;    given-9.17
-;    given-9.18
-;    given-9.19
-;    given-9.3
-;    given-9.20
-;    given-9.21
+;    given-9.23
 ;    given-9.22
-;    given-9.16
+;    wanted-9
+;    given-9.39
+;    given-9.37
+;    given-9.36
+;    given-9.35
+;    given-9.34
+;    given-9.33
 ;    given-9.2
 ;    given-9.13
-;    given-9.14
-;    given-9.15
-;    given-9.39
-;    wanted-9
-;    given-9.6
-;    given-9.1
-;    given-9.7
-;    given-9.8
-;    given-9.9
-;    given-9.10
-;    given-9.11
-;    given-9.12
-;    given-9.31
-;    given-9.30)
+;    given-9.32)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
-
-; GIVENS (GHC style)
-; [G] cobox_acM1 {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acLV {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLX {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLZ {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLN {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acLP {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLL {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acM4 {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acM5 {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],acM0)
-; (*: [acHE,acLO],acLU)
-; (*: [acHE,acLU],acLW)
-; (*: [acHE,acLW],acLY)
-; (*: [acHE,acHE],acLM)
-; (*: [acHE,acLM],acLO)
-; (*: [acHD,acHD],acLK)
-; (acLY,acM0)
-; (acLK,acLO)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-10")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acHD  <=  a
-;  acHE  <=  b
-;  acLK  <=  fsk_acLK
-;  acLM  <=  fsk_acLM
-;  acLO  <=  fsk_acLO
-;  acLU  <=  fsk_acLU
-;  acLW  <=  fsk_acLW
-;  acLY  <=  fsk_acLY
-;  acM0  <=  fsk_acM0
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acHD (Array String Int))
-; (declare-const acHE (Array String Int))
-; (declare-const acLK (Array String Int))
-; (declare-const acLM (Array String Int))
-; (declare-const acLO (Array String Int))
-; (declare-const acLU (Array String Int))
-; (declare-const acLW (Array String Int))
-; (declare-const acLY (Array String Int))
-; (declare-const acM0 (Array String Int))
-(declare-const
-   acHD
-   (Array String Int))
-(declare-const
-   acHE
-   (Array String Int))
-(declare-const
-   acLK
-   (Array String Int))
-(declare-const
-   acLM
-   (Array String Int))
-(declare-const
-   acLO
-   (Array String Int))
-(declare-const
-   acLU
-   (Array String Int))
-(declare-const
-   acLW
-   (Array String Int))
-(declare-const
-   acLY
-   (Array String Int))
-(declare-const
-   acM0
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acM0)
-      :named
-      given-10.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLO)
-         acLU)
-      :named
-      given-10.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLU)
-         acLW)
-      :named
-      given-10.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLW)
-         acLY)
-      :named
-      given-10.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acHE)
-         acLM)
-      :named
-      given-10.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLM)
-         acLO)
-      :named
-      given-10.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHD
-           acHD)
-         acLK)
-      :named
-      given-10.7))
-(assert
-   (!
-      (= acLY acM0)
-      :named
-      given-10.8))
-(assert
-   (!
-      (= acLK acLO)
-      :named
-      given-10.9))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-10")
-(echo "wanteds-start-cycle-10")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-10))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-10")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acM0)
-;      :named
-;      given-10.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLO)
-;         acLU)
-;      :named
-;      given-10.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLU)
-;         acLW)
-;      :named
-;      given-10.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLW)
-;         acLY)
-;      :named
-;      given-10.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acHE)
-;         acLM)
-;      :named
-;      given-10.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLM)
-;         acLO)
-;      :named
-;      given-10.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHD
-;           acHD)
-;         acLK)
-;      :named
-;      given-10.7)
-;   (!
-;      (= acLY acM0)
-;      :named
-;      given-10.8)
-;   (!
-;      (= acLK acLO)
-;      :named
-;      given-10.9)
-;   (! false :named wanted-10))
-(get-unsat-core)
-; (wanted-10)
-(pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
 
@@ -21131,6 +13482,7 @@
 ;  acM0  <=  fsk_acM0
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const acHD (Array String Int))
 ; (declare-const acHE (Array String Int))
 ; (declare-const acLK (Array String Int))
@@ -21140,7 +13492,6 @@
 ; (declare-const acLW (Array String Int))
 ; (declare-const acLY (Array String Int))
 ; (declare-const acM0 (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    acHD
    (Array String Int))
@@ -21422,135 +13773,19 @@
 ;      :named
 ;      wanted-11))
 (get-unsat-core)
-; (given-11.2
-;    given-11.1
-;    given-11.3
-;    given-11.4
-;    given-11.5
-;    given-11.6
-;    given-11.7
-;    given-11.8
+; (wanted-11
 ;    given-11.9
-;    wanted-11)
+;    given-11.8
+;    given-11.7
+;    given-11.6
+;    given-11.5
+;    given-11.4
+;    given-11.3
+;    given-11.1
+;    given-11.2)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
-
-; GIVENS (GHC style)
-; [G] cobox_acMi {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acMg {0}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acMj {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (One [],acMh)
-; (*: [acHL,acHL],acMf)
-; (acMf,acMh)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-12")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acHL  <=  a
-;  acMf  <=  fsk_acMf
-;  acMh  <=  fsk_acMh
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acHL (Array String Int))
-; (declare-const acMf (Array String Int))
-; (declare-const acMh (Array String Int))
-(declare-const
-   acHL
-   (Array String Int))
-(declare-const
-   acMf
-   (Array String Int))
-(declare-const
-   acMh
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acMh)
-      :named
-      given-12.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHL
-           acHL)
-         acMf)
-      :named
-      given-12.2))
-(assert
-   (!
-      (= acMf acMh)
-      :named
-      given-12.3))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-12")
-(echo "wanteds-start-cycle-12")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-12))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-12")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acMh)
-;      :named
-;      given-12.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHL
-;           acHL)
-;         acMf)
-;      :named
-;      given-12.2)
-;   (!
-;      (= acMf acMh)
-;      :named
-;      given-12.3)
-;   (! false :named wanted-12))
-(get-unsat-core)
-; (wanted-12)
-(pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
 
@@ -21587,10 +13822,10 @@
 ;  acMh  <=  fsk_acMh
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const acHL (Array String Int))
 ; (declare-const acMf (Array String Int))
 ; (declare-const acMh (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    acHL
    (Array String Int))
@@ -21710,153 +13945,10 @@
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
-; (given-13.3 given-13.1 given-13.2 wanted-13)
+; (given-13.1 wanted-13 given-13.2 given-13.3)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-14")
-
-; GIVENS (GHC style)
-; [G] cobox_acMx {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_acMs {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_acMt {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_acMA {1}:: fsk0 ~ v (CTyEqCan)
-
-; WANTEDS (GHC style)
-; []
-
-; GIVENS (Thoralf style)
-; (*: [acHS,acHS],acMw)
-; (*: [acHS,acHT],acMr)
-; (acMr,acHR)
-; (acMw,acHS)
-
-; WANTEDS (Thoralf style)
-; []
-
-(echo "givens-start-cycle-14")
-; GIVENS (conversions)
-; GIVENS (names)
-;  acHR  <=  u
-;  acHS  <=  v
-;  acHT  <=  w
-;  acMr  <=  fsk_acMr
-;  acMw  <=  fsk_acMw
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acHR (Array String Int))
-; (declare-const acHS (Array String Int))
-; (declare-const acHT (Array String Int))
-; (declare-const acMr (Array String Int))
-; (declare-const acMw (Array String Int))
-(declare-const
-   acHR
-   (Array String Int))
-(declare-const
-   acHS
-   (Array String Int))
-(declare-const
-   acHT
-   (Array String Int))
-(declare-const
-   acMr
-   (Array String Int))
-(declare-const
-   acMw
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHS
-           acHS)
-         acMw)
-      :named
-      given-14.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHS
-           acHT)
-         acMr)
-      :named
-      given-14.2))
-(assert
-   (!
-      (= acMr acHR)
-      :named
-      given-14.3))
-(assert
-   (!
-      (= acMw acHS)
-      :named
-      given-14.4))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-14")
-(echo "wanteds-start-cycle-14")
-; WANTEDS (conversions)
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (! false :named wanted-14))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-14")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHS
-;           acHS)
-;         acMw)
-;      :named
-;      given-14.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHS
-;           acHT)
-;         acMr)
-;      :named
-;      given-14.2)
-;   (!
-;      (= acMr acHR)
-;      :named
-;      given-14.3)
-;   (!
-;      (= acMw acHS)
-;      :named
-;      given-14.4)
-;   (! false :named wanted-14))
-(get-unsat-core)
-; (wanted-14)
-(pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-15")
 
@@ -21891,12 +13983,12 @@
 ;  acMw  <=  fsk_acMw
 (push 1)
 ; DECS1 (seen) 
+; DECS1 (unseen) 
 ; (declare-const acHR (Array String Int))
 ; (declare-const acHS (Array String Int))
 ; (declare-const acHT (Array String Int))
 ; (declare-const acMr (Array String Int))
 ; (declare-const acMw (Array String Int))
-; DECS1 (unseen) 
 (declare-const
    acHR
    (Array String Int))
@@ -22020,7 +14112,7 @@
 ;      :named
 ;      wanted-15))
 (get-unsat-core)
-; (given-15.3 given-15.4 given-15.1 wanted-15 given-15.2)
+; (given-15.2 given-15.3 given-15.4 wanted-15 given-15.1)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (exit)

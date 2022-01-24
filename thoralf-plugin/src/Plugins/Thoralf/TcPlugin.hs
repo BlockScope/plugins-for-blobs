@@ -12,7 +12,7 @@ module Plugins.Thoralf.TcPlugin
 import Prelude hiding (showList, cycle)
 import Data.Set (Set)
 import qualified Data.Set as Set
-import Data.Foldable (traverse_)
+import Data.Foldable (traverse_, foldl')
 import Data.Maybe (mapMaybe)
 import Data.List ((\\))
 import Data.List.Split (split, onSublist, dropBlanks)
@@ -244,6 +244,11 @@ thoralfSolver
     tcPluginTrace "thoralf-solve wsConvCts" $ ppr wsConvCts
 
     (decs1Unseen, decs2Unseen, ctSolving) <- case (gsConvCts, wsConvCts) of
+
+        -- With no wanted constraints there's no useful work to do. Checking the
+        -- consistency of the givens without wanteds is not useful.
+        (Just _, Just (ConvCts _ [] _)) -> return (Set.empty, Set.empty, TcPluginOk [] [])
+
         (Just gCCs@(ConvCts ns1 gExprs decs1), Just wCCs@(ConvCts ns2 wExprs decs2)) -> do
             let step = ConvCtsStep gCCs wCCs
             logConvCts step
@@ -393,7 +398,8 @@ thoralfSolver
             sequence_
             $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
 
-        smtWanted ws = foldl SMT.or (justReadSExpr "false") (map (SMT.not . eqSExpr) ws)
+        smtWanted :: [ConvEq] -> SMT.SExpr
+        smtWanted ws = foldl' SMT.or (SMT.Atom "false") (map (SMT.not . eqSExpr) ws)
 
         printAltNames ns =
             sequence_
