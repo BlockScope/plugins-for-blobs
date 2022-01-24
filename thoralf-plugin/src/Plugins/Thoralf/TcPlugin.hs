@@ -12,9 +12,9 @@ module Plugins.Thoralf.TcPlugin
 import Prelude hiding (showList, cycle)
 import Data.Set (Set)
 import qualified Data.Set as Set
-import Data.Foldable (traverse_, foldl')
+import Data.Foldable (traverse_)
 import Data.Maybe (mapMaybe)
-import Data.List ((\\))
+import Data.List ((\\), foldl1')
 import Data.List.Split (split, onSublist, dropBlanks)
 import Control.Monad (when)
 import qualified SimpleSMT as SMT
@@ -399,7 +399,8 @@ thoralfSolver
             $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
 
         smtWanted :: [ConvEq] -> SMT.SExpr
-        smtWanted ws = foldl' SMT.or (SMT.Atom "false") (map (SMT.not . eqSExpr) ws)
+        smtWanted [] = SMT.Atom "false"
+        smtWanted ws = foldl1' SMT.or (map (SMT.not . eqSExpr) ws)
 
         printAltNames ns =
             sequence_

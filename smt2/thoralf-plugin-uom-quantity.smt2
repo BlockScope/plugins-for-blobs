@@ -91,23 +91,21 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base "s" one)
-                 (store base "s" one)))))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "s" one)
+              (store base "s" one))))
       :named
       wanted-2))
 (check-sat)
@@ -118,23 +116,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base "s" one)
-;                 (store base "s" one)))))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "s" one)
+;              (store base "s" one))))
 ;      :named
 ;      wanted-2))
 (get-unsat-core)
@@ -209,23 +205,21 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base "m" one)
-                 (store base "m" one)))))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "m" one)
+              (store base "m" one))))
       :named
       wanted-4))
 (check-sat)
@@ -236,23 +230,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base "m" one)
-;                 (store base "m" one)))))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "m" one)
+;              (store base "m" one))))
 ;      :named
 ;      wanted-4))
 (get-unsat-core)
@@ -411,26 +403,24 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (store base "m" one)
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    (
-                      (_
-                         map
-                         (-
-                            (Int Int)
-                            Int))
-                      (store base "m" one)
-                      (store base "s" one))
-                    (store base "s" one)))))
+         (not
+            (=
+               (store base "m" one)
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 (
+                   (_
+                      map
+                      (-
+                         (Int Int)
+                         Int))
+                   (store base "m" one)
+                   (store base "s" one))
+                 (store base "s" one))))
          (not
             (=
                (store base "m" one)
@@ -460,26 +450,24 @@
 ;   (= enc base)
 ;   (!
 ;      (or
-;         (or
-;            false
-;            (not
-;               (=
-;                  (store base "m" one)
-;                  (
-;                    (_
-;                       map
-;                       (+
-;                          (Int Int)
-;                          Int))
-;                    (
-;                      (_
-;                         map
-;                         (-
-;                            (Int Int)
-;                            Int))
-;                      (store base "m" one)
-;                      (store base "s" one))
-;                    (store base "s" one)))))
+;         (not
+;            (=
+;               (store base "m" one)
+;               (
+;                 (_
+;                    map
+;                    (+
+;                       (Int Int)
+;                       Int))
+;                 (
+;                   (_
+;                      map
+;                      (-
+;                         (Int Int)
+;                         Int))
+;                   (store base "m" one)
+;                   (store base "s" one))
+;                 (store base "s" one))))
 ;         (not
 ;            (=
 ;               (store base "m" one)
@@ -628,19 +616,17 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 aaVY
-                 (store base "s" one))
-               (store base "m" one))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              aaVY
+              (store base "s" one))
+            (store base "m" one)))
       :named
       wanted-8))
 (check-sat)
@@ -680,19 +666,17 @@
 ;      :named
 ;      given-8.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 aaVY
-;                 (store base "s" one))
-;               (store base "m" one))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              aaVY
+;              (store base "s" one))
+;            (store base "m" one)))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
@@ -819,23 +803,21 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base "s" one)
-                 (store base "s" one)))))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "s" one)
+              (store base "s" one))))
       :named
       wanted-2))
 (check-sat)
@@ -846,23 +828,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base "s" one)
-;                 (store base "s" one)))))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "s" one)
+;              (store base "s" one))))
 ;      :named
 ;      wanted-2))
 (get-unsat-core)
@@ -937,23 +917,21 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base "m" one)
-                 (store base "m" one)))))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "m" one)
+              (store base "m" one))))
       :named
       wanted-4))
 (check-sat)
@@ -964,23 +942,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base "m" one)
-;                 (store base "m" one)))))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "m" one)
+;              (store base "m" one))))
 ;      :named
 ;      wanted-4))
 (get-unsat-core)

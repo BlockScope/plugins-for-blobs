@@ -379,18 +379,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map both8514226977520841413)
-                    (
-                      (_ map both8514226977520841413)
-                      a19C
-                      a19D)
-                    a19F)
-                  a19t)))
+         (not
+            (=
+               (
+                 (_ map both8514226977520841413)
+                 (
+                   (_ map both8514226977520841413)
+                   a19C
+                   a19D)
+                 a19F)
+               a19t))
          (not
             (=
                (
@@ -524,7 +522,7 @@
 ;                        a19D
 ;                        a19F))
 ;                    a19v))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a19D
 ;      ()
@@ -1152,18 +1150,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map both8514226977520841413)
-                    (
-                      (_ map both8514226977520841413)
-                      a19C
-                      a19D)
-                    a19F)
-                  a19t)))
+         (not
+            (=
+               (
+                 (_ map both8514226977520841413)
+                 (
+                   (_ map both8514226977520841413)
+                   a19C
+                   a19D)
+                 a19F)
+               a19t))
          (not
             (=
                (
@@ -1297,7 +1293,7 @@
 ;                        a19D
 ;                        a19F))
 ;                    a19v))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a19D
 ;      ()
@@ -1925,18 +1921,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map both8514226977520841413)
-                    (
-                      (_ map both8514226977520841413)
-                      a19C
-                      a19D)
-                    a19F)
-                  a19t)))
+         (not
+            (=
+               (
+                 (_ map both8514226977520841413)
+                 (
+                   (_ map both8514226977520841413)
+                   a19C
+                   a19D)
+                 a19F)
+               a19t))
          (not
             (=
                (
@@ -1955,7 +1949,7 @@
 (get-model)
 ; (
 ;   (declare-fun
-;      Sorta19o!val!0
+;      Sorta19o!val!7
 ;      ()
 ;      Sorta19o)
 ;   (declare-fun
@@ -1979,6 +1973,10 @@
 ;      ()
 ;      Sorta19o)
 ;   (declare-fun
+;      Sorta19o!val!0
+;      ()
+;      Sorta19o)
+;   (declare-fun
 ;      Sorta19o!val!2
 ;      ()
 ;      Sorta19o)
@@ -1986,12 +1984,13 @@
 ;      (
 ;        (x Sorta19o))
 ;      (or
-;         (= x Sorta19o!val!0)
+;         (= x Sorta19o!val!7)
 ;         (= x Sorta19o!val!3)
 ;         (= x Sorta19o!val!4)
 ;         (= x Sorta19o!val!5)
 ;         (= x Sorta19o!val!6)
 ;         (= x Sorta19o!val!1)
+;         (= x Sorta19o!val!0)
 ;         (= x Sorta19o!val!2)))
 ;   (declare-fun
 ;      Sorta19n!val!0
@@ -2017,13 +2016,16 @@
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      a19C
 ;      ()
@@ -2039,20 +2041,23 @@
 ;                 (Maybe Sorta19o)))
 ;           (just Sorta19o!val!0))
 ;         Sorta19n!val!0
-;         (just Sorta19o!val!1)))
+;         (just Sorta19o!val!3)))
 ;   (define-fun
 ;      a1a1
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
 ;   (define-fun
 ;      given-3.8
 ;      ()
@@ -2071,9 +2076,9 @@
 ;              (Array
 ;                 Sorta19n
 ;                 (Maybe Sorta19o)))
-;           (just Sorta19o!val!6))
+;           (just Sorta19o!val!1))
 ;         Sorta19n!val!0
-;         (just Sorta19o!val!2)))
+;         (just Sorta19o!val!6)))
 ;   (define-fun
 ;      a19q
 ;      ()
@@ -2096,13 +2101,16 @@
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      given-3.1
 ;      ()
@@ -2119,13 +2127,16 @@
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!5)))
 ;   (define-fun
 ;      a19p
 ;      ()
@@ -2139,22 +2150,25 @@
 ;              (Array
 ;                 Sorta19n
 ;                 (Maybe Sorta19o)))
-;           (just Sorta19o!val!5))
+;           (just Sorta19o!val!7))
 ;         Sorta19n!val!0
-;         nothing))
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      a1a6
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      given-3.4
 ;      ()
@@ -2198,35 +2212,9 @@
 ;                        a19D
 ;                        a19F))
 ;                    a19v))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a19W
-;      ()
-;      (Array
-;         Sorta19n
-;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
-;   (define-fun
-;      a19t
-;      ()
-;      (Array
-;         Sorta19n
-;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
-;   (define-fun
-;      a19F
 ;      ()
 ;      (Array
 ;         Sorta19n
@@ -2240,33 +2228,68 @@
 ;                 (Maybe Sorta19o)))
 ;           nothing)
 ;         Sorta19n!val!0
-;         (just Sorta19o!val!3)))
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      a19t
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      a19F
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
 ;   (define-fun
 ;      a19u
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
 ;   (define-fun
 ;      a19v
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      given-3.3
 ;      ()
@@ -2304,7 +2327,7 @@
 ;            (and
 ;               (=
 ;                  x!0
-;                  (just Sorta19o!val!5))
+;                  (just Sorta19o!val!7))
 ;               (= x!1 nothing))
 ;            nothing
 ;            (ite
@@ -2314,13 +2337,13 @@
 ;                     (just Sorta19o!val!0))
 ;                  (=
 ;                     x!1
-;                     (just Sorta19o!val!6)))
+;                     (just Sorta19o!val!1)))
 ;               (just Sorta19o!val!0)
 ;               (ite
 ;                  (and
 ;                     (=
 ;                        x!0
-;                        (just Sorta19o!val!6))
+;                        (just Sorta19o!val!1))
 ;                     (= x!1 nothing))
 ;                  nothing
 ;                  (ite
@@ -2337,50 +2360,59 @@
 ;                              (just Sorta19o!val!2))
 ;                           (=
 ;                              x!1
-;                              (just Sorta19o!val!3)))
+;                              (just Sorta19o!val!5)))
 ;                        (just Sorta19o!val!2)
 ;                        (ite
 ;                           (and
 ;                              (=
 ;                                 x!0
-;                                 (just Sorta19o!val!1))
+;                                 (just Sorta19o!val!3))
 ;                              (=
 ;                                 x!1
-;                                 (just Sorta19o!val!2)))
-;                           (just Sorta19o!val!1)
+;                                 (just Sorta19o!val!6)))
+;                           (just Sorta19o!val!3)
 ;                           (ite
 ;                              (and
 ;                                 (=
 ;                                    x!0
-;                                    (just Sorta19o!val!4))
+;                                    (just Sorta19o!val!3))
 ;                                 (= x!1 nothing))
 ;                              nothing
 ;                              (ite
 ;                                 (and
-;                                    (= x!0 nothing)
+;                                    (=
+;                                       x!0
+;                                       (just Sorta19o!val!4))
 ;                                    (=
 ;                                       x!1
-;                                       (just Sorta19o!val!4)))
-;                                 nothing
+;                                       (just Sorta19o!val!5)))
+;                                 (just Sorta19o!val!4)
 ;                                 (ite
 ;                                    (and
 ;                                       (=
 ;                                          x!0
-;                                          (just Sorta19o!val!1))
+;                                          (just Sorta19o!val!2))
 ;                                       (=
 ;                                          x!1
-;                                          (just Sorta19o!val!3)))
-;                                    (just Sorta19o!val!1)
+;                                          (just Sorta19o!val!4)))
+;                                    (just Sorta19o!val!2)
 ;                                    (ite
 ;                                       (and
-;                                          (
-;                                            (_ is just)
-;                                            x!0)
-;                                          (
-;                                            (_ is just)
-;                                            x!1))
-;                                       x!0
-;                                       nothing)))))))))))))
+;                                          (=
+;                                             x!0
+;                                             (just Sorta19o!val!6))
+;                                          (= x!1 nothing))
+;                                       nothing
+;                                       (ite
+;                                          (and
+;                                             (
+;                                               (_ is just)
+;                                               x!0)
+;                                             (
+;                                               (_ is just)
+;                                               x!1))
+;                                          x!0
+;                                          nothing))))))))))))))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-3")
@@ -2708,18 +2740,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map both8514226977520841413)
-                    (
-                      (_ map both8514226977520841413)
-                      a19C
-                      a19D)
-                    a19F)
-                  a19t)))
+         (not
+            (=
+               (
+                 (_ map both8514226977520841413)
+                 (
+                   (_ map both8514226977520841413)
+                   a19C
+                   a19D)
+                 a19F)
+               a19t))
          (not
             (=
                (
@@ -2738,7 +2768,7 @@
 (get-model)
 ; (
 ;   (declare-fun
-;      Sorta19o!val!0
+;      Sorta19o!val!7
 ;      ()
 ;      Sorta19o)
 ;   (declare-fun
@@ -2762,6 +2792,10 @@
 ;      ()
 ;      Sorta19o)
 ;   (declare-fun
+;      Sorta19o!val!0
+;      ()
+;      Sorta19o)
+;   (declare-fun
 ;      Sorta19o!val!2
 ;      ()
 ;      Sorta19o)
@@ -2769,12 +2803,13 @@
 ;      (
 ;        (x Sorta19o))
 ;      (or
-;         (= x Sorta19o!val!0)
+;         (= x Sorta19o!val!7)
 ;         (= x Sorta19o!val!3)
 ;         (= x Sorta19o!val!4)
 ;         (= x Sorta19o!val!5)
 ;         (= x Sorta19o!val!6)
 ;         (= x Sorta19o!val!1)
+;         (= x Sorta19o!val!0)
 ;         (= x Sorta19o!val!2)))
 ;   (declare-fun
 ;      Sorta19n!val!0
@@ -2800,13 +2835,16 @@
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      a19C
 ;      ()
@@ -2822,20 +2860,23 @@
 ;                 (Maybe Sorta19o)))
 ;           (just Sorta19o!val!0))
 ;         Sorta19n!val!0
-;         (just Sorta19o!val!1)))
+;         (just Sorta19o!val!3)))
 ;   (define-fun
 ;      a1a1
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
 ;   (define-fun
 ;      given-3.8
 ;      ()
@@ -2854,9 +2895,9 @@
 ;              (Array
 ;                 Sorta19n
 ;                 (Maybe Sorta19o)))
-;           (just Sorta19o!val!6))
+;           (just Sorta19o!val!1))
 ;         Sorta19n!val!0
-;         (just Sorta19o!val!2)))
+;         (just Sorta19o!val!6)))
 ;   (define-fun
 ;      a19q
 ;      ()
@@ -2879,13 +2920,16 @@
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      given-3.1
 ;      ()
@@ -2902,13 +2946,16 @@
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!5)))
 ;   (define-fun
 ;      a19p
 ;      ()
@@ -2922,22 +2969,25 @@
 ;              (Array
 ;                 Sorta19n
 ;                 (Maybe Sorta19o)))
-;           (just Sorta19o!val!5))
+;           (just Sorta19o!val!7))
 ;         Sorta19n!val!0
-;         nothing))
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      a1a6
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      given-3.4
 ;      ()
@@ -2981,35 +3031,9 @@
 ;                        a19D
 ;                        a19F))
 ;                    a19v))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a19W
-;      ()
-;      (Array
-;         Sorta19n
-;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
-;   (define-fun
-;      a19t
-;      ()
-;      (Array
-;         Sorta19n
-;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
-;   (define-fun
-;      a19F
 ;      ()
 ;      (Array
 ;         Sorta19n
@@ -3023,33 +3047,68 @@
 ;                 (Maybe Sorta19o)))
 ;           nothing)
 ;         Sorta19n!val!0
-;         (just Sorta19o!val!3)))
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      a19t
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      a19F
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
 ;   (define-fun
 ;      a19u
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
 ;   (define-fun
 ;      a19v
 ;      ()
 ;      (Array
 ;         Sorta19n
 ;         (Maybe Sorta19o))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta19n
-;              (Maybe Sorta19o)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
 ;   (define-fun
 ;      given-3.3
 ;      ()
@@ -3087,7 +3146,7 @@
 ;            (and
 ;               (=
 ;                  x!0
-;                  (just Sorta19o!val!5))
+;                  (just Sorta19o!val!7))
 ;               (= x!1 nothing))
 ;            nothing
 ;            (ite
@@ -3097,13 +3156,13 @@
 ;                     (just Sorta19o!val!0))
 ;                  (=
 ;                     x!1
-;                     (just Sorta19o!val!6)))
+;                     (just Sorta19o!val!1)))
 ;               (just Sorta19o!val!0)
 ;               (ite
 ;                  (and
 ;                     (=
 ;                        x!0
-;                        (just Sorta19o!val!6))
+;                        (just Sorta19o!val!1))
 ;                     (= x!1 nothing))
 ;                  nothing
 ;                  (ite
@@ -3120,50 +3179,59 @@
 ;                              (just Sorta19o!val!2))
 ;                           (=
 ;                              x!1
-;                              (just Sorta19o!val!3)))
+;                              (just Sorta19o!val!5)))
 ;                        (just Sorta19o!val!2)
 ;                        (ite
 ;                           (and
 ;                              (=
 ;                                 x!0
-;                                 (just Sorta19o!val!1))
+;                                 (just Sorta19o!val!3))
 ;                              (=
 ;                                 x!1
-;                                 (just Sorta19o!val!2)))
-;                           (just Sorta19o!val!1)
+;                                 (just Sorta19o!val!6)))
+;                           (just Sorta19o!val!3)
 ;                           (ite
 ;                              (and
 ;                                 (=
 ;                                    x!0
-;                                    (just Sorta19o!val!4))
+;                                    (just Sorta19o!val!3))
 ;                                 (= x!1 nothing))
 ;                              nothing
 ;                              (ite
 ;                                 (and
-;                                    (= x!0 nothing)
+;                                    (=
+;                                       x!0
+;                                       (just Sorta19o!val!4))
 ;                                    (=
 ;                                       x!1
-;                                       (just Sorta19o!val!4)))
-;                                 nothing
+;                                       (just Sorta19o!val!5)))
+;                                 (just Sorta19o!val!4)
 ;                                 (ite
 ;                                    (and
 ;                                       (=
 ;                                          x!0
-;                                          (just Sorta19o!val!1))
+;                                          (just Sorta19o!val!2))
 ;                                       (=
 ;                                          x!1
-;                                          (just Sorta19o!val!3)))
-;                                    (just Sorta19o!val!1)
+;                                          (just Sorta19o!val!4)))
+;                                    (just Sorta19o!val!2)
 ;                                    (ite
 ;                                       (and
-;                                          (
-;                                            (_ is just)
-;                                            x!0)
-;                                          (
-;                                            (_ is just)
-;                                            x!1))
-;                                       x!0
-;                                       nothing)))))))))))))
+;                                          (=
+;                                             x!0
+;                                             (just Sorta19o!val!6))
+;                                          (= x!1 nothing))
+;                                       nothing
+;                                       (ite
+;                                          (and
+;                                             (
+;                                               (_ is just)
+;                                               x!0)
+;                                             (
+;                                               (_ is just)
+;                                               x!1))
+;                                          x!0
+;                                          nothing))))))))))))))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -3476,18 +3544,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map either8570520873362452143)
-                    (
-                      (_ map either8570520873362452143)
-                      a1bz
-                      a1bA)
-                    a1bC)
-                  a1bq)))
+         (not
+            (=
+               (
+                 (_ map either8570520873362452143)
+                 (
+                   (_ map either8570520873362452143)
+                   a1bz
+                   a1bA)
+                 a1bC)
+               a1bq))
          (not
             (=
                (
@@ -3532,10 +3598,6 @@
 ;      ()
 ;      Sorta1bl)
 ;   (declare-fun
-;      Sorta1bl!val!6
-;      ()
-;      Sorta1bl)
-;   (declare-fun
 ;      Sorta1bl!val!3
 ;      ()
 ;      Sorta1bl)
@@ -3554,7 +3616,6 @@
 ;         (= x Sorta1bl!val!2)
 ;         (= x Sorta1bl!val!5)
 ;         (= x Sorta1bl!val!1)
-;         (= x Sorta1bl!val!6)
 ;         (= x Sorta1bl!val!3)
 ;         (= x Sorta1bl!val!4)
 ;         (= x Sorta1bl!val!0)))
@@ -3572,11 +3633,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         nothing))
 ;   (define-fun
 ;      wanted-5
 ;      ()
@@ -3605,7 +3666,7 @@
 ;                        a1bA
 ;                        a1bC))
 ;                    a1bs))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a1bp
 ;      ()
@@ -3613,18 +3674,15 @@
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
 ;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    Sorta1bk
-;                    (Maybe Sorta1bl)))
-;              nothing)
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!2)))
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bm
 ;      ()
@@ -3662,27 +3720,24 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bA
 ;      ()
 ;      (Array
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 Sorta1bk
-;                 (Maybe Sorta1bl)))
-;           nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!4)))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
 ;   (define-fun
 ;      given-5.4
 ;      ()
@@ -3747,11 +3802,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         nothing))
 ;   (define-fun
 ;      a1bY
 ;      ()
@@ -3766,11 +3821,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1br
 ;      ()
@@ -3785,11 +3840,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bo
 ;      ()
@@ -3804,11 +3859,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         nothing))
 ;   (define-fun
 ;      a1c3
 ;      ()
@@ -3823,11 +3878,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bs
 ;      ()
@@ -3842,11 +3897,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bz
 ;      ()
@@ -3875,10 +3930,10 @@
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
 ;              (just Sorta1bl!val!0))
-;            Sorta1bk!val!1
+;            Sorta1bk!val!0
 ;            (just Sorta1bl!val!1))
-;         Sorta1bk!val!0
-;         nothing))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bT
 ;      ()
@@ -3893,23 +3948,23 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
-;      k!71
+;      k!73
 ;      (
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
-;         (just Sorta1bl!val!5)
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!3)
 ;         (ite
-;            (= x!0 Sorta1bk!val!0)
-;            (just Sorta1bl!val!3)
-;            (just Sorta1bl!val!6))))
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!4)
+;            (just Sorta1bl!val!5))))
 ;   (define-fun
 ;      either8570520873362452143
 ;      (
@@ -3922,35 +3977,35 @@
 ;         (and
 ;            (=
 ;               x!0
-;               (just Sorta1bl!val!6))
+;               (just Sorta1bl!val!5))
 ;            (= x!1 nothing))
-;         (just Sorta1bl!val!6)
+;         (just Sorta1bl!val!5)
 ;         (ite
 ;            (and
 ;               (= x!0 nothing)
 ;               (=
 ;                  x!1
-;                  (just Sorta1bl!val!6)))
-;            (just Sorta1bl!val!6)
+;                  (just Sorta1bl!val!5)))
+;            (just Sorta1bl!val!5)
 ;            (ite
 ;               (and
 ;                  (= x!0 nothing)
-;                  (= x!1 nothing))
-;               nothing
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
 ;               (ite
 ;                  (and
 ;                     (= x!0 nothing)
-;                     (=
-;                        x!1
-;                        (just Sorta1bl!val!0)))
-;                  (just Sorta1bl!val!0)
+;                     (= x!1 nothing))
+;                  nothing
 ;                  (ite
 ;                     (and
+;                        (= x!0 nothing)
 ;                        (=
-;                           x!0
-;                           (just Sorta1bl!val!4))
-;                        (= x!1 nothing))
-;                     (just Sorta1bl!val!4)
+;                           x!1
+;                           (just Sorta1bl!val!1)))
+;                     (just Sorta1bl!val!1)
 ;                     (ite
 ;                        (and
 ;                           (= x!0 nothing)
@@ -3963,48 +4018,39 @@
 ;                              (= x!0 nothing)
 ;                              (=
 ;                                 x!1
-;                                 (just Sorta1bl!val!3)))
-;                           (just Sorta1bl!val!3)
+;                                 (just Sorta1bl!val!2)))
+;                           (just Sorta1bl!val!2)
 ;                           (ite
 ;                              (and
-;                                 (= x!0 nothing)
 ;                                 (=
-;                                    x!1
-;                                    (just Sorta1bl!val!5)))
-;                              (just Sorta1bl!val!5)
+;                                    x!0
+;                                    (just Sorta1bl!val!3))
+;                                 (= x!1 nothing))
+;                              (just Sorta1bl!val!3)
 ;                              (ite
 ;                                 (and
 ;                                    (= x!0 nothing)
 ;                                    (=
 ;                                       x!1
-;                                       (just Sorta1bl!val!1)))
-;                                 (just Sorta1bl!val!1)
+;                                       (just Sorta1bl!val!3)))
+;                                 (just Sorta1bl!val!3)
 ;                                 (ite
-;                                    (and
-;                                       (=
-;                                          x!0
-;                                          (just Sorta1bl!val!3))
-;                                       (=
-;                                          x!1
-;                                          (just Sorta1bl!val!2)))
-;                                    (just Sorta1bl!val!3)
-;                                    (ite
-;                                       (
-;                                         (_ is just)
-;                                         x!0)
-;                                       x!0
-;                                       x!1))))))))))))
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    x!0
+;                                    x!1)))))))))))
 ;   (define-fun
 ;      k!79
 ;      (
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
+;         (= x!0 Sorta1bk!val!0)
 ;         (just Sorta1bl!val!1)
 ;         (ite
-;            (= x!0 Sorta1bk!val!0)
-;            (just Sorta1bl!val!4)
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!2)
 ;            (just Sorta1bl!val!0)))))
 (pop 1)
 (echo "solver-finish-cycle-5")
@@ -4314,18 +4360,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map either8570520873362452143)
-                    (
-                      (_ map either8570520873362452143)
-                      a1bz
-                      a1bA)
-                    a1bC)
-                  a1bq)))
+         (not
+            (=
+               (
+                 (_ map either8570520873362452143)
+                 (
+                   (_ map either8570520873362452143)
+                   a1bz
+                   a1bA)
+                 a1bC)
+               a1bq))
          (not
             (=
                (
@@ -4370,10 +4414,6 @@
 ;      ()
 ;      Sorta1bl)
 ;   (declare-fun
-;      Sorta1bl!val!6
-;      ()
-;      Sorta1bl)
-;   (declare-fun
 ;      Sorta1bl!val!3
 ;      ()
 ;      Sorta1bl)
@@ -4392,7 +4432,6 @@
 ;         (= x Sorta1bl!val!2)
 ;         (= x Sorta1bl!val!5)
 ;         (= x Sorta1bl!val!1)
-;         (= x Sorta1bl!val!6)
 ;         (= x Sorta1bl!val!3)
 ;         (= x Sorta1bl!val!4)
 ;         (= x Sorta1bl!val!0)))
@@ -4410,11 +4449,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         nothing))
 ;   (define-fun
 ;      wanted-5
 ;      ()
@@ -4443,7 +4482,7 @@
 ;                        a1bA
 ;                        a1bC))
 ;                    a1bs))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a1bp
 ;      ()
@@ -4451,18 +4490,15 @@
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
 ;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    Sorta1bk
-;                    (Maybe Sorta1bl)))
-;              nothing)
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!2)))
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bm
 ;      ()
@@ -4500,27 +4536,24 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bA
 ;      ()
 ;      (Array
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 Sorta1bk
-;                 (Maybe Sorta1bl)))
-;           nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!4)))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
 ;   (define-fun
 ;      given-5.4
 ;      ()
@@ -4585,11 +4618,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         nothing))
 ;   (define-fun
 ;      a1bY
 ;      ()
@@ -4604,11 +4637,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1br
 ;      ()
@@ -4623,11 +4656,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bo
 ;      ()
@@ -4642,11 +4675,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         nothing))
 ;   (define-fun
 ;      a1c3
 ;      ()
@@ -4661,11 +4694,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bs
 ;      ()
@@ -4680,11 +4713,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      a1bz
 ;      ()
@@ -4713,10 +4746,10 @@
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
 ;              (just Sorta1bl!val!0))
-;            Sorta1bk!val!1
+;            Sorta1bk!val!0
 ;            (just Sorta1bl!val!1))
-;         Sorta1bk!val!0
-;         nothing))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bT
 ;      ()
@@ -4731,23 +4764,23 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!6))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!5))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!3)))
+;              (just Sorta1bl!val!5))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!3))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
-;      k!71
+;      k!73
 ;      (
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
-;         (just Sorta1bl!val!5)
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!3)
 ;         (ite
-;            (= x!0 Sorta1bk!val!0)
-;            (just Sorta1bl!val!3)
-;            (just Sorta1bl!val!6))))
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!4)
+;            (just Sorta1bl!val!5))))
 ;   (define-fun
 ;      either8570520873362452143
 ;      (
@@ -4760,35 +4793,35 @@
 ;         (and
 ;            (=
 ;               x!0
-;               (just Sorta1bl!val!6))
+;               (just Sorta1bl!val!5))
 ;            (= x!1 nothing))
-;         (just Sorta1bl!val!6)
+;         (just Sorta1bl!val!5)
 ;         (ite
 ;            (and
 ;               (= x!0 nothing)
 ;               (=
 ;                  x!1
-;                  (just Sorta1bl!val!6)))
-;            (just Sorta1bl!val!6)
+;                  (just Sorta1bl!val!5)))
+;            (just Sorta1bl!val!5)
 ;            (ite
 ;               (and
 ;                  (= x!0 nothing)
-;                  (= x!1 nothing))
-;               nothing
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
 ;               (ite
 ;                  (and
 ;                     (= x!0 nothing)
-;                     (=
-;                        x!1
-;                        (just Sorta1bl!val!0)))
-;                  (just Sorta1bl!val!0)
+;                     (= x!1 nothing))
+;                  nothing
 ;                  (ite
 ;                     (and
+;                        (= x!0 nothing)
 ;                        (=
-;                           x!0
-;                           (just Sorta1bl!val!4))
-;                        (= x!1 nothing))
-;                     (just Sorta1bl!val!4)
+;                           x!1
+;                           (just Sorta1bl!val!1)))
+;                     (just Sorta1bl!val!1)
 ;                     (ite
 ;                        (and
 ;                           (= x!0 nothing)
@@ -4801,48 +4834,39 @@
 ;                              (= x!0 nothing)
 ;                              (=
 ;                                 x!1
-;                                 (just Sorta1bl!val!3)))
-;                           (just Sorta1bl!val!3)
+;                                 (just Sorta1bl!val!2)))
+;                           (just Sorta1bl!val!2)
 ;                           (ite
 ;                              (and
-;                                 (= x!0 nothing)
 ;                                 (=
-;                                    x!1
-;                                    (just Sorta1bl!val!5)))
-;                              (just Sorta1bl!val!5)
+;                                    x!0
+;                                    (just Sorta1bl!val!3))
+;                                 (= x!1 nothing))
+;                              (just Sorta1bl!val!3)
 ;                              (ite
 ;                                 (and
 ;                                    (= x!0 nothing)
 ;                                    (=
 ;                                       x!1
-;                                       (just Sorta1bl!val!1)))
-;                                 (just Sorta1bl!val!1)
+;                                       (just Sorta1bl!val!3)))
+;                                 (just Sorta1bl!val!3)
 ;                                 (ite
-;                                    (and
-;                                       (=
-;                                          x!0
-;                                          (just Sorta1bl!val!3))
-;                                       (=
-;                                          x!1
-;                                          (just Sorta1bl!val!2)))
-;                                    (just Sorta1bl!val!3)
-;                                    (ite
-;                                       (
-;                                         (_ is just)
-;                                         x!0)
-;                                       x!0
-;                                       x!1))))))))))))
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    x!0
+;                                    x!1)))))))))))
 ;   (define-fun
 ;      k!79
 ;      (
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
+;         (= x!0 Sorta1bk!val!0)
 ;         (just Sorta1bl!val!1)
 ;         (ite
-;            (= x!0 Sorta1bk!val!0)
-;            (just Sorta1bl!val!4)
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!2)
 ;            (just Sorta1bl!val!0)))))
 (pop 1)
 (echo "solver-finish-cycle-5")
@@ -5152,18 +5176,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map either8570520873362452143)
-                    (
-                      (_ map either8570520873362452143)
-                      a1bz
-                      a1bA)
-                    a1bC)
-                  a1bq)))
+         (not
+            (=
+               (
+                 (_ map either8570520873362452143)
+                 (
+                   (_ map either8570520873362452143)
+                   a1bz
+                   a1bA)
+                 a1bC)
+               a1bq))
          (not
             (=
                (
@@ -5243,11 +5265,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      given-6.2
 ;      ()
@@ -5272,10 +5294,10 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
 ;         nothing))
 ;   (define-fun
 ;      wanted-6
@@ -5305,7 +5327,7 @@
 ;                        a1bA
 ;                        a1bC))
 ;                    a1bs))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a1bp
 ;      ()
@@ -5320,8 +5342,8 @@
 ;                 Sorta1bk
 ;                 (Maybe Sorta1bl)))
 ;           nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bm
 ;      ()
@@ -5359,24 +5381,27 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bA
 ;      ()
 ;      (Array
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta1bk
-;              (Maybe Sorta1bl)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!1)))
 ;   (define-fun
 ;      a1bn
 ;      ()
@@ -5391,10 +5416,10 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
 ;         nothing))
 ;   (define-fun
 ;      a1c3
@@ -5410,11 +5435,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1br
 ;      ()
@@ -5429,11 +5454,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      given-6.1
 ;      ()
@@ -5471,11 +5496,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bs
 ;      ()
@@ -5490,11 +5515,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bo
 ;      ()
@@ -5509,10 +5534,10 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
 ;         nothing))
 ;   (define-fun
 ;      given-6.6
@@ -5526,15 +5551,18 @@
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
 ;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 Sorta1bk
-;                 (Maybe Sorta1bl)))
-;           (just Sorta1bl!val!0))
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!0))
+;            Sorta1bk!val!0
+;            nothing)
 ;         Sorta1bk!val!1
-;         (just Sorta1bl!val!2)))
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      given-6.4
 ;      ()
@@ -5561,21 +5589,24 @@
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
-;         (just Sorta1bl!val!2)
-;         (just Sorta1bl!val!0)))
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!1)
+;         (ite
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!4)
+;            (just Sorta1bl!val!0))))
 ;   (define-fun
-;      k!98
+;      k!100
 ;      (
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
-;         (just Sorta1bl!val!3)
+;         (= x!0 Sorta1bk!val!0)
+;         nothing
 ;         (ite
-;            (= x!0 Sorta1bk!val!0)
-;            (just Sorta1bl!val!1)
-;            (just Sorta1bl!val!4))))
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!2)
+;            (just Sorta1bl!val!3))))
 ;   (define-fun
 ;      either8570520873362452143
 ;      (
@@ -5588,28 +5619,28 @@
 ;         (and
 ;            (=
 ;               x!0
-;               (just Sorta1bl!val!4))
+;               (just Sorta1bl!val!3))
 ;            (= x!1 nothing))
-;         (just Sorta1bl!val!4)
+;         (just Sorta1bl!val!3)
 ;         (ite
 ;            (and
 ;               (= x!0 nothing)
 ;               (=
 ;                  x!1
-;                  (just Sorta1bl!val!4)))
-;            (just Sorta1bl!val!4)
+;                  (just Sorta1bl!val!3)))
+;            (just Sorta1bl!val!3)
 ;            (ite
 ;               (and
 ;                  (= x!0 nothing)
-;                  (= x!1 nothing))
-;               nothing
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
 ;               (ite
 ;                  (and
 ;                     (= x!0 nothing)
-;                     (=
-;                        x!1
-;                        (just Sorta1bl!val!0)))
-;                  (just Sorta1bl!val!0)
+;                     (= x!1 nothing))
+;                  nothing
 ;                  (ite
 ;                     (and
 ;                        (= x!0 nothing)
@@ -5619,25 +5650,25 @@
 ;                     (just Sorta1bl!val!1)
 ;                     (ite
 ;                        (and
+;                           (= x!0 nothing)
 ;                           (=
-;                              x!0
-;                              (just Sorta1bl!val!3))
-;                           (= x!1 nothing))
-;                        (just Sorta1bl!val!3)
+;                              x!1
+;                              (just Sorta1bl!val!4)))
+;                        (just Sorta1bl!val!4)
 ;                        (ite
 ;                           (and
 ;                              (= x!0 nothing)
 ;                              (=
 ;                                 x!1
-;                                 (just Sorta1bl!val!3)))
-;                           (just Sorta1bl!val!3)
+;                                 (just Sorta1bl!val!2)))
+;                           (just Sorta1bl!val!2)
 ;                           (ite
 ;                              (and
-;                                 (= x!0 nothing)
 ;                                 (=
-;                                    x!1
-;                                    (just Sorta1bl!val!2)))
-;                              (just Sorta1bl!val!2)
+;                                    x!0
+;                                    (just Sorta1bl!val!1))
+;                                 (= x!1 nothing))
+;                              (just Sorta1bl!val!1)
 ;                              (ite
 ;                                 (
 ;                                   (_ is just)
@@ -5952,18 +5983,16 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_ map either8570520873362452143)
-                    (
-                      (_ map either8570520873362452143)
-                      a1bz
-                      a1bA)
-                    a1bC)
-                  a1bq)))
+         (not
+            (=
+               (
+                 (_ map either8570520873362452143)
+                 (
+                   (_ map either8570520873362452143)
+                   a1bz
+                   a1bA)
+                 a1bC)
+               a1bq))
          (not
             (=
                (
@@ -6043,11 +6072,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      given-6.2
 ;      ()
@@ -6072,10 +6101,10 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
 ;         nothing))
 ;   (define-fun
 ;      wanted-6
@@ -6105,7 +6134,7 @@
 ;                        a1bA
 ;                        a1bC))
 ;                    a1bs))))
-;         (or false a!1 a!2)))
+;         (or a!1 a!2)))
 ;   (define-fun
 ;      a1bp
 ;      ()
@@ -6120,8 +6149,8 @@
 ;                 Sorta1bk
 ;                 (Maybe Sorta1bl)))
 ;           nothing)
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bm
 ;      ()
@@ -6159,24 +6188,27 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bA
 ;      ()
 ;      (Array
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
-;      (
-;        (as
-;           const
-;           (Array
-;              Sorta1bk
-;              (Maybe Sorta1bl)))
-;        nothing))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!1)))
 ;   (define-fun
 ;      a1bn
 ;      ()
@@ -6191,10 +6223,10 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
 ;         nothing))
 ;   (define-fun
 ;      a1c3
@@ -6210,11 +6242,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1br
 ;      ()
@@ -6229,11 +6261,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      given-6.1
 ;      ()
@@ -6271,11 +6303,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bs
 ;      ()
@@ -6290,11 +6322,11 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
-;         (just Sorta1bl!val!1)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!2)))
 ;   (define-fun
 ;      a1bo
 ;      ()
@@ -6309,10 +6341,10 @@
 ;                 (Array
 ;                    Sorta1bk
 ;                    (Maybe Sorta1bl)))
-;              (just Sorta1bl!val!4))
-;            Sorta1bk!val!1
-;            (just Sorta1bl!val!3))
-;         Sorta1bk!val!0
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
 ;         nothing))
 ;   (define-fun
 ;      given-6.6
@@ -6326,15 +6358,18 @@
 ;         Sorta1bk
 ;         (Maybe Sorta1bl))
 ;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 Sorta1bk
-;                 (Maybe Sorta1bl)))
-;           (just Sorta1bl!val!0))
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!0))
+;            Sorta1bk!val!0
+;            nothing)
 ;         Sorta1bk!val!1
-;         (just Sorta1bl!val!2)))
+;         (just Sorta1bl!val!4)))
 ;   (define-fun
 ;      given-6.4
 ;      ()
@@ -6361,21 +6396,24 @@
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
-;         (just Sorta1bl!val!2)
-;         (just Sorta1bl!val!0)))
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!1)
+;         (ite
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!4)
+;            (just Sorta1bl!val!0))))
 ;   (define-fun
-;      k!98
+;      k!100
 ;      (
 ;        (x!0 Sorta1bk))
 ;      (Maybe Sorta1bl)
 ;      (ite
-;         (= x!0 Sorta1bk!val!1)
-;         (just Sorta1bl!val!3)
+;         (= x!0 Sorta1bk!val!0)
+;         nothing
 ;         (ite
-;            (= x!0 Sorta1bk!val!0)
-;            (just Sorta1bl!val!1)
-;            (just Sorta1bl!val!4))))
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!2)
+;            (just Sorta1bl!val!3))))
 ;   (define-fun
 ;      either8570520873362452143
 ;      (
@@ -6388,28 +6426,28 @@
 ;         (and
 ;            (=
 ;               x!0
-;               (just Sorta1bl!val!4))
+;               (just Sorta1bl!val!3))
 ;            (= x!1 nothing))
-;         (just Sorta1bl!val!4)
+;         (just Sorta1bl!val!3)
 ;         (ite
 ;            (and
 ;               (= x!0 nothing)
 ;               (=
 ;                  x!1
-;                  (just Sorta1bl!val!4)))
-;            (just Sorta1bl!val!4)
+;                  (just Sorta1bl!val!3)))
+;            (just Sorta1bl!val!3)
 ;            (ite
 ;               (and
 ;                  (= x!0 nothing)
-;                  (= x!1 nothing))
-;               nothing
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
 ;               (ite
 ;                  (and
 ;                     (= x!0 nothing)
-;                     (=
-;                        x!1
-;                        (just Sorta1bl!val!0)))
-;                  (just Sorta1bl!val!0)
+;                     (= x!1 nothing))
+;                  nothing
 ;                  (ite
 ;                     (and
 ;                        (= x!0 nothing)
@@ -6419,25 +6457,25 @@
 ;                     (just Sorta1bl!val!1)
 ;                     (ite
 ;                        (and
+;                           (= x!0 nothing)
 ;                           (=
-;                              x!0
-;                              (just Sorta1bl!val!3))
-;                           (= x!1 nothing))
-;                        (just Sorta1bl!val!3)
+;                              x!1
+;                              (just Sorta1bl!val!4)))
+;                        (just Sorta1bl!val!4)
 ;                        (ite
 ;                           (and
 ;                              (= x!0 nothing)
 ;                              (=
 ;                                 x!1
-;                                 (just Sorta1bl!val!3)))
-;                           (just Sorta1bl!val!3)
+;                                 (just Sorta1bl!val!2)))
+;                           (just Sorta1bl!val!2)
 ;                           (ite
 ;                              (and
-;                                 (= x!0 nothing)
 ;                                 (=
-;                                    x!1
-;                                    (just Sorta1bl!val!2)))
-;                              (just Sorta1bl!val!2)
+;                                    x!0
+;                                    (just Sorta1bl!val!1))
+;                                 (= x!1 nothing))
+;                              (just Sorta1bl!val!1)
 ;                              (ite
 ;                                 (
 ;                                   (_ is just)
@@ -6575,15 +6613,13 @@
       (Maybe Int)))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (store
-                  a1db
-                  "ok"
-                  (just 2))
-               a1d7)))
+      (not
+         (=
+            (store
+               a1db
+               "ok"
+               (just 2))
+            a1d7))
       :named
       wanted-8))
 (check-sat)
@@ -6685,17 +6721,13 @@
 ;      wanted-8
 ;      ()
 ;      Bool
-;      (let
-;         (
-;           (a!1
-;              (not
-;                 (=
-;                    (store
-;                       a1db
-;                       "ok"
-;                       (just 2))
-;                    a1d7))))
-;         (or false a!1)))
+;      (not
+;         (=
+;            (store
+;               a1db
+;               "ok"
+;               (just 2))
+;            a1d7)))
 ;   (define-fun
 ;      a1d7
 ;      ()
@@ -6871,15 +6903,13 @@
       (Maybe Int)))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (store
-                  a1db
-                  "ok"
-                  (just 2))
-               a1d7)))
+      (not
+         (=
+            (store
+               a1db
+               "ok"
+               (just 2))
+            a1d7))
       :named
       wanted-8))
 (check-sat)
@@ -6981,17 +7011,13 @@
 ;      wanted-8
 ;      ()
 ;      Bool
-;      (let
-;         (
-;           (a!1
-;              (not
-;                 (=
-;                    (store
-;                       a1db
-;                       "ok"
-;                       (just 2))
-;                    a1d7))))
-;         (or false a!1)))
+;      (not
+;         (=
+;            (store
+;               a1db
+;               "ok"
+;               (just 2))
+;            a1d7)))
 ;   (define-fun
 ;      a1d7
 ;      ()
@@ -7181,17 +7207,15 @@
       (Maybe Sorta1dU)))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (store
-                  a1e1
-                  "bob"
-                  (as
-                     nothing
-                     (Maybe Sorta1dU)))
-               a1dW)))
+      (not
+         (=
+            (store
+               a1e1
+               "bob"
+               (as
+                  nothing
+                  (Maybe Sorta1dU)))
+            a1dW))
       :named
       wanted-10))
 (check-sat)
@@ -7234,7 +7258,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7260,7 +7284,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7284,7 +7308,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7303,7 +7327,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7333,17 +7357,15 @@
 ;                 (Maybe Sorta1dU)))
 ;           (just Sorta1dU!val!2))
 ;         "b"
-;         nothing))
+;         (just Sorta1dU!val!0)))
 ;   (define-fun
 ;      wanted-10
 ;      ()
 ;      Bool
-;      (or
-;         false
-;         (not
-;            (=
-;               (store a1e1 "bob" nothing)
-;               a1dW))))
+;      (not
+;         (=
+;            (store a1e1 "bob" nothing)
+;            a1dW)))
 ;   (define-fun
 ;      a1dV
 ;      ()
@@ -7359,7 +7381,7 @@
 ;                 (Maybe Sorta1dU)))
 ;           (just Sorta1dU!val!1))
 ;         "b"
-;         (just Sorta1dU!val!0))))
+;         nothing)))
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-10")
@@ -7497,17 +7519,15 @@
       (Maybe Sorta1dU)))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (store
-                  a1e1
-                  "bob"
-                  (as
-                     nothing
-                     (Maybe Sorta1dU)))
-               a1dW)))
+      (not
+         (=
+            (store
+               a1e1
+               "bob"
+               (as
+                  nothing
+                  (Maybe Sorta1dU)))
+            a1dW))
       :named
       wanted-10))
 (check-sat)
@@ -7550,7 +7570,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7576,7 +7596,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7600,7 +7620,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7619,7 +7639,7 @@
 ;                    (Maybe Sorta1dU)))
 ;              (just Sorta1dU!val!1))
 ;            "b"
-;            (just Sorta1dU!val!0))
+;            nothing)
 ;         "bob"
 ;         nothing))
 ;   (define-fun
@@ -7649,17 +7669,15 @@
 ;                 (Maybe Sorta1dU)))
 ;           (just Sorta1dU!val!2))
 ;         "b"
-;         nothing))
+;         (just Sorta1dU!val!0)))
 ;   (define-fun
 ;      wanted-10
 ;      ()
 ;      Bool
-;      (or
-;         false
-;         (not
-;            (=
-;               (store a1e1 "bob" nothing)
-;               a1dW))))
+;      (not
+;         (=
+;            (store a1e1 "bob" nothing)
+;            a1dW)))
 ;   (define-fun
 ;      a1dV
 ;      ()
@@ -7675,7 +7693,7 @@
 ;                 (Maybe Sorta1dU)))
 ;           (just Sorta1dU!val!1))
 ;         "b"
-;         (just Sorta1dU!val!0))))
+;         nothing)))
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
@@ -7772,36 +7790,34 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
+      (not
+         (=
+            (store
                (store
-                  (store
-                     (
-                       (as
-                          const
-                          (Array
-                             Int
-                             (Maybe String)))
-                       nothing)
-                     1
-                     (just "ok"))
+                  (
+                    (as
+                       const
+                       (Array
+                          Int
+                          (Maybe String)))
+                    nothing)
+                  1
+                  (just "ok"))
+               2
+               (just "hi"))
+            (store
+               (store
+                  (
+                    (as
+                       const
+                       (Array
+                          Int
+                          (Maybe String)))
+                    nothing)
                   2
                   (just "hi"))
-               (store
-                  (store
-                     (
-                       (as
-                          const
-                          (Array
-                             Int
-                             (Maybe String)))
-                       nothing)
-                     2
-                     (just "hi"))
-                  1
-                  (just "ok")))))
+               1
+               (just "ok"))))
       :named
       wanted-11))
 (check-sat)
@@ -7810,36 +7826,34 @@
 (get-assertions)
 ; (
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
+;      (not
+;         (=
+;            (store
 ;               (store
-;                  (store
-;                     (
-;                       (as
-;                          const
-;                          (Array
-;                             Int
-;                             (Maybe String)))
-;                       nothing)
-;                     1
-;                     (just "ok"))
+;                  (
+;                    (as
+;                       const
+;                       (Array
+;                          Int
+;                          (Maybe String)))
+;                    nothing)
+;                  1
+;                  (just "ok"))
+;               2
+;               (just "hi"))
+;            (store
+;               (store
+;                  (
+;                    (as
+;                       const
+;                       (Array
+;                          Int
+;                          (Maybe String)))
+;                    nothing)
 ;                  2
 ;                  (just "hi"))
-;               (store
-;                  (store
-;                     (
-;                       (as
-;                          const
-;                          (Array
-;                             Int
-;                             (Maybe String)))
-;                       nothing)
-;                     2
-;                     (just "hi"))
-;                  1
-;                  (just "ok")))))
+;               1
+;               (just "ok"))))
 ;      :named
 ;      wanted-11))
 (get-unsat-core)
@@ -8103,10 +8117,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= a1eK a1eM)))
+      (not
+         (= a1eK a1eM))
       :named
       wanted-13))
 (check-sat)
@@ -8212,22 +8224,20 @@
 ;      :named
 ;      given-13.8)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= a1eK a1eM)))
+;      (not
+;         (= a1eK a1eM))
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
-; (given-13.5
-;    given-13.4
-;    given-13.3
-;    given-13.7
-;    given-13.8
+; (given-13.3
 ;    given-13.1
-;    wanted-13
 ;    given-13.2
-;    given-13.6)
+;    given-13.6
+;    given-13.8
+;    given-13.5
+;    given-13.4
+;    wanted-13
+;    given-13.7)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-13")
@@ -8468,10 +8478,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= a1f2 a1f4)))
+      (not
+         (= a1f2 a1f4))
       :named
       wanted-15))
 (check-sat)
@@ -8560,22 +8568,20 @@
 ;      :named
 ;      given-15.8)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= a1f2 a1f4)))
+;      (not
+;         (= a1f2 a1f4))
 ;      :named
 ;      wanted-15))
 (get-unsat-core)
 ; (given-15.3
-;    given-15.8
-;    given-15.7
 ;    given-15.4
-;    wanted-15
 ;    given-15.6
-;    given-15.1
+;    wanted-15
+;    given-15.7
+;    given-15.2
 ;    given-15.5
-;    given-15.2)
+;    given-15.8
+;    given-15.1)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-15")
@@ -8693,10 +8699,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= a1ff a1fg)))
+      (not
+         (= a1ff a1fg))
       :named
       wanted-17))
 (check-sat)
@@ -8731,14 +8735,12 @@
 ;      :named
 ;      given-17.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= a1ff a1fg)))
+;      (not
+;         (= a1ff a1fg))
 ;      :named
 ;      wanted-17))
 (get-unsat-core)
-; (given-17.3 given-17.2 wanted-17 given-17.4 given-17.1)
+; (given-17.1 given-17.2 given-17.3 wanted-17 given-17.4)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-17")
@@ -8862,10 +8864,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= a1fq a1fr)))
+      (not
+         (= a1fq a1fr))
       :named
       wanted-19))
 (check-sat)
@@ -8904,14 +8904,12 @@
 ;      :named
 ;      given-19.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= a1fq a1fr)))
+;      (not
+;         (= a1fq a1fr))
 ;      :named
 ;      wanted-19))
 (get-unsat-core)
-; (given-19.2 given-19.3 wanted-19 given-19.4 given-19.1)
+; (given-19.2 given-19.1 given-19.4 wanted-19 given-19.3)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-19")
@@ -9075,12 +9073,10 @@
    (!
       (or
          (or
-            (or
-               false
-               (not
-                  (=
-                     (< a3jC a3jD)
-                     (< a3jF a3jG))))
+            (not
+               (=
+                  (< a3jC a3jD)
+                  (< a3jF a3jG)))
             (not
                (=
                   (< a3jE a3jG)
@@ -9101,7 +9097,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (< a3jC a3jD)
@@ -9248,12 +9243,10 @@
    (!
       (or
          (or
-            (or
-               false
-               (not
-                  (=
-                     (< a3jC a3jD)
-                     (< a3jF a3jG))))
+            (not
+               (=
+                  (< a3jC a3jD)
+                  (< a3jF a3jG)))
             (not
                (=
                   (< a3jE a3jG)
@@ -9274,7 +9267,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (< a3jC a3jD)
@@ -9396,12 +9388,10 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (+ a3ks a3kt)
-                  (+ a3kq a3kr))))
+         (not
+            (=
+               (+ a3ks a3kt)
+               (+ a3kq a3kr)))
          (not
             (=
                (+ a3kt a3ks)
@@ -9417,13 +9407,12 @@
 ;      a3kq
 ;      ()
 ;      Int
-;      1)
+;      0)
 ;   (define-fun
 ;      wanted-3
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (+ a3ks a3kt)
@@ -9441,7 +9430,7 @@
 ;      a3ks
 ;      ()
 ;      Int
-;      0)
+;      1)
 ;   (define-fun
 ;      a3kr
 ;      ()
@@ -9526,12 +9515,10 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (+ a3ks a3kt)
-                  (+ a3kq a3kr))))
+         (not
+            (=
+               (+ a3ks a3kt)
+               (+ a3kq a3kr)))
          (not
             (=
                (+ a3kt a3ks)
@@ -9547,13 +9534,12 @@
 ;      a3kq
 ;      ()
 ;      Int
-;      1)
+;      0)
 ;   (define-fun
 ;      wanted-3
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (+ a3ks a3kt)
@@ -9571,7 +9557,7 @@
 ;      a3ks
 ;      ()
 ;      Int
-;      0)
+;      1)
 ;   (define-fun
 ;      a3kr
 ;      ()
@@ -9709,12 +9695,10 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (- a3lo a3lm)
-               (- a3lb a3la))))
+      (not
+         (=
+            (- a3lo a3lm)
+            (- a3lb a3la)))
       :named
       wanted-9))
 (check-sat)
@@ -9749,16 +9733,14 @@
 ;      :named
 ;      given-9.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (- a3lo a3lm)
-;               (- a3lb a3la))))
+;      (not
+;         (=
+;            (- a3lo a3lm)
+;            (- a3lb a3la)))
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
-; (given-9.4 given-9.3 given-9.2 wanted-9 given-9.1)
+; (given-9.1 given-9.4 given-9.3 given-9.2 wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-9")
@@ -9871,14 +9853,12 @@
    (<= 0 a3md))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (+
-                  1
-                  (+ a3mi a3md))
-               (+ a3mb a3md))))
+      (not
+         (=
+            (+
+               1
+               (+ a3mi a3md))
+            (+ a3mb a3md)))
       :named
       wanted-16))
 (check-sat)
@@ -9901,14 +9881,12 @@
 ;      given-16.2)
 ;   (<= 0 a3md)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (+
-;                  1
-;                  (+ a3mi a3md))
-;               (+ a3mb a3md))))
+;      (not
+;         (=
+;            (+
+;               1
+;               (+ a3mi a3md))
+;            (+ a3mb a3md)))
 ;      :named
 ;      wanted-16))
 (get-unsat-core)
@@ -10021,12 +9999,10 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (< a3qt a3qv)
-               true)))
+      (not
+         (=
+            (< a3qt a3qv)
+            true))
       :named
       wanted-19))
 (check-sat)
@@ -10058,16 +10034,14 @@
 ;      :named
 ;      given-19.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (< a3qt a3qv)
-;               true)))
+;      (not
+;         (=
+;            (< a3qt a3qv)
+;            true))
 ;      :named
 ;      wanted-19))
 (get-unsat-core)
-; (given-19.4 given-19.3 wanted-19 given-19.2 given-19.1)
+; (given-19.4 given-19.2 wanted-19 given-19.3 given-19.1)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-19")
@@ -10161,10 +10135,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= a3qF a3qG)))
+      (not
+         (= a3qF a3qG))
       :named
       wanted-21))
 (check-sat)
@@ -10193,14 +10165,12 @@
 ;      :named
 ;      given-21.3)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= a3qF a3qG)))
+;      (not
+;         (= a3qF a3qG))
 ;      :named
 ;      wanted-21))
 (get-unsat-core)
-; (given-21.3 given-21.1 given-21.2 wanted-21)
+; (given-21.2 given-21.1 wanted-21 given-21.3)
 (pop 1)
 (echo "solver-finish-cycle-21")
 (echo "solver-start-cycle-21")
@@ -10257,12 +10227,10 @@
    (<= 0 a3qP))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (+ a3qO a3qP)
-               (+ a3qP a3qO))))
+      (not
+         (=
+            (+ a3qO a3qP)
+            (+ a3qP a3qO)))
       :named
       wanted-22))
 (check-sat)
@@ -10273,12 +10241,10 @@
 ;   (<= 0 a3qO)
 ;   (<= 0 a3qP)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (+ a3qO a3qP)
-;               (+ a3qP a3qO))))
+;      (not
+;         (=
+;            (+ a3qO a3qP)
+;            (+ a3qP a3qO)))
 ;      :named
 ;      wanted-22))
 (get-unsat-core)
@@ -10333,12 +10299,10 @@
    (<= 0 a3qW))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (+ a3qW 1)
-               (+ 1 a3qW))))
+      (not
+         (=
+            (+ a3qW 1)
+            (+ 1 a3qW)))
       :named
       wanted-23))
 (check-sat)
@@ -10348,12 +10312,10 @@
 ; (
 ;   (<= 0 a3qW)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (+ a3qW 1)
-;               (+ 1 a3qW))))
+;      (not
+;         (=
+;            (+ a3qW 1)
+;            (+ 1 a3qW)))
 ;      :named
 ;      wanted-23))
 (get-unsat-core)
@@ -10658,31 +10620,9 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (store
-                     (store
-                        (store
-                           (
-                             (as
-                                const
-                                (Array
-                                   String
-                                   (Maybe Type)))
-                             nothing)
-                           "price"
-                           (just
-                              (lit "3u")))
-                        "make"
-                        (just
-                           (apply
-                              (lit "3M")
-                              (lit "3g"))))
-                     "price"
-                     (just
-                        (lit "3u")))
+         (not
+            (=
+               (store
                   (store
                      (store
                         (
@@ -10699,7 +10639,27 @@
                      (just
                         (apply
                            (lit "3M")
-                           (lit "3g")))))))
+                           (lit "3g"))))
+                  "price"
+                  (just
+                     (lit "3u")))
+               (store
+                  (store
+                     (
+                       (as
+                          const
+                          (Array
+                             String
+                             (Maybe Type)))
+                       nothing)
+                     "price"
+                     (just
+                        (lit "3u")))
+                  "make"
+                  (just
+                     (apply
+                        (lit "3M")
+                        (lit "3g"))))))
          (not
             (=
                (store
@@ -10749,31 +10709,9 @@
 ; (
 ;   (!
 ;      (or
-;         (or
-;            false
-;            (not
-;               (=
-;                  (store
-;                     (store
-;                        (store
-;                           (
-;                             (as
-;                                const
-;                                (Array
-;                                   String
-;                                   (Maybe Type)))
-;                             nothing)
-;                           "price"
-;                           (just
-;                              (lit "3u")))
-;                        "make"
-;                        (just
-;                           (apply
-;                              (lit "3M")
-;                              (lit "3g"))))
-;                     "price"
-;                     (just
-;                        (lit "3u")))
+;         (not
+;            (=
+;               (store
 ;                  (store
 ;                     (store
 ;                        (
@@ -10790,7 +10728,27 @@
 ;                     (just
 ;                        (apply
 ;                           (lit "3M")
-;                           (lit "3g")))))))
+;                           (lit "3g"))))
+;                  "price"
+;                  (just
+;                     (lit "3u")))
+;               (store
+;                  (store
+;                     (
+;                       (as
+;                          const
+;                          (Array
+;                             String
+;                             (Maybe Type)))
+;                       nothing)
+;                     "price"
+;                     (just
+;                        (lit "3u")))
+;                  "make"
+;                  (just
+;                     (apply
+;                        (lit "3M")
+;                        (lit "3g"))))))
 ;         (not
 ;            (=
 ;               (store
@@ -10966,16 +10924,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (store
-                  a5kE
-                  "price"
-                  (just
-                     (lit "3u")))
-               a5kE)))
+      (not
+         (=
+            (store
+               a5kE
+               "price"
+               (just
+                  (lit "3u")))
+            a5kE))
       :named
       wanted-8))
 (check-sat)
@@ -11013,16 +10969,14 @@
 ;      :named
 ;      given-8.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (store
-;                  a5kE
-;                  "price"
-;                  (just
-;                     (lit "3u")))
-;               a5kE)))
+;      (not
+;         (=
+;            (store
+;               a5kE
+;               "price"
+;               (just
+;                  (lit "3u")))
+;            a5kE))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
@@ -11158,12 +11112,10 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               a5kN
-               (lit "3u"))))
+      (not
+         (=
+            a5kN
+            (lit "3u")))
       :named
       wanted-11))
 (check-sat)
@@ -11203,12 +11155,10 @@
 ;      :named
 ;      given-11.5)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               a5kN
-;               (lit "3u"))))
+;      (not
+;         (=
+;            a5kN
+;            (lit "3u")))
 ;      :named
 ;      wanted-11))
 (get-unsat-core)
@@ -11349,16 +11299,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (store
-                  a5kL
-                  "price"
-                  (just
-                     (lit "3u")))
-               a5kL)))
+      (not
+         (=
+            (store
+               a5kL
+               "price"
+               (just
+                  (lit "3u")))
+            a5kL))
       :named
       wanted-13))
 (check-sat)
@@ -11399,16 +11347,14 @@
 ;      :named
 ;      given-13.5)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (store
-;                  a5kL
-;                  "price"
-;                  (just
-;                     (lit "3u")))
-;               a5kL)))
+;      (not
+;         (=
+;            (store
+;               a5kL
+;               "price"
+;               (just
+;                  (lit "3u")))
+;            a5kL))
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
@@ -11612,12 +11558,10 @@
    (!
       (or
          (or
-            (or
-               false
-               (not
-                  (=
-                     (< a2Th a2Ti)
-                     (< a2Tk a2Tl))))
+            (not
+               (=
+                  (< a2Th a2Ti)
+                  (< a2Tk a2Tl)))
             (not
                (=
                   (< a2Tj a2Tl)
@@ -11638,7 +11582,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (< a2Th a2Ti)
@@ -11785,12 +11728,10 @@
    (!
       (or
          (or
-            (or
-               false
-               (not
-                  (=
-                     (< a2Th a2Ti)
-                     (< a2Tk a2Tl))))
+            (not
+               (=
+                  (< a2Th a2Ti)
+                  (< a2Tk a2Tl)))
             (not
                (=
                   (< a2Tj a2Tl)
@@ -11811,7 +11752,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (< a2Th a2Ti)
@@ -11933,12 +11873,10 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (+ a2U7 a2U8)
-                  (+ a2U5 a2U6))))
+         (not
+            (=
+               (+ a2U7 a2U8)
+               (+ a2U5 a2U6)))
          (not
             (=
                (+ a2U8 a2U7)
@@ -11960,7 +11898,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (+ a2U7 a2U8)
@@ -11973,12 +11910,12 @@
 ;      a2U5
 ;      ()
 ;      Int
-;      1)
+;      0)
 ;   (define-fun
 ;      a2U7
 ;      ()
 ;      Int
-;      0)
+;      1)
 ;   (define-fun
 ;      a2U6
 ;      ()
@@ -12063,12 +12000,10 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (+ a2U7 a2U8)
-                  (+ a2U5 a2U6))))
+         (not
+            (=
+               (+ a2U7 a2U8)
+               (+ a2U5 a2U6)))
          (not
             (=
                (+ a2U8 a2U7)
@@ -12090,7 +12025,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (+ a2U7 a2U8)
@@ -12103,12 +12037,12 @@
 ;      a2U5
 ;      ()
 ;      Int
-;      1)
+;      0)
 ;   (define-fun
 ;      a2U7
 ;      ()
 ;      Int
-;      0)
+;      1)
 ;   (define-fun
 ;      a2U6
 ;      ()
@@ -12246,12 +12180,10 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (- a2V3 a2V1)
-               (- a2UQ a2UP))))
+      (not
+         (=
+            (- a2V3 a2V1)
+            (- a2UQ a2UP)))
       :named
       wanted-9))
 (check-sat)
@@ -12286,16 +12218,14 @@
 ;      :named
 ;      given-9.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (- a2V3 a2V1)
-;               (- a2UQ a2UP))))
+;      (not
+;         (=
+;            (- a2V3 a2V1)
+;            (- a2UQ a2UP)))
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
-; (given-9.4 given-9.3 given-9.2 wanted-9 given-9.1)
+; (given-9.1 given-9.4 given-9.3 given-9.2 wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-9")
@@ -12408,14 +12338,12 @@
    (<= 0 a2VS))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (+
-                  1
-                  (+ a2VX a2VS))
-               (+ a2VQ a2VS))))
+      (not
+         (=
+            (+
+               1
+               (+ a2VX a2VS))
+            (+ a2VQ a2VS)))
       :named
       wanted-16))
 (check-sat)
@@ -12438,14 +12366,12 @@
 ;      given-16.2)
 ;   (<= 0 a2VS)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (+
-;                  1
-;                  (+ a2VX a2VS))
-;               (+ a2VQ a2VS))))
+;      (not
+;         (=
+;            (+
+;               1
+;               (+ a2VX a2VS))
+;            (+ a2VQ a2VS)))
 ;      :named
 ;      wanted-16))
 (get-unsat-core)
@@ -12558,12 +12484,10 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (< a3ac a3ae)
-               true)))
+      (not
+         (=
+            (< a3ac a3ae)
+            true))
       :named
       wanted-19))
 (check-sat)
@@ -12595,16 +12519,14 @@
 ;      :named
 ;      given-19.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (< a3ac a3ae)
-;               true)))
+;      (not
+;         (=
+;            (< a3ac a3ae)
+;            true))
 ;      :named
 ;      wanted-19))
 (get-unsat-core)
-; (given-19.4 given-19.3 wanted-19 given-19.2 given-19.1)
+; (given-19.4 given-19.2 wanted-19 given-19.3 given-19.1)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-19")
@@ -12698,10 +12620,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= a3ao a3ap)))
+      (not
+         (= a3ao a3ap))
       :named
       wanted-21))
 (check-sat)
@@ -12730,14 +12650,12 @@
 ;      :named
 ;      given-21.3)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= a3ao a3ap)))
+;      (not
+;         (= a3ao a3ap))
 ;      :named
 ;      wanted-21))
 (get-unsat-core)
-; (given-21.3 given-21.1 given-21.2 wanted-21)
+; (given-21.2 given-21.1 wanted-21 given-21.3)
 (pop 1)
 (echo "solver-finish-cycle-21")
 (echo "solver-start-cycle-21")
@@ -12794,12 +12712,10 @@
    (<= 0 a3ay))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (+ a3ax a3ay)
-               (+ a3ay a3ax))))
+      (not
+         (=
+            (+ a3ax a3ay)
+            (+ a3ay a3ax)))
       :named
       wanted-22))
 (check-sat)
@@ -12810,12 +12726,10 @@
 ;   (<= 0 a3ax)
 ;   (<= 0 a3ay)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (+ a3ax a3ay)
-;               (+ a3ay a3ax))))
+;      (not
+;         (=
+;            (+ a3ax a3ay)
+;            (+ a3ay a3ax)))
 ;      :named
 ;      wanted-22))
 (get-unsat-core)
@@ -12870,12 +12784,10 @@
    (<= 0 a3aF))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (+ a3aF 1)
-               (+ 1 a3aF))))
+      (not
+         (=
+            (+ a3aF 1)
+            (+ 1 a3aF)))
       :named
       wanted-23))
 (check-sat)
@@ -12885,12 +12797,10 @@
 ; (
 ;   (<= 0 a3aF)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (+ a3aF 1)
-;               (+ 1 a3aF))))
+;      (not
+;         (=
+;            (+ a3aF 1)
+;            (+ 1 a3aF)))
 ;      :named
 ;      wanted-23))
 (get-unsat-core)

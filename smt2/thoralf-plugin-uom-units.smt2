@@ -151,48 +151,46 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1HB
-                 (
-                   (_
-                      map
-                      (-
-                         (Int Int)
-                         Int))
-                   (
-                     (as
-                        const
-                        (Array String Int))
-                     0)
-                   a1HB))
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1HD
-                 (
-                   (_
-                      map
-                      (-
-                         (Int Int)
-                         Int))
-                   (
-                     (as
-                        const
-                        (Array String Int))
-                     0)
-                   a1HD)))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1HB
+              (
+                (_
+                   map
+                   (-
+                      (Int Int)
+                      Int))
+                (
+                  (as
+                     const
+                     (Array String Int))
+                  0)
+                a1HB))
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1HD
+              (
+                (_
+                   map
+                   (-
+                      (Int Int)
+                      Int))
+                (
+                  (as
+                     const
+                     (Array String Int))
+                  0)
+                a1HD))))
       :named
       wanted-1))
 (check-sat)
@@ -203,48 +201,46 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1HB
-;                 (
-;                   (_
-;                      map
-;                      (-
-;                         (Int Int)
-;                         Int))
-;                   (
-;                     (as
-;                        const
-;                        (Array String Int))
-;                     0)
-;                   a1HB))
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1HD
-;                 (
-;                   (_
-;                      map
-;                      (-
-;                         (Int Int)
-;                         Int))
-;                   (
-;                     (as
-;                        const
-;                        (Array String Int))
-;                     0)
-;                   a1HD)))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1HB
+;              (
+;                (_
+;                   map
+;                   (-
+;                      (Int Int)
+;                      Int))
+;                (
+;                  (as
+;                     const
+;                     (Array String Int))
+;                  0)
+;                a1HB))
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1HD
+;              (
+;                (_
+;                   map
+;                   (-
+;                      (Int Int)
+;                      Int))
+;                (
+;                  (as
+;                     const
+;                     (Array String Int))
+;                  0)
+;                a1HD))))
 ;      :named
 ;      wanted-1))
 (get-unsat-core)
@@ -380,26 +376,24 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    a1Il
-                    a1Ik)
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    a1Ii
-                    a1Ih))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 a1Il
+                 a1Ik)
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 a1Ii
+                 a1Ih)))
          (not
             (=
                (
@@ -430,7 +424,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (
@@ -756,40 +749,38 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      a1IP
-                      a1IQ)
-                    a1IR)
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      a1IL
-                      a1IM)
-                    a1IN))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   a1IP
+                   a1IQ)
+                 a1IR)
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   a1IL
+                   a1IM)
+                 a1IN)))
          (not
             (=
                (
@@ -834,7 +825,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (
@@ -888,7 +878,7 @@
 ;         "!0!"
 ;         15921))
 ;   (define-fun
-;      a1IL
+;      a1IN
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -900,7 +890,7 @@
 ;         "!0!"
 ;         26285))
 ;   (define-fun
-;      a1IN
+;      a1IL
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -910,9 +900,18 @@
 ;              (Array String Int))
 ;           0)
 ;         "!0!"
-;         2997))
+;         16122))
 ;   (define-fun
 ;      base
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        2))
+;   (define-fun
+;      enc
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -931,16 +930,7 @@
 ;              (Array String Int))
 ;           0)
 ;         "!0!"
-;         20537))
-;   (define-fun
-;      enc
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        2))
+;         8945))
 ;   (define-fun
 ;      a1IR
 ;      ()
@@ -952,7 +942,7 @@
 ;              (Array String Int))
 ;           0)
 ;         "!0!"
-;         8945))
+;         20537))
 ;   (define-fun
 ;      one
 ;      ()
@@ -969,7 +959,7 @@
 ;              (Array String Int))
 ;           0)
 ;         "!0!"
-;         16122))
+;         2997))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -1046,23 +1036,21 @@
 (declare-const a1Jf String)
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base a1Jf one)
-                 (store base a1Jf one))
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base a1Jf one)
+              (store base a1Jf one))
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)))
       :named
       wanted-4))
 (check-sat)
@@ -1073,23 +1061,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base a1Jf one)
-;                 (store base a1Jf one))
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base a1Jf one)
+;              (store base a1Jf one))
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)))
 ;      :named
 ;      wanted-4))
 (get-unsat-core)
@@ -1185,34 +1171,32 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1Jp
-                 (
-                   (_
-                      map
-                      (-
-                         (Int Int)
-                         Int))
-                   (
-                     (as
-                        const
-                        (Array String Int))
-                     0)
-                   a1Jp))
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1Jp
+              (
+                (_
+                   map
+                   (-
+                      (Int Int)
+                      Int))
+                (
+                  (as
+                     const
+                     (Array String Int))
+                  0)
+                a1Jp))
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)))
       :named
       wanted-5))
 (check-sat)
@@ -1223,34 +1207,32 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1Jp
-;                 (
-;                   (_
-;                      map
-;                      (-
-;                         (Int Int)
-;                         Int))
-;                   (
-;                     (as
-;                        const
-;                        (Array String Int))
-;                     0)
-;                   a1Jp))
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1Jp
+;              (
+;                (_
+;                   map
+;                   (-
+;                      (Int Int)
+;                      Int))
+;                (
+;                  (as
+;                     const
+;                     (Array String Int))
+;                  0)
+;                a1Jp))
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)))
 ;      :named
 ;      wanted-5))
 (get-unsat-core)
@@ -1324,23 +1306,21 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1Jw
-                 (
-                   (as
-                      const
-                      (Array String Int))
-                   0))
-               a1Jw)))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1Jw
+              (
+                (as
+                   const
+                   (Array String Int))
+                0))
+            a1Jw))
       :named
       wanted-6))
 (check-sat)
@@ -1351,23 +1331,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1Jw
-;                 (
-;                   (as
-;                      const
-;                      (Array String Int))
-;                   0))
-;               a1Jw)))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1Jw
+;              (
+;                (as
+;                   const
+;                   (Array String Int))
+;                0))
+;            a1Jw))
 ;      :named
 ;      wanted-6))
 (get-unsat-core)
@@ -1452,26 +1430,24 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1JC
-                 a1JD)
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1JD
-                 a1JC))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1JC
+              a1JD)
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1JD
+              a1JC)))
       :named
       wanted-7))
 (check-sat)
@@ -1482,26 +1458,24 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1JC
-;                 a1JD)
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1JD
-;                 a1JC))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1JC
+;              a1JD)
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1JD
+;              a1JC)))
 ;      :named
 ;      wanted-7))
 (get-unsat-core)
@@ -1625,40 +1599,38 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1JK
-                 (
-                   (_
-                      map
-                      (+
-                         (Int Int)
-                         Int))
-                   a1JL
-                   a1JM))
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 (
-                   (_
-                      map
-                      (+
-                         (Int Int)
-                         Int))
-                   a1JK
-                   a1JL)
-                 a1JM))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1JK
+              (
+                (_
+                   map
+                   (+
+                      (Int Int)
+                      Int))
+                a1JL
+                a1JM))
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              (
+                (_
+                   map
+                   (+
+                      (Int Int)
+                      Int))
+                a1JK
+                a1JL)
+              a1JM)))
       :named
       wanted-8))
 (check-sat)
@@ -1669,40 +1641,38 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1JK
-;                 (
-;                   (_
-;                      map
-;                      (+
-;                         (Int Int)
-;                         Int))
-;                   a1JL
-;                   a1JM))
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 (
-;                   (_
-;                      map
-;                      (+
-;                         (Int Int)
-;                         Int))
-;                   a1JK
-;                   a1JL)
-;                 a1JM))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1JK
+;              (
+;                (_
+;                   map
+;                   (+
+;                      (Int Int)
+;                      Int))
+;                a1JL
+;                a1JM))
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              (
+;                (_
+;                   map
+;                   (+
+;                      (Int Int)
+;                      Int))
+;                a1JK
+;                a1JL)
+;              a1JM)))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
@@ -1735,7 +1705,7 @@
 (assert
    (= enc base))
 (exit)
-; [3 of 5] Compiling Defs
+; [3 of 5] Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -1829,23 +1799,21 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base "byte" one)
-                 (store base "byte" one)))))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "byte" one)
+              (store base "byte" one))))
       :named
       wanted-2))
 (check-sat)
@@ -1856,23 +1824,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base "byte" one)
-;                 (store base "byte" one)))))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "byte" one)
+;              (store base "byte" one))))
 ;      :named
 ;      wanted-2))
 (get-unsat-core)
@@ -2820,33 +2786,31 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 aeCB
-                 aeCB)
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 aeCy
-                 (
-                   (_
-                      map
-                      (+
-                         (Int Int)
-                         Int))
-                   aeCy
-                   aeCy)))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              aeCB
+              aeCB)
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              aeCy
+              (
+                (_
+                   map
+                   (+
+                      (Int Int)
+                      Int))
+                aeCy
+                aeCy))))
       :named
       wanted-2))
 (check-sat)
@@ -3410,27 +3374,25 @@
 ;      wanted-2
 ;      ()
 ;      Bool
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 aeCB
-;                 aeCB)
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 aeCy
-;                 aeCy
-;                 aeCy)))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              aeCB
+;              aeCB)
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              aeCy
+;              aeCy
+;              aeCy))))
 ;   (define-fun
 ;      given-2.39
 ;      ()
@@ -4199,40 +4161,38 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    aeEu
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      aeEu
-                      aeEu))
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    aeEq
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      aeEq
-                      aeEq)))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 aeEu
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   aeEu
+                   aeEu))
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 aeEq
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   aeEq
+                   aeEq))))
          (not
             (=
                (
@@ -4427,7 +4387,6 @@
 ;                         (Array String Int))
 ;                      0)))))
 ;         (or
-;            false
 ;            (not
 ;               (=
 ;                  (
@@ -4731,19 +4690,17 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    aeG0
-                    aeFV)
-                  aeFT)))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 aeG0
+                 aeFV)
+               aeFT))
          (not
             (=
                (
@@ -4770,7 +4727,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        2))
+;        3))
 ;   (define-fun
 ;      base
 ;      ()
@@ -4779,7 +4736,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        2))
+;        3))
 ;   (define-fun
 ;      given-7.4
 ;      ()
@@ -4837,7 +4794,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (
@@ -4871,7 +4827,7 @@
 ;              (Array String Int))
 ;           2437)
 ;         "!0!"
-;         (- 1)))
+;         1))
 ;   (define-fun
 ;      given-7.3
 ;      ()
@@ -5796,16 +5752,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               aeGM)))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            aeGM))
       :named
       wanted-9))
 (check-sat)
@@ -6315,48 +6269,46 @@
 ;      :named
 ;      given-9.40)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               aeGM)))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            aeGM))
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
-; (given-9.21
+; (given-9.19
 ;    given-9.20
-;    given-9.19
 ;    given-9.18
-;    given-9.6
 ;    given-9.17
-;    given-9.15
-;    given-9.3
-;    given-9.14
-;    given-9.12
 ;    given-9.16
-;    given-9.5
-;    given-9.1
-;    given-9.9
+;    given-9.15
+;    given-9.14
+;    given-9.13
 ;    given-9.11
-;    given-9.10
 ;    given-9.4
+;    given-9.1
+;    given-9.10
 ;    given-9.7
-;    given-9.8
+;    given-9.9
+;    given-9.3
+;    given-9.6
+;    given-9.5
 ;    given-9.29
 ;    given-9.30
-;    given-9.31
 ;    given-9.28
 ;    given-9.27
 ;    given-9.26
 ;    given-9.25
 ;    given-9.24
 ;    given-9.23
+;    given-9.21
 ;    given-9.22
+;    given-9.2
+;    given-9.8
 ;    wanted-9
 ;    given-9.39
 ;    given-9.37
@@ -6364,9 +6316,9 @@
 ;    given-9.35
 ;    given-9.34
 ;    given-9.33
-;    given-9.2
-;    given-9.13
-;    given-9.32)
+;    given-9.32
+;    given-9.31
+;    given-9.12)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -6586,16 +6538,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               aeGT)))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            aeGT))
       :named
       wanted-11))
 (check-sat)
@@ -6702,16 +6652,14 @@
 ;      :named
 ;      given-11.9)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               aeGT)))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            aeGT))
 ;      :named
 ;      wanted-11))
 (get-unsat-core)
@@ -6827,16 +6775,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               aeH1)))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            aeH1))
       :named
       wanted-13))
 (check-sat)
@@ -6874,16 +6820,14 @@
 ;      :named
 ;      given-13.3)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               aeH1)))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            aeH1))
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
@@ -6999,10 +6943,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= aeH7 aeH9)))
+      (not
+         (= aeH7 aeH9))
       :named
       wanted-15))
 (check-sat)
@@ -7047,14 +6989,12 @@
 ;      :named
 ;      given-15.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= aeH7 aeH9)))
+;      (not
+;         (= aeH7 aeH9))
 ;      :named
 ;      wanted-15))
 (get-unsat-core)
-; (given-15.2 given-15.3 given-15.4 wanted-15 given-15.1)
+; (given-15.2 given-15.4 wanted-15 given-15.3 given-15.1)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (exit)
@@ -7210,48 +7150,46 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1HH
-                 (
-                   (_
-                      map
-                      (-
-                         (Int Int)
-                         Int))
-                   (
-                     (as
-                        const
-                        (Array String Int))
-                     0)
-                   a1HH))
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1HJ
-                 (
-                   (_
-                      map
-                      (-
-                         (Int Int)
-                         Int))
-                   (
-                     (as
-                        const
-                        (Array String Int))
-                     0)
-                   a1HJ)))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1HH
+              (
+                (_
+                   map
+                   (-
+                      (Int Int)
+                      Int))
+                (
+                  (as
+                     const
+                     (Array String Int))
+                  0)
+                a1HH))
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1HJ
+              (
+                (_
+                   map
+                   (-
+                      (Int Int)
+                      Int))
+                (
+                  (as
+                     const
+                     (Array String Int))
+                  0)
+                a1HJ))))
       :named
       wanted-1))
 (check-sat)
@@ -7262,48 +7200,46 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1HH
-;                 (
-;                   (_
-;                      map
-;                      (-
-;                         (Int Int)
-;                         Int))
-;                   (
-;                     (as
-;                        const
-;                        (Array String Int))
-;                     0)
-;                   a1HH))
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1HJ
-;                 (
-;                   (_
-;                      map
-;                      (-
-;                         (Int Int)
-;                         Int))
-;                   (
-;                     (as
-;                        const
-;                        (Array String Int))
-;                     0)
-;                   a1HJ)))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1HH
+;              (
+;                (_
+;                   map
+;                   (-
+;                      (Int Int)
+;                      Int))
+;                (
+;                  (as
+;                     const
+;                     (Array String Int))
+;                  0)
+;                a1HH))
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1HJ
+;              (
+;                (_
+;                   map
+;                   (-
+;                      (Int Int)
+;                      Int))
+;                (
+;                  (as
+;                     const
+;                     (Array String Int))
+;                  0)
+;                a1HJ))))
 ;      :named
 ;      wanted-1))
 (get-unsat-core)
@@ -7439,26 +7375,24 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    a1Ir
-                    a1Iq)
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    a1Io
-                    a1In))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 a1Ir
+                 a1Iq)
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 a1Io
+                 a1In)))
          (not
             (=
                (
@@ -7489,7 +7423,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (
@@ -7815,40 +7748,38 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      a1IV
-                      a1IW)
-                    a1IX)
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      a1IR
-                      a1IS)
-                    a1IT))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   a1IV
+                   a1IW)
+                 a1IX)
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   a1IR
+                   a1IS)
+                 a1IT)))
          (not
             (=
                (
@@ -7893,7 +7824,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (
@@ -7944,28 +7874,7 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      enc
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        2))
-;   (define-fun
-;      a1IV
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         20537))
-;   (define-fun
-;      a1IR
+;      a1IT
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -7977,7 +7886,45 @@
 ;         "!0!"
 ;         26285))
 ;   (define-fun
-;      a1IT
+;      enc
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        2))
+;   (define-fun
+;      a1IR
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         16122))
+;   (define-fun
+;      a1IV
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         8945))
+;   (define-fun
+;      one
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      a1IS
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -7988,11 +7935,6 @@
 ;           0)
 ;         "!0!"
 ;         2997))
-;   (define-fun
-;      one
-;      ()
-;      Int
-;      1)
 ;   (define-fun
 ;      a1IW
 ;      ()
@@ -8016,19 +7958,7 @@
 ;              (Array String Int))
 ;           0)
 ;         "!0!"
-;         8945))
-;   (define-fun
-;      a1IS
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         16122))
+;         20537))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -8105,23 +8035,21 @@
 (declare-const a1Jl String)
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base a1Jl one)
-                 (store base a1Jl one))
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base a1Jl one)
+              (store base a1Jl one))
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)))
       :named
       wanted-4))
 (check-sat)
@@ -8132,23 +8060,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base a1Jl one)
-;                 (store base a1Jl one))
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base a1Jl one)
+;              (store base a1Jl one))
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)))
 ;      :named
 ;      wanted-4))
 (get-unsat-core)
@@ -8244,34 +8170,32 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1Jv
-                 (
-                   (_
-                      map
-                      (-
-                         (Int Int)
-                         Int))
-                   (
-                     (as
-                        const
-                        (Array String Int))
-                     0)
-                   a1Jv))
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1Jv
+              (
+                (_
+                   map
+                   (-
+                      (Int Int)
+                      Int))
+                (
+                  (as
+                     const
+                     (Array String Int))
+                  0)
+                a1Jv))
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)))
       :named
       wanted-5))
 (check-sat)
@@ -8282,34 +8206,32 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1Jv
-;                 (
-;                   (_
-;                      map
-;                      (-
-;                         (Int Int)
-;                         Int))
-;                   (
-;                     (as
-;                        const
-;                        (Array String Int))
-;                     0)
-;                   a1Jv))
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1Jv
+;              (
+;                (_
+;                   map
+;                   (-
+;                      (Int Int)
+;                      Int))
+;                (
+;                  (as
+;                     const
+;                     (Array String Int))
+;                  0)
+;                a1Jv))
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)))
 ;      :named
 ;      wanted-5))
 (get-unsat-core)
@@ -8383,23 +8305,21 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1JC
-                 (
-                   (as
-                      const
-                      (Array String Int))
-                   0))
-               a1JC)))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1JC
+              (
+                (as
+                   const
+                   (Array String Int))
+                0))
+            a1JC))
       :named
       wanted-6))
 (check-sat)
@@ -8410,23 +8330,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1JC
-;                 (
-;                   (as
-;                      const
-;                      (Array String Int))
-;                   0))
-;               a1JC)))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1JC
+;              (
+;                (as
+;                   const
+;                   (Array String Int))
+;                0))
+;            a1JC))
 ;      :named
 ;      wanted-6))
 (get-unsat-core)
@@ -8511,26 +8429,24 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1JI
-                 a1JJ)
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1JJ
-                 a1JI))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1JI
+              a1JJ)
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1JJ
+              a1JI)))
       :named
       wanted-7))
 (check-sat)
@@ -8541,26 +8457,24 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1JI
-;                 a1JJ)
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1JJ
-;                 a1JI))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1JI
+;              a1JJ)
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1JJ
+;              a1JI)))
 ;      :named
 ;      wanted-7))
 (get-unsat-core)
@@ -8684,40 +8598,38 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 a1JQ
-                 (
-                   (_
-                      map
-                      (+
-                         (Int Int)
-                         Int))
-                   a1JR
-                   a1JS))
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 (
-                   (_
-                      map
-                      (+
-                         (Int Int)
-                         Int))
-                   a1JQ
-                   a1JR)
-                 a1JS))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              a1JQ
+              (
+                (_
+                   map
+                   (+
+                      (Int Int)
+                      Int))
+                a1JR
+                a1JS))
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              (
+                (_
+                   map
+                   (+
+                      (Int Int)
+                      Int))
+                a1JQ
+                a1JR)
+              a1JS)))
       :named
       wanted-8))
 (check-sat)
@@ -8728,40 +8640,38 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 a1JQ
-;                 (
-;                   (_
-;                      map
-;                      (+
-;                         (Int Int)
-;                         Int))
-;                   a1JR
-;                   a1JS))
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 (
-;                   (_
-;                      map
-;                      (+
-;                         (Int Int)
-;                         Int))
-;                   a1JQ
-;                   a1JR)
-;                 a1JS))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              a1JQ
+;              (
+;                (_
+;                   map
+;                   (+
+;                      (Int Int)
+;                      Int))
+;                a1JR
+;                a1JS))
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              (
+;                (_
+;                   map
+;                   (+
+;                      (Int Int)
+;                      Int))
+;                a1JQ
+;                a1JR)
+;              a1JS)))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
@@ -8888,23 +8798,21 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               (
-                 (_
-                    map
-                    (-
-                       (Int Int)
-                       Int))
-                 (store base "byte" one)
-                 (store base "byte" one)))))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "byte" one)
+              (store base "byte" one))))
       :named
       wanted-2))
 (check-sat)
@@ -8915,23 +8823,21 @@
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               (
-;                 (_
-;                    map
-;                    (-
-;                       (Int Int)
-;                       Int))
-;                 (store base "byte" one)
-;                 (store base "byte" one)))))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "byte" one)
+;              (store base "byte" one))))
 ;      :named
 ;      wanted-2))
 (get-unsat-core)
@@ -9878,33 +9784,31 @@
    (Array String Int))
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 acDd
-                 acDd)
-               (
-                 (_
-                    map
-                    (+
-                       (Int Int)
-                       Int))
-                 acDa
-                 (
-                   (_
-                      map
-                      (+
-                         (Int Int)
-                         Int))
-                   acDa
-                   acDa)))))
+      (not
+         (=
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              acDd
+              acDd)
+            (
+              (_
+                 map
+                 (+
+                    (Int Int)
+                    Int))
+              acDa
+              (
+                (_
+                   map
+                   (+
+                      (Int Int)
+                      Int))
+                acDa
+                acDa))))
       :named
       wanted-2))
 (check-sat)
@@ -10519,27 +10423,25 @@
 ;      wanted-2
 ;      ()
 ;      Bool
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 acDd
-;                 acDd)
-;               (
-;                 (_
-;                    map
-;                    (+
-;                       (Int Int)
-;                       Int))
-;                 acDa
-;                 acDa
-;                 acDa)))))
+;      (not
+;         (=
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              acDd
+;              acDd)
+;            (
+;              (_
+;                 map
+;                 (+
+;                    (Int Int)
+;                    Int))
+;              acDa
+;              acDa
+;              acDa))))
 ;   (define-fun
 ;      given-2.39
 ;      ()
@@ -11257,40 +11159,38 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    acFb
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      acFb
-                      acFb))
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    acF7
-                    (
-                      (_
-                         map
-                         (+
-                            (Int Int)
-                            Int))
-                      acF7
-                      acF7)))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 acFb
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   acFb
+                   acFb))
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 acF7
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   acF7
+                   acF7))))
          (not
             (=
                (
@@ -11524,7 +11424,6 @@
 ;                         (Array String Int))
 ;                      0)))))
 ;         (or
-;            false
 ;            (not
 ;               (=
 ;                  (
@@ -11789,19 +11688,17 @@
 (assert
    (!
       (or
-         (or
-            false
-            (not
-               (=
-                  (
-                    (_
-                       map
-                       (+
-                          (Int Int)
-                          Int))
-                    acGH
-                    acGC)
-                  acGA)))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (+
+                       (Int Int)
+                       Int))
+                 acGH
+                 acGC)
+               acGA))
          (not
             (=
                (
@@ -11843,7 +11740,7 @@
 ;              (Array String Int))
 ;           2437)
 ;         "!0!"
-;         (- 1)))
+;         1))
 ;   (define-fun
 ;      acGV
 ;      ()
@@ -11861,7 +11758,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        2))
+;        3))
 ;   (define-fun
 ;      base
 ;      ()
@@ -11870,7 +11767,7 @@
 ;        (as
 ;           const
 ;           (Array String Int))
-;        2))
+;        3))
 ;   (define-fun
 ;      given-7.4
 ;      ()
@@ -11895,7 +11792,6 @@
 ;      ()
 ;      Bool
 ;      (or
-;         false
 ;         (not
 ;            (=
 ;               (
@@ -12854,16 +12750,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               acHw)))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            acHw))
       :named
       wanted-9))
 (check-sat)
@@ -13373,48 +13267,46 @@
 ;      :named
 ;      given-9.40)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               acHw)))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            acHw))
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
-; (given-9.21
+; (given-9.19
 ;    given-9.20
-;    given-9.19
 ;    given-9.18
-;    given-9.6
 ;    given-9.17
-;    given-9.15
-;    given-9.3
-;    given-9.14
-;    given-9.12
 ;    given-9.16
-;    given-9.5
-;    given-9.1
-;    given-9.9
+;    given-9.15
+;    given-9.14
+;    given-9.13
 ;    given-9.11
-;    given-9.10
 ;    given-9.4
+;    given-9.1
+;    given-9.10
 ;    given-9.7
-;    given-9.8
+;    given-9.9
+;    given-9.3
+;    given-9.6
+;    given-9.5
 ;    given-9.29
 ;    given-9.30
-;    given-9.31
 ;    given-9.28
 ;    given-9.27
 ;    given-9.26
 ;    given-9.25
 ;    given-9.24
 ;    given-9.23
+;    given-9.21
 ;    given-9.22
+;    given-9.2
+;    given-9.8
 ;    wanted-9
 ;    given-9.39
 ;    given-9.37
@@ -13422,9 +13314,9 @@
 ;    given-9.35
 ;    given-9.34
 ;    given-9.33
-;    given-9.2
-;    given-9.13
-;    given-9.32)
+;    given-9.32
+;    given-9.31
+;    given-9.12)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -13644,16 +13536,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               acHD)))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            acHD))
       :named
       wanted-11))
 (check-sat)
@@ -13760,16 +13650,14 @@
 ;      :named
 ;      given-11.9)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               acHD)))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            acHD))
 ;      :named
 ;      wanted-11))
 (get-unsat-core)
@@ -13885,16 +13773,14 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (=
-               (
-                 (as
-                    const
-                    (Array String Int))
-                 0)
-               acHL)))
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            acHL))
       :named
       wanted-13))
 (check-sat)
@@ -13932,16 +13818,14 @@
 ;      :named
 ;      given-13.3)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (=
-;               (
-;                 (as
-;                    const
-;                    (Array String Int))
-;                 0)
-;               acHL)))
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            acHL))
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
@@ -14057,10 +13941,8 @@
 ; DECS2 (unseen) 
 (assert
    (!
-      (or
-         false
-         (not
-            (= acHR acHT)))
+      (not
+         (= acHR acHT))
       :named
       wanted-15))
 (check-sat)
@@ -14105,14 +13987,12 @@
 ;      :named
 ;      given-15.4)
 ;   (!
-;      (or
-;         false
-;         (not
-;            (= acHR acHT)))
+;      (not
+;         (= acHR acHT))
 ;      :named
 ;      wanted-15))
 (get-unsat-core)
-; (given-15.2 given-15.3 given-15.4 wanted-15 given-15.1)
+; (given-15.2 given-15.4 wanted-15 given-15.3 given-15.1)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (exit)
