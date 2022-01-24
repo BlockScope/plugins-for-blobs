@@ -39,6 +39,11 @@ inMetresPerSecond = [u| m/s |]
 sum' :: [Quantity Double u] -> Quantity Double u
 sum' = foldr (+:) zero
 
+-- Gingerly now...
+
+-- w^-2 ~ kg^-2  =>  w ~ kg
+f :: (One /: (w ^: 2)) ~ (One /: [u| kg^2 |])  => Quantity a w -> Quantity a [u| kg |]
+f = id
 -- u ~ v * w, v^2 ~ v  =>  u ~ w
 g :: (u ~ (v *: w), (v ^: 2) ~ v) => Quantity a u -> Quantity a w
 g = id
