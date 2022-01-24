@@ -4,6 +4,7 @@
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -244,6 +245,8 @@
 ;      :named
 ;      given-1.7)
 ;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -342,6 +345,8 @@
 ;      :named
 ;      given-2.2)
 ;   (! false :named wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -440,6 +445,8 @@
 ;      :named
 ;      given-3.2)
 ;   (! false :named wanted-3))
+(get-unsat-core)
+; (wanted-3)
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -524,6 +531,8 @@
 ;      :named
 ;      given-4.2)
 ;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -831,6 +840,8 @@
 ;                     0))))))
 ;      :named
 ;      wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
@@ -929,6 +940,8 @@
 ;      :named
 ;      given-6.2)
 ;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -1027,6 +1040,8 @@
 ;      :named
 ;      given-7.2)
 ;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
@@ -1251,6 +1266,8 @@
 ;      :named
 ;      given-8.7)
 ;   (! false :named wanted-8))
+(get-unsat-core)
+; (wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -1624,6 +1641,15 @@
 ;                   0)))))
 ;      :named
 ;      wanted-9))
+(get-unsat-core)
+; (given-9.6
+;    given-9.5
+;    given-9.3
+;    given-9.7
+;    given-9.1
+;    given-9.4
+;    given-9.2
+;    wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -1708,6 +1734,8 @@
 ;      :named
 ;      given-10.2)
 ;   (! false :named wanted-10))
+(get-unsat-core)
+; (wanted-10)
 (pop 1)
 (echo "solver-finish-cycle-10")
 (exit)

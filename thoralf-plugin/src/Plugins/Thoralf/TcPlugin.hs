@@ -147,6 +147,7 @@ options =
     -- twice.
     [ ":interactive-mode"
     , ":produce-assertions"
+    , ":produce-models"
     , ":produce-assignments"
     , ":produce-proofs"
     , ":produce-unsat-assumptions"
@@ -292,7 +293,7 @@ thoralfSolver
                         return (Set.empty, c)
 
                     SMT.Unsat -> do
-                        tcPluginIO $ putStrLn "Inconsistent Givens" >> SMT.pop smtSolver
+                        tcPluginIO $ putStrLn "; Inconsistent Givens" >> SMT.pop smtSolver
                         return (Set.empty, TcPluginContradiction [])
 
                     SMT.Sat -> do
@@ -325,7 +326,9 @@ thoralfSolver
                         solveCheck <- case wantedCheck of
                             SMT.Unsat -> do
                                 assertions <- tcPluginIO $ getAssertions smtSolver
-                                tcPluginIO $ printAssertions assertions
+                                tcPluginIO $ printCommented assertions
+                                unsatCore <- tcPluginIO $ getUnsatCore smtSolver
+                                tcPluginIO $ printCommented unsatCore
                                 tcPluginIO (SMT.pop smtSolver)
 
                                 let solvedCts = mapMaybe (addEvTerm . eqCt) wExprs
@@ -336,7 +339,10 @@ thoralfSolver
 
                             SMT.Unknown -> tcPluginIO (SMT.pop smtSolver) >> noSolving
 
-                            SMT.Sat -> tcPluginIO (SMT.pop smtSolver) >> noSolving
+                            SMT.Sat ->do
+                                model <- tcPluginIO $ getModel smtSolver
+                                tcPluginIO $ printCommented model
+                                tcPluginIO (SMT.pop smtSolver) >> noSolving
 
                         return (decs2Unseen, solveCheck)
 
@@ -361,6 +367,8 @@ thoralfSolver
         constraintFiltered = (tab . showString "[constraints-filtered]") ""
 
         getAssertions = flip SMT.command (SMT.List [ SMT.Atom "get-assertions" ])
+        getModel = flip SMT.command (SMT.List [ SMT.Atom "get-model" ])
+        getUnsatCore = flip SMT.command (SMT.List [ SMT.Atom "get-unsat-core" ])
 
         logCtsProblem msg gs ds ws =
             sequence_
@@ -400,7 +408,7 @@ thoralfSolver
                 | dec <- Set.toList decs
                 ]
 
-        printAssertions as =
+        printCommented as =
             sequence_
                 [ putStrLn $ "; " ++ line
                 | line <- lines $ SMT.ppSExpr as ""
