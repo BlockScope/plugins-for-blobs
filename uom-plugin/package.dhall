@@ -12,7 +12,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "uom-plugin"
                 ]
               , main = "Tests.hs"
-              , other-modules = [ "UnitDefs", "UnitDefsTests", "Z" ]
+              , other-modules =
+                [ "Abelian", "UnitDefs", "UnitDefsTests", "UnQuantity", "Z" ]
               , source-dirs = "test-suite-units"
               , when =
                 [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"

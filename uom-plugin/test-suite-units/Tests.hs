@@ -64,6 +64,8 @@ import "uom-th" Data.UnitsOfMeasure.TH (u)
 import "uom-plugin" Data.UnitsOfMeasure.Convert
 import "uom-quantity" Data.UnitsOfMeasure.Show
 
+import Abelian (associativity, commutativity, unit, inverse, inverse2)
+import UnQuantity (testsUnQuantity)
 import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
@@ -74,10 +76,13 @@ import qualified Z (tests)
 
 myMass :: Quantity Double (Base "kg")
 myMass = [u| 65 kg |]
+
 gravityOnEarth :: Quantity Double [u| m/s^2 |]
 gravityOnEarth = [u| 9.808 m/(s*s) |]
+
 readMass :: Read a => String -> Quantity a (Base "kg")
 readMass = fmap [u| kg |] read
+
 forceOnGround :: Quantity Double [u| N |]
 forceOnGround = gravityOnEarth *: myMass
 
@@ -115,24 +120,6 @@ angularSpeed :: Quantity Rational [u|rad/s|]
 angularSpeed = z x
   where x :: Quantity Rational [u|s^-1|]
         x = undefined
-
-
--- Check that the abelian group laws hold
-
-associativity :: Quantity a (u *: (v *: w)) -> Quantity a ((u *: v) *: w)
-associativity = id
-
-commutativity :: Quantity a (u *: v) -> Quantity a (v *: u)
-commutativity = id
-
-unit :: Quantity a (u *: One) -> Quantity a u
-unit = id
-
-inverse :: Quantity a (u *: (One /: u)) -> Quantity a One
-inverse = id
-
-inverse2 :: proxy b -> Quantity a (Base b /: Base b) -> Quantity a One
-inverse2 _ = id
 
 
 -- Gingerly now...
@@ -202,22 +189,7 @@ main = defaultMain tests
 
 tests :: TestTree
 tests = testGroup "uom-plugin:units"
-  [ testGroup "Get the underlying value with unQuantity"
-    [ testCase "unQuantity 3 m"                $ unQuantity [u| 3 m |]            @?= 3
-    , testCase "unQuantity 3 s^2"              $ unQuantity [u| 3 s^2 |]          @?= 3
-#if __GLASGOW_HASKELL__ > 802
-    -- TODO: Find out why unQuantity (3 m s^-1) fails with ghc-8.0.2.
-    -- solveSimpleWanteds: too many iterations (limit = 4)
-    , testCase "unQuantity 3 m s^-1"           $ unQuantity [u| 3 m s^-1 |]       @?= 3
-#endif
-    , testCase "unQuantity 3.0 kg m^2 / m s^2" $ unQuantity [u| 3.0 kg m / s^2 |] @?= 3
-    , testCase "unQuantity 1"                  $ unQuantity (mk 1)                @?= 1
-    , testCase "unQuantity 1 (1/s)"            $ unQuantity [u| 1 (1/s) |]        @?= 1
-    , testCase "unQuantity 1 1/s"              $ unQuantity [u| 1 1/s |]          @?= 1
-    , testCase "unQuantity 1 s^-1"             $ unQuantity [u| 1 s^-1 |]         @?= 1
-    , testCase "unQuantity 2 1 / kg s"         $ unQuantity [u| 2 1 / kg s |]     @?= 2
-    , testCase "unQuantity (1 % 2) kg"         $ unQuantity [u| 1 % 2 kg |]       @?= 0.5
-    ]
+  [ testsUnQuantity
   , testGroup "Attach units by applying the quasiquoter without a numeric value"
     [ testCase "m 3"                           $ [u| m |] 3           @?= [u| 3 m |]
     , testCase "m <$> [3..5]"                  $ [u| m |] <$> [3..5]  @?= [[u| 3 m |],[u| 4 m |],[u| 5 m |]]

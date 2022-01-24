@@ -119,8 +119,10 @@ test-suite units
   type: exitcode-stdio-1.0
   main-is: Tests.hs
   other-modules:
+      Abelian
       UnitDefs
       UnitDefsTests
+      UnQuantity
       Z
   hs-source-dirs:
       test-suite-units
@@ -158,8 +160,10 @@ test-suite unpack-solve
   type: exitcode-stdio-1.0
   main-is: Tests.hs
   other-modules:
+      Abelian
       UnitDefs
       UnitDefsTests
+      UnQuantity
       Z
   hs-source-dirs:
       test-suite-units
