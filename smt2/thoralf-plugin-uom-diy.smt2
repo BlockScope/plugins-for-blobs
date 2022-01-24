@@ -51,13 +51,13 @@
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1u1  <=  mps
-a1Bw  <=  fsk_a1Bw
-a1By  <=  fsk_a1By
-a1BA  <=  fsk_a1BA
-a1BC  <=  fsk_a1BC
-a1BE  <=  fsk_a1BE
-a1BG  <=  fsk_a1BG
+;  a1u1  <=  mps
+;  a1Bw  <=  fsk_a1Bw
+;  a1By  <=  fsk_a1By
+;  a1BA  <=  fsk_a1BA
+;  a1BC  <=  fsk_a1BC
+;  a1BE  <=  fsk_a1BE
+;  a1BG  <=  fsk_a1BG
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
@@ -195,10 +195,10 @@ unsat
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1Cl  <=  a
-a1Cm  <=  b
-a1Cn  <=  c
-a1Cv  <=  fsk_a1Cv
+;  a1Cl  <=  a
+;  a1Cm  <=  b
+;  a1Cn  <=  c
+;  a1Cv  <=  fsk_a1Cv
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
@@ -271,10 +271,10 @@ unsat
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1CU  <=  a
-a1CV  <=  b
-a1CW  <=  c
-a1D8  <=  fsk_a1D8
+;  a1CU  <=  a
+;  a1CV  <=  b
+;  a1CW  <=  c
+;  a1D8  <=  fsk_a1D8
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
@@ -347,10 +347,10 @@ unsat
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1E5  <=  s
-a1E6  <=  n
-a1E7  <=  b
-a1Ej  <=  fsk_a1Ej
+;  a1E5  <=  s
+;  a1E6  <=  n
+;  a1E7  <=  b
+;  a1Ej  <=  fsk_a1Ej
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
@@ -651,10 +651,10 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1EB  <=  a
-a1EC  <=  b
-a1ED  <=  c
-a1GO  <=  fsk_a1GO
+;  a1EB  <=  a
+;  a1EC  <=  b
+;  a1ED  <=  c
+;  a1GO  <=  fsk_a1GO
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
@@ -727,10 +727,10 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1ER  <=  a
-a1ES  <=  b
-a1ET  <=  c
-a1GX  <=  fsk_a1GX
+;  a1ER  <=  a
+;  a1ES  <=  b
+;  a1ET  <=  c
+;  a1GX  <=  fsk_a1GX
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
@@ -813,13 +813,13 @@ unsat
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1Fi  <=  mps
-a1H6  <=  fsk_a1H6
-a1H8  <=  fsk_a1H8
-a1Ha  <=  fsk_a1Ha
-a1Hc  <=  fsk_a1Hc
-a1He  <=  fsk_a1He
-a1Hg  <=  fsk_a1Hg
+;  a1Fi  <=  mps
+;  a1H6  <=  fsk_a1H6
+;  a1H8  <=  fsk_a1H8
+;  a1Ha  <=  fsk_a1Ha
+;  a1Hc  <=  fsk_a1Hc
+;  a1He  <=  fsk_a1He
+;  a1Hg  <=  fsk_a1Hg
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
@@ -1005,13 +1005,13 @@ unsat
 ;        0)))
 
 ; GIVENS (names)
-a1Fi  <=  mps
-a1H6  <=  fsk_a1H6
-a1H8  <=  fsk_a1H8
-a1Ha  <=  fsk_a1Ha
-a1Hc  <=  fsk_a1Hc
-a1He  <=  fsk_a1He
-a1Hg  <=  fsk_a1Hg
+;  a1Fi  <=  mps
+;  a1H6  <=  fsk_a1H6
+;  a1H8  <=  fsk_a1H8
+;  a1Ha  <=  fsk_a1Ha
+;  a1Hc  <=  fsk_a1Hc
+;  a1He  <=  fsk_a1He
+;  a1Hg  <=  fsk_a1Hg
 (push 1)
 ; DECS1 (seen) 
 ; (declare-const a1Fi (Array String Int))
@@ -1157,7 +1157,7 @@ sat
 ;        0)))
 
 ; WANTEDS (names)
-a1Fi  <=  mps
+;  a1Fi  <=  mps
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -1223,10 +1223,10 @@ unsat
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1FE  <=  s
-a1FF  <=  n
-a1FG  <=  b
-a1Hx  <=  fsk_a1Hx
+;  a1FE  <=  s
+;  a1FF  <=  n
+;  a1FG  <=  b
+;  a1Hx  <=  fsk_a1Hx
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 

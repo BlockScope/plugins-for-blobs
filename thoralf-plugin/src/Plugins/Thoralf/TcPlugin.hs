@@ -385,7 +385,8 @@ thoralfSolver
 
         printAltNames ns =
             sequence_
-                [ putStrLn $ showSDocUnsafe (ppr thoralfName <+> text " <= " <+> ppr ghcName)
+                [ putStrLn . showSDocUnsafe $
+                    ( text "; " <+> ppr thoralfName <+> text " <= " <+> ppr ghcName)
                 | (ghcName, thoralfName) <- ns
                 ]
 
