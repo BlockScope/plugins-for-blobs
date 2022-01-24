@@ -97,33 +97,33 @@ solverWithLevel (TraceSmtTalk dbg)
                     case msgContent of
                         [msg@"sat"] ->
                             if | dbgRecvCheckSat && dbgArrow -> logMsg s
-                                | dbgRecvCheckSat -> logMsg msg
-                                | otherwise -> return ()
+                               | dbgRecvCheckSat -> logMsg $ "; " ++ msg
+                               | otherwise -> return ()
 
                         [msg@"unsat"] ->
                             if | dbgRecvCheckSat && dbgArrow -> logMsg s
-                                | dbgRecvCheckSat -> logMsg msg
-                                | otherwise -> return ()
+                               | dbgRecvCheckSat -> logMsg $ "; " ++ msg
+                               | otherwise -> return ()
 
                         [msg@"success"] ->
                             if | dbgRecvSuccess && dbgArrow -> logMsg s
-                                | dbgRecvSuccess -> logMsg msg
-                                | otherwise -> return ()
+                               | dbgRecvSuccess -> logMsg msg
+                               | otherwise -> return ()
 
                         [msg@"unsupported"] ->
                             if | dbgRecvSuccess && dbgArrow -> logMsg s
-                                | dbgRecvSuccess -> logMsg msg
-                                | otherwise -> return ()
+                               | dbgRecvSuccess -> logMsg msg
+                               | otherwise -> return ()
 
                         "error" : _ ->
                             if | dbgRecvSuccess && dbgArrow -> logMsg s
-                                | dbgRecvSuccess -> logMsg $ drop (length "[<-recv] error ") s
-                                | otherwise -> return ()
+                               | dbgRecvSuccess -> logMsg $ drop (length "[<-recv] error ") s
+                               | otherwise -> return ()
 
                         _msgs ->
                             if | dbgRecvAll && dbgArrow -> logMsg s
-                                | dbgRecvAll -> logMsg s
-                                | otherwise -> return ()
+                               | dbgRecvAll -> logMsg s
+                               | otherwise -> return ()
 
                 (_, _, "[stderr] " : _) ->
                     when (traceErr dbg) $ logMsg s

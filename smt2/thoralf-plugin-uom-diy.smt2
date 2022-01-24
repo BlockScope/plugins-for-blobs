@@ -162,7 +162,7 @@
       :named
       given-1.7))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
@@ -172,7 +172,7 @@ sat
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
 (pop 1)
 (echo "solver-finish-cycle-1")
@@ -238,7 +238,7 @@ unsat
       :named
       given-2.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -248,7 +248,7 @@ sat
 (assert
    (! false :named wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
 (pop 1)
 (echo "solver-finish-cycle-2")
@@ -314,7 +314,7 @@ unsat
       :named
       given-3.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
@@ -324,7 +324,7 @@ sat
 (assert
    (! false :named wanted-3))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-3")
 (pop 1)
 (echo "solver-finish-cycle-3")
@@ -382,7 +382,7 @@ unsat
       :named
       given-4.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
@@ -392,7 +392,7 @@ sat
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
 (pop 1)
 (echo "solver-finish-cycle-4")
@@ -486,7 +486,7 @@ unsat
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
@@ -628,7 +628,7 @@ sat
       :named
       wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
 (pop 1)
 (echo "solver-finish-cycle-5")
@@ -694,7 +694,7 @@ unsat
       :named
       given-6.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
@@ -704,7 +704,7 @@ sat
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
 (pop 1)
 (echo "solver-finish-cycle-6")
@@ -770,7 +770,7 @@ unsat
       :named
       given-7.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
@@ -780,7 +780,7 @@ sat
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
 (pop 1)
 (echo "solver-finish-cycle-7")
@@ -924,7 +924,7 @@ unsat
       :named
       given-8.7))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
@@ -934,7 +934,7 @@ sat
 (assert
    (! false :named wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
 (pop 1)
 (echo "solver-finish-cycle-8")
@@ -1116,7 +1116,7 @@ unsat
       :named
       given-9.7))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
@@ -1200,7 +1200,7 @@ sat
       :named
       wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
 (pop 1)
 (echo "solver-finish-cycle-9")
@@ -1258,7 +1258,7 @@ unsat
       :named
       given-10.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
@@ -1268,7 +1268,7 @@ sat
 (assert
    (! false :named wanted-10))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-10")
 (pop 1)
 (echo "solver-finish-cycle-10")
