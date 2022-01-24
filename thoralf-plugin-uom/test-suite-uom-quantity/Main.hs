@@ -3,19 +3,20 @@
 -- NOTE: The plugin Plugins.UoM.Unpack in needed for Known (Unpack (Base "m"))
 -- otherwise we'll get an error like this:
 --
---      • No instance for (Data.UnitsOfMeasure.Singleton.KnownUnit
---                           (Data.UnitsOfMeasure.Syntax.Unpack (Data.Theory.UoM.Base "m")))
---          arising from a use of ‘show’
---      • In the second argument of ‘printf’, namely
---          ‘(show $ metres (mkMpS 3) (mkS 3))’
---        In the second argument of ‘($)’, namely
---          ‘printf "3 m/s for 3 s = %s m" (show $ metres (mkMpS 3) (mkS 3))’
---        In a stmt of a 'do' block:
---          putStrLn
---            $ printf "3 m/s for 3 s = %s m" (show $ metres (mkMpS 3) (mkS 3))
---     |
---  18 |     putStrLn $ printf "3 m/s for 3 s = %s m" (show $ metres (mkMpS 3) (mkS 3))
---     |
+--     • No instance for (Data.UnitsOfMeasure.Singleton.KnownUnit
+--                          (Data.UnitsOfMeasure.Syntax.Unpack (Data.Theory.UoM.Base "m")))
+--         arising from a use of ‘show’
+--     • In the second argument of ‘printf’, namely
+--         ‘(show $ metres (mkMpS 3) (mkS 3))’
+--       In the second argument of ‘($)’, namely
+--         ‘printf "3 m/s for 3 s = %s m" (show $ metres (mkMpS 3) (mkS 3))’
+--       In a stmt of a 'do' block:
+--         putStrLn
+--           $ printf "3 m/s for 3 s = %s m" (show $ metres (mkMpS 3) (mkS 3))
+--    |
+-- __ |     putStrLn $ printf "3 m/s for 3 s = %s m" (show $ metres (mkMpS 3) (mkS 3))
+--    |
+
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
 
