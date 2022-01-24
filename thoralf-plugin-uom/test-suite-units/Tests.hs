@@ -1,8 +1,9 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE AllowAmbiguousTypes #-}
-{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
@@ -50,6 +51,23 @@ givens2 = id
 givens3 :: ((a ^: 2) ~ (b ^: 3), (b ^: 37) ~ One) => Quantity Double b -> Quantity Double One
 givens3 = id
 
+
+
+-- Miscellaneous bits and bobs
+
+-- Pattern splices are supported, albeit with restricted types
+patternSplice :: Quantity Integer [u| m |] -> Quantity Rational [u| kg/s |] -> Bool
+patternSplice [u| 2 m |] [u| 0.0 kg / s |] = True
+patternSplice [u| 1 m |] [u| 0.1 kg / s |] = True
+patternSplice _          _                 = False
+
+-- This declares a synonym for One
+[u| dimensionless = 1 |]
+dimensionless :: Quantity a [u|dimensionless|] -> Quantity a [u|1|]
+dimensionless = id
+
+
+-- Runtime testsuite
 main :: IO ()
 main = defaultMain tests
 
