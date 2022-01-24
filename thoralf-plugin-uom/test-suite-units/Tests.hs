@@ -12,16 +12,30 @@
 
 module Main where
 
-import "uom-quantity" Data.UnitsOfMeasure
-import "uom-th" Data.UnitsOfMeasure.TH
-
-import UnitDefs ()
 import Test.Tasty
 import Test.Tasty.HUnit
 
+import "uom-quantity" Data.UnitsOfMeasure
+import "uom-quantity" Data.UnitsOfMeasure.Show
+import "uom-th" Data.UnitsOfMeasure.TH (u)
+
+import UnitDefs ()
 import Defs ()
 import UnQuantity (testsUnQuantity)
 
+-- Some basic examples
+
+myMass :: Quantity Double (Base "kg")
+myMass = [u| 65 kg |]
+
+gravityOnEarth :: Quantity Double [u| m/s^2 |]
+gravityOnEarth = [u| 9.808 m/(s*s) |]
+
+readMass :: Read a => String -> Quantity a (Base "kg")
+readMass = fmap [u| kg |] read
+
+inMetresPerSecond :: a -> Quantity a [u| m/s |]
+inMetresPerSecond = [u| m/s |]
 sum' :: [Quantity Double u] -> Quantity Double u
 sum' = foldr (+:) zero
 
@@ -83,6 +97,10 @@ tests = testGroup "thoralf-plugin:units"
     , testCase "show 1 s^-1"             $ show [u| 1 s^-1 |]             @?= "[u| 1 s^-1 |]"
     , testCase "show 2 1 / kg s"         $ show [u| 2 1 / kg s |]         @?= "[u| 2 kg^-1 s^-1 |]"
     , testCase "show (1 % 2) kg"         $ show [u| 1 % 2 kg |]           @?= "[u| 0.5 kg |]"
+    ]
+  , testGroup "showQuantity"
+    [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
+    , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"
     ]
   , testGroup "read . show"
     [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
