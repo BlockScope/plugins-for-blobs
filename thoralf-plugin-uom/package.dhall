@@ -131,7 +131,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , ghc-options = testopts
               , main = "Tests.hs"
               , other-modules =
-                [ "Plugins.Thoralf.UnitDefs", "Abelian", "Defs", "UnQuantity" ]
+                [ "Abelian", "Defs", "UnitDefs", "UnitDefsTests", "UnQuantity" ]
               , source-dirs = "test-suite-units"
               }
             }

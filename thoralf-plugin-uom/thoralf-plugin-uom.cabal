@@ -140,9 +140,10 @@ test-suite units
   type: exitcode-stdio-1.0
   main-is: Tests.hs
   other-modules:
-      Plugins.Thoralf.UnitDefs
       Abelian
       Defs
+      UnitDefs
+      UnitDefsTests
       UnQuantity
   hs-source-dirs:
       test-suite-units

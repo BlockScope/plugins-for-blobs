@@ -10,7 +10,7 @@
 module Main where
 
 import "uom-quantity" Data.UnitsOfMeasure
-import Plugins.Thoralf.UnitDefs ()
+import UnitDefs ()
 import Test.Tasty
 
 import Defs ()

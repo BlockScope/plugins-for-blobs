@@ -1,10 +1,8 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
-
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE PackageImports #-}
@@ -15,7 +13,7 @@
 
 module Defs where
 
-import Plugins.Thoralf.UnitDefs ()
+import UnitDefs ()
 
 import "uom-th" Data.UnitsOfMeasure.TH
 
