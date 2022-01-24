@@ -4,6 +4,7 @@
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -40,17 +41,28 @@
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -89,8 +101,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -113,6 +127,8 @@ sat
 ;      (store base "s" one)))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -135,8 +151,34 @@ sat
       :named
       wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (as
+;                    const
+;                    (Array String Int))
+;                 0)
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (store base "s" one)
+;                 (store base "s" one)))))
+;      :named
+;      wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -157,17 +199,28 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-3))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-3")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (! false :named wanted-3))
+(get-unsat-core)
+; (wanted-3)
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -206,8 +259,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
@@ -230,6 +285,8 @@ sat
 ;      (store base "m" one)))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -252,8 +309,34 @@ sat
       :named
       wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (as
+;                    const
+;                    (Array String Int))
+;                 0)
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (store base "m" one)
+;                 (store base "m" one)))))
+;      :named
+;      wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (exit)
@@ -262,6 +345,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -303,11 +387,17 @@ unsat
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
 ; GIVENS (names)
-aaSm  <=  mps
-aaSw  <=  fsk_aaSw
-aaSy  <=  fsk_aaSy
-aaSA  <=  fsk_aaSA
+;  aaSm  <=  mps
+;  aaSw  <=  fsk_aaSw
+;  aaSy  <=  fsk_aaSy
+;  aaSA  <=  fsk_aaSA
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aaSA (Array String Int))
+; (declare-const aaSm (Array String Int))
+; (declare-const aaSw (Array String Int))
+; (declare-const aaSy (Array String Int))
 (declare-const
    aaSm
    (Array String Int))
@@ -354,16 +444,54 @@ aaSA  <=  fsk_aaSA
       :named
       given-1.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (store base "m" one)
+;         aaSw)
+;      :named
+;      given-1.1)
+;   (!
+;      (=
+;         (store base "s" one)
+;         aaSy)
+;      :named
+;      given-1.2)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           aaSw
+;           aaSy)
+;         aaSA)
+;      :named
+;      given-1.3)
+;   (!
+;      (= aaSA aaSm)
+;      :named
+;      given-1.4)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -385,11 +513,17 @@ unsat
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
 ; GIVENS (names)
-aaTA  <=  a
-aaTB  <=  b
-aaTC  <=  c
-aaTK  <=  fsk_aaTK
+;  aaTA  <=  a
+;  aaTB  <=  b
+;  aaTC  <=  c
+;  aaTK  <=  fsk_aaTK
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aaTA (Array String Int))
+; (declare-const aaTB (Array String Int))
+; (declare-const aaTC (Array String Int))
+; (declare-const aaTK (Array String Int))
 (declare-const
    aaTA
    (Array String Int))
@@ -422,16 +556,42 @@ aaTK  <=  fsk_aaTK
       :named
       given-2.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           aaTA
+;           aaTB)
+;         aaTK)
+;      :named
+;      given-2.1)
+;   (!
+;      (= aaTK aaTC)
+;      :named
+;      given-2.2)
+;   (! false :named wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -453,11 +613,17 @@ unsat
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
 ; GIVENS (names)
-aaU9  <=  a
-aaUa  <=  b
-aaUb  <=  c
-aaUn  <=  fsk_aaUn
+;  aaU9  <=  a
+;  aaUa  <=  b
+;  aaUb  <=  c
+;  aaUn  <=  fsk_aaUn
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aaU9 (Array String Int))
+; (declare-const aaUa (Array String Int))
+; (declare-const aaUb (Array String Int))
+; (declare-const aaUn (Array String Int))
 (declare-const
    aaU9
    (Array String Int))
@@ -490,16 +656,42 @@ aaUn  <=  fsk_aaUn
       :named
       given-3.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-3))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-3")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aaU9
+;           aaUa)
+;         aaUn)
+;      :named
+;      given-3.1)
+;   (!
+;      (= aaUn aaUb)
+;      :named
+;      given-3.2)
+;   (! false :named wanted-3))
+(get-unsat-core)
+; (wanted-3)
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -568,8 +760,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
@@ -616,6 +810,8 @@ sat
 ;      (store base "s" one)))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -660,8 +856,56 @@ sat
       :named
       wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         (or
+;            false
+;            (not
+;               (=
+;                  (store base "m" one)
+;                  (
+;                    (_
+;                       map
+;                       (+
+;                          (Int Int)
+;                          Int))
+;                    (
+;                      (_
+;                         map
+;                         (-
+;                            (Int Int)
+;                            Int))
+;                      (store base "m" one)
+;                      (store base "s" one))
+;                    (store base "s" one)))))
+;         (not
+;            (=
+;               (store base "m" one)
+;               (
+;                 (_
+;                    map
+;                    (+
+;                       (Int Int)
+;                       Int))
+;                 (
+;                   (_
+;                      map
+;                      (-
+;                         (Int Int)
+;                         Int))
+;                   (store base "m" one)
+;                   (store base "s" one))
+;                 (store base "s" one)))))
+;      :named
+;      wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -683,11 +927,17 @@ unsat
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
 ; GIVENS (names)
-aaVf  <=  a
-aaVg  <=  b
-aaVh  <=  c
-aaWT  <=  fsk_aaWT
+;  aaVf  <=  a
+;  aaVg  <=  b
+;  aaVh  <=  c
+;  aaWT  <=  fsk_aaWT
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aaVf (Array String Int))
+; (declare-const aaVg (Array String Int))
+; (declare-const aaVh (Array String Int))
+; (declare-const aaWT (Array String Int))
 (declare-const
    aaVf
    (Array String Int))
@@ -720,16 +970,42 @@ aaWT  <=  fsk_aaWT
       :named
       given-5.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           aaVf
+;           aaVg)
+;         aaWT)
+;      :named
+;      given-5.1)
+;   (!
+;      (= aaWT aaVh)
+;      :named
+;      given-5.2)
+;   (! false :named wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
@@ -751,11 +1027,17 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-aaVw  <=  a
-aaVx  <=  b
-aaVy  <=  c
-aaX2  <=  fsk_aaX2
+;  aaVw  <=  a
+;  aaVx  <=  b
+;  aaVy  <=  c
+;  aaX2  <=  fsk_aaX2
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aaVw (Array String Int))
+; (declare-const aaVx (Array String Int))
+; (declare-const aaVy (Array String Int))
+; (declare-const aaX2 (Array String Int))
 (declare-const
    aaVw
    (Array String Int))
@@ -788,16 +1070,42 @@ aaX2  <=  fsk_aaX2
       :named
       given-6.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aaVw
+;           aaVx)
+;         aaX2)
+;      :named
+;      given-6.1)
+;   (!
+;      (= aaX2 aaVy)
+;      :named
+;      given-6.2)
+;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -823,11 +1131,17 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-aaVY  <=  mps
-aaXb  <=  fsk_aaXb
-aaXd  <=  fsk_aaXd
-aaXf  <=  fsk_aaXf
+;  aaVY  <=  mps
+;  aaXb  <=  fsk_aaXb
+;  aaXd  <=  fsk_aaXd
+;  aaXf  <=  fsk_aaXf
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aaVY (Array String Int))
+; (declare-const aaXb (Array String Int))
+; (declare-const aaXd (Array String Int))
+; (declare-const aaXf (Array String Int))
 (declare-const
    aaVY
    (Array String Int))
@@ -874,16 +1188,54 @@ aaXf  <=  fsk_aaXf
       :named
       given-7.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (store base "m" one)
+;         aaXb)
+;      :named
+;      given-7.1)
+;   (!
+;      (=
+;         (store base "s" one)
+;         aaXd)
+;      :named
+;      given-7.2)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           aaXb
+;           aaXd)
+;         aaXf)
+;      :named
+;      given-7.3)
+;   (!
+;      (= aaXf aaVY)
+;      :named
+;      given-7.4)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
@@ -923,11 +1275,17 @@ unsat
 ;    (store base "m" one))
 
 ; GIVENS (names)
-aaVY  <=  mps
-aaXb  <=  fsk_aaXb
-aaXd  <=  fsk_aaXd
-aaXf  <=  fsk_aaXf
+;  aaVY  <=  mps
+;  aaXb  <=  fsk_aaXb
+;  aaXd  <=  fsk_aaXd
+;  aaXf  <=  fsk_aaXf
 (push 1)
+; DECS1 (seen) 
+; (declare-const aaVY (Array String Int))
+; (declare-const aaXb (Array String Int))
+; (declare-const aaXd (Array String Int))
+; (declare-const aaXf (Array String Int))
+; DECS1 (unseen) 
 (declare-const
    aaVY
    (Array String Int))
@@ -974,7 +1332,7 @@ aaXf  <=  fsk_aaXf
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
@@ -993,7 +1351,9 @@ sat
 ;    (store base "m" one))
 
 ; WANTEDS (names)
-aaVY  <=  mps
+;  aaVY  <=  mps
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -1012,8 +1372,59 @@ aaVY  <=  mps
       :named
       wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (store base "m" one)
+;         aaXb)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (store base "s" one)
+;         aaXd)
+;      :named
+;      given-8.2)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           aaXb
+;           aaXd)
+;         aaXf)
+;      :named
+;      given-8.3)
+;   (!
+;      (= aaXf aaVY)
+;      :named
+;      given-8.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (_
+;                    map
+;                    (+
+;                       (Int Int)
+;                       Int))
+;                 aaVY
+;                 (store base "s" one))
+;               (store base "m" one))))
+;      :named
+;      wanted-8))
+(get-unsat-core)
+; (given-8.2 given-8.4 given-8.1 given-8.3 wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (exit)
@@ -1022,6 +1433,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -1058,17 +1470,28 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (exit)
@@ -1077,6 +1500,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -1113,17 +1537,28 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -1162,8 +1597,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -1186,6 +1623,8 @@ sat
 ;      (store base "s" one)))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -1208,8 +1647,34 @@ sat
       :named
       wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (as
+;                    const
+;                    (Array String Int))
+;                 0)
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (store base "s" one)
+;                 (store base "s" one)))))
+;      :named
+;      wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -1230,17 +1695,28 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-3))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-3")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (! false :named wanted-3))
+(get-unsat-core)
+; (wanted-3)
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -1279,8 +1755,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
@@ -1303,6 +1781,8 @@ sat
 ;      (store base "m" one)))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -1325,8 +1805,34 @@ sat
       :named
       wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (as
+;                    const
+;                    (Array String Int))
+;                 0)
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (store base "m" one)
+;                 (store base "m" one)))))
+;      :named
+;      wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (exit)

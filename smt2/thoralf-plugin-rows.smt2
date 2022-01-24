@@ -4,6 +4,7 @@
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -28,6 +29,7 @@
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -79,18 +81,37 @@
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a19p  <=  a
-a19q  <=  b
-a19r  <=  ab
-a19s  <=  c
-a19t  <=  abc
-a19u  <=  bc
-a19v  <=  abc'
-a19R  <=  fsk_a19R
-a19W  <=  fsk_a19W
-a1a1  <=  fsk_a1a1
-a1a6  <=  fsk_a1a6
+;  a19p  <=  a
+;  a19q  <=  b
+;  a19r  <=  ab
+;  a19s  <=  c
+;  a19t  <=  abc
+;  a19u  <=  bc
+;  a19v  <=  abc'
+;  a19R  <=  fsk_a19R
+;  a19W  <=  fsk_a19W
+;  a1a1  <=  fsk_a1a1
+;  a1a6  <=  fsk_a1a6
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta19o)) (y (Maybe Sorta19o))) (=> (and ((_ is (just (Sorta19o) (Maybe Sorta19o))) x) ((_ is (just (Sorta19o) (Maybe Sorta19o))) y)) (= (both8514226977520841413 x y) x))))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 y (as nothing (Maybe Sorta19o))) (as nothing (Maybe Sorta19o)))))
+; (declare-const a19R (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19W (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19p (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19q (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19r (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19s (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19t (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19u (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19v (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a1 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a6 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-fun both8514226977520841413 ((Maybe Sorta19o) (Maybe Sorta19o)) (Maybe Sorta19o))
+; (declare-sort Sorta19n)
+; (declare-sort Sorta19o)
 (declare-sort Sorta19n)
 (declare-sort Sorta19o)
 (declare-const
@@ -263,16 +284,120 @@ a1a6  <=  fsk_a1a6
       :named
       given-1.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta19o)))
+;      (=
+;         (both8514226977520841413
+;            y
+;            (as
+;               nothing
+;               (Maybe Sorta19o)))
+;         (as
+;            nothing
+;            (Maybe Sorta19o))))
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta19o)))
+;      (=
+;         (both8514226977520841413 nothing y)
+;         nothing))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta19o))
+;        (y
+;           (Maybe Sorta19o)))
+;      (=>
+;         (and
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta19o)
+;                    (Maybe Sorta19o)))
+;              x)
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta19o)
+;                    (Maybe Sorta19o)))
+;              y))
+;         (=
+;            (both8514226977520841413 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19q
+;           a19s)
+;         a1a1)
+;      :named
+;      given-1.1)
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19r
+;           a19s)
+;         a19W)
+;      :named
+;      given-1.2)
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19u)
+;         a1a6)
+;      :named
+;      given-1.3)
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19q)
+;         a19R)
+;      :named
+;      given-1.4)
+;   (!
+;      (= a1a1 a19u)
+;      :named
+;      given-1.5)
+;   (!
+;      (= a19R a19r)
+;      :named
+;      given-1.6)
+;   (!
+;      (= a19W a19t)
+;      :named
+;      given-1.7)
+;   (!
+;      (= a1a6 a19v)
+;      :named
+;      given-1.8)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-1")
@@ -306,18 +431,37 @@ unsat
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a19p  <=  a
-a19q  <=  b
-a19r  <=  ab
-a19s  <=  c
-a19t  <=  abc
-a19u  <=  bc
-a19v  <=  abc'
-a19R  <=  fsk_a19R
-a19W  <=  fsk_a19W
-a1a1  <=  fsk_a1a1
-a1a6  <=  fsk_a1a6
+;  a19p  <=  a
+;  a19q  <=  b
+;  a19r  <=  ab
+;  a19s  <=  c
+;  a19t  <=  abc
+;  a19u  <=  bc
+;  a19v  <=  abc'
+;  a19R  <=  fsk_a19R
+;  a19W  <=  fsk_a19W
+;  a1a1  <=  fsk_a1a1
+;  a1a6  <=  fsk_a1a6
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta19o)) (y (Maybe Sorta19o))) (=> (and ((_ is (just (Sorta19o) (Maybe Sorta19o))) x) ((_ is (just (Sorta19o) (Maybe Sorta19o))) y)) (= (both8514226977520841413 x y) x))))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 y (as nothing (Maybe Sorta19o))) (as nothing (Maybe Sorta19o)))))
+; (declare-const a19R (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19W (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19p (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19q (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19r (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19s (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19t (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19u (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19v (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a1 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a6 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-fun both8514226977520841413 ((Maybe Sorta19o) (Maybe Sorta19o)) (Maybe Sorta19o))
+; (declare-sort Sorta19n)
+; (declare-sort Sorta19o)
 (declare-sort Sorta19n)
 (declare-sort Sorta19o)
 (declare-const
@@ -490,16 +634,120 @@ a1a6  <=  fsk_a1a6
       :named
       given-1.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta19o)))
+;      (=
+;         (both8514226977520841413
+;            y
+;            (as
+;               nothing
+;               (Maybe Sorta19o)))
+;         (as
+;            nothing
+;            (Maybe Sorta19o))))
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta19o)))
+;      (=
+;         (both8514226977520841413 nothing y)
+;         nothing))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta19o))
+;        (y
+;           (Maybe Sorta19o)))
+;      (=>
+;         (and
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta19o)
+;                    (Maybe Sorta19o)))
+;              x)
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta19o)
+;                    (Maybe Sorta19o)))
+;              y))
+;         (=
+;            (both8514226977520841413 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19q
+;           a19s)
+;         a1a1)
+;      :named
+;      given-1.1)
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19r
+;           a19s)
+;         a19W)
+;      :named
+;      given-1.2)
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19u)
+;         a1a6)
+;      :named
+;      given-1.3)
+;   (!
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19q)
+;         a19R)
+;      :named
+;      given-1.4)
+;   (!
+;      (= a1a1 a19u)
+;      :named
+;      given-1.5)
+;   (!
+;      (= a19R a19r)
+;      :named
+;      given-1.6)
+;   (!
+;      (= a19W a19t)
+;      :named
+;      given-1.7)
+;   (!
+;      (= a1a6 a19v)
+;      :named
+;      given-1.8)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -565,18 +813,37 @@ unsat
 ;    a19v)
 
 ; GIVENS (names)
-a19p  <=  a
-a19q  <=  b
-a19r  <=  ab
-a19s  <=  c
-a19t  <=  abc
-a19u  <=  bc
-a19v  <=  abc'
-a19R  <=  fsk_a19R
-a19W  <=  fsk_a19W
-a1a1  <=  fsk_a1a1
-a1a6  <=  fsk_a1a6
+;  a19p  <=  a
+;  a19q  <=  b
+;  a19r  <=  ab
+;  a19s  <=  c
+;  a19t  <=  abc
+;  a19u  <=  bc
+;  a19v  <=  abc'
+;  a19R  <=  fsk_a19R
+;  a19W  <=  fsk_a19W
+;  a1a1  <=  fsk_a1a1
+;  a1a6  <=  fsk_a1a6
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta19o)) (y (Maybe Sorta19o))) (=> (and ((_ is (just (Sorta19o) (Maybe Sorta19o))) x) ((_ is (just (Sorta19o) (Maybe Sorta19o))) y)) (= (both8514226977520841413 x y) x))))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 y (as nothing (Maybe Sorta19o))) (as nothing (Maybe Sorta19o)))))
+; (declare-const a19R (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19W (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19p (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19q (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19r (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19s (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19t (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19u (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19v (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a1 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a6 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-fun both8514226977520841413 ((Maybe Sorta19o) (Maybe Sorta19o)) (Maybe Sorta19o))
+; (declare-sort Sorta19n)
+; (declare-sort Sorta19o)
+; DECS1 (unseen) 
 (declare-sort Sorta19n)
 (declare-sort Sorta19o)
 (declare-const
@@ -749,7 +1016,7 @@ a1a6  <=  fsk_a1a6
       :named
       given-2.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -780,11 +1047,16 @@ sat
 ;    a19v)
 
 ; WANTEDS (names)
-a19t  <=  abc
-a19v  <=  abc'
-a19C  <=  a_a19C
-a19D  <=  b_a19D
-a19F  <=  c_a19F
+;  a19t  <=  abc
+;  a19v  <=  abc'
+;  a19C  <=  a_a19C
+;  a19D  <=  b_a19D
+;  a19F  <=  c_a19F
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a19C (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19D (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19F (Array Sorta19n (Maybe Sorta19o)))
 (declare-const
    a19C
    (Array
@@ -828,8 +1100,442 @@ a19F  <=  c_a19F
       :named
       wanted-2))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-2")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta19o!val!0
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!3
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!4
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!5
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!1
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!2
+;      ()
+;      Sorta19o)
+;   (forall
+;      (
+;        (x Sorta19o))
+;      (or
+;         (= x Sorta19o!val!0)
+;         (= x Sorta19o!val!3)
+;         (= x Sorta19o!val!4)
+;         (= x Sorta19o!val!5)
+;         (= x Sorta19o!val!1)
+;         (= x Sorta19o!val!2)))
+;   (declare-fun
+;      Sorta19n!val!0
+;      ()
+;      Sorta19n)
+;   (forall
+;      (
+;        (x Sorta19n))
+;      (= x Sorta19n!val!0))
+;   (define-fun
+;      a19R
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      given-2.6
+;      ()
+;      Bool
+;      (= a19R a19r))
+;   (define-fun
+;      given-2.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19r
+;           a19s)
+;         a19W))
+;   (define-fun
+;      a1a1
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
+;   (define-fun
+;      wanted-2
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19C
+;                        a19D)
+;                      a19F)
+;                    a19t)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      a19C
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19D
+;                        a19F))
+;                    a19v))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      a19D
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!1))
+;         Sorta19n!val!0
+;         nothing))
+;   (define-fun
+;      given-2.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19q)
+;         a19R))
+;   (define-fun
+;      given-2.5
+;      ()
+;      Bool
+;      (= a1a1 a19u))
+;   (define-fun
+;      given-2.8
+;      ()
+;      Bool
+;      (= a1a6 a19v))
+;   (define-fun
+;      a19q
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
+;   (define-fun
+;      a19r
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19s
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      given-2.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19u)
+;         a1a6))
+;   (define-fun
+;      given-2.7
+;      ()
+;      Bool
+;      (= a19W a19t))
+;   (define-fun
+;      a19p
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!5))
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a1a6
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      given-2.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19q
+;           a19s)
+;         a1a1))
+;   (define-fun
+;      a19W
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19t
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19F
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19u
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
+;   (define-fun
+;      a19v
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19C
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!0))
+;         Sorta19n!val!0
+;         nothing))
+;   (define-fun
+;      both8514226977520841413
+;      (
+;        (x!0
+;           (Maybe Sorta19o))
+;        (x!1
+;           (Maybe Sorta19o)))
+;      (Maybe Sorta19o)
+;      (ite
+;         (and
+;            (= x!0 nothing)
+;            (= x!1 nothing))
+;         nothing
+;         (ite
+;            (and
+;               (=
+;                  x!0
+;                  (just Sorta19o!val!5))
+;               (= x!1 nothing))
+;            nothing
+;            (ite
+;               (and
+;                  (=
+;                     x!0
+;                     (just Sorta19o!val!0))
+;                  (=
+;                     x!1
+;                     (just Sorta19o!val!1)))
+;               (just Sorta19o!val!0)
+;               (ite
+;                  (and
+;                     (=
+;                        x!0
+;                        (just Sorta19o!val!1))
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (=
+;                           x!0
+;                           (just Sorta19o!val!0))
+;                        (= x!1 nothing))
+;                     nothing
+;                     (ite
+;                        (and
+;                           (=
+;                              x!0
+;                              (just Sorta19o!val!3))
+;                           (=
+;                              x!1
+;                              (just Sorta19o!val!4)))
+;                        (just Sorta19o!val!3)
+;                        (ite
+;                           (and
+;                              (=
+;                                 x!0
+;                                 (just Sorta19o!val!4))
+;                              (=
+;                                 x!1
+;                                 (just Sorta19o!val!2)))
+;                           (just Sorta19o!val!4)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta19o!val!3))
+;                                 (=
+;                                    x!1
+;                                    (just Sorta19o!val!2)))
+;                              (just Sorta19o!val!3)
+;                              (ite
+;                                 (and
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    (
+;                                      (_ is just)
+;                                      x!1))
+;                                 x!0
+;                                 nothing)))))))))))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-2")
@@ -895,18 +1601,37 @@ sat
 ;    a19v)
 
 ; GIVENS (names)
-a19p  <=  a
-a19q  <=  b
-a19r  <=  ab
-a19s  <=  c
-a19t  <=  abc
-a19u  <=  bc
-a19v  <=  abc'
-a19R  <=  fsk_a19R
-a19W  <=  fsk_a19W
-a1a1  <=  fsk_a1a1
-a1a6  <=  fsk_a1a6
+;  a19p  <=  a
+;  a19q  <=  b
+;  a19r  <=  ab
+;  a19s  <=  c
+;  a19t  <=  abc
+;  a19u  <=  bc
+;  a19v  <=  abc'
+;  a19R  <=  fsk_a19R
+;  a19W  <=  fsk_a19W
+;  a1a1  <=  fsk_a1a1
+;  a1a6  <=  fsk_a1a6
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta19o)) (y (Maybe Sorta19o))) (=> (and ((_ is (just (Sorta19o) (Maybe Sorta19o))) x) ((_ is (just (Sorta19o) (Maybe Sorta19o))) y)) (= (both8514226977520841413 x y) x))))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 y (as nothing (Maybe Sorta19o))) (as nothing (Maybe Sorta19o)))))
+; (declare-const a19R (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19W (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19p (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19q (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19r (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19s (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19t (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19u (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19v (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a1 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a6 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-fun both8514226977520841413 ((Maybe Sorta19o) (Maybe Sorta19o)) (Maybe Sorta19o))
+; (declare-sort Sorta19n)
+; (declare-sort Sorta19o)
+; DECS1 (unseen) 
 (declare-sort Sorta19n)
 (declare-sort Sorta19o)
 (declare-const
@@ -1079,7 +1804,7 @@ a1a6  <=  fsk_a1a6
       :named
       given-2.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -1110,11 +1835,16 @@ sat
 ;    a19v)
 
 ; WANTEDS (names)
-a19t  <=  abc
-a19v  <=  abc'
-a19C  <=  a_a19C
-a19D  <=  b_a19D
-a19F  <=  c_a19F
+;  a19t  <=  abc
+;  a19v  <=  abc'
+;  a19C  <=  a_a19C
+;  a19D  <=  b_a19D
+;  a19F  <=  c_a19F
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a19C (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19D (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19F (Array Sorta19n (Maybe Sorta19o)))
 (declare-const
    a19C
    (Array
@@ -1158,8 +1888,442 @@ a19F  <=  c_a19F
       :named
       wanted-2))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-2")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta19o!val!0
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!3
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!4
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!5
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!1
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!2
+;      ()
+;      Sorta19o)
+;   (forall
+;      (
+;        (x Sorta19o))
+;      (or
+;         (= x Sorta19o!val!0)
+;         (= x Sorta19o!val!3)
+;         (= x Sorta19o!val!4)
+;         (= x Sorta19o!val!5)
+;         (= x Sorta19o!val!1)
+;         (= x Sorta19o!val!2)))
+;   (declare-fun
+;      Sorta19n!val!0
+;      ()
+;      Sorta19n)
+;   (forall
+;      (
+;        (x Sorta19n))
+;      (= x Sorta19n!val!0))
+;   (define-fun
+;      a19R
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      given-2.6
+;      ()
+;      Bool
+;      (= a19R a19r))
+;   (define-fun
+;      given-2.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19r
+;           a19s)
+;         a19W))
+;   (define-fun
+;      a1a1
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
+;   (define-fun
+;      wanted-2
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19C
+;                        a19D)
+;                      a19F)
+;                    a19t)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      a19C
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19D
+;                        a19F))
+;                    a19v))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      a19D
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!1))
+;         Sorta19n!val!0
+;         nothing))
+;   (define-fun
+;      given-2.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19q)
+;         a19R))
+;   (define-fun
+;      given-2.5
+;      ()
+;      Bool
+;      (= a1a1 a19u))
+;   (define-fun
+;      given-2.8
+;      ()
+;      Bool
+;      (= a1a6 a19v))
+;   (define-fun
+;      a19q
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
+;   (define-fun
+;      a19r
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19s
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      given-2.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19u)
+;         a1a6))
+;   (define-fun
+;      given-2.7
+;      ()
+;      Bool
+;      (= a19W a19t))
+;   (define-fun
+;      a19p
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!5))
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a1a6
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      given-2.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19q
+;           a19s)
+;         a1a1))
+;   (define-fun
+;      a19W
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19t
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19F
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19u
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!4)))
+;   (define-fun
+;      a19v
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19C
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!0))
+;         Sorta19n!val!0
+;         nothing))
+;   (define-fun
+;      both8514226977520841413
+;      (
+;        (x!0
+;           (Maybe Sorta19o))
+;        (x!1
+;           (Maybe Sorta19o)))
+;      (Maybe Sorta19o)
+;      (ite
+;         (and
+;            (= x!0 nothing)
+;            (= x!1 nothing))
+;         nothing
+;         (ite
+;            (and
+;               (=
+;                  x!0
+;                  (just Sorta19o!val!5))
+;               (= x!1 nothing))
+;            nothing
+;            (ite
+;               (and
+;                  (=
+;                     x!0
+;                     (just Sorta19o!val!0))
+;                  (=
+;                     x!1
+;                     (just Sorta19o!val!1)))
+;               (just Sorta19o!val!0)
+;               (ite
+;                  (and
+;                     (=
+;                        x!0
+;                        (just Sorta19o!val!1))
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (=
+;                           x!0
+;                           (just Sorta19o!val!0))
+;                        (= x!1 nothing))
+;                     nothing
+;                     (ite
+;                        (and
+;                           (=
+;                              x!0
+;                              (just Sorta19o!val!3))
+;                           (=
+;                              x!1
+;                              (just Sorta19o!val!4)))
+;                        (just Sorta19o!val!3)
+;                        (ite
+;                           (and
+;                              (=
+;                                 x!0
+;                                 (just Sorta19o!val!4))
+;                              (=
+;                                 x!1
+;                                 (just Sorta19o!val!2)))
+;                           (just Sorta19o!val!4)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta19o!val!3))
+;                                 (=
+;                                    x!1
+;                                    (just Sorta19o!val!2)))
+;                              (just Sorta19o!val!3)
+;                              (ite
+;                                 (and
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    (
+;                                      (_ is just)
+;                                      x!1))
+;                                 x!0
+;                                 nothing)))))))))))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -1225,18 +2389,37 @@ sat
 ;    a19v)
 
 ; GIVENS (names)
-a19p  <=  a
-a19q  <=  b
-a19r  <=  ab
-a19s  <=  c
-a19t  <=  abc
-a19u  <=  bc
-a19v  <=  abc'
-a19R  <=  fsk_a19R
-a19W  <=  fsk_a19W
-a1a1  <=  fsk_a1a1
-a1a6  <=  fsk_a1a6
+;  a19p  <=  a
+;  a19q  <=  b
+;  a19r  <=  ab
+;  a19s  <=  c
+;  a19t  <=  abc
+;  a19u  <=  bc
+;  a19v  <=  abc'
+;  a19R  <=  fsk_a19R
+;  a19W  <=  fsk_a19W
+;  a1a1  <=  fsk_a1a1
+;  a1a6  <=  fsk_a1a6
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta19o)) (y (Maybe Sorta19o))) (=> (and ((_ is (just (Sorta19o) (Maybe Sorta19o))) x) ((_ is (just (Sorta19o) (Maybe Sorta19o))) y)) (= (both8514226977520841413 x y) x))))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 y (as nothing (Maybe Sorta19o))) (as nothing (Maybe Sorta19o)))))
+; (declare-const a19R (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19W (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19p (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19q (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19r (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19s (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19t (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19u (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19v (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a1 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a6 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-fun both8514226977520841413 ((Maybe Sorta19o) (Maybe Sorta19o)) (Maybe Sorta19o))
+; (declare-sort Sorta19n)
+; (declare-sort Sorta19o)
+; DECS1 (unseen) 
 (declare-sort Sorta19n)
 (declare-sort Sorta19o)
 (declare-const
@@ -1409,7 +2592,7 @@ a1a6  <=  fsk_a1a6
       :named
       given-3.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
@@ -1440,11 +2623,16 @@ sat
 ;    a19v)
 
 ; WANTEDS (names)
-a19t  <=  abc
-a19v  <=  abc'
-a19C  <=  a_a19C
-a19D  <=  b_a19D
-a19F  <=  c_a19F
+;  a19t  <=  abc
+;  a19v  <=  abc'
+;  a19C  <=  a_a19C
+;  a19D  <=  b_a19D
+;  a19F  <=  c_a19F
+; DECS2 (seen) 
+; (declare-const a19C (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19D (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19F (Array Sorta19n (Maybe Sorta19o)))
+; DECS2 (unseen) 
 (declare-const
    a19C
    (Array
@@ -1488,8 +2676,415 @@ a19F  <=  c_a19F
       :named
       wanted-3))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-3")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta19o!val!0
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!3
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!4
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!5
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!1
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!2
+;      ()
+;      Sorta19o)
+;   (forall
+;      (
+;        (x Sorta19o))
+;      (or
+;         (= x Sorta19o!val!0)
+;         (= x Sorta19o!val!3)
+;         (= x Sorta19o!val!4)
+;         (= x Sorta19o!val!5)
+;         (= x Sorta19o!val!1)
+;         (= x Sorta19o!val!2)))
+;   (declare-fun
+;      Sorta19n!val!0
+;      ()
+;      Sorta19n)
+;   (forall
+;      (
+;        (x Sorta19n))
+;      (= x Sorta19n!val!0))
+;   (define-fun
+;      given-3.6
+;      ()
+;      Bool
+;      (= a19R a19r))
+;   (define-fun
+;      wanted-3
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19C
+;                        a19D)
+;                      a19F)
+;                    a19t)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      a19C
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19D
+;                        a19F))
+;                    a19v))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      a19R
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19C
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!0))
+;         Sorta19n!val!0
+;         (just Sorta19o!val!1)))
+;   (define-fun
+;      a1a1
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19r
+;           a19s)
+;         a19W))
+;   (define-fun
+;      a19D
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!5))
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19q
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19r
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.5
+;      ()
+;      Bool
+;      (= a1a1 a19u))
+;   (define-fun
+;      a19s
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19p
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!4))
+;         Sorta19n!val!0
+;         nothing))
+;   (define-fun
+;      a1a6
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19q
+;           a19s)
+;         a1a1))
+;   (define-fun
+;      given-3.8
+;      ()
+;      Bool
+;      (= a1a6 a19v))
+;   (define-fun
+;      given-3.7
+;      ()
+;      Bool
+;      (= a19W a19t))
+;   (define-fun
+;      a19W
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19t
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19F
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      a19u
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19v
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19q)
+;         a19R))
+;   (define-fun
+;      given-3.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19u)
+;         a1a6))
+;   (define-fun
+;      both8514226977520841413
+;      (
+;        (x!0
+;           (Maybe Sorta19o))
+;        (x!1
+;           (Maybe Sorta19o)))
+;      (Maybe Sorta19o)
+;      (ite
+;         (and
+;            (= x!0 nothing)
+;            (= x!1 nothing))
+;         nothing
+;         (ite
+;            (and
+;               (=
+;                  x!0
+;                  (just Sorta19o!val!4))
+;               (= x!1 nothing))
+;            nothing
+;            (ite
+;               (and
+;                  (=
+;                     x!0
+;                     (just Sorta19o!val!0))
+;                  (=
+;                     x!1
+;                     (just Sorta19o!val!5)))
+;               (just Sorta19o!val!0)
+;               (ite
+;                  (and
+;                     (=
+;                        x!0
+;                        (just Sorta19o!val!5))
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (=
+;                           x!0
+;                           (just Sorta19o!val!0))
+;                        (= x!1 nothing))
+;                     nothing
+;                     (ite
+;                        (and
+;                           (=
+;                              x!0
+;                              (just Sorta19o!val!3))
+;                           (=
+;                              x!1
+;                              (just Sorta19o!val!2)))
+;                        (just Sorta19o!val!3)
+;                        (ite
+;                           (and
+;                              (=
+;                                 x!0
+;                                 (just Sorta19o!val!1))
+;                              (=
+;                                 x!1
+;                                 (just Sorta19o!val!3)))
+;                           (just Sorta19o!val!1)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta19o!val!1))
+;                                 (=
+;                                    x!1
+;                                    (just Sorta19o!val!2)))
+;                              (just Sorta19o!val!1)
+;                              (ite
+;                                 (and
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    (
+;                                      (_ is just)
+;                                      x!1))
+;                                 x!0
+;                                 nothing)))))))))))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-3")
@@ -1555,18 +3150,37 @@ sat
 ;    a19v)
 
 ; GIVENS (names)
-a19p  <=  a
-a19q  <=  b
-a19r  <=  ab
-a19s  <=  c
-a19t  <=  abc
-a19u  <=  bc
-a19v  <=  abc'
-a19R  <=  fsk_a19R
-a19W  <=  fsk_a19W
-a1a1  <=  fsk_a1a1
-a1a6  <=  fsk_a1a6
+;  a19p  <=  a
+;  a19q  <=  b
+;  a19r  <=  ab
+;  a19s  <=  c
+;  a19t  <=  abc
+;  a19u  <=  bc
+;  a19v  <=  abc'
+;  a19R  <=  fsk_a19R
+;  a19W  <=  fsk_a19W
+;  a1a1  <=  fsk_a1a1
+;  a1a6  <=  fsk_a1a6
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta19o)) (y (Maybe Sorta19o))) (=> (and ((_ is (just (Sorta19o) (Maybe Sorta19o))) x) ((_ is (just (Sorta19o) (Maybe Sorta19o))) y)) (= (both8514226977520841413 x y) x))))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta19o))) (= (both8514226977520841413 y (as nothing (Maybe Sorta19o))) (as nothing (Maybe Sorta19o)))))
+; (declare-const a19R (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19W (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19p (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19q (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19r (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19s (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19t (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19u (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19v (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a1 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a1a6 (Array Sorta19n (Maybe Sorta19o)))
+; (declare-fun both8514226977520841413 ((Maybe Sorta19o) (Maybe Sorta19o)) (Maybe Sorta19o))
+; (declare-sort Sorta19n)
+; (declare-sort Sorta19o)
+; DECS1 (unseen) 
 (declare-sort Sorta19n)
 (declare-sort Sorta19o)
 (declare-const
@@ -1739,7 +3353,7 @@ a1a6  <=  fsk_a1a6
       :named
       given-3.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
@@ -1770,11 +3384,16 @@ sat
 ;    a19v)
 
 ; WANTEDS (names)
-a19t  <=  abc
-a19v  <=  abc'
-a19C  <=  a_a19C
-a19D  <=  b_a19D
-a19F  <=  c_a19F
+;  a19t  <=  abc
+;  a19v  <=  abc'
+;  a19C  <=  a_a19C
+;  a19D  <=  b_a19D
+;  a19F  <=  c_a19F
+; DECS2 (seen) 
+; (declare-const a19C (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19D (Array Sorta19n (Maybe Sorta19o)))
+; (declare-const a19F (Array Sorta19n (Maybe Sorta19o)))
+; DECS2 (unseen) 
 (declare-const
    a19C
    (Array
@@ -1818,8 +3437,415 @@ a19F  <=  c_a19F
       :named
       wanted-3))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-3")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta19o!val!0
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!3
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!4
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!5
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!1
+;      ()
+;      Sorta19o)
+;   (declare-fun
+;      Sorta19o!val!2
+;      ()
+;      Sorta19o)
+;   (forall
+;      (
+;        (x Sorta19o))
+;      (or
+;         (= x Sorta19o!val!0)
+;         (= x Sorta19o!val!3)
+;         (= x Sorta19o!val!4)
+;         (= x Sorta19o!val!5)
+;         (= x Sorta19o!val!1)
+;         (= x Sorta19o!val!2)))
+;   (declare-fun
+;      Sorta19n!val!0
+;      ()
+;      Sorta19n)
+;   (forall
+;      (
+;        (x Sorta19n))
+;      (= x Sorta19n!val!0))
+;   (define-fun
+;      given-3.6
+;      ()
+;      Bool
+;      (= a19R a19r))
+;   (define-fun
+;      wanted-3
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19C
+;                        a19D)
+;                      a19F)
+;                    a19t)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map both8514226977520841413)
+;                      a19C
+;                      (
+;                        (_ map both8514226977520841413)
+;                        a19D
+;                        a19F))
+;                    a19v))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      a19R
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19C
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!0))
+;         Sorta19n!val!0
+;         (just Sorta19o!val!1)))
+;   (define-fun
+;      a1a1
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19r
+;           a19s)
+;         a19W))
+;   (define-fun
+;      a19D
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!5))
+;         Sorta19n!val!0
+;         (just Sorta19o!val!3)))
+;   (define-fun
+;      a19q
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19r
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.5
+;      ()
+;      Bool
+;      (= a1a1 a19u))
+;   (define-fun
+;      a19s
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19p
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           (just Sorta19o!val!4))
+;         Sorta19n!val!0
+;         nothing))
+;   (define-fun
+;      a1a6
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19q
+;           a19s)
+;         a1a1))
+;   (define-fun
+;      given-3.8
+;      ()
+;      Bool
+;      (= a1a6 a19v))
+;   (define-fun
+;      given-3.7
+;      ()
+;      Bool
+;      (= a19W a19t))
+;   (define-fun
+;      a19W
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19t
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19F
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta19n
+;                 (Maybe Sorta19o)))
+;           nothing)
+;         Sorta19n!val!0
+;         (just Sorta19o!val!2)))
+;   (define-fun
+;      a19u
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      a19v
+;      ()
+;      (Array
+;         Sorta19n
+;         (Maybe Sorta19o))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta19n
+;              (Maybe Sorta19o)))
+;        nothing))
+;   (define-fun
+;      given-3.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19q)
+;         a19R))
+;   (define-fun
+;      given-3.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map both8514226977520841413)
+;           a19p
+;           a19u)
+;         a1a6))
+;   (define-fun
+;      both8514226977520841413
+;      (
+;        (x!0
+;           (Maybe Sorta19o))
+;        (x!1
+;           (Maybe Sorta19o)))
+;      (Maybe Sorta19o)
+;      (ite
+;         (and
+;            (= x!0 nothing)
+;            (= x!1 nothing))
+;         nothing
+;         (ite
+;            (and
+;               (=
+;                  x!0
+;                  (just Sorta19o!val!4))
+;               (= x!1 nothing))
+;            nothing
+;            (ite
+;               (and
+;                  (=
+;                     x!0
+;                     (just Sorta19o!val!0))
+;                  (=
+;                     x!1
+;                     (just Sorta19o!val!5)))
+;               (just Sorta19o!val!0)
+;               (ite
+;                  (and
+;                     (=
+;                        x!0
+;                        (just Sorta19o!val!5))
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (=
+;                           x!0
+;                           (just Sorta19o!val!0))
+;                        (= x!1 nothing))
+;                     nothing
+;                     (ite
+;                        (and
+;                           (=
+;                              x!0
+;                              (just Sorta19o!val!3))
+;                           (=
+;                              x!1
+;                              (just Sorta19o!val!2)))
+;                        (just Sorta19o!val!3)
+;                        (ite
+;                           (and
+;                              (=
+;                                 x!0
+;                                 (just Sorta19o!val!1))
+;                              (=
+;                                 x!1
+;                                 (just Sorta19o!val!3)))
+;                           (just Sorta19o!val!1)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta19o!val!1))
+;                                 (=
+;                                    x!1
+;                                    (just Sorta19o!val!2)))
+;                              (just Sorta19o!val!1)
+;                              (ite
+;                                 (and
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    (
+;                                      (_ is just)
+;                                      x!1))
+;                                 x!0
+;                                 nothing)))))))))))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -1853,18 +3879,36 @@ sat
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1bm  <=  a
-a1bn  <=  b
-a1bo  <=  ab
-a1bp  <=  c
-a1bq  <=  abc
-a1br  <=  bc
-a1bs  <=  abc'
-a1bO  <=  fsk_a1bO
-a1bT  <=  fsk_a1bT
-a1bY  <=  fsk_a1bY
-a1c3  <=  fsk_a1c3
+;  a1bm  <=  a
+;  a1bn  <=  b
+;  a1bo  <=  ab
+;  a1bp  <=  c
+;  a1bq  <=  abc
+;  a1br  <=  bc
+;  a1bs  <=  abc'
+;  a1bO  <=  fsk_a1bO
+;  a1bT  <=  fsk_a1bT
+;  a1bY  <=  fsk_a1bY
+;  a1c3  <=  fsk_a1c3
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta1bl)) (y (Maybe Sorta1bl))) (=> ((_ is (just (Sorta1bl) (Maybe Sorta1bl))) x) (= (either8570520873362452143 x y) x))))
+; (assert (forall ((y (Maybe Sorta1bl))) (= (either8570520873362452143 (as nothing (Maybe Sorta1bl)) y) y)))
+; (declare-const a1bO (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bT (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bY (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bm (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bn (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bo (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bp (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bq (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1br (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bs (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1c3 (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-fun either8570520873362452143 ((Maybe Sorta1bl) (Maybe Sorta1bl)) (Maybe Sorta1bl))
+; (declare-sort Sorta1bk)
+; (declare-sort Sorta1bl)
 (declare-sort Sorta1bk)
 (declare-sort Sorta1bl)
 (declare-const
@@ -2019,16 +4063,103 @@ a1c3  <=  fsk_a1c3
       :named
       given-4.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1bl)))
+;      (=
+;         (either8570520873362452143
+;            (as
+;               nothing
+;               (Maybe Sorta1bl))
+;            y)
+;         y))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1bl))
+;        (y
+;           (Maybe Sorta1bl)))
+;      (=>
+;         (
+;           (_
+;              is
+;              (just
+;                 (Sorta1bl)
+;                 (Maybe Sorta1bl)))
+;           x)
+;         (=
+;            (either8570520873362452143 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bn
+;           a1bp)
+;         a1bY)
+;      :named
+;      given-4.1)
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bo
+;           a1bp)
+;         a1bT)
+;      :named
+;      given-4.2)
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1br)
+;         a1c3)
+;      :named
+;      given-4.3)
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1bn)
+;         a1bO)
+;      :named
+;      given-4.4)
+;   (!
+;      (= a1bY a1br)
+;      :named
+;      given-4.5)
+;   (!
+;      (= a1bO a1bo)
+;      :named
+;      given-4.6)
+;   (!
+;      (= a1bT a1bq)
+;      :named
+;      given-4.7)
+;   (!
+;      (= a1c3 a1bs)
+;      :named
+;      given-4.8)
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-4")
@@ -2062,18 +4193,36 @@ unsat
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1bm  <=  a
-a1bn  <=  b
-a1bo  <=  ab
-a1bp  <=  c
-a1bq  <=  abc
-a1br  <=  bc
-a1bs  <=  abc'
-a1bO  <=  fsk_a1bO
-a1bT  <=  fsk_a1bT
-a1bY  <=  fsk_a1bY
-a1c3  <=  fsk_a1c3
+;  a1bm  <=  a
+;  a1bn  <=  b
+;  a1bo  <=  ab
+;  a1bp  <=  c
+;  a1bq  <=  abc
+;  a1br  <=  bc
+;  a1bs  <=  abc'
+;  a1bO  <=  fsk_a1bO
+;  a1bT  <=  fsk_a1bT
+;  a1bY  <=  fsk_a1bY
+;  a1c3  <=  fsk_a1c3
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta1bl)) (y (Maybe Sorta1bl))) (=> ((_ is (just (Sorta1bl) (Maybe Sorta1bl))) x) (= (either8570520873362452143 x y) x))))
+; (assert (forall ((y (Maybe Sorta1bl))) (= (either8570520873362452143 (as nothing (Maybe Sorta1bl)) y) y)))
+; (declare-const a1bO (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bT (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bY (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bm (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bn (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bo (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bp (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bq (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1br (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bs (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1c3 (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-fun either8570520873362452143 ((Maybe Sorta1bl) (Maybe Sorta1bl)) (Maybe Sorta1bl))
+; (declare-sort Sorta1bk)
+; (declare-sort Sorta1bl)
 (declare-sort Sorta1bk)
 (declare-sort Sorta1bl)
 (declare-const
@@ -2228,16 +4377,103 @@ a1c3  <=  fsk_a1c3
       :named
       given-4.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1bl)))
+;      (=
+;         (either8570520873362452143
+;            (as
+;               nothing
+;               (Maybe Sorta1bl))
+;            y)
+;         y))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1bl))
+;        (y
+;           (Maybe Sorta1bl)))
+;      (=>
+;         (
+;           (_
+;              is
+;              (just
+;                 (Sorta1bl)
+;                 (Maybe Sorta1bl)))
+;           x)
+;         (=
+;            (either8570520873362452143 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bn
+;           a1bp)
+;         a1bY)
+;      :named
+;      given-4.1)
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bo
+;           a1bp)
+;         a1bT)
+;      :named
+;      given-4.2)
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1br)
+;         a1c3)
+;      :named
+;      given-4.3)
+;   (!
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1bn)
+;         a1bO)
+;      :named
+;      given-4.4)
+;   (!
+;      (= a1bY a1br)
+;      :named
+;      given-4.5)
+;   (!
+;      (= a1bO a1bo)
+;      :named
+;      given-4.6)
+;   (!
+;      (= a1bT a1bq)
+;      :named
+;      given-4.7)
+;   (!
+;      (= a1c3 a1bs)
+;      :named
+;      given-4.8)
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -2303,18 +4539,36 @@ unsat
 ;    a1bs)
 
 ; GIVENS (names)
-a1bm  <=  a
-a1bn  <=  b
-a1bo  <=  ab
-a1bp  <=  c
-a1bq  <=  abc
-a1br  <=  bc
-a1bs  <=  abc'
-a1bO  <=  fsk_a1bO
-a1bT  <=  fsk_a1bT
-a1bY  <=  fsk_a1bY
-a1c3  <=  fsk_a1c3
+;  a1bm  <=  a
+;  a1bn  <=  b
+;  a1bo  <=  ab
+;  a1bp  <=  c
+;  a1bq  <=  abc
+;  a1br  <=  bc
+;  a1bs  <=  abc'
+;  a1bO  <=  fsk_a1bO
+;  a1bT  <=  fsk_a1bT
+;  a1bY  <=  fsk_a1bY
+;  a1c3  <=  fsk_a1c3
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1bl)) (y (Maybe Sorta1bl))) (=> ((_ is (just (Sorta1bl) (Maybe Sorta1bl))) x) (= (either8570520873362452143 x y) x))))
+; (assert (forall ((y (Maybe Sorta1bl))) (= (either8570520873362452143 (as nothing (Maybe Sorta1bl)) y) y)))
+; (declare-const a1bO (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bT (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bY (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bm (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bn (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bo (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bp (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bq (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1br (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bs (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1c3 (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-fun either8570520873362452143 ((Maybe Sorta1bl) (Maybe Sorta1bl)) (Maybe Sorta1bl))
+; (declare-sort Sorta1bk)
+; (declare-sort Sorta1bl)
+; DECS1 (unseen) 
 (declare-sort Sorta1bk)
 (declare-sort Sorta1bl)
 (declare-const
@@ -2469,7 +4723,7 @@ a1c3  <=  fsk_a1c3
       :named
       given-5.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
@@ -2500,11 +4754,16 @@ sat
 ;    a1bs)
 
 ; WANTEDS (names)
-a1bq  <=  abc
-a1bs  <=  abc'
-a1bz  <=  a_a1bz
-a1bA  <=  b_a1bA
-a1bC  <=  c_a1bC
+;  a1bq  <=  abc
+;  a1bs  <=  abc'
+;  a1bz  <=  a_a1bz
+;  a1bA  <=  b_a1bA
+;  a1bC  <=  c_a1bC
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a1bA (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bC (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bz (Array Sorta1bk (Maybe Sorta1bl)))
 (declare-const
    a1bz
    (Array
@@ -2548,8 +4807,424 @@ a1bC  <=  c_a1bC
       :named
       wanted-5))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-5")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta1bk!val!0
+;      ()
+;      Sorta1bk)
+;   (forall
+;      (
+;        (x Sorta1bk))
+;      (= x Sorta1bk!val!0))
+;   (declare-fun
+;      Sorta1bl!val!2
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!1
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!3
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!4
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!0
+;      ()
+;      Sorta1bl)
+;   (forall
+;      (
+;        (x Sorta1bl))
+;      (or
+;         (= x Sorta1bl!val!2)
+;         (= x Sorta1bl!val!1)
+;         (= x Sorta1bl!val!3)
+;         (= x Sorta1bl!val!4)
+;         (= x Sorta1bl!val!0)))
+;   (define-fun
+;      a1bO
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         nothing))
+;   (define-fun
+;      wanted-5
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bz
+;                        a1bA)
+;                      a1bC)
+;                    a1bq)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      a1bz
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bA
+;                        a1bC))
+;                    a1bs))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      a1bp
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bm
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      given-5.6
+;      ()
+;      Bool
+;      (= a1bO a1bo))
+;   (define-fun
+;      a1bq
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bA
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      given-5.7
+;      ()
+;      Bool
+;      (= a1bT a1bq))
+;   (define-fun
+;      given-5.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bo
+;           a1bp)
+;         a1bT))
+;   (define-fun
+;      given-5.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1br)
+;         a1c3))
+;   (define-fun
+;      given-5.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bn
+;           a1bp)
+;         a1bY))
+;   (define-fun
+;      given-5.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1bn)
+;         a1bO))
+;   (define-fun
+;      given-5.8
+;      ()
+;      Bool
+;      (= a1c3 a1bs))
+;   (define-fun
+;      given-5.5
+;      ()
+;      Bool
+;      (= a1bY a1br))
+;   (define-fun
+;      a1bn
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         nothing))
+;   (define-fun
+;      a1bY
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1br
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bo
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         nothing))
+;   (define-fun
+;      a1c3
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bs
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bz
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bC
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!0))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!4)))
+;   (define-fun
+;      a1bT
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      either8570520873362452143
+;      (
+;        (x!0
+;           (Maybe Sorta1bl))
+;        (x!1
+;           (Maybe Sorta1bl)))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (and
+;            (=
+;               x!0
+;               (just Sorta1bl!val!2))
+;            (= x!1 nothing))
+;         (just Sorta1bl!val!2)
+;         (ite
+;            (and
+;               (= x!0 nothing)
+;               (=
+;                  x!1
+;                  (just Sorta1bl!val!2)))
+;            (just Sorta1bl!val!2)
+;            (ite
+;               (and
+;                  (= x!0 nothing)
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
+;               (ite
+;                  (and
+;                     (= x!0 nothing)
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (=
+;                           x!0
+;                           (just Sorta1bl!val!1))
+;                        (= x!1 nothing))
+;                     (just Sorta1bl!val!1)
+;                     (ite
+;                        (and
+;                           (= x!0 nothing)
+;                           (=
+;                              x!1
+;                              (just Sorta1bl!val!3)))
+;                        (just Sorta1bl!val!3)
+;                        (ite
+;                           (and
+;                              (= x!0 nothing)
+;                              (=
+;                                 x!1
+;                                 (just Sorta1bl!val!4)))
+;                           (just Sorta1bl!val!4)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta1bl!val!1))
+;                                 (=
+;                                    x!1
+;                                    (just Sorta1bl!val!4)))
+;                              (just Sorta1bl!val!1)
+;                              (ite
+;                                 (
+;                                   (_ is just)
+;                                   x!0)
+;                                 x!0
+;                                 x!1)))))))))))
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-5")
@@ -2615,18 +5290,36 @@ sat
 ;    a1bs)
 
 ; GIVENS (names)
-a1bm  <=  a
-a1bn  <=  b
-a1bo  <=  ab
-a1bp  <=  c
-a1bq  <=  abc
-a1br  <=  bc
-a1bs  <=  abc'
-a1bO  <=  fsk_a1bO
-a1bT  <=  fsk_a1bT
-a1bY  <=  fsk_a1bY
-a1c3  <=  fsk_a1c3
+;  a1bm  <=  a
+;  a1bn  <=  b
+;  a1bo  <=  ab
+;  a1bp  <=  c
+;  a1bq  <=  abc
+;  a1br  <=  bc
+;  a1bs  <=  abc'
+;  a1bO  <=  fsk_a1bO
+;  a1bT  <=  fsk_a1bT
+;  a1bY  <=  fsk_a1bY
+;  a1c3  <=  fsk_a1c3
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1bl)) (y (Maybe Sorta1bl))) (=> ((_ is (just (Sorta1bl) (Maybe Sorta1bl))) x) (= (either8570520873362452143 x y) x))))
+; (assert (forall ((y (Maybe Sorta1bl))) (= (either8570520873362452143 (as nothing (Maybe Sorta1bl)) y) y)))
+; (declare-const a1bO (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bT (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bY (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bm (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bn (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bo (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bp (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bq (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1br (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bs (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1c3 (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-fun either8570520873362452143 ((Maybe Sorta1bl) (Maybe Sorta1bl)) (Maybe Sorta1bl))
+; (declare-sort Sorta1bk)
+; (declare-sort Sorta1bl)
+; DECS1 (unseen) 
 (declare-sort Sorta1bk)
 (declare-sort Sorta1bl)
 (declare-const
@@ -2781,7 +5474,7 @@ a1c3  <=  fsk_a1c3
       :named
       given-5.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
@@ -2812,11 +5505,16 @@ sat
 ;    a1bs)
 
 ; WANTEDS (names)
-a1bq  <=  abc
-a1bs  <=  abc'
-a1bz  <=  a_a1bz
-a1bA  <=  b_a1bA
-a1bC  <=  c_a1bC
+;  a1bq  <=  abc
+;  a1bs  <=  abc'
+;  a1bz  <=  a_a1bz
+;  a1bA  <=  b_a1bA
+;  a1bC  <=  c_a1bC
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a1bA (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bC (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bz (Array Sorta1bk (Maybe Sorta1bl)))
 (declare-const
    a1bz
    (Array
@@ -2860,8 +5558,424 @@ a1bC  <=  c_a1bC
       :named
       wanted-5))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-5")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta1bk!val!0
+;      ()
+;      Sorta1bk)
+;   (forall
+;      (
+;        (x Sorta1bk))
+;      (= x Sorta1bk!val!0))
+;   (declare-fun
+;      Sorta1bl!val!2
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!1
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!3
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!4
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!0
+;      ()
+;      Sorta1bl)
+;   (forall
+;      (
+;        (x Sorta1bl))
+;      (or
+;         (= x Sorta1bl!val!2)
+;         (= x Sorta1bl!val!1)
+;         (= x Sorta1bl!val!3)
+;         (= x Sorta1bl!val!4)
+;         (= x Sorta1bl!val!0)))
+;   (define-fun
+;      a1bO
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         nothing))
+;   (define-fun
+;      wanted-5
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bz
+;                        a1bA)
+;                      a1bC)
+;                    a1bq)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      a1bz
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bA
+;                        a1bC))
+;                    a1bs))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      a1bp
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bm
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      given-5.6
+;      ()
+;      Bool
+;      (= a1bO a1bo))
+;   (define-fun
+;      a1bq
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bA
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      given-5.7
+;      ()
+;      Bool
+;      (= a1bT a1bq))
+;   (define-fun
+;      given-5.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bo
+;           a1bp)
+;         a1bT))
+;   (define-fun
+;      given-5.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1br)
+;         a1c3))
+;   (define-fun
+;      given-5.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bn
+;           a1bp)
+;         a1bY))
+;   (define-fun
+;      given-5.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1bn)
+;         a1bO))
+;   (define-fun
+;      given-5.8
+;      ()
+;      Bool
+;      (= a1c3 a1bs))
+;   (define-fun
+;      given-5.5
+;      ()
+;      Bool
+;      (= a1bY a1br))
+;   (define-fun
+;      a1bn
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         nothing))
+;   (define-fun
+;      a1bY
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1br
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bo
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         nothing))
+;   (define-fun
+;      a1c3
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bs
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      a1bz
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bC
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!0))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!4)))
+;   (define-fun
+;      a1bT
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           (just Sorta1bl!val!2))
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!3)))
+;   (define-fun
+;      either8570520873362452143
+;      (
+;        (x!0
+;           (Maybe Sorta1bl))
+;        (x!1
+;           (Maybe Sorta1bl)))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (and
+;            (=
+;               x!0
+;               (just Sorta1bl!val!2))
+;            (= x!1 nothing))
+;         (just Sorta1bl!val!2)
+;         (ite
+;            (and
+;               (= x!0 nothing)
+;               (=
+;                  x!1
+;                  (just Sorta1bl!val!2)))
+;            (just Sorta1bl!val!2)
+;            (ite
+;               (and
+;                  (= x!0 nothing)
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
+;               (ite
+;                  (and
+;                     (= x!0 nothing)
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (=
+;                           x!0
+;                           (just Sorta1bl!val!1))
+;                        (= x!1 nothing))
+;                     (just Sorta1bl!val!1)
+;                     (ite
+;                        (and
+;                           (= x!0 nothing)
+;                           (=
+;                              x!1
+;                              (just Sorta1bl!val!3)))
+;                        (just Sorta1bl!val!3)
+;                        (ite
+;                           (and
+;                              (= x!0 nothing)
+;                              (=
+;                                 x!1
+;                                 (just Sorta1bl!val!4)))
+;                           (just Sorta1bl!val!4)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta1bl!val!1))
+;                                 (=
+;                                    x!1
+;                                    (just Sorta1bl!val!4)))
+;                              (just Sorta1bl!val!1)
+;                              (ite
+;                                 (
+;                                   (_ is just)
+;                                   x!0)
+;                                 x!0
+;                                 x!1)))))))))))
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
@@ -2927,18 +6041,36 @@ sat
 ;    a1bs)
 
 ; GIVENS (names)
-a1bm  <=  a
-a1bn  <=  b
-a1bo  <=  ab
-a1bp  <=  c
-a1bq  <=  abc
-a1br  <=  bc
-a1bs  <=  abc'
-a1bO  <=  fsk_a1bO
-a1bT  <=  fsk_a1bT
-a1bY  <=  fsk_a1bY
-a1c3  <=  fsk_a1c3
+;  a1bm  <=  a
+;  a1bn  <=  b
+;  a1bo  <=  ab
+;  a1bp  <=  c
+;  a1bq  <=  abc
+;  a1br  <=  bc
+;  a1bs  <=  abc'
+;  a1bO  <=  fsk_a1bO
+;  a1bT  <=  fsk_a1bT
+;  a1bY  <=  fsk_a1bY
+;  a1c3  <=  fsk_a1c3
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1bl)) (y (Maybe Sorta1bl))) (=> ((_ is (just (Sorta1bl) (Maybe Sorta1bl))) x) (= (either8570520873362452143 x y) x))))
+; (assert (forall ((y (Maybe Sorta1bl))) (= (either8570520873362452143 (as nothing (Maybe Sorta1bl)) y) y)))
+; (declare-const a1bO (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bT (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bY (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bm (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bn (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bo (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bp (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bq (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1br (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bs (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1c3 (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-fun either8570520873362452143 ((Maybe Sorta1bl) (Maybe Sorta1bl)) (Maybe Sorta1bl))
+; (declare-sort Sorta1bk)
+; (declare-sort Sorta1bl)
+; DECS1 (unseen) 
 (declare-sort Sorta1bk)
 (declare-sort Sorta1bl)
 (declare-const
@@ -3093,7 +6225,7 @@ a1c3  <=  fsk_a1c3
       :named
       given-6.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
@@ -3124,11 +6256,16 @@ sat
 ;    a1bs)
 
 ; WANTEDS (names)
-a1bq  <=  abc
-a1bs  <=  abc'
-a1bz  <=  a_a1bz
-a1bA  <=  b_a1bA
-a1bC  <=  c_a1bC
+;  a1bq  <=  abc
+;  a1bs  <=  abc'
+;  a1bz  <=  a_a1bz
+;  a1bA  <=  b_a1bA
+;  a1bC  <=  c_a1bC
+; DECS2 (seen) 
+; (declare-const a1bA (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bC (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bz (Array Sorta1bk (Maybe Sorta1bl)))
+; DECS2 (unseen) 
 (declare-const
    a1bz
    (Array
@@ -3172,8 +6309,497 @@ a1bC  <=  c_a1bC
       :named
       wanted-6))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-6")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta1bk!val!1
+;      ()
+;      Sorta1bk)
+;   (declare-fun
+;      Sorta1bk!val!0
+;      ()
+;      Sorta1bk)
+;   (forall
+;      (
+;        (x Sorta1bk))
+;      (or
+;         (= x Sorta1bk!val!1)
+;         (= x Sorta1bk!val!0)))
+;   (declare-fun
+;      Sorta1bl!val!2
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!5
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!1
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!3
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!4
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!0
+;      ()
+;      Sorta1bl)
+;   (forall
+;      (
+;        (x Sorta1bl))
+;      (or
+;         (= x Sorta1bl!val!2)
+;         (= x Sorta1bl!val!5)
+;         (= x Sorta1bl!val!1)
+;         (= x Sorta1bl!val!3)
+;         (= x Sorta1bl!val!4)
+;         (= x Sorta1bl!val!0)))
+;   (define-fun
+;      given-6.8
+;      ()
+;      Bool
+;      (= a1c3 a1bs))
+;   (define-fun
+;      a1bT
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      given-6.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1bn)
+;         a1bO))
+;   (define-fun
+;      a1bO
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         nothing))
+;   (define-fun
+;      given-6.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bo
+;           a1bp)
+;         a1bT))
+;   (define-fun
+;      a1bp
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              nothing)
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bm
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      given-6.5
+;      ()
+;      Bool
+;      (= a1bY a1br))
+;   (define-fun
+;      a1bq
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bA
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!2)))
+;   (define-fun
+;      a1bn
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         nothing))
+;   (define-fun
+;      a1c3
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1br
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      given-6.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1br)
+;         a1c3))
+;   (define-fun
+;      a1bz
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      a1bY
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bs
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bo
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         nothing))
+;   (define-fun
+;      given-6.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bn
+;           a1bp)
+;         a1bY))
+;   (define-fun
+;      a1bC
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!0))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!5)))
+;   (define-fun
+;      given-6.7
+;      ()
+;      Bool
+;      (= a1bT a1bq))
+;   (define-fun
+;      given-6.6
+;      ()
+;      Bool
+;      (= a1bO a1bo))
+;   (define-fun
+;      wanted-6
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bz
+;                        a1bA)
+;                      a1bC)
+;                    a1bq)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      a1bz
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bA
+;                        a1bC))
+;                    a1bs))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      k!121
+;      (
+;        (x!0 Sorta1bk))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!4)
+;         (ite
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!1)
+;            (just Sorta1bl!val!3))))
+;   (define-fun
+;      either8570520873362452143
+;      (
+;        (x!0
+;           (Maybe Sorta1bl))
+;        (x!1
+;           (Maybe Sorta1bl)))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (and
+;            (=
+;               x!0
+;               (just Sorta1bl!val!3))
+;            (= x!1 nothing))
+;         (just Sorta1bl!val!3)
+;         (ite
+;            (and
+;               (= x!0 nothing)
+;               (=
+;                  x!1
+;                  (just Sorta1bl!val!3)))
+;            (just Sorta1bl!val!3)
+;            (ite
+;               (and
+;                  (= x!0 nothing)
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
+;               (ite
+;                  (and
+;                     (= x!0 nothing)
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (= x!0 nothing)
+;                        (=
+;                           x!1
+;                           (just Sorta1bl!val!1)))
+;                     (just Sorta1bl!val!1)
+;                     (ite
+;                        (and
+;                           (= x!0 nothing)
+;                           (=
+;                              x!1
+;                              (just Sorta1bl!val!5)))
+;                        (just Sorta1bl!val!5)
+;                        (ite
+;                           (and
+;                              (= x!0 nothing)
+;                              (=
+;                                 x!1
+;                                 (just Sorta1bl!val!4)))
+;                           (just Sorta1bl!val!4)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta1bl!val!2))
+;                                 (= x!1 nothing))
+;                              (just Sorta1bl!val!2)
+;                              (ite
+;                                 (and
+;                                    (= x!0 nothing)
+;                                    (=
+;                                       x!1
+;                                       (just Sorta1bl!val!2)))
+;                                 (just Sorta1bl!val!2)
+;                                 (ite
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    x!0
+;                                    x!1)))))))))))
+;   (define-fun
+;      k!127
+;      (
+;        (x!0 Sorta1bk))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!2)
+;         (ite
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!5)
+;            (just Sorta1bl!val!0)))))
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-6")
@@ -3239,18 +6865,36 @@ sat
 ;    a1bs)
 
 ; GIVENS (names)
-a1bm  <=  a
-a1bn  <=  b
-a1bo  <=  ab
-a1bp  <=  c
-a1bq  <=  abc
-a1br  <=  bc
-a1bs  <=  abc'
-a1bO  <=  fsk_a1bO
-a1bT  <=  fsk_a1bT
-a1bY  <=  fsk_a1bY
-a1c3  <=  fsk_a1c3
+;  a1bm  <=  a
+;  a1bn  <=  b
+;  a1bo  <=  ab
+;  a1bp  <=  c
+;  a1bq  <=  abc
+;  a1br  <=  bc
+;  a1bs  <=  abc'
+;  a1bO  <=  fsk_a1bO
+;  a1bT  <=  fsk_a1bT
+;  a1bY  <=  fsk_a1bY
+;  a1c3  <=  fsk_a1c3
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1bl)) (y (Maybe Sorta1bl))) (=> ((_ is (just (Sorta1bl) (Maybe Sorta1bl))) x) (= (either8570520873362452143 x y) x))))
+; (assert (forall ((y (Maybe Sorta1bl))) (= (either8570520873362452143 (as nothing (Maybe Sorta1bl)) y) y)))
+; (declare-const a1bO (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bT (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bY (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bm (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bn (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bo (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bp (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bq (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1br (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bs (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1c3 (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-fun either8570520873362452143 ((Maybe Sorta1bl) (Maybe Sorta1bl)) (Maybe Sorta1bl))
+; (declare-sort Sorta1bk)
+; (declare-sort Sorta1bl)
+; DECS1 (unseen) 
 (declare-sort Sorta1bk)
 (declare-sort Sorta1bl)
 (declare-const
@@ -3405,7 +7049,7 @@ a1c3  <=  fsk_a1c3
       :named
       given-6.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
@@ -3436,11 +7080,16 @@ sat
 ;    a1bs)
 
 ; WANTEDS (names)
-a1bq  <=  abc
-a1bs  <=  abc'
-a1bz  <=  a_a1bz
-a1bA  <=  b_a1bA
-a1bC  <=  c_a1bC
+;  a1bq  <=  abc
+;  a1bs  <=  abc'
+;  a1bz  <=  a_a1bz
+;  a1bA  <=  b_a1bA
+;  a1bC  <=  c_a1bC
+; DECS2 (seen) 
+; (declare-const a1bA (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bC (Array Sorta1bk (Maybe Sorta1bl)))
+; (declare-const a1bz (Array Sorta1bk (Maybe Sorta1bl)))
+; DECS2 (unseen) 
 (declare-const
    a1bz
    (Array
@@ -3484,8 +7133,497 @@ a1bC  <=  c_a1bC
       :named
       wanted-6))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-6")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta1bk!val!1
+;      ()
+;      Sorta1bk)
+;   (declare-fun
+;      Sorta1bk!val!0
+;      ()
+;      Sorta1bk)
+;   (forall
+;      (
+;        (x Sorta1bk))
+;      (or
+;         (= x Sorta1bk!val!1)
+;         (= x Sorta1bk!val!0)))
+;   (declare-fun
+;      Sorta1bl!val!2
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!5
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!1
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!3
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!4
+;      ()
+;      Sorta1bl)
+;   (declare-fun
+;      Sorta1bl!val!0
+;      ()
+;      Sorta1bl)
+;   (forall
+;      (
+;        (x Sorta1bl))
+;      (or
+;         (= x Sorta1bl!val!2)
+;         (= x Sorta1bl!val!5)
+;         (= x Sorta1bl!val!1)
+;         (= x Sorta1bl!val!3)
+;         (= x Sorta1bl!val!4)
+;         (= x Sorta1bl!val!0)))
+;   (define-fun
+;      given-6.8
+;      ()
+;      Bool
+;      (= a1c3 a1bs))
+;   (define-fun
+;      a1bT
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      given-6.4
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1bn)
+;         a1bO))
+;   (define-fun
+;      a1bO
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         nothing))
+;   (define-fun
+;      given-6.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bo
+;           a1bp)
+;         a1bT))
+;   (define-fun
+;      a1bp
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              nothing)
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bm
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      given-6.5
+;      ()
+;      Bool
+;      (= a1bY a1br))
+;   (define-fun
+;      a1bq
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bA
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 Sorta1bk
+;                 (Maybe Sorta1bl)))
+;           nothing)
+;         Sorta1bk!val!0
+;         (just Sorta1bl!val!2)))
+;   (define-fun
+;      a1bn
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         nothing))
+;   (define-fun
+;      a1c3
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1br
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      given-6.3
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bm
+;           a1br)
+;         a1c3))
+;   (define-fun
+;      a1bz
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (
+;        (as
+;           const
+;           (Array
+;              Sorta1bk
+;              (Maybe Sorta1bl)))
+;        nothing))
+;   (define-fun
+;      a1bY
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bs
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            (just Sorta1bl!val!4))
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!1)))
+;   (define-fun
+;      a1bo
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!3))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         nothing))
+;   (define-fun
+;      given-6.1
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_ map either8570520873362452143)
+;           a1bn
+;           a1bp)
+;         a1bY))
+;   (define-fun
+;      a1bC
+;      ()
+;      (Array
+;         Sorta1bk
+;         (Maybe Sorta1bl))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    Sorta1bk
+;                    (Maybe Sorta1bl)))
+;              (just Sorta1bl!val!0))
+;            Sorta1bk!val!0
+;            nothing)
+;         Sorta1bk!val!1
+;         (just Sorta1bl!val!5)))
+;   (define-fun
+;      given-6.7
+;      ()
+;      Bool
+;      (= a1bT a1bq))
+;   (define-fun
+;      given-6.6
+;      ()
+;      Bool
+;      (= a1bO a1bo))
+;   (define-fun
+;      wanted-6
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bz
+;                        a1bA)
+;                      a1bC)
+;                    a1bq)))
+;           (a!2
+;              (not
+;                 (=
+;                    (
+;                      (_ map either8570520873362452143)
+;                      a1bz
+;                      (
+;                        (_ map either8570520873362452143)
+;                        a1bA
+;                        a1bC))
+;                    a1bs))))
+;         (or false a!1 a!2)))
+;   (define-fun
+;      k!121
+;      (
+;        (x!0 Sorta1bk))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!4)
+;         (ite
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!1)
+;            (just Sorta1bl!val!3))))
+;   (define-fun
+;      either8570520873362452143
+;      (
+;        (x!0
+;           (Maybe Sorta1bl))
+;        (x!1
+;           (Maybe Sorta1bl)))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (and
+;            (=
+;               x!0
+;               (just Sorta1bl!val!3))
+;            (= x!1 nothing))
+;         (just Sorta1bl!val!3)
+;         (ite
+;            (and
+;               (= x!0 nothing)
+;               (=
+;                  x!1
+;                  (just Sorta1bl!val!3)))
+;            (just Sorta1bl!val!3)
+;            (ite
+;               (and
+;                  (= x!0 nothing)
+;                  (=
+;                     x!1
+;                     (just Sorta1bl!val!0)))
+;               (just Sorta1bl!val!0)
+;               (ite
+;                  (and
+;                     (= x!0 nothing)
+;                     (= x!1 nothing))
+;                  nothing
+;                  (ite
+;                     (and
+;                        (= x!0 nothing)
+;                        (=
+;                           x!1
+;                           (just Sorta1bl!val!1)))
+;                     (just Sorta1bl!val!1)
+;                     (ite
+;                        (and
+;                           (= x!0 nothing)
+;                           (=
+;                              x!1
+;                              (just Sorta1bl!val!5)))
+;                        (just Sorta1bl!val!5)
+;                        (ite
+;                           (and
+;                              (= x!0 nothing)
+;                              (=
+;                                 x!1
+;                                 (just Sorta1bl!val!4)))
+;                           (just Sorta1bl!val!4)
+;                           (ite
+;                              (and
+;                                 (=
+;                                    x!0
+;                                    (just Sorta1bl!val!2))
+;                                 (= x!1 nothing))
+;                              (just Sorta1bl!val!2)
+;                              (ite
+;                                 (and
+;                                    (= x!0 nothing)
+;                                    (=
+;                                       x!1
+;                                       (just Sorta1bl!val!2)))
+;                                 (just Sorta1bl!val!2)
+;                                 (ite
+;                                    (
+;                                      (_ is just)
+;                                      x!0)
+;                                    x!0
+;                                    x!1)))))))))))
+;   (define-fun
+;      k!127
+;      (
+;        (x!0 Sorta1bk))
+;      (Maybe Sorta1bl)
+;      (ite
+;         (= x!0 Sorta1bk!val!0)
+;         (just Sorta1bl!val!2)
+;         (ite
+;            (= x!0 Sorta1bk!val!1)
+;            (just Sorta1bl!val!5)
+;            (just Sorta1bl!val!0)))))
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -3511,12 +7649,19 @@ sat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1d6  <=  m1
-a1d7  <=  m2
-a1d8  <=  m3
-a1dk  <=  fsk_a1dk
-a1do  <=  fsk_a1do
+;  a1d6  <=  m1
+;  a1d7  <=  m2
+;  a1d8  <=  m3
+;  a1dk  <=  fsk_a1dk
+;  a1do  <=  fsk_a1do
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1d6 (Array String (Maybe Int)))
+; (declare-const a1d7 (Array String (Maybe Int)))
+; (declare-const a1d8 (Array String (Maybe Int)))
+; (declare-const a1dk (Array String (Maybe Int)))
+; (declare-const a1do (Array String (Maybe Int)))
 (declare-const
    a1d6
    (Array
@@ -3573,16 +7718,49 @@ a1do  <=  fsk_a1do
       :named
       given-7.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1d7
+;            "ok"
+;            (just 2))
+;         a1do)
+;      :named
+;      given-7.1)
+;   (!
+;      (=
+;         (store
+;            a1d6
+;            "ok"
+;            (just 2))
+;         a1dk)
+;      :named
+;      given-7.2)
+;   (!
+;      (= a1do a1d8)
+;      :named
+;      given-7.3)
+;   (!
+;      (= a1dk a1d7)
+;      :named
+;      given-7.4)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-7")
@@ -3608,12 +7786,19 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1d6  <=  m1
-a1d7  <=  m2
-a1d8  <=  m3
-a1dk  <=  fsk_a1dk
-a1do  <=  fsk_a1do
+;  a1d6  <=  m1
+;  a1d7  <=  m2
+;  a1d8  <=  m3
+;  a1dk  <=  fsk_a1dk
+;  a1do  <=  fsk_a1do
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1d6 (Array String (Maybe Int)))
+; (declare-const a1d7 (Array String (Maybe Int)))
+; (declare-const a1d8 (Array String (Maybe Int)))
+; (declare-const a1dk (Array String (Maybe Int)))
+; (declare-const a1do (Array String (Maybe Int)))
 (declare-const
    a1d6
    (Array
@@ -3670,16 +7855,49 @@ a1do  <=  fsk_a1do
       :named
       given-7.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1d7
+;            "ok"
+;            (just 2))
+;         a1do)
+;      :named
+;      given-7.1)
+;   (!
+;      (=
+;         (store
+;            a1d6
+;            "ok"
+;            (just 2))
+;         a1dk)
+;      :named
+;      given-7.2)
+;   (!
+;      (= a1do a1d8)
+;      :named
+;      given-7.3)
+;   (!
+;      (= a1dk a1d7)
+;      :named
+;      given-7.4)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
@@ -3713,12 +7931,19 @@ unsat
 ;    a1d7)
 
 ; GIVENS (names)
-a1d6  <=  m1
-a1d7  <=  m2
-a1d8  <=  m3
-a1dk  <=  fsk_a1dk
-a1do  <=  fsk_a1do
+;  a1d6  <=  m1
+;  a1d7  <=  m2
+;  a1d8  <=  m3
+;  a1dk  <=  fsk_a1dk
+;  a1do  <=  fsk_a1do
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1d6 (Array String (Maybe Int)))
+; (declare-const a1d7 (Array String (Maybe Int)))
+; (declare-const a1d8 (Array String (Maybe Int)))
+; (declare-const a1dk (Array String (Maybe Int)))
+; (declare-const a1do (Array String (Maybe Int)))
+; DECS1 (unseen) 
 (declare-const
    a1d6
    (Array
@@ -3775,7 +8000,7 @@ a1do  <=  fsk_a1do
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
@@ -3788,8 +8013,11 @@ sat
 ;    a1d7)
 
 ; WANTEDS (names)
-a1d7  <=  m2
-a1db  <=  m1_a1db
+;  a1d7  <=  m2
+;  a1db  <=  m1_a1db
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a1db (Array String (Maybe Int)))
 (declare-const
    a1db
    (Array
@@ -3809,8 +8037,163 @@ a1db  <=  m1_a1db
       :named
       wanted-8))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-8")
+(get-model)
+; (
+;   (define-fun
+;      given-8.3
+;      ()
+;      Bool
+;      (= a1do a1d8))
+;   (define-fun
+;      a1d6
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 4))
+;         "o"
+;         nothing))
+;   (define-fun
+;      given-8.4
+;      ()
+;      Bool
+;      (= a1dk a1d7))
+;   (define-fun
+;      a1db
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 5))
+;         "o"
+;         (just 3)))
+;   (define-fun
+;      a1do
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      given-8.2
+;      ()
+;      Bool
+;      (=
+;         (store
+;            a1d6
+;            "ok"
+;            (just 2))
+;         a1dk))
+;   (define-fun
+;      a1d8
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      wanted-8
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (store
+;                       a1db
+;                       "ok"
+;                       (just 2))
+;                    a1d7))))
+;         (or false a!1)))
+;   (define-fun
+;      a1d7
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      a1dk
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      given-8.1
+;      ()
+;      Bool
+;      (=
+;         (store
+;            a1d7
+;            "ok"
+;            (just 2))
+;         a1do)))
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-8")
@@ -3844,12 +8227,19 @@ sat
 ;    a1d7)
 
 ; GIVENS (names)
-a1d6  <=  m1
-a1d7  <=  m2
-a1d8  <=  m3
-a1dk  <=  fsk_a1dk
-a1do  <=  fsk_a1do
+;  a1d6  <=  m1
+;  a1d7  <=  m2
+;  a1d8  <=  m3
+;  a1dk  <=  fsk_a1dk
+;  a1do  <=  fsk_a1do
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1d6 (Array String (Maybe Int)))
+; (declare-const a1d7 (Array String (Maybe Int)))
+; (declare-const a1d8 (Array String (Maybe Int)))
+; (declare-const a1dk (Array String (Maybe Int)))
+; (declare-const a1do (Array String (Maybe Int)))
+; DECS1 (unseen) 
 (declare-const
    a1d6
    (Array
@@ -3906,7 +8296,7 @@ a1do  <=  fsk_a1do
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
@@ -3919,8 +8309,11 @@ sat
 ;    a1d7)
 
 ; WANTEDS (names)
-a1d7  <=  m2
-a1db  <=  m1_a1db
+;  a1d7  <=  m2
+;  a1db  <=  m1_a1db
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a1db (Array String (Maybe Int)))
 (declare-const
    a1db
    (Array
@@ -3940,8 +8333,163 @@ a1db  <=  m1_a1db
       :named
       wanted-8))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-8")
+(get-model)
+; (
+;   (define-fun
+;      given-8.3
+;      ()
+;      Bool
+;      (= a1do a1d8))
+;   (define-fun
+;      a1d6
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 4))
+;         "o"
+;         nothing))
+;   (define-fun
+;      given-8.4
+;      ()
+;      Bool
+;      (= a1dk a1d7))
+;   (define-fun
+;      a1db
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 5))
+;         "o"
+;         (just 3)))
+;   (define-fun
+;      a1do
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      given-8.2
+;      ()
+;      Bool
+;      (=
+;         (store
+;            a1d6
+;            "ok"
+;            (just 2))
+;         a1dk))
+;   (define-fun
+;      a1d8
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      wanted-8
+;      ()
+;      Bool
+;      (let
+;         (
+;           (a!1
+;              (not
+;                 (=
+;                    (store
+;                       a1db
+;                       "ok"
+;                       (just 2))
+;                    a1d7))))
+;         (or false a!1)))
+;   (define-fun
+;      a1d7
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      a1dk
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Int)))
+;              (just 4))
+;            "o"
+;            nothing)
+;         "ok"
+;         (just 2)))
+;   (define-fun
+;      given-8.1
+;      ()
+;      Bool
+;      (=
+;         (store
+;            a1d7
+;            "ok"
+;            (just 2))
+;         a1do)))
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -3967,12 +8515,20 @@ sat
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1dV  <=  m1
-a1dW  <=  m2
-a1dX  <=  m3
-a1ea  <=  fsk_a1ea
-a1ee  <=  fsk_a1ee
+;  a1dV  <=  m1
+;  a1dW  <=  m2
+;  a1dX  <=  m3
+;  a1ea  <=  fsk_a1ea
+;  a1ee  <=  fsk_a1ee
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1dV (Array String (Maybe Sorta1dU)))
+; (declare-const a1dW (Array String (Maybe Sorta1dU)))
+; (declare-const a1dX (Array String (Maybe Sorta1dU)))
+; (declare-const a1ea (Array String (Maybe Sorta1dU)))
+; (declare-const a1ee (Array String (Maybe Sorta1dU)))
+; (declare-sort Sorta1dU)
 (declare-sort Sorta1dU)
 (declare-const
    a1dV
@@ -4034,16 +8590,53 @@ a1ee  <=  fsk_a1ee
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1dW
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1dU)))
+;         a1ee)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (store
+;            a1dV
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1dU)))
+;         a1ea)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a1ee a1dX)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a1ea a1dW)
+;      :named
+;      given-9.4)
+;   (! false :named wanted-9))
+(get-unsat-core)
+; (wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-9")
@@ -4069,12 +8662,20 @@ unsat
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1dV  <=  m1
-a1dW  <=  m2
-a1dX  <=  m3
-a1ea  <=  fsk_a1ea
-a1ee  <=  fsk_a1ee
+;  a1dV  <=  m1
+;  a1dW  <=  m2
+;  a1dX  <=  m3
+;  a1ea  <=  fsk_a1ea
+;  a1ee  <=  fsk_a1ee
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1dV (Array String (Maybe Sorta1dU)))
+; (declare-const a1dW (Array String (Maybe Sorta1dU)))
+; (declare-const a1dX (Array String (Maybe Sorta1dU)))
+; (declare-const a1ea (Array String (Maybe Sorta1dU)))
+; (declare-const a1ee (Array String (Maybe Sorta1dU)))
+; (declare-sort Sorta1dU)
 (declare-sort Sorta1dU)
 (declare-const
    a1dV
@@ -4136,16 +8737,53 @@ a1ee  <=  fsk_a1ee
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1dW
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1dU)))
+;         a1ee)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (store
+;            a1dV
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1dU)))
+;         a1ea)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a1ee a1dX)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a1ea a1dW)
+;      :named
+;      given-9.4)
+;   (! false :named wanted-9))
+(get-unsat-core)
+; (wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -4181,12 +8819,20 @@ unsat
 ;    a1dW)
 
 ; GIVENS (names)
-a1dV  <=  m1
-a1dW  <=  m2
-a1dX  <=  m3
-a1ea  <=  fsk_a1ea
-a1ee  <=  fsk_a1ee
+;  a1dV  <=  m1
+;  a1dW  <=  m2
+;  a1dX  <=  m3
+;  a1ea  <=  fsk_a1ea
+;  a1ee  <=  fsk_a1ee
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1dV (Array String (Maybe Sorta1dU)))
+; (declare-const a1dW (Array String (Maybe Sorta1dU)))
+; (declare-const a1dX (Array String (Maybe Sorta1dU)))
+; (declare-const a1ea (Array String (Maybe Sorta1dU)))
+; (declare-const a1ee (Array String (Maybe Sorta1dU)))
+; (declare-sort Sorta1dU)
+; DECS1 (unseen) 
 (declare-sort Sorta1dU)
 (declare-const
    a1dV
@@ -4248,7 +8894,7 @@ a1ee  <=  fsk_a1ee
       :named
       given-10.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
@@ -4263,8 +8909,11 @@ sat
 ;    a1dW)
 
 ; WANTEDS (names)
-a1dW  <=  m2
-a1e1  <=  m1_a1e1
+;  a1dW  <=  m2
+;  a1e1  <=  m1_a1e1
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a1e1 (Array String (Maybe Sorta1dU)))
 (declare-const
    a1e1
    (Array
@@ -4286,8 +8935,171 @@ a1e1  <=  m1_a1e1
       :named
       wanted-10))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-10")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta1dU!val!2
+;      ()
+;      Sorta1dU)
+;   (declare-fun
+;      Sorta1dU!val!0
+;      ()
+;      Sorta1dU)
+;   (declare-fun
+;      Sorta1dU!val!1
+;      ()
+;      Sorta1dU)
+;   (forall
+;      (
+;        (x Sorta1dU))
+;      (or
+;         (= x Sorta1dU!val!2)
+;         (= x Sorta1dU!val!0)
+;         (= x Sorta1dU!val!1)))
+;   (define-fun
+;      a1dX
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      given-10.1
+;      ()
+;      Bool
+;      (=
+;         (store a1dW "bob" nothing)
+;         a1ee))
+;   (define-fun
+;      a1ea
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      given-10.4
+;      ()
+;      Bool
+;      (= a1ea a1dW))
+;   (define-fun
+;      a1dW
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      a1ee
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      given-10.3
+;      ()
+;      Bool
+;      (= a1ee a1dX))
+;   (define-fun
+;      given-10.2
+;      ()
+;      Bool
+;      (=
+;         (store a1dV "bob" nothing)
+;         a1ea))
+;   (define-fun
+;      a1e1
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Sorta1dU)))
+;           (just Sorta1dU!val!2))
+;         "b"
+;         (just Sorta1dU!val!0)))
+;   (define-fun
+;      wanted-10
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (store a1e1 "bob" nothing)
+;               a1dW))))
+;   (define-fun
+;      a1dV
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Sorta1dU)))
+;           (just Sorta1dU!val!1))
+;         "b"
+;         nothing)))
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-10")
@@ -4323,12 +9135,20 @@ sat
 ;    a1dW)
 
 ; GIVENS (names)
-a1dV  <=  m1
-a1dW  <=  m2
-a1dX  <=  m3
-a1ea  <=  fsk_a1ea
-a1ee  <=  fsk_a1ee
+;  a1dV  <=  m1
+;  a1dW  <=  m2
+;  a1dX  <=  m3
+;  a1ea  <=  fsk_a1ea
+;  a1ee  <=  fsk_a1ee
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1dV (Array String (Maybe Sorta1dU)))
+; (declare-const a1dW (Array String (Maybe Sorta1dU)))
+; (declare-const a1dX (Array String (Maybe Sorta1dU)))
+; (declare-const a1ea (Array String (Maybe Sorta1dU)))
+; (declare-const a1ee (Array String (Maybe Sorta1dU)))
+; (declare-sort Sorta1dU)
+; DECS1 (unseen) 
 (declare-sort Sorta1dU)
 (declare-const
    a1dV
@@ -4390,7 +9210,7 @@ a1ee  <=  fsk_a1ee
       :named
       given-10.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
@@ -4405,8 +9225,11 @@ sat
 ;    a1dW)
 
 ; WANTEDS (names)
-a1dW  <=  m2
-a1e1  <=  m1_a1e1
+;  a1dW  <=  m2
+;  a1e1  <=  m1_a1e1
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (declare-const a1e1 (Array String (Maybe Sorta1dU)))
 (declare-const
    a1e1
    (Array
@@ -4428,8 +9251,171 @@ a1e1  <=  m1_a1e1
       :named
       wanted-10))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-10")
+(get-model)
+; (
+;   (declare-fun
+;      Sorta1dU!val!2
+;      ()
+;      Sorta1dU)
+;   (declare-fun
+;      Sorta1dU!val!0
+;      ()
+;      Sorta1dU)
+;   (declare-fun
+;      Sorta1dU!val!1
+;      ()
+;      Sorta1dU)
+;   (forall
+;      (
+;        (x Sorta1dU))
+;      (or
+;         (= x Sorta1dU!val!2)
+;         (= x Sorta1dU!val!0)
+;         (= x Sorta1dU!val!1)))
+;   (define-fun
+;      a1dX
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      given-10.1
+;      ()
+;      Bool
+;      (=
+;         (store a1dW "bob" nothing)
+;         a1ee))
+;   (define-fun
+;      a1ea
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      given-10.4
+;      ()
+;      Bool
+;      (= a1ea a1dW))
+;   (define-fun
+;      a1dW
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      a1ee
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe Sorta1dU)))
+;              (just Sorta1dU!val!1))
+;            "b"
+;            nothing)
+;         "bob"
+;         nothing))
+;   (define-fun
+;      given-10.3
+;      ()
+;      Bool
+;      (= a1ee a1dX))
+;   (define-fun
+;      given-10.2
+;      ()
+;      Bool
+;      (=
+;         (store a1dV "bob" nothing)
+;         a1ea))
+;   (define-fun
+;      a1e1
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Sorta1dU)))
+;           (just Sorta1dU!val!2))
+;         "b"
+;         (just Sorta1dU!val!0)))
+;   (define-fun
+;      wanted-10
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (store a1e1 "bob" nothing)
+;               a1dW))))
+;   (define-fun
+;      a1dV
+;      ()
+;      (Array
+;         String
+;         (Maybe Sorta1dU))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Sorta1dU)))
+;           (just Sorta1dU!val!1))
+;         "b"
+;         nothing)))
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
@@ -4483,8 +9469,10 @@ sat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
@@ -4520,6 +9508,8 @@ sat
 ;       (just "ok")))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -4555,8 +9545,45 @@ sat
       :named
       wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (store
+;                  (store
+;                     (
+;                       (as
+;                          const
+;                          (Array
+;                             Int
+;                             (Maybe String)))
+;                       nothing)
+;                     1
+;                     (just "ok"))
+;                  2
+;                  (just "hi"))
+;               (store
+;                  (store
+;                     (
+;                       (as
+;                          const
+;                          (Array
+;                             Int
+;                             (Maybe String)))
+;                       nothing)
+;                     2
+;                     (just "hi"))
+;                  1
+;                  (just "ok")))))
+;      :named
+;      wanted-11))
+(get-unsat-core)
+; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-11")
@@ -4577,17 +9604,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (! false :named wanted-11))
+(get-unsat-core)
+; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
@@ -4621,18 +9657,37 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1eG  <=  a
-a1eH  <=  b
-a1eI  <=  ab
-a1eJ  <=  c
-a1eK  <=  abc
-a1eL  <=  bc
-a1eM  <=  abc'
-a1g3  <=  fsk_a1g3
-a1g8  <=  fsk_a1g8
-a1gd  <=  fsk_a1gd
-a1gi  <=  fsk_a1gi
+;  a1eG  <=  a
+;  a1eH  <=  b
+;  a1eI  <=  ab
+;  a1eJ  <=  c
+;  a1eK  <=  abc
+;  a1eL  <=  bc
+;  a1eM  <=  abc'
+;  a1g3  <=  fsk_a1g3
+;  a1g8  <=  fsk_a1g8
+;  a1gd  <=  fsk_a1gd
+;  a1gi  <=  fsk_a1gi
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta1eF)) (y (Maybe Sorta1eF))) (=> (and ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) x) ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) y)) (= (both8571567608432319790 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 y (as nothing (Maybe Sorta1eF))) (as nothing (Maybe Sorta1eF)))))
+; (declare-const a1eG (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eH (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eI (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eJ (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eK (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eL (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eM (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g3 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g8 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gd (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gi (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-fun both8571567608432319790 ((Maybe Sorta1eF) (Maybe Sorta1eF)) (Maybe Sorta1eF))
+; (declare-sort Sorta1eE)
+; (declare-sort Sorta1eF)
 (declare-sort Sorta1eE)
 (declare-sort Sorta1eF)
 (declare-const
@@ -4805,16 +9860,120 @@ a1gi  <=  fsk_a1gi
       :named
       given-12.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790
+;            y
+;            (as
+;               nothing
+;               (Maybe Sorta1eF)))
+;         (as
+;            nothing
+;            (Maybe Sorta1eF))))
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790 nothing y)
+;         nothing))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eF))
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=>
+;         (and
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              x)
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              y))
+;         (=
+;            (both8571567608432319790 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eH
+;           a1eJ)
+;         a1gd)
+;      :named
+;      given-12.1)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eI
+;           a1eJ)
+;         a1g8)
+;      :named
+;      given-12.2)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eL)
+;         a1gi)
+;      :named
+;      given-12.3)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eH)
+;         a1g3)
+;      :named
+;      given-12.4)
+;   (!
+;      (= a1gd a1eL)
+;      :named
+;      given-12.5)
+;   (!
+;      (= a1g3 a1eI)
+;      :named
+;      given-12.6)
+;   (!
+;      (= a1g8 a1eK)
+;      :named
+;      given-12.7)
+;   (!
+;      (= a1gi a1eM)
+;      :named
+;      given-12.8)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-12")
@@ -4848,18 +10007,37 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1eG  <=  a
-a1eH  <=  b
-a1eI  <=  ab
-a1eJ  <=  c
-a1eK  <=  abc
-a1eL  <=  bc
-a1eM  <=  abc'
-a1g3  <=  fsk_a1g3
-a1g8  <=  fsk_a1g8
-a1gd  <=  fsk_a1gd
-a1gi  <=  fsk_a1gi
+;  a1eG  <=  a
+;  a1eH  <=  b
+;  a1eI  <=  ab
+;  a1eJ  <=  c
+;  a1eK  <=  abc
+;  a1eL  <=  bc
+;  a1eM  <=  abc'
+;  a1g3  <=  fsk_a1g3
+;  a1g8  <=  fsk_a1g8
+;  a1gd  <=  fsk_a1gd
+;  a1gi  <=  fsk_a1gi
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta1eF)) (y (Maybe Sorta1eF))) (=> (and ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) x) ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) y)) (= (both8571567608432319790 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 y (as nothing (Maybe Sorta1eF))) (as nothing (Maybe Sorta1eF)))))
+; (declare-const a1eG (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eH (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eI (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eJ (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eK (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eL (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eM (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g3 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g8 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gd (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gi (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-fun both8571567608432319790 ((Maybe Sorta1eF) (Maybe Sorta1eF)) (Maybe Sorta1eF))
+; (declare-sort Sorta1eE)
+; (declare-sort Sorta1eF)
 (declare-sort Sorta1eE)
 (declare-sort Sorta1eF)
 (declare-const
@@ -5032,16 +10210,120 @@ a1gi  <=  fsk_a1gi
       :named
       given-12.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790
+;            y
+;            (as
+;               nothing
+;               (Maybe Sorta1eF)))
+;         (as
+;            nothing
+;            (Maybe Sorta1eF))))
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790 nothing y)
+;         nothing))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eF))
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=>
+;         (and
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              x)
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              y))
+;         (=
+;            (both8571567608432319790 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eH
+;           a1eJ)
+;         a1gd)
+;      :named
+;      given-12.1)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eI
+;           a1eJ)
+;         a1g8)
+;      :named
+;      given-12.2)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eL)
+;         a1gi)
+;      :named
+;      given-12.3)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eH)
+;         a1g3)
+;      :named
+;      given-12.4)
+;   (!
+;      (= a1gd a1eL)
+;      :named
+;      given-12.5)
+;   (!
+;      (= a1g3 a1eI)
+;      :named
+;      given-12.6)
+;   (!
+;      (= a1g8 a1eK)
+;      :named
+;      given-12.7)
+;   (!
+;      (= a1gi a1eM)
+;      :named
+;      given-12.8)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
@@ -5078,18 +10360,37 @@ unsat
 ;  =>  (= a1eK a1eM)
 
 ; GIVENS (names)
-a1eG  <=  a
-a1eH  <=  b
-a1eI  <=  ab
-a1eJ  <=  c
-a1eK  <=  abc
-a1eL  <=  bc
-a1eM  <=  abc'
-a1g3  <=  fsk_a1g3
-a1g8  <=  fsk_a1g8
-a1gd  <=  fsk_a1gd
-a1gi  <=  fsk_a1gi
+;  a1eG  <=  a
+;  a1eH  <=  b
+;  a1eI  <=  ab
+;  a1eJ  <=  c
+;  a1eK  <=  abc
+;  a1eL  <=  bc
+;  a1eM  <=  abc'
+;  a1g3  <=  fsk_a1g3
+;  a1g8  <=  fsk_a1g8
+;  a1gd  <=  fsk_a1gd
+;  a1gi  <=  fsk_a1gi
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1eF)) (y (Maybe Sorta1eF))) (=> (and ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) x) ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) y)) (= (both8571567608432319790 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 y (as nothing (Maybe Sorta1eF))) (as nothing (Maybe Sorta1eF)))))
+; (declare-const a1eG (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eH (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eI (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eJ (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eK (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eL (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eM (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g3 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g8 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gd (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gi (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-fun both8571567608432319790 ((Maybe Sorta1eF) (Maybe Sorta1eF)) (Maybe Sorta1eF))
+; (declare-sort Sorta1eE)
+; (declare-sort Sorta1eF)
+; DECS1 (unseen) 
 (declare-sort Sorta1eE)
 (declare-sort Sorta1eF)
 (declare-const
@@ -5262,7 +10563,7 @@ a1gi  <=  fsk_a1gi
       :named
       given-13.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
@@ -5270,8 +10571,10 @@ sat
 ;  =>  (= a1eK a1eM)
 
 ; WANTEDS (names)
-a1eK  <=  abc
-a1eM  <=  abc'
+;  a1eK  <=  abc
+;  a1eM  <=  abc'
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -5281,8 +10584,124 @@ a1eM  <=  abc'
       :named
       wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790
+;            y
+;            (as
+;               nothing
+;               (Maybe Sorta1eF)))
+;         (as
+;            nothing
+;            (Maybe Sorta1eF))))
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790 nothing y)
+;         nothing))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eF))
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=>
+;         (and
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              x)
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              y))
+;         (=
+;            (both8571567608432319790 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eH
+;           a1eJ)
+;         a1gd)
+;      :named
+;      given-13.1)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eI
+;           a1eJ)
+;         a1g8)
+;      :named
+;      given-13.2)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eL)
+;         a1gi)
+;      :named
+;      given-13.3)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eH)
+;         a1g3)
+;      :named
+;      given-13.4)
+;   (!
+;      (= a1gd a1eL)
+;      :named
+;      given-13.5)
+;   (!
+;      (= a1g3 a1eI)
+;      :named
+;      given-13.6)
+;   (!
+;      (= a1g8 a1eK)
+;      :named
+;      given-13.7)
+;   (!
+;      (= a1gi a1eM)
+;      :named
+;      given-13.8)
+;   (!
+;      (or
+;         false
+;         (not
+;            (= a1eK a1eM)))
+;      :named
+;      wanted-13))
+(get-unsat-core)
+; (given-13.8
+;    given-13.5
+;    given-13.6
+;    given-13.4
+;    given-13.7
+;    wanted-13
+;    given-13.3
+;    given-13.2
+;    given-13.1)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-13")
@@ -5316,18 +10735,37 @@ unsat
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1eG  <=  a
-a1eH  <=  b
-a1eI  <=  ab
-a1eJ  <=  c
-a1eK  <=  abc
-a1eL  <=  bc
-a1eM  <=  abc'
-a1g3  <=  fsk_a1g3
-a1g8  <=  fsk_a1g8
-a1gd  <=  fsk_a1gd
-a1gi  <=  fsk_a1gi
+;  a1eG  <=  a
+;  a1eH  <=  b
+;  a1eI  <=  ab
+;  a1eJ  <=  c
+;  a1eK  <=  abc
+;  a1eL  <=  bc
+;  a1eM  <=  abc'
+;  a1g3  <=  fsk_a1g3
+;  a1g8  <=  fsk_a1g8
+;  a1gd  <=  fsk_a1gd
+;  a1gi  <=  fsk_a1gi
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1eF)) (y (Maybe Sorta1eF))) (=> (and ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) x) ((_ is (just (Sorta1eF) (Maybe Sorta1eF))) y)) (= (both8571567608432319790 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 nothing y) nothing)))
+; (assert (forall ((y (Maybe Sorta1eF))) (= (both8571567608432319790 y (as nothing (Maybe Sorta1eF))) (as nothing (Maybe Sorta1eF)))))
+; (declare-const a1eG (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eH (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eI (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eJ (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eK (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eL (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1eM (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g3 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1g8 (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gd (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-const a1gi (Array Sorta1eE (Maybe Sorta1eF)))
+; (declare-fun both8571567608432319790 ((Maybe Sorta1eF) (Maybe Sorta1eF)) (Maybe Sorta1eF))
+; (declare-sort Sorta1eE)
+; (declare-sort Sorta1eF)
+; DECS1 (unseen) 
 (declare-sort Sorta1eE)
 (declare-sort Sorta1eF)
 (declare-const
@@ -5500,16 +10938,120 @@ a1gi  <=  fsk_a1gi
       :named
       given-13.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790
+;            y
+;            (as
+;               nothing
+;               (Maybe Sorta1eF)))
+;         (as
+;            nothing
+;            (Maybe Sorta1eF))))
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=
+;         (both8571567608432319790 nothing y)
+;         nothing))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eF))
+;        (y
+;           (Maybe Sorta1eF)))
+;      (=>
+;         (and
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              x)
+;            (
+;              (_
+;                 is
+;                 (just
+;                    (Sorta1eF)
+;                    (Maybe Sorta1eF)))
+;              y))
+;         (=
+;            (both8571567608432319790 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eH
+;           a1eJ)
+;         a1gd)
+;      :named
+;      given-13.1)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eI
+;           a1eJ)
+;         a1g8)
+;      :named
+;      given-13.2)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eL)
+;         a1gi)
+;      :named
+;      given-13.3)
+;   (!
+;      (=
+;         (
+;           (_ map both8571567608432319790)
+;           a1eG
+;           a1eH)
+;         a1g3)
+;      :named
+;      given-13.4)
+;   (!
+;      (= a1gd a1eL)
+;      :named
+;      given-13.5)
+;   (!
+;      (= a1g3 a1eI)
+;      :named
+;      given-13.6)
+;   (!
+;      (= a1g8 a1eK)
+;      :named
+;      given-13.7)
+;   (!
+;      (= a1gi a1eM)
+;      :named
+;      given-13.8)
+;   (! false :named wanted-13))
+(get-unsat-core)
+; (wanted-13)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-14")
@@ -5543,18 +11085,36 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1eY  <=  a
-a1eZ  <=  b
-a1f0  <=  ab
-a1f1  <=  c
-a1f2  <=  abc
-a1f3  <=  bc
-a1f4  <=  abc'
-a1gv  <=  fsk_a1gv
-a1gA  <=  fsk_a1gA
-a1gF  <=  fsk_a1gF
-a1gK  <=  fsk_a1gK
+;  a1eY  <=  a
+;  a1eZ  <=  b
+;  a1f0  <=  ab
+;  a1f1  <=  c
+;  a1f2  <=  abc
+;  a1f3  <=  bc
+;  a1f4  <=  abc'
+;  a1gv  <=  fsk_a1gv
+;  a1gA  <=  fsk_a1gA
+;  a1gF  <=  fsk_a1gF
+;  a1gK  <=  fsk_a1gK
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta1eX)) (y (Maybe Sorta1eX))) (=> ((_ is (just (Sorta1eX) (Maybe Sorta1eX))) x) (= (either8571596195734653276 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eX))) (= (either8571596195734653276 (as nothing (Maybe Sorta1eX)) y) y)))
+; (declare-const a1eY (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1eZ (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f0 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f1 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f2 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f3 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f4 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gA (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gF (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gK (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gv (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-fun either8571596195734653276 ((Maybe Sorta1eX) (Maybe Sorta1eX)) (Maybe Sorta1eX))
+; (declare-sort Sorta1eW)
+; (declare-sort Sorta1eX)
 (declare-sort Sorta1eW)
 (declare-sort Sorta1eX)
 (declare-const
@@ -5709,16 +11269,103 @@ a1gK  <=  fsk_a1gK
       :named
       given-14.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=
+;         (either8571596195734653276
+;            (as
+;               nothing
+;               (Maybe Sorta1eX))
+;            y)
+;         y))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eX))
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=>
+;         (
+;           (_
+;              is
+;              (just
+;                 (Sorta1eX)
+;                 (Maybe Sorta1eX)))
+;           x)
+;         (=
+;            (either8571596195734653276 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eZ
+;           a1f1)
+;         a1gF)
+;      :named
+;      given-14.1)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1f0
+;           a1f1)
+;         a1gA)
+;      :named
+;      given-14.2)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1f3)
+;         a1gK)
+;      :named
+;      given-14.3)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1eZ)
+;         a1gv)
+;      :named
+;      given-14.4)
+;   (!
+;      (= a1gF a1f3)
+;      :named
+;      given-14.5)
+;   (!
+;      (= a1gv a1f0)
+;      :named
+;      given-14.6)
+;   (!
+;      (= a1gA a1f2)
+;      :named
+;      given-14.7)
+;   (!
+;      (= a1gK a1f4)
+;      :named
+;      given-14.8)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-14")
@@ -5752,18 +11399,36 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1eY  <=  a
-a1eZ  <=  b
-a1f0  <=  ab
-a1f1  <=  c
-a1f2  <=  abc
-a1f3  <=  bc
-a1f4  <=  abc'
-a1gv  <=  fsk_a1gv
-a1gA  <=  fsk_a1gA
-a1gF  <=  fsk_a1gF
-a1gK  <=  fsk_a1gK
+;  a1eY  <=  a
+;  a1eZ  <=  b
+;  a1f0  <=  ab
+;  a1f1  <=  c
+;  a1f2  <=  abc
+;  a1f3  <=  bc
+;  a1f4  <=  abc'
+;  a1gv  <=  fsk_a1gv
+;  a1gA  <=  fsk_a1gA
+;  a1gF  <=  fsk_a1gF
+;  a1gK  <=  fsk_a1gK
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (forall ((x (Maybe Sorta1eX)) (y (Maybe Sorta1eX))) (=> ((_ is (just (Sorta1eX) (Maybe Sorta1eX))) x) (= (either8571596195734653276 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eX))) (= (either8571596195734653276 (as nothing (Maybe Sorta1eX)) y) y)))
+; (declare-const a1eY (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1eZ (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f0 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f1 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f2 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f3 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f4 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gA (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gF (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gK (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gv (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-fun either8571596195734653276 ((Maybe Sorta1eX) (Maybe Sorta1eX)) (Maybe Sorta1eX))
+; (declare-sort Sorta1eW)
+; (declare-sort Sorta1eX)
 (declare-sort Sorta1eW)
 (declare-sort Sorta1eX)
 (declare-const
@@ -5918,16 +11583,103 @@ a1gK  <=  fsk_a1gK
       :named
       given-14.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=
+;         (either8571596195734653276
+;            (as
+;               nothing
+;               (Maybe Sorta1eX))
+;            y)
+;         y))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eX))
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=>
+;         (
+;           (_
+;              is
+;              (just
+;                 (Sorta1eX)
+;                 (Maybe Sorta1eX)))
+;           x)
+;         (=
+;            (either8571596195734653276 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eZ
+;           a1f1)
+;         a1gF)
+;      :named
+;      given-14.1)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1f0
+;           a1f1)
+;         a1gA)
+;      :named
+;      given-14.2)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1f3)
+;         a1gK)
+;      :named
+;      given-14.3)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1eZ)
+;         a1gv)
+;      :named
+;      given-14.4)
+;   (!
+;      (= a1gF a1f3)
+;      :named
+;      given-14.5)
+;   (!
+;      (= a1gv a1f0)
+;      :named
+;      given-14.6)
+;   (!
+;      (= a1gA a1f2)
+;      :named
+;      given-14.7)
+;   (!
+;      (= a1gK a1f4)
+;      :named
+;      given-14.8)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-15")
@@ -5964,18 +11716,36 @@ unsat
 ;  =>  (= a1f2 a1f4)
 
 ; GIVENS (names)
-a1eY  <=  a
-a1eZ  <=  b
-a1f0  <=  ab
-a1f1  <=  c
-a1f2  <=  abc
-a1f3  <=  bc
-a1f4  <=  abc'
-a1gv  <=  fsk_a1gv
-a1gA  <=  fsk_a1gA
-a1gF  <=  fsk_a1gF
-a1gK  <=  fsk_a1gK
+;  a1eY  <=  a
+;  a1eZ  <=  b
+;  a1f0  <=  ab
+;  a1f1  <=  c
+;  a1f2  <=  abc
+;  a1f3  <=  bc
+;  a1f4  <=  abc'
+;  a1gv  <=  fsk_a1gv
+;  a1gA  <=  fsk_a1gA
+;  a1gF  <=  fsk_a1gF
+;  a1gK  <=  fsk_a1gK
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1eX)) (y (Maybe Sorta1eX))) (=> ((_ is (just (Sorta1eX) (Maybe Sorta1eX))) x) (= (either8571596195734653276 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eX))) (= (either8571596195734653276 (as nothing (Maybe Sorta1eX)) y) y)))
+; (declare-const a1eY (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1eZ (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f0 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f1 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f2 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f3 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f4 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gA (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gF (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gK (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gv (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-fun either8571596195734653276 ((Maybe Sorta1eX) (Maybe Sorta1eX)) (Maybe Sorta1eX))
+; (declare-sort Sorta1eW)
+; (declare-sort Sorta1eX)
+; DECS1 (unseen) 
 (declare-sort Sorta1eW)
 (declare-sort Sorta1eX)
 (declare-const
@@ -6130,7 +11900,7 @@ a1gK  <=  fsk_a1gK
       :named
       given-15.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
@@ -6138,8 +11908,10 @@ sat
 ;  =>  (= a1f2 a1f4)
 
 ; WANTEDS (names)
-a1f2  <=  abc
-a1f4  <=  abc'
+;  a1f2  <=  abc
+;  a1f4  <=  abc'
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -6149,8 +11921,107 @@ a1f4  <=  abc'
       :named
       wanted-15))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-15")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=
+;         (either8571596195734653276
+;            (as
+;               nothing
+;               (Maybe Sorta1eX))
+;            y)
+;         y))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eX))
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=>
+;         (
+;           (_
+;              is
+;              (just
+;                 (Sorta1eX)
+;                 (Maybe Sorta1eX)))
+;           x)
+;         (=
+;            (either8571596195734653276 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eZ
+;           a1f1)
+;         a1gF)
+;      :named
+;      given-15.1)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1f0
+;           a1f1)
+;         a1gA)
+;      :named
+;      given-15.2)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1f3)
+;         a1gK)
+;      :named
+;      given-15.3)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1eZ)
+;         a1gv)
+;      :named
+;      given-15.4)
+;   (!
+;      (= a1gF a1f3)
+;      :named
+;      given-15.5)
+;   (!
+;      (= a1gv a1f0)
+;      :named
+;      given-15.6)
+;   (!
+;      (= a1gA a1f2)
+;      :named
+;      given-15.7)
+;   (!
+;      (= a1gK a1f4)
+;      :named
+;      given-15.8)
+;   (!
+;      (or
+;         false
+;         (not
+;            (= a1f2 a1f4)))
+;      :named
+;      wanted-15))
+(get-unsat-core)
+; (wanted-15
+;    given-15.7
+;    given-15.8
+;    given-15.6
+;    given-15.5
+;    given-15.4
+;    given-15.3
+;    given-15.2
+;    given-15.1)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-15")
@@ -6184,18 +12055,36 @@ unsat
 (echo "givens-start-cycle-15")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1eY  <=  a
-a1eZ  <=  b
-a1f0  <=  ab
-a1f1  <=  c
-a1f2  <=  abc
-a1f3  <=  bc
-a1f4  <=  abc'
-a1gv  <=  fsk_a1gv
-a1gA  <=  fsk_a1gA
-a1gF  <=  fsk_a1gF
-a1gK  <=  fsk_a1gK
+;  a1eY  <=  a
+;  a1eZ  <=  b
+;  a1f0  <=  ab
+;  a1f1  <=  c
+;  a1f2  <=  abc
+;  a1f3  <=  bc
+;  a1f4  <=  abc'
+;  a1gv  <=  fsk_a1gv
+;  a1gA  <=  fsk_a1gA
+;  a1gF  <=  fsk_a1gF
+;  a1gK  <=  fsk_a1gK
 (push 1)
+; DECS1 (seen) 
+; (assert (forall ((x (Maybe Sorta1eX)) (y (Maybe Sorta1eX))) (=> ((_ is (just (Sorta1eX) (Maybe Sorta1eX))) x) (= (either8571596195734653276 x y) x))))
+; (assert (forall ((y (Maybe Sorta1eX))) (= (either8571596195734653276 (as nothing (Maybe Sorta1eX)) y) y)))
+; (declare-const a1eY (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1eZ (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f0 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f1 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f2 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f3 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1f4 (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gA (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gF (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gK (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-const a1gv (Array Sorta1eW (Maybe Sorta1eX)))
+; (declare-fun either8571596195734653276 ((Maybe Sorta1eX) (Maybe Sorta1eX)) (Maybe Sorta1eX))
+; (declare-sort Sorta1eW)
+; (declare-sort Sorta1eX)
+; DECS1 (unseen) 
 (declare-sort Sorta1eW)
 (declare-sort Sorta1eX)
 (declare-const
@@ -6350,16 +12239,103 @@ a1gK  <=  fsk_a1gK
       :named
       given-15.8))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-15))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-15")
+(get-assertions)
+; (
+;   (forall
+;      (
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=
+;         (either8571596195734653276
+;            (as
+;               nothing
+;               (Maybe Sorta1eX))
+;            y)
+;         y))
+;   (forall
+;      (
+;        (x
+;           (Maybe Sorta1eX))
+;        (y
+;           (Maybe Sorta1eX)))
+;      (=>
+;         (
+;           (_
+;              is
+;              (just
+;                 (Sorta1eX)
+;                 (Maybe Sorta1eX)))
+;           x)
+;         (=
+;            (either8571596195734653276 x y)
+;            x)))
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eZ
+;           a1f1)
+;         a1gF)
+;      :named
+;      given-15.1)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1f0
+;           a1f1)
+;         a1gA)
+;      :named
+;      given-15.2)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1f3)
+;         a1gK)
+;      :named
+;      given-15.3)
+;   (!
+;      (=
+;         (
+;           (_ map either8571596195734653276)
+;           a1eY
+;           a1eZ)
+;         a1gv)
+;      :named
+;      given-15.4)
+;   (!
+;      (= a1gF a1f3)
+;      :named
+;      given-15.5)
+;   (!
+;      (= a1gv a1f0)
+;      :named
+;      given-15.6)
+;   (!
+;      (= a1gA a1f2)
+;      :named
+;      given-15.7)
+;   (!
+;      (= a1gK a1f4)
+;      :named
+;      given-15.8)
+;   (! false :named wanted-15))
+(get-unsat-core)
+; (wanted-15)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-16")
@@ -6385,12 +12361,19 @@ unsat
 (echo "givens-start-cycle-16")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1fe  <=  m1
-a1ff  <=  m2
-a1fg  <=  m3
-a1gX  <=  fsk_a1gX
-a1h1  <=  fsk_a1h1
+;  a1fe  <=  m1
+;  a1ff  <=  m2
+;  a1fg  <=  m3
+;  a1gX  <=  fsk_a1gX
+;  a1h1  <=  fsk_a1h1
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1fe (Array String (Maybe Int)))
+; (declare-const a1ff (Array String (Maybe Int)))
+; (declare-const a1fg (Array String (Maybe Int)))
+; (declare-const a1gX (Array String (Maybe Int)))
+; (declare-const a1h1 (Array String (Maybe Int)))
 (declare-const
    a1fe
    (Array
@@ -6447,16 +12430,49 @@ a1h1  <=  fsk_a1h1
       :named
       given-16.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-16))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1ff
+;            "ok"
+;            (just 2))
+;         a1h1)
+;      :named
+;      given-16.1)
+;   (!
+;      (=
+;         (store
+;            a1fe
+;            "ok"
+;            (just 2))
+;         a1gX)
+;      :named
+;      given-16.2)
+;   (!
+;      (= a1h1 a1fg)
+;      :named
+;      given-16.3)
+;   (!
+;      (= a1gX a1ff)
+;      :named
+;      given-16.4)
+;   (! false :named wanted-16))
+(get-unsat-core)
+; (wanted-16)
 (pop 1)
 (echo "solver-finish-cycle-16")
 (echo "solver-start-cycle-16")
@@ -6482,12 +12498,19 @@ unsat
 (echo "givens-start-cycle-16")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1fe  <=  m1
-a1ff  <=  m2
-a1fg  <=  m3
-a1gX  <=  fsk_a1gX
-a1h1  <=  fsk_a1h1
+;  a1fe  <=  m1
+;  a1ff  <=  m2
+;  a1fg  <=  m3
+;  a1gX  <=  fsk_a1gX
+;  a1h1  <=  fsk_a1h1
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1fe (Array String (Maybe Int)))
+; (declare-const a1ff (Array String (Maybe Int)))
+; (declare-const a1fg (Array String (Maybe Int)))
+; (declare-const a1gX (Array String (Maybe Int)))
+; (declare-const a1h1 (Array String (Maybe Int)))
 (declare-const
    a1fe
    (Array
@@ -6544,16 +12567,49 @@ a1h1  <=  fsk_a1h1
       :named
       given-16.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-16))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1ff
+;            "ok"
+;            (just 2))
+;         a1h1)
+;      :named
+;      given-16.1)
+;   (!
+;      (=
+;         (store
+;            a1fe
+;            "ok"
+;            (just 2))
+;         a1gX)
+;      :named
+;      given-16.2)
+;   (!
+;      (= a1h1 a1fg)
+;      :named
+;      given-16.3)
+;   (!
+;      (= a1gX a1ff)
+;      :named
+;      given-16.4)
+;   (! false :named wanted-16))
+(get-unsat-core)
+; (wanted-16)
 (pop 1)
 (echo "solver-finish-cycle-16")
 (echo "solver-start-cycle-17")
@@ -6582,12 +12638,19 @@ unsat
 ;  =>  (= a1ff a1fg)
 
 ; GIVENS (names)
-a1fe  <=  m1
-a1ff  <=  m2
-a1fg  <=  m3
-a1gX  <=  fsk_a1gX
-a1h1  <=  fsk_a1h1
+;  a1fe  <=  m1
+;  a1ff  <=  m2
+;  a1fg  <=  m3
+;  a1gX  <=  fsk_a1gX
+;  a1h1  <=  fsk_a1h1
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1fe (Array String (Maybe Int)))
+; (declare-const a1ff (Array String (Maybe Int)))
+; (declare-const a1fg (Array String (Maybe Int)))
+; (declare-const a1gX (Array String (Maybe Int)))
+; (declare-const a1h1 (Array String (Maybe Int)))
+; DECS1 (unseen) 
 (declare-const
    a1fe
    (Array
@@ -6644,7 +12707,7 @@ a1h1  <=  fsk_a1h1
       :named
       given-17.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
@@ -6652,8 +12715,10 @@ sat
 ;  =>  (= a1ff a1fg)
 
 ; WANTEDS (names)
-a1ff  <=  m2
-a1fg  <=  m3
+;  a1ff  <=  m2
+;  a1fg  <=  m3
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -6663,8 +12728,45 @@ a1fg  <=  m3
       :named
       wanted-17))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-17")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1ff
+;            "ok"
+;            (just 2))
+;         a1h1)
+;      :named
+;      given-17.1)
+;   (!
+;      (=
+;         (store
+;            a1fe
+;            "ok"
+;            (just 2))
+;         a1gX)
+;      :named
+;      given-17.2)
+;   (!
+;      (= a1h1 a1fg)
+;      :named
+;      given-17.3)
+;   (!
+;      (= a1gX a1ff)
+;      :named
+;      given-17.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (= a1ff a1fg)))
+;      :named
+;      wanted-17))
+(get-unsat-core)
+; (wanted-17 given-17.3 given-17.2 given-17.1 given-17.4)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-17")
@@ -6690,12 +12792,19 @@ unsat
 (echo "givens-start-cycle-17")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1fe  <=  m1
-a1ff  <=  m2
-a1fg  <=  m3
-a1gX  <=  fsk_a1gX
-a1h1  <=  fsk_a1h1
+;  a1fe  <=  m1
+;  a1ff  <=  m2
+;  a1fg  <=  m3
+;  a1gX  <=  fsk_a1gX
+;  a1h1  <=  fsk_a1h1
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1fe (Array String (Maybe Int)))
+; (declare-const a1ff (Array String (Maybe Int)))
+; (declare-const a1fg (Array String (Maybe Int)))
+; (declare-const a1gX (Array String (Maybe Int)))
+; (declare-const a1h1 (Array String (Maybe Int)))
+; DECS1 (unseen) 
 (declare-const
    a1fe
    (Array
@@ -6752,16 +12861,49 @@ a1h1  <=  fsk_a1h1
       :named
       given-17.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-17))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-17")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1ff
+;            "ok"
+;            (just 2))
+;         a1h1)
+;      :named
+;      given-17.1)
+;   (!
+;      (=
+;         (store
+;            a1fe
+;            "ok"
+;            (just 2))
+;         a1gX)
+;      :named
+;      given-17.2)
+;   (!
+;      (= a1h1 a1fg)
+;      :named
+;      given-17.3)
+;   (!
+;      (= a1gX a1ff)
+;      :named
+;      given-17.4)
+;   (! false :named wanted-17))
+(get-unsat-core)
+; (wanted-17)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-18")
@@ -6787,12 +12929,20 @@ unsat
 (echo "givens-start-cycle-18")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1fp  <=  m1
-a1fq  <=  m2
-a1fr  <=  m3
-a1hb  <=  fsk_a1hb
-a1hf  <=  fsk_a1hf
+;  a1fp  <=  m1
+;  a1fq  <=  m2
+;  a1fr  <=  m3
+;  a1hb  <=  fsk_a1hb
+;  a1hf  <=  fsk_a1hf
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1fp (Array String (Maybe Sorta1fo)))
+; (declare-const a1fq (Array String (Maybe Sorta1fo)))
+; (declare-const a1fr (Array String (Maybe Sorta1fo)))
+; (declare-const a1hb (Array String (Maybe Sorta1fo)))
+; (declare-const a1hf (Array String (Maybe Sorta1fo)))
+; (declare-sort Sorta1fo)
 (declare-sort Sorta1fo)
 (declare-const
    a1fp
@@ -6854,16 +13004,53 @@ a1hf  <=  fsk_a1hf
       :named
       given-18.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-18")
 (echo "wanteds-start-cycle-18")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-18))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1fq
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hf)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (store
+;            a1fp
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hb)
+;      :named
+;      given-18.2)
+;   (!
+;      (= a1hf a1fr)
+;      :named
+;      given-18.3)
+;   (!
+;      (= a1hb a1fq)
+;      :named
+;      given-18.4)
+;   (! false :named wanted-18))
+(get-unsat-core)
+; (wanted-18)
 (pop 1)
 (echo "solver-finish-cycle-18")
 (echo "solver-start-cycle-18")
@@ -6889,12 +13076,20 @@ unsat
 (echo "givens-start-cycle-18")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1fp  <=  m1
-a1fq  <=  m2
-a1fr  <=  m3
-a1hb  <=  fsk_a1hb
-a1hf  <=  fsk_a1hf
+;  a1fp  <=  m1
+;  a1fq  <=  m2
+;  a1fr  <=  m3
+;  a1hb  <=  fsk_a1hb
+;  a1hf  <=  fsk_a1hf
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a1fp (Array String (Maybe Sorta1fo)))
+; (declare-const a1fq (Array String (Maybe Sorta1fo)))
+; (declare-const a1fr (Array String (Maybe Sorta1fo)))
+; (declare-const a1hb (Array String (Maybe Sorta1fo)))
+; (declare-const a1hf (Array String (Maybe Sorta1fo)))
+; (declare-sort Sorta1fo)
 (declare-sort Sorta1fo)
 (declare-const
    a1fp
@@ -6956,16 +13151,53 @@ a1hf  <=  fsk_a1hf
       :named
       given-18.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-18")
 (echo "wanteds-start-cycle-18")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-18))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1fq
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hf)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (store
+;            a1fp
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hb)
+;      :named
+;      given-18.2)
+;   (!
+;      (= a1hf a1fr)
+;      :named
+;      given-18.3)
+;   (!
+;      (= a1hb a1fq)
+;      :named
+;      given-18.4)
+;   (! false :named wanted-18))
+(get-unsat-core)
+; (wanted-18)
 (pop 1)
 (echo "solver-finish-cycle-18")
 (echo "solver-start-cycle-19")
@@ -6994,12 +13226,20 @@ unsat
 ;  =>  (= a1fq a1fr)
 
 ; GIVENS (names)
-a1fp  <=  m1
-a1fq  <=  m2
-a1fr  <=  m3
-a1hb  <=  fsk_a1hb
-a1hf  <=  fsk_a1hf
+;  a1fp  <=  m1
+;  a1fq  <=  m2
+;  a1fr  <=  m3
+;  a1hb  <=  fsk_a1hb
+;  a1hf  <=  fsk_a1hf
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1fp (Array String (Maybe Sorta1fo)))
+; (declare-const a1fq (Array String (Maybe Sorta1fo)))
+; (declare-const a1fr (Array String (Maybe Sorta1fo)))
+; (declare-const a1hb (Array String (Maybe Sorta1fo)))
+; (declare-const a1hf (Array String (Maybe Sorta1fo)))
+; (declare-sort Sorta1fo)
+; DECS1 (unseen) 
 (declare-sort Sorta1fo)
 (declare-const
    a1fp
@@ -7061,7 +13301,7 @@ a1hf  <=  fsk_a1hf
       :named
       given-19.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
@@ -7069,8 +13309,10 @@ sat
 ;  =>  (= a1fq a1fr)
 
 ; WANTEDS (names)
-a1fq  <=  m2
-a1fr  <=  m3
+;  a1fq  <=  m2
+;  a1fr  <=  m3
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -7080,8 +13322,49 @@ a1fr  <=  m3
       :named
       wanted-19))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-19")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1fq
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hf)
+;      :named
+;      given-19.1)
+;   (!
+;      (=
+;         (store
+;            a1fp
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hb)
+;      :named
+;      given-19.2)
+;   (!
+;      (= a1hf a1fr)
+;      :named
+;      given-19.3)
+;   (!
+;      (= a1hb a1fq)
+;      :named
+;      given-19.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (= a1fq a1fr)))
+;      :named
+;      wanted-19))
+(get-unsat-core)
+; (given-19.1 given-19.3 given-19.2 wanted-19 given-19.4)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-19")
@@ -7107,12 +13390,20 @@ unsat
 (echo "givens-start-cycle-19")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a1fp  <=  m1
-a1fq  <=  m2
-a1fr  <=  m3
-a1hb  <=  fsk_a1hb
-a1hf  <=  fsk_a1hf
+;  a1fp  <=  m1
+;  a1fq  <=  m2
+;  a1fr  <=  m3
+;  a1hb  <=  fsk_a1hb
+;  a1hf  <=  fsk_a1hf
 (push 1)
+; DECS1 (seen) 
+; (declare-const a1fp (Array String (Maybe Sorta1fo)))
+; (declare-const a1fq (Array String (Maybe Sorta1fo)))
+; (declare-const a1fr (Array String (Maybe Sorta1fo)))
+; (declare-const a1hb (Array String (Maybe Sorta1fo)))
+; (declare-const a1hf (Array String (Maybe Sorta1fo)))
+; (declare-sort Sorta1fo)
+; DECS1 (unseen) 
 (declare-sort Sorta1fo)
 (declare-const
    a1fp
@@ -7174,16 +13465,53 @@ a1hf  <=  fsk_a1hf
       :named
       given-19.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-19))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-19")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a1fq
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hf)
+;      :named
+;      given-19.1)
+;   (!
+;      (=
+;         (store
+;            a1fp
+;            "bob"
+;            (as
+;               nothing
+;               (Maybe Sorta1fo)))
+;         a1hb)
+;      :named
+;      given-19.2)
+;   (!
+;      (= a1hf a1fr)
+;      :named
+;      given-19.3)
+;   (!
+;      (= a1hb a1fq)
+;      :named
+;      given-19.4)
+;   (! false :named wanted-19))
+(get-unsat-core)
+; (wanted-19)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (exit)
@@ -7193,6 +13521,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -7217,6 +13546,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -7255,17 +13585,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-1")
@@ -7286,17 +13625,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -7336,8 +13684,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -7357,12 +13707,26 @@ sat
 ;    (< a3jE a3jF))
 
 ; WANTEDS (names)
-a3jB  <=  a
-a3jC  <=  b
-a3jD  <=  c
-a3jE  <=  a_a3jE
-a3jF  <=  b_a3jF
-a3jG  <=  c_a3jG
+;  a3jB  <=  a
+;  a3jC  <=  b
+;  a3jD  <=  c
+;  a3jE  <=  a_a3jE
+;  a3jF  <=  b_a3jF
+;  a3jG  <=  c_a3jG
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3jB))
+; (assert (<= 0 a3jC))
+; (assert (<= 0 a3jD))
+; (assert (<= 0 a3jE))
+; (assert (<= 0 a3jF))
+; (assert (<= 0 a3jG))
+; (declare-const a3jB Int)
+; (declare-const a3jC Int)
+; (declare-const a3jD Int)
+; (declare-const a3jE Int)
+; (declare-const a3jF Int)
+; (declare-const a3jG Int)
 (declare-const a3jB Int)
 (declare-const a3jC Int)
 (declare-const a3jD Int)
@@ -7402,8 +13766,58 @@ a3jG  <=  c_a3jG
       :named
       wanted-2))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-2")
+(get-model)
+; (
+;   (define-fun
+;      wanted-2
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (< a3jC a3jD)
+;               (< a3jF a3jG)))
+;         (not
+;            (=
+;               (< a3jE a3jG)
+;               (< a3jB a3jD)))
+;         (not
+;            (=
+;               (< a3jB a3jC)
+;               (< a3jE a3jF)))))
+;   (define-fun
+;      a3jB
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jD
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      a3jC
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jF
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jG
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jE
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-2")
@@ -7443,8 +13857,10 @@ sat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -7464,12 +13880,26 @@ sat
 ;    (< a3jE a3jF))
 
 ; WANTEDS (names)
-a3jB  <=  a
-a3jC  <=  b
-a3jD  <=  c
-a3jE  <=  a_a3jE
-a3jF  <=  b_a3jF
-a3jG  <=  c_a3jG
+;  a3jB  <=  a
+;  a3jC  <=  b
+;  a3jD  <=  c
+;  a3jE  <=  a_a3jE
+;  a3jF  <=  b_a3jF
+;  a3jG  <=  c_a3jG
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3jB))
+; (assert (<= 0 a3jC))
+; (assert (<= 0 a3jD))
+; (assert (<= 0 a3jE))
+; (assert (<= 0 a3jF))
+; (assert (<= 0 a3jG))
+; (declare-const a3jB Int)
+; (declare-const a3jC Int)
+; (declare-const a3jD Int)
+; (declare-const a3jE Int)
+; (declare-const a3jF Int)
+; (declare-const a3jG Int)
 (declare-const a3jB Int)
 (declare-const a3jC Int)
 (declare-const a3jD Int)
@@ -7509,8 +13939,58 @@ a3jG  <=  c_a3jG
       :named
       wanted-2))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-2")
+(get-model)
+; (
+;   (define-fun
+;      wanted-2
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (< a3jC a3jD)
+;               (< a3jF a3jG)))
+;         (not
+;            (=
+;               (< a3jE a3jG)
+;               (< a3jB a3jD)))
+;         (not
+;            (=
+;               (< a3jB a3jC)
+;               (< a3jE a3jF)))))
+;   (define-fun
+;      a3jB
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jD
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      a3jC
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jF
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jG
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3jE
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -7543,8 +14023,10 @@ sat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
@@ -7559,10 +14041,20 @@ sat
 ;    (+ a3kr a3kq))
 
 ; WANTEDS (names)
-a3kq  <=  a
-a3kr  <=  b
-a3ks  <=  a_a3ks
-a3kt  <=  b_a3kt
+;  a3kq  <=  a
+;  a3kr  <=  b
+;  a3ks  <=  a_a3ks
+;  a3kt  <=  b_a3kt
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3kq))
+; (assert (<= 0 a3kr))
+; (assert (<= 0 a3ks))
+; (assert (<= 0 a3kt))
+; (declare-const a3kq Int)
+; (declare-const a3kr Int)
+; (declare-const a3ks Int)
+; (declare-const a3kt Int)
 (declare-const a3kq Int)
 (declare-const a3kr Int)
 (declare-const a3ks Int)
@@ -7591,8 +14083,44 @@ a3kt  <=  b_a3kt
       :named
       wanted-3))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-3")
+(get-model)
+; (
+;   (define-fun
+;      a3kq
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      wanted-3
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a3ks a3kt)
+;               (+ a3kq a3kr)))
+;         (not
+;            (=
+;               (+ a3kt a3ks)
+;               (+ a3kr a3kq)))))
+;   (define-fun
+;      a3kt
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3ks
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3kr
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-3")
@@ -7625,8 +14153,10 @@ sat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
@@ -7641,10 +14171,20 @@ sat
 ;    (+ a3kr a3kq))
 
 ; WANTEDS (names)
-a3kq  <=  a
-a3kr  <=  b
-a3ks  <=  a_a3ks
-a3kt  <=  b_a3kt
+;  a3kq  <=  a
+;  a3kr  <=  b
+;  a3ks  <=  a_a3ks
+;  a3kt  <=  b_a3kt
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3kq))
+; (assert (<= 0 a3kr))
+; (assert (<= 0 a3ks))
+; (assert (<= 0 a3kt))
+; (declare-const a3kq Int)
+; (declare-const a3kr Int)
+; (declare-const a3ks Int)
+; (declare-const a3kt Int)
 (declare-const a3kq Int)
 (declare-const a3kr Int)
 (declare-const a3ks Int)
@@ -7673,8 +14213,44 @@ a3kt  <=  b_a3kt
       :named
       wanted-3))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-3")
+(get-model)
+; (
+;   (define-fun
+;      a3kq
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      wanted-3
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a3ks a3kt)
+;               (+ a3kq a3kr)))
+;         (not
+;            (=
+;               (+ a3kt a3ks)
+;               (+ a3kr a3kq)))))
+;   (define-fun
+;      a3kt
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3ks
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a3kr
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -7695,17 +14271,26 @@ sat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-4")
@@ -7726,17 +14311,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -7756,8 +14350,12 @@ unsat
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3la  <=  n
+;  a3la  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3la))
+; (declare-const a3la Int)
 (declare-const a3la Int)
 (assert
    (<= 0 a3la))
@@ -7767,16 +14365,28 @@ a3la  <=  n
       :named
       given-5.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (!
+;      (= a3la 0)
+;      :named
+;      given-5.1)
+;   (! false :named wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-5")
@@ -7796,8 +14406,12 @@ unsat
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3la  <=  n
+;  a3la  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3la))
+; (declare-const a3la Int)
 (declare-const a3la Int)
 (assert
    (<= 0 a3la))
@@ -7807,16 +14421,28 @@ a3la  <=  n
       :named
       given-5.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (!
+;      (= a3la 0)
+;      :named
+;      given-5.1)
+;   (! false :named wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
@@ -7836,8 +14462,12 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lb  <=  m
+;  a3lb  <=  m
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3lb))
+; (declare-const a3lb Int)
 (declare-const a3lb Int)
 (assert
    (<= 0 a3lb))
@@ -7847,16 +14477,28 @@ a3lb  <=  m
       :named
       given-6.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (<= 0 a3lb)
+;   (!
+;      (= a3lb 0)
+;      :named
+;      given-6.1)
+;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-6")
@@ -7876,8 +14518,12 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lb  <=  m
+;  a3lb  <=  m
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3lb))
+; (declare-const a3lb Int)
 (declare-const a3lb Int)
 (assert
    (<= 0 a3lb))
@@ -7887,16 +14533,28 @@ a3lb  <=  m
       :named
       given-6.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (<= 0 a3lb)
+;   (!
+;      (= a3lb 0)
+;      :named
+;      given-6.1)
+;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -7918,10 +14576,18 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3la  <=  n
-a3lm  <=  n
-a3sx  <=  fsk_a3sx
+;  a3la  <=  n
+;  a3lm  <=  n
+;  a3sx  <=  fsk_a3sx
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3la))
+; (declare-const a3la Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3lm))
+; (assert (<= 0 a3sx))
+; (declare-const a3lm Int)
+; (declare-const a3sx Int)
 (declare-const a3la Int)
 (declare-const a3lm Int)
 (declare-const a3sx Int)
@@ -7944,16 +14610,36 @@ a3sx  <=  fsk_a3sx
       :named
       given-7.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (<= 0 a3lm)
+;   (<= 0 a3sx)
+;   (!
+;      (=
+;         (+ 1 a3lm)
+;         a3sx)
+;      :named
+;      given-7.1)
+;   (!
+;      (= a3sx a3la)
+;      :named
+;      given-7.2)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-7")
@@ -7975,10 +14661,18 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3la  <=  n
-a3lm  <=  n
-a3sx  <=  fsk_a3sx
+;  a3la  <=  n
+;  a3lm  <=  n
+;  a3sx  <=  fsk_a3sx
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3la))
+; (declare-const a3la Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3lm))
+; (assert (<= 0 a3sx))
+; (declare-const a3lm Int)
+; (declare-const a3sx Int)
 (declare-const a3la Int)
 (declare-const a3lm Int)
 (declare-const a3sx Int)
@@ -8001,16 +14695,36 @@ a3sx  <=  fsk_a3sx
       :named
       given-7.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (<= 0 a3lm)
+;   (<= 0 a3sx)
+;   (!
+;      (=
+;         (+ 1 a3lm)
+;         a3sx)
+;      :named
+;      given-7.1)
+;   (!
+;      (= a3sx a3la)
+;      :named
+;      given-7.2)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
@@ -8036,13 +14750,27 @@ unsat
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3la  <=  n
-a3lb  <=  m
-a3lm  <=  n
-a3lo  <=  n
-a3sx  <=  fsk_a3sx
-a3sA  <=  fsk_a3sA
+;  a3la  <=  n
+;  a3lb  <=  m
+;  a3lm  <=  n
+;  a3lo  <=  n
+;  a3sx  <=  fsk_a3sx
+;  a3sA  <=  fsk_a3sA
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3la))
+; (assert (<= 0 a3lb))
+; (assert (<= 0 a3lm))
+; (assert (<= 0 a3sx))
+; (declare-const a3la Int)
+; (declare-const a3lb Int)
+; (declare-const a3lm Int)
+; (declare-const a3sx Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3lo))
+; (assert (<= 0 a3sA))
+; (declare-const a3lo Int)
+; (declare-const a3sA Int)
 (declare-const a3la Int)
 (declare-const a3lb Int)
 (declare-const a3lm Int)
@@ -8086,16 +14814,49 @@ a3sA  <=  fsk_a3sA
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (<= 0 a3lb)
+;   (<= 0 a3lm)
+;   (<= 0 a3lo)
+;   (<= 0 a3sx)
+;   (<= 0 a3sA)
+;   (!
+;      (=
+;         (+ 1 a3lm)
+;         a3sx)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (+ 1 a3lo)
+;         a3sA)
+;      :named
+;      given-8.2)
+;   (!
+;      (= a3sx a3la)
+;      :named
+;      given-8.3)
+;   (!
+;      (= a3sA a3lb)
+;      :named
+;      given-8.4)
+;   (! false :named wanted-8))
+(get-unsat-core)
+; (wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-8")
@@ -8121,13 +14882,27 @@ unsat
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3la  <=  n
-a3lb  <=  m
-a3lm  <=  n
-a3lo  <=  n
-a3sx  <=  fsk_a3sx
-a3sA  <=  fsk_a3sA
+;  a3la  <=  n
+;  a3lb  <=  m
+;  a3lm  <=  n
+;  a3lo  <=  n
+;  a3sx  <=  fsk_a3sx
+;  a3sA  <=  fsk_a3sA
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3la))
+; (assert (<= 0 a3lb))
+; (assert (<= 0 a3lm))
+; (assert (<= 0 a3sx))
+; (declare-const a3la Int)
+; (declare-const a3lb Int)
+; (declare-const a3lm Int)
+; (declare-const a3sx Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3lo))
+; (assert (<= 0 a3sA))
+; (declare-const a3lo Int)
+; (declare-const a3sA Int)
 (declare-const a3la Int)
 (declare-const a3lb Int)
 (declare-const a3lm Int)
@@ -8171,16 +14946,49 @@ a3sA  <=  fsk_a3sA
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (<= 0 a3lb)
+;   (<= 0 a3lm)
+;   (<= 0 a3lo)
+;   (<= 0 a3sx)
+;   (<= 0 a3sA)
+;   (!
+;      (=
+;         (+ 1 a3lm)
+;         a3sx)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (+ 1 a3lo)
+;         a3sA)
+;      :named
+;      given-8.2)
+;   (!
+;      (= a3sx a3la)
+;      :named
+;      given-8.3)
+;   (!
+;      (= a3sA a3lb)
+;      :named
+;      given-8.4)
+;   (! false :named wanted-8))
+(get-unsat-core)
+; (wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -8211,13 +15019,27 @@ unsat
 ;    (- a3lb a3la))
 
 ; GIVENS (names)
-a3la  <=  n
-a3lb  <=  m
-a3lm  <=  n
-a3lo  <=  n
-a3sx  <=  fsk_a3sx
-a3sA  <=  fsk_a3sA
+;  a3la  <=  n
+;  a3lb  <=  m
+;  a3lm  <=  n
+;  a3lo  <=  n
+;  a3sx  <=  fsk_a3sx
+;  a3sA  <=  fsk_a3sA
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3la))
+; (assert (<= 0 a3lb))
+; (assert (<= 0 a3lm))
+; (assert (<= 0 a3lo))
+; (assert (<= 0 a3sA))
+; (assert (<= 0 a3sx))
+; (declare-const a3la Int)
+; (declare-const a3lb Int)
+; (declare-const a3lm Int)
+; (declare-const a3lo Int)
+; (declare-const a3sA Int)
+; (declare-const a3sx Int)
+; DECS1 (unseen) 
 (declare-const a3la Int)
 (declare-const a3lb Int)
 (declare-const a3lm Int)
@@ -8261,7 +15083,7 @@ a3sA  <=  fsk_a3sA
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
@@ -8271,10 +15093,12 @@ sat
 ;    (- a3lb a3la))
 
 ; WANTEDS (names)
-a3la  <=  n
-a3lb  <=  m
-a3lm  <=  n
-a3lo  <=  n
+;  a3la  <=  n
+;  a3lb  <=  m
+;  a3lm  <=  n
+;  a3lo  <=  n
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -8286,8 +15110,47 @@ a3lo  <=  n
       :named
       wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (<= 0 a3lb)
+;   (<= 0 a3lm)
+;   (<= 0 a3lo)
+;   (<= 0 a3sx)
+;   (<= 0 a3sA)
+;   (!
+;      (=
+;         (+ 1 a3lm)
+;         a3sx)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (+ 1 a3lo)
+;         a3sA)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a3sx a3la)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a3sA a3lb)
+;      :named
+;      given-9.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (- a3lo a3lm)
+;               (- a3lb a3la))))
+;      :named
+;      wanted-9))
+(get-unsat-core)
+; (given-9.2 wanted-9 given-9.4 given-9.1 given-9.3)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-9")
@@ -8313,13 +15176,27 @@ unsat
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3la  <=  n
-a3lb  <=  m
-a3lm  <=  n
-a3lo  <=  n
-a3sx  <=  fsk_a3sx
-a3sA  <=  fsk_a3sA
+;  a3la  <=  n
+;  a3lb  <=  m
+;  a3lm  <=  n
+;  a3lo  <=  n
+;  a3sx  <=  fsk_a3sx
+;  a3sA  <=  fsk_a3sA
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3la))
+; (assert (<= 0 a3lb))
+; (assert (<= 0 a3lm))
+; (assert (<= 0 a3lo))
+; (assert (<= 0 a3sA))
+; (assert (<= 0 a3sx))
+; (declare-const a3la Int)
+; (declare-const a3lb Int)
+; (declare-const a3lm Int)
+; (declare-const a3lo Int)
+; (declare-const a3sA Int)
+; (declare-const a3sx Int)
+; DECS1 (unseen) 
 (declare-const a3la Int)
 (declare-const a3lb Int)
 (declare-const a3lm Int)
@@ -8363,16 +15240,49 @@ a3sA  <=  fsk_a3sA
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (<= 0 a3la)
+;   (<= 0 a3lb)
+;   (<= 0 a3lm)
+;   (<= 0 a3lo)
+;   (<= 0 a3sx)
+;   (<= 0 a3sA)
+;   (!
+;      (=
+;         (+ 1 a3lm)
+;         a3sx)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (+ 1 a3lo)
+;         a3sA)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a3sx a3la)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a3sA a3lb)
+;      :named
+;      given-9.4)
+;   (! false :named wanted-9))
+(get-unsat-core)
+; (wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -8392,8 +15302,12 @@ unsat
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lD  <=  n
+;  a3lD  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3lD))
+; (declare-const a3lD Int)
 (declare-const a3lD Int)
 (assert
    (<= 0 a3lD))
@@ -8403,16 +15317,28 @@ a3lD  <=  n
       :named
       given-10.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-10))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-10")
+(get-assertions)
+; (
+;   (<= 0 a3lD)
+;   (!
+;      (= a3lD 0)
+;      :named
+;      given-10.1)
+;   (! false :named wanted-10))
+(get-unsat-core)
+; (wanted-10)
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-10")
@@ -8432,8 +15358,12 @@ unsat
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lD  <=  n
+;  a3lD  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3lD))
+; (declare-const a3lD Int)
 (declare-const a3lD Int)
 (assert
    (<= 0 a3lD))
@@ -8443,16 +15373,28 @@ a3lD  <=  n
       :named
       given-10.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-10))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-10")
+(get-assertions)
+; (
+;   (<= 0 a3lD)
+;   (!
+;      (= a3lD 0)
+;      :named
+;      given-10.1)
+;   (! false :named wanted-10))
+(get-unsat-core)
+; (wanted-10)
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
@@ -8474,10 +15416,18 @@ unsat
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lD  <=  n
-a3lL  <=  n
-a3sK  <=  fsk_a3sK
+;  a3lD  <=  n
+;  a3lL  <=  n
+;  a3sK  <=  fsk_a3sK
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3lD))
+; (declare-const a3lD Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3lL))
+; (assert (<= 0 a3sK))
+; (declare-const a3lL Int)
+; (declare-const a3sK Int)
 (declare-const a3lD Int)
 (declare-const a3lL Int)
 (declare-const a3sK Int)
@@ -8500,16 +15450,36 @@ a3sK  <=  fsk_a3sK
       :named
       given-11.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (<= 0 a3lD)
+;   (<= 0 a3lL)
+;   (<= 0 a3sK)
+;   (!
+;      (=
+;         (+ 1 a3lL)
+;         a3sK)
+;      :named
+;      given-11.1)
+;   (!
+;      (= a3sK a3lD)
+;      :named
+;      given-11.2)
+;   (! false :named wanted-11))
+(get-unsat-core)
+; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-11")
@@ -8531,10 +15501,18 @@ unsat
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lD  <=  n
-a3lL  <=  n
-a3sK  <=  fsk_a3sK
+;  a3lD  <=  n
+;  a3lL  <=  n
+;  a3sK  <=  fsk_a3sK
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3lD))
+; (declare-const a3lD Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3lL))
+; (assert (<= 0 a3sK))
+; (declare-const a3lL Int)
+; (declare-const a3sK Int)
 (declare-const a3lD Int)
 (declare-const a3lL Int)
 (declare-const a3sK Int)
@@ -8557,16 +15535,36 @@ a3sK  <=  fsk_a3sK
       :named
       given-11.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (<= 0 a3lD)
+;   (<= 0 a3lL)
+;   (<= 0 a3sK)
+;   (!
+;      (=
+;         (+ 1 a3lL)
+;         a3sK)
+;      :named
+;      given-11.1)
+;   (!
+;      (= a3sK a3lD)
+;      :named
+;      given-11.2)
+;   (! false :named wanted-11))
+(get-unsat-core)
+; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
@@ -8586,8 +15584,12 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lV  <=  n
+;  a3lV  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3lV))
+; (declare-const a3lV Int)
 (declare-const a3lV Int)
 (assert
    (<= 0 a3lV))
@@ -8597,16 +15599,28 @@ a3lV  <=  n
       :named
       given-12.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (<= 0 a3lV)
+;   (!
+;      (= a3lV 0)
+;      :named
+;      given-12.1)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-12")
@@ -8626,8 +15640,12 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lV  <=  n
+;  a3lV  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3lV))
+; (declare-const a3lV Int)
 (declare-const a3lV Int)
 (assert
    (<= 0 a3lV))
@@ -8637,16 +15655,28 @@ a3lV  <=  n
       :named
       given-12.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (<= 0 a3lV)
+;   (!
+;      (= a3lV 0)
+;      :named
+;      given-12.1)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
@@ -8668,10 +15698,18 @@ unsat
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lV  <=  n
-a3m2  <=  n
-a3sQ  <=  fsk_a3sQ
+;  a3lV  <=  n
+;  a3m2  <=  n
+;  a3sQ  <=  fsk_a3sQ
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3lV))
+; (declare-const a3lV Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3m2))
+; (assert (<= 0 a3sQ))
+; (declare-const a3m2 Int)
+; (declare-const a3sQ Int)
 (declare-const a3lV Int)
 (declare-const a3m2 Int)
 (declare-const a3sQ Int)
@@ -8694,16 +15732,36 @@ a3sQ  <=  fsk_a3sQ
       :named
       given-13.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (<= 0 a3lV)
+;   (<= 0 a3m2)
+;   (<= 0 a3sQ)
+;   (!
+;      (=
+;         (+ 1 a3m2)
+;         a3sQ)
+;      :named
+;      given-13.1)
+;   (!
+;      (= a3sQ a3lV)
+;      :named
+;      given-13.2)
+;   (! false :named wanted-13))
+(get-unsat-core)
+; (wanted-13)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-13")
@@ -8725,10 +15783,18 @@ unsat
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3lV  <=  n
-a3m2  <=  n
-a3sQ  <=  fsk_a3sQ
+;  a3lV  <=  n
+;  a3m2  <=  n
+;  a3sQ  <=  fsk_a3sQ
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3lV))
+; (declare-const a3lV Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3m2))
+; (assert (<= 0 a3sQ))
+; (declare-const a3m2 Int)
+; (declare-const a3sQ Int)
 (declare-const a3lV Int)
 (declare-const a3m2 Int)
 (declare-const a3sQ Int)
@@ -8751,16 +15817,36 @@ a3sQ  <=  fsk_a3sQ
       :named
       given-13.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (<= 0 a3lV)
+;   (<= 0 a3m2)
+;   (<= 0 a3sQ)
+;   (!
+;      (=
+;         (+ 1 a3m2)
+;         a3sQ)
+;      :named
+;      given-13.1)
+;   (!
+;      (= a3sQ a3lV)
+;      :named
+;      given-13.2)
+;   (! false :named wanted-13))
+(get-unsat-core)
+; (wanted-13)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-14")
@@ -8780,8 +15866,12 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3mb  <=  n
+;  a3mb  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3mb))
+; (declare-const a3mb Int)
 (declare-const a3mb Int)
 (assert
    (<= 0 a3mb))
@@ -8791,16 +15881,28 @@ a3mb  <=  n
       :named
       given-14.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (<= 0 a3mb)
+;   (!
+;      (= a3mb 0)
+;      :named
+;      given-14.1)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-14")
@@ -8820,8 +15922,12 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3mb  <=  n
+;  a3mb  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3mb))
+; (declare-const a3mb Int)
 (declare-const a3mb Int)
 (assert
    (<= 0 a3mb))
@@ -8831,16 +15937,28 @@ a3mb  <=  n
       :named
       given-14.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (<= 0 a3mb)
+;   (!
+;      (= a3mb 0)
+;      :named
+;      given-14.1)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-15")
@@ -8862,10 +15980,18 @@ unsat
 (echo "givens-start-cycle-15")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3mb  <=  n
-a3mi  <=  n
-a3sV  <=  fsk_a3sV
+;  a3mb  <=  n
+;  a3mi  <=  n
+;  a3sV  <=  fsk_a3sV
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3mb))
+; (declare-const a3mb Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3mi))
+; (assert (<= 0 a3sV))
+; (declare-const a3mi Int)
+; (declare-const a3sV Int)
 (declare-const a3mb Int)
 (declare-const a3mi Int)
 (declare-const a3sV Int)
@@ -8888,16 +16014,36 @@ a3sV  <=  fsk_a3sV
       :named
       given-15.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-15))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-15")
+(get-assertions)
+; (
+;   (<= 0 a3mb)
+;   (<= 0 a3mi)
+;   (<= 0 a3sV)
+;   (!
+;      (=
+;         (+ 1 a3mi)
+;         a3sV)
+;      :named
+;      given-15.1)
+;   (!
+;      (= a3sV a3mb)
+;      :named
+;      given-15.2)
+;   (! false :named wanted-15))
+(get-unsat-core)
+; (wanted-15)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-15")
@@ -8919,10 +16065,18 @@ unsat
 (echo "givens-start-cycle-15")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3mb  <=  n
-a3mi  <=  n
-a3sV  <=  fsk_a3sV
+;  a3mb  <=  n
+;  a3mi  <=  n
+;  a3sV  <=  fsk_a3sV
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3mb))
+; (declare-const a3mb Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3mi))
+; (assert (<= 0 a3sV))
+; (declare-const a3mi Int)
+; (declare-const a3sV Int)
 (declare-const a3mb Int)
 (declare-const a3mi Int)
 (declare-const a3sV Int)
@@ -8945,16 +16099,36 @@ a3sV  <=  fsk_a3sV
       :named
       given-15.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-15))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-15")
+(get-assertions)
+; (
+;   (<= 0 a3mb)
+;   (<= 0 a3mi)
+;   (<= 0 a3sV)
+;   (!
+;      (=
+;         (+ 1 a3mi)
+;         a3sV)
+;      :named
+;      given-15.1)
+;   (!
+;      (= a3sV a3mb)
+;      :named
+;      given-15.2)
+;   (! false :named wanted-15))
+(get-unsat-core)
+; (wanted-15)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-16")
@@ -8983,10 +16157,18 @@ unsat
 ;    (+ a3mb a3md))
 
 ; GIVENS (names)
-a3mb  <=  n
-a3mi  <=  n
-a3sV  <=  fsk_a3sV
+;  a3mb  <=  n
+;  a3mi  <=  n
+;  a3sV  <=  fsk_a3sV
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3mb))
+; (assert (<= 0 a3mi))
+; (assert (<= 0 a3sV))
+; (declare-const a3mb Int)
+; (declare-const a3mi Int)
+; (declare-const a3sV Int)
+; DECS1 (unseen) 
 (declare-const a3mb Int)
 (declare-const a3mi Int)
 (declare-const a3sV Int)
@@ -9009,7 +16191,7 @@ a3sV  <=  fsk_a3sV
       :named
       given-16.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
@@ -9021,9 +16203,13 @@ sat
 ;    (+ a3mb a3md))
 
 ; WANTEDS (names)
-a3mb  <=  n
-a3md  <=  m
-a3mi  <=  n
+;  a3mb  <=  n
+;  a3md  <=  m
+;  a3mi  <=  n
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3md))
+; (declare-const a3md Int)
 (declare-const a3md Int)
 (assert
    (<= 0 a3md))
@@ -9040,8 +16226,37 @@ a3mi  <=  n
       :named
       wanted-16))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (<= 0 a3mb)
+;   (<= 0 a3mi)
+;   (<= 0 a3sV)
+;   (!
+;      (=
+;         (+ 1 a3mi)
+;         a3sV)
+;      :named
+;      given-16.1)
+;   (!
+;      (= a3sV a3mb)
+;      :named
+;      given-16.2)
+;   (<= 0 a3md)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (+
+;                  1
+;                  (+ a3mi a3md))
+;               (+ a3mb a3md))))
+;      :named
+;      wanted-16))
+(get-unsat-core)
+; (wanted-16 given-16.1 given-16.2)
 (pop 1)
 (echo "solver-finish-cycle-16")
 (echo "solver-start-cycle-16")
@@ -9063,10 +16278,18 @@ unsat
 (echo "givens-start-cycle-16")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3mb  <=  n
-a3mi  <=  n
-a3sV  <=  fsk_a3sV
+;  a3mb  <=  n
+;  a3mi  <=  n
+;  a3sV  <=  fsk_a3sV
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3mb))
+; (assert (<= 0 a3mi))
+; (assert (<= 0 a3sV))
+; (declare-const a3mb Int)
+; (declare-const a3mi Int)
+; (declare-const a3sV Int)
+; DECS1 (unseen) 
 (declare-const a3mb Int)
 (declare-const a3mi Int)
 (declare-const a3sV Int)
@@ -9089,16 +16312,36 @@ a3sV  <=  fsk_a3sV
       :named
       given-16.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-16))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (<= 0 a3mb)
+;   (<= 0 a3mi)
+;   (<= 0 a3sV)
+;   (!
+;      (=
+;         (+ 1 a3mi)
+;         a3sV)
+;      :named
+;      given-16.1)
+;   (!
+;      (= a3sV a3mb)
+;      :named
+;      given-16.2)
+;   (! false :named wanted-16))
+(get-unsat-core)
+; (wanted-16)
 (pop 1)
 (echo "solver-finish-cycle-16")
 (echo "solver-start-cycle-17")
@@ -9120,10 +16363,17 @@ unsat
 (echo "givens-start-cycle-17")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qt  <=  a
-a3qu  <=  b
-a3t6  <=  fsk_a3t6
+;  a3qt  <=  a
+;  a3qu  <=  b
+;  a3t6  <=  fsk_a3t6
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3qt))
+; (assert (<= 0 a3qu))
+; (declare-const a3qt Int)
+; (declare-const a3qu Int)
+; (declare-const a3t6 Bool)
 (declare-const a3qt Int)
 (declare-const a3qu Int)
 (declare-const a3t6 Bool)
@@ -9144,16 +16394,35 @@ a3t6  <=  fsk_a3t6
       :named
       given-17.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-17))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-17")
+(get-assertions)
+; (
+;   (<= 0 a3qt)
+;   (<= 0 a3qu)
+;   (!
+;      (=
+;         (< a3qt a3qu)
+;         a3t6)
+;      :named
+;      given-17.1)
+;   (!
+;      (= a3t6 true)
+;      :named
+;      given-17.2)
+;   (! false :named wanted-17))
+(get-unsat-core)
+; (wanted-17)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-17")
@@ -9175,10 +16444,17 @@ unsat
 (echo "givens-start-cycle-17")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qt  <=  a
-a3qu  <=  b
-a3t6  <=  fsk_a3t6
+;  a3qt  <=  a
+;  a3qu  <=  b
+;  a3t6  <=  fsk_a3t6
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3qt))
+; (assert (<= 0 a3qu))
+; (declare-const a3qt Int)
+; (declare-const a3qu Int)
+; (declare-const a3t6 Bool)
 (declare-const a3qt Int)
 (declare-const a3qu Int)
 (declare-const a3t6 Bool)
@@ -9199,16 +16475,35 @@ a3t6  <=  fsk_a3t6
       :named
       given-17.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-17))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-17")
+(get-assertions)
+; (
+;   (<= 0 a3qt)
+;   (<= 0 a3qu)
+;   (!
+;      (=
+;         (< a3qt a3qu)
+;         a3t6)
+;      :named
+;      given-17.1)
+;   (!
+;      (= a3t6 true)
+;      :named
+;      given-17.2)
+;   (! false :named wanted-17))
+(get-unsat-core)
+; (wanted-17)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-18")
@@ -9234,12 +16529,22 @@ unsat
 (echo "givens-start-cycle-18")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qt  <=  a
-a3qu  <=  b
-a3qv  <=  c
-a3t6  <=  fsk_a3t6
-a3t9  <=  fsk_a3t9
+;  a3qt  <=  a
+;  a3qu  <=  b
+;  a3qv  <=  c
+;  a3t6  <=  fsk_a3t6
+;  a3t9  <=  fsk_a3t9
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3qt))
+; (assert (<= 0 a3qu))
+; (declare-const a3qt Int)
+; (declare-const a3qu Int)
+; (declare-const a3t6 Bool)
+; DECS1 (unseen) 
+; (assert (<= 0 a3qv))
+; (declare-const a3qv Int)
+; (declare-const a3t9 Bool)
 (declare-const a3qt Int)
 (declare-const a3qu Int)
 (declare-const a3qv Int)
@@ -9276,16 +16581,46 @@ a3t9  <=  fsk_a3t9
       :named
       given-18.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-18")
 (echo "wanteds-start-cycle-18")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-18))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (<= 0 a3qt)
+;   (<= 0 a3qu)
+;   (<= 0 a3qv)
+;   (!
+;      (=
+;         (< a3qt a3qu)
+;         a3t6)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (< a3qu a3qv)
+;         a3t9)
+;      :named
+;      given-18.2)
+;   (!
+;      (= a3t6 true)
+;      :named
+;      given-18.3)
+;   (!
+;      (= a3t9 true)
+;      :named
+;      given-18.4)
+;   (! false :named wanted-18))
+(get-unsat-core)
+; (wanted-18)
 (pop 1)
 (echo "solver-finish-cycle-18")
 (echo "solver-start-cycle-18")
@@ -9311,12 +16646,22 @@ unsat
 (echo "givens-start-cycle-18")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qt  <=  a
-a3qu  <=  b
-a3qv  <=  c
-a3t6  <=  fsk_a3t6
-a3t9  <=  fsk_a3t9
+;  a3qt  <=  a
+;  a3qu  <=  b
+;  a3qv  <=  c
+;  a3t6  <=  fsk_a3t6
+;  a3t9  <=  fsk_a3t9
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3qt))
+; (assert (<= 0 a3qu))
+; (declare-const a3qt Int)
+; (declare-const a3qu Int)
+; (declare-const a3t6 Bool)
+; DECS1 (unseen) 
+; (assert (<= 0 a3qv))
+; (declare-const a3qv Int)
+; (declare-const a3t9 Bool)
 (declare-const a3qt Int)
 (declare-const a3qu Int)
 (declare-const a3qv Int)
@@ -9353,16 +16698,46 @@ a3t9  <=  fsk_a3t9
       :named
       given-18.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-18")
 (echo "wanteds-start-cycle-18")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-18))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (<= 0 a3qt)
+;   (<= 0 a3qu)
+;   (<= 0 a3qv)
+;   (!
+;      (=
+;         (< a3qt a3qu)
+;         a3t6)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (< a3qu a3qv)
+;         a3t9)
+;      :named
+;      given-18.2)
+;   (!
+;      (= a3t6 true)
+;      :named
+;      given-18.3)
+;   (!
+;      (= a3t9 true)
+;      :named
+;      given-18.4)
+;   (! false :named wanted-18))
+(get-unsat-core)
+; (wanted-18)
 (pop 1)
 (echo "solver-finish-cycle-18")
 (echo "solver-start-cycle-19")
@@ -9393,12 +16768,22 @@ unsat
 ;    true)
 
 ; GIVENS (names)
-a3qt  <=  a
-a3qu  <=  b
-a3qv  <=  c
-a3t6  <=  fsk_a3t6
-a3t9  <=  fsk_a3t9
+;  a3qt  <=  a
+;  a3qu  <=  b
+;  a3qv  <=  c
+;  a3t6  <=  fsk_a3t6
+;  a3t9  <=  fsk_a3t9
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3qt))
+; (assert (<= 0 a3qu))
+; (assert (<= 0 a3qv))
+; (declare-const a3qt Int)
+; (declare-const a3qu Int)
+; (declare-const a3qv Int)
+; (declare-const a3t6 Bool)
+; (declare-const a3t9 Bool)
+; DECS1 (unseen) 
 (declare-const a3qt Int)
 (declare-const a3qu Int)
 (declare-const a3qv Int)
@@ -9435,7 +16820,7 @@ a3t9  <=  fsk_a3t9
       :named
       given-19.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
@@ -9445,8 +16830,10 @@ sat
 ;    true)
 
 ; WANTEDS (names)
-a3qt  <=  a
-a3qv  <=  c
+;  a3qt  <=  a
+;  a3qv  <=  c
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -9458,8 +16845,44 @@ a3qv  <=  c
       :named
       wanted-19))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-19")
+(get-assertions)
+; (
+;   (<= 0 a3qt)
+;   (<= 0 a3qu)
+;   (<= 0 a3qv)
+;   (!
+;      (=
+;         (< a3qt a3qu)
+;         a3t6)
+;      :named
+;      given-19.1)
+;   (!
+;      (=
+;         (< a3qu a3qv)
+;         a3t9)
+;      :named
+;      given-19.2)
+;   (!
+;      (= a3t6 true)
+;      :named
+;      given-19.3)
+;   (!
+;      (= a3t9 true)
+;      :named
+;      given-19.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (< a3qt a3qv)
+;               true)))
+;      :named
+;      wanted-19))
+(get-unsat-core)
+; (given-19.2 given-19.3 wanted-19 given-19.4 given-19.1)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-19")
@@ -9485,12 +16908,22 @@ unsat
 (echo "givens-start-cycle-19")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qt  <=  a
-a3qu  <=  b
-a3qv  <=  c
-a3t6  <=  fsk_a3t6
-a3t9  <=  fsk_a3t9
+;  a3qt  <=  a
+;  a3qu  <=  b
+;  a3qv  <=  c
+;  a3t6  <=  fsk_a3t6
+;  a3t9  <=  fsk_a3t9
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3qt))
+; (assert (<= 0 a3qu))
+; (assert (<= 0 a3qv))
+; (declare-const a3qt Int)
+; (declare-const a3qu Int)
+; (declare-const a3qv Int)
+; (declare-const a3t6 Bool)
+; (declare-const a3t9 Bool)
+; DECS1 (unseen) 
 (declare-const a3qt Int)
 (declare-const a3qu Int)
 (declare-const a3qv Int)
@@ -9527,16 +16960,46 @@ a3t9  <=  fsk_a3t9
       :named
       given-19.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-19))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-19")
+(get-assertions)
+; (
+;   (<= 0 a3qt)
+;   (<= 0 a3qu)
+;   (<= 0 a3qv)
+;   (!
+;      (=
+;         (< a3qt a3qu)
+;         a3t6)
+;      :named
+;      given-19.1)
+;   (!
+;      (=
+;         (< a3qu a3qv)
+;         a3t9)
+;      :named
+;      given-19.2)
+;   (!
+;      (= a3t6 true)
+;      :named
+;      given-19.3)
+;   (!
+;      (= a3t9 true)
+;      :named
+;      given-19.4)
+;   (! false :named wanted-19))
+(get-unsat-core)
+; (wanted-19)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-20")
@@ -9560,11 +17023,21 @@ unsat
 (echo "givens-start-cycle-20")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qF  <=  a
-a3qG  <=  b
-a3tg  <=  fsk_a3tg
-a3ti  <=  fsk_a3ti
+;  a3qF  <=  a
+;  a3qG  <=  b
+;  a3tg  <=  fsk_a3tg
+;  a3ti  <=  fsk_a3ti
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3qF))
+; (assert (<= 0 a3qG))
+; (assert (<= 0 a3tg))
+; (assert (<= 0 a3ti))
+; (declare-const a3qF Int)
+; (declare-const a3qG Int)
+; (declare-const a3tg Int)
+; (declare-const a3ti Int)
 (declare-const a3qF Int)
 (declare-const a3qG Int)
 (declare-const a3tg Int)
@@ -9597,16 +17070,43 @@ a3ti  <=  fsk_a3ti
       :named
       given-20.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-20")
 (echo "wanteds-start-cycle-20")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-20))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-20")
+(get-assertions)
+; (
+;   (<= 0 a3qF)
+;   (<= 0 a3qG)
+;   (<= 0 a3tg)
+;   (<= 0 a3ti)
+;   (!
+;      (=
+;         (+ a3qF a3qG)
+;         a3ti)
+;      :named
+;      given-20.1)
+;   (!
+;      (=
+;         (+ a3qF a3qF)
+;         a3tg)
+;      :named
+;      given-20.2)
+;   (!
+;      (= a3tg a3ti)
+;      :named
+;      given-20.3)
+;   (! false :named wanted-20))
+(get-unsat-core)
+; (wanted-20)
 (pop 1)
 (echo "solver-finish-cycle-20")
 (echo "solver-start-cycle-20")
@@ -9630,11 +17130,21 @@ unsat
 (echo "givens-start-cycle-20")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qF  <=  a
-a3qG  <=  b
-a3tg  <=  fsk_a3tg
-a3ti  <=  fsk_a3ti
+;  a3qF  <=  a
+;  a3qG  <=  b
+;  a3tg  <=  fsk_a3tg
+;  a3ti  <=  fsk_a3ti
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3qF))
+; (assert (<= 0 a3qG))
+; (assert (<= 0 a3tg))
+; (assert (<= 0 a3ti))
+; (declare-const a3qF Int)
+; (declare-const a3qG Int)
+; (declare-const a3tg Int)
+; (declare-const a3ti Int)
 (declare-const a3qF Int)
 (declare-const a3qG Int)
 (declare-const a3tg Int)
@@ -9667,16 +17177,43 @@ a3ti  <=  fsk_a3ti
       :named
       given-20.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-20")
 (echo "wanteds-start-cycle-20")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-20))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-20")
+(get-assertions)
+; (
+;   (<= 0 a3qF)
+;   (<= 0 a3qG)
+;   (<= 0 a3tg)
+;   (<= 0 a3ti)
+;   (!
+;      (=
+;         (+ a3qF a3qG)
+;         a3ti)
+;      :named
+;      given-20.1)
+;   (!
+;      (=
+;         (+ a3qF a3qF)
+;         a3tg)
+;      :named
+;      given-20.2)
+;   (!
+;      (= a3tg a3ti)
+;      :named
+;      given-20.3)
+;   (! false :named wanted-20))
+(get-unsat-core)
+; (wanted-20)
 (pop 1)
 (echo "solver-finish-cycle-20")
 (echo "solver-start-cycle-21")
@@ -9703,11 +17240,21 @@ unsat
 ;  =>  (= a3qF a3qG)
 
 ; GIVENS (names)
-a3qF  <=  a
-a3qG  <=  b
-a3tg  <=  fsk_a3tg
-a3ti  <=  fsk_a3ti
+;  a3qF  <=  a
+;  a3qG  <=  b
+;  a3tg  <=  fsk_a3tg
+;  a3ti  <=  fsk_a3ti
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3qF))
+; (assert (<= 0 a3qG))
+; (assert (<= 0 a3tg))
+; (assert (<= 0 a3ti))
+; (declare-const a3qF Int)
+; (declare-const a3qG Int)
+; (declare-const a3tg Int)
+; (declare-const a3ti Int)
+; DECS1 (unseen) 
 (declare-const a3qF Int)
 (declare-const a3qG Int)
 (declare-const a3tg Int)
@@ -9740,7 +17287,7 @@ a3ti  <=  fsk_a3ti
       :named
       given-21.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-21")
 (echo "wanteds-start-cycle-21")
 ; WANTEDS (conversions)
@@ -9748,8 +17295,10 @@ sat
 ;  =>  (= a3qF a3qG)
 
 ; WANTEDS (names)
-a3qF  <=  a
-a3qG  <=  b
+;  a3qF  <=  a
+;  a3qG  <=  b
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -9759,8 +17308,39 @@ a3qG  <=  b
       :named
       wanted-21))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-21")
+(get-assertions)
+; (
+;   (<= 0 a3qF)
+;   (<= 0 a3qG)
+;   (<= 0 a3tg)
+;   (<= 0 a3ti)
+;   (!
+;      (=
+;         (+ a3qF a3qG)
+;         a3ti)
+;      :named
+;      given-21.1)
+;   (!
+;      (=
+;         (+ a3qF a3qF)
+;         a3tg)
+;      :named
+;      given-21.2)
+;   (!
+;      (= a3tg a3ti)
+;      :named
+;      given-21.3)
+;   (!
+;      (or
+;         false
+;         (not
+;            (= a3qF a3qG)))
+;      :named
+;      wanted-21))
+(get-unsat-core)
+; (given-21.2 given-21.3 wanted-21 given-21.1)
 (pop 1)
 (echo "solver-finish-cycle-21")
 (echo "solver-start-cycle-21")
@@ -9784,11 +17364,21 @@ unsat
 (echo "givens-start-cycle-21")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3qF  <=  a
-a3qG  <=  b
-a3tg  <=  fsk_a3tg
-a3ti  <=  fsk_a3ti
+;  a3qF  <=  a
+;  a3qG  <=  b
+;  a3tg  <=  fsk_a3tg
+;  a3ti  <=  fsk_a3ti
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3qF))
+; (assert (<= 0 a3qG))
+; (assert (<= 0 a3tg))
+; (assert (<= 0 a3ti))
+; (declare-const a3qF Int)
+; (declare-const a3qG Int)
+; (declare-const a3tg Int)
+; (declare-const a3ti Int)
+; DECS1 (unseen) 
 (declare-const a3qF Int)
 (declare-const a3qG Int)
 (declare-const a3tg Int)
@@ -9821,16 +17411,43 @@ a3ti  <=  fsk_a3ti
       :named
       given-21.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-21")
 (echo "wanteds-start-cycle-21")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-21))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-21")
+(get-assertions)
+; (
+;   (<= 0 a3qF)
+;   (<= 0 a3qG)
+;   (<= 0 a3tg)
+;   (<= 0 a3ti)
+;   (!
+;      (=
+;         (+ a3qF a3qG)
+;         a3ti)
+;      :named
+;      given-21.1)
+;   (!
+;      (=
+;         (+ a3qF a3qF)
+;         a3tg)
+;      :named
+;      given-21.2)
+;   (!
+;      (= a3tg a3ti)
+;      :named
+;      given-21.3)
+;   (! false :named wanted-21))
+(get-unsat-core)
+; (wanted-21)
 (pop 1)
 (echo "solver-finish-cycle-21")
 (echo "solver-start-cycle-22")
@@ -9856,8 +17473,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-22")
 (echo "wanteds-start-cycle-22")
 ; WANTEDS (conversions)
@@ -9867,8 +17486,14 @@ sat
 ;    (+ a3qP a3qO))
 
 ; WANTEDS (names)
-a3qO  <=  a
-a3qP  <=  b
+;  a3qO  <=  a
+;  a3qP  <=  b
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3qO))
+; (assert (<= 0 a3qP))
+; (declare-const a3qO Int)
+; (declare-const a3qP Int)
 (declare-const a3qO Int)
 (declare-const a3qP Int)
 (assert
@@ -9886,8 +17511,23 @@ a3qP  <=  b
       :named
       wanted-22))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (<= 0 a3qO)
+;   (<= 0 a3qP)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a3qO a3qP)
+;               (+ a3qP a3qO))))
+;      :named
+;      wanted-22))
+(get-unsat-core)
+; (wanted-22)
 (pop 1)
 (echo "solver-finish-cycle-22")
 (echo "solver-start-cycle-22")
@@ -9908,17 +17548,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-22")
 (echo "wanteds-start-cycle-22")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-22))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (! false :named wanted-22))
+(get-unsat-core)
+; (wanted-22)
 (pop 1)
 (echo "solver-finish-cycle-22")
 (echo "solver-start-cycle-23")
@@ -9944,8 +17593,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-23")
 (echo "wanteds-start-cycle-23")
 ; WANTEDS (conversions)
@@ -9955,7 +17606,11 @@ sat
 ;    (+ 1 a3qW))
 
 ; WANTEDS (names)
-a3qW  <=  a
+;  a3qW  <=  a
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3qW))
+; (declare-const a3qW Int)
 (declare-const a3qW Int)
 (assert
    (<= 0 a3qW))
@@ -9970,8 +17625,22 @@ a3qW  <=  a
       :named
       wanted-23))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-23")
+(get-assertions)
+; (
+;   (<= 0 a3qW)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a3qW 1)
+;               (+ 1 a3qW))))
+;      :named
+;      wanted-23))
+(get-unsat-core)
+; (wanted-23)
 (pop 1)
 (echo "solver-finish-cycle-23")
 (echo "solver-start-cycle-23")
@@ -9992,17 +17661,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-23")
 (echo "wanteds-start-cycle-23")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-23))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-23")
+(get-assertions)
+; (
+;   (! false :named wanted-23))
+(get-unsat-core)
+; (wanted-23)
 (pop 1)
 (echo "solver-finish-cycle-23")
 (echo "solver-start-cycle-24")
@@ -10023,17 +17701,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-24")
 (echo "wanteds-start-cycle-24")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-24))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-24")
+(get-assertions)
+; (
+;   (! false :named wanted-24))
+(get-unsat-core)
+; (wanted-24)
 (pop 1)
 (echo "solver-finish-cycle-24")
 (echo "solver-start-cycle-24")
@@ -10054,17 +17741,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-24")
 (echo "wanteds-start-cycle-24")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-24))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-24")
+(get-assertions)
+; (
+;   (! false :named wanted-24))
+(get-unsat-core)
+; (wanted-24)
 (pop 1)
 (echo "solver-finish-cycle-24")
 (echo "solver-start-cycle-25")
@@ -10084,8 +17780,12 @@ unsat
 (echo "givens-start-cycle-25")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3r7  <=  n
+;  a3r7  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3r7))
+; (declare-const a3r7 Int)
 (declare-const a3r7 Int)
 (assert
    (<= 0 a3r7))
@@ -10095,16 +17795,28 @@ a3r7  <=  n
       :named
       given-25.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-25")
 (echo "wanteds-start-cycle-25")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-25))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-25")
+(get-assertions)
+; (
+;   (<= 0 a3r7)
+;   (!
+;      (= a3r7 0)
+;      :named
+;      given-25.1)
+;   (! false :named wanted-25))
+(get-unsat-core)
+; (wanted-25)
 (pop 1)
 (echo "solver-finish-cycle-25")
 (echo "solver-start-cycle-25")
@@ -10124,8 +17836,12 @@ unsat
 (echo "givens-start-cycle-25")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3r7  <=  n
+;  a3r7  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3r7))
+; (declare-const a3r7 Int)
 (declare-const a3r7 Int)
 (assert
    (<= 0 a3r7))
@@ -10135,16 +17851,28 @@ a3r7  <=  n
       :named
       given-25.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-25")
 (echo "wanteds-start-cycle-25")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-25))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-25")
+(get-assertions)
+; (
+;   (<= 0 a3r7)
+;   (!
+;      (= a3r7 0)
+;      :named
+;      given-25.1)
+;   (! false :named wanted-25))
+(get-unsat-core)
+; (wanted-25)
 (pop 1)
 (echo "solver-finish-cycle-25")
 (echo "solver-start-cycle-26")
@@ -10166,10 +17894,18 @@ unsat
 (echo "givens-start-cycle-26")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3r7  <=  n
-a3rh  <=  n
-a3tA  <=  fsk_a3tA
+;  a3r7  <=  n
+;  a3rh  <=  n
+;  a3tA  <=  fsk_a3tA
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3r7))
+; (declare-const a3r7 Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3rh))
+; (assert (<= 0 a3tA))
+; (declare-const a3rh Int)
+; (declare-const a3tA Int)
 (declare-const a3r7 Int)
 (declare-const a3rh Int)
 (declare-const a3tA Int)
@@ -10192,16 +17928,36 @@ a3tA  <=  fsk_a3tA
       :named
       given-26.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-26")
 (echo "wanteds-start-cycle-26")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-26))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-26")
+(get-assertions)
+; (
+;   (<= 0 a3r7)
+;   (<= 0 a3rh)
+;   (<= 0 a3tA)
+;   (!
+;      (=
+;         (+ 1 a3rh)
+;         a3tA)
+;      :named
+;      given-26.1)
+;   (!
+;      (= a3tA a3r7)
+;      :named
+;      given-26.2)
+;   (! false :named wanted-26))
+(get-unsat-core)
+; (wanted-26)
 (pop 1)
 (echo "solver-finish-cycle-26")
 (echo "solver-start-cycle-26")
@@ -10223,10 +17979,18 @@ unsat
 (echo "givens-start-cycle-26")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3r7  <=  n
-a3rh  <=  n
-a3tA  <=  fsk_a3tA
+;  a3r7  <=  n
+;  a3rh  <=  n
+;  a3tA  <=  fsk_a3tA
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3r7))
+; (declare-const a3r7 Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3rh))
+; (assert (<= 0 a3tA))
+; (declare-const a3rh Int)
+; (declare-const a3tA Int)
 (declare-const a3r7 Int)
 (declare-const a3rh Int)
 (declare-const a3tA Int)
@@ -10249,16 +18013,36 @@ a3tA  <=  fsk_a3tA
       :named
       given-26.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-26")
 (echo "wanteds-start-cycle-26")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-26))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-26")
+(get-assertions)
+; (
+;   (<= 0 a3r7)
+;   (<= 0 a3rh)
+;   (<= 0 a3tA)
+;   (!
+;      (=
+;         (+ 1 a3rh)
+;         a3tA)
+;      :named
+;      given-26.1)
+;   (!
+;      (= a3tA a3r7)
+;      :named
+;      given-26.2)
+;   (! false :named wanted-26))
+(get-unsat-core)
+; (wanted-26)
 (pop 1)
 (echo "solver-finish-cycle-26")
 (exit)
@@ -10268,6 +18052,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -10292,6 +18077,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -10331,12 +18117,19 @@ unsat
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5hh  <=  m'
-a5hi  <=  m
-a5hj  <=  field
-a5hk  <=  val
-a5hv  <=  fsk_a5hv
+;  a5hh  <=  m'
+;  a5hi  <=  m
+;  a5hj  <=  field
+;  a5hk  <=  val
+;  a5hv  <=  fsk_a5hv
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5hh (Array String (Maybe Type)))
+; (declare-const a5hi (Array String (Maybe Type)))
+; (declare-const a5hj String)
+; (declare-const a5hk Type)
+; (declare-const a5hv (Array String (Maybe Type)))
 (declare-const
    a5hh
    (Array
@@ -10370,16 +18163,36 @@ a5hv  <=  fsk_a5hv
       :named
       given-1.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5hi
+;            a5hj
+;            (just a5hk))
+;         a5hv)
+;      :named
+;      given-1.1)
+;   (!
+;      (= a5hv a5hh)
+;      :named
+;      given-1.2)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-1")
@@ -10401,12 +18214,19 @@ unsat
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5hh  <=  m'
-a5hi  <=  m
-a5hj  <=  field
-a5hk  <=  val
-a5hv  <=  fsk_a5hv
+;  a5hh  <=  m'
+;  a5hi  <=  m
+;  a5hj  <=  field
+;  a5hk  <=  val
+;  a5hv  <=  fsk_a5hv
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5hh (Array String (Maybe Type)))
+; (declare-const a5hi (Array String (Maybe Type)))
+; (declare-const a5hj String)
+; (declare-const a5hk Type)
+; (declare-const a5hv (Array String (Maybe Type)))
 (declare-const
    a5hh
    (Array
@@ -10440,16 +18260,36 @@ a5hv  <=  fsk_a5hv
       :named
       given-1.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5hi
+;            a5hj
+;            (just a5hk))
+;         a5hv)
+;      :named
+;      given-1.1)
+;   (!
+;      (= a5hv a5hh)
+;      :named
+;      given-1.2)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -10471,11 +18311,17 @@ unsat
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5hC  <=  m'
-a5hD  <=  m
-a5hE  <=  field
-a5hQ  <=  fsk_a5hQ
+;  a5hC  <=  m'
+;  a5hD  <=  m
+;  a5hE  <=  field
+;  a5hQ  <=  fsk_a5hQ
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5hC (Array String (Maybe Type)))
+; (declare-const a5hD (Array String (Maybe Type)))
+; (declare-const a5hE String)
+; (declare-const a5hQ (Array String (Maybe Type)))
 (declare-const
    a5hC
    (Array
@@ -10510,16 +18356,38 @@ a5hQ  <=  fsk_a5hQ
       :named
       given-2.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5hD
+;            a5hE
+;            (as
+;               nothing
+;               (Maybe Type)))
+;         a5hQ)
+;      :named
+;      given-2.1)
+;   (!
+;      (= a5hQ a5hC)
+;      :named
+;      given-2.2)
+;   (! false :named wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-2")
@@ -10541,11 +18409,17 @@ unsat
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5hC  <=  m'
-a5hD  <=  m
-a5hE  <=  field
-a5hQ  <=  fsk_a5hQ
+;  a5hC  <=  m'
+;  a5hD  <=  m
+;  a5hE  <=  field
+;  a5hQ  <=  fsk_a5hQ
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5hC (Array String (Maybe Type)))
+; (declare-const a5hD (Array String (Maybe Type)))
+; (declare-const a5hE String)
+; (declare-const a5hQ (Array String (Maybe Type)))
 (declare-const
    a5hC
    (Array
@@ -10580,16 +18454,38 @@ a5hQ  <=  fsk_a5hQ
       :named
       given-2.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5hD
+;            a5hE
+;            (as
+;               nothing
+;               (Maybe Type)))
+;         a5hQ)
+;      :named
+;      given-2.1)
+;   (!
+;      (= a5hQ a5hC)
+;      :named
+;      given-2.2)
+;   (! false :named wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -10611,9 +18507,13 @@ unsat
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5ir  <=  m
-a5iz  <=  fsk_a5iz
+;  a5ir  <=  m
+;  a5iz  <=  fsk_a5iz
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5ir (Array String (Maybe Type)))
+; (declare-const a5iz (Array String (Maybe Type)))
 (declare-const
    a5ir
    (Array
@@ -10641,16 +18541,37 @@ a5iz  <=  fsk_a5iz
       :named
       given-3.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-3))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-3")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5ir
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5iz)
+;      :named
+;      given-3.1)
+;   (!
+;      (= a5iz a5ir)
+;      :named
+;      given-3.2)
+;   (! false :named wanted-3))
+(get-unsat-core)
+; (wanted-3)
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-3")
@@ -10672,9 +18593,13 @@ unsat
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5ir  <=  m
-a5iz  <=  fsk_a5iz
+;  a5ir  <=  m
+;  a5iz  <=  fsk_a5iz
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5ir (Array String (Maybe Type)))
+; (declare-const a5iz (Array String (Maybe Type)))
 (declare-const
    a5ir
    (Array
@@ -10702,16 +18627,37 @@ a5iz  <=  fsk_a5iz
       :named
       given-3.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-3))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-3")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5ir
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5iz)
+;      :named
+;      given-3.1)
+;   (!
+;      (= a5iz a5ir)
+;      :named
+;      given-3.2)
+;   (! false :named wanted-3))
+(get-unsat-core)
+; (wanted-3)
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -10733,9 +18679,13 @@ unsat
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5jl  <=  m
-a5jt  <=  fsk_a5jt
+;  a5jl  <=  m
+;  a5jt  <=  fsk_a5jt
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5jl (Array String (Maybe Type)))
+; (declare-const a5jt (Array String (Maybe Type)))
 (declare-const
    a5jl
    (Array
@@ -10763,16 +18713,37 @@ a5jt  <=  fsk_a5jt
       :named
       given-4.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5jl
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5jt)
+;      :named
+;      given-4.1)
+;   (!
+;      (= a5jt a5jl)
+;      :named
+;      given-4.2)
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-4")
@@ -10794,9 +18765,13 @@ unsat
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5jl  <=  m
-a5jt  <=  fsk_a5jt
+;  a5jl  <=  m
+;  a5jt  <=  fsk_a5jt
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5jl (Array String (Maybe Type)))
+; (declare-const a5jt (Array String (Maybe Type)))
 (declare-const
    a5jl
    (Array
@@ -10824,16 +18799,37 @@ a5jt  <=  fsk_a5jt
       :named
       given-4.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5jl
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5jt)
+;      :named
+;      given-4.1)
+;   (!
+;      (= a5jt a5jl)
+;      :named
+;      given-4.2)
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -10950,8 +18946,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
@@ -11044,6 +19042,8 @@ sat
 ;          (lit "3u"))))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -11132,8 +19132,98 @@ sat
       :named
       wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (!
+;      (or
+;         (or
+;            false
+;            (not
+;               (=
+;                  (store
+;                     (store
+;                        (store
+;                           (
+;                             (as
+;                                const
+;                                (Array
+;                                   String
+;                                   (Maybe Type)))
+;                             nothing)
+;                           "price"
+;                           (just
+;                              (lit "3u")))
+;                        "make"
+;                        (just
+;                           (apply
+;                              (lit "3M")
+;                              (lit "3g"))))
+;                     "price"
+;                     (just
+;                        (lit "3u")))
+;                  (store
+;                     (store
+;                        (
+;                          (as
+;                             const
+;                             (Array
+;                                String
+;                                (Maybe Type)))
+;                          nothing)
+;                        "price"
+;                        (just
+;                           (lit "3u")))
+;                     "make"
+;                     (just
+;                        (apply
+;                           (lit "3M")
+;                           (lit "3g")))))))
+;         (not
+;            (=
+;               (store
+;                  (store
+;                     (store
+;                        (
+;                          (as
+;                             const
+;                             (Array
+;                                String
+;                                (Maybe Type)))
+;                          nothing)
+;                        "pilot"
+;                        (just
+;                           (apply
+;                              (lit "3M")
+;                              (lit "3g"))))
+;                     "price"
+;                     (just
+;                        (lit "3u")))
+;                  "price"
+;                  (just
+;                     (lit "3u")))
+;               (store
+;                  (store
+;                     (
+;                       (as
+;                          const
+;                          (Array
+;                             String
+;                             (Maybe Type)))
+;                       nothing)
+;                     "pilot"
+;                     (just
+;                        (apply
+;                           (lit "3M")
+;                           (lit "3g"))))
+;                  "price"
+;                  (just
+;                     (lit "3u"))))))
+;      :named
+;      wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-5")
@@ -11154,17 +19244,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (! false :named wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
@@ -11186,9 +19285,13 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5o2  <=  fsk_a5o2
+;  a5kB  <=  m
+;  a5o2  <=  fsk_a5o2
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5o2 (Array String (Maybe Type)))
 (declare-const
    a5kB
    (Array
@@ -11216,16 +19319,37 @@ a5o2  <=  fsk_a5o2
       :named
       given-6.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-6.1)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-6.2)
+;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-6")
@@ -11247,9 +19371,13 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5o2  <=  fsk_a5o2
+;  a5kB  <=  m
+;  a5o2  <=  fsk_a5o2
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5o2 (Array String (Maybe Type)))
 (declare-const
    a5kB
    (Array
@@ -11277,16 +19405,37 @@ a5o2  <=  fsk_a5o2
       :named
       given-6.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-6.1)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-6.2)
+;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -11312,12 +19461,19 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kE  <=  m
-a5kF  <=  field
-a5o2  <=  fsk_a5o2
-a5o9  <=  fsk_a5o9
+;  a5kB  <=  m
+;  a5kE  <=  m
+;  a5kF  <=  field
+;  a5o2  <=  fsk_a5o2
+;  a5o9  <=  fsk_a5o9
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5o2 (Array String (Maybe Type)))
+; DECS1 (unseen) 
+; (declare-const a5kE (Array String (Maybe Type)))
+; (declare-const a5kF String)
+; (declare-const a5o9 (Array String (Maybe Type)))
 (declare-const
    a5kB
    (Array
@@ -11373,16 +19529,52 @@ a5o9  <=  fsk_a5o9
       :named
       given-7.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-7.1)
+;   (!
+;      (=
+;         (store
+;            a5kE
+;            a5kF
+;            (as
+;               nothing
+;               (Maybe Type)))
+;         a5o9)
+;      :named
+;      given-7.2)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-7.3)
+;   (!
+;      (= a5o9 a5kB)
+;      :named
+;      given-7.4)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-7")
@@ -11408,12 +19600,19 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kE  <=  m
-a5kF  <=  field
-a5o2  <=  fsk_a5o2
-a5o9  <=  fsk_a5o9
+;  a5kB  <=  m
+;  a5kE  <=  m
+;  a5kF  <=  field
+;  a5o2  <=  fsk_a5o2
+;  a5o9  <=  fsk_a5o9
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5o2 (Array String (Maybe Type)))
+; DECS1 (unseen) 
+; (declare-const a5kE (Array String (Maybe Type)))
+; (declare-const a5kF String)
+; (declare-const a5o9 (Array String (Maybe Type)))
 (declare-const
    a5kB
    (Array
@@ -11469,16 +19668,52 @@ a5o9  <=  fsk_a5o9
       :named
       given-7.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-7.1)
+;   (!
+;      (=
+;         (store
+;            a5kE
+;            a5kF
+;            (as
+;               nothing
+;               (Maybe Type)))
+;         a5o9)
+;      :named
+;      given-7.2)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-7.3)
+;   (!
+;      (= a5o9 a5kB)
+;      :named
+;      given-7.4)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
@@ -11513,12 +19748,19 @@ unsat
 ;    a5kE)
 
 ; GIVENS (names)
-a5kB  <=  m
-a5kE  <=  m
-a5kF  <=  field
-a5o2  <=  fsk_a5o2
-a5o9  <=  fsk_a5o9
+;  a5kB  <=  m
+;  a5kE  <=  m
+;  a5kF  <=  field
+;  a5o2  <=  fsk_a5o2
+;  a5o9  <=  fsk_a5o9
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kE (Array String (Maybe Type)))
+; (declare-const a5kF String)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5o9 (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -11574,7 +19816,7 @@ a5o9  <=  fsk_a5o9
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
@@ -11588,7 +19830,9 @@ sat
 ;    a5kE)
 
 ; WANTEDS (names)
-a5kE  <=  m
+;  a5kE  <=  m
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -11604,8 +19848,54 @@ a5kE  <=  m
       :named
       wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (store
+;            a5kE
+;            a5kF
+;            (as
+;               nothing
+;               (Maybe Type)))
+;         a5o9)
+;      :named
+;      given-8.2)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-8.3)
+;   (!
+;      (= a5o9 a5kB)
+;      :named
+;      given-8.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (store
+;                  a5kE
+;                  "price"
+;                  (just
+;                     (lit "3u")))
+;               a5kE)))
+;      :named
+;      wanted-8))
+(get-unsat-core)
+; (given-8.1 wanted-8 given-8.2 given-8.4 given-8.3)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-8")
@@ -11631,12 +19921,19 @@ unsat
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kE  <=  m
-a5kF  <=  field
-a5o2  <=  fsk_a5o2
-a5o9  <=  fsk_a5o9
+;  a5kB  <=  m
+;  a5kE  <=  m
+;  a5kF  <=  field
+;  a5o2  <=  fsk_a5o2
+;  a5o9  <=  fsk_a5o9
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kE (Array String (Maybe Type)))
+; (declare-const a5kF String)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5o9 (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -11692,16 +19989,52 @@ a5o9  <=  fsk_a5o9
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (store
+;            a5kE
+;            a5kF
+;            (as
+;               nothing
+;               (Maybe Type)))
+;         a5o9)
+;      :named
+;      given-8.2)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-8.3)
+;   (!
+;      (= a5o9 a5kB)
+;      :named
+;      given-8.4)
+;   (! false :named wanted-8))
+(get-unsat-core)
+; (wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -11727,13 +20060,21 @@ unsat
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5o2 (Array String (Maybe Type)))
+; DECS1 (unseen) 
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5ol (Array String (Maybe Type)))
 (declare-const
    a5kB
    (Array
@@ -11788,16 +20129,50 @@ a5ol  <=  fsk_a5ol
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            a5kM
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-9.4)
+;   (! false :named wanted-9))
+(get-unsat-core)
+; (wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-9")
@@ -11823,13 +20198,21 @@ unsat
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5o2 (Array String (Maybe Type)))
+; DECS1 (unseen) 
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5ol (Array String (Maybe Type)))
 (declare-const
    a5kB
    (Array
@@ -11884,16 +20267,50 @@ a5ol  <=  fsk_a5ol
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            a5kM
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-9.4)
+;   (! false :named wanted-9))
+(get-unsat-core)
+; (wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -11921,13 +20338,21 @@ unsat
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -11987,16 +20412,54 @@ a5ol  <=  fsk_a5ol
       :named
       given-10.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-10))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-10")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-10.1)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            "price"
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-10.2)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-10.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-10.4)
+;   (!
+;      (= a5kM "price")
+;      :named
+;      given-10.5)
+;   (! false :named wanted-10))
+(get-unsat-core)
+; (wanted-10)
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-10")
@@ -12024,13 +20487,21 @@ unsat
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -12090,16 +20561,54 @@ a5ol  <=  fsk_a5ol
       :named
       given-10.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-10))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-10")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-10.1)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            "price"
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-10.2)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-10.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-10.4)
+;   (!
+;      (= a5kM "price")
+;      :named
+;      given-10.5)
+;   (! false :named wanted-10))
+(get-unsat-core)
+; (wanted-10)
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
@@ -12132,13 +20641,21 @@ unsat
 ;    (lit "3u"))
 
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -12198,7 +20715,7 @@ a5ol  <=  fsk_a5ol
       :named
       given-11.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
@@ -12208,7 +20725,9 @@ sat
 ;    (lit "3u"))
 
 ; WANTEDS (names)
-a5kN  <=  val
+;  a5kN  <=  val
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -12220,8 +20739,52 @@ a5kN  <=  val
       :named
       wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-11.1)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            "price"
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-11.2)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-11.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-11.4)
+;   (!
+;      (= a5kM "price")
+;      :named
+;      given-11.5)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               a5kN
+;               (lit "3u"))))
+;      :named
+;      wanted-11))
+(get-unsat-core)
+; (given-11.4 given-11.3 given-11.1 given-11.2 wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-11")
@@ -12249,13 +20812,21 @@ unsat
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -12315,16 +20886,54 @@ a5ol  <=  fsk_a5ol
       :named
       given-11.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-11.1)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            "price"
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-11.2)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-11.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-11.4)
+;   (!
+;      (= a5kM "price")
+;      :named
+;      given-11.5)
+;   (! false :named wanted-11))
+(get-unsat-core)
+; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
@@ -12352,13 +20961,21 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -12419,16 +21036,55 @@ a5ol  <=  fsk_a5ol
       :named
       given-12.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (!
+;      (not
+;         (= a5kM "price"))
+;      :named
+;      given-12.1)
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-12.2)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            a5kM
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-12.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-12.4)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-12.5)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-12")
@@ -12456,13 +21112,21 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -12523,16 +21187,55 @@ a5ol  <=  fsk_a5ol
       :named
       given-12.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (!
+;      (not
+;         (= a5kM "price"))
+;      :named
+;      given-12.1)
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-12.2)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            a5kM
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-12.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-12.4)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-12.5)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
@@ -12569,13 +21272,21 @@ unsat
 ;    a5kL)
 
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -12636,7 +21347,7 @@ a5ol  <=  fsk_a5ol
       :named
       given-13.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
@@ -12650,7 +21361,9 @@ sat
 ;    a5kL)
 
 ; WANTEDS (names)
-a5kL  <=  m
+;  a5kL  <=  m
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -12666,8 +21379,62 @@ a5kL  <=  m
       :named
       wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (!
+;      (not
+;         (= a5kM "price"))
+;      :named
+;      given-13.1)
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-13.2)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            a5kM
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-13.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-13.4)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-13.5)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (store
+;                  a5kL
+;                  "price"
+;                  (just
+;                     (lit "3u")))
+;               a5kL)))
+;      :named
+;      wanted-13))
+(get-unsat-core)
+; (given-13.2
+;    wanted-13
+;    given-13.5
+;    given-13.4
+;    given-13.3
+;    given-13.1)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-13")
@@ -12695,13 +21462,21 @@ unsat
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5kB  <=  m
-a5kL  <=  m
-a5kM  <=  field
-a5kN  <=  val
-a5o2  <=  fsk_a5o2
-a5ol  <=  fsk_a5ol
+;  a5kB  <=  m
+;  a5kL  <=  m
+;  a5kM  <=  field
+;  a5kN  <=  val
+;  a5o2  <=  fsk_a5o2
+;  a5ol  <=  fsk_a5ol
 (push 1)
+; DECS1 (seen) 
+; (declare-const a5kB (Array String (Maybe Type)))
+; (declare-const a5kL (Array String (Maybe Type)))
+; (declare-const a5kM String)
+; (declare-const a5kN Type)
+; (declare-const a5o2 (Array String (Maybe Type)))
+; (declare-const a5ol (Array String (Maybe Type)))
+; DECS1 (unseen) 
 (declare-const
    a5kB
    (Array
@@ -12762,16 +21537,55 @@ a5ol  <=  fsk_a5ol
       :named
       given-13.5))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (!
+;      (not
+;         (= a5kM "price"))
+;      :named
+;      given-13.1)
+;   (!
+;      (=
+;         (store
+;            a5kB
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5o2)
+;      :named
+;      given-13.2)
+;   (!
+;      (=
+;         (store
+;            a5kL
+;            a5kM
+;            (just a5kN))
+;         a5ol)
+;      :named
+;      given-13.3)
+;   (!
+;      (= a5o2 a5kB)
+;      :named
+;      given-13.4)
+;   (!
+;      (= a5ol a5kB)
+;      :named
+;      given-13.5)
+;   (! false :named wanted-13))
+(get-unsat-core)
+; (wanted-13)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-14")
@@ -12793,9 +21607,13 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5lh  <=  m
-a5oz  <=  fsk_a5oz
+;  a5lh  <=  m
+;  a5oz  <=  fsk_a5oz
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5lh (Array String (Maybe Type)))
+; (declare-const a5oz (Array String (Maybe Type)))
 (declare-const
    a5lh
    (Array
@@ -12823,16 +21641,37 @@ a5oz  <=  fsk_a5oz
       :named
       given-14.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5lh
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5oz)
+;      :named
+;      given-14.1)
+;   (!
+;      (= a5oz a5lh)
+;      :named
+;      given-14.2)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-14")
@@ -12854,9 +21693,13 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a5lh  <=  m
-a5oz  <=  fsk_a5oz
+;  a5lh  <=  m
+;  a5oz  <=  fsk_a5oz
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const a5lh (Array String (Maybe Type)))
+; (declare-const a5oz (Array String (Maybe Type)))
 (declare-const
    a5lh
    (Array
@@ -12884,16 +21727,37 @@ a5oz  <=  fsk_a5oz
       :named
       given-14.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (!
+;      (=
+;         (store
+;            a5lh
+;            "price"
+;            (just
+;               (lit "3u")))
+;         a5oz)
+;      :named
+;      given-14.1)
+;   (!
+;      (= a5oz a5lh)
+;      :named
+;      given-14.2)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (exit)
@@ -12903,6 +21767,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -12929,6 +21794,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -12953,6 +21819,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -12991,17 +21858,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-1")
@@ -13022,17 +21898,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -13072,8 +21957,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -13093,12 +21980,26 @@ sat
 ;    (< a2Tj a2Tk))
 
 ; WANTEDS (names)
-a2Tg  <=  a
-a2Th  <=  b
-a2Ti  <=  c
-a2Tj  <=  a_a2Tj
-a2Tk  <=  b_a2Tk
-a2Tl  <=  c_a2Tl
+;  a2Tg  <=  a
+;  a2Th  <=  b
+;  a2Ti  <=  c
+;  a2Tj  <=  a_a2Tj
+;  a2Tk  <=  b_a2Tk
+;  a2Tl  <=  c_a2Tl
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a2Tg))
+; (assert (<= 0 a2Th))
+; (assert (<= 0 a2Ti))
+; (assert (<= 0 a2Tj))
+; (assert (<= 0 a2Tk))
+; (assert (<= 0 a2Tl))
+; (declare-const a2Tg Int)
+; (declare-const a2Th Int)
+; (declare-const a2Ti Int)
+; (declare-const a2Tj Int)
+; (declare-const a2Tk Int)
+; (declare-const a2Tl Int)
 (declare-const a2Tg Int)
 (declare-const a2Th Int)
 (declare-const a2Ti Int)
@@ -13138,8 +22039,58 @@ a2Tl  <=  c_a2Tl
       :named
       wanted-2))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-2")
+(get-model)
+; (
+;   (define-fun
+;      wanted-2
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (< a2Th a2Ti)
+;               (< a2Tk a2Tl)))
+;         (not
+;            (=
+;               (< a2Tj a2Tl)
+;               (< a2Tg a2Ti)))
+;         (not
+;            (=
+;               (< a2Tg a2Th)
+;               (< a2Tj a2Tk)))))
+;   (define-fun
+;      a2Tj
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Tk
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Tl
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Tg
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Th
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Ti
+;      ()
+;      Int
+;      1))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-2")
@@ -13179,8 +22130,10 @@ sat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -13200,12 +22153,26 @@ sat
 ;    (< a2Tj a2Tk))
 
 ; WANTEDS (names)
-a2Tg  <=  a
-a2Th  <=  b
-a2Ti  <=  c
-a2Tj  <=  a_a2Tj
-a2Tk  <=  b_a2Tk
-a2Tl  <=  c_a2Tl
+;  a2Tg  <=  a
+;  a2Th  <=  b
+;  a2Ti  <=  c
+;  a2Tj  <=  a_a2Tj
+;  a2Tk  <=  b_a2Tk
+;  a2Tl  <=  c_a2Tl
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a2Tg))
+; (assert (<= 0 a2Th))
+; (assert (<= 0 a2Ti))
+; (assert (<= 0 a2Tj))
+; (assert (<= 0 a2Tk))
+; (assert (<= 0 a2Tl))
+; (declare-const a2Tg Int)
+; (declare-const a2Th Int)
+; (declare-const a2Ti Int)
+; (declare-const a2Tj Int)
+; (declare-const a2Tk Int)
+; (declare-const a2Tl Int)
 (declare-const a2Tg Int)
 (declare-const a2Th Int)
 (declare-const a2Ti Int)
@@ -13245,8 +22212,58 @@ a2Tl  <=  c_a2Tl
       :named
       wanted-2))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-2")
+(get-model)
+; (
+;   (define-fun
+;      wanted-2
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (< a2Th a2Ti)
+;               (< a2Tk a2Tl)))
+;         (not
+;            (=
+;               (< a2Tj a2Tl)
+;               (< a2Tg a2Ti)))
+;         (not
+;            (=
+;               (< a2Tg a2Th)
+;               (< a2Tj a2Tk)))))
+;   (define-fun
+;      a2Tj
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Tk
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Tl
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Tg
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Th
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2Ti
+;      ()
+;      Int
+;      1))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -13279,8 +22296,10 @@ sat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
@@ -13295,10 +22314,20 @@ sat
 ;    (+ a2U6 a2U5))
 
 ; WANTEDS (names)
-a2U5  <=  a
-a2U6  <=  b
-a2U7  <=  a_a2U7
-a2U8  <=  b_a2U8
+;  a2U5  <=  a
+;  a2U6  <=  b
+;  a2U7  <=  a_a2U7
+;  a2U8  <=  b_a2U8
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a2U5))
+; (assert (<= 0 a2U6))
+; (assert (<= 0 a2U7))
+; (assert (<= 0 a2U8))
+; (declare-const a2U5 Int)
+; (declare-const a2U6 Int)
+; (declare-const a2U7 Int)
+; (declare-const a2U8 Int)
 (declare-const a2U5 Int)
 (declare-const a2U6 Int)
 (declare-const a2U7 Int)
@@ -13327,8 +22356,44 @@ a2U8  <=  b_a2U8
       :named
       wanted-3))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-3")
+(get-model)
+; (
+;   (define-fun
+;      a2U8
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      wanted-3
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a2U7 a2U8)
+;               (+ a2U5 a2U6)))
+;         (not
+;            (=
+;               (+ a2U8 a2U7)
+;               (+ a2U6 a2U5)))))
+;   (define-fun
+;      a2U5
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      a2U7
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2U6
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-3")
@@ -13361,8 +22426,10 @@ sat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
@@ -13377,10 +22444,20 @@ sat
 ;    (+ a2U6 a2U5))
 
 ; WANTEDS (names)
-a2U5  <=  a
-a2U6  <=  b
-a2U7  <=  a_a2U7
-a2U8  <=  b_a2U8
+;  a2U5  <=  a
+;  a2U6  <=  b
+;  a2U7  <=  a_a2U7
+;  a2U8  <=  b_a2U8
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a2U5))
+; (assert (<= 0 a2U6))
+; (assert (<= 0 a2U7))
+; (assert (<= 0 a2U8))
+; (declare-const a2U5 Int)
+; (declare-const a2U6 Int)
+; (declare-const a2U7 Int)
+; (declare-const a2U8 Int)
 (declare-const a2U5 Int)
 (declare-const a2U6 Int)
 (declare-const a2U7 Int)
@@ -13409,8 +22486,44 @@ a2U8  <=  b_a2U8
       :named
       wanted-3))
 (check-sat)
-sat
+; sat
 (echo "wanteds-finish-cycle-3")
+(get-model)
+; (
+;   (define-fun
+;      a2U8
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      wanted-3
+;      ()
+;      Bool
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a2U7 a2U8)
+;               (+ a2U5 a2U6)))
+;         (not
+;            (=
+;               (+ a2U8 a2U7)
+;               (+ a2U6 a2U5)))))
+;   (define-fun
+;      a2U5
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      a2U7
+;      ()
+;      Int
+;      0)
+;   (define-fun
+;      a2U6
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -13431,17 +22544,26 @@ sat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-4")
@@ -13462,17 +22584,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-4))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-4")
+(get-assertions)
+; (
+;   (! false :named wanted-4))
+(get-unsat-core)
+; (wanted-4)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -13492,8 +22623,12 @@ unsat
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UP  <=  n
+;  a2UP  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2UP))
+; (declare-const a2UP Int)
 (declare-const a2UP Int)
 (assert
    (<= 0 a2UP))
@@ -13503,16 +22638,28 @@ a2UP  <=  n
       :named
       given-5.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (!
+;      (= a2UP 0)
+;      :named
+;      given-5.1)
+;   (! false :named wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-5")
@@ -13532,8 +22679,12 @@ unsat
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UP  <=  n
+;  a2UP  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2UP))
+; (declare-const a2UP Int)
 (declare-const a2UP Int)
 (assert
    (<= 0 a2UP))
@@ -13543,16 +22694,28 @@ a2UP  <=  n
       :named
       given-5.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-5))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-5")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (!
+;      (= a2UP 0)
+;      :named
+;      given-5.1)
+;   (! false :named wanted-5))
+(get-unsat-core)
+; (wanted-5)
 (pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
@@ -13572,8 +22735,12 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UQ  <=  m
+;  a2UQ  <=  m
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2UQ))
+; (declare-const a2UQ Int)
 (declare-const a2UQ Int)
 (assert
    (<= 0 a2UQ))
@@ -13583,16 +22750,28 @@ a2UQ  <=  m
       :named
       given-6.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (<= 0 a2UQ)
+;   (!
+;      (= a2UQ 0)
+;      :named
+;      given-6.1)
+;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-6")
@@ -13612,8 +22791,12 @@ unsat
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UQ  <=  m
+;  a2UQ  <=  m
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2UQ))
+; (declare-const a2UQ Int)
 (declare-const a2UQ Int)
 (assert
    (<= 0 a2UQ))
@@ -13623,16 +22806,28 @@ a2UQ  <=  m
       :named
       given-6.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-6))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-6")
+(get-assertions)
+; (
+;   (<= 0 a2UQ)
+;   (!
+;      (= a2UQ 0)
+;      :named
+;      given-6.1)
+;   (! false :named wanted-6))
+(get-unsat-core)
+; (wanted-6)
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -13654,10 +22849,18 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UP  <=  n
-a2V1  <=  n
-a3cg  <=  fsk_a3cg
+;  a2UP  <=  n
+;  a2V1  <=  n
+;  a3cg  <=  fsk_a3cg
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2UP))
+; (declare-const a2UP Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2V1))
+; (assert (<= 0 a3cg))
+; (declare-const a2V1 Int)
+; (declare-const a3cg Int)
 (declare-const a2UP Int)
 (declare-const a2V1 Int)
 (declare-const a3cg Int)
@@ -13680,16 +22883,36 @@ a3cg  <=  fsk_a3cg
       :named
       given-7.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (<= 0 a2V1)
+;   (<= 0 a3cg)
+;   (!
+;      (=
+;         (+ 1 a2V1)
+;         a3cg)
+;      :named
+;      given-7.1)
+;   (!
+;      (= a3cg a2UP)
+;      :named
+;      given-7.2)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-7")
@@ -13711,10 +22934,18 @@ unsat
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UP  <=  n
-a2V1  <=  n
-a3cg  <=  fsk_a3cg
+;  a2UP  <=  n
+;  a2V1  <=  n
+;  a3cg  <=  fsk_a3cg
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2UP))
+; (declare-const a2UP Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2V1))
+; (assert (<= 0 a3cg))
+; (declare-const a2V1 Int)
+; (declare-const a3cg Int)
 (declare-const a2UP Int)
 (declare-const a2V1 Int)
 (declare-const a3cg Int)
@@ -13737,16 +22968,36 @@ a3cg  <=  fsk_a3cg
       :named
       given-7.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-7))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-7")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (<= 0 a2V1)
+;   (<= 0 a3cg)
+;   (!
+;      (=
+;         (+ 1 a2V1)
+;         a3cg)
+;      :named
+;      given-7.1)
+;   (!
+;      (= a3cg a2UP)
+;      :named
+;      given-7.2)
+;   (! false :named wanted-7))
+(get-unsat-core)
+; (wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
@@ -13772,13 +23023,27 @@ unsat
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UP  <=  n
-a2UQ  <=  m
-a2V1  <=  n
-a2V3  <=  n
-a3cg  <=  fsk_a3cg
-a3cj  <=  fsk_a3cj
+;  a2UP  <=  n
+;  a2UQ  <=  m
+;  a2V1  <=  n
+;  a2V3  <=  n
+;  a3cg  <=  fsk_a3cg
+;  a3cj  <=  fsk_a3cj
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2UP))
+; (assert (<= 0 a2UQ))
+; (assert (<= 0 a2V1))
+; (assert (<= 0 a3cg))
+; (declare-const a2UP Int)
+; (declare-const a2UQ Int)
+; (declare-const a2V1 Int)
+; (declare-const a3cg Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2V3))
+; (assert (<= 0 a3cj))
+; (declare-const a2V3 Int)
+; (declare-const a3cj Int)
 (declare-const a2UP Int)
 (declare-const a2UQ Int)
 (declare-const a2V1 Int)
@@ -13822,16 +23087,49 @@ a3cj  <=  fsk_a3cj
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (<= 0 a2UQ)
+;   (<= 0 a2V1)
+;   (<= 0 a2V3)
+;   (<= 0 a3cg)
+;   (<= 0 a3cj)
+;   (!
+;      (=
+;         (+ 1 a2V1)
+;         a3cg)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (+ 1 a2V3)
+;         a3cj)
+;      :named
+;      given-8.2)
+;   (!
+;      (= a3cg a2UP)
+;      :named
+;      given-8.3)
+;   (!
+;      (= a3cj a2UQ)
+;      :named
+;      given-8.4)
+;   (! false :named wanted-8))
+(get-unsat-core)
+; (wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-8")
@@ -13857,13 +23155,27 @@ unsat
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UP  <=  n
-a2UQ  <=  m
-a2V1  <=  n
-a2V3  <=  n
-a3cg  <=  fsk_a3cg
-a3cj  <=  fsk_a3cj
+;  a2UP  <=  n
+;  a2UQ  <=  m
+;  a2V1  <=  n
+;  a2V3  <=  n
+;  a3cg  <=  fsk_a3cg
+;  a3cj  <=  fsk_a3cj
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2UP))
+; (assert (<= 0 a2UQ))
+; (assert (<= 0 a2V1))
+; (assert (<= 0 a3cg))
+; (declare-const a2UP Int)
+; (declare-const a2UQ Int)
+; (declare-const a2V1 Int)
+; (declare-const a3cg Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2V3))
+; (assert (<= 0 a3cj))
+; (declare-const a2V3 Int)
+; (declare-const a3cj Int)
 (declare-const a2UP Int)
 (declare-const a2UQ Int)
 (declare-const a2V1 Int)
@@ -13907,16 +23219,49 @@ a3cj  <=  fsk_a3cj
       :named
       given-8.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-8))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-8")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (<= 0 a2UQ)
+;   (<= 0 a2V1)
+;   (<= 0 a2V3)
+;   (<= 0 a3cg)
+;   (<= 0 a3cj)
+;   (!
+;      (=
+;         (+ 1 a2V1)
+;         a3cg)
+;      :named
+;      given-8.1)
+;   (!
+;      (=
+;         (+ 1 a2V3)
+;         a3cj)
+;      :named
+;      given-8.2)
+;   (!
+;      (= a3cg a2UP)
+;      :named
+;      given-8.3)
+;   (!
+;      (= a3cj a2UQ)
+;      :named
+;      given-8.4)
+;   (! false :named wanted-8))
+(get-unsat-core)
+; (wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -13947,13 +23292,27 @@ unsat
 ;    (- a2UQ a2UP))
 
 ; GIVENS (names)
-a2UP  <=  n
-a2UQ  <=  m
-a2V1  <=  n
-a2V3  <=  n
-a3cg  <=  fsk_a3cg
-a3cj  <=  fsk_a3cj
+;  a2UP  <=  n
+;  a2UQ  <=  m
+;  a2V1  <=  n
+;  a2V3  <=  n
+;  a3cg  <=  fsk_a3cg
+;  a3cj  <=  fsk_a3cj
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2UP))
+; (assert (<= 0 a2UQ))
+; (assert (<= 0 a2V1))
+; (assert (<= 0 a2V3))
+; (assert (<= 0 a3cg))
+; (assert (<= 0 a3cj))
+; (declare-const a2UP Int)
+; (declare-const a2UQ Int)
+; (declare-const a2V1 Int)
+; (declare-const a2V3 Int)
+; (declare-const a3cg Int)
+; (declare-const a3cj Int)
+; DECS1 (unseen) 
 (declare-const a2UP Int)
 (declare-const a2UQ Int)
 (declare-const a2V1 Int)
@@ -13997,7 +23356,7 @@ a3cj  <=  fsk_a3cj
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
@@ -14007,10 +23366,12 @@ sat
 ;    (- a2UQ a2UP))
 
 ; WANTEDS (names)
-a2UP  <=  n
-a2UQ  <=  m
-a2V1  <=  n
-a2V3  <=  n
+;  a2UP  <=  n
+;  a2UQ  <=  m
+;  a2V1  <=  n
+;  a2V3  <=  n
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -14022,8 +23383,47 @@ a2V3  <=  n
       :named
       wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (<= 0 a2UQ)
+;   (<= 0 a2V1)
+;   (<= 0 a2V3)
+;   (<= 0 a3cg)
+;   (<= 0 a3cj)
+;   (!
+;      (=
+;         (+ 1 a2V1)
+;         a3cg)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (+ 1 a2V3)
+;         a3cj)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a3cg a2UP)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a3cj a2UQ)
+;      :named
+;      given-9.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (- a2V3 a2V1)
+;               (- a2UQ a2UP))))
+;      :named
+;      wanted-9))
+(get-unsat-core)
+; (given-9.2 wanted-9 given-9.4 given-9.1 given-9.3)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-9")
@@ -14049,13 +23449,27 @@ unsat
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2UP  <=  n
-a2UQ  <=  m
-a2V1  <=  n
-a2V3  <=  n
-a3cg  <=  fsk_a3cg
-a3cj  <=  fsk_a3cj
+;  a2UP  <=  n
+;  a2UQ  <=  m
+;  a2V1  <=  n
+;  a2V3  <=  n
+;  a3cg  <=  fsk_a3cg
+;  a3cj  <=  fsk_a3cj
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2UP))
+; (assert (<= 0 a2UQ))
+; (assert (<= 0 a2V1))
+; (assert (<= 0 a2V3))
+; (assert (<= 0 a3cg))
+; (assert (<= 0 a3cj))
+; (declare-const a2UP Int)
+; (declare-const a2UQ Int)
+; (declare-const a2V1 Int)
+; (declare-const a2V3 Int)
+; (declare-const a3cg Int)
+; (declare-const a3cj Int)
+; DECS1 (unseen) 
 (declare-const a2UP Int)
 (declare-const a2UQ Int)
 (declare-const a2V1 Int)
@@ -14099,16 +23513,49 @@ a3cj  <=  fsk_a3cj
       :named
       given-9.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-9))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-9")
+(get-assertions)
+; (
+;   (<= 0 a2UP)
+;   (<= 0 a2UQ)
+;   (<= 0 a2V1)
+;   (<= 0 a2V3)
+;   (<= 0 a3cg)
+;   (<= 0 a3cj)
+;   (!
+;      (=
+;         (+ 1 a2V1)
+;         a3cg)
+;      :named
+;      given-9.1)
+;   (!
+;      (=
+;         (+ 1 a2V3)
+;         a3cj)
+;      :named
+;      given-9.2)
+;   (!
+;      (= a3cg a2UP)
+;      :named
+;      given-9.3)
+;   (!
+;      (= a3cj a2UQ)
+;      :named
+;      given-9.4)
+;   (! false :named wanted-9))
+(get-unsat-core)
+; (wanted-9)
 (pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
@@ -14128,8 +23575,12 @@ unsat
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2Vi  <=  n
+;  a2Vi  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2Vi))
+; (declare-const a2Vi Int)
 (declare-const a2Vi Int)
 (assert
    (<= 0 a2Vi))
@@ -14139,16 +23590,28 @@ a2Vi  <=  n
       :named
       given-10.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-10))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-10")
+(get-assertions)
+; (
+;   (<= 0 a2Vi)
+;   (!
+;      (= a2Vi 0)
+;      :named
+;      given-10.1)
+;   (! false :named wanted-10))
+(get-unsat-core)
+; (wanted-10)
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-10")
@@ -14168,8 +23631,12 @@ unsat
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2Vi  <=  n
+;  a2Vi  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2Vi))
+; (declare-const a2Vi Int)
 (declare-const a2Vi Int)
 (assert
    (<= 0 a2Vi))
@@ -14179,16 +23646,28 @@ a2Vi  <=  n
       :named
       given-10.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-10))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-10")
+(get-assertions)
+; (
+;   (<= 0 a2Vi)
+;   (!
+;      (= a2Vi 0)
+;      :named
+;      given-10.1)
+;   (! false :named wanted-10))
+(get-unsat-core)
+; (wanted-10)
 (pop 1)
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
@@ -14210,10 +23689,18 @@ unsat
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2Vi  <=  n
-a2Vq  <=  n
-a3cy  <=  fsk_a3cy
+;  a2Vi  <=  n
+;  a2Vq  <=  n
+;  a3cy  <=  fsk_a3cy
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2Vi))
+; (declare-const a2Vi Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2Vq))
+; (assert (<= 0 a3cy))
+; (declare-const a2Vq Int)
+; (declare-const a3cy Int)
 (declare-const a2Vi Int)
 (declare-const a2Vq Int)
 (declare-const a3cy Int)
@@ -14236,16 +23723,36 @@ a3cy  <=  fsk_a3cy
       :named
       given-11.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (<= 0 a2Vi)
+;   (<= 0 a2Vq)
+;   (<= 0 a3cy)
+;   (!
+;      (=
+;         (+ 1 a2Vq)
+;         a3cy)
+;      :named
+;      given-11.1)
+;   (!
+;      (= a3cy a2Vi)
+;      :named
+;      given-11.2)
+;   (! false :named wanted-11))
+(get-unsat-core)
+; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-11")
@@ -14267,10 +23774,18 @@ unsat
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2Vi  <=  n
-a2Vq  <=  n
-a3cy  <=  fsk_a3cy
+;  a2Vi  <=  n
+;  a2Vq  <=  n
+;  a3cy  <=  fsk_a3cy
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2Vi))
+; (declare-const a2Vi Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2Vq))
+; (assert (<= 0 a3cy))
+; (declare-const a2Vq Int)
+; (declare-const a3cy Int)
 (declare-const a2Vi Int)
 (declare-const a2Vq Int)
 (declare-const a3cy Int)
@@ -14293,16 +23808,36 @@ a3cy  <=  fsk_a3cy
       :named
       given-11.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-11))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-11")
+(get-assertions)
+; (
+;   (<= 0 a2Vi)
+;   (<= 0 a2Vq)
+;   (<= 0 a3cy)
+;   (!
+;      (=
+;         (+ 1 a2Vq)
+;         a3cy)
+;      :named
+;      given-11.1)
+;   (!
+;      (= a3cy a2Vi)
+;      :named
+;      given-11.2)
+;   (! false :named wanted-11))
+(get-unsat-core)
+; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
@@ -14322,8 +23857,12 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VA  <=  n
+;  a2VA  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2VA))
+; (declare-const a2VA Int)
 (declare-const a2VA Int)
 (assert
    (<= 0 a2VA))
@@ -14333,16 +23872,28 @@ a2VA  <=  n
       :named
       given-12.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (<= 0 a2VA)
+;   (!
+;      (= a2VA 0)
+;      :named
+;      given-12.1)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-12")
@@ -14362,8 +23913,12 @@ unsat
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VA  <=  n
+;  a2VA  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2VA))
+; (declare-const a2VA Int)
 (declare-const a2VA Int)
 (assert
    (<= 0 a2VA))
@@ -14373,16 +23928,28 @@ a2VA  <=  n
       :named
       given-12.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-12))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-12")
+(get-assertions)
+; (
+;   (<= 0 a2VA)
+;   (!
+;      (= a2VA 0)
+;      :named
+;      given-12.1)
+;   (! false :named wanted-12))
+(get-unsat-core)
+; (wanted-12)
 (pop 1)
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
@@ -14404,10 +23971,18 @@ unsat
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VA  <=  n
-a2VH  <=  n
-a3cE  <=  fsk_a3cE
+;  a2VA  <=  n
+;  a2VH  <=  n
+;  a3cE  <=  fsk_a3cE
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2VA))
+; (declare-const a2VA Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2VH))
+; (assert (<= 0 a3cE))
+; (declare-const a2VH Int)
+; (declare-const a3cE Int)
 (declare-const a2VA Int)
 (declare-const a2VH Int)
 (declare-const a3cE Int)
@@ -14430,16 +24005,36 @@ a3cE  <=  fsk_a3cE
       :named
       given-13.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (<= 0 a2VA)
+;   (<= 0 a2VH)
+;   (<= 0 a3cE)
+;   (!
+;      (=
+;         (+ 1 a2VH)
+;         a3cE)
+;      :named
+;      given-13.1)
+;   (!
+;      (= a3cE a2VA)
+;      :named
+;      given-13.2)
+;   (! false :named wanted-13))
+(get-unsat-core)
+; (wanted-13)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-13")
@@ -14461,10 +24056,18 @@ unsat
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VA  <=  n
-a2VH  <=  n
-a3cE  <=  fsk_a3cE
+;  a2VA  <=  n
+;  a2VH  <=  n
+;  a3cE  <=  fsk_a3cE
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2VA))
+; (declare-const a2VA Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2VH))
+; (assert (<= 0 a3cE))
+; (declare-const a2VH Int)
+; (declare-const a3cE Int)
 (declare-const a2VA Int)
 (declare-const a2VH Int)
 (declare-const a3cE Int)
@@ -14487,16 +24090,36 @@ a3cE  <=  fsk_a3cE
       :named
       given-13.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-13))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-13")
+(get-assertions)
+; (
+;   (<= 0 a2VA)
+;   (<= 0 a2VH)
+;   (<= 0 a3cE)
+;   (!
+;      (=
+;         (+ 1 a2VH)
+;         a3cE)
+;      :named
+;      given-13.1)
+;   (!
+;      (= a3cE a2VA)
+;      :named
+;      given-13.2)
+;   (! false :named wanted-13))
+(get-unsat-core)
+; (wanted-13)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-14")
@@ -14516,8 +24139,12 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VQ  <=  n
+;  a2VQ  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2VQ))
+; (declare-const a2VQ Int)
 (declare-const a2VQ Int)
 (assert
    (<= 0 a2VQ))
@@ -14527,16 +24154,28 @@ a2VQ  <=  n
       :named
       given-14.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (<= 0 a2VQ)
+;   (!
+;      (= a2VQ 0)
+;      :named
+;      given-14.1)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-14")
@@ -14556,8 +24195,12 @@ unsat
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VQ  <=  n
+;  a2VQ  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a2VQ))
+; (declare-const a2VQ Int)
 (declare-const a2VQ Int)
 (assert
    (<= 0 a2VQ))
@@ -14567,16 +24210,28 @@ a2VQ  <=  n
       :named
       given-14.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-14))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-14")
+(get-assertions)
+; (
+;   (<= 0 a2VQ)
+;   (!
+;      (= a2VQ 0)
+;      :named
+;      given-14.1)
+;   (! false :named wanted-14))
+(get-unsat-core)
+; (wanted-14)
 (pop 1)
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-15")
@@ -14598,10 +24253,18 @@ unsat
 (echo "givens-start-cycle-15")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VQ  <=  n
-a2VX  <=  n
-a3cJ  <=  fsk_a3cJ
+;  a2VQ  <=  n
+;  a2VX  <=  n
+;  a3cJ  <=  fsk_a3cJ
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2VQ))
+; (declare-const a2VQ Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2VX))
+; (assert (<= 0 a3cJ))
+; (declare-const a2VX Int)
+; (declare-const a3cJ Int)
 (declare-const a2VQ Int)
 (declare-const a2VX Int)
 (declare-const a3cJ Int)
@@ -14624,16 +24287,36 @@ a3cJ  <=  fsk_a3cJ
       :named
       given-15.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-15))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-15")
+(get-assertions)
+; (
+;   (<= 0 a2VQ)
+;   (<= 0 a2VX)
+;   (<= 0 a3cJ)
+;   (!
+;      (=
+;         (+ 1 a2VX)
+;         a3cJ)
+;      :named
+;      given-15.1)
+;   (!
+;      (= a3cJ a2VQ)
+;      :named
+;      given-15.2)
+;   (! false :named wanted-15))
+(get-unsat-core)
+; (wanted-15)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-15")
@@ -14655,10 +24338,18 @@ unsat
 (echo "givens-start-cycle-15")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VQ  <=  n
-a2VX  <=  n
-a3cJ  <=  fsk_a3cJ
+;  a2VQ  <=  n
+;  a2VX  <=  n
+;  a3cJ  <=  fsk_a3cJ
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2VQ))
+; (declare-const a2VQ Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a2VX))
+; (assert (<= 0 a3cJ))
+; (declare-const a2VX Int)
+; (declare-const a3cJ Int)
 (declare-const a2VQ Int)
 (declare-const a2VX Int)
 (declare-const a3cJ Int)
@@ -14681,16 +24372,36 @@ a3cJ  <=  fsk_a3cJ
       :named
       given-15.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-15))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-15")
+(get-assertions)
+; (
+;   (<= 0 a2VQ)
+;   (<= 0 a2VX)
+;   (<= 0 a3cJ)
+;   (!
+;      (=
+;         (+ 1 a2VX)
+;         a3cJ)
+;      :named
+;      given-15.1)
+;   (!
+;      (= a3cJ a2VQ)
+;      :named
+;      given-15.2)
+;   (! false :named wanted-15))
+(get-unsat-core)
+; (wanted-15)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-16")
@@ -14719,10 +24430,18 @@ unsat
 ;    (+ a2VQ a2VS))
 
 ; GIVENS (names)
-a2VQ  <=  n
-a2VX  <=  n
-a3cJ  <=  fsk_a3cJ
+;  a2VQ  <=  n
+;  a2VX  <=  n
+;  a3cJ  <=  fsk_a3cJ
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2VQ))
+; (assert (<= 0 a2VX))
+; (assert (<= 0 a3cJ))
+; (declare-const a2VQ Int)
+; (declare-const a2VX Int)
+; (declare-const a3cJ Int)
+; DECS1 (unseen) 
 (declare-const a2VQ Int)
 (declare-const a2VX Int)
 (declare-const a3cJ Int)
@@ -14745,7 +24464,7 @@ a3cJ  <=  fsk_a3cJ
       :named
       given-16.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
@@ -14757,9 +24476,13 @@ sat
 ;    (+ a2VQ a2VS))
 
 ; WANTEDS (names)
-a2VQ  <=  n
-a2VS  <=  m
-a2VX  <=  n
+;  a2VQ  <=  n
+;  a2VS  <=  m
+;  a2VX  <=  n
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a2VS))
+; (declare-const a2VS Int)
 (declare-const a2VS Int)
 (assert
    (<= 0 a2VS))
@@ -14776,8 +24499,37 @@ a2VX  <=  n
       :named
       wanted-16))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (<= 0 a2VQ)
+;   (<= 0 a2VX)
+;   (<= 0 a3cJ)
+;   (!
+;      (=
+;         (+ 1 a2VX)
+;         a3cJ)
+;      :named
+;      given-16.1)
+;   (!
+;      (= a3cJ a2VQ)
+;      :named
+;      given-16.2)
+;   (<= 0 a2VS)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (+
+;                  1
+;                  (+ a2VX a2VS))
+;               (+ a2VQ a2VS))))
+;      :named
+;      wanted-16))
+(get-unsat-core)
+; (wanted-16 given-16.1 given-16.2)
 (pop 1)
 (echo "solver-finish-cycle-16")
 (echo "solver-start-cycle-16")
@@ -14799,10 +24551,18 @@ unsat
 (echo "givens-start-cycle-16")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a2VQ  <=  n
-a2VX  <=  n
-a3cJ  <=  fsk_a3cJ
+;  a2VQ  <=  n
+;  a2VX  <=  n
+;  a3cJ  <=  fsk_a3cJ
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a2VQ))
+; (assert (<= 0 a2VX))
+; (assert (<= 0 a3cJ))
+; (declare-const a2VQ Int)
+; (declare-const a2VX Int)
+; (declare-const a3cJ Int)
+; DECS1 (unseen) 
 (declare-const a2VQ Int)
 (declare-const a2VX Int)
 (declare-const a3cJ Int)
@@ -14825,16 +24585,36 @@ a3cJ  <=  fsk_a3cJ
       :named
       given-16.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-16))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (<= 0 a2VQ)
+;   (<= 0 a2VX)
+;   (<= 0 a3cJ)
+;   (!
+;      (=
+;         (+ 1 a2VX)
+;         a3cJ)
+;      :named
+;      given-16.1)
+;   (!
+;      (= a3cJ a2VQ)
+;      :named
+;      given-16.2)
+;   (! false :named wanted-16))
+(get-unsat-core)
+; (wanted-16)
 (pop 1)
 (echo "solver-finish-cycle-16")
 (echo "solver-start-cycle-17")
@@ -14856,10 +24636,17 @@ unsat
 (echo "givens-start-cycle-17")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ac  <=  a
-a3ad  <=  b
-a3cU  <=  fsk_a3cU
+;  a3ac  <=  a
+;  a3ad  <=  b
+;  a3cU  <=  fsk_a3cU
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3ac))
+; (assert (<= 0 a3ad))
+; (declare-const a3ac Int)
+; (declare-const a3ad Int)
+; (declare-const a3cU Bool)
 (declare-const a3ac Int)
 (declare-const a3ad Int)
 (declare-const a3cU Bool)
@@ -14880,16 +24667,35 @@ a3cU  <=  fsk_a3cU
       :named
       given-17.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-17))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-17")
+(get-assertions)
+; (
+;   (<= 0 a3ac)
+;   (<= 0 a3ad)
+;   (!
+;      (=
+;         (< a3ac a3ad)
+;         a3cU)
+;      :named
+;      given-17.1)
+;   (!
+;      (= a3cU true)
+;      :named
+;      given-17.2)
+;   (! false :named wanted-17))
+(get-unsat-core)
+; (wanted-17)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-17")
@@ -14911,10 +24717,17 @@ unsat
 (echo "givens-start-cycle-17")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ac  <=  a
-a3ad  <=  b
-a3cU  <=  fsk_a3cU
+;  a3ac  <=  a
+;  a3ad  <=  b
+;  a3cU  <=  fsk_a3cU
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3ac))
+; (assert (<= 0 a3ad))
+; (declare-const a3ac Int)
+; (declare-const a3ad Int)
+; (declare-const a3cU Bool)
 (declare-const a3ac Int)
 (declare-const a3ad Int)
 (declare-const a3cU Bool)
@@ -14935,16 +24748,35 @@ a3cU  <=  fsk_a3cU
       :named
       given-17.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-17))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-17")
+(get-assertions)
+; (
+;   (<= 0 a3ac)
+;   (<= 0 a3ad)
+;   (!
+;      (=
+;         (< a3ac a3ad)
+;         a3cU)
+;      :named
+;      given-17.1)
+;   (!
+;      (= a3cU true)
+;      :named
+;      given-17.2)
+;   (! false :named wanted-17))
+(get-unsat-core)
+; (wanted-17)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-18")
@@ -14970,12 +24802,22 @@ unsat
 (echo "givens-start-cycle-18")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ac  <=  a
-a3ad  <=  b
-a3ae  <=  c
-a3cU  <=  fsk_a3cU
-a3cX  <=  fsk_a3cX
+;  a3ac  <=  a
+;  a3ad  <=  b
+;  a3ae  <=  c
+;  a3cU  <=  fsk_a3cU
+;  a3cX  <=  fsk_a3cX
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3ac))
+; (assert (<= 0 a3ad))
+; (declare-const a3ac Int)
+; (declare-const a3ad Int)
+; (declare-const a3cU Bool)
+; DECS1 (unseen) 
+; (assert (<= 0 a3ae))
+; (declare-const a3ae Int)
+; (declare-const a3cX Bool)
 (declare-const a3ac Int)
 (declare-const a3ad Int)
 (declare-const a3ae Int)
@@ -15012,16 +24854,46 @@ a3cX  <=  fsk_a3cX
       :named
       given-18.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-18")
 (echo "wanteds-start-cycle-18")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-18))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (<= 0 a3ac)
+;   (<= 0 a3ad)
+;   (<= 0 a3ae)
+;   (!
+;      (=
+;         (< a3ac a3ad)
+;         a3cU)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (< a3ad a3ae)
+;         a3cX)
+;      :named
+;      given-18.2)
+;   (!
+;      (= a3cU true)
+;      :named
+;      given-18.3)
+;   (!
+;      (= a3cX true)
+;      :named
+;      given-18.4)
+;   (! false :named wanted-18))
+(get-unsat-core)
+; (wanted-18)
 (pop 1)
 (echo "solver-finish-cycle-18")
 (echo "solver-start-cycle-18")
@@ -15047,12 +24919,22 @@ unsat
 (echo "givens-start-cycle-18")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ac  <=  a
-a3ad  <=  b
-a3ae  <=  c
-a3cU  <=  fsk_a3cU
-a3cX  <=  fsk_a3cX
+;  a3ac  <=  a
+;  a3ad  <=  b
+;  a3ae  <=  c
+;  a3cU  <=  fsk_a3cU
+;  a3cX  <=  fsk_a3cX
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3ac))
+; (assert (<= 0 a3ad))
+; (declare-const a3ac Int)
+; (declare-const a3ad Int)
+; (declare-const a3cU Bool)
+; DECS1 (unseen) 
+; (assert (<= 0 a3ae))
+; (declare-const a3ae Int)
+; (declare-const a3cX Bool)
 (declare-const a3ac Int)
 (declare-const a3ad Int)
 (declare-const a3ae Int)
@@ -15089,16 +24971,46 @@ a3cX  <=  fsk_a3cX
       :named
       given-18.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-18")
 (echo "wanteds-start-cycle-18")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-18))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (<= 0 a3ac)
+;   (<= 0 a3ad)
+;   (<= 0 a3ae)
+;   (!
+;      (=
+;         (< a3ac a3ad)
+;         a3cU)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (< a3ad a3ae)
+;         a3cX)
+;      :named
+;      given-18.2)
+;   (!
+;      (= a3cU true)
+;      :named
+;      given-18.3)
+;   (!
+;      (= a3cX true)
+;      :named
+;      given-18.4)
+;   (! false :named wanted-18))
+(get-unsat-core)
+; (wanted-18)
 (pop 1)
 (echo "solver-finish-cycle-18")
 (echo "solver-start-cycle-19")
@@ -15129,12 +25041,22 @@ unsat
 ;    true)
 
 ; GIVENS (names)
-a3ac  <=  a
-a3ad  <=  b
-a3ae  <=  c
-a3cU  <=  fsk_a3cU
-a3cX  <=  fsk_a3cX
+;  a3ac  <=  a
+;  a3ad  <=  b
+;  a3ae  <=  c
+;  a3cU  <=  fsk_a3cU
+;  a3cX  <=  fsk_a3cX
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3ac))
+; (assert (<= 0 a3ad))
+; (assert (<= 0 a3ae))
+; (declare-const a3ac Int)
+; (declare-const a3ad Int)
+; (declare-const a3ae Int)
+; (declare-const a3cU Bool)
+; (declare-const a3cX Bool)
+; DECS1 (unseen) 
 (declare-const a3ac Int)
 (declare-const a3ad Int)
 (declare-const a3ae Int)
@@ -15171,7 +25093,7 @@ a3cX  <=  fsk_a3cX
       :named
       given-19.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
@@ -15181,8 +25103,10 @@ sat
 ;    true)
 
 ; WANTEDS (names)
-a3ac  <=  a
-a3ae  <=  c
+;  a3ac  <=  a
+;  a3ae  <=  c
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -15194,8 +25118,44 @@ a3ae  <=  c
       :named
       wanted-19))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-19")
+(get-assertions)
+; (
+;   (<= 0 a3ac)
+;   (<= 0 a3ad)
+;   (<= 0 a3ae)
+;   (!
+;      (=
+;         (< a3ac a3ad)
+;         a3cU)
+;      :named
+;      given-19.1)
+;   (!
+;      (=
+;         (< a3ad a3ae)
+;         a3cX)
+;      :named
+;      given-19.2)
+;   (!
+;      (= a3cU true)
+;      :named
+;      given-19.3)
+;   (!
+;      (= a3cX true)
+;      :named
+;      given-19.4)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (< a3ac a3ae)
+;               true)))
+;      :named
+;      wanted-19))
+(get-unsat-core)
+; (given-19.2 given-19.3 wanted-19 given-19.4 given-19.1)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-19")
@@ -15221,12 +25181,22 @@ unsat
 (echo "givens-start-cycle-19")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ac  <=  a
-a3ad  <=  b
-a3ae  <=  c
-a3cU  <=  fsk_a3cU
-a3cX  <=  fsk_a3cX
+;  a3ac  <=  a
+;  a3ad  <=  b
+;  a3ae  <=  c
+;  a3cU  <=  fsk_a3cU
+;  a3cX  <=  fsk_a3cX
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3ac))
+; (assert (<= 0 a3ad))
+; (assert (<= 0 a3ae))
+; (declare-const a3ac Int)
+; (declare-const a3ad Int)
+; (declare-const a3ae Int)
+; (declare-const a3cU Bool)
+; (declare-const a3cX Bool)
+; DECS1 (unseen) 
 (declare-const a3ac Int)
 (declare-const a3ad Int)
 (declare-const a3ae Int)
@@ -15263,16 +25233,46 @@ a3cX  <=  fsk_a3cX
       :named
       given-19.4))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-19))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-19")
+(get-assertions)
+; (
+;   (<= 0 a3ac)
+;   (<= 0 a3ad)
+;   (<= 0 a3ae)
+;   (!
+;      (=
+;         (< a3ac a3ad)
+;         a3cU)
+;      :named
+;      given-19.1)
+;   (!
+;      (=
+;         (< a3ad a3ae)
+;         a3cX)
+;      :named
+;      given-19.2)
+;   (!
+;      (= a3cU true)
+;      :named
+;      given-19.3)
+;   (!
+;      (= a3cX true)
+;      :named
+;      given-19.4)
+;   (! false :named wanted-19))
+(get-unsat-core)
+; (wanted-19)
 (pop 1)
 (echo "solver-finish-cycle-19")
 (echo "solver-start-cycle-20")
@@ -15296,11 +25296,21 @@ unsat
 (echo "givens-start-cycle-20")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ao  <=  a
-a3ap  <=  b
-a3d4  <=  fsk_a3d4
-a3d6  <=  fsk_a3d6
+;  a3ao  <=  a
+;  a3ap  <=  b
+;  a3d4  <=  fsk_a3d4
+;  a3d6  <=  fsk_a3d6
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3ao))
+; (assert (<= 0 a3ap))
+; (assert (<= 0 a3d4))
+; (assert (<= 0 a3d6))
+; (declare-const a3ao Int)
+; (declare-const a3ap Int)
+; (declare-const a3d4 Int)
+; (declare-const a3d6 Int)
 (declare-const a3ao Int)
 (declare-const a3ap Int)
 (declare-const a3d4 Int)
@@ -15333,16 +25343,43 @@ a3d6  <=  fsk_a3d6
       :named
       given-20.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-20")
 (echo "wanteds-start-cycle-20")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-20))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-20")
+(get-assertions)
+; (
+;   (<= 0 a3ao)
+;   (<= 0 a3ap)
+;   (<= 0 a3d4)
+;   (<= 0 a3d6)
+;   (!
+;      (=
+;         (+ a3ao a3ap)
+;         a3d6)
+;      :named
+;      given-20.1)
+;   (!
+;      (=
+;         (+ a3ao a3ao)
+;         a3d4)
+;      :named
+;      given-20.2)
+;   (!
+;      (= a3d4 a3d6)
+;      :named
+;      given-20.3)
+;   (! false :named wanted-20))
+(get-unsat-core)
+; (wanted-20)
 (pop 1)
 (echo "solver-finish-cycle-20")
 (echo "solver-start-cycle-20")
@@ -15366,11 +25403,21 @@ unsat
 (echo "givens-start-cycle-20")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ao  <=  a
-a3ap  <=  b
-a3d4  <=  fsk_a3d4
-a3d6  <=  fsk_a3d6
+;  a3ao  <=  a
+;  a3ap  <=  b
+;  a3d4  <=  fsk_a3d4
+;  a3d6  <=  fsk_a3d6
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3ao))
+; (assert (<= 0 a3ap))
+; (assert (<= 0 a3d4))
+; (assert (<= 0 a3d6))
+; (declare-const a3ao Int)
+; (declare-const a3ap Int)
+; (declare-const a3d4 Int)
+; (declare-const a3d6 Int)
 (declare-const a3ao Int)
 (declare-const a3ap Int)
 (declare-const a3d4 Int)
@@ -15403,16 +25450,43 @@ a3d6  <=  fsk_a3d6
       :named
       given-20.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-20")
 (echo "wanteds-start-cycle-20")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-20))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-20")
+(get-assertions)
+; (
+;   (<= 0 a3ao)
+;   (<= 0 a3ap)
+;   (<= 0 a3d4)
+;   (<= 0 a3d6)
+;   (!
+;      (=
+;         (+ a3ao a3ap)
+;         a3d6)
+;      :named
+;      given-20.1)
+;   (!
+;      (=
+;         (+ a3ao a3ao)
+;         a3d4)
+;      :named
+;      given-20.2)
+;   (!
+;      (= a3d4 a3d6)
+;      :named
+;      given-20.3)
+;   (! false :named wanted-20))
+(get-unsat-core)
+; (wanted-20)
 (pop 1)
 (echo "solver-finish-cycle-20")
 (echo "solver-start-cycle-21")
@@ -15439,11 +25513,21 @@ unsat
 ;  =>  (= a3ao a3ap)
 
 ; GIVENS (names)
-a3ao  <=  a
-a3ap  <=  b
-a3d4  <=  fsk_a3d4
-a3d6  <=  fsk_a3d6
+;  a3ao  <=  a
+;  a3ap  <=  b
+;  a3d4  <=  fsk_a3d4
+;  a3d6  <=  fsk_a3d6
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3ao))
+; (assert (<= 0 a3ap))
+; (assert (<= 0 a3d4))
+; (assert (<= 0 a3d6))
+; (declare-const a3ao Int)
+; (declare-const a3ap Int)
+; (declare-const a3d4 Int)
+; (declare-const a3d6 Int)
+; DECS1 (unseen) 
 (declare-const a3ao Int)
 (declare-const a3ap Int)
 (declare-const a3d4 Int)
@@ -15476,7 +25560,7 @@ a3d6  <=  fsk_a3d6
       :named
       given-21.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-21")
 (echo "wanteds-start-cycle-21")
 ; WANTEDS (conversions)
@@ -15484,8 +25568,10 @@ sat
 ;  =>  (= a3ao a3ap)
 
 ; WANTEDS (names)
-a3ao  <=  a
-a3ap  <=  b
+;  a3ao  <=  a
+;  a3ap  <=  b
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -15495,8 +25581,39 @@ a3ap  <=  b
       :named
       wanted-21))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-21")
+(get-assertions)
+; (
+;   (<= 0 a3ao)
+;   (<= 0 a3ap)
+;   (<= 0 a3d4)
+;   (<= 0 a3d6)
+;   (!
+;      (=
+;         (+ a3ao a3ap)
+;         a3d6)
+;      :named
+;      given-21.1)
+;   (!
+;      (=
+;         (+ a3ao a3ao)
+;         a3d4)
+;      :named
+;      given-21.2)
+;   (!
+;      (= a3d4 a3d6)
+;      :named
+;      given-21.3)
+;   (!
+;      (or
+;         false
+;         (not
+;            (= a3ao a3ap)))
+;      :named
+;      wanted-21))
+(get-unsat-core)
+; (given-21.2 given-21.3 wanted-21 given-21.1)
 (pop 1)
 (echo "solver-finish-cycle-21")
 (echo "solver-start-cycle-21")
@@ -15520,11 +25637,21 @@ unsat
 (echo "givens-start-cycle-21")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3ao  <=  a
-a3ap  <=  b
-a3d4  <=  fsk_a3d4
-a3d6  <=  fsk_a3d6
+;  a3ao  <=  a
+;  a3ap  <=  b
+;  a3d4  <=  fsk_a3d4
+;  a3d6  <=  fsk_a3d6
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3ao))
+; (assert (<= 0 a3ap))
+; (assert (<= 0 a3d4))
+; (assert (<= 0 a3d6))
+; (declare-const a3ao Int)
+; (declare-const a3ap Int)
+; (declare-const a3d4 Int)
+; (declare-const a3d6 Int)
+; DECS1 (unseen) 
 (declare-const a3ao Int)
 (declare-const a3ap Int)
 (declare-const a3d4 Int)
@@ -15557,16 +25684,43 @@ a3d6  <=  fsk_a3d6
       :named
       given-21.3))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-21")
 (echo "wanteds-start-cycle-21")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-21))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-21")
+(get-assertions)
+; (
+;   (<= 0 a3ao)
+;   (<= 0 a3ap)
+;   (<= 0 a3d4)
+;   (<= 0 a3d6)
+;   (!
+;      (=
+;         (+ a3ao a3ap)
+;         a3d6)
+;      :named
+;      given-21.1)
+;   (!
+;      (=
+;         (+ a3ao a3ao)
+;         a3d4)
+;      :named
+;      given-21.2)
+;   (!
+;      (= a3d4 a3d6)
+;      :named
+;      given-21.3)
+;   (! false :named wanted-21))
+(get-unsat-core)
+; (wanted-21)
 (pop 1)
 (echo "solver-finish-cycle-21")
 (echo "solver-start-cycle-22")
@@ -15592,8 +25746,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-22")
 (echo "wanteds-start-cycle-22")
 ; WANTEDS (conversions)
@@ -15603,8 +25759,14 @@ sat
 ;    (+ a3ay a3ax))
 
 ; WANTEDS (names)
-a3ax  <=  a
-a3ay  <=  b
+;  a3ax  <=  a
+;  a3ay  <=  b
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3ax))
+; (assert (<= 0 a3ay))
+; (declare-const a3ax Int)
+; (declare-const a3ay Int)
 (declare-const a3ax Int)
 (declare-const a3ay Int)
 (assert
@@ -15622,8 +25784,23 @@ a3ay  <=  b
       :named
       wanted-22))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (<= 0 a3ax)
+;   (<= 0 a3ay)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a3ax a3ay)
+;               (+ a3ay a3ax))))
+;      :named
+;      wanted-22))
+(get-unsat-core)
+; (wanted-22)
 (pop 1)
 (echo "solver-finish-cycle-22")
 (echo "solver-start-cycle-22")
@@ -15644,17 +25821,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-22")
 (echo "wanteds-start-cycle-22")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-22))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (! false :named wanted-22))
+(get-unsat-core)
+; (wanted-22)
 (pop 1)
 (echo "solver-finish-cycle-22")
 (echo "solver-start-cycle-23")
@@ -15680,8 +25866,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-23")
 (echo "wanteds-start-cycle-23")
 ; WANTEDS (conversions)
@@ -15691,7 +25879,11 @@ sat
 ;    (+ 1 a3aF))
 
 ; WANTEDS (names)
-a3aF  <=  a
+;  a3aF  <=  a
+; DECS2 (seen) 
+; DECS2 (unseen) 
+; (assert (<= 0 a3aF))
+; (declare-const a3aF Int)
 (declare-const a3aF Int)
 (assert
    (<= 0 a3aF))
@@ -15706,8 +25898,22 @@ a3aF  <=  a
       :named
       wanted-23))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-23")
+(get-assertions)
+; (
+;   (<= 0 a3aF)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (+ a3aF 1)
+;               (+ 1 a3aF))))
+;      :named
+;      wanted-23))
+(get-unsat-core)
+; (wanted-23)
 (pop 1)
 (echo "solver-finish-cycle-23")
 (echo "solver-start-cycle-23")
@@ -15728,17 +25934,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-23")
 (echo "wanteds-start-cycle-23")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-23))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-23")
+(get-assertions)
+; (
+;   (! false :named wanted-23))
+(get-unsat-core)
+; (wanted-23)
 (pop 1)
 (echo "solver-finish-cycle-23")
 (echo "solver-start-cycle-24")
@@ -15759,17 +25974,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-24")
 (echo "wanteds-start-cycle-24")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-24))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-24")
+(get-assertions)
+; (
+;   (! false :named wanted-24))
+(get-unsat-core)
+; (wanted-24)
 (pop 1)
 (echo "solver-finish-cycle-24")
 (echo "solver-start-cycle-24")
@@ -15790,17 +26014,26 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-24")
 (echo "wanteds-start-cycle-24")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-24))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-24")
+(get-assertions)
+; (
+;   (! false :named wanted-24))
+(get-unsat-core)
+; (wanted-24)
 (pop 1)
 (echo "solver-finish-cycle-24")
 (echo "solver-start-cycle-25")
@@ -15820,8 +26053,12 @@ unsat
 (echo "givens-start-cycle-25")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3aQ  <=  n
+;  a3aQ  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3aQ))
+; (declare-const a3aQ Int)
 (declare-const a3aQ Int)
 (assert
    (<= 0 a3aQ))
@@ -15831,16 +26068,28 @@ a3aQ  <=  n
       :named
       given-25.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-25")
 (echo "wanteds-start-cycle-25")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-25))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-25")
+(get-assertions)
+; (
+;   (<= 0 a3aQ)
+;   (!
+;      (= a3aQ 0)
+;      :named
+;      given-25.1)
+;   (! false :named wanted-25))
+(get-unsat-core)
+; (wanted-25)
 (pop 1)
 (echo "solver-finish-cycle-25")
 (echo "solver-start-cycle-25")
@@ -15860,8 +26109,12 @@ unsat
 (echo "givens-start-cycle-25")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3aQ  <=  n
+;  a3aQ  <=  n
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (assert (<= 0 a3aQ))
+; (declare-const a3aQ Int)
 (declare-const a3aQ Int)
 (assert
    (<= 0 a3aQ))
@@ -15871,16 +26124,28 @@ a3aQ  <=  n
       :named
       given-25.1))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-25")
 (echo "wanteds-start-cycle-25")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-25))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-25")
+(get-assertions)
+; (
+;   (<= 0 a3aQ)
+;   (!
+;      (= a3aQ 0)
+;      :named
+;      given-25.1)
+;   (! false :named wanted-25))
+(get-unsat-core)
+; (wanted-25)
 (pop 1)
 (echo "solver-finish-cycle-25")
 (echo "solver-start-cycle-26")
@@ -15902,10 +26167,18 @@ unsat
 (echo "givens-start-cycle-26")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3aQ  <=  n
-a3b0  <=  n
-a3do  <=  fsk_a3do
+;  a3aQ  <=  n
+;  a3b0  <=  n
+;  a3do  <=  fsk_a3do
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3aQ))
+; (declare-const a3aQ Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3b0))
+; (assert (<= 0 a3do))
+; (declare-const a3b0 Int)
+; (declare-const a3do Int)
 (declare-const a3aQ Int)
 (declare-const a3b0 Int)
 (declare-const a3do Int)
@@ -15928,16 +26201,36 @@ a3do  <=  fsk_a3do
       :named
       given-26.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-26")
 (echo "wanteds-start-cycle-26")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-26))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-26")
+(get-assertions)
+; (
+;   (<= 0 a3aQ)
+;   (<= 0 a3b0)
+;   (<= 0 a3do)
+;   (!
+;      (=
+;         (+ 1 a3b0)
+;         a3do)
+;      :named
+;      given-26.1)
+;   (!
+;      (= a3do a3aQ)
+;      :named
+;      given-26.2)
+;   (! false :named wanted-26))
+(get-unsat-core)
+; (wanted-26)
 (pop 1)
 (echo "solver-finish-cycle-26")
 (echo "solver-start-cycle-26")
@@ -15959,10 +26252,18 @@ unsat
 (echo "givens-start-cycle-26")
 ; GIVENS (conversions)
 ; GIVENS (names)
-a3aQ  <=  n
-a3b0  <=  n
-a3do  <=  fsk_a3do
+;  a3aQ  <=  n
+;  a3b0  <=  n
+;  a3do  <=  fsk_a3do
 (push 1)
+; DECS1 (seen) 
+; (assert (<= 0 a3aQ))
+; (declare-const a3aQ Int)
+; DECS1 (unseen) 
+; (assert (<= 0 a3b0))
+; (assert (<= 0 a3do))
+; (declare-const a3b0 Int)
+; (declare-const a3do Int)
 (declare-const a3aQ Int)
 (declare-const a3b0 Int)
 (declare-const a3do Int)
@@ -15985,16 +26286,36 @@ a3do  <=  fsk_a3do
       :named
       given-26.2))
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-26")
 (echo "wanteds-start-cycle-26")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-26))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-26")
+(get-assertions)
+; (
+;   (<= 0 a3aQ)
+;   (<= 0 a3b0)
+;   (<= 0 a3do)
+;   (!
+;      (=
+;         (+ 1 a3b0)
+;         a3do)
+;      :named
+;      given-26.1)
+;   (!
+;      (= a3do a3aQ)
+;      :named
+;      given-26.2)
+;   (! false :named wanted-26))
+(get-unsat-core)
+; (wanted-26)
 (pop 1)
 (echo "solver-finish-cycle-26")
 (exit)

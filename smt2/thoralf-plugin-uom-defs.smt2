@@ -4,6 +4,7 @@
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -40,17 +41,28 @@
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -91,8 +103,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -115,6 +129,8 @@ sat
 ;      (store base "byte" one)))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -137,8 +153,34 @@ sat
       :named
       wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (as
+;                    const
+;                    (Array String Int))
+;                 0)
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (store base "byte" one)
+;                 (store base "byte" one)))))
+;      :named
+;      wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (exit)
@@ -148,6 +190,7 @@ unsat
 (set-option :produce-models true)
 (set-option :interactive-mode true)
 (set-option :produce-assertions true)
+(set-option :produce-models true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
 (set-option :produce-unsat-assumptions true)
@@ -184,17 +227,28 @@ unsat
 ; GIVENS (conversions)
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (! false :named wanted-1))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-1")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (! false :named wanted-1))
+(get-unsat-core)
+; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
 (echo "solver-start-cycle-2")
@@ -235,8 +289,10 @@ unsat
 
 ; GIVENS (names)
 (push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
 (check-sat)
-sat
+; sat
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
@@ -259,6 +315,8 @@ sat
 ;      (store base "byte" one)))
 
 ; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
 (assert
    (!
       (or
@@ -281,8 +339,34 @@ sat
       :named
       wanted-2))
 (check-sat)
-unsat
+; unsat
 (echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         false
+;         (not
+;            (=
+;               (
+;                 (as
+;                    const
+;                    (Array String Int))
+;                 0)
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (store base "byte" one)
+;                 (store base "byte" one)))))
+;      :named
+;      wanted-2))
+(get-unsat-core)
+; (wanted-2)
 (pop 1)
 (echo "solver-finish-cycle-2")
 (exit)
