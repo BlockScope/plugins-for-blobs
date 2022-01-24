@@ -139,12 +139,12 @@ grabSMTsolver =
 
 options :: [String]
 options =
-    [ ":global-declarations"
-    , ":interactive-mode"
-    , ":print-success"
+    -- NOTE: ":print-success" and ":produce-models" are set up for us.
+    -- TODO: Use ":global-declarations" to check we're not declaring a variable
+    -- twice.
+    [ ":interactive-mode"
     , ":produce-assertions"
     , ":produce-assignments"
-    , ":produce-models"
     , ":produce-proofs"
     , ":produce-unsat-assumptions"
     , ":produce-unsat-cores"
@@ -160,26 +160,32 @@ mkThoralfInit
     seed
     DebugSmt{traceSmtTalk} = do
 
-    theoryEncoding <- seed
+    encoding@TheoryEncoding{startDecs} <- seed
     Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
     disEq <- divulgeClass disEqModule "DisEquality"
 
     smtSolver <- tcPluginIO $ solverWithLevel traceSmtTalk
-    smtSolverRef <- unsafeTcPluginTcM $ newMutVar (smtSolver, 0)
+    smtSolverRef <- unsafeTcPluginTcM $ newMutVar (smtSolver, 1)
 
     tcPluginIO $ sequence_ [ SMT.setOption smtSolver o "true" | o <- options ]
-    tcPluginIO $ SMT.echo smtSolver "options are set, initialized"
 
-    -- TODO: Rename refresh now that I'm calling it at initialization.
-    _ <- refresh theoryEncoding smtSolverRef traceSmtTalk
+    _ <- tcPluginIO $ do
+        traverse_ (SMT.ackCommand smtSolver . justReadSExpr) startDecs
+        SMT.ackCommand smtSolver typeDataType
+        return smtSolver
 
     return
         ThoralfState
             { smtSolverRef = smtSolverRef
-            , theoryEncoding = theoryEncoding
+            , theoryEncoding = encoding
             , disEqClass = disEq
             , extract = ExtractEq Ex.extractEq Ex.extractDisEq
             }
+    where
+        typeDataType =
+            justReadSExpr
+                -- WARNING: As one long line to avoid problems with CPP and string gaps.
+                "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
 
 thoralfStop :: ThoralfState -> TcPluginM ()
 thoralfStop ThoralfState{smtSolverRef} = do
@@ -270,7 +276,7 @@ thoralfSolver
                 SMT.Unknown -> tcPluginIO (SMT.pop smtSolver) >> noSolving
 
                 SMT.Unsat -> do
-                    tcPluginIO $ putStrLn "Inconsistent Givens" >> (SMT.pop smtSolver)
+                    tcPluginIO $ putStrLn "Inconsistent Givens" >> SMT.pop smtSolver
                     return $ TcPluginContradiction []
 
                 SMT.Sat -> do
@@ -346,31 +352,6 @@ thoralfSolver
                 [ putStrLn $ showSDocUnsafe (ppr thoralfName <+> text " <= " <+> ppr ghcName)
                 | (ghcName, thoralfName) <- ns
                 ]
-
--- TODO: Rename refresh now that I'm calling it at initialization.
-refresh
-    :: TheoryEncoding
-    -> IORef (SMT.Solver, Int)
-    -> TraceSmtTalk
-    -> TcPluginM ()
-refresh encoding smtSolverRef debug = do
-    (smtSolver, n) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
-    _ <- tcPluginIO $ SMT.stop smtSolver
-    let decs = startDecs encoding
-
-    z3Solver <- tcPluginIO $ do
-        z3Solver <- solverWithLevel debug
-        SMT.ackCommand z3Solver typeDataType
-        traverse_ (SMT.ackCommand z3Solver . justReadSExpr) decs
-        SMT.push z3Solver
-        return z3Solver
-
-    unsafeTcPluginTcM $ writeMutVar smtSolverRef (z3Solver, n + 1)
-    where
-        typeDataType =
-            justReadSExpr
-                -- WARNING: As one long line to avoid problems with CPP and string gaps.
-                "(declare-datatypes () ((Type (apply (fst Type) (snd Type)) (lit (getstr String)))))"
 
 isEqCt :: Class -> Ct -> Bool
 isEqCt diseq ct = case (maybeExtractTyEq ct, maybeExtractTyDisEq diseq ct) of
