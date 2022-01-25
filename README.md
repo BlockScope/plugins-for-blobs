@@ -121,25 +121,15 @@ test-suite-defs/Defs.hs:1:1: error:
       Use -ddump-if-trace to get an idea of which file caused the error
 ```
 
-## Testing
+## Test Suite Units
 
-* ### With Cabal
-
-```
-> cabal test all:tests
-```
-```
-> cabal test uom-plugin:units --test-show-details=always --test-options="--color always"
-uom-plugin:units
-  Get the underlying value with unQuantity
-    unQuantity 1: OK
-    (see stack section below for the full output)
-
-All 78 tests passed (0.00s)
-```
+A goal of this project is to run the same tests in `thoralf-plugin-uom:units` as
+in `uom-plugin:units`.
 
 ```
 > cabal test thoralf-plugin-uom:units --test-show-details=always --test-options="--color always"
+Running 1 test suites...
+Test suite units: RUNNING...
 thoralf-plugin:units
   Get the underlying value with unQuantity
     unQuantity 3 m:                OK
@@ -183,163 +173,124 @@ thoralf-plugin:units
 All 32 tests passed (0.00s)
 ```
 
-* ### With Stack
+```
+> cabal test uom-plugin:units --test-show-details=always --test-options="--color always"
+Running 1 test suites...
+Test suite units: RUNNING...
+uom-plugin:units
+  Get the underlying value with unQuantity
+    unQuantity 3 m:                             OK
+    unQuantity 3 s^2:                           OK
+    unQuantity 3 m s^-1:                        OK
+    unQuantity 3.0 kg m^2 / m s^2:              OK
+    unQuantity 1:                               OK
+    unQuantity 1 (1/s):                         OK
+    unQuantity 1 1/s:                           OK
+    unQuantity 1 s^-1:                          OK
+    unQuantity 2 1 / kg s:                      OK
+    unQuantity (1 % 2) kg:                      OK
+  Attach units by applying the quasiquoter without a numeric value
+    m 3:                                        OK
+    m <$> [3..5]:                               OK
+    m/s 3:                                      OK
+    s^2 3:                                      OK
+    1 $ 3:                                      OK
+    fmap [u| kg |] read $ "3":                  OK
+    fmap [u| kg |] read $ "3.0":                OK
+  Showing constants
+    show 3m:                                    OK
+    show 3m/s:                                  OK
+    show 3.2 s^2:                               OK
+    show 3.0 kg m^2 / m s^2:                    OK
+    show 1:                                     OK
+    show 1 s^-1:                                OK
+    show 2 1 / kg s:                            OK
+    show (1 % 2) kg:                            OK
+  Basic operations
+    2 + 2:                                      OK
+    in m/s:                                     OK
+    mean:                                       OK
+    tricky generalisation:                      OK
+    polymorphic zero:                           OK
+    polymorphic frac zero:                      OK
+  Literal 1 (*:) Quantity _ u
+    _ = Double:                                 OK
+    _ = Int:                                    OK
+    _ = Integer:                                OK
+    _ = Rational, 1 *: [u| 1 m |]:              OK
+    _ = Rational, mk (1 % 1) *: [u| 1 m |]:     OK
+    _ = Rational, 1 *: [u| 1 % 1 m |]:          OK
+    _ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]: OK
+  (1 :: Quantity _ One) (*:) Quantity _ u
+    _ = Double:                                 OK
+    _ = Int:                                    OK
+    _ = Integer:                                OK
+    _ = Int:                                    OK
+  errors when a /= b, (1 :: Quantity a One) (*:) Quantity b u
+    b = Double
+      a = Int:                                  OK
+      a = Integer:                              OK
+      a = Rational:                             OK
+    b = Int
+      a = Double:                               OK
+      a = Integer:                              OK
+      a = Rational:                             OK
+    b = Integer
+      a = Double:                               OK
+      a = Int:                                  OK
+      a = Rational:                             OK
+    b = Rational
+      a = Double:                               OK
+      a = Int:                                  OK
+      a = Integer:                              OK
+  showQuantity
+    myMass:                                     OK
+    gravityOnEarth:                             OK
+    forceOnGround:                              OK
+  convert
+    10m in ft:                                  OK
+    5 km^2 in m^2:                              OK
+    ratio:                                      OK
+    100l in m^3:                                OK
+    1l/m in m^2:                                OK
+    1l/m in m^2:                                OK
+    5l in ft^3:                                 OK
+    2000000l^2 in ft^3 m^3:                     OK
+    42 rad/s in s^-1:                           OK
+    2.4 l/h in m:                               OK
+    1 m^4 in l m:                               OK
+  show via convert
+    A 1.01km:                                   OK
+    B 1010m:                                    OK
+  errors
+    s/m ~ m/s:                                  OK
+    m + s:                                      OK
+    a ~ a  =>  a ~ kg:                          OK
+    a ~ b  =>  a ~ kg:                          OK
+    a^2 ~ b^3  =>  a ~ s:                       OK
+  read . show
+    3 m:                                        OK
+    1.2 m/s:                                    OK
+    0:                                          OK
+  read normalisation
+    1 m/m:                                      OK
+    -0.3 m s^-1:                                OK
+    42 s m s:                                   OK
+  read equality (avoid false equivalences)
+    1 m/m^2 /= 1 m:                             OK
+    1 m /= 1 m/m^2:                             OK
+
+All 83 tests passed (0.00s)
+```
+
+## Running All Test Suites
 
 ```
+> cabal test all:tests
 > stack test
-uom-quantity       > test (suite: doctest)
-uom-quantity       > Examples: 74  Tried: 74  Errors: 0  Failures: 0
-uom-quantity       > Test suite doctest passed
-
-uom-quantity       > test (suite: hlint)
-uom-quantity       > No hints
-uom-quantity       > Test suite hlint passed
-
-uom-plugin         > test (suite: defs)
-uom-plugin         > Test suite defs passed
-
-uom-plugin         > test (suite: units)
-uom-plugin         > uom-plugin
-uom-plugin         >   Get the underlying value with unQuantity
-uom-plugin         >     unQuantity 3 m:                             OK
-uom-plugin         >     unQuantity 3 s^2:                           OK
-uom-plugin         >     unQuantity 3.0 kg m^2 / m s^2:              OK
-uom-plugin         >     unQuantity 1:                               OK
-uom-plugin         >     unQuantity 1 (1/s):                         OK
-uom-plugin         >     unQuantity 1 1/s:                           OK
-uom-plugin         >     unQuantity 1 s^-1:                          OK
-uom-plugin         >     unQuantity 2 1 / kg s:                      OK
-uom-plugin         >     unQuantity (1 % 2) kg:                      OK
-uom-plugin         >   Attach units by applying the quasiquoter without a numeric value
-uom-plugin         >     m 3:                                        OK
-uom-plugin         >     m <$> [3..5]:                               OK
-uom-plugin         >     m/s 3:                                      OK
-uom-plugin         >     s^2 3:                                      OK
-uom-plugin         >     1 $ 3:                                      OK
-uom-plugin         >     fmap [u| kg |] read $ "3":                  OK
-uom-plugin         >     fmap [u| kg |] read $ "3.0":                OK
-uom-plugin         >   Showing constants
-uom-plugin         >     show 3m:                                    OK
-uom-plugin         >     show 3m/s:                                  OK
-uom-plugin         >     show 3.2 s^2:                               OK
-uom-plugin         >     show 3.0 kg m^2 / m s^2:                    OK
-uom-plugin         >     show 1:                                     OK
-uom-plugin         >     show 1 s^-1:                                OK
-uom-plugin         >     show 2 1 / kg s:                            OK
-uom-plugin         >     show (1 % 2) kg:                            OK
-uom-plugin         >   Basic operations
-uom-plugin         >     2 + 2:                                      OK
-uom-plugin         >     in m/s:                                     OK
-uom-plugin         >     mean:                                       OK
-uom-plugin         >     tricky generalisation:                      OK
-uom-plugin         >     polymorphic zero:                           OK
-uom-plugin         >     polymorphic frac zero:                      OK
-uom-plugin         >   Literal 1 (*:) Quantity _ u
-uom-plugin         >     _ = Double:                                 OK
-uom-plugin         >     _ = Int:                                    OK
-uom-plugin         >     _ = Integer:                                OK
-uom-plugin         >     _ = Rational, 1 *: [u| 1 m |]:              OK
-uom-plugin         >     _ = Rational, mk (1 % 1) *: [u| 1 m |]:     OK
-uom-plugin         >     _ = Rational, 1 *: [u| 1 % 1 m |]:          OK
-uom-plugin         >     _ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]: OK
-uom-plugin         >   (1 :: Quantity _ One) (*:) Quantity _ u
-uom-plugin         >     _ = Double:                                 OK
-uom-plugin         >     _ = Int:                                    OK
-uom-plugin         >     _ = Integer:                                OK
-uom-plugin         >     _ = Int:                                    OK
-uom-plugin         >   errors when a /= b, (1 :: Quantity a One) (*:) Quantity b u
-uom-plugin         >     b = Double
-uom-plugin         >       a = Int:                                  OK
-uom-plugin         >       a = Integer:                              OK
-uom-plugin         >       a = Rational:                             OK
-uom-plugin         >     b = Int
-uom-plugin         >       a = Double:                               OK
-uom-plugin         >       a = Integer:                              OK
-uom-plugin         >       a = Rational:                             OK
-uom-plugin         >     b = Integer
-uom-plugin         >       a = Double:                               OK
-uom-plugin         >       a = Int:                                  OK
-uom-plugin         >       a = Rational:                             OK
-uom-plugin         >     b = Rational
-uom-plugin         >       a = Double:                               OK
-uom-plugin         >       a = Int:                                  OK
-uom-plugin         >       a = Integer:                              OK
-uom-plugin         >   showQuantity
-uom-plugin         >     myMass:                                     OK
-uom-plugin         >     gravityOnEarth:                             OK
-uom-plugin         >     forceOnGround:                              OK
-uom-plugin         >   convert
-uom-plugin         >     10m in ft:                                  OK
-uom-plugin         >     5 km^2 in m^2:                              OK
-uom-plugin         >     ratio:                                      OK
-uom-plugin         >     100l in m^3:                                OK
-uom-plugin         >     1l/m in m^2:                                OK
-uom-plugin         >     1l/m in m^2:                                OK
-uom-plugin         >     5l in ft^3:                                 OK
-uom-plugin         >     2000000l^2 in ft^3 m^3:                     OK
-uom-plugin         >     42 rad/s in s^-1:                           OK
-uom-plugin         >     2.4 l/h in m:                               OK
-uom-plugin         >     1 m^4 in l m:                               OK
-uom-plugin         >   errors
-uom-plugin         >     s/m ~ m/s:                                  OK
-uom-plugin         >     m + s:                                      OK
-uom-plugin         >     a ~ a  =>  a ~ kg:                          OK
-uom-plugin         >     a ~ b  =>  a ~ kg:                          OK
-uom-plugin         >     a^2 ~ b^3  =>  a ~ s:                       OK
-uom-plugin         >   read . show
-uom-plugin         >     3 m:                                        OK
-uom-plugin         >     1.2 m/s:                                    OK
-uom-plugin         >     0:                                          OK
-uom-plugin         >   read normalisation
-uom-plugin         >     1 m/m:                                      OK
-uom-plugin         >     -0.3 m s^-1:                                OK
-uom-plugin         >     42 s m s:                                   OK
-uom-plugin         >
-uom-plugin         > All 78 tests passed (0.00s)
-uom-plugin         > Test suite units passed
-
-thoralf-plugin     > test (suite: defs)
-thoralf-plugin     > Test suite defs passed
-
-thoralf-plugin     > test (suite: rows)
-thoralf-plugin     > [1,2] = 1 :> (2 :> VNil)
-thoralf-plugin     > reverse [1,2] = 2 :> (1 :> VNil)
-thoralf-plugin     > concat [1,2] [3,4] = 1 :> (2 :> (3 :> (4 :> VNil)))
-thoralf-plugin     > snoc 3 [1,2] = 1 :> (2 :> (3 :> VNil))
-thoralf-plugin     > stripPrefix [1,2] [1,2,3,4] = Just (3 :> (4 :> VNil))
-thoralf-plugin     > stripPrefix [3,4] [1,2,3,4] = Nothing
-thoralf-plugin     > stripPrefix [] [1,2,3,4] = Just (1 :> (2 :> (3 :> (4 :> VNil))))
-thoralf-plugin     > stripPrefix [1,2] [] = Nothing
-thoralf-plugin     > price of [9000,12000] = 21000
-thoralf-plugin     > Test suite rows passed
-
-thoralf-plugin     > test (suite: units)
-thoralf-plugin     > uom-plugin
-thoralf-plugin     >   Get the underlying value with unQuantity
-thoralf-plugin     >     unQuantity 1: OK
-thoralf-plugin     >
-thoralf-plugin     > All 1 tests passed (0.00s)
-thoralf-plugin     > Test suite units passed
-
-thoralf-plugin     > test (suite: uom)
-thoralf-plugin     > UoM examples
-thoralf-plugin     > 3 m/s for 3 s = 9.0 m
-thoralf-plugin     > 3 m/s for 2 s = 6.0 m
-thoralf-plugin     >
-thoralf-plugin     > Main
-thoralf-plugin     >   distance: OK
-thoralf-plugin     >     +++ OK, passed 100 tests.
-thoralf-plugin     >
-thoralf-plugin     > All 1 tests passed (0.00s)
-thoralf-plugin     > Test suite uom passed
-
-uom-plugin-tutorial> test (suite: doctest)
-uom-plugin-tutorial> Examples: 64  Tried: 64  Errors: 0  Failures: 0
-uom-plugin-tutorial> Test suite doctest passed
-Completed 15 action(s).
 ```
 
-To see tests of `uom-plugin` with color but no build output to the terminal:
+To see tests of the `uom-plugin` with color but no build output to the terminal:
 
 ```
 > stack test uom-plugin --no-terminal --test-arguments "--color=always"
