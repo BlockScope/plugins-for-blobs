@@ -32,6 +32,8 @@ number of unit tests.
 
 ## Progress
 
+### New Utility Packages
+
 * Added [ghc-corroborate](https://github.com/BlockScope/ghc-corroborate#readme),
   a new package exposing a flattened subset of GHC's API needed for typechecking
   plugins as a single API across multiple GHC versions. It uses cabal
@@ -40,19 +42,49 @@ number of unit tests.
 * Forked [ghc-tcplugins-extra](https://github.com/BlockScope/ghc-tcplugins-extra-undef#readme)
   to use `ghc-corroborate` and to remove its use of `CPP`.
 * Moved the tracing of the `thoralf-plugin` to
-  [ghc-tcplugins-trace](https://github.com/BlockScope/ghc-tcplugins-trace#readmi).
+  [ghc-tcplugins-trace](https://github.com/BlockScope/ghc-tcplugins-trace#readme).
+
+### Rearranged Plugin Packages
+
+The general idea with this was to rearrange the modules of each plugin for
+similarity between both (so that I could see that) and to split the packages up
+so that they could be shared between both.
+
 * Moved the quasiquoter of the `uom-plugin` to `uom-th`.
 * Moved the units of measure (UoM) theory from the `thoralf-plugin` and much of
   the `uom-plugin` internals to `uom-quantity`.
-* Rearranged the modules of each plugin for similarity between both.
-* Added two standalone plugins, one for each phase of the `uom-plugin`.
+* Split the `thoralf-plugin` into:
+  * `thoralf-encode`
+  * `thoralf-plugin`
+  * `thoralf-plugin-rows`
+  * `thoralf-plugin-uom`
 * Split the units of measure features of the thoralf plugin from the rest so
   that we have `thoralf-plugin-uom` for units and `thoralf-plugin-rows` for the
-  rest. I've also split the guts of the internals into separate packages;
-  `thoralf-theory`, `thoralf-encode` and `thoralf-plugin`.
-* Pulled unit definitions out of `uom-plugin` and put these into
-  `uom-plugin-defs`. Also added a similar `thoralf-plugin-defs` package with the
-  same set of unit definitions.
+  rest.
+
+### Enhanced Tracing
+
+* Added `-ddump-tc-trace` tracing to the `thoralf-plugin-uom` (the `uom-plugin`
+  already has this).
+* Added configuration for what to trace from the `thoralf-plugin-uom`. There are
+  two combination of these that are useful; a TOML style layout and an SMT2
+  style layout. The later output can be fed directly and unaltered into z3 and
+  is full of useful comments to help follow along.
+
+### Partial Plugins
+
+I saw that the `uom-plugin` operated in two phases; (1) looking for unpacks and
+(2) solving equations. This package now has 3 plugins:
+
+* `Plugins.UoM` that combines the two phases as before.
+* `Plugins.UoM.Unpack` that does only the unpacking.
+* `Plugins.UoM.Solve` that does only the solving.
+
+### Unit Definitions
+
+I pulled unit definitions out of `uom-plugin` and put these into
+`uom-plugin-defs`. Also added a similar `thoralf-plugin-defs` package with the
+same set of unit definitions.
 
 ## Changes in Use
 
