@@ -1,5 +1,5 @@
 ; Build profile: -w ghc-8.2.2 -O1
-; [1 of 5] Compiling Abelian
+; [1 of 6] Compiling Abelian
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -1680,7 +1680,8 @@
 (pop 1)
 (echo "solver-finish-cycle-8")
 (exit)
-; [2 of 5] Compiling Plugins.Thoralf.UnitDefs
+; [2 of 6] Compiling UnQuantity
+; [3 of 6] Compiling UnitDefs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -1704,8 +1705,840 @@
    (Array String Int))
 (assert
    (= enc base))
+(echo "solver-start-cycle-1")
+(echo "solver-finish-cycle-1")
+(echo "solver-start-cycle-2")
+(echo "solver-finish-cycle-2")
+(echo "solver-start-cycle-3")
+(echo "solver-finish-cycle-3")
+(echo "solver-start-cycle-4")
+(echo "solver-finish-cycle-4")
+(echo "solver-start-cycle-5")
+(echo "solver-finish-cycle-5")
+(echo "solver-start-cycle-6")
+(echo "solver-finish-cycle-6")
+(echo "solver-start-cycle-7")
+(echo "solver-finish-cycle-7")
+(echo "solver-start-cycle-8")
+(echo "solver-finish-cycle-8")
+(echo "solver-start-cycle-9")
+(echo "solver-finish-cycle-9")
+(echo "solver-start-cycle-10")
+(echo "solver-finish-cycle-10")
+(echo "solver-start-cycle-11")
+(echo "solver-finish-cycle-11")
+(echo "solver-start-cycle-12")
+(echo "solver-finish-cycle-12")
+(echo "solver-start-cycle-13")
+(echo "solver-finish-cycle-13")
+(echo "solver-start-cycle-14")
+(echo "solver-finish-cycle-14")
+(echo "solver-start-cycle-15")
+(echo "solver-finish-cycle-15")
+(echo "solver-start-cycle-16")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{adVS} {2}:: One
+;                       ~
+;                       (Base "cd" /: Base "cd") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["cd"],Base ["cd"]])
+
+(echo "givens-start-cycle-16")
+; GIVENS (conversions)
+;      [WD] hole{adVS} {2}:: One
+;                            ~
+;                            (Base "cd" /: Base "cd") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "cd" one)
+;      (store base "cd" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-16")
+(echo "wanteds-start-cycle-16")
+; WANTEDS (conversions)
+;      [WD] hole{adVS} {2}:: One
+;                            ~
+;                            (Base "cd" /: Base "cd") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "cd" one)
+;      (store base "cd" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "cd" one)
+              (store base "cd" one))))
+      :named
+      wanted-16))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "cd" one)
+;              (store base "cd" one))))
+;      :named
+;      wanted-16))
+(get-unsat-core)
+; (wanted-16)
+(pop 1)
+(echo "solver-finish-cycle-16")
+(echo "solver-start-cycle-17")
+(echo "solver-finish-cycle-17")
+(echo "solver-start-cycle-18")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{adWn} {2}:: One
+;                       ~
+;                       (Base "mol" /: Base "mol") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["mol"],Base ["mol"]])
+
+(echo "givens-start-cycle-18")
+; GIVENS (conversions)
+;      [WD] hole{adWn} {2}:: One
+;                            ~
+;                            (Base "mol" /: Base "mol") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "mol" one)
+;      (store base "mol" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-18")
+(echo "wanteds-start-cycle-18")
+; WANTEDS (conversions)
+;      [WD] hole{adWn} {2}:: One
+;                            ~
+;                            (Base "mol" /: Base "mol") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "mol" one)
+;      (store base "mol" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "mol" one)
+              (store base "mol" one))))
+      :named
+      wanted-18))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "mol" one)
+;              (store base "mol" one))))
+;      :named
+;      wanted-18))
+(get-unsat-core)
+; (wanted-18)
+(pop 1)
+(echo "solver-finish-cycle-18")
+(echo "solver-start-cycle-19")
+(echo "solver-finish-cycle-19")
+(echo "solver-start-cycle-20")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{adWS} {2}:: One ~ (Base "K" /: Base "K") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["K"],Base ["K"]])
+
+(echo "givens-start-cycle-20")
+; GIVENS (conversions)
+;      [WD] hole{adWS} {2}:: One
+;                            ~
+;                            (Base "K" /: Base "K") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "K" one)
+;      (store base "K" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-20")
+(echo "wanteds-start-cycle-20")
+; WANTEDS (conversions)
+;      [WD] hole{adWS} {2}:: One
+;                            ~
+;                            (Base "K" /: Base "K") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "K" one)
+;      (store base "K" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "K" one)
+              (store base "K" one))))
+      :named
+      wanted-20))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-20")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "K" one)
+;              (store base "K" one))))
+;      :named
+;      wanted-20))
+(get-unsat-core)
+; (wanted-20)
+(pop 1)
+(echo "solver-finish-cycle-20")
+(echo "solver-start-cycle-21")
+(echo "solver-finish-cycle-21")
+(echo "solver-start-cycle-22")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{adXn} {2}:: One ~ (Base "A" /: Base "A") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["A"],Base ["A"]])
+
+(echo "givens-start-cycle-22")
+; GIVENS (conversions)
+;      [WD] hole{adXn} {2}:: One
+;                            ~
+;                            (Base "A" /: Base "A") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "A" one)
+;      (store base "A" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-22")
+(echo "wanteds-start-cycle-22")
+; WANTEDS (conversions)
+;      [WD] hole{adXn} {2}:: One
+;                            ~
+;                            (Base "A" /: Base "A") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "A" one)
+;      (store base "A" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "A" one)
+              (store base "A" one))))
+      :named
+      wanted-22))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "A" one)
+;              (store base "A" one))))
+;      :named
+;      wanted-22))
+(get-unsat-core)
+; (wanted-22)
+(pop 1)
+(echo "solver-finish-cycle-22")
+(echo "solver-start-cycle-23")
+(echo "solver-finish-cycle-23")
+(echo "solver-start-cycle-24")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{adXS} {2}:: One ~ (Base "s" /: Base "s") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["s"],Base ["s"]])
+
+(echo "givens-start-cycle-24")
+; GIVENS (conversions)
+;      [WD] hole{adXS} {2}:: One
+;                            ~
+;                            (Base "s" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "s" one)
+;      (store base "s" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-24")
+(echo "wanteds-start-cycle-24")
+; WANTEDS (conversions)
+;      [WD] hole{adXS} {2}:: One
+;                            ~
+;                            (Base "s" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "s" one)
+;      (store base "s" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "s" one)
+              (store base "s" one))))
+      :named
+      wanted-24))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-24")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "s" one)
+;              (store base "s" one))))
+;      :named
+;      wanted-24))
+(get-unsat-core)
+; (wanted-24)
+(pop 1)
+(echo "solver-finish-cycle-24")
+(echo "solver-start-cycle-25")
+(echo "solver-finish-cycle-25")
+(echo "solver-start-cycle-26")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{adYn} {2}:: One
+;                       ~
+;                       (Base "kg" /: Base "kg") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["kg"],Base ["kg"]])
+
+(echo "givens-start-cycle-26")
+; GIVENS (conversions)
+;      [WD] hole{adYn} {2}:: One
+;                            ~
+;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "kg" one)
+;      (store base "kg" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-26")
+(echo "wanteds-start-cycle-26")
+; WANTEDS (conversions)
+;      [WD] hole{adYn} {2}:: One
+;                            ~
+;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "kg" one)
+;      (store base "kg" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "kg" one)
+              (store base "kg" one))))
+      :named
+      wanted-26))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-26")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "kg" one)
+;              (store base "kg" one))))
+;      :named
+;      wanted-26))
+(get-unsat-core)
+; (wanted-26)
+(pop 1)
+(echo "solver-finish-cycle-26")
+(echo "solver-start-cycle-27")
+(echo "solver-finish-cycle-27")
+(echo "solver-start-cycle-28")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{adYS} {2}:: One ~ (Base "m" /: Base "m") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["m"],Base ["m"]])
+
+(echo "givens-start-cycle-28")
+; GIVENS (conversions)
+;      [WD] hole{adYS} {2}:: One
+;                            ~
+;                            (Base "m" /: Base "m") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "m" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-28")
+(echo "wanteds-start-cycle-28")
+; WANTEDS (conversions)
+;      [WD] hole{adYS} {2}:: One
+;                            ~
+;                            (Base "m" /: Base "m") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "m" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "m" one)
+              (store base "m" one))))
+      :named
+      wanted-28))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-28")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "m" one)
+;              (store base "m" one))))
+;      :named
+;      wanted-28))
+(get-unsat-core)
+; (wanted-28)
+(pop 1)
+(echo "solver-finish-cycle-28")
 (exit)
-; [3 of 5] Compiling Defs
+; [4 of 6] Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -1737,7 +2570,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{abiW} {2}:: One
+; [WD] hole{aeuN} {2}:: One
 ;                       ~
 ;                       (Base "byte" /: Base "byte") (CNonCanonical)
 
@@ -1749,7 +2582,7 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{abiW} {2}:: One
+;      [WD] hole{aeuN} {2}:: One
 ;                            ~
 ;                            (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
@@ -1776,7 +2609,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{abiW} {2}:: One
+;      [WD] hole{aeuN} {2}:: One
 ;                            ~
 ;                            (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
@@ -1850,8 +2683,7 @@
 (echo "solver-start-cycle-4")
 (echo "solver-finish-cycle-4")
 (exit)
-; [4 of 5] Compiling UnQuantity
-; [5 of 5] Compiling Main
+; [5 of 6] Compiling Main
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -1880,98 +2712,98 @@
 (echo "solver-start-cycle-2")
 
 ; GIVENS (GHC style)
-; [G] cobox_aeE0 {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeCU {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCW {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCY {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD0 {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD2 {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD4 {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD6 {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeD8 {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDa {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDc {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDe {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDg {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDi {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDk {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDm {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDo {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDq {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDs {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDu {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDw {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDy {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDA {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDC {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDE {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDG {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDI {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDK {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDM {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDO {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDQ {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDS {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDU {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDW {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeDY {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCM {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeCO {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeCK {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeE3 {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeE4 {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_afr5 {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_afpZ {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afq1 {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afq3 {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afq5 {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afq7 {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afq9 {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqb {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqd {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqf {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqh {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqj {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afql {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqn {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqp {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqr {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqt {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqv {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqx {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqz {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqB {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqD {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqF {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqH {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqJ {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqL {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqN {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqP {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqR {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqT {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqV {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqX {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afqZ {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afr1 {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afr3 {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afpR {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_afpT {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afpP {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_afr8 {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_afr9 {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{aeEd} {2}:: (a0 *: a0) ~ (b *: (b *: b)) (CNonCanonical)
+; [WD] hole{afri} {2}:: (a0 *: a0) ~ (b *: (b *: b)) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aeDZ)
-; (*: [aeCy,aeCN],aeCT)
-; (*: [aeCy,aeCT],aeCV)
-; (*: [aeCy,aeCV],aeCX)
-; (*: [aeCy,aeCX],aeCZ)
-; (*: [aeCy,aeCZ],aeD1)
-; (*: [aeCy,aeD1],aeD3)
-; (*: [aeCy,aeD3],aeD5)
-; (*: [aeCy,aeD5],aeD7)
-; (*: [aeCy,aeD7],aeD9)
-; (*: [aeCy,aeD9],aeDb)
-; (*: [aeCy,aeDb],aeDd)
-; (*: [aeCy,aeDd],aeDf)
-; (*: [aeCy,aeDf],aeDh)
-; (*: [aeCy,aeDh],aeDj)
-; (*: [aeCy,aeDj],aeDl)
-; (*: [aeCy,aeDl],aeDn)
-; (*: [aeCy,aeDn],aeDp)
-; (*: [aeCy,aeDp],aeDr)
-; (*: [aeCy,aeDr],aeDt)
-; (*: [aeCy,aeDt],aeDv)
-; (*: [aeCy,aeDv],aeDx)
-; (*: [aeCy,aeDx],aeDz)
-; (*: [aeCy,aeDz],aeDB)
-; (*: [aeCy,aeDB],aeDD)
-; (*: [aeCy,aeDD],aeDF)
-; (*: [aeCy,aeDF],aeDH)
-; (*: [aeCy,aeDH],aeDJ)
-; (*: [aeCy,aeDJ],aeDL)
-; (*: [aeCy,aeDL],aeDN)
-; (*: [aeCy,aeDN],aeDP)
-; (*: [aeCy,aeDP],aeDR)
-; (*: [aeCy,aeDR],aeDT)
-; (*: [aeCy,aeDT],aeDV)
-; (*: [aeCy,aeDV],aeDX)
-; (*: [aeCy,aeCy],aeCL)
-; (*: [aeCy,aeCL],aeCN)
-; (*: [aeCx,aeCx],aeCJ)
-; (aeDX,aeDZ)
-; (aeCJ,aeCN)
+; (One [],afr4)
+; (*: [afpD,afpS],afpY)
+; (*: [afpD,afpY],afq0)
+; (*: [afpD,afq0],afq2)
+; (*: [afpD,afq2],afq4)
+; (*: [afpD,afq4],afq6)
+; (*: [afpD,afq6],afq8)
+; (*: [afpD,afq8],afqa)
+; (*: [afpD,afqa],afqc)
+; (*: [afpD,afqc],afqe)
+; (*: [afpD,afqe],afqg)
+; (*: [afpD,afqg],afqi)
+; (*: [afpD,afqi],afqk)
+; (*: [afpD,afqk],afqm)
+; (*: [afpD,afqm],afqo)
+; (*: [afpD,afqo],afqq)
+; (*: [afpD,afqq],afqs)
+; (*: [afpD,afqs],afqu)
+; (*: [afpD,afqu],afqw)
+; (*: [afpD,afqw],afqy)
+; (*: [afpD,afqy],afqA)
+; (*: [afpD,afqA],afqC)
+; (*: [afpD,afqC],afqE)
+; (*: [afpD,afqE],afqG)
+; (*: [afpD,afqG],afqI)
+; (*: [afpD,afqI],afqK)
+; (*: [afpD,afqK],afqM)
+; (*: [afpD,afqM],afqO)
+; (*: [afpD,afqO],afqQ)
+; (*: [afpD,afqQ],afqS)
+; (*: [afpD,afqS],afqU)
+; (*: [afpD,afqU],afqW)
+; (*: [afpD,afqW],afqY)
+; (*: [afpD,afqY],afr0)
+; (*: [afpD,afr0],afr2)
+; (*: [afpD,afpD],afpQ)
+; (*: [afpD,afpQ],afpS)
+; (*: [afpC,afpC],afpO)
+; (afr2,afr4)
+; (afpO,afpS)
 
 ; WANTEDS (Thoralf style)
-; (*: [aeCB,aeCB],*: [aeCy,*: [aeCy,aeCy]])
+; (*: [afpG,afpG],*: [afpD,*: [afpD,afpD]])
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{aeEd} {2}:: (a0 *: a0)
+;      [WD] hole{afri} {2}:: (a0 *: a0)
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -1981,227 +2813,227 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeCB
-;      aeCB)
+;      afpG
+;      afpG)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeCy
+;      afpD
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeCy
-;        aeCy)))
+;        afpD
+;        afpD)))
 
 ; GIVENS (names)
-;  aeCx  <=  a
-;  aeCy  <=  b
-;  aeCJ  <=  fsk_aeCJ
-;  aeCL  <=  fsk_aeCL
-;  aeCN  <=  fsk_aeCN
-;  aeCT  <=  fsk_aeCT
-;  aeCV  <=  fsk_aeCV
-;  aeCX  <=  fsk_aeCX
-;  aeCZ  <=  fsk_aeCZ
-;  aeD1  <=  fsk_aeD1
-;  aeD3  <=  fsk_aeD3
-;  aeD5  <=  fsk_aeD5
-;  aeD7  <=  fsk_aeD7
-;  aeD9  <=  fsk_aeD9
-;  aeDb  <=  fsk_aeDb
-;  aeDd  <=  fsk_aeDd
-;  aeDf  <=  fsk_aeDf
-;  aeDh  <=  fsk_aeDh
-;  aeDj  <=  fsk_aeDj
-;  aeDl  <=  fsk_aeDl
-;  aeDn  <=  fsk_aeDn
-;  aeDp  <=  fsk_aeDp
-;  aeDr  <=  fsk_aeDr
-;  aeDt  <=  fsk_aeDt
-;  aeDv  <=  fsk_aeDv
-;  aeDx  <=  fsk_aeDx
-;  aeDz  <=  fsk_aeDz
-;  aeDB  <=  fsk_aeDB
-;  aeDD  <=  fsk_aeDD
-;  aeDF  <=  fsk_aeDF
-;  aeDH  <=  fsk_aeDH
-;  aeDJ  <=  fsk_aeDJ
-;  aeDL  <=  fsk_aeDL
-;  aeDN  <=  fsk_aeDN
-;  aeDP  <=  fsk_aeDP
-;  aeDR  <=  fsk_aeDR
-;  aeDT  <=  fsk_aeDT
-;  aeDV  <=  fsk_aeDV
-;  aeDX  <=  fsk_aeDX
-;  aeDZ  <=  fsk_aeDZ
+;  afpC  <=  a
+;  afpD  <=  b
+;  afpO  <=  fsk_afpO
+;  afpQ  <=  fsk_afpQ
+;  afpS  <=  fsk_afpS
+;  afpY  <=  fsk_afpY
+;  afq0  <=  fsk_afq0
+;  afq2  <=  fsk_afq2
+;  afq4  <=  fsk_afq4
+;  afq6  <=  fsk_afq6
+;  afq8  <=  fsk_afq8
+;  afqa  <=  fsk_afqa
+;  afqc  <=  fsk_afqc
+;  afqe  <=  fsk_afqe
+;  afqg  <=  fsk_afqg
+;  afqi  <=  fsk_afqi
+;  afqk  <=  fsk_afqk
+;  afqm  <=  fsk_afqm
+;  afqo  <=  fsk_afqo
+;  afqq  <=  fsk_afqq
+;  afqs  <=  fsk_afqs
+;  afqu  <=  fsk_afqu
+;  afqw  <=  fsk_afqw
+;  afqy  <=  fsk_afqy
+;  afqA  <=  fsk_afqA
+;  afqC  <=  fsk_afqC
+;  afqE  <=  fsk_afqE
+;  afqG  <=  fsk_afqG
+;  afqI  <=  fsk_afqI
+;  afqK  <=  fsk_afqK
+;  afqM  <=  fsk_afqM
+;  afqO  <=  fsk_afqO
+;  afqQ  <=  fsk_afqQ
+;  afqS  <=  fsk_afqS
+;  afqU  <=  fsk_afqU
+;  afqW  <=  fsk_afqW
+;  afqY  <=  fsk_afqY
+;  afr0  <=  fsk_afr0
+;  afr2  <=  fsk_afr2
+;  afr4  <=  fsk_afr4
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aeCJ (Array String Int))
-; (declare-const aeCL (Array String Int))
-; (declare-const aeCN (Array String Int))
-; (declare-const aeCT (Array String Int))
-; (declare-const aeCV (Array String Int))
-; (declare-const aeCX (Array String Int))
-; (declare-const aeCZ (Array String Int))
-; (declare-const aeCx (Array String Int))
-; (declare-const aeCy (Array String Int))
-; (declare-const aeD1 (Array String Int))
-; (declare-const aeD3 (Array String Int))
-; (declare-const aeD5 (Array String Int))
-; (declare-const aeD7 (Array String Int))
-; (declare-const aeD9 (Array String Int))
-; (declare-const aeDB (Array String Int))
-; (declare-const aeDD (Array String Int))
-; (declare-const aeDF (Array String Int))
-; (declare-const aeDH (Array String Int))
-; (declare-const aeDJ (Array String Int))
-; (declare-const aeDL (Array String Int))
-; (declare-const aeDN (Array String Int))
-; (declare-const aeDP (Array String Int))
-; (declare-const aeDR (Array String Int))
-; (declare-const aeDT (Array String Int))
-; (declare-const aeDV (Array String Int))
-; (declare-const aeDX (Array String Int))
-; (declare-const aeDZ (Array String Int))
-; (declare-const aeDb (Array String Int))
-; (declare-const aeDd (Array String Int))
-; (declare-const aeDf (Array String Int))
-; (declare-const aeDh (Array String Int))
-; (declare-const aeDj (Array String Int))
-; (declare-const aeDl (Array String Int))
-; (declare-const aeDn (Array String Int))
-; (declare-const aeDp (Array String Int))
-; (declare-const aeDr (Array String Int))
-; (declare-const aeDt (Array String Int))
-; (declare-const aeDv (Array String Int))
-; (declare-const aeDx (Array String Int))
-; (declare-const aeDz (Array String Int))
+; (declare-const afpC (Array String Int))
+; (declare-const afpD (Array String Int))
+; (declare-const afpO (Array String Int))
+; (declare-const afpQ (Array String Int))
+; (declare-const afpS (Array String Int))
+; (declare-const afpY (Array String Int))
+; (declare-const afq0 (Array String Int))
+; (declare-const afq2 (Array String Int))
+; (declare-const afq4 (Array String Int))
+; (declare-const afq6 (Array String Int))
+; (declare-const afq8 (Array String Int))
+; (declare-const afqA (Array String Int))
+; (declare-const afqC (Array String Int))
+; (declare-const afqE (Array String Int))
+; (declare-const afqG (Array String Int))
+; (declare-const afqI (Array String Int))
+; (declare-const afqK (Array String Int))
+; (declare-const afqM (Array String Int))
+; (declare-const afqO (Array String Int))
+; (declare-const afqQ (Array String Int))
+; (declare-const afqS (Array String Int))
+; (declare-const afqU (Array String Int))
+; (declare-const afqW (Array String Int))
+; (declare-const afqY (Array String Int))
+; (declare-const afqa (Array String Int))
+; (declare-const afqc (Array String Int))
+; (declare-const afqe (Array String Int))
+; (declare-const afqg (Array String Int))
+; (declare-const afqi (Array String Int))
+; (declare-const afqk (Array String Int))
+; (declare-const afqm (Array String Int))
+; (declare-const afqo (Array String Int))
+; (declare-const afqq (Array String Int))
+; (declare-const afqs (Array String Int))
+; (declare-const afqu (Array String Int))
+; (declare-const afqw (Array String Int))
+; (declare-const afqy (Array String Int))
+; (declare-const afr0 (Array String Int))
+; (declare-const afr2 (Array String Int))
+; (declare-const afr4 (Array String Int))
 (declare-const
-   aeCx
+   afpC
    (Array String Int))
 (declare-const
-   aeCy
+   afpD
    (Array String Int))
 (declare-const
-   aeCJ
+   afpO
    (Array String Int))
 (declare-const
-   aeCL
+   afpQ
    (Array String Int))
 (declare-const
-   aeCN
+   afpS
    (Array String Int))
 (declare-const
-   aeCT
+   afpY
    (Array String Int))
 (declare-const
-   aeCV
+   afq0
    (Array String Int))
 (declare-const
-   aeCX
+   afq2
    (Array String Int))
 (declare-const
-   aeCZ
+   afq4
    (Array String Int))
 (declare-const
-   aeD1
+   afq6
    (Array String Int))
 (declare-const
-   aeD3
+   afq8
    (Array String Int))
 (declare-const
-   aeD5
+   afqa
    (Array String Int))
 (declare-const
-   aeD7
+   afqc
    (Array String Int))
 (declare-const
-   aeD9
+   afqe
    (Array String Int))
 (declare-const
-   aeDb
+   afqg
    (Array String Int))
 (declare-const
-   aeDd
+   afqi
    (Array String Int))
 (declare-const
-   aeDf
+   afqk
    (Array String Int))
 (declare-const
-   aeDh
+   afqm
    (Array String Int))
 (declare-const
-   aeDj
+   afqo
    (Array String Int))
 (declare-const
-   aeDl
+   afqq
    (Array String Int))
 (declare-const
-   aeDn
+   afqs
    (Array String Int))
 (declare-const
-   aeDp
+   afqu
    (Array String Int))
 (declare-const
-   aeDr
+   afqw
    (Array String Int))
 (declare-const
-   aeDt
+   afqy
    (Array String Int))
 (declare-const
-   aeDv
+   afqA
    (Array String Int))
 (declare-const
-   aeDx
+   afqC
    (Array String Int))
 (declare-const
-   aeDz
+   afqE
    (Array String Int))
 (declare-const
-   aeDB
+   afqG
    (Array String Int))
 (declare-const
-   aeDD
+   afqI
    (Array String Int))
 (declare-const
-   aeDF
+   afqK
    (Array String Int))
 (declare-const
-   aeDH
+   afqM
    (Array String Int))
 (declare-const
-   aeDJ
+   afqO
    (Array String Int))
 (declare-const
-   aeDL
+   afqQ
    (Array String Int))
 (declare-const
-   aeDN
+   afqS
    (Array String Int))
 (declare-const
-   aeDP
+   afqU
    (Array String Int))
 (declare-const
-   aeDR
+   afqW
    (Array String Int))
 (declare-const
-   aeDT
+   afqY
    (Array String Int))
 (declare-const
-   aeDV
+   afr0
    (Array String Int))
 (declare-const
-   aeDX
+   afr2
    (Array String Int))
 (declare-const
-   aeDZ
+   afr4
    (Array String Int))
 (assert
    (!
@@ -2211,7 +3043,7 @@
               const
               (Array String Int))
            0)
-         aeDZ)
+         afr4)
       :named
       given-2.1))
 (assert
@@ -2223,9 +3055,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeCN)
-         aeCT)
+           afpD
+           afpS)
+         afpY)
       :named
       given-2.2))
 (assert
@@ -2237,9 +3069,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeCT)
-         aeCV)
+           afpD
+           afpY)
+         afq0)
       :named
       given-2.3))
 (assert
@@ -2251,9 +3083,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeCV)
-         aeCX)
+           afpD
+           afq0)
+         afq2)
       :named
       given-2.4))
 (assert
@@ -2265,9 +3097,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeCX)
-         aeCZ)
+           afpD
+           afq2)
+         afq4)
       :named
       given-2.5))
 (assert
@@ -2279,9 +3111,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeCZ)
-         aeD1)
+           afpD
+           afq4)
+         afq6)
       :named
       given-2.6))
 (assert
@@ -2293,9 +3125,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeD1)
-         aeD3)
+           afpD
+           afq6)
+         afq8)
       :named
       given-2.7))
 (assert
@@ -2307,9 +3139,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeD3)
-         aeD5)
+           afpD
+           afq8)
+         afqa)
       :named
       given-2.8))
 (assert
@@ -2321,9 +3153,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeD5)
-         aeD7)
+           afpD
+           afqa)
+         afqc)
       :named
       given-2.9))
 (assert
@@ -2335,9 +3167,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeD7)
-         aeD9)
+           afpD
+           afqc)
+         afqe)
       :named
       given-2.10))
 (assert
@@ -2349,9 +3181,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeD9)
-         aeDb)
+           afpD
+           afqe)
+         afqg)
       :named
       given-2.11))
 (assert
@@ -2363,9 +3195,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDb)
-         aeDd)
+           afpD
+           afqg)
+         afqi)
       :named
       given-2.12))
 (assert
@@ -2377,9 +3209,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDd)
-         aeDf)
+           afpD
+           afqi)
+         afqk)
       :named
       given-2.13))
 (assert
@@ -2391,9 +3223,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDf)
-         aeDh)
+           afpD
+           afqk)
+         afqm)
       :named
       given-2.14))
 (assert
@@ -2405,9 +3237,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDh)
-         aeDj)
+           afpD
+           afqm)
+         afqo)
       :named
       given-2.15))
 (assert
@@ -2419,9 +3251,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDj)
-         aeDl)
+           afpD
+           afqo)
+         afqq)
       :named
       given-2.16))
 (assert
@@ -2433,9 +3265,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDl)
-         aeDn)
+           afpD
+           afqq)
+         afqs)
       :named
       given-2.17))
 (assert
@@ -2447,9 +3279,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDn)
-         aeDp)
+           afpD
+           afqs)
+         afqu)
       :named
       given-2.18))
 (assert
@@ -2461,9 +3293,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDp)
-         aeDr)
+           afpD
+           afqu)
+         afqw)
       :named
       given-2.19))
 (assert
@@ -2475,9 +3307,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDr)
-         aeDt)
+           afpD
+           afqw)
+         afqy)
       :named
       given-2.20))
 (assert
@@ -2489,9 +3321,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDt)
-         aeDv)
+           afpD
+           afqy)
+         afqA)
       :named
       given-2.21))
 (assert
@@ -2503,9 +3335,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDv)
-         aeDx)
+           afpD
+           afqA)
+         afqC)
       :named
       given-2.22))
 (assert
@@ -2517,9 +3349,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDx)
-         aeDz)
+           afpD
+           afqC)
+         afqE)
       :named
       given-2.23))
 (assert
@@ -2531,9 +3363,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDz)
-         aeDB)
+           afpD
+           afqE)
+         afqG)
       :named
       given-2.24))
 (assert
@@ -2545,9 +3377,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDB)
-         aeDD)
+           afpD
+           afqG)
+         afqI)
       :named
       given-2.25))
 (assert
@@ -2559,9 +3391,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDD)
-         aeDF)
+           afpD
+           afqI)
+         afqK)
       :named
       given-2.26))
 (assert
@@ -2573,9 +3405,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDF)
-         aeDH)
+           afpD
+           afqK)
+         afqM)
       :named
       given-2.27))
 (assert
@@ -2587,9 +3419,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDH)
-         aeDJ)
+           afpD
+           afqM)
+         afqO)
       :named
       given-2.28))
 (assert
@@ -2601,9 +3433,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDJ)
-         aeDL)
+           afpD
+           afqO)
+         afqQ)
       :named
       given-2.29))
 (assert
@@ -2615,9 +3447,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDL)
-         aeDN)
+           afpD
+           afqQ)
+         afqS)
       :named
       given-2.30))
 (assert
@@ -2629,9 +3461,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDN)
-         aeDP)
+           afpD
+           afqS)
+         afqU)
       :named
       given-2.31))
 (assert
@@ -2643,9 +3475,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDP)
-         aeDR)
+           afpD
+           afqU)
+         afqW)
       :named
       given-2.32))
 (assert
@@ -2657,9 +3489,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDR)
-         aeDT)
+           afpD
+           afqW)
+         afqY)
       :named
       given-2.33))
 (assert
@@ -2671,9 +3503,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDT)
-         aeDV)
+           afpD
+           afqY)
+         afr0)
       :named
       given-2.34))
 (assert
@@ -2685,9 +3517,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeDV)
-         aeDX)
+           afpD
+           afr0)
+         afr2)
       :named
       given-2.35))
 (assert
@@ -2699,9 +3531,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeCy)
-         aeCL)
+           afpD
+           afpD)
+         afpQ)
       :named
       given-2.36))
 (assert
@@ -2713,9 +3545,9 @@
               (+
                  (Int Int)
                  Int))
-           aeCy
-           aeCL)
-         aeCN)
+           afpD
+           afpQ)
+         afpS)
       :named
       given-2.37))
 (assert
@@ -2727,19 +3559,19 @@
               (+
                  (Int Int)
                  Int))
-           aeCx
-           aeCx)
-         aeCJ)
+           afpC
+           afpC)
+         afpO)
       :named
       given-2.38))
 (assert
    (!
-      (= aeDX aeDZ)
+      (= afr2 afr4)
       :named
       given-2.39))
 (assert
    (!
-      (= aeCJ aeCN)
+      (= afpO afpS)
       :named
       given-2.40))
 (check-sat)
@@ -2747,7 +3579,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{aeEd} {2}:: (a0 *: a0)
+;      [WD] hole{afri} {2}:: (a0 *: a0)
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -2757,32 +3589,32 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeCB
-;      aeCB)
+;      afpG
+;      afpG)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeCy
+;      afpD
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeCy
-;        aeCy)))
+;        afpD
+;        afpD)))
 
 ; WANTEDS (names)
-;  aeCy  <=  b
-;  aeCB  <=  a_aeCB
+;  afpD  <=  b
+;  afpG  <=  a_afpG
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aeCB (Array String Int))
+; (declare-const afpG (Array String Int))
 (declare-const
-   aeCB
+   afpG
    (Array String Int))
 (assert
    (!
@@ -2794,23 +3626,23 @@
                  (+
                     (Int Int)
                     Int))
-              aeCB
-              aeCB)
+              afpG
+              afpG)
             (
               (_
                  map
                  (+
                     (Int Int)
                     Int))
-              aeCy
+              afpD
               (
                 (_
                    map
                    (+
                       (Int Int)
                       Int))
-                aeCy
-                aeCy))))
+                afpD
+                afpD))))
       :named
       wanted-2))
 (check-sat)
@@ -2819,16 +3651,7 @@
 (get-model)
 ; (
 ;   (define-fun
-;      aeCT
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeCZ
+;      afqi
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -2847,9 +3670,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDT)
-;         aeDV))
+;           afpD
+;           afqY)
+;         afr0))
 ;   (define-fun
 ;      given-2.6
 ;      ()
@@ -2861,9 +3684,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeCZ)
-;         aeD1))
+;           afpD
+;           afq4)
+;         afq6))
 ;   (define-fun
 ;      given-2.30
 ;      ()
@@ -2875,9 +3698,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDL)
-;         aeDN))
+;           afpD
+;           afqQ)
+;         afqS))
 ;   (define-fun
 ;      given-2.15
 ;      ()
@@ -2889,9 +3712,30 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDh)
-;         aeDj))
+;           afpD
+;           afqm)
+;         afqo))
+;   (define-fun
+;      afpG
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           38)
+;         "!0!"
+;         (- 1)))
+;   (define-fun
+;      afqC
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.36
 ;      ()
@@ -2903,11 +3747,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeCy)
-;         aeCL))
+;           afpD
+;           afpD)
+;         afpQ))
 ;   (define-fun
-;      aeDp
+;      afpY
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -2926,11 +3770,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDz)
-;         aeDB))
+;           afpD
+;           afqE)
+;         afqG))
 ;   (define-fun
-;      aeCX
+;      afqk
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -2939,16 +3783,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDx
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeDL
+;      afqK
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -2967,9 +3802,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDj)
-;         aeDl))
+;           afpD
+;           afqo)
+;         afqq))
 ;   (define-fun
 ;      given-2.19
 ;      ()
@@ -2981,38 +3816,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDp)
-;         aeDr))
+;           afpD
+;           afqu)
+;         afqw))
 ;   (define-fun
-;      aeD5
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeD1
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeDj
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeDz
+;      afpQ
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3029,9 +3837,18 @@
 ;      given-2.40
 ;      ()
 ;      Bool
-;      (= aeCJ aeCN))
+;      (= afpO afpS))
 ;   (define-fun
-;      aeDh
+;      afqe
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afpO
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3050,9 +3867,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDx)
-;         aeDz))
+;           afpD
+;           afqC)
+;         afqE))
+;   (define-fun
+;      afqA
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.10
 ;      ()
@@ -3064,9 +3890,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeD7)
-;         aeD9))
+;           afpD
+;           afqc)
+;         afqe))
 ;   (define-fun
 ;      given-2.17
 ;      ()
@@ -3078,11 +3904,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDl)
-;         aeDn))
+;           afpD
+;           afqq)
+;         afqs))
 ;   (define-fun
-;      aeCJ
+;      afpS
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3101,9 +3927,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDN)
-;         aeDP))
+;           afpD
+;           afqS)
+;         afqU))
 ;   (define-fun
 ;      given-2.28
 ;      ()
@@ -3115,38 +3941,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDH)
-;         aeDJ))
+;           afpD
+;           afqM)
+;         afqO))
 ;   (define-fun
-;      aeDV
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeD3
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeDJ
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeDR
+;      afqE
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3165,9 +3964,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeD9)
-;         aeDb))
+;           afpD
+;           afqe)
+;         afqg))
+;   (define-fun
+;      afqY
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.20
 ;      ()
@@ -3179,11 +3987,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDr)
-;         aeDt))
+;           afpD
+;           afqw)
+;         afqy))
 ;   (define-fun
-;      aeDP
+;      afpC
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3192,17 +4000,32 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeCB
+;      afr2
 ;      ()
 ;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           38)
-;         "!0!"
-;         (- 1)))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afq6
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afq4
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.5
 ;      ()
@@ -3214,9 +4037,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeCX)
-;         aeCZ))
+;           afpD
+;           afq2)
+;         afq4))
+;   (define-fun
+;      afqa
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.32
 ;      ()
@@ -3228,9 +4060,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDP)
-;         aeDR))
+;           afpD
+;           afqU)
+;         afqW))
 ;   (define-fun
 ;      given-2.29
 ;      ()
@@ -3242,11 +4074,20 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDJ)
-;         aeDL))
+;           afpD
+;           afqO)
+;         afqQ))
 ;   (define-fun
-;      aeDn
+;      afqq
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afqu
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3265,9 +4106,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDb)
-;         aeDd))
+;           afpD
+;           afqg)
+;         afqi))
 ;   (define-fun
 ;      given-2.13
 ;      ()
@@ -3279,11 +4120,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDd)
-;         aeDf))
+;           afpD
+;           afqi)
+;         afqk))
 ;   (define-fun
-;      aeDf
+;      afqo
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3302,9 +4143,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeCL)
-;         aeCN))
+;           afpD
+;           afpQ)
+;         afpS))
 ;   (define-fun
 ;      given-2.2
 ;      ()
@@ -3316,9 +4157,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeCN)
-;         aeCT))
+;           afpD
+;           afpS)
+;         afpY))
 ;   (define-fun
 ;      given-2.8
 ;      ()
@@ -3330,9 +4171,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeD3)
-;         aeD5))
+;           afpD
+;           afq8)
+;         afqa))
 ;   (define-fun
 ;      given-2.22
 ;      ()
@@ -3344,11 +4185,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDv)
-;         aeDx))
+;           afpD
+;           afqA)
+;         afqC))
 ;   (define-fun
-;      aeD9
+;      afqc
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3367,9 +4208,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDR)
-;         aeDT))
+;           afpD
+;           afqW)
+;         afqY))
 ;   (define-fun
 ;      wanted-2
 ;      ()
@@ -3382,24 +4223,24 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aeCB
-;              aeCB)
+;              afpG
+;              afpG)
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aeCy
-;              aeCy
-;              aeCy))))
+;              afpD
+;              afpD
+;              afpD))))
 ;   (define-fun
 ;      given-2.39
 ;      ()
 ;      Bool
-;      (= aeDX aeDZ))
+;      (= afr2 afr4))
 ;   (define-fun
-;      aeDv
+;      afqs
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3418,11 +4259,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDf)
-;         aeDh))
+;           afpD
+;           afqk)
+;         afqm))
 ;   (define-fun
-;      aeCV
+;      afqm
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3431,7 +4272,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDB
+;      afqG
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3440,7 +4281,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDr
+;      afqW
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3459,9 +4300,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDn)
-;         aeDp))
+;           afpD
+;           afqs)
+;         afqu))
 ;   (define-fun
 ;      given-2.35
 ;      ()
@@ -3473,11 +4314,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDV)
-;         aeDX))
+;           afpD
+;           afr0)
+;         afr2))
 ;   (define-fun
-;      aeDF
+;      afr4
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3486,7 +4327,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDH
+;      afpD
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3495,7 +4336,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDd
+;      afq0
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3504,7 +4345,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDt
+;      afqO
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3513,7 +4354,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeCN
+;      afr0
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3532,9 +4373,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCx
-;           aeCx)
-;         aeCJ))
+;           afpC
+;           afpC)
+;         afpO))
 ;   (define-fun
 ;      given-2.27
 ;      ()
@@ -3546,9 +4387,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDF)
-;         aeDH))
+;           afpD
+;           afqK)
+;         afqM))
 ;   (define-fun
 ;      given-2.21
 ;      ()
@@ -3560,11 +4401,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDt)
-;         aeDv))
+;           afpD
+;           afqy)
+;         afqA))
 ;   (define-fun
-;      aeDN
+;      afq2
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3583,9 +4424,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeD5)
-;         aeD7))
+;           afpD
+;           afqa)
+;         afqc))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -3606,9 +4447,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDB)
-;         aeDD))
+;           afpD
+;           afqG)
+;         afqI))
 ;   (define-fun
 ;      base
 ;      ()
@@ -3619,7 +4460,7 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      aeCy
+;      afqS
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3628,7 +4469,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeD7
+;      afqU
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3637,7 +4478,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDT
+;      afqy
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3646,7 +4487,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDX
+;      afqQ
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3665,11 +4506,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeCT)
-;         aeCV))
+;           afpD
+;           afpY)
+;         afq0))
 ;   (define-fun
-;      aeCx
+;      afqw
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3678,7 +4519,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeDZ
+;      afqM
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3696,16 +4537,7 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         aeDZ))
-;   (define-fun
-;      aeDl
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;         afr4))
 ;   (define-fun
 ;      given-2.26
 ;      ()
@@ -3717,20 +4549,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeDD)
-;         aeDF))
+;           afpD
+;           afqI)
+;         afqK))
 ;   (define-fun
-;      aeDb
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeCL
+;      afq8
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3749,11 +4572,20 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeD1)
-;         aeD3))
+;           afpD
+;           afq6)
+;         afq8))
 ;   (define-fun
-;      aeDD
+;      afqg
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afqI
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -3772,9 +4604,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeCy
-;           aeCV)
-;         aeCX))
+;           afpD
+;           afq0)
+;         afq2))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -3791,42 +4623,42 @@
 (echo "solver-start-cycle-4")
 
 ; GIVENS (GHC style)
-; [G] cobox_aeES {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeEM {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEO {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEQ {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEE {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeEG {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeEC {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeEV {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeEW {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_afrX {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_afrR {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afrT {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afrV {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afrJ {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_afrL {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_afrH {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_afs0 {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_afs1 {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{aeF8} {3}:: (b0 *: (b0 *: b0))
+; [WD] hole{afsd} {3}:: (b0 *: (b0 *: b0))
 ;                       ~
 ;                       (b *: (b *: b)) (CNonCanonical)
-; [WD] hole{aeFh} {2}:: (b0 *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
+; [WD] hole{afsm} {2}:: (b0 *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                       ~
 ;                       One (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aeER)
-; (*: [aeEq,aeEF],aeEL)
-; (*: [aeEq,aeEL],aeEN)
-; (*: [aeEq,aeEN],aeEP)
-; (*: [aeEq,aeEq],aeED)
-; (*: [aeEq,aeED],aeEF)
-; (*: [aeEp,aeEp],aeEB)
-; (aeEP,aeER)
-; (aeEB,aeEF)
+; (One [],afrW)
+; (*: [afrv,afrK],afrQ)
+; (*: [afrv,afrQ],afrS)
+; (*: [afrv,afrS],afrU)
+; (*: [afrv,afrv],afrI)
+; (*: [afrv,afrI],afrK)
+; (*: [afru,afru],afrG)
+; (afrU,afrW)
+; (afrG,afrK)
 
 ; WANTEDS (Thoralf style)
-; (*: [aeEu,*: [aeEu,aeEu]],*: [aeEq,*: [aeEq,aeEq]])
-; (*: [aeEu,*: [aeEu,*: [aeEu,*: [aeEu,*: [aeEu,aeEu]]]]],One [])
+; (*: [afrz,*: [afrz,afrz]],*: [afrv,*: [afrv,afrv]])
+; (*: [afrz,*: [afrz,*: [afrz,*: [afrz,*: [afrz,afrz]]]]],One [])
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{aeF8} {3}:: (b0 *: (b0 *: b0))
+;      [WD] hole{afsd} {3}:: (b0 *: (b0 *: b0))
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -3836,32 +4668,32 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeEu
+;      afrz
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeEu
-;        aeEu))
+;        afrz
+;        afrz))
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeEq
+;      afrv
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeEq
-;        aeEq)))
+;        afrv
+;        afrv)))
 
-;      [WD] hole{aeFh} {2}:: (b0
+;      [WD] hole{afsm} {2}:: (b0
 ;                             *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                            ~
 ;                            One (CNonCanonical)
@@ -3872,36 +4704,36 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeEu
+;      afrz
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeEu
+;        afrz
 ;        (
 ;          (_
 ;             map
 ;             (+
 ;                (Int Int)
 ;                Int))
-;          aeEu
+;          afrz
 ;          (
 ;            (_
 ;               map
 ;               (+
 ;                  (Int Int)
 ;                  Int))
-;            aeEu
+;            afrz
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aeEu
-;              aeEu)))))
+;              afrz
+;              afrz)))))
 ;    (
 ;      (as
 ;         const
@@ -3909,53 +4741,53 @@
 ;      0))
 
 ; GIVENS (names)
-;  aeEp  <=  a
-;  aeEq  <=  b
-;  aeEB  <=  fsk_aeEB
-;  aeED  <=  fsk_aeED
-;  aeEF  <=  fsk_aeEF
-;  aeEL  <=  fsk_aeEL
-;  aeEN  <=  fsk_aeEN
-;  aeEP  <=  fsk_aeEP
-;  aeER  <=  fsk_aeER
+;  afru  <=  a
+;  afrv  <=  b
+;  afrG  <=  fsk_afrG
+;  afrI  <=  fsk_afrI
+;  afrK  <=  fsk_afrK
+;  afrQ  <=  fsk_afrQ
+;  afrS  <=  fsk_afrS
+;  afrU  <=  fsk_afrU
+;  afrW  <=  fsk_afrW
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aeEB (Array String Int))
-; (declare-const aeED (Array String Int))
-; (declare-const aeEF (Array String Int))
-; (declare-const aeEL (Array String Int))
-; (declare-const aeEN (Array String Int))
-; (declare-const aeEP (Array String Int))
-; (declare-const aeER (Array String Int))
-; (declare-const aeEp (Array String Int))
-; (declare-const aeEq (Array String Int))
+; (declare-const afrG (Array String Int))
+; (declare-const afrI (Array String Int))
+; (declare-const afrK (Array String Int))
+; (declare-const afrQ (Array String Int))
+; (declare-const afrS (Array String Int))
+; (declare-const afrU (Array String Int))
+; (declare-const afrW (Array String Int))
+; (declare-const afru (Array String Int))
+; (declare-const afrv (Array String Int))
 (declare-const
-   aeEp
+   afru
    (Array String Int))
 (declare-const
-   aeEq
+   afrv
    (Array String Int))
 (declare-const
-   aeEB
+   afrG
    (Array String Int))
 (declare-const
-   aeED
+   afrI
    (Array String Int))
 (declare-const
-   aeEF
+   afrK
    (Array String Int))
 (declare-const
-   aeEL
+   afrQ
    (Array String Int))
 (declare-const
-   aeEN
+   afrS
    (Array String Int))
 (declare-const
-   aeEP
+   afrU
    (Array String Int))
 (declare-const
-   aeER
+   afrW
    (Array String Int))
 (assert
    (!
@@ -3965,7 +4797,7 @@
               const
               (Array String Int))
            0)
-         aeER)
+         afrW)
       :named
       given-4.1))
 (assert
@@ -3977,9 +4809,9 @@
               (+
                  (Int Int)
                  Int))
-           aeEq
-           aeEF)
-         aeEL)
+           afrv
+           afrK)
+         afrQ)
       :named
       given-4.2))
 (assert
@@ -3991,9 +4823,9 @@
               (+
                  (Int Int)
                  Int))
-           aeEq
-           aeEL)
-         aeEN)
+           afrv
+           afrQ)
+         afrS)
       :named
       given-4.3))
 (assert
@@ -4005,9 +4837,9 @@
               (+
                  (Int Int)
                  Int))
-           aeEq
-           aeEN)
-         aeEP)
+           afrv
+           afrS)
+         afrU)
       :named
       given-4.4))
 (assert
@@ -4019,9 +4851,9 @@
               (+
                  (Int Int)
                  Int))
-           aeEq
-           aeEq)
-         aeED)
+           afrv
+           afrv)
+         afrI)
       :named
       given-4.5))
 (assert
@@ -4033,9 +4865,9 @@
               (+
                  (Int Int)
                  Int))
-           aeEq
-           aeED)
-         aeEF)
+           afrv
+           afrI)
+         afrK)
       :named
       given-4.6))
 (assert
@@ -4047,19 +4879,19 @@
               (+
                  (Int Int)
                  Int))
-           aeEp
-           aeEp)
-         aeEB)
+           afru
+           afru)
+         afrG)
       :named
       given-4.7))
 (assert
    (!
-      (= aeEP aeER)
+      (= afrU afrW)
       :named
       given-4.8))
 (assert
    (!
-      (= aeEB aeEF)
+      (= afrG afrK)
       :named
       given-4.9))
 (check-sat)
@@ -4067,7 +4899,7 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{aeF8} {3}:: (b0 *: (b0 *: b0))
+;      [WD] hole{afsd} {3}:: (b0 *: (b0 *: b0))
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -4077,32 +4909,32 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeEu
+;      afrz
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeEu
-;        aeEu))
+;        afrz
+;        afrz))
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeEq
+;      afrv
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeEq
-;        aeEq)))
+;        afrv
+;        afrv)))
 
-;      [WD] hole{aeFh} {2}:: (b0
+;      [WD] hole{afsm} {2}:: (b0
 ;                             *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                            ~
 ;                            One (CNonCanonical)
@@ -4113,36 +4945,36 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeEu
+;      afrz
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aeEu
+;        afrz
 ;        (
 ;          (_
 ;             map
 ;             (+
 ;                (Int Int)
 ;                Int))
-;          aeEu
+;          afrz
 ;          (
 ;            (_
 ;               map
 ;               (+
 ;                  (Int Int)
 ;                  Int))
-;            aeEu
+;            afrz
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aeEu
-;              aeEu)))))
+;              afrz
+;              afrz)))))
 ;    (
 ;      (as
 ;         const
@@ -4150,13 +4982,13 @@
 ;      0))
 
 ; WANTEDS (names)
-;  aeEq  <=  b
-;  aeEu  <=  b_aeEu
+;  afrv  <=  b
+;  afrz  <=  b_afrz
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aeEu (Array String Int))
+; (declare-const afrz (Array String Int))
 (declare-const
-   aeEu
+   afrz
    (Array String Int))
 (assert
    (!
@@ -4169,30 +5001,30 @@
                     (+
                        (Int Int)
                        Int))
-                 aeEu
+                 afrz
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   aeEu
-                   aeEu))
+                   afrz
+                   afrz))
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
-                 aeEq
+                 afrv
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   aeEq
-                   aeEq))))
+                   afrv
+                   afrv))))
          (not
             (=
                (
@@ -4201,36 +5033,36 @@
                     (+
                        (Int Int)
                        Int))
-                 aeEu
+                 afrz
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   aeEu
+                   afrz
                    (
                      (_
                         map
                         (+
                            (Int Int)
                            Int))
-                     aeEu
+                     afrz
                      (
                        (_
                           map
                           (+
                              (Int Int)
                              Int))
-                       aeEu
+                       afrz
                        (
                          (_
                             map
                             (+
                                (Int Int)
                                Int))
-                         aeEu
-                         aeEu)))))
+                         afrz
+                         afrz)))))
                (
                  (as
                     const
@@ -4254,9 +5086,27 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeEp
-;           aeEp)
-;         aeEB))
+;           afru
+;           afru)
+;         afrG))
+;   (define-fun
+;      afrG
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afrK
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-4.4
 ;      ()
@@ -4268,9 +5118,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeEq
-;           aeEN)
-;         aeEP))
+;           afrv
+;           afrS)
+;         afrU))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -4290,7 +5140,25 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      aeEF
+;      afrI
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afrU
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      afrS
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -4309,9 +5177,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeEq
-;           aeEL)
-;         aeEN))
+;           afrv
+;           afrQ)
+;         afrS))
 ;   (define-fun
 ;      given-4.5
 ;      ()
@@ -4323,11 +5191,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeEq
-;           aeEq)
-;         aeED))
+;           afrv
+;           afrv)
+;         afrI))
 ;   (define-fun
-;      aeEN
+;      afru
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -4346,14 +5214,14 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeEq
-;           aeED)
-;         aeEF))
+;           afrv
+;           afrI)
+;         afrK))
 ;   (define-fun
 ;      given-4.9
 ;      ()
 ;      Bool
-;      (= aeEB aeEF))
+;      (= afrG afrK))
 ;   (define-fun
 ;      wanted-4
 ;      ()
@@ -4369,18 +5237,18 @@
 ;                         (+
 ;                            (Int Int)
 ;                            Int))
-;                      aeEu
-;                      aeEu
-;                      aeEu
+;                      afrz
+;                      afrz
+;                      afrz
 ;                      (
 ;                        (_
 ;                           map
 ;                           (+
 ;                              (Int Int)
 ;                              Int))
-;                        aeEu
-;                        aeEu
-;                        aeEu))
+;                        afrz
+;                        afrz
+;                        afrz))
 ;                    (
 ;                      (as
 ;                         const
@@ -4395,21 +5263,21 @@
 ;                       (+
 ;                          (Int Int)
 ;                          Int))
-;                    aeEu
-;                    aeEu
-;                    aeEu)
+;                    afrz
+;                    afrz
+;                    afrz)
 ;                  (
 ;                    (_
 ;                       map
 ;                       (+
 ;                          (Int Int)
 ;                          Int))
-;                    aeEq
-;                    aeEq
-;                    aeEq)))
+;                    afrv
+;                    afrv
+;                    afrv)))
 ;            a!1)))
 ;   (define-fun
-;      aeEB
+;      afrv
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -4428,11 +5296,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeEq
-;           aeEF)
-;         aeEL))
+;           afrv
+;           afrK)
+;         afrQ))
 ;   (define-fun
-;      aeEq
+;      afrQ
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -4441,50 +5309,17 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aeER
+;      afrz
 ;      ()
 ;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeEP
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeED
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeEp
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeEL
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         (- 1)))
 ;   (define-fun
 ;      one
 ;      ()
@@ -4500,24 +5335,21 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         aeER))
+;         afrW))
 ;   (define-fun
 ;      given-4.8
 ;      ()
 ;      Bool
-;      (= aeEP aeER))
+;      (= afrU afrW))
 ;   (define-fun
-;      aeEu
+;      afrW
 ;      ()
 ;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         (- 1)))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -4536,28 +5368,28 @@
 (echo "solver-start-cycle-7")
 
 ; GIVENS (GHC style)
-; [G] cobox_aeGf {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeGa {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeGb {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_aeGi {1}:: fsk0 ~ v (CTyEqCan)
+; [G] cobox_aftk {1}:: (v *: v) ~ fsk0 (CFunEqCan)
+; [G] cobox_aftf {0}:: (v *: w) ~ fsk0 (CFunEqCan)
+; [G] cobox_aftg {1}:: fsk0 ~ u (CTyEqCan)
+; [G] cobox_aftn {1}:: fsk0 ~ v (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{aeGs} {3}:: (v0 *: w) ~ u (CNonCanonical)
-; [WD] hole{aeGx} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
+; [WD] hole{aftx} {3}:: (v0 *: w) ~ u (CNonCanonical)
+; [WD] hole{aftC} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (*: [aeFU,aeFU],aeGe)
-; (*: [aeFU,aeFV],aeG9)
-; (aeG9,aeFT)
-; (aeGe,aeFU)
+; (*: [afsZ,afsZ],aftj)
+; (*: [afsZ,aft0],afte)
+; (afte,afsY)
+; (aftj,afsZ)
 
 ; WANTEDS (Thoralf style)
-; (*: [aeG0,aeFV],aeFT)
-; (*: [aeG0,aeG0],aeG0)
+; (*: [aft5,aft0],afsY)
+; (*: [aft5,aft5],aft5)
 
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
-;      [WD] hole{aeGs} {3}:: (v0 *: w) ~ u (CNonCanonical)
+;      [WD] hole{aftx} {3}:: (v0 *: w) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -4565,11 +5397,11 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeG0
-;      aeFV)
-;    aeFT)
+;      aft5
+;      aft0)
+;    afsY)
 
-;      [WD] hole{aeGx} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
+;      [WD] hole{aftC} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -4577,38 +5409,38 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeG0
-;      aeG0)
-;    aeG0)
+;      aft5
+;      aft5)
+;    aft5)
 
 ; GIVENS (names)
-;  aeFT  <=  u
-;  aeFU  <=  v
-;  aeFV  <=  w
-;  aeG9  <=  fsk_aeG9
-;  aeGe  <=  fsk_aeGe
+;  afsY  <=  u
+;  afsZ  <=  v
+;  aft0  <=  w
+;  afte  <=  fsk_afte
+;  aftj  <=  fsk_aftj
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aeFT (Array String Int))
-; (declare-const aeFU (Array String Int))
-; (declare-const aeFV (Array String Int))
-; (declare-const aeG9 (Array String Int))
-; (declare-const aeGe (Array String Int))
+; (declare-const afsY (Array String Int))
+; (declare-const afsZ (Array String Int))
+; (declare-const aft0 (Array String Int))
+; (declare-const afte (Array String Int))
+; (declare-const aftj (Array String Int))
 (declare-const
-   aeFT
+   afsY
    (Array String Int))
 (declare-const
-   aeFU
+   afsZ
    (Array String Int))
 (declare-const
-   aeFV
+   aft0
    (Array String Int))
 (declare-const
-   aeG9
+   afte
    (Array String Int))
 (declare-const
-   aeGe
+   aftj
    (Array String Int))
 (assert
    (!
@@ -4619,9 +5451,9 @@
               (+
                  (Int Int)
                  Int))
-           aeFU
-           aeFU)
-         aeGe)
+           afsZ
+           afsZ)
+         aftj)
       :named
       given-7.1))
 (assert
@@ -4633,19 +5465,19 @@
               (+
                  (Int Int)
                  Int))
-           aeFU
-           aeFV)
-         aeG9)
+           afsZ
+           aft0)
+         afte)
       :named
       given-7.2))
 (assert
    (!
-      (= aeG9 aeFT)
+      (= afte afsY)
       :named
       given-7.3))
 (assert
    (!
-      (= aeGe aeFU)
+      (= aftj afsZ)
       :named
       given-7.4))
 (check-sat)
@@ -4653,7 +5485,7 @@
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
-;      [WD] hole{aeGs} {3}:: (v0 *: w) ~ u (CNonCanonical)
+;      [WD] hole{aftx} {3}:: (v0 *: w) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -4661,11 +5493,11 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeG0
-;      aeFV)
-;    aeFT)
+;      aft5
+;      aft0)
+;    afsY)
 
-;      [WD] hole{aeGx} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
+;      [WD] hole{aftC} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -4673,19 +5505,19 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeG0
-;      aeG0)
-;    aeG0)
+;      aft5
+;      aft5)
+;    aft5)
 
 ; WANTEDS (names)
-;  aeFT  <=  u
-;  aeFV  <=  w
-;  aeG0  <=  v_aeG0
+;  afsY  <=  u
+;  aft0  <=  w
+;  aft5  <=  v_aft5
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aeG0 (Array String Int))
+; (declare-const aft5 (Array String Int))
 (declare-const
-   aeG0
+   aft5
    (Array String Int))
 (assert
    (!
@@ -4698,9 +5530,9 @@
                     (+
                        (Int Int)
                        Int))
-                 aeG0
-                 aeFV)
-               aeFT))
+                 aft5
+                 aft0)
+               afsY))
          (not
             (=
                (
@@ -4709,9 +5541,9 @@
                     (+
                        (Int Int)
                        Int))
-                 aeG0
-                 aeG0)
-               aeG0)))
+                 aft5
+                 aft5)
+               aft5)))
       :named
       wanted-7))
 (check-sat)
@@ -4719,6 +5551,39 @@
 (echo "wanteds-finish-cycle-7")
 (get-model)
 ; (
+;   (define-fun
+;      afsZ
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      aft0
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           28957)
+;         "!0!"
+;         8855))
+;   (define-fun
+;      afte
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           28957)
+;         "!0!"
+;         8855))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -4741,19 +5606,16 @@
 ;      given-7.4
 ;      ()
 ;      Bool
-;      (= aeGe aeFU))
+;      (= aftj afsZ))
 ;   (define-fun
-;      aeFT
+;      aftj
 ;      ()
 ;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           28957)
-;         "!0!"
-;         8855))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-7.1
 ;      ()
@@ -4765,20 +5627,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeFU
-;           aeFU)
-;         aeGe))
+;           afsZ
+;           afsZ)
+;         aftj))
 ;   (define-fun
-;      aeGe
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aeFV
+;      afsY
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -4802,9 +5655,9 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aeG0
-;                 aeFV)
-;               aeFT))
+;                 aft5
+;                 aft0)
+;               afsY))
 ;         (not
 ;            (=
 ;               (
@@ -4813,38 +5666,14 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aeG0
-;                 aeG0)
-;               aeG0))))
-;   (define-fun
-;      aeG0
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           2437)
-;         "!0!"
-;         1))
+;                 aft5
+;                 aft5)
+;               aft5))))
 ;   (define-fun
 ;      given-7.3
 ;      ()
 ;      Bool
-;      (= aeG9 aeFT))
-;   (define-fun
-;      aeG9
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           28957)
-;         "!0!"
-;         8855))
+;      (= afte afsY))
 ;   (define-fun
 ;      given-7.2
 ;      ()
@@ -4856,23 +5685,26 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeFU
-;           aeFV)
-;         aeG9))
+;           afsZ
+;           aft0)
+;         afte))
 ;   (define-fun
 ;      one
 ;      ()
 ;      Int
 ;      1)
 ;   (define-fun
-;      aeFU
+;      aft5
 ;      ()
 ;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           2437)
+;         "!0!"
+;         1))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -4887,1843 +5719,324 @@
 (echo "solver-start-cycle-8")
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
-
-; GIVENS (GHC style)
-; [G] cobox_aeKN {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeJH {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJJ {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJL {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJN {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJP {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJR {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJT {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJV {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJX {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJZ {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK1 {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK3 {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK5 {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK7 {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeK9 {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKb {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKd {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKf {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKh {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKj {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKl {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKn {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKp {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKr {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKt {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKv {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKx {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKz {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKB {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKD {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKF {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKH {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKJ {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeKL {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJz {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeJB {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeJx {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeKQ {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeKR {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; [WD] hole{aeKY} {2}:: One ~ b (CNonCanonical)
-
-; GIVENS (Thoralf style)
-; (One [],aeKM)
-; (*: [aeGM,aeJA],aeJG)
-; (*: [aeGM,aeJG],aeJI)
-; (*: [aeGM,aeJI],aeJK)
-; (*: [aeGM,aeJK],aeJM)
-; (*: [aeGM,aeJM],aeJO)
-; (*: [aeGM,aeJO],aeJQ)
-; (*: [aeGM,aeJQ],aeJS)
-; (*: [aeGM,aeJS],aeJU)
-; (*: [aeGM,aeJU],aeJW)
-; (*: [aeGM,aeJW],aeJY)
-; (*: [aeGM,aeJY],aeK0)
-; (*: [aeGM,aeK0],aeK2)
-; (*: [aeGM,aeK2],aeK4)
-; (*: [aeGM,aeK4],aeK6)
-; (*: [aeGM,aeK6],aeK8)
-; (*: [aeGM,aeK8],aeKa)
-; (*: [aeGM,aeKa],aeKc)
-; (*: [aeGM,aeKc],aeKe)
-; (*: [aeGM,aeKe],aeKg)
-; (*: [aeGM,aeKg],aeKi)
-; (*: [aeGM,aeKi],aeKk)
-; (*: [aeGM,aeKk],aeKm)
-; (*: [aeGM,aeKm],aeKo)
-; (*: [aeGM,aeKo],aeKq)
-; (*: [aeGM,aeKq],aeKs)
-; (*: [aeGM,aeKs],aeKu)
-; (*: [aeGM,aeKu],aeKw)
-; (*: [aeGM,aeKw],aeKy)
-; (*: [aeGM,aeKy],aeKA)
-; (*: [aeGM,aeKA],aeKC)
-; (*: [aeGM,aeKC],aeKE)
-; (*: [aeGM,aeKE],aeKG)
-; (*: [aeGM,aeKG],aeKI)
-; (*: [aeGM,aeKI],aeKK)
-; (*: [aeGM,aeGM],aeJy)
-; (*: [aeGM,aeJy],aeJA)
-; (*: [aeGL,aeGL],aeJw)
-; (aeKK,aeKM)
-; (aeJw,aeJA)
-
-; WANTEDS (Thoralf style)
-; (One [],aeGM)
-
-(echo "givens-start-cycle-9")
-; GIVENS (conversions)
-;      [WD] hole{aeKY} {2}:: One ~ b (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    aeGM)
-
-; GIVENS (names)
-;  aeGL  <=  a
-;  aeGM  <=  b
-;  aeJw  <=  fsk_aeJw
-;  aeJy  <=  fsk_aeJy
-;  aeJA  <=  fsk_aeJA
-;  aeJG  <=  fsk_aeJG
-;  aeJI  <=  fsk_aeJI
-;  aeJK  <=  fsk_aeJK
-;  aeJM  <=  fsk_aeJM
-;  aeJO  <=  fsk_aeJO
-;  aeJQ  <=  fsk_aeJQ
-;  aeJS  <=  fsk_aeJS
-;  aeJU  <=  fsk_aeJU
-;  aeJW  <=  fsk_aeJW
-;  aeJY  <=  fsk_aeJY
-;  aeK0  <=  fsk_aeK0
-;  aeK2  <=  fsk_aeK2
-;  aeK4  <=  fsk_aeK4
-;  aeK6  <=  fsk_aeK6
-;  aeK8  <=  fsk_aeK8
-;  aeKa  <=  fsk_aeKa
-;  aeKc  <=  fsk_aeKc
-;  aeKe  <=  fsk_aeKe
-;  aeKg  <=  fsk_aeKg
-;  aeKi  <=  fsk_aeKi
-;  aeKk  <=  fsk_aeKk
-;  aeKm  <=  fsk_aeKm
-;  aeKo  <=  fsk_aeKo
-;  aeKq  <=  fsk_aeKq
-;  aeKs  <=  fsk_aeKs
-;  aeKu  <=  fsk_aeKu
-;  aeKw  <=  fsk_aeKw
-;  aeKy  <=  fsk_aeKy
-;  aeKA  <=  fsk_aeKA
-;  aeKC  <=  fsk_aeKC
-;  aeKE  <=  fsk_aeKE
-;  aeKG  <=  fsk_aeKG
-;  aeKI  <=  fsk_aeKI
-;  aeKK  <=  fsk_aeKK
-;  aeKM  <=  fsk_aeKM
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeGL (Array String Int))
-; (declare-const aeGM (Array String Int))
-; (declare-const aeJA (Array String Int))
-; (declare-const aeJG (Array String Int))
-; (declare-const aeJI (Array String Int))
-; (declare-const aeJK (Array String Int))
-; (declare-const aeJM (Array String Int))
-; (declare-const aeJO (Array String Int))
-; (declare-const aeJQ (Array String Int))
-; (declare-const aeJS (Array String Int))
-; (declare-const aeJU (Array String Int))
-; (declare-const aeJW (Array String Int))
-; (declare-const aeJY (Array String Int))
-; (declare-const aeJw (Array String Int))
-; (declare-const aeJy (Array String Int))
-; (declare-const aeK0 (Array String Int))
-; (declare-const aeK2 (Array String Int))
-; (declare-const aeK4 (Array String Int))
-; (declare-const aeK6 (Array String Int))
-; (declare-const aeK8 (Array String Int))
-; (declare-const aeKA (Array String Int))
-; (declare-const aeKC (Array String Int))
-; (declare-const aeKE (Array String Int))
-; (declare-const aeKG (Array String Int))
-; (declare-const aeKI (Array String Int))
-; (declare-const aeKK (Array String Int))
-; (declare-const aeKM (Array String Int))
-; (declare-const aeKa (Array String Int))
-; (declare-const aeKc (Array String Int))
-; (declare-const aeKe (Array String Int))
-; (declare-const aeKg (Array String Int))
-; (declare-const aeKi (Array String Int))
-; (declare-const aeKk (Array String Int))
-; (declare-const aeKm (Array String Int))
-; (declare-const aeKo (Array String Int))
-; (declare-const aeKq (Array String Int))
-; (declare-const aeKs (Array String Int))
-; (declare-const aeKu (Array String Int))
-; (declare-const aeKw (Array String Int))
-; (declare-const aeKy (Array String Int))
-(declare-const
-   aeGL
-   (Array String Int))
-(declare-const
-   aeGM
-   (Array String Int))
-(declare-const
-   aeJw
-   (Array String Int))
-(declare-const
-   aeJy
-   (Array String Int))
-(declare-const
-   aeJA
-   (Array String Int))
-(declare-const
-   aeJG
-   (Array String Int))
-(declare-const
-   aeJI
-   (Array String Int))
-(declare-const
-   aeJK
-   (Array String Int))
-(declare-const
-   aeJM
-   (Array String Int))
-(declare-const
-   aeJO
-   (Array String Int))
-(declare-const
-   aeJQ
-   (Array String Int))
-(declare-const
-   aeJS
-   (Array String Int))
-(declare-const
-   aeJU
-   (Array String Int))
-(declare-const
-   aeJW
-   (Array String Int))
-(declare-const
-   aeJY
-   (Array String Int))
-(declare-const
-   aeK0
-   (Array String Int))
-(declare-const
-   aeK2
-   (Array String Int))
-(declare-const
-   aeK4
-   (Array String Int))
-(declare-const
-   aeK6
-   (Array String Int))
-(declare-const
-   aeK8
-   (Array String Int))
-(declare-const
-   aeKa
-   (Array String Int))
-(declare-const
-   aeKc
-   (Array String Int))
-(declare-const
-   aeKe
-   (Array String Int))
-(declare-const
-   aeKg
-   (Array String Int))
-(declare-const
-   aeKi
-   (Array String Int))
-(declare-const
-   aeKk
-   (Array String Int))
-(declare-const
-   aeKm
-   (Array String Int))
-(declare-const
-   aeKo
-   (Array String Int))
-(declare-const
-   aeKq
-   (Array String Int))
-(declare-const
-   aeKs
-   (Array String Int))
-(declare-const
-   aeKu
-   (Array String Int))
-(declare-const
-   aeKw
-   (Array String Int))
-(declare-const
-   aeKy
-   (Array String Int))
-(declare-const
-   aeKA
-   (Array String Int))
-(declare-const
-   aeKC
-   (Array String Int))
-(declare-const
-   aeKE
-   (Array String Int))
-(declare-const
-   aeKG
-   (Array String Int))
-(declare-const
-   aeKI
-   (Array String Int))
-(declare-const
-   aeKK
-   (Array String Int))
-(declare-const
-   aeKM
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeKM)
-      :named
-      given-9.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJA)
-         aeJG)
-      :named
-      given-9.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJG)
-         aeJI)
-      :named
-      given-9.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJI)
-         aeJK)
-      :named
-      given-9.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJK)
-         aeJM)
-      :named
-      given-9.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJM)
-         aeJO)
-      :named
-      given-9.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJO)
-         aeJQ)
-      :named
-      given-9.7))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJQ)
-         aeJS)
-      :named
-      given-9.8))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJS)
-         aeJU)
-      :named
-      given-9.9))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJU)
-         aeJW)
-      :named
-      given-9.10))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJW)
-         aeJY)
-      :named
-      given-9.11))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJY)
-         aeK0)
-      :named
-      given-9.12))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK0)
-         aeK2)
-      :named
-      given-9.13))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK2)
-         aeK4)
-      :named
-      given-9.14))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK4)
-         aeK6)
-      :named
-      given-9.15))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK6)
-         aeK8)
-      :named
-      given-9.16))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeK8)
-         aeKa)
-      :named
-      given-9.17))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKa)
-         aeKc)
-      :named
-      given-9.18))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKc)
-         aeKe)
-      :named
-      given-9.19))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKe)
-         aeKg)
-      :named
-      given-9.20))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKg)
-         aeKi)
-      :named
-      given-9.21))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKi)
-         aeKk)
-      :named
-      given-9.22))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKk)
-         aeKm)
-      :named
-      given-9.23))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKm)
-         aeKo)
-      :named
-      given-9.24))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKo)
-         aeKq)
-      :named
-      given-9.25))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKq)
-         aeKs)
-      :named
-      given-9.26))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKs)
-         aeKu)
-      :named
-      given-9.27))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKu)
-         aeKw)
-      :named
-      given-9.28))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKw)
-         aeKy)
-      :named
-      given-9.29))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKy)
-         aeKA)
-      :named
-      given-9.30))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKA)
-         aeKC)
-      :named
-      given-9.31))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKC)
-         aeKE)
-      :named
-      given-9.32))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKE)
-         aeKG)
-      :named
-      given-9.33))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKG)
-         aeKI)
-      :named
-      given-9.34))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeKI)
-         aeKK)
-      :named
-      given-9.35))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeGM)
-         aeJy)
-      :named
-      given-9.36))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGM
-           aeJy)
-         aeJA)
-      :named
-      given-9.37))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGL
-           aeGL)
-         aeJw)
-      :named
-      given-9.38))
-(assert
-   (!
-      (= aeKK aeKM)
-      :named
-      given-9.39))
-(assert
-   (!
-      (= aeJw aeJA)
-      :named
-      given-9.40))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-9")
-(echo "wanteds-start-cycle-9")
-; WANTEDS (conversions)
-;      [WD] hole{aeKY} {2}:: One ~ b (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    aeGM)
-
-; WANTEDS (names)
-;  aeGM  <=  b
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (!
-      (not
-         (=
-            (
-              (as
-                 const
-                 (Array String Int))
-              0)
-            aeGM))
-      :named
-      wanted-9))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-9")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeKM)
-;      :named
-;      given-9.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJA)
-;         aeJG)
-;      :named
-;      given-9.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJG)
-;         aeJI)
-;      :named
-;      given-9.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJI)
-;         aeJK)
-;      :named
-;      given-9.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJK)
-;         aeJM)
-;      :named
-;      given-9.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJM)
-;         aeJO)
-;      :named
-;      given-9.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJO)
-;         aeJQ)
-;      :named
-;      given-9.7)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJQ)
-;         aeJS)
-;      :named
-;      given-9.8)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJS)
-;         aeJU)
-;      :named
-;      given-9.9)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJU)
-;         aeJW)
-;      :named
-;      given-9.10)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJW)
-;         aeJY)
-;      :named
-;      given-9.11)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJY)
-;         aeK0)
-;      :named
-;      given-9.12)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK0)
-;         aeK2)
-;      :named
-;      given-9.13)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK2)
-;         aeK4)
-;      :named
-;      given-9.14)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK4)
-;         aeK6)
-;      :named
-;      given-9.15)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK6)
-;         aeK8)
-;      :named
-;      given-9.16)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeK8)
-;         aeKa)
-;      :named
-;      given-9.17)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKa)
-;         aeKc)
-;      :named
-;      given-9.18)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKc)
-;         aeKe)
-;      :named
-;      given-9.19)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKe)
-;         aeKg)
-;      :named
-;      given-9.20)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKg)
-;         aeKi)
-;      :named
-;      given-9.21)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKi)
-;         aeKk)
-;      :named
-;      given-9.22)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKk)
-;         aeKm)
-;      :named
-;      given-9.23)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKm)
-;         aeKo)
-;      :named
-;      given-9.24)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKo)
-;         aeKq)
-;      :named
-;      given-9.25)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKq)
-;         aeKs)
-;      :named
-;      given-9.26)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKs)
-;         aeKu)
-;      :named
-;      given-9.27)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKu)
-;         aeKw)
-;      :named
-;      given-9.28)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKw)
-;         aeKy)
-;      :named
-;      given-9.29)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKy)
-;         aeKA)
-;      :named
-;      given-9.30)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKA)
-;         aeKC)
-;      :named
-;      given-9.31)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKC)
-;         aeKE)
-;      :named
-;      given-9.32)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKE)
-;         aeKG)
-;      :named
-;      given-9.33)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKG)
-;         aeKI)
-;      :named
-;      given-9.34)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeKI)
-;         aeKK)
-;      :named
-;      given-9.35)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeGM)
-;         aeJy)
-;      :named
-;      given-9.36)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGM
-;           aeJy)
-;         aeJA)
-;      :named
-;      given-9.37)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGL
-;           aeGL)
-;         aeJw)
-;      :named
-;      given-9.38)
-;   (!
-;      (= aeKK aeKM)
-;      :named
-;      given-9.39)
-;   (!
-;      (= aeJw aeJA)
-;      :named
-;      given-9.40)
-;   (!
-;      (not
-;         (=
-;            (
-;              (as
-;                 const
-;                 (Array String Int))
-;              0)
-;            aeGM))
-;      :named
-;      wanted-9))
-(get-unsat-core)
-; (given-9.19
-;    given-9.20
-;    given-9.18
-;    given-9.17
-;    given-9.16
-;    given-9.15
-;    given-9.14
-;    given-9.13
-;    given-9.11
-;    given-9.4
-;    given-9.1
-;    given-9.10
-;    given-9.7
-;    given-9.9
-;    given-9.3
-;    given-9.6
-;    given-9.5
-;    given-9.29
-;    given-9.30
-;    given-9.28
-;    given-9.27
-;    given-9.26
-;    given-9.25
-;    given-9.24
-;    given-9.23
-;    given-9.21
-;    given-9.22
-;    given-9.2
-;    given-9.8
-;    wanted-9
-;    given-9.39
-;    given-9.37
-;    given-9.36
-;    given-9.35
-;    given-9.34
-;    given-9.33
-;    given-9.32
-;    given-9.31
-;    given-9.12)
-(pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
+Parse Failed
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
-
-; GIVENS (GHC style)
-; [G] cobox_aeLi {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLc {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeLe {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeLg {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeL4 {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeL6 {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_aeL2 {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLl {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_aeLm {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; [WD] hole{aeLt} {2}:: One ~ a (CNonCanonical)
-
-; GIVENS (Thoralf style)
-; (One [],aeLh)
-; (*: [aeGU,aeL5],aeLb)
-; (*: [aeGU,aeLb],aeLd)
-; (*: [aeGU,aeLd],aeLf)
-; (*: [aeGU,aeGU],aeL3)
-; (*: [aeGU,aeL3],aeL5)
-; (*: [aeGT,aeGT],aeL1)
-; (aeLf,aeLh)
-; (aeL1,aeL5)
-
-; WANTEDS (Thoralf style)
-; (One [],aeGT)
-
-(echo "givens-start-cycle-11")
-; GIVENS (conversions)
-;      [WD] hole{aeLt} {2}:: One ~ a (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    aeGT)
-
-; GIVENS (names)
-;  aeGT  <=  a
-;  aeGU  <=  b
-;  aeL1  <=  fsk_aeL1
-;  aeL3  <=  fsk_aeL3
-;  aeL5  <=  fsk_aeL5
-;  aeLb  <=  fsk_aeLb
-;  aeLd  <=  fsk_aeLd
-;  aeLf  <=  fsk_aeLf
-;  aeLh  <=  fsk_aeLh
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const aeGT (Array String Int))
-; (declare-const aeGU (Array String Int))
-; (declare-const aeL1 (Array String Int))
-; (declare-const aeL3 (Array String Int))
-; (declare-const aeL5 (Array String Int))
-; (declare-const aeLb (Array String Int))
-; (declare-const aeLd (Array String Int))
-; (declare-const aeLf (Array String Int))
-; (declare-const aeLh (Array String Int))
-(declare-const
-   aeGT
-   (Array String Int))
-(declare-const
-   aeGU
-   (Array String Int))
-(declare-const
-   aeL1
-   (Array String Int))
-(declare-const
-   aeL3
-   (Array String Int))
-(declare-const
-   aeL5
-   (Array String Int))
-(declare-const
-   aeLb
-   (Array String Int))
-(declare-const
-   aeLd
-   (Array String Int))
-(declare-const
-   aeLf
-   (Array String Int))
-(declare-const
-   aeLh
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aeLh)
-      :named
-      given-11.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeL5)
-         aeLb)
-      :named
-      given-11.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeLb)
-         aeLd)
-      :named
-      given-11.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeLd)
-         aeLf)
-      :named
-      given-11.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeGU)
-         aeL3)
-      :named
-      given-11.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGU
-           aeL3)
-         aeL5)
-      :named
-      given-11.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aeGT
-           aeGT)
-         aeL1)
-      :named
-      given-11.7))
-(assert
-   (!
-      (= aeLf aeLh)
-      :named
-      given-11.8))
-(assert
-   (!
-      (= aeL1 aeL5)
-      :named
-      given-11.9))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-11")
-(echo "wanteds-start-cycle-11")
-; WANTEDS (conversions)
-;      [WD] hole{aeLt} {2}:: One ~ a (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    aeGT)
-
-; WANTEDS (names)
-;  aeGT  <=  a
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (!
-      (not
-         (=
-            (
-              (as
-                 const
-                 (Array String Int))
-              0)
-            aeGT))
-      :named
-      wanted-11))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-11")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aeLh)
-;      :named
-;      given-11.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeL5)
-;         aeLb)
-;      :named
-;      given-11.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeLb)
-;         aeLd)
-;      :named
-;      given-11.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeLd)
-;         aeLf)
-;      :named
-;      given-11.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeGU)
-;         aeL3)
-;      :named
-;      given-11.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGU
-;           aeL3)
-;         aeL5)
-;      :named
-;      given-11.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aeGT
-;           aeGT)
-;         aeL1)
-;      :named
-;      given-11.7)
-;   (!
-;      (= aeLf aeLh)
-;      :named
-;      given-11.8)
-;   (!
-;      (= aeL1 aeL5)
-;      :named
-;      given-11.9)
-;   (!
-;      (not
-;         (=
-;            (
-;              (as
-;                 const
-;                 (Array String Int))
-;              0)
-;            aeGT))
-;      :named
-;      wanted-11))
-(get-unsat-core)
-; (wanted-11
-;    given-11.9
-;    given-11.8
-;    given-11.7
-;    given-11.6
-;    given-11.5
-;    given-11.4
-;    given-11.3
-;    given-11.1
-;    given-11.2)
-(pop 1)
+Parse Failed
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
+Parse Failed
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
+(echo "solver-finish-cycle-13")
+(echo "solver-start-cycle-14")
 
 ; GIVENS (GHC style)
-; [G] cobox_aeLz {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLx {0}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLA {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_agL3 {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_agJX {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agJZ {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agK1 {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agK3 {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agK5 {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agK7 {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agK9 {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKb {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKd {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKf {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKh {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKj {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKl {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKn {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKp {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKr {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKt {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKv {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKx {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKz {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKB {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKD {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKF {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKH {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKJ {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKL {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKN {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKP {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKR {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKT {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKV {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKX {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agKZ {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agL1 {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agJP {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_agJR {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agJN {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_agL6 {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_agL7 {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{aeLF} {2}:: One ~ a (CNonCanonical)
+; [WD] hole{agLe} {2}:: One ~ b (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aeLy)
-; (*: [aeH1,aeH1],aeLw)
-; (aeLw,aeLy)
+; (One [],agL2)
+; (*: [ag4C,agJQ],agJW)
+; (*: [ag4C,agJW],agJY)
+; (*: [ag4C,agJY],agK0)
+; (*: [ag4C,agK0],agK2)
+; (*: [ag4C,agK2],agK4)
+; (*: [ag4C,agK4],agK6)
+; (*: [ag4C,agK6],agK8)
+; (*: [ag4C,agK8],agKa)
+; (*: [ag4C,agKa],agKc)
+; (*: [ag4C,agKc],agKe)
+; (*: [ag4C,agKe],agKg)
+; (*: [ag4C,agKg],agKi)
+; (*: [ag4C,agKi],agKk)
+; (*: [ag4C,agKk],agKm)
+; (*: [ag4C,agKm],agKo)
+; (*: [ag4C,agKo],agKq)
+; (*: [ag4C,agKq],agKs)
+; (*: [ag4C,agKs],agKu)
+; (*: [ag4C,agKu],agKw)
+; (*: [ag4C,agKw],agKy)
+; (*: [ag4C,agKy],agKA)
+; (*: [ag4C,agKA],agKC)
+; (*: [ag4C,agKC],agKE)
+; (*: [ag4C,agKE],agKG)
+; (*: [ag4C,agKG],agKI)
+; (*: [ag4C,agKI],agKK)
+; (*: [ag4C,agKK],agKM)
+; (*: [ag4C,agKM],agKO)
+; (*: [ag4C,agKO],agKQ)
+; (*: [ag4C,agKQ],agKS)
+; (*: [ag4C,agKS],agKU)
+; (*: [ag4C,agKU],agKW)
+; (*: [ag4C,agKW],agKY)
+; (*: [ag4C,agKY],agL0)
+; (*: [ag4C,ag4C],agJO)
+; (*: [ag4C,agJO],agJQ)
+; (*: [ag4B,ag4B],agJM)
+; (agL0,agL2)
+; (agJM,agJQ)
 
 ; WANTEDS (Thoralf style)
-; (One [],aeH1)
+; (One [],ag4C)
 
-(echo "givens-start-cycle-13")
+(echo "givens-start-cycle-14")
 ; GIVENS (conversions)
-;      [WD] hole{aeLF} {2}:: One ~ a (CNonCanonical)
+;      [WD] hole{agLe} {2}:: One ~ b (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
 ;         const
 ;         (Array String Int))
 ;      0)
-;    aeH1)
+;    ag4C)
 
 ; GIVENS (names)
-;  aeH1  <=  a
-;  aeLw  <=  fsk_aeLw
-;  aeLy  <=  fsk_aeLy
+;  ag4B  <=  a
+;  ag4C  <=  b
+;  agJM  <=  fsk_agJM
+;  agJO  <=  fsk_agJO
+;  agJQ  <=  fsk_agJQ
+;  agJW  <=  fsk_agJW
+;  agJY  <=  fsk_agJY
+;  agK0  <=  fsk_agK0
+;  agK2  <=  fsk_agK2
+;  agK4  <=  fsk_agK4
+;  agK6  <=  fsk_agK6
+;  agK8  <=  fsk_agK8
+;  agKa  <=  fsk_agKa
+;  agKc  <=  fsk_agKc
+;  agKe  <=  fsk_agKe
+;  agKg  <=  fsk_agKg
+;  agKi  <=  fsk_agKi
+;  agKk  <=  fsk_agKk
+;  agKm  <=  fsk_agKm
+;  agKo  <=  fsk_agKo
+;  agKq  <=  fsk_agKq
+;  agKs  <=  fsk_agKs
+;  agKu  <=  fsk_agKu
+;  agKw  <=  fsk_agKw
+;  agKy  <=  fsk_agKy
+;  agKA  <=  fsk_agKA
+;  agKC  <=  fsk_agKC
+;  agKE  <=  fsk_agKE
+;  agKG  <=  fsk_agKG
+;  agKI  <=  fsk_agKI
+;  agKK  <=  fsk_agKK
+;  agKM  <=  fsk_agKM
+;  agKO  <=  fsk_agKO
+;  agKQ  <=  fsk_agKQ
+;  agKS  <=  fsk_agKS
+;  agKU  <=  fsk_agKU
+;  agKW  <=  fsk_agKW
+;  agKY  <=  fsk_agKY
+;  agL0  <=  fsk_agL0
+;  agL2  <=  fsk_agL2
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aeH1 (Array String Int))
-; (declare-const aeLw (Array String Int))
-; (declare-const aeLy (Array String Int))
+; (declare-const ag4B (Array String Int))
+; (declare-const ag4C (Array String Int))
+; (declare-const agJM (Array String Int))
+; (declare-const agJO (Array String Int))
+; (declare-const agJQ (Array String Int))
+; (declare-const agJW (Array String Int))
+; (declare-const agJY (Array String Int))
+; (declare-const agK0 (Array String Int))
+; (declare-const agK2 (Array String Int))
+; (declare-const agK4 (Array String Int))
+; (declare-const agK6 (Array String Int))
+; (declare-const agK8 (Array String Int))
+; (declare-const agKA (Array String Int))
+; (declare-const agKC (Array String Int))
+; (declare-const agKE (Array String Int))
+; (declare-const agKG (Array String Int))
+; (declare-const agKI (Array String Int))
+; (declare-const agKK (Array String Int))
+; (declare-const agKM (Array String Int))
+; (declare-const agKO (Array String Int))
+; (declare-const agKQ (Array String Int))
+; (declare-const agKS (Array String Int))
+; (declare-const agKU (Array String Int))
+; (declare-const agKW (Array String Int))
+; (declare-const agKY (Array String Int))
+; (declare-const agKa (Array String Int))
+; (declare-const agKc (Array String Int))
+; (declare-const agKe (Array String Int))
+; (declare-const agKg (Array String Int))
+; (declare-const agKi (Array String Int))
+; (declare-const agKk (Array String Int))
+; (declare-const agKm (Array String Int))
+; (declare-const agKo (Array String Int))
+; (declare-const agKq (Array String Int))
+; (declare-const agKs (Array String Int))
+; (declare-const agKu (Array String Int))
+; (declare-const agKw (Array String Int))
+; (declare-const agKy (Array String Int))
+; (declare-const agL0 (Array String Int))
+; (declare-const agL2 (Array String Int))
 (declare-const
-   aeH1
+   ag4B
    (Array String Int))
 (declare-const
-   aeLw
+   ag4C
    (Array String Int))
 (declare-const
-   aeLy
+   agJM
+   (Array String Int))
+(declare-const
+   agJO
+   (Array String Int))
+(declare-const
+   agJQ
+   (Array String Int))
+(declare-const
+   agJW
+   (Array String Int))
+(declare-const
+   agJY
+   (Array String Int))
+(declare-const
+   agK0
+   (Array String Int))
+(declare-const
+   agK2
+   (Array String Int))
+(declare-const
+   agK4
+   (Array String Int))
+(declare-const
+   agK6
+   (Array String Int))
+(declare-const
+   agK8
+   (Array String Int))
+(declare-const
+   agKa
+   (Array String Int))
+(declare-const
+   agKc
+   (Array String Int))
+(declare-const
+   agKe
+   (Array String Int))
+(declare-const
+   agKg
+   (Array String Int))
+(declare-const
+   agKi
+   (Array String Int))
+(declare-const
+   agKk
+   (Array String Int))
+(declare-const
+   agKm
+   (Array String Int))
+(declare-const
+   agKo
+   (Array String Int))
+(declare-const
+   agKq
+   (Array String Int))
+(declare-const
+   agKs
+   (Array String Int))
+(declare-const
+   agKu
+   (Array String Int))
+(declare-const
+   agKw
+   (Array String Int))
+(declare-const
+   agKy
+   (Array String Int))
+(declare-const
+   agKA
+   (Array String Int))
+(declare-const
+   agKC
+   (Array String Int))
+(declare-const
+   agKE
+   (Array String Int))
+(declare-const
+   agKG
+   (Array String Int))
+(declare-const
+   agKI
+   (Array String Int))
+(declare-const
+   agKK
+   (Array String Int))
+(declare-const
+   agKM
+   (Array String Int))
+(declare-const
+   agKO
+   (Array String Int))
+(declare-const
+   agKQ
+   (Array String Int))
+(declare-const
+   agKS
+   (Array String Int))
+(declare-const
+   agKU
+   (Array String Int))
+(declare-const
+   agKW
+   (Array String Int))
+(declare-const
+   agKY
+   (Array String Int))
+(declare-const
+   agL0
+   (Array String Int))
+(declare-const
+   agL2
    (Array String Int))
 (assert
    (!
@@ -6733,9 +6046,9 @@
               const
               (Array String Int))
            0)
-         aeLy)
+         agL2)
       :named
-      given-13.1))
+      given-14.1))
 (assert
    (!
       (=
@@ -6745,32 +6058,541 @@
               (+
                  (Int Int)
                  Int))
-           aeH1
-           aeH1)
-         aeLw)
+           ag4C
+           agJQ)
+         agJW)
       :named
-      given-13.2))
+      given-14.2))
 (assert
    (!
-      (= aeLw aeLy)
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agJW)
+         agJY)
       :named
-      given-13.3))
+      given-14.3))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agJY)
+         agK0)
+      :named
+      given-14.4))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agK0)
+         agK2)
+      :named
+      given-14.5))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agK2)
+         agK4)
+      :named
+      given-14.6))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agK4)
+         agK6)
+      :named
+      given-14.7))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agK6)
+         agK8)
+      :named
+      given-14.8))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agK8)
+         agKa)
+      :named
+      given-14.9))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKa)
+         agKc)
+      :named
+      given-14.10))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKc)
+         agKe)
+      :named
+      given-14.11))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKe)
+         agKg)
+      :named
+      given-14.12))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKg)
+         agKi)
+      :named
+      given-14.13))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKi)
+         agKk)
+      :named
+      given-14.14))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKk)
+         agKm)
+      :named
+      given-14.15))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKm)
+         agKo)
+      :named
+      given-14.16))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKo)
+         agKq)
+      :named
+      given-14.17))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKq)
+         agKs)
+      :named
+      given-14.18))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKs)
+         agKu)
+      :named
+      given-14.19))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKu)
+         agKw)
+      :named
+      given-14.20))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKw)
+         agKy)
+      :named
+      given-14.21))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKy)
+         agKA)
+      :named
+      given-14.22))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKA)
+         agKC)
+      :named
+      given-14.23))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKC)
+         agKE)
+      :named
+      given-14.24))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKE)
+         agKG)
+      :named
+      given-14.25))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKG)
+         agKI)
+      :named
+      given-14.26))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKI)
+         agKK)
+      :named
+      given-14.27))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKK)
+         agKM)
+      :named
+      given-14.28))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKM)
+         agKO)
+      :named
+      given-14.29))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKO)
+         agKQ)
+      :named
+      given-14.30))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKQ)
+         agKS)
+      :named
+      given-14.31))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKS)
+         agKU)
+      :named
+      given-14.32))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKU)
+         agKW)
+      :named
+      given-14.33))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKW)
+         agKY)
+      :named
+      given-14.34))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agKY)
+         agL0)
+      :named
+      given-14.35))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           ag4C)
+         agJO)
+      :named
+      given-14.36))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4C
+           agJO)
+         agJQ)
+      :named
+      given-14.37))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4B
+           ag4B)
+         agJM)
+      :named
+      given-14.38))
+(assert
+   (!
+      (= agL0 agL2)
+      :named
+      given-14.39))
+(assert
+   (!
+      (= agJM agJQ)
+      :named
+      given-14.40))
 (check-sat)
 ; sat
-(echo "givens-finish-cycle-13")
-(echo "wanteds-start-cycle-13")
+(echo "givens-finish-cycle-14")
+(echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
-;      [WD] hole{aeLF} {2}:: One ~ a (CNonCanonical)
+;      [WD] hole{agLe} {2}:: One ~ b (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
 ;         const
 ;         (Array String Int))
 ;      0)
-;    aeH1)
+;    ag4C)
 
 ; WANTEDS (names)
-;  aeH1  <=  a
+;  ag4C  <=  b
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -6782,12 +6604,12 @@
                  const
                  (Array String Int))
               0)
-            aeH1))
+            ag4C))
       :named
-      wanted-13))
+      wanted-14))
 (check-sat)
 ; unsat
-(echo "wanteds-finish-cycle-13")
+(echo "wanteds-finish-cycle-14")
 (get-assertions)
 ; (
 ;   (= one 1)
@@ -6799,9 +6621,9 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         aeLy)
+;         agL2)
 ;      :named
-;      given-13.1)
+;      given-14.1)
 ;   (!
 ;      (=
 ;         (
@@ -6810,15 +6632,487 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeH1
-;           aeH1)
-;         aeLw)
+;           ag4C
+;           agJQ)
+;         agJW)
 ;      :named
-;      given-13.2)
+;      given-14.2)
 ;   (!
-;      (= aeLw aeLy)
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agJW)
+;         agJY)
 ;      :named
-;      given-13.3)
+;      given-14.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agJY)
+;         agK0)
+;      :named
+;      given-14.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agK0)
+;         agK2)
+;      :named
+;      given-14.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agK2)
+;         agK4)
+;      :named
+;      given-14.6)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agK4)
+;         agK6)
+;      :named
+;      given-14.7)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agK6)
+;         agK8)
+;      :named
+;      given-14.8)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agK8)
+;         agKa)
+;      :named
+;      given-14.9)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKa)
+;         agKc)
+;      :named
+;      given-14.10)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKc)
+;         agKe)
+;      :named
+;      given-14.11)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKe)
+;         agKg)
+;      :named
+;      given-14.12)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKg)
+;         agKi)
+;      :named
+;      given-14.13)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKi)
+;         agKk)
+;      :named
+;      given-14.14)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKk)
+;         agKm)
+;      :named
+;      given-14.15)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKm)
+;         agKo)
+;      :named
+;      given-14.16)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKo)
+;         agKq)
+;      :named
+;      given-14.17)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKq)
+;         agKs)
+;      :named
+;      given-14.18)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKs)
+;         agKu)
+;      :named
+;      given-14.19)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKu)
+;         agKw)
+;      :named
+;      given-14.20)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKw)
+;         agKy)
+;      :named
+;      given-14.21)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKy)
+;         agKA)
+;      :named
+;      given-14.22)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKA)
+;         agKC)
+;      :named
+;      given-14.23)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKC)
+;         agKE)
+;      :named
+;      given-14.24)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKE)
+;         agKG)
+;      :named
+;      given-14.25)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKG)
+;         agKI)
+;      :named
+;      given-14.26)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKI)
+;         agKK)
+;      :named
+;      given-14.27)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKK)
+;         agKM)
+;      :named
+;      given-14.28)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKM)
+;         agKO)
+;      :named
+;      given-14.29)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKO)
+;         agKQ)
+;      :named
+;      given-14.30)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKQ)
+;         agKS)
+;      :named
+;      given-14.31)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKS)
+;         agKU)
+;      :named
+;      given-14.32)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKU)
+;         agKW)
+;      :named
+;      given-14.33)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKW)
+;         agKY)
+;      :named
+;      given-14.34)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agKY)
+;         agL0)
+;      :named
+;      given-14.35)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           ag4C)
+;         agJO)
+;      :named
+;      given-14.36)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4C
+;           agJO)
+;         agJQ)
+;      :named
+;      given-14.37)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4B
+;           ag4B)
+;         agJM)
+;      :named
+;      given-14.38)
+;   (!
+;      (= agL0 agL2)
+;      :named
+;      given-14.39)
+;   (!
+;      (= agJM agJQ)
+;      :named
+;      given-14.40)
 ;   (!
 ;      (not
 ;         (=
@@ -6827,69 +7121,154 @@
 ;                 const
 ;                 (Array String Int))
 ;              0)
-;            aeH1))
+;            ag4C))
 ;      :named
-;      wanted-13))
+;      wanted-14))
 (get-unsat-core)
-; (given-13.1 wanted-13 given-13.2 given-13.3)
+; (given-14.19
+;    given-14.20
+;    given-14.18
+;    given-14.17
+;    given-14.16
+;    given-14.15
+;    given-14.14
+;    given-14.13
+;    given-14.11
+;    given-14.4
+;    given-14.1
+;    given-14.10
+;    given-14.7
+;    given-14.9
+;    given-14.3
+;    given-14.6
+;    given-14.5
+;    given-14.29
+;    given-14.30
+;    given-14.28
+;    given-14.27
+;    given-14.26
+;    given-14.25
+;    given-14.24
+;    given-14.23
+;    given-14.21
+;    given-14.22
+;    given-14.2
+;    given-14.8
+;    wanted-14
+;    given-14.39
+;    given-14.37
+;    given-14.36
+;    given-14.35
+;    given-14.34
+;    given-14.33
+;    given-14.32
+;    given-14.31
+;    given-14.12)
 (pop 1)
-(echo "solver-finish-cycle-13")
-(echo "solver-start-cycle-14")
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-15")
+(echo "solver-finish-cycle-15")
+(echo "solver-start-cycle-16")
 
 ; GIVENS (GHC style)
-; [G] cobox_aeLO {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLJ {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_aeLK {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_aeLR {1}:: fsk0 ~ v (CTyEqCan)
+; [G] cobox_agLy {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_agLs {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agLu {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agLw {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agLk {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_agLm {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agLi {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_agLB {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_agLC {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{aeHf} {0}:: u ~ w (CNonCanonical)
+; [WD] hole{agLJ} {2}:: One ~ a (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (*: [aeH8,aeH8],aeLN)
-; (*: [aeH8,aeH9],aeLI)
-; (aeLI,aeH7)
-; (aeLN,aeH8)
+; (One [],agLx)
+; (*: [ag4K,agLl],agLr)
+; (*: [ag4K,agLr],agLt)
+; (*: [ag4K,agLt],agLv)
+; (*: [ag4K,ag4K],agLj)
+; (*: [ag4K,agLj],agLl)
+; (*: [ag4J,ag4J],agLh)
+; (agLv,agLx)
+; (agLh,agLl)
 
 ; WANTEDS (Thoralf style)
-; (aeH7,aeH9)
+; (One [],ag4J)
 
-(echo "givens-start-cycle-15")
+(echo "givens-start-cycle-16")
 ; GIVENS (conversions)
-;      [WD] hole{aeHf} {0}:: u ~ w (CNonCanonical)
-;  =>  (= aeH7 aeH9)
+;      [WD] hole{agLJ} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    ag4J)
 
 ; GIVENS (names)
-;  aeH7  <=  u
-;  aeH8  <=  v
-;  aeH9  <=  w
-;  aeLI  <=  fsk_aeLI
-;  aeLN  <=  fsk_aeLN
+;  ag4J  <=  a
+;  ag4K  <=  b
+;  agLh  <=  fsk_agLh
+;  agLj  <=  fsk_agLj
+;  agLl  <=  fsk_agLl
+;  agLr  <=  fsk_agLr
+;  agLt  <=  fsk_agLt
+;  agLv  <=  fsk_agLv
+;  agLx  <=  fsk_agLx
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aeH7 (Array String Int))
-; (declare-const aeH8 (Array String Int))
-; (declare-const aeH9 (Array String Int))
-; (declare-const aeLI (Array String Int))
-; (declare-const aeLN (Array String Int))
+; (declare-const ag4J (Array String Int))
+; (declare-const ag4K (Array String Int))
+; (declare-const agLh (Array String Int))
+; (declare-const agLj (Array String Int))
+; (declare-const agLl (Array String Int))
+; (declare-const agLr (Array String Int))
+; (declare-const agLt (Array String Int))
+; (declare-const agLv (Array String Int))
+; (declare-const agLx (Array String Int))
 (declare-const
-   aeH7
+   ag4J
    (Array String Int))
 (declare-const
-   aeH8
+   ag4K
    (Array String Int))
 (declare-const
-   aeH9
+   agLh
    (Array String Int))
 (declare-const
-   aeLI
+   agLj
    (Array String Int))
 (declare-const
-   aeLN
+   agLl
    (Array String Int))
+(declare-const
+   agLr
+   (Array String Int))
+(declare-const
+   agLt
+   (Array String Int))
+(declare-const
+   agLv
+   (Array String Int))
+(declare-const
+   agLx
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (as
+              const
+              (Array String Int))
+           0)
+         agLx)
+      :named
+      given-16.1))
 (assert
    (!
       (=
@@ -6899,11 +7278,11 @@
               (+
                  (Int Int)
                  Int))
-           aeH8
-           aeH8)
-         aeLN)
+           ag4K
+           agLl)
+         agLr)
       :named
-      given-15.1))
+      given-16.2))
 (assert
    (!
       (=
@@ -6913,43 +7292,509 @@
               (+
                  (Int Int)
                  Int))
-           aeH8
-           aeH9)
-         aeLI)
+           ag4K
+           agLr)
+         agLt)
       :named
-      given-15.2))
+      given-16.3))
 (assert
    (!
-      (= aeLI aeH7)
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4K
+           agLt)
+         agLv)
       :named
-      given-15.3))
+      given-16.4))
 (assert
    (!
-      (= aeLN aeH8)
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4K
+           ag4K)
+         agLj)
       :named
-      given-15.4))
+      given-16.5))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4K
+           agLj)
+         agLl)
+      :named
+      given-16.6))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4J
+           ag4J)
+         agLh)
+      :named
+      given-16.7))
+(assert
+   (!
+      (= agLv agLx)
+      :named
+      given-16.8))
+(assert
+   (!
+      (= agLh agLl)
+      :named
+      given-16.9))
 (check-sat)
 ; sat
-(echo "givens-finish-cycle-15")
-(echo "wanteds-start-cycle-15")
+(echo "givens-finish-cycle-16")
+(echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
-;      [WD] hole{aeHf} {0}:: u ~ w (CNonCanonical)
-;  =>  (= aeH7 aeH9)
+;      [WD] hole{agLJ} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    ag4J)
 
 ; WANTEDS (names)
-;  aeH7  <=  u
-;  aeH9  <=  w
+;  ag4J  <=  a
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= aeH7 aeH9))
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            ag4J))
       :named
-      wanted-15))
+      wanted-16))
 (check-sat)
 ; unsat
-(echo "wanteds-finish-cycle-15")
+(echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         agLx)
+;      :named
+;      given-16.1)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4K
+;           agLl)
+;         agLr)
+;      :named
+;      given-16.2)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4K
+;           agLr)
+;         agLt)
+;      :named
+;      given-16.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4K
+;           agLt)
+;         agLv)
+;      :named
+;      given-16.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4K
+;           ag4K)
+;         agLj)
+;      :named
+;      given-16.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4K
+;           agLj)
+;         agLl)
+;      :named
+;      given-16.6)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4J
+;           ag4J)
+;         agLh)
+;      :named
+;      given-16.7)
+;   (!
+;      (= agLv agLx)
+;      :named
+;      given-16.8)
+;   (!
+;      (= agLh agLl)
+;      :named
+;      given-16.9)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            ag4J))
+;      :named
+;      wanted-16))
+(get-unsat-core)
+; (wanted-16
+;    given-16.9
+;    given-16.8
+;    given-16.7
+;    given-16.6
+;    given-16.5
+;    given-16.4
+;    given-16.3
+;    given-16.1
+;    given-16.2)
+(pop 1)
+(echo "solver-finish-cycle-16")
+(echo "solver-start-cycle-17")
+(echo "solver-finish-cycle-17")
+(echo "solver-start-cycle-18")
+
+; GIVENS (GHC style)
+; [G] cobox_agLP {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_agLN {0}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_agLQ {1}:: fsk0 ~ fsk1 (CTyEqCan)
+
+; WANTEDS (GHC style)
+; [WD] hole{agLV} {2}:: One ~ a (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; (One [],agLO)
+; (*: [ag4R,ag4R],agLM)
+; (agLM,agLO)
+
+; WANTEDS (Thoralf style)
+; (One [],ag4R)
+
+(echo "givens-start-cycle-18")
+; GIVENS (conversions)
+;      [WD] hole{agLV} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    ag4R)
+
+; GIVENS (names)
+;  ag4R  <=  a
+;  agLM  <=  fsk_agLM
+;  agLO  <=  fsk_agLO
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const ag4R (Array String Int))
+; (declare-const agLM (Array String Int))
+; (declare-const agLO (Array String Int))
+(declare-const
+   ag4R
+   (Array String Int))
+(declare-const
+   agLM
+   (Array String Int))
+(declare-const
+   agLO
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (as
+              const
+              (Array String Int))
+           0)
+         agLO)
+      :named
+      given-18.1))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4R
+           ag4R)
+         agLM)
+      :named
+      given-18.2))
+(assert
+   (!
+      (= agLM agLO)
+      :named
+      given-18.3))
+(check-sat)
+; sat
+(echo "givens-finish-cycle-18")
+(echo "wanteds-start-cycle-18")
+; WANTEDS (conversions)
+;      [WD] hole{agLV} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    ag4R)
+
+; WANTEDS (names)
+;  ag4R  <=  a
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            ag4R))
+      :named
+      wanted-18))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         agLO)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag4R
+;           ag4R)
+;         agLM)
+;      :named
+;      given-18.2)
+;   (!
+;      (= agLM agLO)
+;      :named
+;      given-18.3)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            ag4R))
+;      :named
+;      wanted-18))
+(get-unsat-core)
+; (given-18.1 wanted-18 given-18.2 given-18.3)
+(pop 1)
+(echo "solver-finish-cycle-18")
+(echo "solver-start-cycle-19")
+(echo "solver-finish-cycle-19")
+(echo "solver-start-cycle-20")
+
+; GIVENS (GHC style)
+; [G] cobox_agM4 {1}:: (v *: v) ~ fsk0 (CFunEqCan)
+; [G] cobox_agLZ {0}:: (v *: w) ~ fsk0 (CFunEqCan)
+; [G] cobox_agM0 {1}:: fsk0 ~ u (CTyEqCan)
+; [G] cobox_agM7 {1}:: fsk0 ~ v (CTyEqCan)
+
+; WANTEDS (GHC style)
+; [WD] hole{ag55} {0}:: u ~ w (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; (*: [ag4Y,ag4Y],agM3)
+; (*: [ag4Y,ag4Z],agLY)
+; (agLY,ag4X)
+; (agM3,ag4Y)
+
+; WANTEDS (Thoralf style)
+; (ag4X,ag4Z)
+
+(echo "givens-start-cycle-20")
+; GIVENS (conversions)
+;      [WD] hole{ag55} {0}:: u ~ w (CNonCanonical)
+;  =>  (= ag4X ag4Z)
+
+; GIVENS (names)
+;  ag4X  <=  u
+;  ag4Y  <=  v
+;  ag4Z  <=  w
+;  agLY  <=  fsk_agLY
+;  agM3  <=  fsk_agM3
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const ag4X (Array String Int))
+; (declare-const ag4Y (Array String Int))
+; (declare-const ag4Z (Array String Int))
+; (declare-const agLY (Array String Int))
+; (declare-const agM3 (Array String Int))
+(declare-const
+   ag4X
+   (Array String Int))
+(declare-const
+   ag4Y
+   (Array String Int))
+(declare-const
+   ag4Z
+   (Array String Int))
+(declare-const
+   agLY
+   (Array String Int))
+(declare-const
+   agM3
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4Y
+           ag4Y)
+         agM3)
+      :named
+      given-20.1))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag4Y
+           ag4Z)
+         agLY)
+      :named
+      given-20.2))
+(assert
+   (!
+      (= agLY ag4X)
+      :named
+      given-20.3))
+(assert
+   (!
+      (= agM3 ag4Y)
+      :named
+      given-20.4))
+(check-sat)
+; sat
+(echo "givens-finish-cycle-20")
+(echo "wanteds-start-cycle-20")
+; WANTEDS (conversions)
+;      [WD] hole{ag55} {0}:: u ~ w (CNonCanonical)
+;  =>  (= ag4X ag4Z)
+
+; WANTEDS (names)
+;  ag4X  <=  u
+;  ag4Z  <=  w
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (= ag4X ag4Z))
+      :named
+      wanted-20))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-20")
 (get-assertions)
 ; (
 ;   (= one 1)
@@ -6962,11 +7807,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeH8
-;           aeH8)
-;         aeLN)
+;           ag4Y
+;           ag4Y)
+;         agM3)
 ;      :named
-;      given-15.1)
+;      given-20.1)
 ;   (!
 ;      (=
 ;         (
@@ -6975,30 +7820,1129 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aeH8
-;           aeH9)
-;         aeLI)
+;           ag4Y
+;           ag4Z)
+;         agLY)
 ;      :named
-;      given-15.2)
+;      given-20.2)
 ;   (!
-;      (= aeLI aeH7)
+;      (= agLY ag4X)
 ;      :named
-;      given-15.3)
+;      given-20.3)
 ;   (!
-;      (= aeLN aeH8)
+;      (= agM3 ag4Y)
 ;      :named
-;      given-15.4)
+;      given-20.4)
 ;   (!
 ;      (not
-;         (= aeH7 aeH9))
+;         (= ag4X ag4Z))
 ;      :named
-;      wanted-15))
+;      wanted-20))
 (get-unsat-core)
-; (given-15.2 given-15.4 wanted-15 given-15.3 given-15.1)
+; (given-20.2 given-20.4 wanted-20 given-20.3 given-20.1)
 (pop 1)
-(echo "solver-finish-cycle-15")
+(echo "solver-finish-cycle-20")
+(echo "solver-start-cycle-21")
+(echo "solver-finish-cycle-21")
+(echo "solver-start-cycle-22")
+
+; GIVENS (GHC style)
+; [G] cobox_agMf {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_agMl {2}:: Base "kg" ~ fsk0 (CFunEqCan)
+; [G] cobox_agMh {1}:: (w *: w) ~ fsk0 (CFunEqCan)
+; [G] cobox_agMn {1}:: (fsk0 *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_agMp {0}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
+; [G] cobox_agMj {0}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
+; [G] cobox_agMs {1}:: fsk0 ~ fsk1 (CTyEqCan)
+
+; WANTEDS (GHC style)
+; [WD] hole{agMx} {2}:: Base "kg" ~ w (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; (One [],agMe)
+; (Base ["kg"],agMk)
+; (*: [ag57,ag57],agMg)
+; (*: [agMk,agMk],agMm)
+; (/: [agMe,agMm],agMo)
+; (/: [agMe,agMg],agMi)
+; (agMi,agMo)
+
+; WANTEDS (Thoralf style)
+; (Base ["kg"],ag57)
+
+(echo "givens-start-cycle-22")
+; GIVENS (conversions)
+;      [WD] hole{agMx} {2}:: Base "kg" ~ w (CNonCanonical)
+;  =>  (=
+;    (store base "kg" one)
+;    ag57)
+
+; GIVENS (names)
+;  ag57  <=  w
+;  agMe  <=  fsk_agMe
+;  agMg  <=  fsk_agMg
+;  agMi  <=  fsk_agMi
+;  agMk  <=  fsk_agMk
+;  agMm  <=  fsk_agMm
+;  agMo  <=  fsk_agMo
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const ag57 (Array String Int))
+; (declare-const agMe (Array String Int))
+; (declare-const agMg (Array String Int))
+; (declare-const agMi (Array String Int))
+; (declare-const agMk (Array String Int))
+; (declare-const agMm (Array String Int))
+; (declare-const agMo (Array String Int))
+(declare-const
+   ag57
+   (Array String Int))
+(declare-const
+   agMe
+   (Array String Int))
+(declare-const
+   agMg
+   (Array String Int))
+(declare-const
+   agMi
+   (Array String Int))
+(declare-const
+   agMk
+   (Array String Int))
+(declare-const
+   agMm
+   (Array String Int))
+(declare-const
+   agMo
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (as
+              const
+              (Array String Int))
+           0)
+         agMe)
+      :named
+      given-22.1))
+(assert
+   (!
+      (=
+         (store base "kg" one)
+         agMk)
+      :named
+      given-22.2))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag57
+           ag57)
+         agMg)
+      :named
+      given-22.3))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           agMk
+           agMk)
+         agMm)
+      :named
+      given-22.4))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (-
+                 (Int Int)
+                 Int))
+           agMe
+           agMm)
+         agMo)
+      :named
+      given-22.5))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (-
+                 (Int Int)
+                 Int))
+           agMe
+           agMg)
+         agMi)
+      :named
+      given-22.6))
+(assert
+   (!
+      (= agMi agMo)
+      :named
+      given-22.7))
+(check-sat)
+; sat
+(echo "givens-finish-cycle-22")
+(echo "wanteds-start-cycle-22")
+; WANTEDS (conversions)
+;      [WD] hole{agMx} {2}:: Base "kg" ~ w (CNonCanonical)
+;  =>  (=
+;    (store base "kg" one)
+;    ag57)
+
+; WANTEDS (names)
+;  ag57  <=  w
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (store base "kg" one)
+            ag57))
+      :named
+      wanted-22))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         agMe)
+;      :named
+;      given-22.1)
+;   (!
+;      (=
+;         (store base "kg" one)
+;         agMk)
+;      :named
+;      given-22.2)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag57
+;           ag57)
+;         agMg)
+;      :named
+;      given-22.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           agMk
+;           agMk)
+;         agMm)
+;      :named
+;      given-22.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           agMe
+;           agMm)
+;         agMo)
+;      :named
+;      given-22.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           agMe
+;           agMg)
+;         agMi)
+;      :named
+;      given-22.6)
+;   (!
+;      (= agMi agMo)
+;      :named
+;      given-22.7)
+;   (!
+;      (not
+;         (=
+;            (store base "kg" one)
+;            ag57))
+;      :named
+;      wanted-22))
+(get-unsat-core)
+; (given-22.7
+;    given-22.2
+;    given-22.6
+;    given-22.5
+;    wanted-22
+;    given-22.4
+;    given-22.3)
+(pop 1)
+(echo "solver-finish-cycle-22")
+(echo "solver-start-cycle-23")
+(echo "solver-finish-cycle-23")
+(echo "solver-start-cycle-24")
+Parse Failed
+(echo "solver-finish-cycle-24")
+(echo "solver-start-cycle-25")
+(echo "solver-finish-cycle-25")
+(echo "solver-start-cycle-26")
+(echo "solver-finish-cycle-26")
+(echo "solver-start-cycle-27")
+(echo "solver-finish-cycle-27")
+(echo "solver-start-cycle-28")
+(echo "solver-finish-cycle-28")
+(echo "solver-start-cycle-29")
+(echo "solver-finish-cycle-29")
+(echo "solver-start-cycle-30")
+(echo "solver-finish-cycle-30")
+(echo "solver-start-cycle-31")
+(echo "solver-finish-cycle-31")
+(echo "solver-start-cycle-32")
+(echo "solver-finish-cycle-32")
+(echo "solver-start-cycle-33")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{agUu} {8}:: ((Base "m" *: One) /: (Base "s" *: One))
+;                       ~
+;                       (Base "m" /: Base "s") (CNonCanonical)
+; [WD] hole{agUk} {8}:: ((Base "m"
+;                         *: (Base "s" *: (Base "s" *: One)))
+;                        /: One)
+;                       ~
+;                       (Base "m" *: (Base "s" *: Base "s")) (CNonCanonical)
+; [WD] hole{agUn} {8}:: (One /: One) ~ One (CNonCanonical)
+; [WD] hole{agUx} {6}:: ((Base "m" *: One) /: One)
+;                       ~
+;                       Base "m" (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (/: [*: [Base ["m"],One []],*: [Base ["s"],One []]],/: [Base ["m"],Base ["s"]])
+; (/: [*: [Base ["m"],*: [Base ["s"],*: [Base ["s"],One []]]],One []],*: [Base ["m"],*: [Base ["s"],Base ["s"]]])
+; (/: [One [],One []],One [])
+; (/: [*: [Base ["m"],One []],One []],Base ["m"])
+
+(echo "givens-start-cycle-33")
+; GIVENS (conversions)
+;      [WD] hole{agUu} {8}:: ((Base "m" *: One) /: (Base "s" *: One))
+;                            ~
+;                            (Base "m" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0)))
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "s" one)))
+
+;      [WD] hole{agUk} {8}:: ((Base "m"
+;                              *: (Base "s" *: (Base "s" *: One)))
+;                             /: One)
+;                            ~
+;                            (Base "m" *: (Base "s" *: Base "s")) (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (_
+;             map
+;             (+
+;                (Int Int)
+;                Int))
+;          (store base "s" one)
+;          (
+;            (_
+;               map
+;               (+
+;                  (Int Int)
+;                  Int))
+;            (store base "s" one)
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0))))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (store base "s" one))))
+
+;      [WD] hole{agUn} {8}:: (One /: One) ~ One (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0))
+
+;      [WD] hole{agUx} {6}:: ((Base "m" *: One) /: One)
+;                            ~
+;                            Base "m" (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (store base "m" one))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-33")
+(echo "wanteds-start-cycle-33")
+; WANTEDS (conversions)
+;      [WD] hole{agUu} {8}:: ((Base "m" *: One) /: (Base "s" *: One))
+;                            ~
+;                            (Base "m" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0)))
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "s" one)))
+
+;      [WD] hole{agUk} {8}:: ((Base "m"
+;                              *: (Base "s" *: (Base "s" *: One)))
+;                             /: One)
+;                            ~
+;                            (Base "m" *: (Base "s" *: Base "s")) (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (_
+;             map
+;             (+
+;                (Int Int)
+;                Int))
+;          (store base "s" one)
+;          (
+;            (_
+;               map
+;               (+
+;                  (Int Int)
+;                  Int))
+;            (store base "s" one)
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0))))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (store base "s" one))))
+
+;      [WD] hole{agUn} {8}:: (One /: One) ~ One (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0))
+
+;      [WD] hole{agUx} {6}:: ((Base "m" *: One) /: One)
+;                            ~
+;                            Base "m" (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (store base "m" one))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (or
+         (or
+            (or
+               (not
+                  (=
+                     (
+                       (_
+                          map
+                          (-
+                             (Int Int)
+                             Int))
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "m" one)
+                         (
+                           (as
+                              const
+                              (Array String Int))
+                           0))
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "s" one)
+                         (
+                           (as
+                              const
+                              (Array String Int))
+                           0)))
+                     (
+                       (_
+                          map
+                          (-
+                             (Int Int)
+                             Int))
+                       (store base "m" one)
+                       (store base "s" one))))
+               (not
+                  (=
+                     (
+                       (_
+                          map
+                          (-
+                             (Int Int)
+                             Int))
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "m" one)
+                         (
+                           (_
+                              map
+                              (+
+                                 (Int Int)
+                                 Int))
+                           (store base "s" one)
+                           (
+                             (_
+                                map
+                                (+
+                                   (Int Int)
+                                   Int))
+                             (store base "s" one)
+                             (
+                               (as
+                                  const
+                                  (Array String Int))
+                               0))))
+                       (
+                         (as
+                            const
+                            (Array String Int))
+                         0))
+                     (
+                       (_
+                          map
+                          (+
+                             (Int Int)
+                             Int))
+                       (store base "m" one)
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "s" one)
+                         (store base "s" one))))))
+            (not
+               (=
+                  (
+                    (_
+                       map
+                       (-
+                          (Int Int)
+                          Int))
+                    (
+                      (as
+                         const
+                         (Array String Int))
+                      0)
+                    (
+                      (as
+                         const
+                         (Array String Int))
+                      0))
+                  (
+                    (as
+                       const
+                       (Array String Int))
+                    0))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (-
+                       (Int Int)
+                       Int))
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   (store base "m" one)
+                   (
+                     (as
+                        const
+                        (Array String Int))
+                     0))
+                 (
+                   (as
+                      const
+                      (Array String Int))
+                   0))
+               (store base "m" one))))
+      :named
+      wanted-33))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-33")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         (or
+;            (or
+;               (not
+;                  (=
+;                     (
+;                       (_
+;                          map
+;                          (-
+;                             (Int Int)
+;                             Int))
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "m" one)
+;                         (
+;                           (as
+;                              const
+;                              (Array String Int))
+;                           0))
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "s" one)
+;                         (
+;                           (as
+;                              const
+;                              (Array String Int))
+;                           0)))
+;                     (
+;                       (_
+;                          map
+;                          (-
+;                             (Int Int)
+;                             Int))
+;                       (store base "m" one)
+;                       (store base "s" one))))
+;               (not
+;                  (=
+;                     (
+;                       (_
+;                          map
+;                          (-
+;                             (Int Int)
+;                             Int))
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "m" one)
+;                         (
+;                           (_
+;                              map
+;                              (+
+;                                 (Int Int)
+;                                 Int))
+;                           (store base "s" one)
+;                           (
+;                             (_
+;                                map
+;                                (+
+;                                   (Int Int)
+;                                   Int))
+;                             (store base "s" one)
+;                             (
+;                               (as
+;                                  const
+;                                  (Array String Int))
+;                               0))))
+;                       (
+;                         (as
+;                            const
+;                            (Array String Int))
+;                         0))
+;                     (
+;                       (_
+;                          map
+;                          (+
+;                             (Int Int)
+;                             Int))
+;                       (store base "m" one)
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "s" one)
+;                         (store base "s" one))))))
+;            (not
+;               (=
+;                  (
+;                    (_
+;                       map
+;                       (-
+;                          (Int Int)
+;                          Int))
+;                    (
+;                      (as
+;                         const
+;                         (Array String Int))
+;                      0)
+;                    (
+;                      (as
+;                         const
+;                         (Array String Int))
+;                      0))
+;                  (
+;                    (as
+;                       const
+;                       (Array String Int))
+;                    0))))
+;         (not
+;            (=
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (
+;                   (_
+;                      map
+;                      (+
+;                         (Int Int)
+;                         Int))
+;                   (store base "m" one)
+;                   (
+;                     (as
+;                        const
+;                        (Array String Int))
+;                     0))
+;                 (
+;                   (as
+;                      const
+;                      (Array String Int))
+;                   0))
+;               (store base "m" one))))
+;      :named
+;      wanted-33))
+(get-unsat-core)
+; (wanted-33)
+(pop 1)
+(echo "solver-finish-cycle-33")
 (exit)
-; [1 of 5] Compiling Abelian
+; [6 of 6] Compiling UnitDefsTests
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(echo "solver-start-cycle-1")
+(echo "solver-finish-cycle-1")
+(echo "solver-start-cycle-2")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{amJ9} {2}:: One
+;                       ~
+;                       (Base "byte" /: Base "byte") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["byte"],Base ["byte"]])
+
+(echo "givens-start-cycle-2")
+; GIVENS (conversions)
+;      [WD] hole{amJ9} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-2")
+(echo "wanteds-start-cycle-2")
+; WANTEDS (conversions)
+;      [WD] hole{amJ9} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "byte" one)
+              (store base "byte" one))))
+      :named
+      wanted-2))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "byte" one)
+;              (store base "byte" one))))
+;      :named
+;      wanted-2))
+(get-unsat-core)
+; (wanted-2)
+(pop 1)
+(echo "solver-finish-cycle-2")
+(echo "solver-start-cycle-3")
+(echo "solver-finish-cycle-3")
+(echo "solver-start-cycle-4")
+(echo "solver-finish-cycle-4")
+(exit)
+; [1 of 6] Compiling Abelian
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -8679,7 +10623,7 @@
 (pop 1)
 (echo "solver-finish-cycle-8")
 (exit)
-; [2 of 5] Compiling Plugins.Thoralf.UnitDefs
+; [3 of 6] Compiling UnitDefs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -8703,8 +10647,840 @@
    (Array String Int))
 (assert
    (= enc base))
+(echo "solver-start-cycle-1")
+(echo "solver-finish-cycle-1")
+(echo "solver-start-cycle-2")
+(echo "solver-finish-cycle-2")
+(echo "solver-start-cycle-3")
+(echo "solver-finish-cycle-3")
+(echo "solver-start-cycle-4")
+(echo "solver-finish-cycle-4")
+(echo "solver-start-cycle-5")
+(echo "solver-finish-cycle-5")
+(echo "solver-start-cycle-6")
+(echo "solver-finish-cycle-6")
+(echo "solver-start-cycle-7")
+(echo "solver-finish-cycle-7")
+(echo "solver-start-cycle-8")
+(echo "solver-finish-cycle-8")
+(echo "solver-start-cycle-9")
+(echo "solver-finish-cycle-9")
+(echo "solver-start-cycle-10")
+(echo "solver-finish-cycle-10")
+(echo "solver-start-cycle-11")
+(echo "solver-finish-cycle-11")
+(echo "solver-start-cycle-12")
+(echo "solver-finish-cycle-12")
+(echo "solver-start-cycle-13")
+(echo "solver-finish-cycle-13")
+(echo "solver-start-cycle-14")
+(echo "solver-finish-cycle-14")
+(echo "solver-start-cycle-15")
+(echo "solver-finish-cycle-15")
+(echo "solver-start-cycle-16")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{abr4} {2}:: One
+;                       ~
+;                       (Base "cd" /: Base "cd") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["cd"],Base ["cd"]])
+
+(echo "givens-start-cycle-16")
+; GIVENS (conversions)
+;      [WD] hole{abr4} {2}:: One
+;                            ~
+;                            (Base "cd" /: Base "cd") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "cd" one)
+;      (store base "cd" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-16")
+(echo "wanteds-start-cycle-16")
+; WANTEDS (conversions)
+;      [WD] hole{abr4} {2}:: One
+;                            ~
+;                            (Base "cd" /: Base "cd") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "cd" one)
+;      (store base "cd" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "cd" one)
+              (store base "cd" one))))
+      :named
+      wanted-16))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "cd" one)
+;              (store base "cd" one))))
+;      :named
+;      wanted-16))
+(get-unsat-core)
+; (wanted-16)
+(pop 1)
+(echo "solver-finish-cycle-16")
+(echo "solver-start-cycle-17")
+(echo "solver-finish-cycle-17")
+(echo "solver-start-cycle-18")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{abrz} {2}:: One
+;                       ~
+;                       (Base "mol" /: Base "mol") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["mol"],Base ["mol"]])
+
+(echo "givens-start-cycle-18")
+; GIVENS (conversions)
+;      [WD] hole{abrz} {2}:: One
+;                            ~
+;                            (Base "mol" /: Base "mol") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "mol" one)
+;      (store base "mol" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-18")
+(echo "wanteds-start-cycle-18")
+; WANTEDS (conversions)
+;      [WD] hole{abrz} {2}:: One
+;                            ~
+;                            (Base "mol" /: Base "mol") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "mol" one)
+;      (store base "mol" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "mol" one)
+              (store base "mol" one))))
+      :named
+      wanted-18))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "mol" one)
+;              (store base "mol" one))))
+;      :named
+;      wanted-18))
+(get-unsat-core)
+; (wanted-18)
+(pop 1)
+(echo "solver-finish-cycle-18")
+(echo "solver-start-cycle-19")
+(echo "solver-finish-cycle-19")
+(echo "solver-start-cycle-20")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{abs4} {2}:: One ~ (Base "K" /: Base "K") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["K"],Base ["K"]])
+
+(echo "givens-start-cycle-20")
+; GIVENS (conversions)
+;      [WD] hole{abs4} {2}:: One
+;                            ~
+;                            (Base "K" /: Base "K") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "K" one)
+;      (store base "K" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-20")
+(echo "wanteds-start-cycle-20")
+; WANTEDS (conversions)
+;      [WD] hole{abs4} {2}:: One
+;                            ~
+;                            (Base "K" /: Base "K") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "K" one)
+;      (store base "K" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "K" one)
+              (store base "K" one))))
+      :named
+      wanted-20))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-20")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "K" one)
+;              (store base "K" one))))
+;      :named
+;      wanted-20))
+(get-unsat-core)
+; (wanted-20)
+(pop 1)
+(echo "solver-finish-cycle-20")
+(echo "solver-start-cycle-21")
+(echo "solver-finish-cycle-21")
+(echo "solver-start-cycle-22")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{absz} {2}:: One ~ (Base "A" /: Base "A") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["A"],Base ["A"]])
+
+(echo "givens-start-cycle-22")
+; GIVENS (conversions)
+;      [WD] hole{absz} {2}:: One
+;                            ~
+;                            (Base "A" /: Base "A") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "A" one)
+;      (store base "A" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-22")
+(echo "wanteds-start-cycle-22")
+; WANTEDS (conversions)
+;      [WD] hole{absz} {2}:: One
+;                            ~
+;                            (Base "A" /: Base "A") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "A" one)
+;      (store base "A" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "A" one)
+              (store base "A" one))))
+      :named
+      wanted-22))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "A" one)
+;              (store base "A" one))))
+;      :named
+;      wanted-22))
+(get-unsat-core)
+; (wanted-22)
+(pop 1)
+(echo "solver-finish-cycle-22")
+(echo "solver-start-cycle-23")
+(echo "solver-finish-cycle-23")
+(echo "solver-start-cycle-24")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{abt4} {2}:: One ~ (Base "s" /: Base "s") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["s"],Base ["s"]])
+
+(echo "givens-start-cycle-24")
+; GIVENS (conversions)
+;      [WD] hole{abt4} {2}:: One
+;                            ~
+;                            (Base "s" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "s" one)
+;      (store base "s" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-24")
+(echo "wanteds-start-cycle-24")
+; WANTEDS (conversions)
+;      [WD] hole{abt4} {2}:: One
+;                            ~
+;                            (Base "s" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "s" one)
+;      (store base "s" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "s" one)
+              (store base "s" one))))
+      :named
+      wanted-24))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-24")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "s" one)
+;              (store base "s" one))))
+;      :named
+;      wanted-24))
+(get-unsat-core)
+; (wanted-24)
+(pop 1)
+(echo "solver-finish-cycle-24")
+(echo "solver-start-cycle-25")
+(echo "solver-finish-cycle-25")
+(echo "solver-start-cycle-26")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{abtz} {2}:: One
+;                       ~
+;                       (Base "kg" /: Base "kg") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["kg"],Base ["kg"]])
+
+(echo "givens-start-cycle-26")
+; GIVENS (conversions)
+;      [WD] hole{abtz} {2}:: One
+;                            ~
+;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "kg" one)
+;      (store base "kg" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-26")
+(echo "wanteds-start-cycle-26")
+; WANTEDS (conversions)
+;      [WD] hole{abtz} {2}:: One
+;                            ~
+;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "kg" one)
+;      (store base "kg" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "kg" one)
+              (store base "kg" one))))
+      :named
+      wanted-26))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-26")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "kg" one)
+;              (store base "kg" one))))
+;      :named
+;      wanted-26))
+(get-unsat-core)
+; (wanted-26)
+(pop 1)
+(echo "solver-finish-cycle-26")
+(echo "solver-start-cycle-27")
+(echo "solver-finish-cycle-27")
+(echo "solver-start-cycle-28")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{abu4} {2}:: One ~ (Base "m" /: Base "m") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["m"],Base ["m"]])
+
+(echo "givens-start-cycle-28")
+; GIVENS (conversions)
+;      [WD] hole{abu4} {2}:: One
+;                            ~
+;                            (Base "m" /: Base "m") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "m" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-28")
+(echo "wanteds-start-cycle-28")
+; WANTEDS (conversions)
+;      [WD] hole{abu4} {2}:: One
+;                            ~
+;                            (Base "m" /: Base "m") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "m" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "m" one)
+              (store base "m" one))))
+      :named
+      wanted-28))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-28")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "m" one)
+;              (store base "m" one))))
+;      :named
+;      wanted-28))
+(get-unsat-core)
+; (wanted-28)
+(pop 1)
+(echo "solver-finish-cycle-28")
 (exit)
-; [3 of 5] Compiling Defs
+; [4 of 6] Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -8736,7 +11512,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{abjd} {2}:: One
+; [WD] hole{acch} {2}:: One
 ;                       ~
 ;                       (Base "byte" /: Base "byte") (CNonCanonical)
 
@@ -8748,7 +11524,7 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{abjd} {2}:: One
+;      [WD] hole{acch} {2}:: One
 ;                            ~
 ;                            (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
@@ -8775,7 +11551,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{abjd} {2}:: One
+;      [WD] hole{acch} {2}:: One
 ;                            ~
 ;                            (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
@@ -8849,7 +11625,7 @@
 (echo "solver-start-cycle-4")
 (echo "solver-finish-cycle-4")
 (exit)
-; [5 of 5] Compiling Main
+; [5 of 6] Compiling Main
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -8878,98 +11654,98 @@
 (echo "solver-start-cycle-2")
 
 ; GIVENS (GHC style)
-; [G] cobox_acEH {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acDB {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDD {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDF {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDH {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDJ {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDL {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDN {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDP {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDR {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDT {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDV {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDX {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDZ {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE1 {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE3 {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE5 {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE7 {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acE9 {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEb {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEd {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEf {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEh {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEj {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEl {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEn {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEp {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEr {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEt {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEv {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEx {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEz {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEB {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acED {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acEF {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDt {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acDv {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acDr {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acEK {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acEL {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_adLj {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_adKd {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKf {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKh {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKj {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKl {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKn {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKp {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKr {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKt {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKv {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKx {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKz {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKB {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKD {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKF {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKH {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKJ {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKL {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKN {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKP {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKR {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKT {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKV {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKX {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adKZ {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adL1 {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adL3 {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adL5 {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adL7 {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adL9 {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adLb {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adLd {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adLf {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adLh {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adK5 {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_adK7 {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adK3 {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_adLm {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_adLn {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{acEU} {2}:: (a0 *: a0) ~ (b *: (b *: b)) (CNonCanonical)
+; [WD] hole{adLw} {2}:: (a0 *: a0) ~ (b *: (b *: b)) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],acEG)
-; (*: [acDa,acDu],acDA)
-; (*: [acDa,acDA],acDC)
-; (*: [acDa,acDC],acDE)
-; (*: [acDa,acDE],acDG)
-; (*: [acDa,acDG],acDI)
-; (*: [acDa,acDI],acDK)
-; (*: [acDa,acDK],acDM)
-; (*: [acDa,acDM],acDO)
-; (*: [acDa,acDO],acDQ)
-; (*: [acDa,acDQ],acDS)
-; (*: [acDa,acDS],acDU)
-; (*: [acDa,acDU],acDW)
-; (*: [acDa,acDW],acDY)
-; (*: [acDa,acDY],acE0)
-; (*: [acDa,acE0],acE2)
-; (*: [acDa,acE2],acE4)
-; (*: [acDa,acE4],acE6)
-; (*: [acDa,acE6],acE8)
-; (*: [acDa,acE8],acEa)
-; (*: [acDa,acEa],acEc)
-; (*: [acDa,acEc],acEe)
-; (*: [acDa,acEe],acEg)
-; (*: [acDa,acEg],acEi)
-; (*: [acDa,acEi],acEk)
-; (*: [acDa,acEk],acEm)
-; (*: [acDa,acEm],acEo)
-; (*: [acDa,acEo],acEq)
-; (*: [acDa,acEq],acEs)
-; (*: [acDa,acEs],acEu)
-; (*: [acDa,acEu],acEw)
-; (*: [acDa,acEw],acEy)
-; (*: [acDa,acEy],acEA)
-; (*: [acDa,acEA],acEC)
-; (*: [acDa,acEC],acEE)
-; (*: [acDa,acDa],acDs)
-; (*: [acDa,acDs],acDu)
-; (*: [acD9,acD9],acDq)
-; (acEE,acEG)
-; (acDq,acDu)
+; (One [],adLi)
+; (*: [adJR,adK6],adKc)
+; (*: [adJR,adKc],adKe)
+; (*: [adJR,adKe],adKg)
+; (*: [adJR,adKg],adKi)
+; (*: [adJR,adKi],adKk)
+; (*: [adJR,adKk],adKm)
+; (*: [adJR,adKm],adKo)
+; (*: [adJR,adKo],adKq)
+; (*: [adJR,adKq],adKs)
+; (*: [adJR,adKs],adKu)
+; (*: [adJR,adKu],adKw)
+; (*: [adJR,adKw],adKy)
+; (*: [adJR,adKy],adKA)
+; (*: [adJR,adKA],adKC)
+; (*: [adJR,adKC],adKE)
+; (*: [adJR,adKE],adKG)
+; (*: [adJR,adKG],adKI)
+; (*: [adJR,adKI],adKK)
+; (*: [adJR,adKK],adKM)
+; (*: [adJR,adKM],adKO)
+; (*: [adJR,adKO],adKQ)
+; (*: [adJR,adKQ],adKS)
+; (*: [adJR,adKS],adKU)
+; (*: [adJR,adKU],adKW)
+; (*: [adJR,adKW],adKY)
+; (*: [adJR,adKY],adL0)
+; (*: [adJR,adL0],adL2)
+; (*: [adJR,adL2],adL4)
+; (*: [adJR,adL4],adL6)
+; (*: [adJR,adL6],adL8)
+; (*: [adJR,adL8],adLa)
+; (*: [adJR,adLa],adLc)
+; (*: [adJR,adLc],adLe)
+; (*: [adJR,adLe],adLg)
+; (*: [adJR,adJR],adK4)
+; (*: [adJR,adK4],adK6)
+; (*: [adJQ,adJQ],adK2)
+; (adLg,adLi)
+; (adK2,adK6)
 
 ; WANTEDS (Thoralf style)
-; (*: [acDd,acDd],*: [acDa,*: [acDa,acDa]])
+; (*: [adJU,adJU],*: [adJR,*: [adJR,adJR]])
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{acEU} {2}:: (a0 *: a0)
+;      [WD] hole{adLw} {2}:: (a0 *: a0)
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -8979,227 +11755,227 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acDd
-;      acDd)
+;      adJU
+;      adJU)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acDa
+;      adJR
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acDa
-;        acDa)))
+;        adJR
+;        adJR)))
 
 ; GIVENS (names)
-;  acD9  <=  a
-;  acDa  <=  b
-;  acDq  <=  fsk_acDq
-;  acDs  <=  fsk_acDs
-;  acDu  <=  fsk_acDu
-;  acDA  <=  fsk_acDA
-;  acDC  <=  fsk_acDC
-;  acDE  <=  fsk_acDE
-;  acDG  <=  fsk_acDG
-;  acDI  <=  fsk_acDI
-;  acDK  <=  fsk_acDK
-;  acDM  <=  fsk_acDM
-;  acDO  <=  fsk_acDO
-;  acDQ  <=  fsk_acDQ
-;  acDS  <=  fsk_acDS
-;  acDU  <=  fsk_acDU
-;  acDW  <=  fsk_acDW
-;  acDY  <=  fsk_acDY
-;  acE0  <=  fsk_acE0
-;  acE2  <=  fsk_acE2
-;  acE4  <=  fsk_acE4
-;  acE6  <=  fsk_acE6
-;  acE8  <=  fsk_acE8
-;  acEa  <=  fsk_acEa
-;  acEc  <=  fsk_acEc
-;  acEe  <=  fsk_acEe
-;  acEg  <=  fsk_acEg
-;  acEi  <=  fsk_acEi
-;  acEk  <=  fsk_acEk
-;  acEm  <=  fsk_acEm
-;  acEo  <=  fsk_acEo
-;  acEq  <=  fsk_acEq
-;  acEs  <=  fsk_acEs
-;  acEu  <=  fsk_acEu
-;  acEw  <=  fsk_acEw
-;  acEy  <=  fsk_acEy
-;  acEA  <=  fsk_acEA
-;  acEC  <=  fsk_acEC
-;  acEE  <=  fsk_acEE
-;  acEG  <=  fsk_acEG
+;  adJQ  <=  a
+;  adJR  <=  b
+;  adK2  <=  fsk_adK2
+;  adK4  <=  fsk_adK4
+;  adK6  <=  fsk_adK6
+;  adKc  <=  fsk_adKc
+;  adKe  <=  fsk_adKe
+;  adKg  <=  fsk_adKg
+;  adKi  <=  fsk_adKi
+;  adKk  <=  fsk_adKk
+;  adKm  <=  fsk_adKm
+;  adKo  <=  fsk_adKo
+;  adKq  <=  fsk_adKq
+;  adKs  <=  fsk_adKs
+;  adKu  <=  fsk_adKu
+;  adKw  <=  fsk_adKw
+;  adKy  <=  fsk_adKy
+;  adKA  <=  fsk_adKA
+;  adKC  <=  fsk_adKC
+;  adKE  <=  fsk_adKE
+;  adKG  <=  fsk_adKG
+;  adKI  <=  fsk_adKI
+;  adKK  <=  fsk_adKK
+;  adKM  <=  fsk_adKM
+;  adKO  <=  fsk_adKO
+;  adKQ  <=  fsk_adKQ
+;  adKS  <=  fsk_adKS
+;  adKU  <=  fsk_adKU
+;  adKW  <=  fsk_adKW
+;  adKY  <=  fsk_adKY
+;  adL0  <=  fsk_adL0
+;  adL2  <=  fsk_adL2
+;  adL4  <=  fsk_adL4
+;  adL6  <=  fsk_adL6
+;  adL8  <=  fsk_adL8
+;  adLa  <=  fsk_adLa
+;  adLc  <=  fsk_adLc
+;  adLe  <=  fsk_adLe
+;  adLg  <=  fsk_adLg
+;  adLi  <=  fsk_adLi
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const acD9 (Array String Int))
-; (declare-const acDA (Array String Int))
-; (declare-const acDC (Array String Int))
-; (declare-const acDE (Array String Int))
-; (declare-const acDG (Array String Int))
-; (declare-const acDI (Array String Int))
-; (declare-const acDK (Array String Int))
-; (declare-const acDM (Array String Int))
-; (declare-const acDO (Array String Int))
-; (declare-const acDQ (Array String Int))
-; (declare-const acDS (Array String Int))
-; (declare-const acDU (Array String Int))
-; (declare-const acDW (Array String Int))
-; (declare-const acDY (Array String Int))
-; (declare-const acDa (Array String Int))
-; (declare-const acDq (Array String Int))
-; (declare-const acDs (Array String Int))
-; (declare-const acDu (Array String Int))
-; (declare-const acE0 (Array String Int))
-; (declare-const acE2 (Array String Int))
-; (declare-const acE4 (Array String Int))
-; (declare-const acE6 (Array String Int))
-; (declare-const acE8 (Array String Int))
-; (declare-const acEA (Array String Int))
-; (declare-const acEC (Array String Int))
-; (declare-const acEE (Array String Int))
-; (declare-const acEG (Array String Int))
-; (declare-const acEa (Array String Int))
-; (declare-const acEc (Array String Int))
-; (declare-const acEe (Array String Int))
-; (declare-const acEg (Array String Int))
-; (declare-const acEi (Array String Int))
-; (declare-const acEk (Array String Int))
-; (declare-const acEm (Array String Int))
-; (declare-const acEo (Array String Int))
-; (declare-const acEq (Array String Int))
-; (declare-const acEs (Array String Int))
-; (declare-const acEu (Array String Int))
-; (declare-const acEw (Array String Int))
-; (declare-const acEy (Array String Int))
+; (declare-const adJQ (Array String Int))
+; (declare-const adJR (Array String Int))
+; (declare-const adK2 (Array String Int))
+; (declare-const adK4 (Array String Int))
+; (declare-const adK6 (Array String Int))
+; (declare-const adKA (Array String Int))
+; (declare-const adKC (Array String Int))
+; (declare-const adKE (Array String Int))
+; (declare-const adKG (Array String Int))
+; (declare-const adKI (Array String Int))
+; (declare-const adKK (Array String Int))
+; (declare-const adKM (Array String Int))
+; (declare-const adKO (Array String Int))
+; (declare-const adKQ (Array String Int))
+; (declare-const adKS (Array String Int))
+; (declare-const adKU (Array String Int))
+; (declare-const adKW (Array String Int))
+; (declare-const adKY (Array String Int))
+; (declare-const adKc (Array String Int))
+; (declare-const adKe (Array String Int))
+; (declare-const adKg (Array String Int))
+; (declare-const adKi (Array String Int))
+; (declare-const adKk (Array String Int))
+; (declare-const adKm (Array String Int))
+; (declare-const adKo (Array String Int))
+; (declare-const adKq (Array String Int))
+; (declare-const adKs (Array String Int))
+; (declare-const adKu (Array String Int))
+; (declare-const adKw (Array String Int))
+; (declare-const adKy (Array String Int))
+; (declare-const adL0 (Array String Int))
+; (declare-const adL2 (Array String Int))
+; (declare-const adL4 (Array String Int))
+; (declare-const adL6 (Array String Int))
+; (declare-const adL8 (Array String Int))
+; (declare-const adLa (Array String Int))
+; (declare-const adLc (Array String Int))
+; (declare-const adLe (Array String Int))
+; (declare-const adLg (Array String Int))
+; (declare-const adLi (Array String Int))
 (declare-const
-   acD9
+   adJQ
    (Array String Int))
 (declare-const
-   acDa
+   adJR
    (Array String Int))
 (declare-const
-   acDq
+   adK2
    (Array String Int))
 (declare-const
-   acDs
+   adK4
    (Array String Int))
 (declare-const
-   acDu
+   adK6
    (Array String Int))
 (declare-const
-   acDA
+   adKc
    (Array String Int))
 (declare-const
-   acDC
+   adKe
    (Array String Int))
 (declare-const
-   acDE
+   adKg
    (Array String Int))
 (declare-const
-   acDG
+   adKi
    (Array String Int))
 (declare-const
-   acDI
+   adKk
    (Array String Int))
 (declare-const
-   acDK
+   adKm
    (Array String Int))
 (declare-const
-   acDM
+   adKo
    (Array String Int))
 (declare-const
-   acDO
+   adKq
    (Array String Int))
 (declare-const
-   acDQ
+   adKs
    (Array String Int))
 (declare-const
-   acDS
+   adKu
    (Array String Int))
 (declare-const
-   acDU
+   adKw
    (Array String Int))
 (declare-const
-   acDW
+   adKy
    (Array String Int))
 (declare-const
-   acDY
+   adKA
    (Array String Int))
 (declare-const
-   acE0
+   adKC
    (Array String Int))
 (declare-const
-   acE2
+   adKE
    (Array String Int))
 (declare-const
-   acE4
+   adKG
    (Array String Int))
 (declare-const
-   acE6
+   adKI
    (Array String Int))
 (declare-const
-   acE8
+   adKK
    (Array String Int))
 (declare-const
-   acEa
+   adKM
    (Array String Int))
 (declare-const
-   acEc
+   adKO
    (Array String Int))
 (declare-const
-   acEe
+   adKQ
    (Array String Int))
 (declare-const
-   acEg
+   adKS
    (Array String Int))
 (declare-const
-   acEi
+   adKU
    (Array String Int))
 (declare-const
-   acEk
+   adKW
    (Array String Int))
 (declare-const
-   acEm
+   adKY
    (Array String Int))
 (declare-const
-   acEo
+   adL0
    (Array String Int))
 (declare-const
-   acEq
+   adL2
    (Array String Int))
 (declare-const
-   acEs
+   adL4
    (Array String Int))
 (declare-const
-   acEu
+   adL6
    (Array String Int))
 (declare-const
-   acEw
+   adL8
    (Array String Int))
 (declare-const
-   acEy
+   adLa
    (Array String Int))
 (declare-const
-   acEA
+   adLc
    (Array String Int))
 (declare-const
-   acEC
+   adLe
    (Array String Int))
 (declare-const
-   acEE
+   adLg
    (Array String Int))
 (declare-const
-   acEG
+   adLi
    (Array String Int))
 (assert
    (!
@@ -9209,7 +11985,7 @@
               const
               (Array String Int))
            0)
-         acEG)
+         adLi)
       :named
       given-2.1))
 (assert
@@ -9221,9 +11997,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDu)
-         acDA)
+           adJR
+           adK6)
+         adKc)
       :named
       given-2.2))
 (assert
@@ -9235,9 +12011,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDA)
-         acDC)
+           adJR
+           adKc)
+         adKe)
       :named
       given-2.3))
 (assert
@@ -9249,9 +12025,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDC)
-         acDE)
+           adJR
+           adKe)
+         adKg)
       :named
       given-2.4))
 (assert
@@ -9263,9 +12039,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDE)
-         acDG)
+           adJR
+           adKg)
+         adKi)
       :named
       given-2.5))
 (assert
@@ -9277,9 +12053,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDG)
-         acDI)
+           adJR
+           adKi)
+         adKk)
       :named
       given-2.6))
 (assert
@@ -9291,9 +12067,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDI)
-         acDK)
+           adJR
+           adKk)
+         adKm)
       :named
       given-2.7))
 (assert
@@ -9305,9 +12081,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDK)
-         acDM)
+           adJR
+           adKm)
+         adKo)
       :named
       given-2.8))
 (assert
@@ -9319,9 +12095,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDM)
-         acDO)
+           adJR
+           adKo)
+         adKq)
       :named
       given-2.9))
 (assert
@@ -9333,9 +12109,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDO)
-         acDQ)
+           adJR
+           adKq)
+         adKs)
       :named
       given-2.10))
 (assert
@@ -9347,9 +12123,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDQ)
-         acDS)
+           adJR
+           adKs)
+         adKu)
       :named
       given-2.11))
 (assert
@@ -9361,9 +12137,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDS)
-         acDU)
+           adJR
+           adKu)
+         adKw)
       :named
       given-2.12))
 (assert
@@ -9375,9 +12151,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDU)
-         acDW)
+           adJR
+           adKw)
+         adKy)
       :named
       given-2.13))
 (assert
@@ -9389,9 +12165,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDW)
-         acDY)
+           adJR
+           adKy)
+         adKA)
       :named
       given-2.14))
 (assert
@@ -9403,9 +12179,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDY)
-         acE0)
+           adJR
+           adKA)
+         adKC)
       :named
       given-2.15))
 (assert
@@ -9417,9 +12193,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acE0)
-         acE2)
+           adJR
+           adKC)
+         adKE)
       :named
       given-2.16))
 (assert
@@ -9431,9 +12207,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acE2)
-         acE4)
+           adJR
+           adKE)
+         adKG)
       :named
       given-2.17))
 (assert
@@ -9445,9 +12221,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acE4)
-         acE6)
+           adJR
+           adKG)
+         adKI)
       :named
       given-2.18))
 (assert
@@ -9459,9 +12235,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acE6)
-         acE8)
+           adJR
+           adKI)
+         adKK)
       :named
       given-2.19))
 (assert
@@ -9473,9 +12249,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acE8)
-         acEa)
+           adJR
+           adKK)
+         adKM)
       :named
       given-2.20))
 (assert
@@ -9487,9 +12263,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEa)
-         acEc)
+           adJR
+           adKM)
+         adKO)
       :named
       given-2.21))
 (assert
@@ -9501,9 +12277,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEc)
-         acEe)
+           adJR
+           adKO)
+         adKQ)
       :named
       given-2.22))
 (assert
@@ -9515,9 +12291,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEe)
-         acEg)
+           adJR
+           adKQ)
+         adKS)
       :named
       given-2.23))
 (assert
@@ -9529,9 +12305,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEg)
-         acEi)
+           adJR
+           adKS)
+         adKU)
       :named
       given-2.24))
 (assert
@@ -9543,9 +12319,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEi)
-         acEk)
+           adJR
+           adKU)
+         adKW)
       :named
       given-2.25))
 (assert
@@ -9557,9 +12333,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEk)
-         acEm)
+           adJR
+           adKW)
+         adKY)
       :named
       given-2.26))
 (assert
@@ -9571,9 +12347,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEm)
-         acEo)
+           adJR
+           adKY)
+         adL0)
       :named
       given-2.27))
 (assert
@@ -9585,9 +12361,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEo)
-         acEq)
+           adJR
+           adL0)
+         adL2)
       :named
       given-2.28))
 (assert
@@ -9599,9 +12375,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEq)
-         acEs)
+           adJR
+           adL2)
+         adL4)
       :named
       given-2.29))
 (assert
@@ -9613,9 +12389,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEs)
-         acEu)
+           adJR
+           adL4)
+         adL6)
       :named
       given-2.30))
 (assert
@@ -9627,9 +12403,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEu)
-         acEw)
+           adJR
+           adL6)
+         adL8)
       :named
       given-2.31))
 (assert
@@ -9641,9 +12417,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEw)
-         acEy)
+           adJR
+           adL8)
+         adLa)
       :named
       given-2.32))
 (assert
@@ -9655,9 +12431,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEy)
-         acEA)
+           adJR
+           adLa)
+         adLc)
       :named
       given-2.33))
 (assert
@@ -9669,9 +12445,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEA)
-         acEC)
+           adJR
+           adLc)
+         adLe)
       :named
       given-2.34))
 (assert
@@ -9683,9 +12459,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acEC)
-         acEE)
+           adJR
+           adLe)
+         adLg)
       :named
       given-2.35))
 (assert
@@ -9697,9 +12473,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDa)
-         acDs)
+           adJR
+           adJR)
+         adK4)
       :named
       given-2.36))
 (assert
@@ -9711,9 +12487,9 @@
               (+
                  (Int Int)
                  Int))
-           acDa
-           acDs)
-         acDu)
+           adJR
+           adK4)
+         adK6)
       :named
       given-2.37))
 (assert
@@ -9725,19 +12501,19 @@
               (+
                  (Int Int)
                  Int))
-           acD9
-           acD9)
-         acDq)
+           adJQ
+           adJQ)
+         adK2)
       :named
       given-2.38))
 (assert
    (!
-      (= acEE acEG)
+      (= adLg adLi)
       :named
       given-2.39))
 (assert
    (!
-      (= acDq acDu)
+      (= adK2 adK6)
       :named
       given-2.40))
 (check-sat)
@@ -9745,7 +12521,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{acEU} {2}:: (a0 *: a0)
+;      [WD] hole{adLw} {2}:: (a0 *: a0)
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -9755,32 +12531,32 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acDd
-;      acDd)
+;      adJU
+;      adJU)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acDa
+;      adJR
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acDa
-;        acDa)))
+;        adJR
+;        adJR)))
 
 ; WANTEDS (names)
-;  acDa  <=  b
-;  acDd  <=  a_acDd
+;  adJR  <=  b
+;  adJU  <=  a_adJU
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const acDd (Array String Int))
+; (declare-const adJU (Array String Int))
 (declare-const
-   acDd
+   adJU
    (Array String Int))
 (assert
    (!
@@ -9792,23 +12568,23 @@
                  (+
                     (Int Int)
                     Int))
-              acDd
-              acDd)
+              adJU
+              adJU)
             (
               (_
                  map
                  (+
                     (Int Int)
                     Int))
-              acDa
+              adJR
               (
                 (_
                    map
                    (+
                       (Int Int)
                       Int))
-                acDa
-                acDa))))
+                adJR
+                adJR))))
       :named
       wanted-2))
 (check-sat)
@@ -9817,7 +12593,16 @@
 (get-model)
 ; (
 ;   (define-fun
-;      acDq
+;      adKk
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adKi
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9836,9 +12621,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEA)
-;         acEC))
+;           adJR
+;           adLc)
+;         adLe))
 ;   (define-fun
 ;      given-2.6
 ;      ()
@@ -9850,9 +12635,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDG)
-;         acDI))
+;           adJR
+;           adKi)
+;         adKk))
 ;   (define-fun
 ;      given-2.30
 ;      ()
@@ -9864,9 +12649,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEs)
-;         acEu))
+;           adJR
+;           adL4)
+;         adL6))
 ;   (define-fun
 ;      given-2.15
 ;      ()
@@ -9878,11 +12663,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDY)
-;         acE0))
+;           adJR
+;           adKA)
+;         adKC))
 ;   (define-fun
-;      acDQ
+;      adJR
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9891,16 +12676,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acEw
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acEi
+;      adKq
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9919,11 +12695,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDa)
-;         acDs))
+;           adJR
+;           adJR)
+;         adK4))
 ;   (define-fun
-;      acEy
+;      adKW
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9942,9 +12718,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEg)
-;         acEi))
+;           adJR
+;           adKS)
+;         adKU))
 ;   (define-fun
 ;      given-2.16
 ;      ()
@@ -9956,9 +12732,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acE0)
-;         acE2))
+;           adJR
+;           adKC)
+;         adKE))
 ;   (define-fun
 ;      given-2.19
 ;      ()
@@ -9970,11 +12746,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acE6)
-;         acE8))
+;           adJR
+;           adKI)
+;         adKK))
 ;   (define-fun
-;      acDC
+;      adLc
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9983,7 +12759,34 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acE8
+;      adL2
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adLe
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adJQ
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adKe
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10000,9 +12803,18 @@
 ;      given-2.40
 ;      ()
 ;      Bool
-;      (= acDq acDu))
+;      (= adK2 adK6))
 ;   (define-fun
-;      acEA
+;      adKg
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adKm
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10021,11 +12833,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEe)
-;         acEg))
+;           adJR
+;           adKQ)
+;         adKS))
 ;   (define-fun
-;      acDS
+;      adK6
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10034,7 +12846,19 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acEg
+;      adJU
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           38)
+;         "!0!"
+;         (- 1)))
+;   (define-fun
+;      adKc
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10053,18 +12877,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDO)
-;         acDQ))
-;   (define-fun
-;      acDM
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           adJR
+;           adKq)
+;         adKs))
 ;   (define-fun
 ;      given-2.17
 ;      ()
@@ -10076,11 +12891,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acE2)
-;         acE4))
+;           adJR
+;           adKE)
+;         adKG))
 ;   (define-fun
-;      acDa
+;      adKY
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10099,9 +12914,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEu)
-;         acEw))
+;           adJR
+;           adL6)
+;         adL8))
 ;   (define-fun
 ;      given-2.28
 ;      ()
@@ -10113,11 +12928,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEo)
-;         acEq))
+;           adJR
+;           adL0)
+;         adL2))
 ;   (define-fun
-;      acDO
+;      adL4
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10126,34 +12941,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acEs
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acEo
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acEa
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acEk
+;      adKs
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10172,9 +12960,27 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDQ)
-;         acDS))
+;           adJR
+;           adKs)
+;         adKu))
+;   (define-fun
+;      adL6
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adKM
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.20
 ;      ()
@@ -10186,11 +12992,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acE8)
-;         acEa))
+;           adJR
+;           adKK)
+;         adKM))
 ;   (define-fun
-;      acEG
+;      adKO
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10199,7 +13005,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acEe
+;      adKu
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10208,52 +13014,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acE2
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acEc
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acEu
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acDA
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acDW
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acE0
+;      adKo
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10272,18 +13033,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDE)
-;         acDG))
-;   (define-fun
-;      acEm
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           adJR
+;           adKg)
+;         adKi))
 ;   (define-fun
 ;      given-2.32
 ;      ()
@@ -10295,9 +13047,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEw)
-;         acEy))
+;           adJR
+;           adL8)
+;         adLa))
 ;   (define-fun
 ;      given-2.29
 ;      ()
@@ -10309,11 +13061,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEq)
-;         acEs))
+;           adJR
+;           adL2)
+;         adL4))
 ;   (define-fun
-;      acDs
+;      adKC
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10332,9 +13084,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDS)
-;         acDU))
+;           adJR
+;           adKu)
+;         adKw))
 ;   (define-fun
 ;      given-2.13
 ;      ()
@@ -10346,9 +13098,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDU)
-;         acDW))
+;           adJR
+;           adKw)
+;         adKy))
 ;   (define-fun
 ;      given-2.37
 ;      ()
@@ -10360,9 +13112,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDs)
-;         acDu))
+;           adJR
+;           adK4)
+;         adK6))
 ;   (define-fun
 ;      given-2.2
 ;      ()
@@ -10374,9 +13126,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDu)
-;         acDA))
+;           adJR
+;           adK6)
+;         adKc))
 ;   (define-fun
 ;      given-2.8
 ;      ()
@@ -10388,9 +13140,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDK)
-;         acDM))
+;           adJR
+;           adKm)
+;         adKo))
 ;   (define-fun
 ;      given-2.22
 ;      ()
@@ -10402,9 +13154,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEc)
-;         acEe))
+;           adJR
+;           adKO)
+;         adKQ))
+;   (define-fun
+;      adKA
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.33
 ;      ()
@@ -10416,9 +13177,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEy)
-;         acEA))
+;           adJR
+;           adLa)
+;         adLc))
 ;   (define-fun
 ;      wanted-2
 ;      ()
@@ -10431,31 +13192,22 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              acDd
-;              acDd)
+;              adJU
+;              adJU)
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              acDa
-;              acDa
-;              acDa))))
+;              adJR
+;              adJR
+;              adJR))))
 ;   (define-fun
 ;      given-2.39
 ;      ()
 ;      Bool
-;      (= acEE acEG))
-;   (define-fun
-;      acDu
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;      (= adLg adLi))
 ;   (define-fun
 ;      given-2.14
 ;      ()
@@ -10467,11 +13219,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDW)
-;         acDY))
+;           adJR
+;           adKy)
+;         adKA))
 ;   (define-fun
-;      acE6
+;      adKI
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10480,7 +13232,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acDY
+;      adL8
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10499,9 +13251,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acE4)
-;         acE6))
+;           adJR
+;           adKG)
+;         adKI))
 ;   (define-fun
 ;      given-2.35
 ;      ()
@@ -10513,18 +13265,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEC)
-;         acEE))
-;   (define-fun
-;      acDK
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           adJR
+;           adLe)
+;         adLg))
 ;   (define-fun
 ;      given-2.38
 ;      ()
@@ -10536,9 +13279,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acD9
-;           acD9)
-;         acDq))
+;           adJQ
+;           adJQ)
+;         adK2))
 ;   (define-fun
 ;      given-2.27
 ;      ()
@@ -10550,9 +13293,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEm)
-;         acEo))
+;           adJR
+;           adKY)
+;         adL0))
 ;   (define-fun
 ;      given-2.21
 ;      ()
@@ -10564,11 +13307,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEa)
-;         acEc))
+;           adJR
+;           adKM)
+;         adKO))
 ;   (define-fun
-;      acDI
+;      adKy
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10587,9 +13330,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDM)
-;         acDO))
+;           adJR
+;           adKo)
+;         adKq))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -10610,9 +13353,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEi)
-;         acEk))
+;           adJR
+;           adKU)
+;         adKW))
 ;   (define-fun
 ;      base
 ;      ()
@@ -10623,7 +13366,7 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      acDE
+;      adKw
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10632,7 +13375,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acDG
+;      adKG
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10641,7 +13384,16 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acD9
+;      adKK
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adKS
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10660,9 +13412,27 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDA)
-;         acDC))
+;           adJR
+;           adKc)
+;         adKe))
+;   (define-fun
+;      adKQ
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adKU
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-2.1
 ;      ()
@@ -10673,9 +13443,9 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         acEG))
+;         adLi))
 ;   (define-fun
-;      acEC
+;      adKE
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10684,7 +13454,16 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acDU
+;      adL0
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adLa
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10703,11 +13482,29 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acEk)
-;         acEm))
+;           adJR
+;           adKW)
+;         adKY))
 ;   (define-fun
-;      acEq
+;      adLg
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adK4
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adK2
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10726,11 +13523,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDI)
-;         acDK))
+;           adJR
+;           adKk)
+;         adKm))
 ;   (define-fun
-;      acE4
+;      adLi
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -10738,27 +13535,6 @@
 ;           const
 ;           (Array String Int))
 ;        0))
-;   (define-fun
-;      acEE
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acDd
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           38)
-;         "!0!"
-;         (- 1)))
 ;   (define-fun
 ;      given-2.4
 ;      ()
@@ -10770,9 +13546,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acDa
-;           acDC)
-;         acDE))
+;           adJR
+;           adKe)
+;         adKg))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -10789,42 +13565,42 @@
 (echo "solver-start-cycle-4")
 
 ; GIVENS (GHC style)
-; [G] cobox_acFz {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acFt {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFv {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFx {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFl {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acFn {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acFj {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acFC {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acFD {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_adMb {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_adM5 {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adM7 {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adM9 {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adLX {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_adLZ {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_adLV {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_adMe {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_adMf {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{acFP} {3}:: (b0 *: (b0 *: b0))
+; [WD] hole{adMr} {3}:: (b0 *: (b0 *: b0))
 ;                       ~
 ;                       (b *: (b *: b)) (CNonCanonical)
-; [WD] hole{acFY} {2}:: (b0 *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
+; [WD] hole{adMA} {2}:: (b0 *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                       ~
 ;                       One (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],acFy)
-; (*: [acF7,acFm],acFs)
-; (*: [acF7,acFs],acFu)
-; (*: [acF7,acFu],acFw)
-; (*: [acF7,acF7],acFk)
-; (*: [acF7,acFk],acFm)
-; (*: [acF6,acF6],acFi)
-; (acFw,acFy)
-; (acFi,acFm)
+; (One [],adMa)
+; (*: [adLJ,adLY],adM4)
+; (*: [adLJ,adM4],adM6)
+; (*: [adLJ,adM6],adM8)
+; (*: [adLJ,adLJ],adLW)
+; (*: [adLJ,adLW],adLY)
+; (*: [adLI,adLI],adLU)
+; (adM8,adMa)
+; (adLU,adLY)
 
 ; WANTEDS (Thoralf style)
-; (*: [acFb,*: [acFb,acFb]],*: [acF7,*: [acF7,acF7]])
-; (*: [acFb,*: [acFb,*: [acFb,*: [acFb,*: [acFb,acFb]]]]],One [])
+; (*: [adLN,*: [adLN,adLN]],*: [adLJ,*: [adLJ,adLJ]])
+; (*: [adLN,*: [adLN,*: [adLN,*: [adLN,*: [adLN,adLN]]]]],One [])
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{acFP} {3}:: (b0 *: (b0 *: b0))
+;      [WD] hole{adMr} {3}:: (b0 *: (b0 *: b0))
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -10834,32 +13610,32 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acFb
+;      adLN
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acFb
-;        acFb))
+;        adLN
+;        adLN))
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acF7
+;      adLJ
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acF7
-;        acF7)))
+;        adLJ
+;        adLJ)))
 
-;      [WD] hole{acFY} {2}:: (b0
+;      [WD] hole{adMA} {2}:: (b0
 ;                             *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                            ~
 ;                            One (CNonCanonical)
@@ -10870,36 +13646,36 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acFb
+;      adLN
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acFb
+;        adLN
 ;        (
 ;          (_
 ;             map
 ;             (+
 ;                (Int Int)
 ;                Int))
-;          acFb
+;          adLN
 ;          (
 ;            (_
 ;               map
 ;               (+
 ;                  (Int Int)
 ;                  Int))
-;            acFb
+;            adLN
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              acFb
-;              acFb)))))
+;              adLN
+;              adLN)))))
 ;    (
 ;      (as
 ;         const
@@ -10907,53 +13683,53 @@
 ;      0))
 
 ; GIVENS (names)
-;  acF6  <=  a
-;  acF7  <=  b
-;  acFi  <=  fsk_acFi
-;  acFk  <=  fsk_acFk
-;  acFm  <=  fsk_acFm
-;  acFs  <=  fsk_acFs
-;  acFu  <=  fsk_acFu
-;  acFw  <=  fsk_acFw
-;  acFy  <=  fsk_acFy
+;  adLI  <=  a
+;  adLJ  <=  b
+;  adLU  <=  fsk_adLU
+;  adLW  <=  fsk_adLW
+;  adLY  <=  fsk_adLY
+;  adM4  <=  fsk_adM4
+;  adM6  <=  fsk_adM6
+;  adM8  <=  fsk_adM8
+;  adMa  <=  fsk_adMa
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const acF6 (Array String Int))
-; (declare-const acF7 (Array String Int))
-; (declare-const acFi (Array String Int))
-; (declare-const acFk (Array String Int))
-; (declare-const acFm (Array String Int))
-; (declare-const acFs (Array String Int))
-; (declare-const acFu (Array String Int))
-; (declare-const acFw (Array String Int))
-; (declare-const acFy (Array String Int))
+; (declare-const adLI (Array String Int))
+; (declare-const adLJ (Array String Int))
+; (declare-const adLU (Array String Int))
+; (declare-const adLW (Array String Int))
+; (declare-const adLY (Array String Int))
+; (declare-const adM4 (Array String Int))
+; (declare-const adM6 (Array String Int))
+; (declare-const adM8 (Array String Int))
+; (declare-const adMa (Array String Int))
 (declare-const
-   acF6
+   adLI
    (Array String Int))
 (declare-const
-   acF7
+   adLJ
    (Array String Int))
 (declare-const
-   acFi
+   adLU
    (Array String Int))
 (declare-const
-   acFk
+   adLW
    (Array String Int))
 (declare-const
-   acFm
+   adLY
    (Array String Int))
 (declare-const
-   acFs
+   adM4
    (Array String Int))
 (declare-const
-   acFu
+   adM6
    (Array String Int))
 (declare-const
-   acFw
+   adM8
    (Array String Int))
 (declare-const
-   acFy
+   adMa
    (Array String Int))
 (assert
    (!
@@ -10963,7 +13739,7 @@
               const
               (Array String Int))
            0)
-         acFy)
+         adMa)
       :named
       given-4.1))
 (assert
@@ -10975,9 +13751,9 @@
               (+
                  (Int Int)
                  Int))
-           acF7
-           acFm)
-         acFs)
+           adLJ
+           adLY)
+         adM4)
       :named
       given-4.2))
 (assert
@@ -10989,9 +13765,9 @@
               (+
                  (Int Int)
                  Int))
-           acF7
-           acFs)
-         acFu)
+           adLJ
+           adM4)
+         adM6)
       :named
       given-4.3))
 (assert
@@ -11003,9 +13779,9 @@
               (+
                  (Int Int)
                  Int))
-           acF7
-           acFu)
-         acFw)
+           adLJ
+           adM6)
+         adM8)
       :named
       given-4.4))
 (assert
@@ -11017,9 +13793,9 @@
               (+
                  (Int Int)
                  Int))
-           acF7
-           acF7)
-         acFk)
+           adLJ
+           adLJ)
+         adLW)
       :named
       given-4.5))
 (assert
@@ -11031,9 +13807,9 @@
               (+
                  (Int Int)
                  Int))
-           acF7
-           acFk)
-         acFm)
+           adLJ
+           adLW)
+         adLY)
       :named
       given-4.6))
 (assert
@@ -11045,19 +13821,19 @@
               (+
                  (Int Int)
                  Int))
-           acF6
-           acF6)
-         acFi)
+           adLI
+           adLI)
+         adLU)
       :named
       given-4.7))
 (assert
    (!
-      (= acFw acFy)
+      (= adM8 adMa)
       :named
       given-4.8))
 (assert
    (!
-      (= acFi acFm)
+      (= adLU adLY)
       :named
       given-4.9))
 (check-sat)
@@ -11065,7 +13841,7 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{acFP} {3}:: (b0 *: (b0 *: b0))
+;      [WD] hole{adMr} {3}:: (b0 *: (b0 *: b0))
 ;                            ~
 ;                            (b *: (b *: b)) (CNonCanonical)
 ;  =>  (=
@@ -11075,32 +13851,32 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acFb
+;      adLN
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acFb
-;        acFb))
+;        adLN
+;        adLN))
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acF7
+;      adLJ
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acF7
-;        acF7)))
+;        adLJ
+;        adLJ)))
 
-;      [WD] hole{acFY} {2}:: (b0
+;      [WD] hole{adMA} {2}:: (b0
 ;                             *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                            ~
 ;                            One (CNonCanonical)
@@ -11111,36 +13887,36 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acFb
+;      adLN
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        acFb
+;        adLN
 ;        (
 ;          (_
 ;             map
 ;             (+
 ;                (Int Int)
 ;                Int))
-;          acFb
+;          adLN
 ;          (
 ;            (_
 ;               map
 ;               (+
 ;                  (Int Int)
 ;                  Int))
-;            acFb
+;            adLN
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              acFb
-;              acFb)))))
+;              adLN
+;              adLN)))))
 ;    (
 ;      (as
 ;         const
@@ -11148,13 +13924,13 @@
 ;      0))
 
 ; WANTEDS (names)
-;  acF7  <=  b
-;  acFb  <=  b_acFb
+;  adLJ  <=  b
+;  adLN  <=  b_adLN
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const acFb (Array String Int))
+; (declare-const adLN (Array String Int))
 (declare-const
-   acFb
+   adLN
    (Array String Int))
 (assert
    (!
@@ -11167,30 +13943,30 @@
                     (+
                        (Int Int)
                        Int))
-                 acFb
+                 adLN
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   acFb
-                   acFb))
+                   adLN
+                   adLN))
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
-                 acF7
+                 adLJ
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   acF7
-                   acF7))))
+                   adLJ
+                   adLJ))))
          (not
             (=
                (
@@ -11199,36 +13975,36 @@
                     (+
                        (Int Int)
                        Int))
-                 acFb
+                 adLN
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   acFb
+                   adLN
                    (
                      (_
                         map
                         (+
                            (Int Int)
                            Int))
-                     acFb
+                     adLN
                      (
                        (_
                           map
                           (+
                              (Int Int)
                              Int))
-                       acFb
+                       adLN
                        (
                          (_
                             map
                             (+
                                (Int Int)
                                Int))
-                         acFb
-                         acFb)))))
+                         adLN
+                         adLN)))))
                (
                  (as
                     const
@@ -11252,11 +14028,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acF6
-;           acF6)
-;         acFi))
+;           adLI
+;           adLI)
+;         adLU))
 ;   (define-fun
-;      acFk
+;      adM8
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11264,36 +14040,6 @@
 ;           const
 ;           (Array String Int))
 ;        0))
-;   (define-fun
-;      acF7
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acFy
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acFb
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         (- 1)))
 ;   (define-fun
 ;      given-4.4
 ;      ()
@@ -11305,9 +14051,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acF7
-;           acFu)
-;         acFw))
+;           adLJ
+;           adM6)
+;         adM8))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -11327,16 +14073,7 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      acFu
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      acFi
+;      adLU
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11355,9 +14092,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acF7
-;           acFs)
-;         acFu))
+;           adLJ
+;           adM4)
+;         adM6))
 ;   (define-fun
 ;      given-4.5
 ;      ()
@@ -11369,9 +14106,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acF7
-;           acF7)
-;         acFk))
+;           adLJ
+;           adLJ)
+;         adLW))
+;   (define-fun
+;      adLY
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-4.6
 ;      ()
@@ -11383,14 +14129,14 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acF7
-;           acFk)
-;         acFm))
+;           adLJ
+;           adLW)
+;         adLY))
 ;   (define-fun
 ;      given-4.9
 ;      ()
 ;      Bool
-;      (= acFi acFm))
+;      (= adLU adLY))
 ;   (define-fun
 ;      wanted-4
 ;      ()
@@ -11406,18 +14152,18 @@
 ;                         (+
 ;                            (Int Int)
 ;                            Int))
-;                      acFb
-;                      acFb
-;                      acFb
+;                      adLN
+;                      adLN
+;                      adLN
 ;                      (
 ;                        (_
 ;                           map
 ;                           (+
 ;                              (Int Int)
 ;                              Int))
-;                        acFb
-;                        acFb
-;                        acFb))
+;                        adLN
+;                        adLN
+;                        adLN))
 ;                    (
 ;                      (as
 ;                         const
@@ -11432,21 +14178,21 @@
 ;                       (+
 ;                          (Int Int)
 ;                          Int))
-;                    acFb
-;                    acFb
-;                    acFb)
+;                    adLN
+;                    adLN
+;                    adLN)
 ;                  (
 ;                    (_
 ;                       map
 ;                       (+
 ;                          (Int Int)
 ;                          Int))
-;                    acF7
-;                    acF7
-;                    acF7)))
+;                    adLJ
+;                    adLJ
+;                    adLJ)))
 ;            a!1)))
 ;   (define-fun
-;      acFm
+;      adM6
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11465,11 +14211,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acF7
-;           acFm)
-;         acFs))
+;           adLJ
+;           adLY)
+;         adM4))
 ;   (define-fun
-;      acFw
+;      adLI
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11478,7 +14224,37 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      acF6
+;      adLN
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         (- 1)))
+;   (define-fun
+;      adLJ
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adM4
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adMa
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11501,14 +14277,14 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         acFy))
+;         adMa))
 ;   (define-fun
 ;      given-4.8
 ;      ()
 ;      Bool
-;      (= acFw acFy))
+;      (= adM8 adMa))
 ;   (define-fun
-;      acFs
+;      adLW
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11534,28 +14310,28 @@
 (echo "solver-start-cycle-7")
 
 ; GIVENS (GHC style)
-; [G] cobox_acGW {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_acGR {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_acGS {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_acGZ {1}:: fsk0 ~ v (CTyEqCan)
+; [G] cobox_adNy {1}:: (v *: v) ~ fsk0 (CFunEqCan)
+; [G] cobox_adNt {0}:: (v *: w) ~ fsk0 (CFunEqCan)
+; [G] cobox_adNu {1}:: fsk0 ~ u (CTyEqCan)
+; [G] cobox_adNB {1}:: fsk0 ~ v (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{acH9} {3}:: (v0 *: w) ~ u (CNonCanonical)
-; [WD] hole{acHe} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
+; [WD] hole{adNL} {3}:: (v0 *: w) ~ u (CNonCanonical)
+; [WD] hole{adNQ} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (*: [acGB,acGB],acGV)
-; (*: [acGB,acGC],acGQ)
-; (acGQ,acGA)
-; (acGV,acGB)
+; (*: [adNd,adNd],adNx)
+; (*: [adNd,adNe],adNs)
+; (adNs,adNc)
+; (adNx,adNd)
 
 ; WANTEDS (Thoralf style)
-; (*: [acGH,acGC],acGA)
-; (*: [acGH,acGH],acGH)
+; (*: [adNj,adNe],adNc)
+; (*: [adNj,adNj],adNj)
 
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
-;      [WD] hole{acH9} {3}:: (v0 *: w) ~ u (CNonCanonical)
+;      [WD] hole{adNL} {3}:: (v0 *: w) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -11563,11 +14339,11 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acGH
-;      acGC)
-;    acGA)
+;      adNj
+;      adNe)
+;    adNc)
 
-;      [WD] hole{acHe} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
+;      [WD] hole{adNQ} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -11575,38 +14351,38 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acGH
-;      acGH)
-;    acGH)
+;      adNj
+;      adNj)
+;    adNj)
 
 ; GIVENS (names)
-;  acGA  <=  u
-;  acGB  <=  v
-;  acGC  <=  w
-;  acGQ  <=  fsk_acGQ
-;  acGV  <=  fsk_acGV
+;  adNc  <=  u
+;  adNd  <=  v
+;  adNe  <=  w
+;  adNs  <=  fsk_adNs
+;  adNx  <=  fsk_adNx
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const acGA (Array String Int))
-; (declare-const acGB (Array String Int))
-; (declare-const acGC (Array String Int))
-; (declare-const acGQ (Array String Int))
-; (declare-const acGV (Array String Int))
+; (declare-const adNc (Array String Int))
+; (declare-const adNd (Array String Int))
+; (declare-const adNe (Array String Int))
+; (declare-const adNs (Array String Int))
+; (declare-const adNx (Array String Int))
 (declare-const
-   acGA
+   adNc
    (Array String Int))
 (declare-const
-   acGB
+   adNd
    (Array String Int))
 (declare-const
-   acGC
+   adNe
    (Array String Int))
 (declare-const
-   acGQ
+   adNs
    (Array String Int))
 (declare-const
-   acGV
+   adNx
    (Array String Int))
 (assert
    (!
@@ -11617,9 +14393,9 @@
               (+
                  (Int Int)
                  Int))
-           acGB
-           acGB)
-         acGV)
+           adNd
+           adNd)
+         adNx)
       :named
       given-7.1))
 (assert
@@ -11631,19 +14407,19 @@
               (+
                  (Int Int)
                  Int))
-           acGB
-           acGC)
-         acGQ)
+           adNd
+           adNe)
+         adNs)
       :named
       given-7.2))
 (assert
    (!
-      (= acGQ acGA)
+      (= adNs adNc)
       :named
       given-7.3))
 (assert
    (!
-      (= acGV acGB)
+      (= adNx adNd)
       :named
       given-7.4))
 (check-sat)
@@ -11651,7 +14427,7 @@
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
-;      [WD] hole{acH9} {3}:: (v0 *: w) ~ u (CNonCanonical)
+;      [WD] hole{adNL} {3}:: (v0 *: w) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -11659,11 +14435,11 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acGH
-;      acGC)
-;    acGA)
+;      adNj
+;      adNe)
+;    adNc)
 
-;      [WD] hole{acHe} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
+;      [WD] hole{adNQ} {2}:: (v0 *: v0) ~ v0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -11671,19 +14447,19 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      acGH
-;      acGH)
-;    acGH)
+;      adNj
+;      adNj)
+;    adNj)
 
 ; WANTEDS (names)
-;  acGA  <=  u
-;  acGC  <=  w
-;  acGH  <=  v_acGH
+;  adNc  <=  u
+;  adNe  <=  w
+;  adNj  <=  v_adNj
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const acGH (Array String Int))
+; (declare-const adNj (Array String Int))
 (declare-const
-   acGH
+   adNj
    (Array String Int))
 (assert
    (!
@@ -11696,9 +14472,9 @@
                     (+
                        (Int Int)
                        Int))
-                 acGH
-                 acGC)
-               acGA))
+                 adNj
+                 adNe)
+               adNc))
          (not
             (=
                (
@@ -11707,9 +14483,9 @@
                     (+
                        (Int Int)
                        Int))
-                 acGH
-                 acGH)
-               acGH)))
+                 adNj
+                 adNj)
+               adNj)))
       :named
       wanted-7))
 (check-sat)
@@ -11718,7 +14494,7 @@
 (get-model)
 ; (
 ;   (define-fun
-;      acGQ
+;      adNe
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -11729,27 +14505,6 @@
 ;           28957)
 ;         "!0!"
 ;         8855))
-;   (define-fun
-;      acGH
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           2437)
-;         "!0!"
-;         1))
-;   (define-fun
-;      acGV
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -11772,7 +14527,28 @@
 ;      given-7.4
 ;      ()
 ;      Bool
-;      (= acGV acGB))
+;      (= adNx adNd))
+;   (define-fun
+;      adNd
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      adNc
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           28957)
+;         "!0!"
+;         8855))
 ;   (define-fun
 ;      given-7.1
 ;      ()
@@ -11784,9 +14560,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acGB
-;           acGB)
-;         acGV))
+;           adNd
+;           adNd)
+;         adNx))
+;   (define-fun
+;      adNx
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      wanted-7
 ;      ()
@@ -11800,9 +14585,9 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 acGH
-;                 acGC)
-;               acGA))
+;                 adNj
+;                 adNe)
+;               adNc))
 ;         (not
 ;            (=
 ;               (
@@ -11811,11 +14596,11 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 acGH
-;                 acGH)
-;               acGH))))
+;                 adNj
+;                 adNj)
+;               adNj))))
 ;   (define-fun
-;      acGC
+;      adNj
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -11823,11 +14608,11 @@
 ;           (as
 ;              const
 ;              (Array String Int))
-;           28957)
+;           2437)
 ;         "!0!"
-;         8855))
+;         1))
 ;   (define-fun
-;      acGA
+;      adNs
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -11842,7 +14627,7 @@
 ;      given-7.3
 ;      ()
 ;      Bool
-;      (= acGQ acGA))
+;      (= adNs adNc))
 ;   (define-fun
 ;      given-7.2
 ;      ()
@@ -11854,23 +14639,14 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acGB
-;           acGC)
-;         acGQ))
+;           adNd
+;           adNe)
+;         adNs))
 ;   (define-fun
 ;      one
 ;      ()
 ;      Int
 ;      1)
-;   (define-fun
-;      acGB
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -11885,1843 +14661,324 @@
 (echo "solver-start-cycle-8")
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
-
-; GIVENS (GHC style)
-; [G] cobox_acLw {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acKq {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKs {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKu {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKw {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKy {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKA {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKC {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKE {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKG {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKI {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKK {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKM {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKO {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKQ {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKS {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKU {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKW {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKY {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL0 {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL2 {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL4 {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL6 {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acL8 {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLa {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLc {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLe {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLg {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLi {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLk {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLm {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLo {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLq {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLs {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLu {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKi {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acKk {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acKg {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acLz {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acLA {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; [WD] hole{acLH} {2}:: One ~ b (CNonCanonical)
-
-; GIVENS (Thoralf style)
-; (One [],acLv)
-; (*: [acHw,acKj],acKp)
-; (*: [acHw,acKp],acKr)
-; (*: [acHw,acKr],acKt)
-; (*: [acHw,acKt],acKv)
-; (*: [acHw,acKv],acKx)
-; (*: [acHw,acKx],acKz)
-; (*: [acHw,acKz],acKB)
-; (*: [acHw,acKB],acKD)
-; (*: [acHw,acKD],acKF)
-; (*: [acHw,acKF],acKH)
-; (*: [acHw,acKH],acKJ)
-; (*: [acHw,acKJ],acKL)
-; (*: [acHw,acKL],acKN)
-; (*: [acHw,acKN],acKP)
-; (*: [acHw,acKP],acKR)
-; (*: [acHw,acKR],acKT)
-; (*: [acHw,acKT],acKV)
-; (*: [acHw,acKV],acKX)
-; (*: [acHw,acKX],acKZ)
-; (*: [acHw,acKZ],acL1)
-; (*: [acHw,acL1],acL3)
-; (*: [acHw,acL3],acL5)
-; (*: [acHw,acL5],acL7)
-; (*: [acHw,acL7],acL9)
-; (*: [acHw,acL9],acLb)
-; (*: [acHw,acLb],acLd)
-; (*: [acHw,acLd],acLf)
-; (*: [acHw,acLf],acLh)
-; (*: [acHw,acLh],acLj)
-; (*: [acHw,acLj],acLl)
-; (*: [acHw,acLl],acLn)
-; (*: [acHw,acLn],acLp)
-; (*: [acHw,acLp],acLr)
-; (*: [acHw,acLr],acLt)
-; (*: [acHw,acHw],acKh)
-; (*: [acHw,acKh],acKj)
-; (*: [acHv,acHv],acKf)
-; (acLt,acLv)
-; (acKf,acKj)
-
-; WANTEDS (Thoralf style)
-; (One [],acHw)
-
-(echo "givens-start-cycle-9")
-; GIVENS (conversions)
-;      [WD] hole{acLH} {2}:: One ~ b (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    acHw)
-
-; GIVENS (names)
-;  acHv  <=  a
-;  acHw  <=  b
-;  acKf  <=  fsk_acKf
-;  acKh  <=  fsk_acKh
-;  acKj  <=  fsk_acKj
-;  acKp  <=  fsk_acKp
-;  acKr  <=  fsk_acKr
-;  acKt  <=  fsk_acKt
-;  acKv  <=  fsk_acKv
-;  acKx  <=  fsk_acKx
-;  acKz  <=  fsk_acKz
-;  acKB  <=  fsk_acKB
-;  acKD  <=  fsk_acKD
-;  acKF  <=  fsk_acKF
-;  acKH  <=  fsk_acKH
-;  acKJ  <=  fsk_acKJ
-;  acKL  <=  fsk_acKL
-;  acKN  <=  fsk_acKN
-;  acKP  <=  fsk_acKP
-;  acKR  <=  fsk_acKR
-;  acKT  <=  fsk_acKT
-;  acKV  <=  fsk_acKV
-;  acKX  <=  fsk_acKX
-;  acKZ  <=  fsk_acKZ
-;  acL1  <=  fsk_acL1
-;  acL3  <=  fsk_acL3
-;  acL5  <=  fsk_acL5
-;  acL7  <=  fsk_acL7
-;  acL9  <=  fsk_acL9
-;  acLb  <=  fsk_acLb
-;  acLd  <=  fsk_acLd
-;  acLf  <=  fsk_acLf
-;  acLh  <=  fsk_acLh
-;  acLj  <=  fsk_acLj
-;  acLl  <=  fsk_acLl
-;  acLn  <=  fsk_acLn
-;  acLp  <=  fsk_acLp
-;  acLr  <=  fsk_acLr
-;  acLt  <=  fsk_acLt
-;  acLv  <=  fsk_acLv
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acHv (Array String Int))
-; (declare-const acHw (Array String Int))
-; (declare-const acKB (Array String Int))
-; (declare-const acKD (Array String Int))
-; (declare-const acKF (Array String Int))
-; (declare-const acKH (Array String Int))
-; (declare-const acKJ (Array String Int))
-; (declare-const acKL (Array String Int))
-; (declare-const acKN (Array String Int))
-; (declare-const acKP (Array String Int))
-; (declare-const acKR (Array String Int))
-; (declare-const acKT (Array String Int))
-; (declare-const acKV (Array String Int))
-; (declare-const acKX (Array String Int))
-; (declare-const acKZ (Array String Int))
-; (declare-const acKf (Array String Int))
-; (declare-const acKh (Array String Int))
-; (declare-const acKj (Array String Int))
-; (declare-const acKp (Array String Int))
-; (declare-const acKr (Array String Int))
-; (declare-const acKt (Array String Int))
-; (declare-const acKv (Array String Int))
-; (declare-const acKx (Array String Int))
-; (declare-const acKz (Array String Int))
-; (declare-const acL1 (Array String Int))
-; (declare-const acL3 (Array String Int))
-; (declare-const acL5 (Array String Int))
-; (declare-const acL7 (Array String Int))
-; (declare-const acL9 (Array String Int))
-; (declare-const acLb (Array String Int))
-; (declare-const acLd (Array String Int))
-; (declare-const acLf (Array String Int))
-; (declare-const acLh (Array String Int))
-; (declare-const acLj (Array String Int))
-; (declare-const acLl (Array String Int))
-; (declare-const acLn (Array String Int))
-; (declare-const acLp (Array String Int))
-; (declare-const acLr (Array String Int))
-; (declare-const acLt (Array String Int))
-; (declare-const acLv (Array String Int))
-(declare-const
-   acHv
-   (Array String Int))
-(declare-const
-   acHw
-   (Array String Int))
-(declare-const
-   acKf
-   (Array String Int))
-(declare-const
-   acKh
-   (Array String Int))
-(declare-const
-   acKj
-   (Array String Int))
-(declare-const
-   acKp
-   (Array String Int))
-(declare-const
-   acKr
-   (Array String Int))
-(declare-const
-   acKt
-   (Array String Int))
-(declare-const
-   acKv
-   (Array String Int))
-(declare-const
-   acKx
-   (Array String Int))
-(declare-const
-   acKz
-   (Array String Int))
-(declare-const
-   acKB
-   (Array String Int))
-(declare-const
-   acKD
-   (Array String Int))
-(declare-const
-   acKF
-   (Array String Int))
-(declare-const
-   acKH
-   (Array String Int))
-(declare-const
-   acKJ
-   (Array String Int))
-(declare-const
-   acKL
-   (Array String Int))
-(declare-const
-   acKN
-   (Array String Int))
-(declare-const
-   acKP
-   (Array String Int))
-(declare-const
-   acKR
-   (Array String Int))
-(declare-const
-   acKT
-   (Array String Int))
-(declare-const
-   acKV
-   (Array String Int))
-(declare-const
-   acKX
-   (Array String Int))
-(declare-const
-   acKZ
-   (Array String Int))
-(declare-const
-   acL1
-   (Array String Int))
-(declare-const
-   acL3
-   (Array String Int))
-(declare-const
-   acL5
-   (Array String Int))
-(declare-const
-   acL7
-   (Array String Int))
-(declare-const
-   acL9
-   (Array String Int))
-(declare-const
-   acLb
-   (Array String Int))
-(declare-const
-   acLd
-   (Array String Int))
-(declare-const
-   acLf
-   (Array String Int))
-(declare-const
-   acLh
-   (Array String Int))
-(declare-const
-   acLj
-   (Array String Int))
-(declare-const
-   acLl
-   (Array String Int))
-(declare-const
-   acLn
-   (Array String Int))
-(declare-const
-   acLp
-   (Array String Int))
-(declare-const
-   acLr
-   (Array String Int))
-(declare-const
-   acLt
-   (Array String Int))
-(declare-const
-   acLv
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acLv)
-      :named
-      given-9.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKj)
-         acKp)
-      :named
-      given-9.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKp)
-         acKr)
-      :named
-      given-9.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKr)
-         acKt)
-      :named
-      given-9.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKt)
-         acKv)
-      :named
-      given-9.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKv)
-         acKx)
-      :named
-      given-9.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKx)
-         acKz)
-      :named
-      given-9.7))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKz)
-         acKB)
-      :named
-      given-9.8))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKB)
-         acKD)
-      :named
-      given-9.9))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKD)
-         acKF)
-      :named
-      given-9.10))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKF)
-         acKH)
-      :named
-      given-9.11))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKH)
-         acKJ)
-      :named
-      given-9.12))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKJ)
-         acKL)
-      :named
-      given-9.13))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKL)
-         acKN)
-      :named
-      given-9.14))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKN)
-         acKP)
-      :named
-      given-9.15))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKP)
-         acKR)
-      :named
-      given-9.16))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKR)
-         acKT)
-      :named
-      given-9.17))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKT)
-         acKV)
-      :named
-      given-9.18))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKV)
-         acKX)
-      :named
-      given-9.19))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKX)
-         acKZ)
-      :named
-      given-9.20))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKZ)
-         acL1)
-      :named
-      given-9.21))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL1)
-         acL3)
-      :named
-      given-9.22))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL3)
-         acL5)
-      :named
-      given-9.23))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL5)
-         acL7)
-      :named
-      given-9.24))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL7)
-         acL9)
-      :named
-      given-9.25))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acL9)
-         acLb)
-      :named
-      given-9.26))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLb)
-         acLd)
-      :named
-      given-9.27))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLd)
-         acLf)
-      :named
-      given-9.28))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLf)
-         acLh)
-      :named
-      given-9.29))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLh)
-         acLj)
-      :named
-      given-9.30))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLj)
-         acLl)
-      :named
-      given-9.31))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLl)
-         acLn)
-      :named
-      given-9.32))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLn)
-         acLp)
-      :named
-      given-9.33))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLp)
-         acLr)
-      :named
-      given-9.34))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acLr)
-         acLt)
-      :named
-      given-9.35))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acHw)
-         acKh)
-      :named
-      given-9.36))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHw
-           acKh)
-         acKj)
-      :named
-      given-9.37))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHv
-           acHv)
-         acKf)
-      :named
-      given-9.38))
-(assert
-   (!
-      (= acLt acLv)
-      :named
-      given-9.39))
-(assert
-   (!
-      (= acKf acKj)
-      :named
-      given-9.40))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-9")
-(echo "wanteds-start-cycle-9")
-; WANTEDS (conversions)
-;      [WD] hole{acLH} {2}:: One ~ b (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    acHw)
-
-; WANTEDS (names)
-;  acHw  <=  b
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (!
-      (not
-         (=
-            (
-              (as
-                 const
-                 (Array String Int))
-              0)
-            acHw))
-      :named
-      wanted-9))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-9")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acLv)
-;      :named
-;      given-9.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKj)
-;         acKp)
-;      :named
-;      given-9.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKp)
-;         acKr)
-;      :named
-;      given-9.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKr)
-;         acKt)
-;      :named
-;      given-9.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKt)
-;         acKv)
-;      :named
-;      given-9.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKv)
-;         acKx)
-;      :named
-;      given-9.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKx)
-;         acKz)
-;      :named
-;      given-9.7)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKz)
-;         acKB)
-;      :named
-;      given-9.8)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKB)
-;         acKD)
-;      :named
-;      given-9.9)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKD)
-;         acKF)
-;      :named
-;      given-9.10)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKF)
-;         acKH)
-;      :named
-;      given-9.11)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKH)
-;         acKJ)
-;      :named
-;      given-9.12)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKJ)
-;         acKL)
-;      :named
-;      given-9.13)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKL)
-;         acKN)
-;      :named
-;      given-9.14)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKN)
-;         acKP)
-;      :named
-;      given-9.15)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKP)
-;         acKR)
-;      :named
-;      given-9.16)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKR)
-;         acKT)
-;      :named
-;      given-9.17)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKT)
-;         acKV)
-;      :named
-;      given-9.18)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKV)
-;         acKX)
-;      :named
-;      given-9.19)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKX)
-;         acKZ)
-;      :named
-;      given-9.20)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKZ)
-;         acL1)
-;      :named
-;      given-9.21)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL1)
-;         acL3)
-;      :named
-;      given-9.22)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL3)
-;         acL5)
-;      :named
-;      given-9.23)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL5)
-;         acL7)
-;      :named
-;      given-9.24)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL7)
-;         acL9)
-;      :named
-;      given-9.25)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acL9)
-;         acLb)
-;      :named
-;      given-9.26)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLb)
-;         acLd)
-;      :named
-;      given-9.27)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLd)
-;         acLf)
-;      :named
-;      given-9.28)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLf)
-;         acLh)
-;      :named
-;      given-9.29)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLh)
-;         acLj)
-;      :named
-;      given-9.30)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLj)
-;         acLl)
-;      :named
-;      given-9.31)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLl)
-;         acLn)
-;      :named
-;      given-9.32)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLn)
-;         acLp)
-;      :named
-;      given-9.33)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLp)
-;         acLr)
-;      :named
-;      given-9.34)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acLr)
-;         acLt)
-;      :named
-;      given-9.35)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acHw)
-;         acKh)
-;      :named
-;      given-9.36)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHw
-;           acKh)
-;         acKj)
-;      :named
-;      given-9.37)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHv
-;           acHv)
-;         acKf)
-;      :named
-;      given-9.38)
-;   (!
-;      (= acLt acLv)
-;      :named
-;      given-9.39)
-;   (!
-;      (= acKf acKj)
-;      :named
-;      given-9.40)
-;   (!
-;      (not
-;         (=
-;            (
-;              (as
-;                 const
-;                 (Array String Int))
-;              0)
-;            acHw))
-;      :named
-;      wanted-9))
-(get-unsat-core)
-; (given-9.19
-;    given-9.20
-;    given-9.18
-;    given-9.17
-;    given-9.16
-;    given-9.15
-;    given-9.14
-;    given-9.13
-;    given-9.11
-;    given-9.4
-;    given-9.1
-;    given-9.10
-;    given-9.7
-;    given-9.9
-;    given-9.3
-;    given-9.6
-;    given-9.5
-;    given-9.29
-;    given-9.30
-;    given-9.28
-;    given-9.27
-;    given-9.26
-;    given-9.25
-;    given-9.24
-;    given-9.23
-;    given-9.21
-;    given-9.22
-;    given-9.2
-;    given-9.8
-;    wanted-9
-;    given-9.39
-;    given-9.37
-;    given-9.36
-;    given-9.35
-;    given-9.34
-;    given-9.33
-;    given-9.32
-;    given-9.31
-;    given-9.12)
-(pop 1)
 (echo "solver-finish-cycle-9")
 (echo "solver-start-cycle-10")
+Parse Failed
 (echo "solver-finish-cycle-10")
 (echo "solver-start-cycle-11")
-
-; GIVENS (GHC style)
-; [G] cobox_acM1 {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acLV {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLX {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLZ {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLN {2}:: (b *: b) ~ fsk0 (CFunEqCan)
-; [G] cobox_acLP {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
-; [G] cobox_acLL {1}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acM4 {1}:: fsk0 ~ fsk1 (CTyEqCan)
-; [G] cobox_acM5 {1}:: fsk0 ~ fsk1 (CTyEqCan)
-
-; WANTEDS (GHC style)
-; [WD] hole{acMc} {2}:: One ~ a (CNonCanonical)
-
-; GIVENS (Thoralf style)
-; (One [],acM0)
-; (*: [acHE,acLO],acLU)
-; (*: [acHE,acLU],acLW)
-; (*: [acHE,acLW],acLY)
-; (*: [acHE,acHE],acLM)
-; (*: [acHE,acLM],acLO)
-; (*: [acHD,acHD],acLK)
-; (acLY,acM0)
-; (acLK,acLO)
-
-; WANTEDS (Thoralf style)
-; (One [],acHD)
-
-(echo "givens-start-cycle-11")
-; GIVENS (conversions)
-;      [WD] hole{acMc} {2}:: One ~ a (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    acHD)
-
-; GIVENS (names)
-;  acHD  <=  a
-;  acHE  <=  b
-;  acLK  <=  fsk_acLK
-;  acLM  <=  fsk_acLM
-;  acLO  <=  fsk_acLO
-;  acLU  <=  fsk_acLU
-;  acLW  <=  fsk_acLW
-;  acLY  <=  fsk_acLY
-;  acM0  <=  fsk_acM0
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-; (declare-const acHD (Array String Int))
-; (declare-const acHE (Array String Int))
-; (declare-const acLK (Array String Int))
-; (declare-const acLM (Array String Int))
-; (declare-const acLO (Array String Int))
-; (declare-const acLU (Array String Int))
-; (declare-const acLW (Array String Int))
-; (declare-const acLY (Array String Int))
-; (declare-const acM0 (Array String Int))
-(declare-const
-   acHD
-   (Array String Int))
-(declare-const
-   acHE
-   (Array String Int))
-(declare-const
-   acLK
-   (Array String Int))
-(declare-const
-   acLM
-   (Array String Int))
-(declare-const
-   acLO
-   (Array String Int))
-(declare-const
-   acLU
-   (Array String Int))
-(declare-const
-   acLW
-   (Array String Int))
-(declare-const
-   acLY
-   (Array String Int))
-(declare-const
-   acM0
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         acM0)
-      :named
-      given-11.1))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLO)
-         acLU)
-      :named
-      given-11.2))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLU)
-         acLW)
-      :named
-      given-11.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLW)
-         acLY)
-      :named
-      given-11.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acHE)
-         acLM)
-      :named
-      given-11.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHE
-           acLM)
-         acLO)
-      :named
-      given-11.6))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           acHD
-           acHD)
-         acLK)
-      :named
-      given-11.7))
-(assert
-   (!
-      (= acLY acM0)
-      :named
-      given-11.8))
-(assert
-   (!
-      (= acLK acLO)
-      :named
-      given-11.9))
-(check-sat)
-; sat
-(echo "givens-finish-cycle-11")
-(echo "wanteds-start-cycle-11")
-; WANTEDS (conversions)
-;      [WD] hole{acMc} {2}:: One ~ a (CNonCanonical)
-;  =>  (=
-;    (
-;      (as
-;         const
-;         (Array String Int))
-;      0)
-;    acHD)
-
-; WANTEDS (names)
-;  acHD  <=  a
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (!
-      (not
-         (=
-            (
-              (as
-                 const
-                 (Array String Int))
-              0)
-            acHD))
-      :named
-      wanted-11))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-11")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         acM0)
-;      :named
-;      given-11.1)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLO)
-;         acLU)
-;      :named
-;      given-11.2)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLU)
-;         acLW)
-;      :named
-;      given-11.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLW)
-;         acLY)
-;      :named
-;      given-11.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acHE)
-;         acLM)
-;      :named
-;      given-11.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHE
-;           acLM)
-;         acLO)
-;      :named
-;      given-11.6)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           acHD
-;           acHD)
-;         acLK)
-;      :named
-;      given-11.7)
-;   (!
-;      (= acLY acM0)
-;      :named
-;      given-11.8)
-;   (!
-;      (= acLK acLO)
-;      :named
-;      given-11.9)
-;   (!
-;      (not
-;         (=
-;            (
-;              (as
-;                 const
-;                 (Array String Int))
-;              0)
-;            acHD))
-;      :named
-;      wanted-11))
-(get-unsat-core)
-; (wanted-11
-;    given-11.9
-;    given-11.8
-;    given-11.7
-;    given-11.6
-;    given-11.5
-;    given-11.4
-;    given-11.3
-;    given-11.1
-;    given-11.2)
-(pop 1)
+Parse Failed
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-12")
+Parse Failed
 (echo "solver-finish-cycle-12")
 (echo "solver-start-cycle-13")
+(echo "solver-finish-cycle-13")
+(echo "solver-start-cycle-14")
 
 ; GIVENS (GHC style)
-; [G] cobox_acMi {0}:: One ~ fsk0 (CFunEqCan)
-; [G] cobox_acMg {0}:: (a *: a) ~ fsk0 (CFunEqCan)
-; [G] cobox_acMj {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_ag5c {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_ag46 {34}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag48 {33}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4a {32}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4c {31}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4e {30}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4g {29}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4i {28}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4k {27}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4m {26}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4o {25}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4q {24}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4s {23}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4u {22}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4w {21}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4y {20}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4A {19}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4C {18}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4E {17}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4G {16}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4I {15}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4K {14}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4M {13}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4O {12}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4Q {11}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4S {10}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4U {9}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4W {8}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag4Y {7}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag50 {6}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag52 {5}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag54 {4}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag56 {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag58 {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag5a {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag3Y {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag40 {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag3W {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag5f {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_ag5g {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{acMo} {2}:: One ~ a (CNonCanonical)
+; [WD] hole{ag5n} {2}:: One ~ b (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],acMh)
-; (*: [acHL,acHL],acMf)
-; (acMf,acMh)
+; (One [],ag5b)
+; (*: [aeJZ,ag3Z],ag45)
+; (*: [aeJZ,ag45],ag47)
+; (*: [aeJZ,ag47],ag49)
+; (*: [aeJZ,ag49],ag4b)
+; (*: [aeJZ,ag4b],ag4d)
+; (*: [aeJZ,ag4d],ag4f)
+; (*: [aeJZ,ag4f],ag4h)
+; (*: [aeJZ,ag4h],ag4j)
+; (*: [aeJZ,ag4j],ag4l)
+; (*: [aeJZ,ag4l],ag4n)
+; (*: [aeJZ,ag4n],ag4p)
+; (*: [aeJZ,ag4p],ag4r)
+; (*: [aeJZ,ag4r],ag4t)
+; (*: [aeJZ,ag4t],ag4v)
+; (*: [aeJZ,ag4v],ag4x)
+; (*: [aeJZ,ag4x],ag4z)
+; (*: [aeJZ,ag4z],ag4B)
+; (*: [aeJZ,ag4B],ag4D)
+; (*: [aeJZ,ag4D],ag4F)
+; (*: [aeJZ,ag4F],ag4H)
+; (*: [aeJZ,ag4H],ag4J)
+; (*: [aeJZ,ag4J],ag4L)
+; (*: [aeJZ,ag4L],ag4N)
+; (*: [aeJZ,ag4N],ag4P)
+; (*: [aeJZ,ag4P],ag4R)
+; (*: [aeJZ,ag4R],ag4T)
+; (*: [aeJZ,ag4T],ag4V)
+; (*: [aeJZ,ag4V],ag4X)
+; (*: [aeJZ,ag4X],ag4Z)
+; (*: [aeJZ,ag4Z],ag51)
+; (*: [aeJZ,ag51],ag53)
+; (*: [aeJZ,ag53],ag55)
+; (*: [aeJZ,ag55],ag57)
+; (*: [aeJZ,ag57],ag59)
+; (*: [aeJZ,aeJZ],ag3X)
+; (*: [aeJZ,ag3X],ag3Z)
+; (*: [aeJY,aeJY],ag3V)
+; (ag59,ag5b)
+; (ag3V,ag3Z)
 
 ; WANTEDS (Thoralf style)
-; (One [],acHL)
+; (One [],aeJZ)
 
-(echo "givens-start-cycle-13")
+(echo "givens-start-cycle-14")
 ; GIVENS (conversions)
-;      [WD] hole{acMo} {2}:: One ~ a (CNonCanonical)
+;      [WD] hole{ag5n} {2}:: One ~ b (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
 ;         const
 ;         (Array String Int))
 ;      0)
-;    acHL)
+;    aeJZ)
 
 ; GIVENS (names)
-;  acHL  <=  a
-;  acMf  <=  fsk_acMf
-;  acMh  <=  fsk_acMh
+;  aeJY  <=  a
+;  aeJZ  <=  b
+;  ag3V  <=  fsk_ag3V
+;  ag3X  <=  fsk_ag3X
+;  ag3Z  <=  fsk_ag3Z
+;  ag45  <=  fsk_ag45
+;  ag47  <=  fsk_ag47
+;  ag49  <=  fsk_ag49
+;  ag4b  <=  fsk_ag4b
+;  ag4d  <=  fsk_ag4d
+;  ag4f  <=  fsk_ag4f
+;  ag4h  <=  fsk_ag4h
+;  ag4j  <=  fsk_ag4j
+;  ag4l  <=  fsk_ag4l
+;  ag4n  <=  fsk_ag4n
+;  ag4p  <=  fsk_ag4p
+;  ag4r  <=  fsk_ag4r
+;  ag4t  <=  fsk_ag4t
+;  ag4v  <=  fsk_ag4v
+;  ag4x  <=  fsk_ag4x
+;  ag4z  <=  fsk_ag4z
+;  ag4B  <=  fsk_ag4B
+;  ag4D  <=  fsk_ag4D
+;  ag4F  <=  fsk_ag4F
+;  ag4H  <=  fsk_ag4H
+;  ag4J  <=  fsk_ag4J
+;  ag4L  <=  fsk_ag4L
+;  ag4N  <=  fsk_ag4N
+;  ag4P  <=  fsk_ag4P
+;  ag4R  <=  fsk_ag4R
+;  ag4T  <=  fsk_ag4T
+;  ag4V  <=  fsk_ag4V
+;  ag4X  <=  fsk_ag4X
+;  ag4Z  <=  fsk_ag4Z
+;  ag51  <=  fsk_ag51
+;  ag53  <=  fsk_ag53
+;  ag55  <=  fsk_ag55
+;  ag57  <=  fsk_ag57
+;  ag59  <=  fsk_ag59
+;  ag5b  <=  fsk_ag5b
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const acHL (Array String Int))
-; (declare-const acMf (Array String Int))
-; (declare-const acMh (Array String Int))
+; (declare-const aeJY (Array String Int))
+; (declare-const aeJZ (Array String Int))
+; (declare-const ag3V (Array String Int))
+; (declare-const ag3X (Array String Int))
+; (declare-const ag3Z (Array String Int))
+; (declare-const ag45 (Array String Int))
+; (declare-const ag47 (Array String Int))
+; (declare-const ag49 (Array String Int))
+; (declare-const ag4B (Array String Int))
+; (declare-const ag4D (Array String Int))
+; (declare-const ag4F (Array String Int))
+; (declare-const ag4H (Array String Int))
+; (declare-const ag4J (Array String Int))
+; (declare-const ag4L (Array String Int))
+; (declare-const ag4N (Array String Int))
+; (declare-const ag4P (Array String Int))
+; (declare-const ag4R (Array String Int))
+; (declare-const ag4T (Array String Int))
+; (declare-const ag4V (Array String Int))
+; (declare-const ag4X (Array String Int))
+; (declare-const ag4Z (Array String Int))
+; (declare-const ag4b (Array String Int))
+; (declare-const ag4d (Array String Int))
+; (declare-const ag4f (Array String Int))
+; (declare-const ag4h (Array String Int))
+; (declare-const ag4j (Array String Int))
+; (declare-const ag4l (Array String Int))
+; (declare-const ag4n (Array String Int))
+; (declare-const ag4p (Array String Int))
+; (declare-const ag4r (Array String Int))
+; (declare-const ag4t (Array String Int))
+; (declare-const ag4v (Array String Int))
+; (declare-const ag4x (Array String Int))
+; (declare-const ag4z (Array String Int))
+; (declare-const ag51 (Array String Int))
+; (declare-const ag53 (Array String Int))
+; (declare-const ag55 (Array String Int))
+; (declare-const ag57 (Array String Int))
+; (declare-const ag59 (Array String Int))
+; (declare-const ag5b (Array String Int))
 (declare-const
-   acHL
+   aeJY
    (Array String Int))
 (declare-const
-   acMf
+   aeJZ
    (Array String Int))
 (declare-const
-   acMh
+   ag3V
+   (Array String Int))
+(declare-const
+   ag3X
+   (Array String Int))
+(declare-const
+   ag3Z
+   (Array String Int))
+(declare-const
+   ag45
+   (Array String Int))
+(declare-const
+   ag47
+   (Array String Int))
+(declare-const
+   ag49
+   (Array String Int))
+(declare-const
+   ag4b
+   (Array String Int))
+(declare-const
+   ag4d
+   (Array String Int))
+(declare-const
+   ag4f
+   (Array String Int))
+(declare-const
+   ag4h
+   (Array String Int))
+(declare-const
+   ag4j
+   (Array String Int))
+(declare-const
+   ag4l
+   (Array String Int))
+(declare-const
+   ag4n
+   (Array String Int))
+(declare-const
+   ag4p
+   (Array String Int))
+(declare-const
+   ag4r
+   (Array String Int))
+(declare-const
+   ag4t
+   (Array String Int))
+(declare-const
+   ag4v
+   (Array String Int))
+(declare-const
+   ag4x
+   (Array String Int))
+(declare-const
+   ag4z
+   (Array String Int))
+(declare-const
+   ag4B
+   (Array String Int))
+(declare-const
+   ag4D
+   (Array String Int))
+(declare-const
+   ag4F
+   (Array String Int))
+(declare-const
+   ag4H
+   (Array String Int))
+(declare-const
+   ag4J
+   (Array String Int))
+(declare-const
+   ag4L
+   (Array String Int))
+(declare-const
+   ag4N
+   (Array String Int))
+(declare-const
+   ag4P
+   (Array String Int))
+(declare-const
+   ag4R
+   (Array String Int))
+(declare-const
+   ag4T
+   (Array String Int))
+(declare-const
+   ag4V
+   (Array String Int))
+(declare-const
+   ag4X
+   (Array String Int))
+(declare-const
+   ag4Z
+   (Array String Int))
+(declare-const
+   ag51
+   (Array String Int))
+(declare-const
+   ag53
+   (Array String Int))
+(declare-const
+   ag55
+   (Array String Int))
+(declare-const
+   ag57
+   (Array String Int))
+(declare-const
+   ag59
+   (Array String Int))
+(declare-const
+   ag5b
    (Array String Int))
 (assert
    (!
@@ -13731,9 +14988,9 @@
               const
               (Array String Int))
            0)
-         acMh)
+         ag5b)
       :named
-      given-13.1))
+      given-14.1))
 (assert
    (!
       (=
@@ -13743,32 +15000,541 @@
               (+
                  (Int Int)
                  Int))
-           acHL
-           acHL)
-         acMf)
+           aeJZ
+           ag3Z)
+         ag45)
       :named
-      given-13.2))
+      given-14.2))
 (assert
    (!
-      (= acMf acMh)
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag45)
+         ag47)
       :named
-      given-13.3))
+      given-14.3))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag47)
+         ag49)
+      :named
+      given-14.4))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag49)
+         ag4b)
+      :named
+      given-14.5))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4b)
+         ag4d)
+      :named
+      given-14.6))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4d)
+         ag4f)
+      :named
+      given-14.7))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4f)
+         ag4h)
+      :named
+      given-14.8))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4h)
+         ag4j)
+      :named
+      given-14.9))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4j)
+         ag4l)
+      :named
+      given-14.10))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4l)
+         ag4n)
+      :named
+      given-14.11))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4n)
+         ag4p)
+      :named
+      given-14.12))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4p)
+         ag4r)
+      :named
+      given-14.13))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4r)
+         ag4t)
+      :named
+      given-14.14))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4t)
+         ag4v)
+      :named
+      given-14.15))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4v)
+         ag4x)
+      :named
+      given-14.16))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4x)
+         ag4z)
+      :named
+      given-14.17))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4z)
+         ag4B)
+      :named
+      given-14.18))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4B)
+         ag4D)
+      :named
+      given-14.19))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4D)
+         ag4F)
+      :named
+      given-14.20))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4F)
+         ag4H)
+      :named
+      given-14.21))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4H)
+         ag4J)
+      :named
+      given-14.22))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4J)
+         ag4L)
+      :named
+      given-14.23))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4L)
+         ag4N)
+      :named
+      given-14.24))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4N)
+         ag4P)
+      :named
+      given-14.25))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4P)
+         ag4R)
+      :named
+      given-14.26))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4R)
+         ag4T)
+      :named
+      given-14.27))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4T)
+         ag4V)
+      :named
+      given-14.28))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4V)
+         ag4X)
+      :named
+      given-14.29))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4X)
+         ag4Z)
+      :named
+      given-14.30))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag4Z)
+         ag51)
+      :named
+      given-14.31))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag51)
+         ag53)
+      :named
+      given-14.32))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag53)
+         ag55)
+      :named
+      given-14.33))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag55)
+         ag57)
+      :named
+      given-14.34))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag57)
+         ag59)
+      :named
+      given-14.35))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           aeJZ)
+         ag3X)
+      :named
+      given-14.36))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJZ
+           ag3X)
+         ag3Z)
+      :named
+      given-14.37))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeJY
+           aeJY)
+         ag3V)
+      :named
+      given-14.38))
+(assert
+   (!
+      (= ag59 ag5b)
+      :named
+      given-14.39))
+(assert
+   (!
+      (= ag3V ag3Z)
+      :named
+      given-14.40))
 (check-sat)
 ; sat
-(echo "givens-finish-cycle-13")
-(echo "wanteds-start-cycle-13")
+(echo "givens-finish-cycle-14")
+(echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
-;      [WD] hole{acMo} {2}:: One ~ a (CNonCanonical)
+;      [WD] hole{ag5n} {2}:: One ~ b (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
 ;         const
 ;         (Array String Int))
 ;      0)
-;    acHL)
+;    aeJZ)
 
 ; WANTEDS (names)
-;  acHL  <=  a
+;  aeJZ  <=  b
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -13780,12 +15546,12 @@
                  const
                  (Array String Int))
               0)
-            acHL))
+            aeJZ))
       :named
-      wanted-13))
+      wanted-14))
 (check-sat)
 ; unsat
-(echo "wanteds-finish-cycle-13")
+(echo "wanteds-finish-cycle-14")
 (get-assertions)
 ; (
 ;   (= one 1)
@@ -13797,9 +15563,9 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         acMh)
+;         ag5b)
 ;      :named
-;      given-13.1)
+;      given-14.1)
 ;   (!
 ;      (=
 ;         (
@@ -13808,15 +15574,487 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acHL
-;           acHL)
-;         acMf)
+;           aeJZ
+;           ag3Z)
+;         ag45)
 ;      :named
-;      given-13.2)
+;      given-14.2)
 ;   (!
-;      (= acMf acMh)
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag45)
+;         ag47)
 ;      :named
-;      given-13.3)
+;      given-14.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag47)
+;         ag49)
+;      :named
+;      given-14.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag49)
+;         ag4b)
+;      :named
+;      given-14.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4b)
+;         ag4d)
+;      :named
+;      given-14.6)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4d)
+;         ag4f)
+;      :named
+;      given-14.7)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4f)
+;         ag4h)
+;      :named
+;      given-14.8)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4h)
+;         ag4j)
+;      :named
+;      given-14.9)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4j)
+;         ag4l)
+;      :named
+;      given-14.10)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4l)
+;         ag4n)
+;      :named
+;      given-14.11)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4n)
+;         ag4p)
+;      :named
+;      given-14.12)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4p)
+;         ag4r)
+;      :named
+;      given-14.13)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4r)
+;         ag4t)
+;      :named
+;      given-14.14)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4t)
+;         ag4v)
+;      :named
+;      given-14.15)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4v)
+;         ag4x)
+;      :named
+;      given-14.16)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4x)
+;         ag4z)
+;      :named
+;      given-14.17)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4z)
+;         ag4B)
+;      :named
+;      given-14.18)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4B)
+;         ag4D)
+;      :named
+;      given-14.19)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4D)
+;         ag4F)
+;      :named
+;      given-14.20)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4F)
+;         ag4H)
+;      :named
+;      given-14.21)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4H)
+;         ag4J)
+;      :named
+;      given-14.22)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4J)
+;         ag4L)
+;      :named
+;      given-14.23)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4L)
+;         ag4N)
+;      :named
+;      given-14.24)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4N)
+;         ag4P)
+;      :named
+;      given-14.25)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4P)
+;         ag4R)
+;      :named
+;      given-14.26)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4R)
+;         ag4T)
+;      :named
+;      given-14.27)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4T)
+;         ag4V)
+;      :named
+;      given-14.28)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4V)
+;         ag4X)
+;      :named
+;      given-14.29)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4X)
+;         ag4Z)
+;      :named
+;      given-14.30)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag4Z)
+;         ag51)
+;      :named
+;      given-14.31)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag51)
+;         ag53)
+;      :named
+;      given-14.32)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag53)
+;         ag55)
+;      :named
+;      given-14.33)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag55)
+;         ag57)
+;      :named
+;      given-14.34)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag57)
+;         ag59)
+;      :named
+;      given-14.35)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           aeJZ)
+;         ag3X)
+;      :named
+;      given-14.36)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJZ
+;           ag3X)
+;         ag3Z)
+;      :named
+;      given-14.37)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeJY
+;           aeJY)
+;         ag3V)
+;      :named
+;      given-14.38)
+;   (!
+;      (= ag59 ag5b)
+;      :named
+;      given-14.39)
+;   (!
+;      (= ag3V ag3Z)
+;      :named
+;      given-14.40)
 ;   (!
 ;      (not
 ;         (=
@@ -13825,69 +16063,154 @@
 ;                 const
 ;                 (Array String Int))
 ;              0)
-;            acHL))
+;            aeJZ))
 ;      :named
-;      wanted-13))
+;      wanted-14))
 (get-unsat-core)
-; (given-13.1 wanted-13 given-13.2 given-13.3)
+; (given-14.19
+;    given-14.20
+;    given-14.18
+;    given-14.17
+;    given-14.16
+;    given-14.15
+;    given-14.14
+;    given-14.13
+;    given-14.11
+;    given-14.4
+;    given-14.1
+;    given-14.10
+;    given-14.7
+;    given-14.9
+;    given-14.3
+;    given-14.6
+;    given-14.5
+;    given-14.29
+;    given-14.30
+;    given-14.28
+;    given-14.27
+;    given-14.26
+;    given-14.25
+;    given-14.24
+;    given-14.23
+;    given-14.21
+;    given-14.22
+;    given-14.2
+;    given-14.8
+;    wanted-14
+;    given-14.39
+;    given-14.37
+;    given-14.36
+;    given-14.35
+;    given-14.34
+;    given-14.33
+;    given-14.32
+;    given-14.12
+;    given-14.31)
 (pop 1)
-(echo "solver-finish-cycle-13")
-(echo "solver-start-cycle-14")
 (echo "solver-finish-cycle-14")
 (echo "solver-start-cycle-15")
+(echo "solver-finish-cycle-15")
+(echo "solver-start-cycle-16")
 
 ; GIVENS (GHC style)
-; [G] cobox_acMx {1}:: (v *: v) ~ fsk0 (CFunEqCan)
-; [G] cobox_acMs {0}:: (v *: w) ~ fsk0 (CFunEqCan)
-; [G] cobox_acMt {1}:: fsk0 ~ u (CTyEqCan)
-; [G] cobox_acMA {1}:: fsk0 ~ v (CTyEqCan)
+; [G] cobox_ag5H {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_ag5B {3}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag5D {2}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag5F {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag5t {2}:: (b *: b) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag5v {1}:: (b *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag5r {1}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag5K {1}:: fsk0 ~ fsk1 (CTyEqCan)
+; [G] cobox_ag5L {1}:: fsk0 ~ fsk1 (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{acHZ} {0}:: u ~ w (CNonCanonical)
+; [WD] hole{ag5S} {2}:: One ~ a (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (*: [acHS,acHS],acMw)
-; (*: [acHS,acHT],acMr)
-; (acMr,acHR)
-; (acMw,acHS)
+; (One [],ag5G)
+; (*: [aeK7,ag5u],ag5A)
+; (*: [aeK7,ag5A],ag5C)
+; (*: [aeK7,ag5C],ag5E)
+; (*: [aeK7,aeK7],ag5s)
+; (*: [aeK7,ag5s],ag5u)
+; (*: [aeK6,aeK6],ag5q)
+; (ag5E,ag5G)
+; (ag5q,ag5u)
 
 ; WANTEDS (Thoralf style)
-; (acHR,acHT)
+; (One [],aeK6)
 
-(echo "givens-start-cycle-15")
+(echo "givens-start-cycle-16")
 ; GIVENS (conversions)
-;      [WD] hole{acHZ} {0}:: u ~ w (CNonCanonical)
-;  =>  (= acHR acHT)
+;      [WD] hole{ag5S} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    aeK6)
 
 ; GIVENS (names)
-;  acHR  <=  u
-;  acHS  <=  v
-;  acHT  <=  w
-;  acMr  <=  fsk_acMr
-;  acMw  <=  fsk_acMw
+;  aeK6  <=  a
+;  aeK7  <=  b
+;  ag5q  <=  fsk_ag5q
+;  ag5s  <=  fsk_ag5s
+;  ag5u  <=  fsk_ag5u
+;  ag5A  <=  fsk_ag5A
+;  ag5C  <=  fsk_ag5C
+;  ag5E  <=  fsk_ag5E
+;  ag5G  <=  fsk_ag5G
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const acHR (Array String Int))
-; (declare-const acHS (Array String Int))
-; (declare-const acHT (Array String Int))
-; (declare-const acMr (Array String Int))
-; (declare-const acMw (Array String Int))
+; (declare-const aeK6 (Array String Int))
+; (declare-const aeK7 (Array String Int))
+; (declare-const ag5A (Array String Int))
+; (declare-const ag5C (Array String Int))
+; (declare-const ag5E (Array String Int))
+; (declare-const ag5G (Array String Int))
+; (declare-const ag5q (Array String Int))
+; (declare-const ag5s (Array String Int))
+; (declare-const ag5u (Array String Int))
 (declare-const
-   acHR
+   aeK6
    (Array String Int))
 (declare-const
-   acHS
+   aeK7
    (Array String Int))
 (declare-const
-   acHT
+   ag5q
    (Array String Int))
 (declare-const
-   acMr
+   ag5s
    (Array String Int))
 (declare-const
-   acMw
+   ag5u
    (Array String Int))
+(declare-const
+   ag5A
+   (Array String Int))
+(declare-const
+   ag5C
+   (Array String Int))
+(declare-const
+   ag5E
+   (Array String Int))
+(declare-const
+   ag5G
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (as
+              const
+              (Array String Int))
+           0)
+         ag5G)
+      :named
+      given-16.1))
 (assert
    (!
       (=
@@ -13897,11 +16220,11 @@
               (+
                  (Int Int)
                  Int))
-           acHS
-           acHS)
-         acMw)
+           aeK7
+           ag5u)
+         ag5A)
       :named
-      given-15.1))
+      given-16.2))
 (assert
    (!
       (=
@@ -13911,43 +16234,509 @@
               (+
                  (Int Int)
                  Int))
-           acHS
-           acHT)
-         acMr)
+           aeK7
+           ag5A)
+         ag5C)
       :named
-      given-15.2))
+      given-16.3))
 (assert
    (!
-      (= acMr acHR)
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeK7
+           ag5C)
+         ag5E)
       :named
-      given-15.3))
+      given-16.4))
 (assert
    (!
-      (= acMw acHS)
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeK7
+           aeK7)
+         ag5s)
       :named
-      given-15.4))
+      given-16.5))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeK7
+           ag5s)
+         ag5u)
+      :named
+      given-16.6))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeK6
+           aeK6)
+         ag5q)
+      :named
+      given-16.7))
+(assert
+   (!
+      (= ag5E ag5G)
+      :named
+      given-16.8))
+(assert
+   (!
+      (= ag5q ag5u)
+      :named
+      given-16.9))
 (check-sat)
 ; sat
-(echo "givens-finish-cycle-15")
-(echo "wanteds-start-cycle-15")
+(echo "givens-finish-cycle-16")
+(echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
-;      [WD] hole{acHZ} {0}:: u ~ w (CNonCanonical)
-;  =>  (= acHR acHT)
+;      [WD] hole{ag5S} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    aeK6)
 
 ; WANTEDS (names)
-;  acHR  <=  u
-;  acHT  <=  w
+;  aeK6  <=  a
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= acHR acHT))
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            aeK6))
       :named
-      wanted-15))
+      wanted-16))
 (check-sat)
 ; unsat
-(echo "wanteds-finish-cycle-15")
+(echo "wanteds-finish-cycle-16")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         ag5G)
+;      :named
+;      given-16.1)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeK7
+;           ag5u)
+;         ag5A)
+;      :named
+;      given-16.2)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeK7
+;           ag5A)
+;         ag5C)
+;      :named
+;      given-16.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeK7
+;           ag5C)
+;         ag5E)
+;      :named
+;      given-16.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeK7
+;           aeK7)
+;         ag5s)
+;      :named
+;      given-16.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeK7
+;           ag5s)
+;         ag5u)
+;      :named
+;      given-16.6)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeK6
+;           aeK6)
+;         ag5q)
+;      :named
+;      given-16.7)
+;   (!
+;      (= ag5E ag5G)
+;      :named
+;      given-16.8)
+;   (!
+;      (= ag5q ag5u)
+;      :named
+;      given-16.9)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            aeK6))
+;      :named
+;      wanted-16))
+(get-unsat-core)
+; (wanted-16
+;    given-16.9
+;    given-16.8
+;    given-16.7
+;    given-16.6
+;    given-16.5
+;    given-16.4
+;    given-16.3
+;    given-16.1
+;    given-16.2)
+(pop 1)
+(echo "solver-finish-cycle-16")
+(echo "solver-start-cycle-17")
+(echo "solver-finish-cycle-17")
+(echo "solver-start-cycle-18")
+
+; GIVENS (GHC style)
+; [G] cobox_ag5Y {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_ag5W {0}:: (a *: a) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag5Z {1}:: fsk0 ~ fsk1 (CTyEqCan)
+
+; WANTEDS (GHC style)
+; [WD] hole{ag64} {2}:: One ~ a (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; (One [],ag5X)
+; (*: [aeKe,aeKe],ag5V)
+; (ag5V,ag5X)
+
+; WANTEDS (Thoralf style)
+; (One [],aeKe)
+
+(echo "givens-start-cycle-18")
+; GIVENS (conversions)
+;      [WD] hole{ag64} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    aeKe)
+
+; GIVENS (names)
+;  aeKe  <=  a
+;  ag5V  <=  fsk_ag5V
+;  ag5X  <=  fsk_ag5X
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aeKe (Array String Int))
+; (declare-const ag5V (Array String Int))
+; (declare-const ag5X (Array String Int))
+(declare-const
+   aeKe
+   (Array String Int))
+(declare-const
+   ag5V
+   (Array String Int))
+(declare-const
+   ag5X
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (as
+              const
+              (Array String Int))
+           0)
+         ag5X)
+      :named
+      given-18.1))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeKe
+           aeKe)
+         ag5V)
+      :named
+      given-18.2))
+(assert
+   (!
+      (= ag5V ag5X)
+      :named
+      given-18.3))
+(check-sat)
+; sat
+(echo "givens-finish-cycle-18")
+(echo "wanteds-start-cycle-18")
+; WANTEDS (conversions)
+;      [WD] hole{ag64} {2}:: One ~ a (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    aeKe)
+
+; WANTEDS (names)
+;  aeKe  <=  a
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            aeKe))
+      :named
+      wanted-18))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         ag5X)
+;      :named
+;      given-18.1)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeKe
+;           aeKe)
+;         ag5V)
+;      :named
+;      given-18.2)
+;   (!
+;      (= ag5V ag5X)
+;      :named
+;      given-18.3)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            aeKe))
+;      :named
+;      wanted-18))
+(get-unsat-core)
+; (given-18.1 wanted-18 given-18.2 given-18.3)
+(pop 1)
+(echo "solver-finish-cycle-18")
+(echo "solver-start-cycle-19")
+(echo "solver-finish-cycle-19")
+(echo "solver-start-cycle-20")
+
+; GIVENS (GHC style)
+; [G] cobox_ag6d {1}:: (v *: v) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag68 {0}:: (v *: w) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag69 {1}:: fsk0 ~ u (CTyEqCan)
+; [G] cobox_ag6g {1}:: fsk0 ~ v (CTyEqCan)
+
+; WANTEDS (GHC style)
+; [WD] hole{aeKs} {0}:: u ~ w (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; (*: [aeKl,aeKl],ag6c)
+; (*: [aeKl,aeKm],ag67)
+; (ag67,aeKk)
+; (ag6c,aeKl)
+
+; WANTEDS (Thoralf style)
+; (aeKk,aeKm)
+
+(echo "givens-start-cycle-20")
+; GIVENS (conversions)
+;      [WD] hole{aeKs} {0}:: u ~ w (CNonCanonical)
+;  =>  (= aeKk aeKm)
+
+; GIVENS (names)
+;  aeKk  <=  u
+;  aeKl  <=  v
+;  aeKm  <=  w
+;  ag67  <=  fsk_ag67
+;  ag6c  <=  fsk_ag6c
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aeKk (Array String Int))
+; (declare-const aeKl (Array String Int))
+; (declare-const aeKm (Array String Int))
+; (declare-const ag67 (Array String Int))
+; (declare-const ag6c (Array String Int))
+(declare-const
+   aeKk
+   (Array String Int))
+(declare-const
+   aeKl
+   (Array String Int))
+(declare-const
+   aeKm
+   (Array String Int))
+(declare-const
+   ag67
+   (Array String Int))
+(declare-const
+   ag6c
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeKl
+           aeKl)
+         ag6c)
+      :named
+      given-20.1))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeKl
+           aeKm)
+         ag67)
+      :named
+      given-20.2))
+(assert
+   (!
+      (= ag67 aeKk)
+      :named
+      given-20.3))
+(assert
+   (!
+      (= ag6c aeKl)
+      :named
+      given-20.4))
+(check-sat)
+; sat
+(echo "givens-finish-cycle-20")
+(echo "wanteds-start-cycle-20")
+; WANTEDS (conversions)
+;      [WD] hole{aeKs} {0}:: u ~ w (CNonCanonical)
+;  =>  (= aeKk aeKm)
+
+; WANTEDS (names)
+;  aeKk  <=  u
+;  aeKm  <=  w
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (= aeKk aeKm))
+      :named
+      wanted-20))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-20")
 (get-assertions)
 ; (
 ;   (= one 1)
@@ -13960,11 +16749,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acHS
-;           acHS)
-;         acMw)
+;           aeKl
+;           aeKl)
+;         ag6c)
 ;      :named
-;      given-15.1)
+;      given-20.1)
 ;   (!
 ;      (=
 ;         (
@@ -13973,28 +16762,1127 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           acHS
-;           acHT)
-;         acMr)
+;           aeKl
+;           aeKm)
+;         ag67)
 ;      :named
-;      given-15.2)
+;      given-20.2)
 ;   (!
-;      (= acMr acHR)
+;      (= ag67 aeKk)
 ;      :named
-;      given-15.3)
+;      given-20.3)
 ;   (!
-;      (= acMw acHS)
+;      (= ag6c aeKl)
 ;      :named
-;      given-15.4)
+;      given-20.4)
 ;   (!
 ;      (not
-;         (= acHR acHT))
+;         (= aeKk aeKm))
 ;      :named
-;      wanted-15))
+;      wanted-20))
 (get-unsat-core)
-; (given-15.2 given-15.4 wanted-15 given-15.3 given-15.1)
+; (given-20.2 given-20.4 wanted-20 given-20.3 given-20.1)
 (pop 1)
-(echo "solver-finish-cycle-15")
+(echo "solver-finish-cycle-20")
+(echo "solver-start-cycle-21")
+(echo "solver-finish-cycle-21")
+(echo "solver-start-cycle-22")
+
+; GIVENS (GHC style)
+; [G] cobox_ag6o {0}:: One ~ fsk0 (CFunEqCan)
+; [G] cobox_ag6u {2}:: Base "kg" ~ fsk0 (CFunEqCan)
+; [G] cobox_ag6q {1}:: (w *: w) ~ fsk0 (CFunEqCan)
+; [G] cobox_ag6w {1}:: (fsk0 *: fsk0) ~ fsk1 (CFunEqCan)
+; [G] cobox_ag6y {0}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
+; [G] cobox_ag6s {0}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
+; [G] cobox_ag6B {1}:: fsk0 ~ fsk1 (CTyEqCan)
+
+; WANTEDS (GHC style)
+; [WD] hole{ag6G} {2}:: Base "kg" ~ w (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; (One [],ag6n)
+; (Base ["kg"],ag6t)
+; (*: [aeKu,aeKu],ag6p)
+; (*: [ag6t,ag6t],ag6v)
+; (/: [ag6n,ag6v],ag6x)
+; (/: [ag6n,ag6p],ag6r)
+; (ag6r,ag6x)
+
+; WANTEDS (Thoralf style)
+; (Base ["kg"],aeKu)
+
+(echo "givens-start-cycle-22")
+; GIVENS (conversions)
+;      [WD] hole{ag6G} {2}:: Base "kg" ~ w (CNonCanonical)
+;  =>  (=
+;    (store base "kg" one)
+;    aeKu)
+
+; GIVENS (names)
+;  aeKu  <=  w
+;  ag6n  <=  fsk_ag6n
+;  ag6p  <=  fsk_ag6p
+;  ag6r  <=  fsk_ag6r
+;  ag6t  <=  fsk_ag6t
+;  ag6v  <=  fsk_ag6v
+;  ag6x  <=  fsk_ag6x
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+; (declare-const aeKu (Array String Int))
+; (declare-const ag6n (Array String Int))
+; (declare-const ag6p (Array String Int))
+; (declare-const ag6r (Array String Int))
+; (declare-const ag6t (Array String Int))
+; (declare-const ag6v (Array String Int))
+; (declare-const ag6x (Array String Int))
+(declare-const
+   aeKu
+   (Array String Int))
+(declare-const
+   ag6n
+   (Array String Int))
+(declare-const
+   ag6p
+   (Array String Int))
+(declare-const
+   ag6r
+   (Array String Int))
+(declare-const
+   ag6t
+   (Array String Int))
+(declare-const
+   ag6v
+   (Array String Int))
+(declare-const
+   ag6x
+   (Array String Int))
+(assert
+   (!
+      (=
+         (
+           (as
+              const
+              (Array String Int))
+           0)
+         ag6n)
+      :named
+      given-22.1))
+(assert
+   (!
+      (=
+         (store base "kg" one)
+         ag6t)
+      :named
+      given-22.2))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           aeKu
+           aeKu)
+         ag6p)
+      :named
+      given-22.3))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (+
+                 (Int Int)
+                 Int))
+           ag6t
+           ag6t)
+         ag6v)
+      :named
+      given-22.4))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (-
+                 (Int Int)
+                 Int))
+           ag6n
+           ag6v)
+         ag6x)
+      :named
+      given-22.5))
+(assert
+   (!
+      (=
+         (
+           (_
+              map
+              (-
+                 (Int Int)
+                 Int))
+           ag6n
+           ag6p)
+         ag6r)
+      :named
+      given-22.6))
+(assert
+   (!
+      (= ag6r ag6x)
+      :named
+      given-22.7))
+(check-sat)
+; sat
+(echo "givens-finish-cycle-22")
+(echo "wanteds-start-cycle-22")
+; WANTEDS (conversions)
+;      [WD] hole{ag6G} {2}:: Base "kg" ~ w (CNonCanonical)
+;  =>  (=
+;    (store base "kg" one)
+;    aeKu)
+
+; WANTEDS (names)
+;  aeKu  <=  w
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (store base "kg" one)
+            aeKu))
+      :named
+      wanted-22))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (=
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         ag6n)
+;      :named
+;      given-22.1)
+;   (!
+;      (=
+;         (store base "kg" one)
+;         ag6t)
+;      :named
+;      given-22.2)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           aeKu
+;           aeKu)
+;         ag6p)
+;      :named
+;      given-22.3)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ag6t
+;           ag6t)
+;         ag6v)
+;      :named
+;      given-22.4)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           ag6n
+;           ag6v)
+;         ag6x)
+;      :named
+;      given-22.5)
+;   (!
+;      (=
+;         (
+;           (_
+;              map
+;              (-
+;                 (Int Int)
+;                 Int))
+;           ag6n
+;           ag6p)
+;         ag6r)
+;      :named
+;      given-22.6)
+;   (!
+;      (= ag6r ag6x)
+;      :named
+;      given-22.7)
+;   (!
+;      (not
+;         (=
+;            (store base "kg" one)
+;            aeKu))
+;      :named
+;      wanted-22))
+(get-unsat-core)
+; (given-22.7
+;    given-22.2
+;    given-22.6
+;    given-22.5
+;    wanted-22
+;    given-22.4
+;    given-22.3)
+(pop 1)
+(echo "solver-finish-cycle-22")
+(echo "solver-start-cycle-23")
+(echo "solver-finish-cycle-23")
+(echo "solver-start-cycle-24")
+Parse Failed
+(echo "solver-finish-cycle-24")
+(echo "solver-start-cycle-25")
+(echo "solver-finish-cycle-25")
+(echo "solver-start-cycle-26")
+(echo "solver-finish-cycle-26")
+(echo "solver-start-cycle-27")
+(echo "solver-finish-cycle-27")
+(echo "solver-start-cycle-28")
+(echo "solver-finish-cycle-28")
+(echo "solver-start-cycle-29")
+(echo "solver-finish-cycle-29")
+(echo "solver-start-cycle-30")
+(echo "solver-finish-cycle-30")
+(echo "solver-start-cycle-31")
+(echo "solver-finish-cycle-31")
+(echo "solver-start-cycle-32")
+(echo "solver-finish-cycle-32")
+(echo "solver-start-cycle-33")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{ageD} {8}:: ((Base "m" *: One) /: (Base "s" *: One))
+;                       ~
+;                       (Base "m" /: Base "s") (CNonCanonical)
+; [WD] hole{aget} {8}:: ((Base "m"
+;                         *: (Base "s" *: (Base "s" *: One)))
+;                        /: One)
+;                       ~
+;                       (Base "m" *: (Base "s" *: Base "s")) (CNonCanonical)
+; [WD] hole{agew} {8}:: (One /: One) ~ One (CNonCanonical)
+; [WD] hole{ageG} {6}:: ((Base "m" *: One) /: One)
+;                       ~
+;                       Base "m" (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (/: [*: [Base ["m"],One []],*: [Base ["s"],One []]],/: [Base ["m"],Base ["s"]])
+; (/: [*: [Base ["m"],*: [Base ["s"],*: [Base ["s"],One []]]],One []],*: [Base ["m"],*: [Base ["s"],Base ["s"]]])
+; (/: [One [],One []],One [])
+; (/: [*: [Base ["m"],One []],One []],Base ["m"])
+
+(echo "givens-start-cycle-33")
+; GIVENS (conversions)
+;      [WD] hole{ageD} {8}:: ((Base "m" *: One) /: (Base "s" *: One))
+;                            ~
+;                            (Base "m" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0)))
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "s" one)))
+
+;      [WD] hole{aget} {8}:: ((Base "m"
+;                              *: (Base "s" *: (Base "s" *: One)))
+;                             /: One)
+;                            ~
+;                            (Base "m" *: (Base "s" *: Base "s")) (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (_
+;             map
+;             (+
+;                (Int Int)
+;                Int))
+;          (store base "s" one)
+;          (
+;            (_
+;               map
+;               (+
+;                  (Int Int)
+;                  Int))
+;            (store base "s" one)
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0))))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (store base "s" one))))
+
+;      [WD] hole{agew} {8}:: (One /: One) ~ One (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0))
+
+;      [WD] hole{ageG} {6}:: ((Base "m" *: One) /: One)
+;                            ~
+;                            Base "m" (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (store base "m" one))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-33")
+(echo "wanteds-start-cycle-33")
+; WANTEDS (conversions)
+;      [WD] hole{ageD} {8}:: ((Base "m" *: One) /: (Base "s" *: One))
+;                            ~
+;                            (Base "m" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0)))
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "s" one)))
+
+;      [WD] hole{aget} {8}:: ((Base "m"
+;                              *: (Base "s" *: (Base "s" *: One)))
+;                             /: One)
+;                            ~
+;                            (Base "m" *: (Base "s" *: Base "s")) (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (_
+;             map
+;             (+
+;                (Int Int)
+;                Int))
+;          (store base "s" one)
+;          (
+;            (_
+;               map
+;               (+
+;                  (Int Int)
+;                  Int))
+;            (store base "s" one)
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0))))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "s" one)
+;        (store base "s" one))))
+
+;      [WD] hole{agew} {8}:: (One /: One) ~ One (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0))
+
+;      [WD] hole{ageG} {6}:: ((Base "m" *: One) /: One)
+;                            ~
+;                            Base "m" (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        (store base "m" one)
+;        (
+;          (as
+;             const
+;             (Array String Int))
+;          0))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;    (store base "m" one))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (or
+         (or
+            (or
+               (not
+                  (=
+                     (
+                       (_
+                          map
+                          (-
+                             (Int Int)
+                             Int))
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "m" one)
+                         (
+                           (as
+                              const
+                              (Array String Int))
+                           0))
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "s" one)
+                         (
+                           (as
+                              const
+                              (Array String Int))
+                           0)))
+                     (
+                       (_
+                          map
+                          (-
+                             (Int Int)
+                             Int))
+                       (store base "m" one)
+                       (store base "s" one))))
+               (not
+                  (=
+                     (
+                       (_
+                          map
+                          (-
+                             (Int Int)
+                             Int))
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "m" one)
+                         (
+                           (_
+                              map
+                              (+
+                                 (Int Int)
+                                 Int))
+                           (store base "s" one)
+                           (
+                             (_
+                                map
+                                (+
+                                   (Int Int)
+                                   Int))
+                             (store base "s" one)
+                             (
+                               (as
+                                  const
+                                  (Array String Int))
+                               0))))
+                       (
+                         (as
+                            const
+                            (Array String Int))
+                         0))
+                     (
+                       (_
+                          map
+                          (+
+                             (Int Int)
+                             Int))
+                       (store base "m" one)
+                       (
+                         (_
+                            map
+                            (+
+                               (Int Int)
+                               Int))
+                         (store base "s" one)
+                         (store base "s" one))))))
+            (not
+               (=
+                  (
+                    (_
+                       map
+                       (-
+                          (Int Int)
+                          Int))
+                    (
+                      (as
+                         const
+                         (Array String Int))
+                      0)
+                    (
+                      (as
+                         const
+                         (Array String Int))
+                      0))
+                  (
+                    (as
+                       const
+                       (Array String Int))
+                    0))))
+         (not
+            (=
+               (
+                 (_
+                    map
+                    (-
+                       (Int Int)
+                       Int))
+                 (
+                   (_
+                      map
+                      (+
+                         (Int Int)
+                         Int))
+                   (store base "m" one)
+                   (
+                     (as
+                        const
+                        (Array String Int))
+                     0))
+                 (
+                   (as
+                      const
+                      (Array String Int))
+                   0))
+               (store base "m" one))))
+      :named
+      wanted-33))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-33")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (or
+;         (or
+;            (or
+;               (not
+;                  (=
+;                     (
+;                       (_
+;                          map
+;                          (-
+;                             (Int Int)
+;                             Int))
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "m" one)
+;                         (
+;                           (as
+;                              const
+;                              (Array String Int))
+;                           0))
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "s" one)
+;                         (
+;                           (as
+;                              const
+;                              (Array String Int))
+;                           0)))
+;                     (
+;                       (_
+;                          map
+;                          (-
+;                             (Int Int)
+;                             Int))
+;                       (store base "m" one)
+;                       (store base "s" one))))
+;               (not
+;                  (=
+;                     (
+;                       (_
+;                          map
+;                          (-
+;                             (Int Int)
+;                             Int))
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "m" one)
+;                         (
+;                           (_
+;                              map
+;                              (+
+;                                 (Int Int)
+;                                 Int))
+;                           (store base "s" one)
+;                           (
+;                             (_
+;                                map
+;                                (+
+;                                   (Int Int)
+;                                   Int))
+;                             (store base "s" one)
+;                             (
+;                               (as
+;                                  const
+;                                  (Array String Int))
+;                               0))))
+;                       (
+;                         (as
+;                            const
+;                            (Array String Int))
+;                         0))
+;                     (
+;                       (_
+;                          map
+;                          (+
+;                             (Int Int)
+;                             Int))
+;                       (store base "m" one)
+;                       (
+;                         (_
+;                            map
+;                            (+
+;                               (Int Int)
+;                               Int))
+;                         (store base "s" one)
+;                         (store base "s" one))))))
+;            (not
+;               (=
+;                  (
+;                    (_
+;                       map
+;                       (-
+;                          (Int Int)
+;                          Int))
+;                    (
+;                      (as
+;                         const
+;                         (Array String Int))
+;                      0)
+;                    (
+;                      (as
+;                         const
+;                         (Array String Int))
+;                      0))
+;                  (
+;                    (as
+;                       const
+;                       (Array String Int))
+;                    0))))
+;         (not
+;            (=
+;               (
+;                 (_
+;                    map
+;                    (-
+;                       (Int Int)
+;                       Int))
+;                 (
+;                   (_
+;                      map
+;                      (+
+;                         (Int Int)
+;                         Int))
+;                   (store base "m" one)
+;                   (
+;                     (as
+;                        const
+;                        (Array String Int))
+;                     0))
+;                 (
+;                   (as
+;                      const
+;                      (Array String Int))
+;                   0))
+;               (store base "m" one))))
+;      :named
+;      wanted-33))
+(get-unsat-core)
+; (wanted-33)
+(pop 1)
+(echo "solver-finish-cycle-33")
+(exit)
+; [6 of 6] Compiling UnitDefsTests
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(echo "solver-start-cycle-1")
+(echo "solver-finish-cycle-1")
+(echo "solver-start-cycle-2")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{amow} {2}:: One
+;                       ~
+;                       (Base "byte" /: Base "byte") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["byte"],Base ["byte"]])
+
+(echo "givens-start-cycle-2")
+; GIVENS (conversions)
+;      [WD] hole{amow} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-2")
+(echo "wanteds-start-cycle-2")
+; WANTEDS (conversions)
+;      [WD] hole{amow} {2}:: One
+;                            ~
+;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "byte" one)
+;      (store base "byte" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "byte" one)
+              (store base "byte" one))))
+      :named
+      wanted-2))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-2")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "byte" one)
+;              (store base "byte" one))))
+;      :named
+;      wanted-2))
+(get-unsat-core)
+; (wanted-2)
+(pop 1)
+(echo "solver-finish-cycle-2")
+(echo "solver-start-cycle-3")
+(echo "solver-finish-cycle-3")
+(echo "solver-start-cycle-4")
+(echo "solver-finish-cycle-4")
 (exit)
 ; Test suite units: RUNNING...
 ; Test suite units: PASS
