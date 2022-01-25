@@ -26,9 +26,9 @@ number of unit tests.
 
 ## Goals
 
-* Use the unit quasiquoter with the `thoralf-plugin` and get it to pass all of
-  the units tests of the `uom-plugin`.
-* Identify, refactor and extract commonality in both unit plugins.
+✅&nbsp;&nbsp;Identify, refactor and extract commonality in both unit plugins.
+✅&nbsp;&nbsp;Use the unit quasiquoter with the `thoralf-plugin`.
+❌&nbsp;&nbsp;Pass all of the units tests of the `uom-plugin` with the `thoralf-plugin`.
 
 ## Progress
 
