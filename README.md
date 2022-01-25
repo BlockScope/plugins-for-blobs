@@ -139,7 +139,7 @@ All 78 tests passed (0.00s)
 ```
 
 ```
-> cabal test thoralf-plugin:units --test-show-details=always --test-options="--color always"
+> cabal test thoralf-plugin-uom:units --test-show-details=always --test-options="--color always"
 thoralf-plugin:units
   Get the underlying value with unQuantity
     unQuantity 3 m:                OK
@@ -152,8 +152,35 @@ thoralf-plugin:units
     unQuantity 1 s^-1:             OK
     unQuantity 2 1 / kg s:         OK
     unQuantity (1 % 2) kg:         OK
+  Attach units by applying the quasiquoter without a numeric value
+    m 3:                           OK
+    m <$> [3..5]:                  OK
+    m/s 3:                         OK
+    m s^-1 3:                      OK
+    s^2 3:                         OK
+    1 $ 3:                         OK
+    fmap [u| kg |] read $ "3":     OK
+    fmap [u| kg |] read $ "3.0":   OK
+  Showing constants
+    show 3m:                       OK
+    show 3m/s:                     OK
+    show 3.2 s^2:                  OK
+    show 3.0 kg m^2 / m s^2:       OK
+    show 1:                        OK
+    show 1 s^-1:                   OK
+    show 2 1 / kg s:               OK
+    show (1 % 2) kg:               OK
+  Basic operations
+    2 + 2:                         OK
+    in m/s:                        OK
+    polymorphic frac zero:         OK
+  showQuantity
+    myMass:                        OK
+    gravityOnEarth:                OK
+  read . show
+    3 m:                           OK
 
-All 10 tests passed (0.00s))
+All 32 tests passed (0.00s)
 ```
 
 * ### With Stack
