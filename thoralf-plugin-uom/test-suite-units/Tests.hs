@@ -10,7 +10,25 @@
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
 
-module Main where
+module Main
+    ( main
+
+    -- * Exported to avoid -Wunused-top-binds.
+    , associativity
+    , commutativity
+    , unit
+    , inverse
+    , inverse2
+    , f
+    , g
+    , givens
+    , givens2
+    , givens3
+    , patternSplice
+    , dimensionless
+    , sum'
+    , noParse
+    ) where
 
 import Test.Tasty
 import Test.Tasty.HUnit
@@ -19,9 +37,11 @@ import "uom-quantity" Data.UnitsOfMeasure
 import "uom-quantity" Data.UnitsOfMeasure.Show
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
-import UnitDefs ()
-import Defs ()
+import Abelian (associativity, commutativity, unit, inverse, inverse2)
 import UnQuantity (testsUnQuantity)
+import UnitDefs ()
+import UnitDefsTests ()
+import ErrorTestGroups
 
 -- Some basic examples
 
@@ -135,6 +155,7 @@ tests = testGroup "thoralf-plugin:units"
     [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
     , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"
     ]
+  , errorsTestGroup
   , testGroup "read . show"
     [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
 

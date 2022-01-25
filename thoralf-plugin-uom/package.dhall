@@ -133,6 +133,18 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , other-modules =
                 [ "Abelian", "Defs", "UnitDefs", "UnitDefsTests", "UnQuantity" ]
               , source-dirs = "test-suite-units"
+              , when =
+                [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
+                  , source-dirs = [ "test-suite-units-ghc-9.2" ]
+                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.2) && impl(ghc < 9.2)"
+                  , source-dirs = [ "test-suite-units-ghc-8.2" ]
+                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , buildable = True
+                  }
+                ]
               }
             }
           }

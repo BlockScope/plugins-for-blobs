@@ -199,10 +199,13 @@ thoralf-plugin:units
   showQuantity
     myMass:                        OK
     gravityOnEarth:                OK
+  errors
+    s/m ~ m/s:                     OK
+    m + s:                         OK
   read . show
     3 m:                           OK
 
-All 32 tests passed (0.00s)
+All 34 tests passed (0.01s)
 ```
 
 ```
