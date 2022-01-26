@@ -19,7 +19,6 @@ module ErrorTests where
 
 import "uom-quantity" Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH
-import Data.Theory.UoM
 import UnitDefs ()
 
 mismatch1 :: Quantity Double [u| s/m |]
