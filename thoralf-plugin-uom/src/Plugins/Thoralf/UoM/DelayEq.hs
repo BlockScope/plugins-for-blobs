@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP, PackageImports, ScopedTypeVariables #-}
+{-# LANGUAGE CPP, ScopedTypeVariables #-}
 
 module Plugins.Thoralf.UoM.DelayEq (plugin) where
 

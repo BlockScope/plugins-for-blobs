@@ -1,5 +1,4 @@
-{-# LANGUAGE MultiWayIf, NamedFieldPuns, ParallelListComp, TypeFamilies, TypeInType #-}
-{-# LANGUAGE PackageImports #-}
+{-# LANGUAGE NamedFieldPuns, ParallelListComp, TypeFamilies, TypeInType, PackageImports #-}
 
 module Plugins.Thoralf.UoM.DelayEq.TcPlugin (thoralfDelayEqPlugin) where
 
