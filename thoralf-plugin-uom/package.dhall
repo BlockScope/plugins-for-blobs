@@ -149,7 +149,13 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , ghc-options = testopts
               , main = "Tests.hs"
               , other-modules =
-                [ "Abelian", "Defs", "UnitDefs", "UnitDefsTests", "UnQuantity" ]
+                [ "Abelian"
+                , "Defs"
+                , "Literal"
+                , "UnitDefs"
+                , "UnitDefsTests"
+                , "UnQuantity"
+                ]
               , source-dirs = "test-suite-units"
               , when =
                 [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"

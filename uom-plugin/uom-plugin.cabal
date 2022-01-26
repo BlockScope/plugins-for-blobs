@@ -120,6 +120,7 @@ test-suite units
   main-is: Tests.hs
   other-modules:
       Abelian
+      Literal
       UnitDefs
       UnitDefsTests
       UnQuantity
@@ -161,6 +162,7 @@ test-suite unpack-solve
   main-is: Tests.hs
   other-modules:
       Abelian
+      Literal
       UnitDefs
       UnitDefsTests
       UnQuantity

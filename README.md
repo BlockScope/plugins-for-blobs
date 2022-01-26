@@ -164,48 +164,56 @@ Running 1 test suites...
 Test suite units: RUNNING...
 thoralf-plugin:units
   Get the underlying value with unQuantity
-    unQuantity 3 m:                OK
-    unQuantity 3 s^2:              OK
-    unQuantity 3 m s^-1:           OK
-    unQuantity 3.0 kg m^2 / m s^2: OK
-    unQuantity 1:                  OK
-    unQuantity 1 (1/s):            OK
-    unQuantity 1 1/s:              OK
-    unQuantity 1 s^-1:             OK
-    unQuantity 2 1 / kg s:         OK
-    unQuantity (1 % 2) kg:         OK
+    unQuantity 3 m:                             OK
+    unQuantity 3 s^2:                           OK
+    unQuantity 3 m s^-1:                        OK
+    unQuantity 3.0 kg m^2 / m s^2:              OK
+    unQuantity 1:                               OK
+    unQuantity 1 (1/s):                         OK
+    unQuantity 1 1/s:                           OK
+    unQuantity 1 s^-1:                          OK
+    unQuantity 2 1 / kg s:                      OK
+    unQuantity (1 % 2) kg:                      OK
   Attach units by applying the quasiquoter without a numeric value
-    m 3:                           OK
-    m <$> [3..5]:                  OK
-    m/s 3:                         OK
-    m s^-1 3:                      OK
-    s^2 3:                         OK
-    1 $ 3:                         OK
-    fmap [u| kg |] read $ "3":     OK
-    fmap [u| kg |] read $ "3.0":   OK
+    m 3:                                        OK
+    m <$> [3..5]:                               OK
+    m/s 3:                                      OK
+    m s^-1 3:                                   OK
+    s^2 3:                                      OK
+    1 $ 3:                                      OK
+    fmap [u| kg |] read $ "3":                  OK
+    fmap [u| kg |] read $ "3.0":                OK
   Showing constants
-    show 3m:                       OK
-    show 3m/s:                     OK
-    show 3.2 s^2:                  OK
-    show 3.0 kg m^2 / m s^2:       OK
-    show 1:                        OK
-    show 1 s^-1:                   OK
-    show 2 1 / kg s:               OK
-    show (1 % 2) kg:               OK
+    show 3m:                                    OK
+    show 3m/s:                                  OK
+    show 3.2 s^2:                               OK
+    show 3.0 kg m^2 / m s^2:                    OK
+    show 1:                                     OK
+    show 1 s^-1:                                OK
+    show 2 1 / kg s:                            OK
+    show (1 % 2) kg:                            OK
   Basic operations
-    2 + 2:                         OK
-    in m/s:                        OK
-    polymorphic frac zero:         OK
+    2 + 2:                                      OK
+    in m/s:                                     OK
+    polymorphic frac zero:                      OK
+  Literal 1 (*:) Quantity _ u
+    _ = Double:                                 OK
+    _ = Int:                                    OK
+    _ = Integer:                                OK
+    _ = Rational, 1 *: [u| 1 m |]:              OK
+    _ = Rational, mk (1 % 1) *: [u| 1 m |]:     OK
+    _ = Rational, 1 *: [u| 1 % 1 m |]:          OK
+    _ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]: OK
   showQuantity
-    myMass:                        OK
-    gravityOnEarth:                OK
+    myMass:                                     OK
+    gravityOnEarth:                             OK
   errors
-    s/m ~ m/s:                     OK
-    m + s:                         OK
+    s/m ~ m/s:                                  OK
+    m + s:                                      OK
   read . show
-    3 m:                           OK
+    3 m:                                        OK
 
-All 34 tests passed (0.01s)
+All 41 tests passed (0.00s)
 ```
 
 ```

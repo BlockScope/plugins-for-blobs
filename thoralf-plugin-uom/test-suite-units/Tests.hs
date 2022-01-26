@@ -38,7 +38,8 @@ import "uom-quantity" Data.UnitsOfMeasure.Show
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
-import UnQuantity (testsUnQuantity)
+import UnQuantity (unQuantityTestGroup)
+import Literal (literalTestGroup)
 import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
@@ -113,7 +114,7 @@ main = defaultMain tests
 -- WARNING: The commented out tests work for ghc-8.2.2 but not for later GHC versions.
 tests :: TestTree
 tests = testGroup "thoralf-plugin:units"
-  [ testsUnQuantity
+  [ unQuantityTestGroup
   , testGroup "Attach units by applying the quasiquoter without a numeric value"
     [ testCase "m 3"                           $ [u| m |] 3           @?= [u| 3 m |]
     , testCase "m <$> [3..5]"                  $ [u| m |] <$> [3..5]  @?= [[u| 3 m |],[u| 4 m |],[u| 5 m |]]
@@ -151,7 +152,7 @@ tests = testGroup "thoralf-plugin:units"
 
     , testCase "polymorphic frac zero"   $ [u| 0.0 |] @?= [u| 0.0 N / m |]
     ]
-  -- TODO literalTestGroup
+  , literalTestGroup
   , testGroup "showQuantity"
     [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
     , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"

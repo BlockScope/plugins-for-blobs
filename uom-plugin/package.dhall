@@ -13,7 +13,13 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 ]
               , main = "Tests.hs"
               , other-modules =
-                [ "Abelian", "UnitDefs", "UnitDefsTests", "UnQuantity", "Z" ]
+                [ "Abelian"
+                , "Literal"
+                , "UnitDefs"
+                , "UnitDefsTests"
+                , "UnQuantity"
+                , "Z"
+                ]
               , source-dirs = "test-suite-units"
               , when =
                 [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"

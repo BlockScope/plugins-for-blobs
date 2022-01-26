@@ -11,8 +11,8 @@ import Test.Tasty.HUnit ((@?=), testCase)
 import "uom-quantity" Data.UnitsOfMeasure (mk, unQuantity)
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
-testsUnQuantity :: TestTree
-testsUnQuantity = testGroup "Get the underlying value with unQuantity"
+unQuantityTestGroup :: TestTree
+unQuantityTestGroup = testGroup "Get the underlying value with unQuantity"
     [ testCase "unQuantity 3 m"                $ unQuantity [u| 3 m |]            @?= 3
     , testCase "unQuantity 3 s^2"              $ unQuantity [u| 3 s^2 |]          @?= 3
     , testCase "unQuantity 3 m s^-1"           $ unQuantity [u| 3 m s^-1 |]       @?= 3

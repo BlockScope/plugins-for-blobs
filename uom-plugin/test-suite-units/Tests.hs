@@ -54,7 +54,6 @@ module Main
     ) where
 
 import Data.List
-import Data.Ratio ((%))
 
 import Test.Tasty
 import Test.Tasty.HUnit
@@ -65,7 +64,8 @@ import "uom-plugin" Data.UnitsOfMeasure.Convert
 import "uom-quantity" Data.UnitsOfMeasure.Show
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
-import UnQuantity (testsUnQuantity)
+import UnQuantity (unQuantityTestGroup)
+import Literal (literalTestGroup)
 import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
@@ -189,7 +189,7 @@ main = defaultMain tests
 
 tests :: TestTree
 tests = testGroup "uom-plugin:units"
-  [ testsUnQuantity
+  [ unQuantityTestGroup
   , testGroup "Attach units by applying the quasiquoter without a numeric value"
     [ testCase "m 3"                           $ [u| m |] 3           @?= [u| 3 m |]
     , testCase "m <$> [3..5]"                  $ [u| m |] <$> [3..5]  @?= [[u| 3 m |],[u| 4 m |],[u| 5 m |]]
@@ -222,22 +222,7 @@ tests = testGroup "uom-plugin:units"
     , testCase "polymorphic zero"        $ [u| 0 |] @?= [u| 0 m |]
     , testCase "polymorphic frac zero"   $ [u| 0.0 |] @?= [u| 0.0 N / m |]
     ]
-  , testGroup "Literal 1 (*:) Quantity _ u"
-    [ testCase "_ = Double"
-        $ 1 *: ([u| 1 m |] :: (Quantity Double (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Int"
-        $ 1 *: ([u| 1 m |] :: (Quantity Int (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Integer"
-        $ 1 *: ([u| 1 m |] :: (Quantity Integer (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Rational, 1 *: [u| 1 m |]"
-        $ 1 *: ([u| 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Rational, mk (1 % 1) *: [u| 1 m |]"
-        $ mk (1 % 1) *: ([u| 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Rational, 1 *: [u| 1 % 1 m |]"
-        $ 1 *: ([u| 1 % 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]"
-        $ mk (1 % 1) *: ([u| 1 % 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
-    ]
+  , literalTestGroup
   , testGroup "(1 :: Quantity _ One) (*:) Quantity _ u"
     [ testCase "_ = Double"
         $ (1 :: Quantity Double One) *: ([u| 1 m |] :: (Quantity Double (Base "m"))) @?= [u| 1 m |]
