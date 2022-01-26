@@ -238,11 +238,6 @@ thoralf-plugin:units
     m + s:                                      OK
   read . show
     3 m:                                        OK
-  errors
-    s/m ~ m/s:                                  OK
-    m + s:                                      OK
-  read . show
-    3 m:                                        OK
     1.2 m/s:                                    OK
     1:                                          OK
   read normalisation
@@ -250,7 +245,7 @@ thoralf-plugin:units
     -0.3 m s^-1:                                OK
     42 s m s:                                   OK
 
-All 69 tests passed (0.01s)
+All 66 tests passed (0.00s)
 ```
 
 ```

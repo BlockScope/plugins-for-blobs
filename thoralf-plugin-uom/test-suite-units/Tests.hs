@@ -133,22 +133,6 @@ tests = testGroup "thoralf-plugin:units"
   , errorsWhenTestGroup
   , showQuantityTestGroup
   , errorsTestGroup
-  , testGroup "read . show"
-    [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
-
-    -- • Couldn't match type ‘fsk1’
-    --                  with ‘(fsk3 *: fsk2) /: (fsk0 *: fsk2)’
-    --     arising from a use of ‘read’
-    --   The type variables ‘fsk3’, ‘fsk0’, ‘fsk2’, ‘fsk1’ are ambiguous
-    --, testCase "1.2 m/s" $ read (show [u| 1.2 m/s |]) @?= [u| 1.2 m/s |]
-
-    -- • Occurs check: cannot construct the infinite type:
-    --     fsk0 ~ fsk0 /: fsk0
-    --     arising from a use of ‘read’
-    --   The type variable ‘fsk0’ is ambiguous
-    -- , testCase "0"       $ read (show [u| 1       |]) @?= [u| 1       |]
-    ]
-  , errorsTestGroup
   , readShowTestGroup
   , readNormalisationTestGroup
   ]
