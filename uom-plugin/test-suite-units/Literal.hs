@@ -38,3 +38,15 @@ literalTestGroup = testGroup "Literal 1 (*:) Quantity _ u"
     , testCase "_ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]"
         $ mk (1 % 1) *: ([u| 1 % 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
     ]
+
+timesOneTestGroup :: TestTree
+timesOneTestGroup = testGroup "(1 :: Quantity _ One) (*:) Quantity _ u"
+    [ testCase "_ = Double"
+        $ (1 :: Quantity Double One) *: ([u| 1 m |] :: (Quantity Double (Base "m"))) @?= [u| 1 m |]
+    , testCase "_ = Int"
+        $ (1 :: Quantity Int One) *: ([u| 1 m |] :: (Quantity Int (Base "m"))) @?= [u| 1 m |]
+    , testCase "_ = Integer"
+        $ (1 :: Quantity Integer One) *: ([u| 1 m |] :: (Quantity Integer (Base "m"))) @?= [u| 1 m |]
+    , testCase "_ = Int"
+        $ (1 :: Quantity Rational One) *: ([u| 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
+    ]

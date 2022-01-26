@@ -204,6 +204,11 @@ thoralf-plugin:units
     _ = Rational, mk (1 % 1) *: [u| 1 m |]:     OK
     _ = Rational, 1 *: [u| 1 % 1 m |]:          OK
     _ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]: OK
+  (1 :: Quantity _ One) (*:) Quantity _ u
+    _ = Double:                                 OK
+    _ = Int:                                    OK
+    _ = Integer:                                OK
+    _ = Int:                                    OK
   showQuantity
     myMass:                                     OK
     gravityOnEarth:                             OK
@@ -213,7 +218,7 @@ thoralf-plugin:units
   read . show
     3 m:                                        OK
 
-All 41 tests passed (0.00s)
+All 45 tests passed (0.00s)
 ```
 
 ```

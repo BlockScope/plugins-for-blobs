@@ -67,7 +67,7 @@ import "uom-quantity" Data.UnitsOfMeasure.Show
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
 import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
-import Literal (literalTestGroup)
+import Literal (literalTestGroup, timesOneTestGroup)
 import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
@@ -201,16 +201,7 @@ tests = testGroup "uom-plugin:units"
     , testCase "polymorphic frac zero"   $ [u| 0.0 |] @?= [u| 0.0 N / m |]
     ]
   , literalTestGroup
-  , testGroup "(1 :: Quantity _ One) (*:) Quantity _ u"
-    [ testCase "_ = Double"
-        $ (1 :: Quantity Double One) *: ([u| 1 m |] :: (Quantity Double (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Int"
-        $ (1 :: Quantity Int One) *: ([u| 1 m |] :: (Quantity Int (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Integer"
-        $ (1 :: Quantity Integer One) *: ([u| 1 m |] :: (Quantity Integer (Base "m"))) @?= [u| 1 m |]
-    , testCase "_ = Int"
-        $ (1 :: Quantity Rational One) *: ([u| 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
-    ]
+  , timesOneTestGroup
   , errorsWhenTestGroup
   , testGroup "showQuantity"
     [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"

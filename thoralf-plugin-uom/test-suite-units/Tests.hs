@@ -44,7 +44,7 @@ import "uom-th" Data.UnitsOfMeasure.TH (u)
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
 import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
-import Literal (literalTestGroup)
+import Literal (literalTestGroup, timesOneTestGroup)
 import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
@@ -156,6 +156,7 @@ tests = testGroup "thoralf-plugin:units"
     , testCase "polymorphic frac zero"   $ [u| 0.0 |] @?= [u| 0.0 N / m |]
     ]
   , literalTestGroup
+  , timesOneTestGroup
   , testGroup "showQuantity"
     [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
     , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"
