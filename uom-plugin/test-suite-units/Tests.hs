@@ -64,7 +64,10 @@ import "uom-th" Data.UnitsOfMeasure.TH (u)
 import "uom-plugin" Data.UnitsOfMeasure.Convert
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
-import Basic (readMass, basicTestGroup, showQuantityTestGroup)
+import Basic
+    ( readMass, basicTestGroup
+    , showQuantityTestGroup, readShowTestGroup, readNormalisationTestGroup
+    )
 import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
 import Literal (literalTestGroup, timesOneTestGroup)
@@ -195,16 +198,8 @@ tests = testGroup "uom-plugin:units"
     ]
   , Z.tests
   , errorsTestGroup
-  , testGroup "read . show"
-    [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
-    , testCase "1.2 m/s" $ read (show [u| 1.2 m/s |]) @?= [u| 1.2 m/s |]
-    , testCase "0"       $ read (show [u| 1       |]) @?= [u| 1       |]
-    ]
-  , testGroup "read normalisation"
-    [ testCase "1 m/m"       $ read "[u| 1 m/m |]"       @?= [u| 1 |]
-    , testCase "-0.3 m s^-1" $ read "[u| -0.3 m s^-1 |]" @?= [u| -0.3 m/s |]
-    , testCase "42 s m s"    $ read "[u| 42 s m s |]"    @?= [u| 42 m s^2 |]
-    ]
+  , readShowTestGroup
+  , readNormalisationTestGroup
   , testGroup "read equality (avoid false equivalences)"
     [ testCase "1 m/m^2 /= 1 m" $
         (read "[u| 1 m/m^2 |]" :: Quantity Double [u| m |]) `throws` noParse

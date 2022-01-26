@@ -19,6 +19,8 @@ module Basic
     , inMetresPerSecond
     , basicTestGroup
     , showQuantityTestGroup
+    , readShowTestGroup
+    , readNormalisationTestGroup
     ) where
 
 import Test.Tasty
@@ -61,4 +63,18 @@ showQuantityTestGroup = testGroup "showQuantity"
     [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
     , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"
     , testCase "forceOnGround"  $ showQuantity forceOnGround  @?= "637.52 kg m / s^2"
+    ]
+
+readShowTestGroup :: TestTree
+readShowTestGroup = testGroup "read . show"
+    [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
+    , testCase "1.2 m/s" $ read (show [u| 1.2 m/s |]) @?= [u| 1.2 m/s |]
+    , testCase "0"       $ read (show [u| 1       |]) @?= [u| 1       |]
+    ]
+
+readNormalisationTestGroup :: TestTree
+readNormalisationTestGroup = testGroup "read normalisation"
+    [ testCase "1 m/m"       $ read "[u| 1 m/m |]"       @?= [u| 1 |]
+    , testCase "-0.3 m s^-1" $ read "[u| -0.3 m s^-1 |]" @?= [u| -0.3 m/s |]
+    , testCase "42 s m s"    $ read "[u| 42 s m s |]"    @?= [u| 42 m s^2 |]
     ]

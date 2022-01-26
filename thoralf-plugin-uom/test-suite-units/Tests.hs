@@ -41,7 +41,10 @@ import "uom-quantity" Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
-import Basic (readMass, basicTestGroup, showQuantityTestGroup)
+import Basic
+    ( readMass, basicTestGroup
+    , showQuantityTestGroup, readShowTestGroup, readNormalisationTestGroup
+    )
 import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
 import Literal (literalTestGroup, timesOneTestGroup)
@@ -144,25 +147,9 @@ tests = testGroup "thoralf-plugin:units"
     --   The type variable ‘fsk0’ is ambiguous
     -- , testCase "0"       $ read (show [u| 1       |]) @?= [u| 1       |]
     ]
-  , testGroup "read normalisation" [
-    -- • Occurs check: cannot construct the infinite type:
-    --     fsk0 ~ fsk0 /: fsk0
-    --     arising from a use of ‘read’
-    --   The type variable ‘fsk0’ is ambiguous
-    --  testCase "1 m/m"       $ read "[u| 1 m/m |]"       @?= [u| 1 |]
-
-    -- • Couldn't match type ‘fsk1’
-    --                  with ‘(fsk3 *: fsk2) /: (fsk0 *: fsk2)’
-    --     arising from a use of ‘read’
-    --   The type variables ‘fsk3’, ‘fsk0’, ‘fsk2’, ‘fsk1’ are ambiguous
-    --, testCase "-0.3 m s^-1" $ read "[u| -0.3 m s^-1 |]" @?= [u| -0.3 m/s |]
-
-    -- • Couldn't match type ‘fsk1’
-    --                  with ‘(fsk3 *: (fsk0 *: (fsk0 *: fsk2))) /: fsk2’
-    --     arising from a use of ‘read’
-    --   The type variables ‘fsk3’, ‘fsk0’, ‘fsk2’, ‘fsk1’ are ambiguous
-    --, testCase "42 s m s"    $ read "[u| 42 s m s |]"    @?= [u| 42 m s^2 |]
-    ]
+  , errorsTestGroup
+  , readShowTestGroup
+  , readNormalisationTestGroup
   ]
 
 noParse :: [[String]]
