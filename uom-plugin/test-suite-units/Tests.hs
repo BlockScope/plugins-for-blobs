@@ -33,8 +33,11 @@ module Main
 
     -- * Exported to avoid -Wunused-top-binds.
     , attract
+    , sum'
+    , mean
     , foo
     , foo'
+    , tricky
     , angularSpeed
     , associativity
     , commutativity
@@ -53,8 +56,6 @@ module Main
     , dimensionless
     ) where
 
-import Data.List
-
 import Test.Tasty
 import Test.Tasty.HUnit
 
@@ -64,6 +65,7 @@ import "uom-plugin" Data.UnitsOfMeasure.Convert
 import "uom-quantity" Data.UnitsOfMeasure.Show
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
+import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
 import Literal (literalTestGroup)
 import UnitDefs ()
@@ -102,18 +104,6 @@ attract
     = _G *: m1 *: m2 /: (r *: r) :: Quantity a [u| N |]
   where
     _G = [u| 6.67384e-11 N*m^2/kg^2 |]
-
-sum' :: [Quantity Double u] -> Quantity Double u
-sum' = foldr (+:) zero
-
-mean :: [Quantity Double u] -> Quantity Double u
-mean xs = sum' xs /: mk (genericLength xs)
-
-foo :: Num a => Quantity a u -> Quantity a v -> Quantity a (u *: v)
-foo x y = x *: y +: y *: x
-
-foo' :: Num a => Quantity a u -> Quantity a v -> Quantity a (u *: v)
-foo' = foo
 
 -- thanks to expipiplus1, https://github.com/adamgundry/uom-plugin/issues/14
 angularSpeed :: Quantity Rational [u|rad/s|]
@@ -158,18 +148,6 @@ patternSplice :: Quantity Integer [u| m |] -> Quantity Rational [u| kg/s |] -> B
 patternSplice [u| 2 m |] [u| 0.0 kg / s |] = True
 patternSplice [u| 1 m |] [u| 0.1 kg / s |] = True
 patternSplice _          _                 = False
-
--- Andrew's awkward generalisation example is accepted only with a
--- type signature, even with NoMonoLocalBinds
-tricky
-    :: forall a u . Num a
-    => Quantity a u
-    -> (Quantity a (u *: Base "m"), Quantity a (u *: Base "kg"))
-tricky x =
-    let h :: Quantity a v -> Quantity a (u *: v)
-        h = (x *:)
-    in (h [u| 3 m |], h [u| 5 kg |])
-
 
 -- Test that basic constraints involving exponentiation work
 pow :: Quantity a (u *: (v ^: i)) -> Quantity a ((v ^: i) *: u)

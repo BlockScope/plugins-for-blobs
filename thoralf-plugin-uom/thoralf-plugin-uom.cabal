@@ -175,6 +175,7 @@ test-suite units
   other-modules:
       Abelian
       Defs
+      DelayEq
       Literal
       UnitDefs
       UnitDefsTests

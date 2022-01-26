@@ -14,6 +14,11 @@ module Main
     ( main
 
     -- * Exported to avoid -Wunused-top-binds.
+    , sum'
+    , mean
+    , foo
+    , foo'
+    , tricky
     , associativity
     , commutativity
     , unit
@@ -26,7 +31,6 @@ module Main
     , givens3
     , patternSplice
     , dimensionless
-    , sum'
     , noParse
     ) where
 
@@ -38,6 +42,7 @@ import "uom-quantity" Data.UnitsOfMeasure.Show
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
+import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
 import Literal (literalTestGroup)
 import UnitDefs ()
@@ -57,8 +62,6 @@ readMass = fmap [u| kg |] read
 
 inMetresPerSecond :: a -> Quantity a [u| m/s |]
 inMetresPerSecond = [u| m/s |]
-sum' :: [Quantity Double u] -> Quantity Double u
-sum' = foldr (+:) zero
 
 -- Gingerly now...
 

@@ -120,6 +120,7 @@ test-suite units
   main-is: Tests.hs
   other-modules:
       Abelian
+      DelayEq
       Literal
       UnitDefs
       UnitDefsTests
@@ -162,6 +163,7 @@ test-suite unpack-solve
   main-is: Tests.hs
   other-modules:
       Abelian
+      DelayEq
       Literal
       UnitDefs
       UnitDefsTests

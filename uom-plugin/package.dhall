@@ -14,6 +14,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "Tests.hs"
               , other-modules =
                 [ "Abelian"
+                , "DelayEq"
                 , "Literal"
                 , "UnitDefs"
                 , "UnitDefsTests"

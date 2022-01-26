@@ -151,6 +151,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , other-modules =
                 [ "Abelian"
                 , "Defs"
+                , "DelayEq"
                 , "Literal"
                 , "UnitDefs"
                 , "UnitDefsTests"
