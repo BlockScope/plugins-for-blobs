@@ -11,7 +11,6 @@ import Data.List
 
 import Test.Tasty
 import Test.Tasty.HUnit
-import Data.Theory.UoM
 
 import UnitDefs ()
 import UnitDefsTests ()
@@ -23,17 +22,17 @@ errorsWhenTestGroup =
     [ testGroup "b = Double"
       [ testCase "a = Int" $ op_a1 `throws` opErrorsExpectA_ActualC "Double" "Int" "Int"
       , testCase "a = Integer" $ op_a2 `throws` opErrorsExpectA_ActualC "Double" "Integer" "Integer"
-      , testCase "a = Rational" $ op_a3 `throws` opErrorsExpectA_ActualC "Double" "GHC.Real.Ratio Integer" "Rational"
+      , testCase "a = Rational" $ op_a3 `throws` opErrorsExpectC_ActualA "Double" "GHC.Real.Ratio Integer" "Rational"
       ]
     , testGroup "b = Int"
       [ testCase "a = Double" $ op_b1 `throws` opErrorsExpectA_ActualC "Int" "Double" "Double"
       , testCase "a = Integer" $ op_b2 `throws` opErrorsExpectA_ActualC "Int" "Integer" "Integer"
-      , testCase "a = Rational" $ op_b3 `throws` opErrorsExpectA_ActualC "Int" "GHC.Real.Ratio Integer" "Rational"
+      , testCase "a = Rational" $ op_b3 `throws` opErrorsExpectC_ActualA "Int" "GHC.Real.Ratio Integer" "Rational"
       ]
     , testGroup "b = Integer"
       [ testCase "a = Double" $ op_c1 `throws` opErrorsExpectA_ActualC "Integer" "Double" "Double"
       , testCase "a = Int" $ op_c2 `throws` opErrorsExpectA_ActualC "Integer" "Int" "Int"
-      , testCase "a = Rational" $ op_c3 `throws` opErrorsExpectA_ActualC "Integer" "GHC.Real.Ratio Integer" "Rational"
+      , testCase "a = Rational" $ op_c3 `throws` opErrorsExpectC_ActualA "Integer" "GHC.Real.Ratio Integer" "Rational"
       ]
     , testGroup "b = Rational"
       [ testCase "a = Double" $ op_d1 `throws` opErrorsExpectC_ActualB "GHC.Real.Ratio Integer" "Double" "Rational"

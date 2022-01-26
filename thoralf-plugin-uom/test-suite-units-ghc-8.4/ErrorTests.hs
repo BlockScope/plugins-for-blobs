@@ -118,17 +118,26 @@ op_d3 = (1 :: Quantity Integer One) *: ([u| 1 m |] :: (Quantity Rational (Base "
 {-# ANN opErrorsExpectA_ActualC "HLint: ignore Use camelCase" #-}
 opErrorsExpectA_ActualC :: String -> String -> String -> [[String]]
 opErrorsExpectA_ActualC a b c =
-  [ [ "Couldn't match type ‘" ++ b ++ "’ with ‘" ++ a ++ "’"
-    , "Expected: Quantity " ++ a ++ " One"
-    , "Actual: Quantity " ++ c ++ " One"
+  [ [ "Couldn't match type ‘" ++ a ++ "’ with ‘" ++ b ++ "’"
+    , "Expected type: Quantity " ++ b ++ " (Base \"m\")"
+    , "  Actual type: Quantity " ++ a ++ " (Base \"m\")"
+    ]
+  ]
+
+{-# ANN opErrorsExpectC_ActualA "HLint: ignore Use camelCase" #-}
+opErrorsExpectC_ActualA :: String -> String -> String -> [[String]]
+opErrorsExpectC_ActualA a b c =
+  [ [ "Couldn't match type ‘" ++ a ++ "’ with ‘" ++ b ++ "’"
+    , "Expected type: Quantity " ++ c ++ " (Base \"m\")"
+    , "  Actual type: Quantity " ++ a ++ " (Base \"m\")"
     ]
   ]
 
 {-# ANN opErrorsExpectC_ActualB "HLint: ignore Use camelCase" #-}
 opErrorsExpectC_ActualB :: String -> String -> String -> [[String]]
 opErrorsExpectC_ActualB a b c =
-  [ [ "Couldn't match type ‘" ++ b ++ "’ with ‘" ++ a ++ "’"
-    , "Expected: Quantity " ++ c ++ " One"
-    , "Actual: Quantity " ++ b ++ " One"
+  [ [ "Couldn't match type ‘" ++ a ++ "’ with ‘" ++ b ++ "’"
+    , "Expected type: Quantity " ++ b ++ " (Base \"m\")"
+    , "  Actual type: Quantity " ++ c ++ " (Base \"m\")"
     ]
   ]

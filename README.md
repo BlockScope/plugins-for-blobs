@@ -212,6 +212,23 @@ thoralf-plugin:units
     _ = Int:                                    OK
     _ = Integer:                                OK
     _ = Int:                                    OK
+  errors when a /= b, (1 :: Quantity a One) (*:) Quantity b u
+    b = Double
+      a = Int:                                  OK
+      a = Integer:                              OK
+      a = Rational:                             OK
+    b = Int
+      a = Double:                               OK
+      a = Integer:                              OK
+      a = Rational:                             OK
+    b = Integer
+      a = Double:                               OK
+      a = Int:                                  OK
+      a = Rational:                             OK
+    b = Rational
+      a = Double:                               OK
+      a = Int:                                  OK
+      a = Integer:                              OK
   showQuantity
     myMass:                                     OK
     gravityOnEarth:                             OK
@@ -227,13 +244,13 @@ thoralf-plugin:units
   read . show
     3 m:                                        OK
     1.2 m/s:                                    OK
-    0:                                          OK
+    1:                                          OK
   read normalisation
     1 m/m:                                      OK
     -0.3 m s^-1:                                OK
     42 s m s:                                   OK
 
-All 57 tests passed (0.00s)
+All 69 tests passed (0.01s)
 ```
 
 ```

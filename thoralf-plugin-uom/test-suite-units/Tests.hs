@@ -130,6 +130,7 @@ tests = testGroup "thoralf-plugin:units"
   , basicTestGroup
   , literalTestGroup
   , timesOneTestGroup
+  , errorsWhenTestGroup
   , showQuantityTestGroup
   , errorsTestGroup
   , testGroup "read . show"
