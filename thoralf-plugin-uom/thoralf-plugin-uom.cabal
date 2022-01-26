@@ -174,6 +174,7 @@ test-suite units
   main-is: Tests.hs
   other-modules:
       Abelian
+      Basic
       Defs
       DelayEq
       Literal

@@ -62,9 +62,9 @@ import Test.Tasty.HUnit
 import "uom-quantity" Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 import "uom-plugin" Data.UnitsOfMeasure.Convert
-import "uom-quantity" Data.UnitsOfMeasure.Show
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
+import Basic (readMass, basicTestGroup, showQuantityTestGroup)
 import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
 import Literal (literalTestGroup, timesOneTestGroup)
@@ -73,23 +73,6 @@ import UnitDefsTests ()
 import ErrorTestGroups
 import Z (z)
 import qualified Z (tests)
-
--- Some basic examples
-
-myMass :: Quantity Double (Base "kg")
-myMass = [u| 65 kg |]
-
-gravityOnEarth :: Quantity Double [u| m/s^2 |]
-gravityOnEarth = [u| 9.808 m/(s*s) |]
-
-readMass :: Read a => String -> Quantity a (Base "kg")
-readMass = fmap [u| kg |] read
-
-forceOnGround :: Quantity Double [u| N |]
-forceOnGround = gravityOnEarth *: myMass
-
-inMetresPerSecond :: a -> Quantity a [u| m/s |]
-inMetresPerSecond = [u| m/s |]
 
 attract
     :: Fractional a
@@ -192,22 +175,11 @@ tests = testGroup "uom-plugin:units"
     , testCase "show 2 1 / kg s"         $ show [u| 2 1 / kg s |]         @?= "[u| 2 kg^-1 s^-1 |]"
     , testCase "show (1 % 2) kg"         $ show [u| 1 % 2 kg |]           @?= "[u| 0.5 kg |]"
     ]
-  , testGroup "Basic operations"
-    [ testCase "2 + 2"                   $ [u| 2 s |] +: [u| 2 s |]        @?= [u| 4 s |]
-    , testCase "in m/s"                  $ inMetresPerSecond 5             @?= [u| 5 m/s |]
-    , testCase "mean"                    $ mean [ [u| 2 N |], [u| 4 N |] ] @?= [u| 3 N |]
-    , testCase "tricky generalisation"   $ tricky [u| 2 s |]               @?= ([u| 6 m s |], [u| 10 kg s |])
-    , testCase "polymorphic zero"        $ [u| 0 |] @?= [u| 0 m |]
-    , testCase "polymorphic frac zero"   $ [u| 0.0 |] @?= [u| 0.0 N / m |]
-    ]
+  , basicTestGroup
   , literalTestGroup
   , timesOneTestGroup
   , errorsWhenTestGroup
-  , testGroup "showQuantity"
-    [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
-    , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"
-    , testCase "forceOnGround"  $ showQuantity forceOnGround  @?= "637.52 kg m / s^2"
-    ]
+  , showQuantityTestGroup
   , testGroup "convert"
     [ testCase "10m in ft"     $ convert [u| 10m |]   @?= [u| 32.8 ft |]
     , testCase "5 km^2 in m^2" $ convert [u| 5km^2 |] @?= [u| 5000000 m m |]

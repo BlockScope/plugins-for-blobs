@@ -150,6 +150,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "Tests.hs"
               , other-modules =
                 [ "Abelian"
+                , "Basic"
                 , "Defs"
                 , "DelayEq"
                 , "Literal"

@@ -38,30 +38,16 @@ import Test.Tasty
 import Test.Tasty.HUnit
 
 import "uom-quantity" Data.UnitsOfMeasure
-import "uom-quantity" Data.UnitsOfMeasure.Show
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
+import Basic (readMass, basicTestGroup, showQuantityTestGroup)
 import DelayEq (sum', mean, foo, foo', tricky)
 import UnQuantity (unQuantityTestGroup)
 import Literal (literalTestGroup, timesOneTestGroup)
 import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
-
--- Some basic examples
-
-myMass :: Quantity Double (Base "kg")
-myMass = [u| 65 kg |]
-
-gravityOnEarth :: Quantity Double [u| m/s^2 |]
-gravityOnEarth = [u| 9.808 m/(s*s) |]
-
-readMass :: Read a => String -> Quantity a (Base "kg")
-readMass = fmap [u| kg |] read
-
-inMetresPerSecond :: a -> Quantity a [u| m/s |]
-inMetresPerSecond = [u| m/s |]
 
 -- Gingerly now...
 
@@ -138,29 +124,10 @@ tests = testGroup "thoralf-plugin:units"
     , testCase "show 2 1 / kg s"         $ show [u| 2 1 / kg s |]         @?= "[u| 2 kg^-1 s^-1 |]"
     , testCase "show (1 % 2) kg"         $ show [u| 1 % 2 kg |]           @?= "[u| 0.5 kg |]"
     ]
-  , testGroup "Basic operations"
-    [ testCase "2 + 2"                   $ [u| 2 s |] +: [u| 2 s |]        @?= [u| 4 s |]
-    , testCase "in m/s"                  $ inMetresPerSecond 5             @?= [u| 5 m/s |]
-
-    -- • Ambiguous type variables ‘fsk0’,
-    --                            ‘fsk1’ arising from a use of ‘@?=’
-    --   prevents the constraint ‘(KnownUnit
-    --                               (Unpack ((fsk0 *: fsk1) /: fsk1)))’ from being solved.
-    --   Probable fix: use a type annotation to specify what ‘fsk0’,
-    --                                                       ‘fsk1’ should be.
-    --   These potential instance exist:
-    --     one instance involving out-of-scope types
-    --     (use -fprint-potential-instances to see them all)
-    --, testCase "polymorphic zero"        $ [u| 0 |] @?= [u| 0 m |]
-
-    , testCase "polymorphic frac zero"   $ [u| 0.0 |] @?= [u| 0.0 N / m |]
-    ]
+  , basicTestGroup
   , literalTestGroup
   , timesOneTestGroup
-  , testGroup "showQuantity"
-    [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
-    , testCase "gravityOnEarth" $ showQuantity gravityOnEarth @?= "9.808 m / s^2"
-    ]
+  , showQuantityTestGroup
   , errorsTestGroup
   , testGroup "read . show"
     [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]

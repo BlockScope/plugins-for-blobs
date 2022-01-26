@@ -195,6 +195,9 @@ thoralf-plugin:units
   Basic operations
     2 + 2:                                      OK
     in m/s:                                     OK
+    mean:                                       OK
+    tricky generalisation:                      OK
+    polymorphic zero:                           OK
     polymorphic frac zero:                      OK
   Literal 1 (*:) Quantity _ u
     _ = Double:                                 OK
@@ -212,13 +215,14 @@ thoralf-plugin:units
   showQuantity
     myMass:                                     OK
     gravityOnEarth:                             OK
+    forceOnGround:                              OK
   errors
     s/m ~ m/s:                                  OK
     m + s:                                      OK
   read . show
     3 m:                                        OK
 
-All 45 tests passed (0.00s)
+All 49 tests passed (0.00s)
 ```
 
 ```
