@@ -150,7 +150,6 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "Tests.hs"
               , other-modules =
                 [ "Abelian"
-                , "Basic"
                 , "Defs"
                 , "DelayEq"
                 , "Literal"
@@ -162,12 +161,17 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , when =
                 [ { condition = "impl(ghc >= 9.2) && impl(ghc < 9.4)"
                   , source-dirs = [ "test-suite-units-ghc-9.2" ]
-                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , other-modules = [ "Basic", "ErrorTests", "ErrorTestGroups" ]
                   , buildable = True
                   }
-                , { condition = "impl(ghc >= 8.2) && impl(ghc < 9.2)"
+                , { condition = "impl(ghc >= 8.4) && impl(ghc < 9.2)"
+                  , source-dirs = [ "test-suite-units-ghc-8.4" ]
+                  , other-modules = [ "Basic", "ErrorTests", "ErrorTestGroups" ]
+                  , buildable = True
+                  }
+                , { condition = "impl(ghc >= 8.2) && impl(ghc < 8.4)"
                   , source-dirs = [ "test-suite-units-ghc-8.2" ]
-                  , other-modules = [ "ErrorTests", "ErrorTestGroups" ]
+                  , other-modules = [ "Basic", "ErrorTests", "ErrorTestGroups" ]
                   , buildable = True
                   }
                 ]

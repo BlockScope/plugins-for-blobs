@@ -174,7 +174,6 @@ test-suite units
   main-is: Tests.hs
   other-modules:
       Abelian
-      Basic
       Defs
       DelayEq
       Literal
@@ -207,13 +206,23 @@ test-suite units
     , uom-th
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     other-modules:
+        Basic
         ErrorTests
         ErrorTestGroups
     hs-source-dirs:
         test-suite-units-ghc-9.2
     buildable: True
-  if impl(ghc >= 8.2) && impl(ghc < 9.2)
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
     other-modules:
+        Basic
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        test-suite-units-ghc-8.4
+    buildable: True
+  if impl(ghc >= 8.2) && impl(ghc < 8.4)
+    other-modules:
+        Basic
         ErrorTests
         ErrorTestGroups
     hs-source-dirs:

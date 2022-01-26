@@ -69,7 +69,7 @@ readShowTestGroup :: TestTree
 readShowTestGroup = testGroup "read . show"
     [ testCase "3 m"     $ read (show [u| 3 m     |]) @?= [u| 3 m     |]
     , testCase "1.2 m/s" $ read (show [u| 1.2 m/s |]) @?= [u| 1.2 m/s |]
-    , testCase "0"       $ read (show [u| 1       |]) @?= [u| 1       |]
+    , testCase "1"       $ read (show [u| 1       |]) @?= [u| 1       |]
     ]
 
 readNormalisationTestGroup :: TestTree
