@@ -54,6 +54,14 @@ jobs:
         if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
+      - name: test thoralf-plugin-uom:force
+        if: ${{ matrix.ghc != '9.2.1' }}
+        run: stack test thoralf-plugin-uom:force --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+      - name: test thoralf-plugin-uom:delay-eq
+        if: ${{ matrix.ghc != '9.2.1' }}
+        run: stack test thoralf-plugin-uom:delay-eq --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
       - name: test thoralf-plugin-uom:units
         if: ${{ matrix.ghc != '9.2.1' }}
         run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml

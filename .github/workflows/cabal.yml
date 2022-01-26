@@ -61,6 +61,14 @@ jobs:
         if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:defs --test-show-details=direct --test-option="--color=always"
 
+      - name: test thoralf-plugin-uom:force
+        if: ${{ matrix.ghc != '9.2.1' }}
+        run: cabal v2-test thoralf-plugin-uom:force --test-show-details=direct --test-option="--color=always"
+
+      - name: test thoralf-plugin-uom:delay-eq
+        if: ${{ matrix.ghc != '9.2.1' }}
+        run: cabal v2-test thoralf-plugin-uom:delay-eq --test-show-details=direct --test-option="--color=always"
+
       - name: test thoralf-plugin-uom:units
         if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:units --test-show-details=direct --test-option="--color=always"

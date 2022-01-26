@@ -39,11 +39,15 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               [ "Plugins.Thoralf.DisEq"
               , "Plugins.Thoralf.DisEq.TcPlugin"
               , "Plugins.Thoralf.UoM"
+              , "Plugins.Thoralf.UoM.DelayEq"
               , "Data.UnitsOfMeasure.Constraint"
               , "ThoralfPlugin.Singletons.Nat"
               ]
             , other-modules =
-              [ "ThoralfPlugin.Encode", "ThoralfPlugin.Encode.UoM" ]
+              [ "ThoralfPlugin.Encode"
+              , "ThoralfPlugin.Encode.UoM"
+              , "Plugins.Thoralf.UoM.DelayEq.TcPlugin"
+              ]
             , other-extensions =
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
             , when =
@@ -118,6 +122,20 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "Tests.hs"
               , other-modules = [ "UnitDefs" ]
               , source-dirs = "test-suite-force"
+              }
+            , delay-eq =
+              { dependencies =
+                [ "base"
+                , "tasty"
+                , "tasty-hunit"
+                , "thoralf-plugin-uom"
+                , "uom-quantity"
+                , "uom-th"
+                ]
+              , ghc-options = testopts
+              , main = "Tests.hs"
+              , other-modules = [ "UnitDefs" ]
+              , source-dirs = "test-suite-delay-eq"
               }
             , units =
               { dependencies =

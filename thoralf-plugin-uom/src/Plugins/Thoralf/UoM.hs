@@ -1,6 +1,6 @@
 {-# LANGUAGE CPP, ScopedTypeVariables #-}
 
-module Plugins.Thoralf.UoM (plugin) where
+module Plugins.Thoralf.UoM (plugin, thoralfUomPlugin, mkThoralfUomInit) where
 
 import Data.Maybe (mapMaybe)
 import Control.Monad.Reader (guard)
@@ -54,7 +54,7 @@ plugin =
                             }
                 }
 
-        tc = thoralfUoMPlugin dbgPlugin dbgSmt disEq thoralfUoMTheories
+        tc = thoralfUomPlugin dbgPlugin dbgSmt disEq thoralfUoMTheories
     in
         defaultPlugin
             { tcPlugin = const . Just $ tracePlugin "thoralf-uom-plugin" tc
@@ -63,34 +63,39 @@ plugin =
 #endif
             }
 
-thoralfUoMPlugin
+mkThoralfUomInit
+    :: DebugSmt
+    -> PkgModuleName
+    -> TcPluginM TheoryEncoding
+    -> TcPluginM (ThoralfState, UnitDefs)
+mkThoralfUomInit dbgSmt pkgModuleName seed = do
+    let theory = mkModuleName "Data.Theory.UoM"
+    let syntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
+    uds <- lookupUnitDefs theory syntax (fsLit "uom-quantity")
+    s <- mkThoralfInit pkgModuleName seed dbgSmt
+
+    let ExtractEq{extractEq = _exEq, extractDisEq = _exDisEq} = extract s
+
+    -- let f :: [Ct] -> [((Type, Type), Ct)]
+    --     f cts = undefined
+
+    let extract' :: ExtractEq
+        extract' = ExtractEq{extractEq = _extractEq uds, extractDisEq = _extractDisEq}
+
+    return (s{extract = extract'}, uds)
+
+thoralfUomPlugin
     :: DebugCts
     -> DebugSmt
     -> PkgModuleName
     -> TcPluginM TheoryEncoding
     -> TcPlugin
-thoralfUoMPlugin dbgPlugin dbgSmt pkgModuleName seed =
+thoralfUomPlugin dbgPlugin dbgSmt pkgModuleName seed =
     TcPlugin
-        { tcPluginInit = do
-            let theory = mkModuleName "Data.Theory.UoM"
-            let syntax = mkModuleName "Data.UnitsOfMeasure.Syntax"
-            uds <- lookupUnitDefs theory syntax (fsLit "uom-quantity")
-            s <- mkThoralfInit pkgModuleName seed dbgSmt
-
-            let ExtractEq{extractEq = _exEq, extractDisEq = _exDisEq} = extract s
-
-            -- let f :: [Ct] -> [((Type, Type), Ct)]
-            --     f cts = undefined
-
-            let extract' :: ExtractEq
-                extract' = ExtractEq{extractEq = _extractEq uds, extractDisEq = _extractDisEq}
-
-            return s{extract = extract'}
-
+        { tcPluginInit = fst <$> mkThoralfUomInit dbgSmt pkgModuleName seed
         , tcPluginSolve = thoralfSolver dbgPlugin dbgSmt
         , tcPluginStop = thoralfStop
         }
-
 
 _extractEq :: UnitDefs -> [Ct] -> [((Type, Type), Ct)]
 _extractEq uds = mapMaybe (_maybeExtractTyEq uds)

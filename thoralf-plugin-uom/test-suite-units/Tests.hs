@@ -30,6 +30,7 @@ module Main
     , noParse
     ) where
 
+import Data.Ratio ((%))
 import Test.Tasty
 import Test.Tasty.HUnit
 
@@ -150,6 +151,22 @@ tests = testGroup "thoralf-plugin:units"
     --, testCase "polymorphic zero"        $ [u| 0 |] @?= [u| 0 m |]
 
     , testCase "polymorphic frac zero"   $ [u| 0.0 |] @?= [u| 0.0 N / m |]
+    ]
+  , testGroup "Literal 1 (*:) Quantity _ u"
+    [ testCase "_ = Double"
+        $ 1 *: ([u| 1 m |] :: (Quantity Double (Base "m"))) @?= [u| 1 m |]
+    -- , testCase "_ = Int"
+    --     $ 1 *: ([u| 1 m |] :: (Quantity Int (Base "m"))) @?= [u| 1 m |]
+    -- , testCase "_ = Integer"
+    --     $ 1 *: ([u| 1 m |] :: (Quantity Integer (Base "m"))) @?= [u| 1 m |]
+    -- , testCase "_ = Rational, 1 *: [u| 1 m |]"
+    --     $ 1 *: ([u| 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
+    -- , testCase "_ = Rational, mk (1 % 1) *: [u| 1 m |]"
+    --     $ mk (1 % 1) *: ([u| 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
+    -- , testCase "_ = Rational, 1 *: [u| 1 % 1 m |]"
+    --     $ 1 *: ([u| 1 % 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
+    -- , testCase "_ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]"
+    --     $ mk (1 % 1) *: ([u| 1 % 1 m |] :: (Quantity Rational (Base "m"))) @?= [u| 1 m |]
     ]
   , testGroup "showQuantity"
     [ testCase "myMass"         $ showQuantity myMass         @?= "65.0 kg"
