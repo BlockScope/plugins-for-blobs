@@ -54,35 +54,27 @@ jobs:
         run: cabal v2-build uom-plugin-examples
 
       - name: test thoralf-plugin-rows:rows
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-rows:rows --test-show-details=direct --test-option="--color=always"
 
       - name: test thoralf-plugin-uom:defs
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:defs --test-show-details=direct --test-option="--color=always"
 
       - name: test thoralf-plugin-uom:force
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:force --test-show-details=direct --test-option="--color=always"
 
       - name: test thoralf-plugin-uom:delay-eq
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:delay-eq --test-show-details=direct --test-option="--color=always"
 
       - name: test thoralf-plugin-uom:units
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:units --test-show-details=direct --test-option="--color=always"
 
       - name: test thoralf-plugin-uom:uom-diy
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:uom-diy --test-show-details=direct --test-option="--color=always"
 
       - name: test thoralf-plugin-uom:uom-quantity
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal v2-test thoralf-plugin-uom:uom-quantity --test-show-details=direct --test-option="--color=always"
 
       - name: build thoralf-plugin-defs
-        if: ${{ matrix.ghc != '9.2.1' }}
         run: cabal build thoralf-plugin-defs
 
       - name: test uom-plugin:defs with ghc-8.2.2
