@@ -13,12 +13,11 @@ thoralfTheories :: TcPluginM TheoryEncoding
 thoralfTheories =
     let fm = PkgModuleName (mkModuleName "Data.Theory.FiniteMap") (fsLit "thoralf-plugin-rows")
         bool = PkgModuleName (mkModuleName "Data.Theory.Bool") (fsLit "thoralf-theory")
-        nats = PkgModuleName (mkModuleName "GHC.TypeNats") (fsLit "base")
 
     in
         sumEncodings
             [ natTheory
             , fmTheory fm
             , symbolTheory
-            , boolTheory nats bool
+            , boolTheory bool
             ]

@@ -12,13 +12,12 @@ import ThoralfPlugin.Encode.Bool (boolTheory)
 thoralfUoMTheories :: TcPluginM TheoryEncoding
 thoralfUoMTheories =
     let bool = PkgModuleName (mkModuleName "Data.Theory.Bool") (fsLit "thoralf-theory")
-        nats = PkgModuleName (mkModuleName "GHC.TypeNats") (fsLit "base")
 
     in
         sumEncodings
             [ natTheory
             , symbolTheory
-            , boolTheory nats bool
+            , boolTheory bool
             , uomTheory
                 (mkModuleName "Data.Theory.UoM")
                 (mkModuleName "Data.UnitsOfMeasure.Syntax")

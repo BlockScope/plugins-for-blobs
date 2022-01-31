@@ -11,13 +11,12 @@ import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule)
 import ThoralfPlugin.Encode.TheoryEncoding
     (Vec(..), Nat(Zero), TheoryEncoding(..), emptyTheory)
 
-boolTheory :: PkgModuleName -> PkgModuleName -> TcPluginM TheoryEncoding
-boolTheory nats theory = do
+boolTheory :: PkgModuleName -> TcPluginM TheoryEncoding
+boolTheory theory = do
   boolModule <- findModule theory
-  typeNatMod <- findModule nats
 
   compTyCon <- divulgeTyCon boolModule "<?"
-  compNat <- divulgeTyCon typeNatMod "<=?"
+  compNat <- divulgeTyCon boolModule "<=?"
 
   return $ boolEncoding compTyCon compNat
 

@@ -6,3 +6,6 @@ import GHC.TypeLits (Nat)
 
 type (<?) :: Nat -> Nat -> Bool
 type family (<?) x y where {}
+
+type (<=?) :: Nat -> Nat -> Bool
+type family (<=?) x y where {}

@@ -130,29 +130,6 @@ __ | declareBaseUnit "byte"
    | ^
 ```
 
-## Building
-
-To format `**/package.dhall` files and generate `**/*.cabal` files:
-
-```
-> ./cabal-shake-build.sh cabal-files
-```
-
-The `uom-plugin` works with `ghc-8.2` and `ghc-9.2` while the `thoralf-plugin`
-works with all `ghc >= 8.2` but not `ghc-9.2`. It will build if tests are
-disabled but enabling them has this problem:
-
-```
-> cabal build thoralf-plugin-uom:defs
-Resolving dependencies...
-Build profile: -w ghc-9.2.1 -O1
-
-test-suite-defs/Defs.hs:1:1: error:
-    Can't find interface-file declaration for type constructor or class GHC.TypeNats.<=?
-      Probable cause: bug in .hi-boot file, or inconsistent .hi file
-      Use -ddump-if-trace to get an idea of which file caused the error
-```
-
 ## Test Suite Units
 
 A goal of this project is to run the same tests in `thoralf-plugin-uom:units` as
@@ -369,4 +346,12 @@ To see tests of the `uom-plugin` with color but no build output to the terminal:
 
 ```
 > stack test uom-plugin --no-terminal --test-arguments "--color=always"
+```
+
+## Generating Cabal Files
+
+To format `**/package.dhall` files and generate `**/*.cabal` files:
+
+```
+> ./cabal-shake-build.sh cabal-files
 ```
