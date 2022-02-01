@@ -70,47 +70,49 @@ unitsSolve
                 Simplified _ -> return $ TcPluginOk [] []
                 Impossible eq _ -> contradiction eq
 
+    | not $ null unpacks = return $ TcPluginOk [] unpacks
+
+    | null unit_wanteds = return $ TcPluginOk [] []
+
     | otherwise = do
         logCalls
         logCtsProblem wanteds
 
-        if not $ null unpacks then return $ TcPluginOk [] unpacks else do
-            if null unit_wanteds then return $ TcPluginOk [] [] else do
-                sr <- simplifyUnits unitDefs unit_givens
-                tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
+        sr <- simplifyUnits unitDefs unit_givens
+        tcPluginTrace "unitsOfMeasureSolver simplified givens" $ ppr sr
 
-                case sr of
-                    Impossible eq _ -> contradiction eq
+        case sr of
+            Impossible eq _ -> contradiction eq
 
-                    Simplified ss -> do
-                        sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
-                        tcPluginTrace "unitsOfMeasureSolver simplified wanteds" $ ppr sr'
-                        case sr' of
-                            Impossible _eq _ ->
-                                -- Don't report a contradiction, see #22
-                                return $ TcPluginOk [] []
+            Simplified ss -> do
+                sr' <- simplifyUnits unitDefs $ map (substsUnitEquality (simplifySubst ss)) unit_wanteds
+                tcPluginTrace "unitsOfMeasureSolver simplified wanteds" $ ppr sr'
+                case sr' of
+                    Impossible _eq _ ->
+                        -- Don't report a contradiction, see #22
+                        return $ TcPluginOk [] []
 
-                            Simplified ss' -> do
-                                let solvedCts =
-                                        [ (evMagic "uom-solve" unitDefs ct, ct)
-                                        | eq <- simplifySolved ss'
-                                        , let ct = fromUnitEquality eq
-                                        ]
+                    Simplified ss' -> do
+                        let solvedCts =
+                                [ (evMagic "uom-solve" unitDefs ct, ct)
+                                | eq <- simplifySolved ss'
+                                , let ct = fromUnitEquality eq
+                                ]
 
-                                ok <-
-                                    TcPluginOk solvedCts
-                                    <$>
-                                        mapM
-                                            (substItemToCt unitDefs)
-                                            (filter
-                                                (isWanted . ctEvidence . siCt)
-                                                (substsSubst
-                                                    (simplifyUnsubst ss)
-                                                    (simplifySubst ss'))
-                                            )
+                        ok <-
+                            TcPluginOk solvedCts
+                            <$>
+                                mapM
+                                    (substItemToCt unitDefs)
+                                    (filter
+                                        (isWanted . ctEvidence . siCt)
+                                        (substsSubst
+                                            (simplifyUnsubst ss)
+                                            (simplifySubst ss'))
+                                    )
 
-                                logCtsSolution ok
-                                return ok
+                        logCtsSolution ok
+                        return ok
     where
         -- solvedGiven ct = (ctEvTerm (ctEvidence ct), ct)
 
