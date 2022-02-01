@@ -7,28 +7,20 @@
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 
 module Main
     ( main
 
     -- * Exported to avoid -Wunused-top-binds.
-    , sum'
-    , mean
-    , foo
-    , foo'
-    , tricky
     , associativity
     , commutativity
     , unit
     , inverse
     , inverse2
-    , f
-    , g
-    , givens
-    , givens2
-    , givens3
+
+    , module DelayEq
+
     , patternSplice
     , dimensionless
     , noParse
@@ -52,39 +44,6 @@ import UnitDefs ()
 import UnitDefsTests ()
 import ErrorTestGroups
 
--- Gingerly now...
-
--- w^-2 ~ kg^-2  =>  w ~ kg
-f :: (One /: (w ^: 2)) ~ (One /: [u| kg^2 |])  => Quantity a w -> Quantity a [u| kg |]
-f = id
--- u ~ v * w, v^2 ~ v  =>  u ~ w
-g :: (u ~ (v *: w), (v ^: 2) ~ v) => Quantity a u -> Quantity a w
-g = id
-
-
-{- NOTE: I enabled TypeFamilies to get givens to compile.
-    • Illegal equational constraint (a *: a) ~ One
-      (Use GADTs or TypeFamilies to permit this)
-    • In the type signature:
-        givens :: ((a *: a) ~ One) =>
-                  Quantity Double a -> Quantity Double One
--}
--- a*a ~ 1  =>  a ~ 1
-givens :: ((a *: a) ~ One) => Quantity Double a -> Quantity Double One
-givens = id
-
--- NOTE: I enabled DataKinds to get givens2 to compile.
---    Illegal type: ‘2’ Perhaps you intended to use DataKinds
--- a^2 ~ b^3, b^6 ~ 1 => a ~ 1
-givens2 :: ((a ^: 2) ~ (b ^: 3), (b ^: 6) ~ One) => Quantity Double a -> Quantity Double One
-givens2 = id
-
--- a^2 ~ b^3, b^37 ~ 1 => b ~ 1
-givens3 :: ((a ^: 2) ~ (b ^: 3), (b ^: 37) ~ One) => Quantity Double b -> Quantity Double One
-givens3 = id
-
-
-
 -- Miscellaneous bits and bobs
 
 -- Pattern splices are supported, albeit with restricted types
@@ -97,7 +56,6 @@ patternSplice _          _                 = False
 [u| dimensionless = 1 |]
 dimensionless :: Quantity a [u|dimensionless|] -> Quantity a [u|1|]
 dimensionless = id
-
 
 -- Runtime testsuite
 main :: IO ()

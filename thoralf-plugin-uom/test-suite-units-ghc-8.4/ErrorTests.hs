@@ -8,8 +8,7 @@
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fdefer-type-errors #-}
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 
 #if __GLASGOW_HASKELL__ > 710
 {-# OPTIONS_GHC -fno-warn-deferred-type-errors #-}
@@ -117,7 +116,7 @@ op_d3 = (1 :: Quantity Integer One) *: ([u| 1 m |] :: (Quantity Rational (Base "
 
 {-# ANN opErrorsExpectA_ActualC "HLint: ignore Use camelCase" #-}
 opErrorsExpectA_ActualC :: String -> String -> String -> [[String]]
-opErrorsExpectA_ActualC a b c =
+opErrorsExpectA_ActualC a b _c =
   [ [ "Couldn't match type ‘" ++ a ++ "’ with ‘" ++ b ++ "’"
     , "Expected type: Quantity " ++ b ++ " (Base \"m\")"
     , "  Actual type: Quantity " ++ a ++ " (Base \"m\")"

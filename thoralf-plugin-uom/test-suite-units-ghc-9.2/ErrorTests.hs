@@ -8,8 +8,7 @@
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fdefer-type-errors #-}
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 
 #if __GLASGOW_HASKELL__ > 710
 {-# OPTIONS_GHC -fno-warn-deferred-type-errors #-}

@@ -1,7 +1,6 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 
 module ErrorTestGroups (errorsWhenTestGroup, errorsTestGroup, throws) where
 

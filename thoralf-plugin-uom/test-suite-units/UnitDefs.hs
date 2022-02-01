@@ -5,8 +5,7 @@
 {-# LANGUAGE PackageImports #-}
 {-# LANGUAGE QuasiQuotes #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 -- | This module exports some example definitions of base and derived

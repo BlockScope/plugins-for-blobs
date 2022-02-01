@@ -1,7 +1,6 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 
 module ErrorTestGroups (errorsWhenTestGroup, errorsTestGroup, throws) where
 
@@ -11,7 +10,6 @@ import Data.List
 
 import Test.Tasty
 import Test.Tasty.HUnit
-import Data.Theory.UoM
 
 import UnitDefs ()
 import UnitDefsTests ()
@@ -49,17 +47,19 @@ errorsTestGroup =
     , testCase "m + s"                $ mismatch2 `throws` mismatch2_errors
     , testCase "a ~ a  =>  a ~ kg"    $ given1 undefined `throws` given1_errors
 
-    -- • Couldn't match type ‘One *: a0’ with ‘b0 *: One’
+    -- • Couldn't match type: One *: a0
+    --                  with: b0 *: One
     --     arising from a use of ‘given2’
     --   NB: ‘*:’ is a non-injective type family
     --   The type variables ‘a0’, ‘b0’ are ambiguous
     -- , testCase "a ~ b  =>  a ~ kg"    $ given2 undefined `throws` given2_errors
 
-    -- • Couldn't match type ‘a2 *: a2’ with ‘b1 *: (b1 *: b1)’
+    -- • Couldn't match type: a0 *: a0
+    --                  with: b0 *: (b0 *: b0)
     --     arising from a use of ‘given3’
     --   NB: ‘*:’ is a non-injective type family
-    --   The type variables ‘a2’, ‘b1’ are ambiguous
-    --, testCase "a^2 ~ b^3  =>  a ~ s" $ given3 undefined `throws` given3_errors
+    --   The type variables ‘a0’, ‘b0’ are ambiguous
+    -- , testCase "a^2 ~ b^3  =>  a ~ s" $ given3 undefined `throws` given3_errors
     ]
 
 -- | Assert that evaluation of the first argument (to WHNF) will throw

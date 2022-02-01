@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeOperators, AllowAmbiguousTypes, PackageImports #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 
 -- | Checks that the abelian group laws hold.
 module Abelian where
