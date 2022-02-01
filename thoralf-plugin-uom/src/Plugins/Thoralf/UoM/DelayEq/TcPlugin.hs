@@ -75,28 +75,7 @@ delayEqSolve
         }
     givens ds' wanteds
 
-    | null wanteds = do
-        if null unit_givens then return $ TcPluginOk [] [] else do
-
-            (smtSolver, calls) <- unsafeTcPluginTcM $ readMutVar smtSolverRef
-            unsafeTcPluginTcM $ writeMutVar smtSolverRef (smtSolver, calls + 1)
-
-            let cycle = show calls
-            tcPluginIO . SMT.echo smtSolver $ "solver-start-cycle-" ++ cycle
-
-            _ <- tracePlugin
-                    dbgPlugin
-                    (pprSolverCallCount traceCallCount "ghc-tcplugin-thoralf" iIndent calls)
-
-            let (unit_givens', _) = partitionEithers $ zipWith foo givens (Left <$> unit_givens)
-
-            let solvedCts =
-                    [ (evMagic "thoralf-uom-delay-eq" ud ct, ct)
-                    | (_, eq) <- unit_givens'
-                    , let ct = fromUnitEquality eq
-                    ]
-
-            return $ TcPluginOk solvedCts []
+    | null wanteds = return $ TcPluginOk [] []
 
     | not $ null unpacks = return $ TcPluginOk [] unpacks
 
@@ -131,9 +110,13 @@ delayEqSolve
                 , let ct = fromUnitEquality eq
                 ]
 
-        let gs = sift gs' ++ (snd <$> solvedEqGivens)
+        let gsEq = snd <$> solvedEqGivens
+        let wsEq = snd <$> solvedEqWanteds
+
+        let gs = sift gs' ++ gsEq
         let ds = sift ds'
-        let ws = sift ws' ++ (snd <$> solvedEqWanteds)
+        let ws = sift ws' ++ wsEq
+
         logCtsProblem (Just constraintAsIs) gs' ds' ws'
         logCtsProblem (Just constraintFiltered) gs ds ws
 

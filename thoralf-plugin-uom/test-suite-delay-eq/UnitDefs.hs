@@ -5,12 +5,11 @@
 {-# LANGUAGE PackageImports #-}
 {-# LANGUAGE QuasiQuotes #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module UnitDefs () where
 
 import "uom-th" Data.UnitsOfMeasure.TH
 
-[u| m |]
+[u| m, kg |]
