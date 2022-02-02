@@ -91,7 +91,9 @@ so that they could be shared between both.
 * Added configuration for what to trace from the `thoralf-plugin-uom`. There are
   two combination of these that are useful; a TOML style layout and an SMT2
   style layout. The later output can be fed directly and unaltered into Z3 and
-  is full of useful comments to help follow along.
+  is full of useful comments to help follow along. The SMT2 output for various
+  unit tests can be found in the smt2/ghc-x.y folders, such as
+  [smt2/ghc-8.10](/smt2/ghc-8.10).
 
 ### Partial Plugins
 
