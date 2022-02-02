@@ -372,7 +372,9 @@ To see tests of the `uom-plugin` with color but no build output to the terminal:
 
 ## Generating Cabal Files
 
-To format `**/package.dhall` files and generate `**/*.cabal` files:
+We're using [hpack-dhall](https://github.com/cabalism/hpack-dhall) to format
+`**/package.dhall` files and generate `**/*.cabal` files. There's a shake build
+rule `cabal-files` that does this for every package in this monorepo.
 
 ```
 > ./cabal-shake-build.sh cabal-files
@@ -380,7 +382,7 @@ To format `**/package.dhall` files and generate `**/*.cabal` files:
 
 ## Unit Conversions
 
-The `uom-plugin` has an experimental unit conversion function.
+The `uom-plugin` has experimental unit conversions.
 
 ```haskell
 -- | Automatically convert a quantity with units @u@ so that its units
