@@ -5,18 +5,13 @@
 
 > 1 blob is equal to 1 lbf⋅s2/in, or 12 [slugs][slug].
 
-This is refactoring of the [thoralf-plugin][thoralf-plugin] and the
-[uom-plugin][uom-plugin].
+In their [paper][thoralf-paper], the researchers developing the `thoralf-plugin`
+suggest that it could match the `uom-plugin` in units of measure typechecking
+capability. That's the challenge for this refactoring of both plugins.
 
 Under the hood, the `thoralf-plugin` uses Z3 to solve equational theories. The
 `uom-plugin` solves trivial equations, rewrites and simplifies constraints and
 makes substitutions.
-
-[slug]: https://en.wikipedia.org/wiki/Slug_(unit)
-[uom-plugin]: https://github.com/adamgundry/uom-plugin
-[thoralf-plugin]: https://github.com/bgamari/the-thoralf-plugin
-[ghc-tcplugins-extra]: https://github.com/BlockScope/ghc-tcplugins-extra
-[units-parser]: https://github.com/adamgundry/units-parser
 
 The `uom-plugin` depends on [ghc-tcplugins-extra][ghc-tcplugins-extra] and
 [units-parser][units-parser]. It defines a quasiquoter for writing units with
@@ -26,10 +21,11 @@ The `thoralf-plugin` ships with one small units example, calculating distance in
 `m` from velocity in `m/s` and time in `s`. The `uom-plugin` has a large number
 of unit tests.
 
-In their [paper][thoralf-paper], the researchers developing the `thoralf-plugin`
-suggest that it could match the `uom-plugin` in units of measure typechecking
-capability. That's the challenge for this refactoring.
-
+[slug]: https://en.wikipedia.org/wiki/Slug_(unit)
+[uom-plugin]: https://github.com/adamgundry/uom-plugin
+[thoralf-plugin]: https://github.com/bgamari/the-thoralf-plugin
+[ghc-tcplugins-extra]: https://github.com/BlockScope/ghc-tcplugins-extra
+[units-parser]: https://github.com/adamgundry/units-parser
 [thoralf-paper]: https://repository.brynmawr.edu/compsci_pubs/82/
 
 ## Goals
