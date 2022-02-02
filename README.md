@@ -38,10 +38,10 @@ Initial goals:
 
 Stretch goals:
 
-✅&nbsp;&nbsp;Fix a longstanding bug with the `uom-plugin` (a bonus goal, stumbled on by accident [^1]).  
-❌&nbsp;&nbsp;Add the experimental unit conversions of the `uom-plugin` to the `thoralf-plugin` and pass those unit tests too.  
+✅&nbsp;&nbsp;Fix a longstanding bug with the `uom-plugin` (a bonus goal, stumbled on by accident [^uom-fix]).  
+❌&nbsp;&nbsp;Add the experimental [unit conversions](#unit-conversions) of the `uom-plugin` to the `thoralf-plugin`.  
 
-[^1]: Adam Gundry made changes that got the `uom-plugin` working again with
+[^uom-fix]: Adam Gundry made changes that got the `uom-plugin` working again with
 `ghc-9.0` and `ghc-9.2` when the plugin was stuck at `ghc-8.2`, failing with
 later versions of GHC). I caught a problem with these changes not yet picked up
 by the unit tests and added a unit test for that. While working on reproducing
@@ -376,4 +376,56 @@ To format `**/package.dhall` files and generate `**/*.cabal` files:
 
 ```
 > ./cabal-shake-build.sh cabal-files
+```
+
+## Unit Conversions
+
+The `uom-plugin` has an experimental unit conversion function.
+
+```haskell
+-- | Automatically convert a quantity with units @u@ so that its units
+-- are @v@, provided @u@ and @v@ have the same dimension.
+convert
+    :: forall a u v
+    . (Fractional a, Convertible u v)
+    => Quantity a u
+    -> Quantity a v
+
+-- | Calculate the conversion ratio between two units with the same
+-- dimension.  The slightly unusual proxy arguments allow this to be
+-- called using quasiquoters to specify the units, for example
+-- @'ratio' [u| ft |] [u| m |]@.
+ratio
+    :: forall a u v (proxy :: Unit -> Type) proxy'
+    . (Fractional a, Convertible u v)
+    => proxy' (proxy u)
+    -> proxy' (proxy v)
+    -> Quantity a (u /: v)
+```
+
+How this works can be seen in the units tests for this feature.
+
+```haskell
+testGroup "convert"
+[ testCase "10m in ft"     $ convert [u| 10m |]   @?= [u| 32.8 ft |]
+, testCase "5 km^2 in m^2" $ convert [u| 5km^2 |] @?= [u| 5000000 m m |]
+, testCase "ratio"         $ show (ratio [u| ft |] [u| m |]) @?= "[u| 3.28 ft / m |]"
+, testCase "100l in m^3"   $ convert [u| 100l |]   @?= [u| 0.1 m^3 |]
+, testCase "1l/m in m^2"   $ convert [u| 1l/m |]   @?= [u| 0.001 m^2 |]
+, testCase "1l/m in m^2"   $ convert [u| 1l/m |]   @?= [u| 0.001 m^2 |]
+, testCase "5l in ft^3"    $ convert [u| 5l   |]   @?= [u| 0.17643776 ft^3 |]
+, testCase "2000000l^2 in ft^3 m^3" $ convert [u| 2000000l^2 |] @?= [u| 70.575104 ft^3 m^3 |]
+, testCase "42 rad/s in s^-1" $ convert [u| 42 rad/s |] @?= [u| 42 s^-1 |]
+, testCase "2.4 l/h in m" $ convert [u| 2.4 l/ha |] @?= [u| 2.4e-7 m |]
+, testCase "1 m^4 in l m" $ convert [u| 1 m^4 |] @?= [u| 1000 l m |]
+]
+```
+
+Units can only be converted if they share a dimension and for that they need to
+be derived from a base unit with a conversion ratio.
+
+```haskell
+[u| rad = 1 1 |] -- dimensionless unit
+[u| m, s |] -- base units
+[u| km = 1000m, ha = 10000 m^2, l = 0.001 m^3, ft = 100 % 328 m |] -- derived units
 ```
