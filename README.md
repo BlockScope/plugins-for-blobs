@@ -30,9 +30,16 @@ of unit tests.
 
 ## Goals
 
+Initial goals:
+
 ✅&nbsp;&nbsp;Identify, refactor and extract commonality in both unit plugins.  
 ✅&nbsp;&nbsp;Use the unit quasiquoter with the `thoralf-plugin`.  
-❌&nbsp;&nbsp;Pass all of the units tests of the `uom-plugin` with the `thoralf-plugin`.
+✅&nbsp;&nbsp;Pass all units tests of the `uom-plugin` with the `thoralf-plugin` except for those involving unit conversions.  
+
+Stretch goals:
+
+✅&nbsp;&nbsp;Fix a longstanding bug with the `uom-plugin` (a bonus goal, stumbled on by accident).  
+❌&nbsp;&nbsp;Add the experimental unit conversions of the `uom-plugin` to the `thoralf-plugin` and pass those unit tests too.  
 
 ## Progress
 
