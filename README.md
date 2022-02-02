@@ -38,8 +38,19 @@ Initial goals:
 
 Stretch goals:
 
-✅&nbsp;&nbsp;Fix a longstanding bug with the `uom-plugin` (a bonus goal, stumbled on by accident).  
+✅&nbsp;&nbsp;Fix a longstanding bug with the `uom-plugin` (a bonus goal, stumbled on by accident [^1]).  
 ❌&nbsp;&nbsp;Add the experimental unit conversions of the `uom-plugin` to the `thoralf-plugin` and pass those unit tests too.  
+
+[^1]: Adam Gundry made changes that got the `uom-plugin` working again with
+`ghc-9.0` and `ghc-9.2` when the plugin was stuck at `ghc-8.2`, failing with
+later versions of GHC). I caught a problem with these changes not yet picked up
+by the unit tests and added a unit test for that. While working on reproducing
+tests for the `thoralf-plugin` I noticed that in some cases the `uom-plugin`
+tests showed failures with unit order reversed. I then backported a fraction of
+Adam's changes into `ghc-corroborate`. With just these few changes to
+`cmpTyCon`, `cmpType` and `cmpTypes` the plugin works again with `ghc-9.2`. I've
+tested this with flare-timing and nothing bad happens but the fix comes with a
+core-lint error.
 
 ## Progress
 
