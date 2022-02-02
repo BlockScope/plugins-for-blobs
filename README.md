@@ -90,7 +90,7 @@ so that they could be shared between both.
   already has this).
 * Added configuration for what to trace from the `thoralf-plugin-uom`. There are
   two combination of these that are useful; a TOML style layout and an SMT2
-  style layout. The later output can be fed directly and unaltered into z3 and
+  style layout. The later output can be fed directly and unaltered into Z3 and
   is full of useful comments to help follow along.
 
 ### Partial Plugins
