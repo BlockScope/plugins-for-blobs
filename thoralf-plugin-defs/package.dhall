@@ -9,11 +9,7 @@ in    defs
           GHC using the new experimental facility for typechecker plugins. This
           package adds some unit definitions.''
       , category = "Type System"
-      , github = "adamgundry/uom-plugin"
-      , license = "BSD3"
-      , license-file = "LICENSE"
       , stability = "experimental"
-      , extra-source-files = [ "LICENSE" ]
       , library =
         { source-dirs = "src"
         , exposed-modules = "Plugins.Thoralf.UnitDefs"

@@ -10,10 +10,7 @@ in    defs
           package adds some unit definitions.''
       , category = "Type System"
       , github = "adamgundry/uom-plugin"
-      , license = "BSD3"
-      , license-file = "LICENSE"
       , stability = "experimental"
-      , extra-source-files = [ "LICENSE" ]
       , library =
         { source-dirs = "src"
         , exposed-modules = "Plugins.UoM.UnitDefs"

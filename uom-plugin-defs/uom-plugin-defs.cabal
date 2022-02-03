@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d4351f55d549548d09090408e4ba568c8b1518b83556b4b427a888a66d174c85
+-- hash: 5c66977b2a5bda7dd4335dd08bcf86ed78517cff7918b1be92ffd1e1d77ee791
 
 name:           uom-plugin-defs
 version:        0.3.0.1
@@ -20,12 +20,13 @@ author:         Adam Gundry <adam@well-typed.com>
 maintainer:     Adam Gundry <adam@well-typed.com>
 copyright:      Copyright (c) 2014-2018, Adam Gundry
 license:        BSD3
-license-file:   LICENSE
+license-file:   LICENSE.txt
 tested-with:
     GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
 build-type:     Simple
 extra-source-files:
-    LICENSE
+    package.dhall
+    LICENSE.txt
 
 source-repository head
   type: git

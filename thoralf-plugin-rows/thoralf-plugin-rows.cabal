@@ -16,7 +16,7 @@ bug-reports:    https://github.com/bgamari/the-thoralf-plugin/issues
 author:         Divesh Otwani
 maintainer:     Ben Gamari
 license:        MIT
-license-file:   LICENSE
+license-file:   LICENSE.txt
 build-type:     Simple
 tested-with:
     GHC == 8.4.4

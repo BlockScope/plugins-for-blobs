@@ -13,10 +13,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               "Data.UnitsOfMeasure.Tutorial" for an introduction to the library.''
           , category = "Type System"
           , github = "adamgundry/uom-plugin"
-          , license = "BSD3"
-          , license-file = "LICENSE"
           , stability = "experimental"
-          , extra-source-files = [ "README.md", "LICENSE" ]
+          , extra-source-files = defs.extra-source-files # [ "README.md" ]
           , library =
             { source-dirs = [ "src" ]
             , dependencies =

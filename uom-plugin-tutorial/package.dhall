@@ -13,7 +13,6 @@ in  let testopts =
           , description =
               "A tutorial for the units of measure typechecker plugin, checked with doctest."
           , category = "Type System"
-          , license = "BSD3"
           , tests.doctest
             =
             { dependencies =

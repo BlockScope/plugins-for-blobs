@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: aa6fde22d03990cf631d6ebfc1c691289a2707388d9f584f369bfb9f9947f5d4
+-- hash: 657827619d6a17721a15f6c795bbac4d6d8b41fd8c92827e564f914491d81f02
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -13,7 +13,7 @@ description:         Thoralf is a small yet extensible typechecker plugin based 
                      Z3 SMT solver. It is designed to be easy to extend with new
                      theories.
 license:             MIT
-license-file:        LICENSE
+license-file:        LICENSE.txt
 author:              Divesh Otwani
 maintainer:          Ben Gamari
 category:            Development

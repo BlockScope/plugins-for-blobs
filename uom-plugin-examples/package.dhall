@@ -9,6 +9,8 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , description =
               "This package provides examples of the use of uom-plugin"
           , license = "PublicDomain"
+          , license-file = ""
+          , extra-source-files = [ "package.dhall" ]
           , executables.uom-plugin-examples
             =
             { dependencies =

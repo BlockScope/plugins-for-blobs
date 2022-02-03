@@ -2,7 +2,7 @@
 , author = "Divesh Otwani"
 , maintainer = "Ben Gamari"
 , license = "MIT"
-, license-file = "LICENSE"
+, license-file = "LICENSE.txt"
 , tested-with = "GHC == 8.4.4"
 , ghc-options =
   [ "-Wall"

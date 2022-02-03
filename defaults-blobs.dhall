@@ -1,7 +1,4 @@
-let ghc-opts =
-      [ "-Wall"
-      , "-fno-warn-unticked-promoted-constructors"
-      ]
+let ghc-opts = [ "-Wall", "-fno-warn-unticked-promoted-constructors" ]
 
 in  { version = "0.1.0"
     , author = "Phil de Joux"
@@ -11,8 +8,7 @@ in  { version = "0.1.0"
     , bug-reports = "https://github.com/blockscope/plugins-for-blobs/issues"
     , license = "MPL-2.0"
     , license-file = "LICENSE.md"
-    , tested-with =
-        "GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.1"
+    , tested-with = "GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.1"
     , extra-source-files = "package.dhall"
     , when =
       { condition = "impl(ghc >= 8.8.0)"
