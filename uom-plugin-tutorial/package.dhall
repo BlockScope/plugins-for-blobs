@@ -1,4 +1,4 @@
-let defs = ./../defaults.dhall
+let defs = ./../defaults-uom.dhall
 
 in  let testopts =
           [ "-rtsopts"

@@ -1,4 +1,4 @@
-let defs = ./../defaults.dhall
+let defs = ./../defaults-blobs.dhall
 
 in    defs
     ⫽ { name = "thoralf-plugin-defs"

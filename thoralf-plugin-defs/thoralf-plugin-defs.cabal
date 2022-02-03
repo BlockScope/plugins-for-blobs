@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           thoralf-plugin-defs
-version:        0.3.0.1
+version:        0.1.0
 synopsis:       Units of measure definitions
 description:    The @thoralf-plugin-uom@ library adds support for units of measure to
                 GHC using the new experimental facility for typechecker plugins. This
@@ -13,15 +13,15 @@ description:    The @thoralf-plugin-uom@ library adds support for units of measu
 category:       Type System
 stability:      experimental
 homepage:       https://github.com/adamgundry/uom-plugin#readme
-bug-reports:    https://github.com/adamgundry/uom-plugin/issues
-author:         Adam Gundry <adam@well-typed.com>
-maintainer:     Adam Gundry <adam@well-typed.com>
-copyright:      Copyright (c) 2014-2018, Adam Gundry
+bug-reports:    https://github.com/blockscope/plugins-for-blobs/issues
+author:         Phil de Joux
+maintainer:     phil.dejoux@blockscope.com
+copyright:      © 2017-2022 Phil de Joux, © 2017-2022 Block Scope Limited
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
 tested-with:
-    GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
+    GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.1
 extra-source-files:
     LICENSE
 
@@ -35,7 +35,7 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.9.1.0 && <5
+      base
     , template-haskell >=2.9
     , thoralf-encode
     , thoralf-plugin

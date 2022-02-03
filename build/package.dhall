@@ -1,4 +1,4 @@
-  ./../defaults.dhall
+  ./../defaults-blobs.dhall
 ⫽ { name = "build-plugins-for-blobs"
   , synopsis = "A shake build of uom-plugin."
   , description = "Builds the packages making up uom-plugin."

@@ -1,4 +1,4 @@
-let defs = ./defaults.dhall
+let defs = ./../defaults-thoralf.dhall
 
 in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
 
