@@ -13,9 +13,7 @@ import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import ThoralfPlugin.Convert (ExtractEq(..))
 import Plugins.Thoralf.TcPlugin
     (ThoralfState(..), mkThoralfInit, thoralfStop, thoralfSolver)
-import Plugins.Thoralf.Print
-    (DebugSmt(..), TraceCarry(..), DebugSmtTalk(..), DebugSmtRecv(..), TraceSmtTalk(..))
-import Plugins.Print.SMT (TraceSmtCts(..))
+import Plugins.Thoralf.Print (DebugSmt, defaultDebugSmt)
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 
@@ -33,26 +31,7 @@ plugin =
                 , traceSolution = TraceSolution False
                 }
 
-        dbgSmt =
-            DebugSmt
-                { traceCarry = TraceCarry False
-                , traceSmtCts = TraceSmtCts False
-                , traceSmtTalk =
-                    TraceSmtTalk
-                        DebugSmtTalk
-                            { traceSend = True
-                            -- , traceRecv = DebugSmtRecvAll False
-                            , traceRecv =
-                                DebugSmtRecvSome
-                                    { traceSuccess = False
-                                    , traceCheckSat = True
-                                    }
-                            , traceErr = False
-                            , traceOther = False
-                            , traceArrow = False
-                            , traceCtsComments = True
-                            }
-                }
+        dbgSmt = defaultDebugSmt
 
         tc = thoralfUomPlugin dbgPlugin dbgSmt disEq thoralfUoMTheories
     in

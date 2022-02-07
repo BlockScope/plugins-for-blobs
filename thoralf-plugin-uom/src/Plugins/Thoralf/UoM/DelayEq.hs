@@ -7,9 +7,7 @@ import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), Trace
 
 import ThoralfPlugin.Encode (thoralfUoMTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Thoralf.Print
-    (DebugSmt(..), TraceCarry(..), DebugSmtTalk(..), DebugSmtRecv(..), TraceSmtTalk(..))
-import Plugins.Print.SMT (TraceSmtCts(..))
+import Plugins.Thoralf.Print (defaultDebugSmt)
 
 import Plugins.Thoralf.UoM.DelayEq.TcPlugin (thoralfDelayEqPlugin)
 
@@ -27,26 +25,7 @@ plugin =
                 , traceSolution = TraceSolution False
                 }
 
-        dbgSmt =
-            DebugSmt
-                { traceCarry = TraceCarry False
-                , traceSmtCts = TraceSmtCts False
-                , traceSmtTalk =
-                    TraceSmtTalk
-                        DebugSmtTalk
-                            { traceSend = True
-                            -- , traceRecv = DebugSmtRecvAll False
-                            , traceRecv =
-                                DebugSmtRecvSome
-                                    { traceSuccess = False
-                                    , traceCheckSat = True
-                                    }
-                            , traceErr = False
-                            , traceOther = False
-                            , traceArrow = False
-                            , traceCtsComments = True
-                            }
-                }
+        dbgSmt = defaultDebugSmt
 
         tc = thoralfDelayEqPlugin dbgCts dbgSmt disEq thoralfUoMTheories
     in

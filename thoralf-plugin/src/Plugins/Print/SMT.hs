@@ -9,6 +9,8 @@ module Plugins.Print.SMT
     , DebugSmtTalk(..)
     , DebugSmtRecv(..)
     , DebugSmt(..)
+    , defaultDebugSmt
+    , sendOnlyDebugSmt
     , SmtDecls(..)
     , SmtGivens(..)
     , SmtWanteds(..)
@@ -77,6 +79,44 @@ data DebugSmt =
         -- ^ Trace conversions to SMT notation
         , traceSmtTalk :: TraceSmtTalk
         -- ^ Trace the conversation with the SMT solver
+        }
+
+defaultDebugSmt :: DebugSmt
+defaultDebugSmt =
+    DebugSmt
+        { traceCarry = TraceCarry False
+        , traceSmtCts = TraceSmtCts False
+        , traceSmtTalk =
+            TraceSmtTalk
+                DebugSmtTalk
+                    { traceSend = True
+                    , traceRecv =
+                        DebugSmtRecvSome
+                            { traceSuccess = False
+                            , traceCheckSat = True
+                            }
+                    , traceErr = False
+                    , traceOther = False
+                    , traceArrow = False
+                    , traceCtsComments = True
+                    }
+        }
+
+sendOnlyDebugSmt :: DebugSmt
+sendOnlyDebugSmt =
+    DebugSmt
+        { traceCarry = TraceCarry False
+        , traceSmtCts = TraceSmtCts False
+        , traceSmtTalk =
+            TraceSmtTalk
+                DebugSmtTalk
+                    { traceSend = True
+                    , traceRecv = DebugSmtRecvAll False
+                    , traceErr = False
+                    , traceOther = False
+                    , traceArrow = False
+                    , traceCtsComments = True
+                    }
         }
 
 newtype SmtDecls = SmtDecls [SExpr]

@@ -3,6 +3,7 @@
 module Plugins.Thoralf.Print
     ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..), DebugSmtTalk(..)
     , TraceCarry(..), TraceSmtTalk(..)
+    , defaultDebugSmt, sendOnlyDebugSmt
     , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
     , tracePlugin, traceSmt
     ) where
@@ -17,7 +18,7 @@ import Plugins.Print.SMT
     , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , SmtCommentGivens(..), SmtCommentWanteds(..)
-    , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk
+    , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk, defaultDebugSmt, sendOnlyDebugSmt
     )
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
