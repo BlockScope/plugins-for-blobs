@@ -1,0 +1,139 @@
+cradle:
+  cabal:
+    - path: "build/./Main.hs"
+      component: "build-plugins-for-blobs:exe:build-plugins-for-blobs"
+
+    - path: "build/./Paths_build_plugins_for_blobs.hs"
+      component: "build-plugins-for-blobs:exe:build-plugins-for-blobs"
+
+    - path: "ghc-corroborate/ghc-corroborate/src-ghc-tree"
+      component: "lib:ghc-corroborate"
+
+    - path: "ghc-corroborate/ghc-corroborate/src-ghc-9.2"
+      component: "lib:ghc-corroborate"
+
+    - path: "ghc-tcplugins-trace/ghc-tcplugins-trace/src"
+      component: "lib:ghc-tcplugins-trace"
+
+    - path: "simple-smt/./"
+      component: "lib:simple-smt"
+
+    - path: "thoralf-encode/src"
+      component: "lib:thoralf-encode"
+
+    - path: "thoralf-plugin/src"
+      component: "lib:thoralf-plugin"
+
+    - path: "thoralf-plugin-defs/src"
+      component: "lib:thoralf-plugin-defs"
+
+    - path: "thoralf-plugin-rows/src"
+      component: "lib:thoralf-plugin-rows"
+
+    - path: "thoralf-plugin-rows/src-StandaloneKindSignatures"
+      component: "lib:thoralf-plugin-rows"
+
+    - path: "thoralf-plugin-rows/test-suite-rows"
+      component: "thoralf-plugin-rows:test:rows"
+
+    - path: "thoralf-plugin-uom/src"
+      component: "lib:thoralf-plugin-uom"
+
+    - path: "thoralf-plugin-uom/src-StandaloneKindSignatures"
+      component: "lib:thoralf-plugin-uom"
+
+    - path: "thoralf-plugin-uom/test-suite-defs"
+      component: "thoralf-plugin-uom:test:defs"
+
+    - path: "thoralf-plugin-uom/test-suite-delay-eq"
+      component: "thoralf-plugin-uom:test:delay-eq"
+
+    - path: "thoralf-plugin-uom/test-suite-force"
+      component: "thoralf-plugin-uom:test:force"
+
+    - path: "thoralf-plugin-uom/test-suite-units"
+      component: "thoralf-plugin-uom:test:units"
+
+    - path: "thoralf-plugin-uom/test-suite-units-ghc-9.2"
+      component: "thoralf-plugin-uom:test:units"
+
+    - path: "thoralf-plugin-uom/test-suite-uom-diy"
+      component: "thoralf-plugin-uom:test:uom-diy"
+
+    - path: "thoralf-plugin-uom/test-suite-uom-quantity"
+      component: "thoralf-plugin-uom:test:uom-quantity"
+
+    - path: "thoralf-theory/src"
+      component: "lib:thoralf-theory"
+
+    - path: "thoralf-theory/src-StandaloneKindSignatures"
+      component: "lib:thoralf-theory"
+
+    - path: "uom-plugin/src"
+      component: "lib:uom-plugin"
+
+    - path: "uom-plugin/doc-ghc-9.2"
+      component: "lib:uom-plugin"
+
+    - path: "uom-plugin/test-suite-defs"
+      component: "uom-plugin:test:defs"
+
+    - path: "uom-plugin/test-suite-force"
+      component: "uom-plugin:test:force"
+
+    - path: "uom-plugin/test-suite-units"
+      component: "uom-plugin:test:units"
+
+    - path: "uom-plugin/test-suite-units-ghc-9.2"
+      component: "uom-plugin:test:units"
+
+    - path: "uom-plugin/test-suite-units"
+      component: "uom-plugin:test:unpack-solve"
+
+    - path: "uom-plugin/test-suite-units-ghc-9.2"
+      component: "uom-plugin:test:unpack-solve"
+
+    - path: "uom-plugin-defs/src"
+      component: "lib:uom-plugin-defs"
+
+    - path: "uom-plugin-examples/./Examples.hs"
+      component: "uom-plugin-examples:exe:uom-plugin-examples"
+
+    - path: "uom-plugin-examples/./RationalExamples.hs"
+      component: "uom-plugin-examples:exe:uom-plugin-examples"
+
+    - path: "uom-plugin-examples/./Paths_uom_plugin_examples.hs"
+      component: "uom-plugin-examples:exe:uom-plugin-examples"
+
+    - path: "uom-plugin-tutorial/src"
+      component: "uom-plugin-tutorial:test:doctest"
+
+    - path: "uom-plugin-tutorial/doc-ghc-9.2"
+      component: "uom-plugin-tutorial:test:doctest"
+
+    - path: "uom-plugin-tutorial/test-suite-doctest-ghc-9.2"
+      component: "uom-plugin-tutorial:test:doctest"
+
+    - path: "uom-quantity/src"
+      component: "lib:uom-quantity"
+
+    - path: "uom-quantity/src-ghc-9.0"
+      component: "lib:uom-quantity"
+
+    - path: "uom-quantity/src-StandaloneKindSignatures"
+      component: "lib:uom-quantity"
+
+    - path: "uom-quantity/src"
+      component: "uom-quantity:test:doctest"
+
+    - path: "uom-quantity/src-ghc-9.0"
+      component: "uom-quantity:test:doctest"
+
+    - path: "uom-quantity/src-StandaloneKindSignatures"
+      component: "uom-quantity:test:doctest"
+
+    - path: "uom-th/src"
+      component: "lib:uom-th"
+
+    - path: "uom-th/src-StandaloneKindSignatures"
+      component: "lib:uom-th"
