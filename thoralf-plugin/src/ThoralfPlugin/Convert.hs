@@ -370,4 +370,7 @@ tryFns (f : fs) a = case f a of
     Just b -> Just b
 
 justReadSExpr :: String -> SExpr
-justReadSExpr sexpr = let Just (e, _) = SMT.readSExpr sexpr in e
+justReadSExpr sexpr =
+    case SMT.readSExpr sexpr of
+        Just (e, _) -> e
+        Nothing -> error $ "Could not parse SExpr: " ++ sexpr
