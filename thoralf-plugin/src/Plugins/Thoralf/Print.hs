@@ -5,7 +5,7 @@ module Plugins.Thoralf.Print
     , TraceCarry(..), TraceSmtTalk(..)
     , defaultDebugSmt, sendOnlyDebugSmt
     , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
-    , tracePlugin, traceSmt
+    , tracePlugin, traceSmt, compilingModuleSmtComment
     ) where
 
 import Data.Coerce (coerce)
@@ -18,7 +18,8 @@ import Plugins.Print.SMT
     , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , SmtCommentGivens(..), SmtCommentWanteds(..)
-    , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk, defaultDebugSmt, sendOnlyDebugSmt
+    , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk
+    , defaultDebugSmt, sendOnlyDebugSmt, compilingModuleSmtComment
     )
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }

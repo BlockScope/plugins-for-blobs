@@ -21,9 +21,11 @@ module Plugins.Print.SMT
     , pprSmtGivens
     , pprSmtWanteds
     , isSilencedTalk, isSilencedRecv
+    , compilingModuleSmtComment
     ) where
 
 import GHC.Corroborate
+import Control.Monad.IO.Class (MonadIO(..))
 import SimpleSMT (SExpr(..))
 import qualified SimpleSMT as SMT (ppSExpr)
 import Plugins.Print (Indent(..))
@@ -208,3 +210,10 @@ pprSmtWanteds (Indent i) (SmtWanteds es) = let tab = replicate (2 * i) ' ' in
             . m)
         (showString tab . showChar ']')
         es
+
+compilingModuleSmtComment :: MonadIO m => HsParsedModule -> m HsParsedModule
+compilingModuleSmtComment m = do
+    let modName = fmap unLoc . hsmodName . unLoc . hpm_module
+    let msg = "; Compiling " ++ maybe "an unnamed module" moduleNameString (modName m)
+    liftIO $ putStrLn msg
+    return m

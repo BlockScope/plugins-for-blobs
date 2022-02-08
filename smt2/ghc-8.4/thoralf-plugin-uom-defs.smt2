@@ -29,9 +29,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaGB} {2}:: One
-;                       ~
-;                       (Base "byte" /: Base "byte") (CNonCanonical)
+; [WD] hole{co_aajv} {2}:: One
+;                          ~ (Base "byte" /: Base "byte") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -41,9 +40,8 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{aaGB} {2}:: One
-;                            ~
-;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;      [WD] hole{co_aajv} {2}:: One
+;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -68,9 +66,8 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{aaGB} {2}:: One
-;                            ~
-;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;      [WD] hole{co_aajv} {2}:: One
+;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -169,9 +166,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaGM} {2}:: One
-;                       ~
-;                       (Base "byte" /: Base "byte") (CNonCanonical)
+; [WD] hole{co_aajG} {2}:: One
+;                          ~ (Base "byte" /: Base "byte") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -181,9 +177,8 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{aaGM} {2}:: One
-;                            ~
-;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;      [WD] hole{co_aajG} {2}:: One
+;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -208,9 +203,8 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{aaGM} {2}:: One
-;                            ~
-;                            (Base "byte" /: Base "byte") (CNonCanonical)
+;      [WD] hole{co_aajG} {2}:: One
+;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as

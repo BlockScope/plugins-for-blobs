@@ -1,5 +1,4 @@
-; Build profile: -w ghc-8.10.7 -O1
-; [1 of 3] Compiling Defs
+; Compiling Defs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -31,7 +30,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a5Wz} {1}:: One
+; [WD] hole{co_a5Vu} {1}:: One
 ;                          ~ (Base "s" /: Base "s") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -42,7 +41,7 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_a5Wz} {1}:: One
+;      [WD] hole{co_a5Vu} {1}:: One
 ;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -68,7 +67,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a5Wz} {1}:: One
+;      [WD] hole{co_a5Vu} {1}:: One
 ;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -144,7 +143,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a5X1} {1}:: One
+; [WD] hole{co_a5VW} {1}:: One
 ;                          ~ (Base "m" /: Base "m") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -155,7 +154,7 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{co_a5X1} {1}:: One
+;      [WD] hole{co_a5VW} {1}:: One
 ;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -181,7 +180,7 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a5X1} {1}:: One
+;      [WD] hole{co_a5VW} {1}:: One
 ;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -250,7 +249,271 @@
 (pop 1)
 (echo "solver-finish-cycle-4")
 (exit)
-; [2 of 3] Compiling UoM
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+; Compiling UoM
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -286,7 +549,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [W] hole{co_a66y} {2}:: Base "m"
+; [W] hole{co_a65E} {2}:: Base "m"
 ;                         ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ; [D] _ {2}:: Base "m"
 ;             ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
@@ -300,7 +563,7 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [W] hole{co_a66y} {2}:: Base "m"
+;      [W] hole{co_a65E} {2}:: Base "m"
 ;                              ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (store base "m" one)
@@ -349,7 +612,7 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [W] hole{co_a66y} {2}:: Base "m"
+;      [W] hole{co_a65E} {2}:: Base "m"
 ;                              ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (store base "m" one)
@@ -493,26 +756,26 @@
 (echo "solver-start-cycle-8")
 
 ; GIVENS (GHC style)
-; [G] co_a66Z {3}:: Base "m" ~ fsk0 (CFunEqCan)
-; [G] co_a671 {3}:: Base "s" ~ fsk0 (CFunEqCan)
-; [G] co_a673 {2}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
-; [G] co_a676 {1}:: fsk0 ~ mps (CTyEqCan)
+; [G] co_a665 {3}:: Base "m" ~ fsk0 (CFunEqCan)
+; [G] co_a667 {3}:: Base "s" ~ fsk0 (CFunEqCan)
+; [G] co_a669 {2}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
+; [G] co_a66c {1}:: fsk0 ~ mps (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a67f} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+; [WD] hole{co_a66l} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (Base ["m"],a66Y)
-; (Base ["s"],a670)
-; (/: [a66Y,a670],a672)
-; (a672,a65Q)
+; (Base ["m"],a664)
+; (Base ["s"],a666)
+; (/: [a664,a666],a668)
+; (a668,a64W)
 
 ; WANTEDS (Thoralf style)
-; (*: [a65Q,a670],a66Y)
+; (*: [a64W,a666],a664)
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] hole{co_a67f} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_a66l} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -520,46 +783,46 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      a65Q
-;      a670)
-;    a66Y)
+;      a64W
+;      a666)
+;    a664)
 
 ; GIVENS (names)
-;  a65Q  <=  mps
-;  a66Y  <=  fsk_a66Y
-;  a670  <=  fsk_a670
-;  a672  <=  fsk_a672
+;  a64W  <=  mps
+;  a664  <=  fsk_a664
+;  a666  <=  fsk_a666
+;  a668  <=  fsk_a668
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const a65Q (Array String Int))
-; (declare-const a66Y (Array String Int))
-; (declare-const a670 (Array String Int))
-; (declare-const a672 (Array String Int))
+; (declare-const a64W (Array String Int))
+; (declare-const a664 (Array String Int))
+; (declare-const a666 (Array String Int))
+; (declare-const a668 (Array String Int))
 (declare-const
-   a65Q
+   a64W
    (Array String Int))
 (declare-const
-   a66Y
+   a664
    (Array String Int))
 (declare-const
-   a670
+   a666
    (Array String Int))
 (declare-const
-   a672
+   a668
    (Array String Int))
 (assert
    (!
       (=
          (store base "m" one)
-         a66Y)
+         a664)
       :named
       given-8.1))
 (assert
    (!
       (=
          (store base "s" one)
-         a670)
+         a666)
       :named
       given-8.2))
 (assert
@@ -571,14 +834,14 @@
               (-
                  (Int Int)
                  Int))
-           a66Y
-           a670)
-         a672)
+           a664
+           a666)
+         a668)
       :named
       given-8.3))
 (assert
    (!
-      (= a672 a65Q)
+      (= a668 a64W)
       :named
       given-8.4))
 (check-sat)
@@ -586,7 +849,7 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a67f} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_a66l} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -594,14 +857,14 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      a65Q
-;      a670)
-;    a66Y)
+;      a64W
+;      a666)
+;    a664)
 
 ; WANTEDS (names)
-;  a65Q  <=  mps
-;  a66Y  <=  fsk_a66Y
-;  a670  <=  fsk_a670
+;  a64W  <=  mps
+;  a664  <=  fsk_a664
+;  a666  <=  fsk_a666
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -614,9 +877,9 @@
                  (+
                     (Int Int)
                     Int))
-              a65Q
-              a670)
-            a66Y))
+              a64W
+              a666)
+            a664))
       :named
       wanted-8))
 (check-sat)
@@ -629,13 +892,13 @@
 ;   (!
 ;      (=
 ;         (store base "m" one)
-;         a66Y)
+;         a664)
 ;      :named
 ;      given-8.1)
 ;   (!
 ;      (=
 ;         (store base "s" one)
-;         a670)
+;         a666)
 ;      :named
 ;      given-8.2)
 ;   (!
@@ -646,13 +909,13 @@
 ;              (-
 ;                 (Int Int)
 ;                 Int))
-;           a66Y
-;           a670)
-;         a672)
+;           a664
+;           a666)
+;         a668)
 ;      :named
 ;      given-8.3)
 ;   (!
-;      (= a672 a65Q)
+;      (= a668 a64W)
 ;      :named
 ;      given-8.4)
 ;   (!
@@ -664,9 +927,9 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              a65Q
-;              a670)
-;            a66Y))
+;              a64W
+;              a666)
+;            a664))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
@@ -674,7 +937,895 @@
 (pop 1)
 (echo "solver-finish-cycle-8")
 (exit)
-; [3 of 3] Compiling Main
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+; Compiling Main
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -701,5 +1852,1395 @@
 (echo "solver-start-cycle-1")
 (echo "solver-finish-cycle-1")
 (exit)
-; Test suite uom-quantity: RUNNING...
-; Test suite uom-quantity: PASS
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)

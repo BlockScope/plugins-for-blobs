@@ -36,9 +36,9 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aUl} {2}:: (Base "m" *: One)
-;                         ~ (((Base "m" *: One) /: (Base "s" *: One))
-;                            *: (Base "s" *: One)) (CNonCanonical)
+; [WD] hole{co_a1IR} {2}:: (Base "m" *: One)
+;                          ~ (((Base "m" *: One) /: (Base "s" *: One))
+;                             *: (Base "s" *: One)) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -48,9 +48,9 @@
 
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
-;      [WD] hole{co_aUl} {2}:: (Base "m" *: One)
-;                              ~ (((Base "m" *: One) /: (Base "s" *: One))
-;                                 *: (Base "s" *: One)) (CNonCanonical)
+;      [WD] hole{co_a1IR} {2}:: (Base "m" *: One)
+;                               ~ (((Base "m" *: One) /: (Base "s" *: One))
+;                                  *: (Base "s" *: One)) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -122,9 +122,9 @@
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aUl} {2}:: (Base "m" *: One)
-;                              ~ (((Base "m" *: One) /: (Base "s" *: One))
-;                                 *: (Base "s" *: One)) (CNonCanonical)
+;      [WD] hole{co_a1IR} {2}:: (Base "m" *: One)
+;                               ~ (((Base "m" *: One) /: (Base "s" *: One))
+;                                  *: (Base "s" *: One)) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -341,32 +341,32 @@
 (echo "solver-start-cycle-9")
 
 ; GIVENS (GHC style)
-; [G] co_aUU {4}:: One ~ fsk0 (CFunEqCan)
-; [G] co_aUS {3}:: Base "m" ~ fsk0 (CFunEqCan)
-; [G] co_aUY {3}:: Base "s" ~ fsk0 (CFunEqCan)
-; [G] co_aUW {3}:: (fsk0 *: fsk1) ~ fsk2 (CFunEqCan)
-; [G] co_aV0 {3}:: (fsk0 *: fsk1) ~ fsk2 (CFunEqCan)
-; [G] co_aV2 {2}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
-; [G] co_aV5 {1}:: fsk0 ~ mps (CTyEqCan)
+; [G] co_a1Js {3}:: One ~ fsk0 (CFunEqCan)
+; [G] co_a1Jq {2}:: Base "m" ~ fsk0 (CFunEqCan)
+; [G] co_a1Jw {2}:: Base "s" ~ fsk0 (CFunEqCan)
+; [G] co_a1Ju {2}:: (fsk0 *: fsk1) ~ fsk2 (CFunEqCan)
+; [G] co_a1Jy {2}:: (fsk0 *: fsk1) ~ fsk2 (CFunEqCan)
+; [G] co_a1JA {1}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
+; [G] co_a1JD {1}:: fsk0 ~ mps (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aVe} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+; [WD] hole{co_a1JM} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aUT)
-; (Base ["m"],aUR)
-; (Base ["s"],aUX)
-; (*: [aUR,aUT],aUV)
-; (*: [aUX,aUT],aUZ)
-; (/: [aUV,aUZ],aV1)
-; (aV1,aTi)
+; (One [],a1Jr)
+; (Base ["m"],a1Jp)
+; (Base ["s"],a1Jv)
+; (*: [a1Jp,a1Jr],a1Jt)
+; (*: [a1Jv,a1Jr],a1Jx)
+; (/: [a1Jt,a1Jx],a1Jz)
+; (a1Jz,a1HK)
 
 ; WANTEDS (Thoralf style)
-; (*: [aTi,aUZ],aUV)
+; (*: [a1HK,a1Jx],a1Jt)
 
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
-;      [WD] hole{co_aVe} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_a1JM} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -374,48 +374,48 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aTi
-;      aUZ)
-;    aUV)
+;      a1HK
+;      a1Jx)
+;    a1Jt)
 
 ; GIVENS (names)
-;  aTi  <=  mps
-;  aUR  <=  fsk_aUR
-;  aUT  <=  fsk_aUT
-;  aUV  <=  fsk_aUV
-;  aUX  <=  fsk_aUX
-;  aUZ  <=  fsk_aUZ
-;  aV1  <=  fsk_aV1
+;  a1HK  <=  mps
+;  a1Jp  <=  fsk_a1Jp
+;  a1Jr  <=  fsk_a1Jr
+;  a1Jt  <=  fsk_a1Jt
+;  a1Jv  <=  fsk_a1Jv
+;  a1Jx  <=  fsk_a1Jx
+;  a1Jz  <=  fsk_a1Jz
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aTi (Array String Int))
-; (declare-const aUR (Array String Int))
-; (declare-const aUT (Array String Int))
-; (declare-const aUV (Array String Int))
-; (declare-const aUX (Array String Int))
-; (declare-const aUZ (Array String Int))
-; (declare-const aV1 (Array String Int))
+; (declare-const a1HK (Array String Int))
+; (declare-const a1Jp (Array String Int))
+; (declare-const a1Jr (Array String Int))
+; (declare-const a1Jt (Array String Int))
+; (declare-const a1Jv (Array String Int))
+; (declare-const a1Jx (Array String Int))
+; (declare-const a1Jz (Array String Int))
 (declare-const
-   aTi
+   a1HK
    (Array String Int))
 (declare-const
-   aUR
+   a1Jp
    (Array String Int))
 (declare-const
-   aUT
+   a1Jr
    (Array String Int))
 (declare-const
-   aUV
+   a1Jt
    (Array String Int))
 (declare-const
-   aUX
+   a1Jv
    (Array String Int))
 (declare-const
-   aUZ
+   a1Jx
    (Array String Int))
 (declare-const
-   aV1
+   a1Jz
    (Array String Int))
 (assert
    (!
@@ -425,21 +425,21 @@
               const
               (Array String Int))
            0)
-         aUT)
+         a1Jr)
       :named
       given-9.1))
 (assert
    (!
       (=
          (store base "m" one)
-         aUR)
+         a1Jp)
       :named
       given-9.2))
 (assert
    (!
       (=
          (store base "s" one)
-         aUX)
+         a1Jv)
       :named
       given-9.3))
 (assert
@@ -451,9 +451,9 @@
               (+
                  (Int Int)
                  Int))
-           aUR
-           aUT)
-         aUV)
+           a1Jp
+           a1Jr)
+         a1Jt)
       :named
       given-9.4))
 (assert
@@ -465,9 +465,9 @@
               (+
                  (Int Int)
                  Int))
-           aUX
-           aUT)
-         aUZ)
+           a1Jv
+           a1Jr)
+         a1Jx)
       :named
       given-9.5))
 (assert
@@ -479,14 +479,14 @@
               (-
                  (Int Int)
                  Int))
-           aUV
-           aUZ)
-         aV1)
+           a1Jt
+           a1Jx)
+         a1Jz)
       :named
       given-9.6))
 (assert
    (!
-      (= aV1 aTi)
+      (= a1Jz a1HK)
       :named
       given-9.7))
 (check-sat)
@@ -494,7 +494,7 @@
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aVe} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_a1JM} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -502,14 +502,14 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aTi
-;      aUZ)
-;    aUV)
+;      a1HK
+;      a1Jx)
+;    a1Jt)
 
 ; WANTEDS (names)
-;  aTi  <=  mps
-;  aUV  <=  fsk_aUV
-;  aUZ  <=  fsk_aUZ
+;  a1HK  <=  mps
+;  a1Jt  <=  fsk_a1Jt
+;  a1Jx  <=  fsk_a1Jx
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -522,9 +522,9 @@
                  (+
                     (Int Int)
                     Int))
-              aTi
-              aUZ)
-            aUV))
+              a1HK
+              a1Jx)
+            a1Jt))
       :named
       wanted-9))
 (check-sat)
@@ -541,19 +541,19 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         aUT)
+;         a1Jr)
 ;      :named
 ;      given-9.1)
 ;   (!
 ;      (=
 ;         (store base "m" one)
-;         aUR)
+;         a1Jp)
 ;      :named
 ;      given-9.2)
 ;   (!
 ;      (=
 ;         (store base "s" one)
-;         aUX)
+;         a1Jv)
 ;      :named
 ;      given-9.3)
 ;   (!
@@ -564,9 +564,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aUR
-;           aUT)
-;         aUV)
+;           a1Jp
+;           a1Jr)
+;         a1Jt)
 ;      :named
 ;      given-9.4)
 ;   (!
@@ -577,9 +577,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aUX
-;           aUT)
-;         aUZ)
+;           a1Jv
+;           a1Jr)
+;         a1Jx)
 ;      :named
 ;      given-9.5)
 ;   (!
@@ -590,13 +590,13 @@
 ;              (-
 ;                 (Int Int)
 ;                 Int))
-;           aUV
-;           aUZ)
-;         aV1)
+;           a1Jt
+;           a1Jx)
+;         a1Jz)
 ;      :named
 ;      given-9.6)
 ;   (!
-;      (= aV1 aTi)
+;      (= a1Jz a1HK)
 ;      :named
 ;      given-9.7)
 ;   (!
@@ -608,9 +608,9 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aTi
-;              aUZ)
-;            aUV))
+;              a1HK
+;              a1Jx)
+;            a1Jt))
 ;      :named
 ;      wanted-9))
 (get-unsat-core)

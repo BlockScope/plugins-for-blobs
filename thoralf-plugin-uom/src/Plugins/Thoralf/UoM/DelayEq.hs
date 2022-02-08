@@ -7,7 +7,12 @@ import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), Trace
 
 import ThoralfPlugin.Encode (thoralfUoMTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Thoralf.Print (defaultDebugSmt)
+import Plugins.Thoralf.Print
+    ( defaultDebugSmt
+#if __GLASGOW_HASKELL__ >= 806
+    , compilingModuleSmtComment
+#endif
+    )
 
 import Plugins.Thoralf.UoM.DelayEq.TcPlugin (thoralfDelayEqPlugin)
 
@@ -33,5 +38,6 @@ plugin =
             { tcPlugin = const . Just $ tracePlugin "thoralf-uom-plugin" tc
 #if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
+            , parsedResultAction = const . const compilingModuleSmtComment
 #endif
             }

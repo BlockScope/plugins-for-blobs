@@ -29,7 +29,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaIk} {2}:: One ~ (Base "s" /: Base "s") (CNonCanonical)
+; [WD] hole{co_aal8} {2}:: One
+;                          ~ (Base "s" /: Base "s") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -39,9 +40,8 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{aaIk} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aal8} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -66,9 +66,8 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{aaIk} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aal8} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -143,9 +142,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaIP} {2}:: One
-;                       ~
-;                       (Base "kg" /: Base "kg") (CNonCanonical)
+; [WD] hole{co_aalD} {2}:: One
+;                          ~ (Base "kg" /: Base "kg") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -155,9 +153,8 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{aaIP} {2}:: One
-;                            ~
-;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;      [WD] hole{co_aalD} {2}:: One
+;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -182,9 +179,8 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{aaIP} {2}:: One
-;                            ~
-;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;      [WD] hole{co_aalD} {2}:: One
+;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -259,7 +255,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaJk} {2}:: One ~ (Base "m" /: Base "m") (CNonCanonical)
+; [WD] hole{co_aam8} {2}:: One
+;                          ~ (Base "m" /: Base "m") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -269,9 +266,8 @@
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] hole{aaJk} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aam8} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -296,9 +292,8 @@
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] hole{aaJk} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aam8} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -425,7 +420,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaID} {2}:: One ~ (Base "s" /: Base "s") (CNonCanonical)
+; [WD] hole{co_aall} {2}:: One
+;                          ~ (Base "s" /: Base "s") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -435,9 +431,8 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{aaID} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aall} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -462,9 +457,8 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{aaID} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aall} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -539,9 +533,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaJ8} {2}:: One
-;                       ~
-;                       (Base "kg" /: Base "kg") (CNonCanonical)
+; [WD] hole{co_aalQ} {2}:: One
+;                          ~ (Base "kg" /: Base "kg") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -551,9 +544,8 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{aaJ8} {2}:: One
-;                            ~
-;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;      [WD] hole{co_aalQ} {2}:: One
+;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -578,9 +570,8 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{aaJ8} {2}:: One
-;                            ~
-;                            (Base "kg" /: Base "kg") (CNonCanonical)
+;      [WD] hole{co_aalQ} {2}:: One
+;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -655,7 +646,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaJD} {2}:: One ~ (Base "m" /: Base "m") (CNonCanonical)
+; [WD] hole{co_aaml} {2}:: One
+;                          ~ (Base "m" /: Base "m") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -665,9 +657,8 @@
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] hole{aaJD} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aaml} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -692,9 +683,8 @@
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] hole{aaJD} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aaml} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as

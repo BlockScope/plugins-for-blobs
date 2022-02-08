@@ -1,4 +1,4 @@
-; Compiling UoM
+; Compiling Plugins.Thoralf.UnitDefs
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)
@@ -31,306 +31,6 @@
 (echo "solver-start-cycle-4")
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
-
-; GIVENS (GHC style)
-; []
-
-; WANTEDS (GHC style)
-; [WD] hole{co_aUl} {2}:: (Base "m" *: One)
-;                         ~ (((Base "m" *: One) /: (Base "s" *: One))
-;                            *: (Base "s" *: One)) (CNonCanonical)
-
-; GIVENS (Thoralf style)
-; []
-
-; WANTEDS (Thoralf style)
-; (*: [Base ["m"],One []],*: [/: [*: [Base ["m"],One []],*: [Base ["s"],One []]],*: [Base ["s"],One []]])
-
-(echo "givens-start-cycle-5")
-; GIVENS (conversions)
-;      [WD] hole{co_aUl} {2}:: (Base "m" *: One)
-;                              ~ (((Base "m" *: One) /: (Base "s" *: One))
-;                                 *: (Base "s" *: One)) (CNonCanonical)
-;  =>  (=
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      (store base "m" one)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      (
-;        (_
-;           map
-;           (-
-;              (Int Int)
-;              Int))
-;        (
-;          (_
-;             map
-;             (+
-;                (Int Int)
-;                Int))
-;          (store base "m" one)
-;          (
-;            (as
-;               const
-;               (Array String Int))
-;            0))
-;        (
-;          (_
-;             map
-;             (+
-;                (Int Int)
-;                Int))
-;          (store base "s" one)
-;          (
-;            (as
-;               const
-;               (Array String Int))
-;            0)))
-;      (
-;        (_
-;           map
-;           (+
-;              (Int Int)
-;              Int))
-;        (store base "s" one)
-;        (
-;          (as
-;             const
-;             (Array String Int))
-;          0))))
-
-; GIVENS (names)
-(push 1)
-; DECS1 (seen) 
-; DECS1 (unseen) 
-(check-sat)
-; sat
-(echo "givens-finish-cycle-5")
-(echo "wanteds-start-cycle-5")
-; WANTEDS (conversions)
-;      [WD] hole{co_aUl} {2}:: (Base "m" *: One)
-;                              ~ (((Base "m" *: One) /: (Base "s" *: One))
-;                                 *: (Base "s" *: One)) (CNonCanonical)
-;  =>  (=
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      (store base "m" one)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      (
-;        (_
-;           map
-;           (-
-;              (Int Int)
-;              Int))
-;        (
-;          (_
-;             map
-;             (+
-;                (Int Int)
-;                Int))
-;          (store base "m" one)
-;          (
-;            (as
-;               const
-;               (Array String Int))
-;            0))
-;        (
-;          (_
-;             map
-;             (+
-;                (Int Int)
-;                Int))
-;          (store base "s" one)
-;          (
-;            (as
-;               const
-;               (Array String Int))
-;            0)))
-;      (
-;        (_
-;           map
-;           (+
-;              (Int Int)
-;              Int))
-;        (store base "s" one)
-;        (
-;          (as
-;             const
-;             (Array String Int))
-;          0))))
-
-; WANTEDS (names)
-; DECS2 (seen) 
-; DECS2 (unseen) 
-(assert
-   (!
-      (not
-         (=
-            (
-              (_
-                 map
-                 (+
-                    (Int Int)
-                    Int))
-              (store base "m" one)
-              (
-                (as
-                   const
-                   (Array String Int))
-                0))
-            (
-              (_
-                 map
-                 (+
-                    (Int Int)
-                    Int))
-              (
-                (_
-                   map
-                   (-
-                      (Int Int)
-                      Int))
-                (
-                  (_
-                     map
-                     (+
-                        (Int Int)
-                        Int))
-                  (store base "m" one)
-                  (
-                    (as
-                       const
-                       (Array String Int))
-                    0))
-                (
-                  (_
-                     map
-                     (+
-                        (Int Int)
-                        Int))
-                  (store base "s" one)
-                  (
-                    (as
-                       const
-                       (Array String Int))
-                    0)))
-              (
-                (_
-                   map
-                   (+
-                      (Int Int)
-                      Int))
-                (store base "s" one)
-                (
-                  (as
-                     const
-                     (Array String Int))
-                  0)))))
-      :named
-      wanted-5))
-(check-sat)
-; unsat
-(echo "wanteds-finish-cycle-5")
-(get-assertions)
-; (
-;   (= one 1)
-;   (= enc base)
-;   (!
-;      (not
-;         (=
-;            (
-;              (_
-;                 map
-;                 (+
-;                    (Int Int)
-;                    Int))
-;              (store base "m" one)
-;              (
-;                (as
-;                   const
-;                   (Array String Int))
-;                0))
-;            (
-;              (_
-;                 map
-;                 (+
-;                    (Int Int)
-;                    Int))
-;              (
-;                (_
-;                   map
-;                   (-
-;                      (Int Int)
-;                      Int))
-;                (
-;                  (_
-;                     map
-;                     (+
-;                        (Int Int)
-;                        Int))
-;                  (store base "m" one)
-;                  (
-;                    (as
-;                       const
-;                       (Array String Int))
-;                    0))
-;                (
-;                  (_
-;                     map
-;                     (+
-;                        (Int Int)
-;                        Int))
-;                  (store base "s" one)
-;                  (
-;                    (as
-;                       const
-;                       (Array String Int))
-;                    0)))
-;              (
-;                (_
-;                   map
-;                   (+
-;                      (Int Int)
-;                      Int))
-;                (store base "s" one)
-;                (
-;                  (as
-;                     const
-;                     (Array String Int))
-;                  0)))))
-;      :named
-;      wanted-5))
-(get-unsat-core)
-; (wanted-5)
-(pop 1)
 (echo "solver-finish-cycle-5")
 (echo "solver-start-cycle-6")
 (echo "solver-finish-cycle-6")
@@ -339,177 +39,80 @@
 (echo "solver-start-cycle-8")
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
+(echo "solver-finish-cycle-9")
+(echo "solver-start-cycle-10")
+(echo "solver-finish-cycle-10")
+(echo "solver-start-cycle-11")
+(echo "solver-finish-cycle-11")
+(echo "solver-start-cycle-12")
+(echo "solver-finish-cycle-12")
+(echo "solver-start-cycle-13")
+(echo "solver-finish-cycle-13")
+(echo "solver-start-cycle-14")
+(echo "solver-finish-cycle-14")
+(echo "solver-start-cycle-15")
+(echo "solver-finish-cycle-15")
+(echo "solver-start-cycle-16")
 
 ; GIVENS (GHC style)
-; [G] co_aUU {4}:: One ~ fsk0 (CFunEqCan)
-; [G] co_aUS {3}:: Base "m" ~ fsk0 (CFunEqCan)
-; [G] co_aUY {3}:: Base "s" ~ fsk0 (CFunEqCan)
-; [G] co_aUW {3}:: (fsk0 *: fsk1) ~ fsk2 (CFunEqCan)
-; [G] co_aV0 {3}:: (fsk0 *: fsk1) ~ fsk2 (CFunEqCan)
-; [G] co_aV2 {2}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
-; [G] co_aV5 {1}:: fsk0 ~ mps (CTyEqCan)
+; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aVe} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+; [WD] hole{co_abcd} {1}:: One
+;                          ~ (Base "cd" /: Base "cd") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aUT)
-; (Base ["m"],aUR)
-; (Base ["s"],aUX)
-; (*: [aUR,aUT],aUV)
-; (*: [aUX,aUT],aUZ)
-; (/: [aUV,aUZ],aV1)
-; (aV1,aTi)
+; []
 
 ; WANTEDS (Thoralf style)
-; (*: [aTi,aUZ],aUV)
+; (One [],/: [Base ["cd"],Base ["cd"]])
 
-(echo "givens-start-cycle-9")
+(echo "givens-start-cycle-16")
 ; GIVENS (conversions)
-;      [WD] hole{co_aVe} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_abcd} {1}:: One
+;                               ~ (Base "cd" /: Base "cd") (CNonCanonical)
 ;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
 ;    (
 ;      (_
 ;         map
-;         (+
+;         (-
 ;            (Int Int)
 ;            Int))
-;      aTi
-;      aUZ)
-;    aUV)
+;      (store base "cd" one)
+;      (store base "cd" one)))
 
 ; GIVENS (names)
-;  aTi  <=  mps
-;  aUR  <=  fsk_aUR
-;  aUT  <=  fsk_aUT
-;  aUV  <=  fsk_aUV
-;  aUX  <=  fsk_aUX
-;  aUZ  <=  fsk_aUZ
-;  aV1  <=  fsk_aV1
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aTi (Array String Int))
-; (declare-const aUR (Array String Int))
-; (declare-const aUT (Array String Int))
-; (declare-const aUV (Array String Int))
-; (declare-const aUX (Array String Int))
-; (declare-const aUZ (Array String Int))
-; (declare-const aV1 (Array String Int))
-(declare-const
-   aTi
-   (Array String Int))
-(declare-const
-   aUR
-   (Array String Int))
-(declare-const
-   aUT
-   (Array String Int))
-(declare-const
-   aUV
-   (Array String Int))
-(declare-const
-   aUX
-   (Array String Int))
-(declare-const
-   aUZ
-   (Array String Int))
-(declare-const
-   aV1
-   (Array String Int))
-(assert
-   (!
-      (=
-         (
-           (as
-              const
-              (Array String Int))
-           0)
-         aUT)
-      :named
-      given-9.1))
-(assert
-   (!
-      (=
-         (store base "m" one)
-         aUR)
-      :named
-      given-9.2))
-(assert
-   (!
-      (=
-         (store base "s" one)
-         aUX)
-      :named
-      given-9.3))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aUR
-           aUT)
-         aUV)
-      :named
-      given-9.4))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (+
-                 (Int Int)
-                 Int))
-           aUX
-           aUT)
-         aUZ)
-      :named
-      given-9.5))
-(assert
-   (!
-      (=
-         (
-           (_
-              map
-              (-
-                 (Int Int)
-                 Int))
-           aUV
-           aUZ)
-         aV1)
-      :named
-      given-9.6))
-(assert
-   (!
-      (= aV1 aTi)
-      :named
-      given-9.7))
 (check-sat)
 ; sat
-(echo "givens-finish-cycle-9")
-(echo "wanteds-start-cycle-9")
+(echo "givens-finish-cycle-16")
+(echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aVe} {2}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_abcd} {1}:: One
+;                               ~ (Base "cd" /: Base "cd") (CNonCanonical)
 ;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
 ;    (
 ;      (_
 ;         map
-;         (+
+;         (-
 ;            (Int Int)
 ;            Int))
-;      aTi
-;      aUZ)
-;    aUV)
+;      (store base "cd" one)
+;      (store base "cd" one)))
 
 ; WANTEDS (names)
-;  aTi  <=  mps
-;  aUV  <=  fsk_aUV
-;  aUZ  <=  fsk_aUZ
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -517,108 +120,1015 @@
       (not
          (=
             (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
               (_
                  map
-                 (+
+                 (-
                     (Int Int)
                     Int))
-              aTi
-              aUZ)
-            aUV))
+              (store base "cd" one)
+              (store base "cd" one))))
       :named
-      wanted-9))
+      wanted-16))
 (check-sat)
 ; unsat
-(echo "wanteds-finish-cycle-9")
+(echo "wanteds-finish-cycle-16")
 (get-assertions)
 ; (
 ;   (= one 1)
 ;   (= enc base)
 ;   (!
-;      (=
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         aUT)
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "cd" one)
+;              (store base "cd" one))))
 ;      :named
-;      given-9.1)
-;   (!
-;      (=
-;         (store base "m" one)
-;         aUR)
-;      :named
-;      given-9.2)
-;   (!
-;      (=
-;         (store base "s" one)
-;         aUX)
-;      :named
-;      given-9.3)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aUR
-;           aUT)
-;         aUV)
-;      :named
-;      given-9.4)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           aUX
-;           aUT)
-;         aUZ)
-;      :named
-;      given-9.5)
-;   (!
-;      (=
-;         (
-;           (_
-;              map
-;              (-
-;                 (Int Int)
-;                 Int))
-;           aUV
-;           aUZ)
-;         aV1)
-;      :named
-;      given-9.6)
-;   (!
-;      (= aV1 aTi)
-;      :named
-;      given-9.7)
+;      wanted-16))
+(get-unsat-core)
+; (wanted-16)
+(pop 1)
+(echo "solver-finish-cycle-16")
+(echo "solver-start-cycle-17")
+(echo "solver-finish-cycle-17")
+(echo "solver-start-cycle-18")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{co_abcF} {1}:: One
+;                          ~ (Base "mol" /: Base "mol") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["mol"],Base ["mol"]])
+
+(echo "givens-start-cycle-18")
+; GIVENS (conversions)
+;      [WD] hole{co_abcF} {1}:: One
+;                               ~ (Base "mol" /: Base "mol") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "mol" one)
+;      (store base "mol" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-18")
+(echo "wanteds-start-cycle-18")
+; WANTEDS (conversions)
+;      [WD] hole{co_abcF} {1}:: One
+;                               ~ (Base "mol" /: Base "mol") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "mol" one)
+;      (store base "mol" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "mol" one)
+              (store base "mol" one))))
+      :named
+      wanted-18))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-18")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
 ;   (!
 ;      (not
 ;         (=
 ;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
 ;              (_
 ;                 map
-;                 (+
+;                 (-
 ;                    (Int Int)
 ;                    Int))
-;              aTi
-;              aUZ)
-;            aUV))
+;              (store base "mol" one)
+;              (store base "mol" one))))
 ;      :named
-;      wanted-9))
+;      wanted-18))
 (get-unsat-core)
-; (given-9.4 given-9.6 given-9.7 wanted-9)
+; (wanted-18)
 (pop 1)
-(echo "solver-finish-cycle-9")
-(echo "solver-start-cycle-10")
-(echo "solver-finish-cycle-10")
+(echo "solver-finish-cycle-18")
+(echo "solver-start-cycle-19")
+(echo "solver-finish-cycle-19")
+(echo "solver-start-cycle-20")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{co_abd7} {1}:: One
+;                          ~ (Base "K" /: Base "K") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["K"],Base ["K"]])
+
+(echo "givens-start-cycle-20")
+; GIVENS (conversions)
+;      [WD] hole{co_abd7} {1}:: One
+;                               ~ (Base "K" /: Base "K") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "K" one)
+;      (store base "K" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-20")
+(echo "wanteds-start-cycle-20")
+; WANTEDS (conversions)
+;      [WD] hole{co_abd7} {1}:: One
+;                               ~ (Base "K" /: Base "K") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "K" one)
+;      (store base "K" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "K" one)
+              (store base "K" one))))
+      :named
+      wanted-20))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-20")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "K" one)
+;              (store base "K" one))))
+;      :named
+;      wanted-20))
+(get-unsat-core)
+; (wanted-20)
+(pop 1)
+(echo "solver-finish-cycle-20")
+(echo "solver-start-cycle-21")
+(echo "solver-finish-cycle-21")
+(echo "solver-start-cycle-22")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{co_abdz} {1}:: One
+;                          ~ (Base "A" /: Base "A") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["A"],Base ["A"]])
+
+(echo "givens-start-cycle-22")
+; GIVENS (conversions)
+;      [WD] hole{co_abdz} {1}:: One
+;                               ~ (Base "A" /: Base "A") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "A" one)
+;      (store base "A" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-22")
+(echo "wanteds-start-cycle-22")
+; WANTEDS (conversions)
+;      [WD] hole{co_abdz} {1}:: One
+;                               ~ (Base "A" /: Base "A") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "A" one)
+;      (store base "A" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "A" one)
+              (store base "A" one))))
+      :named
+      wanted-22))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-22")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "A" one)
+;              (store base "A" one))))
+;      :named
+;      wanted-22))
+(get-unsat-core)
+; (wanted-22)
+(pop 1)
+(echo "solver-finish-cycle-22")
+(echo "solver-start-cycle-23")
+(echo "solver-finish-cycle-23")
+(echo "solver-start-cycle-24")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{co_abe1} {1}:: One
+;                          ~ (Base "s" /: Base "s") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["s"],Base ["s"]])
+
+(echo "givens-start-cycle-24")
+; GIVENS (conversions)
+;      [WD] hole{co_abe1} {1}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "s" one)
+;      (store base "s" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-24")
+(echo "wanteds-start-cycle-24")
+; WANTEDS (conversions)
+;      [WD] hole{co_abe1} {1}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "s" one)
+;      (store base "s" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "s" one)
+              (store base "s" one))))
+      :named
+      wanted-24))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-24")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "s" one)
+;              (store base "s" one))))
+;      :named
+;      wanted-24))
+(get-unsat-core)
+; (wanted-24)
+(pop 1)
+(echo "solver-finish-cycle-24")
+(echo "solver-start-cycle-25")
+(echo "solver-finish-cycle-25")
+(echo "solver-start-cycle-26")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{co_abet} {1}:: One
+;                          ~ (Base "kg" /: Base "kg") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["kg"],Base ["kg"]])
+
+(echo "givens-start-cycle-26")
+; GIVENS (conversions)
+;      [WD] hole{co_abet} {1}:: One
+;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "kg" one)
+;      (store base "kg" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-26")
+(echo "wanteds-start-cycle-26")
+; WANTEDS (conversions)
+;      [WD] hole{co_abet} {1}:: One
+;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "kg" one)
+;      (store base "kg" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "kg" one)
+              (store base "kg" one))))
+      :named
+      wanted-26))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-26")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "kg" one)
+;              (store base "kg" one))))
+;      :named
+;      wanted-26))
+(get-unsat-core)
+; (wanted-26)
+(pop 1)
+(echo "solver-finish-cycle-26")
+(echo "solver-start-cycle-27")
+(echo "solver-finish-cycle-27")
+(echo "solver-start-cycle-28")
+
+; GIVENS (GHC style)
+; []
+
+; WANTEDS (GHC style)
+; [WD] hole{co_abeV} {1}:: One
+;                          ~ (Base "m" /: Base "m") (CNonCanonical)
+
+; GIVENS (Thoralf style)
+; []
+
+; WANTEDS (Thoralf style)
+; (One [],/: [Base ["m"],Base ["m"]])
+
+(echo "givens-start-cycle-28")
+; GIVENS (conversions)
+;      [WD] hole{co_abeV} {1}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "m" one)))
+
+; GIVENS (names)
+(push 1)
+; DECS1 (seen) 
+; DECS1 (unseen) 
+(check-sat)
+; sat
+(echo "givens-finish-cycle-28")
+(echo "wanteds-start-cycle-28")
+; WANTEDS (conversions)
+;      [WD] hole{co_abeV} {1}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
+;  =>  (=
+;    (
+;      (as
+;         const
+;         (Array String Int))
+;      0)
+;    (
+;      (_
+;         map
+;         (-
+;            (Int Int)
+;            Int))
+;      (store base "m" one)
+;      (store base "m" one)))
+
+; WANTEDS (names)
+; DECS2 (seen) 
+; DECS2 (unseen) 
+(assert
+   (!
+      (not
+         (=
+            (
+              (as
+                 const
+                 (Array String Int))
+              0)
+            (
+              (_
+                 map
+                 (-
+                    (Int Int)
+                    Int))
+              (store base "m" one)
+              (store base "m" one))))
+      :named
+      wanted-28))
+(check-sat)
+; unsat
+(echo "wanteds-finish-cycle-28")
+(get-assertions)
+; (
+;   (= one 1)
+;   (= enc base)
+;   (!
+;      (not
+;         (=
+;            (
+;              (as
+;                 const
+;                 (Array String Int))
+;              0)
+;            (
+;              (_
+;                 map
+;                 (-
+;                    (Int Int)
+;                    Int))
+;              (store base "m" one)
+;              (store base "m" one))))
+;      :named
+;      wanted-28))
+(get-unsat-core)
+; (wanted-28)
+(pop 1)
+(echo "solver-finish-cycle-28")
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
 (exit)
 (set-option :print-success true)
 (set-option :produce-models true)

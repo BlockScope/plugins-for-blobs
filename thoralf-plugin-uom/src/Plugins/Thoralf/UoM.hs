@@ -7,15 +7,20 @@ import Control.Monad.Reader (guard)
 import GHC.Corroborate
 import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), TraceCts(..))
 
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
+import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode (thoralfUoMTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import ThoralfPlugin.Convert (ExtractEq(..))
 import Plugins.Thoralf.TcPlugin
     (ThoralfState(..), mkThoralfInit, thoralfStop, thoralfSolver)
-import Plugins.Thoralf.Print (DebugSmt, defaultDebugSmt)
-import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
-import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
+import Plugins.Thoralf.Print
+    ( DebugSmt, defaultDebugSmt
+#if __GLASGOW_HASKELL__ >= 806
+    , compilingModuleSmtComment
+#endif
+    )
 
 plugin :: Plugin
 plugin =
@@ -39,6 +44,7 @@ plugin =
             { tcPlugin = const . Just $ tracePlugin "thoralf-uom-plugin" tc
 #if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
+            , parsedResultAction = const . const compilingModuleSmtComment
 #endif
             }
 

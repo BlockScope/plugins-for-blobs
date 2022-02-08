@@ -29,7 +29,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaHI} {2}:: One ~ (Base "s" /: Base "s") (CNonCanonical)
+; [WD] hole{co_aaky} {2}:: One
+;                          ~ (Base "s" /: Base "s") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -39,9 +40,8 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{aaHI} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aaky} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -66,9 +66,8 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{aaHI} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aaky} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -143,7 +142,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaId} {2}:: One ~ (Base "m" /: Base "m") (CNonCanonical)
+; [WD] hole{co_aal3} {2}:: One
+;                          ~ (Base "m" /: Base "m") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -153,9 +153,8 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{aaId} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aal3} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -180,9 +179,8 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{aaId} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aal3} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -285,12 +283,10 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [W] hole{aaWJ} {2}:: Base "m"
-;                      ~
-;                      ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
+; [W] hole{co_aazy} {2}:: Base "m"
+;                         ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ; [D] _ {2}:: Base "m"
-;             ~
-;             ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
+;             ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -301,9 +297,8 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [W] hole{aaWJ} {2}:: Base "m"
-;                           ~
-;                           ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
+;      [W] hole{co_aazy} {2}:: Base "m"
+;                              ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -323,8 +318,7 @@
 ;      (store base "s" one)))
 
 ;      [D] _ {2}:: Base "m"
-;                  ~
-;                  ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
+;                  ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -352,9 +346,8 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [W] hole{aaWJ} {2}:: Base "m"
-;                           ~
-;                           ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
+;      [W] hole{co_aazy} {2}:: Base "m"
+;                              ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -374,8 +367,7 @@
 ;      (store base "s" one)))
 
 ;      [D] _ {2}:: Base "m"
-;                  ~
-;                  ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
+;                  ~ ((Base "m" /: Base "s") *: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -498,28 +490,26 @@
 (echo "solver-start-cycle-8")
 
 ; GIVENS (GHC style)
-; [G] cobox_aaXh {2}:: Base "m" ~ fsk0 (CFunEqCan)
-; [G] cobox_aaXj {2}:: Base "s" ~ fsk0 (CFunEqCan)
-; [G] cobox_aaXl {1}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
-; [G] cobox_aaXp {1}:: fsk0 ~ mps (CTyEqCan)
+; [G] co_aaA6 {2}:: Base "m" ~ fsk0 (CFunEqCan)
+; [G] co_aaA8 {2}:: Base "s" ~ fsk0 (CFunEqCan)
+; [G] co_aaAa {1}:: (fsk0 /: fsk1) ~ fsk2 (CFunEqCan)
+; [G] co_aaAe {1}:: fsk0 ~ mps (CTyEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaXA} {3}:: (mps *: Base "s") ~ Base "m" (CNonCanonical)
+; [WD] hole{co_aaAp} {3}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (Base ["m"],aaXg)
-; (Base ["s"],aaXi)
-; (/: [aaXg,aaXi],aaXk)
-; (aaXk,aaW3)
+; (Base ["m"],aaA5)
+; (Base ["s"],aaA7)
+; (/: [aaA5,aaA7],aaA9)
+; (aaA9,aayS)
 
 ; WANTEDS (Thoralf style)
-; (*: [aaW3,Base ["s"]],Base ["m"])
+; (*: [aayS,aaA7],aaA5)
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] hole{aaXA} {3}:: (mps *: Base "s")
-;                            ~
-;                            Base "m" (CNonCanonical)
+;      [WD] hole{co_aaAp} {3}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -527,46 +517,46 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aaW3
-;      (store base "s" one))
-;    (store base "m" one))
+;      aayS
+;      aaA7)
+;    aaA5)
 
 ; GIVENS (names)
-;  aaW3  <=  mps
-;  aaXg  <=  fsk_aaXg
-;  aaXi  <=  fsk_aaXi
-;  aaXk  <=  fsk_aaXk
+;  aayS  <=  mps
+;  aaA5  <=  fsk_aaA5
+;  aaA7  <=  fsk_aaA7
+;  aaA9  <=  fsk_aaA9
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aaW3 (Array String Int))
-; (declare-const aaXg (Array String Int))
-; (declare-const aaXi (Array String Int))
-; (declare-const aaXk (Array String Int))
+; (declare-const aaA5 (Array String Int))
+; (declare-const aaA7 (Array String Int))
+; (declare-const aaA9 (Array String Int))
+; (declare-const aayS (Array String Int))
 (declare-const
-   aaW3
+   aayS
    (Array String Int))
 (declare-const
-   aaXg
+   aaA5
    (Array String Int))
 (declare-const
-   aaXi
+   aaA7
    (Array String Int))
 (declare-const
-   aaXk
+   aaA9
    (Array String Int))
 (assert
    (!
       (=
          (store base "m" one)
-         aaXg)
+         aaA5)
       :named
       given-8.1))
 (assert
    (!
       (=
          (store base "s" one)
-         aaXi)
+         aaA7)
       :named
       given-8.2))
 (assert
@@ -578,14 +568,14 @@
               (-
                  (Int Int)
                  Int))
-           aaXg
-           aaXi)
-         aaXk)
+           aaA5
+           aaA7)
+         aaA9)
       :named
       given-8.3))
 (assert
    (!
-      (= aaXk aaW3)
+      (= aaA9 aayS)
       :named
       given-8.4))
 (check-sat)
@@ -593,9 +583,7 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] hole{aaXA} {3}:: (mps *: Base "s")
-;                            ~
-;                            Base "m" (CNonCanonical)
+;      [WD] hole{co_aaAp} {3}:: (mps *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -603,12 +591,14 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aaW3
-;      (store base "s" one))
-;    (store base "m" one))
+;      aayS
+;      aaA7)
+;    aaA5)
 
 ; WANTEDS (names)
-;  aaW3  <=  mps
+;  aayS  <=  mps
+;  aaA5  <=  fsk_aaA5
+;  aaA7  <=  fsk_aaA7
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -621,9 +611,9 @@
                  (+
                     (Int Int)
                     Int))
-              aaW3
-              (store base "s" one))
-            (store base "m" one)))
+              aayS
+              aaA7)
+            aaA5))
       :named
       wanted-8))
 (check-sat)
@@ -636,13 +626,13 @@
 ;   (!
 ;      (=
 ;         (store base "m" one)
-;         aaXg)
+;         aaA5)
 ;      :named
 ;      given-8.1)
 ;   (!
 ;      (=
 ;         (store base "s" one)
-;         aaXi)
+;         aaA7)
 ;      :named
 ;      given-8.2)
 ;   (!
@@ -653,13 +643,13 @@
 ;              (-
 ;                 (Int Int)
 ;                 Int))
-;           aaXg
-;           aaXi)
-;         aaXk)
+;           aaA5
+;           aaA7)
+;         aaA9)
 ;      :named
 ;      given-8.3)
 ;   (!
-;      (= aaXk aaW3)
+;      (= aaA9 aayS)
 ;      :named
 ;      given-8.4)
 ;   (!
@@ -671,13 +661,13 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aaW3
-;              (store base "s" one))
-;            (store base "m" one)))
+;              aayS
+;              aaA7)
+;            aaA5))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
-; (given-8.1 given-8.2 given-8.3 given-8.4 wanted-8)
+; (given-8.1 given-8.3 given-8.4 wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (exit)
@@ -738,7 +728,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaHX} {2}:: One ~ (Base "s" /: Base "s") (CNonCanonical)
+; [WD] hole{co_aakK} {2}:: One
+;                          ~ (Base "s" /: Base "s") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -748,9 +739,8 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{aaHX} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aakK} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -775,9 +765,8 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{aaHX} {2}:: One
-;                            ~
-;                            (Base "s" /: Base "s") (CNonCanonical)
+;      [WD] hole{co_aakK} {2}:: One
+;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -852,7 +841,8 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{aaIs} {2}:: One ~ (Base "m" /: Base "m") (CNonCanonical)
+; [WD] hole{co_aalf} {2}:: One
+;                          ~ (Base "m" /: Base "m") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -862,9 +852,8 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{aaIs} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aalf} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as
@@ -889,9 +878,8 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{aaIs} {2}:: One
-;                            ~
-;                            (Base "m" /: Base "m") (CNonCanonical)
+;      [WD] hole{co_aalf} {2}:: One
+;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (as

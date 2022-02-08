@@ -8,7 +8,12 @@ import Plugins.Print
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
-import Plugins.Thoralf.Print (defaultDebugSmt)
+import Plugins.Thoralf.Print
+    ( defaultDebugSmt
+#if __GLASGOW_HASKELL__ >= 806
+    , compilingModuleSmtComment
+#endif
+    )
 
 plugin :: Plugin
 plugin =
@@ -32,5 +37,6 @@ plugin =
             { tcPlugin = const $ Just tyCheck
 #if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
+            , parsedResultAction = const . const compilingModuleSmtComment
 #endif
             }

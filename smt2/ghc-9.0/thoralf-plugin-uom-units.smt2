@@ -28,19 +28,19 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aXr} {1}:: (u *: (One /: u))
-;                         ~ (u0 *: (One /: u0)) (CNonCanonical)
+; [WD] hole{co_aXz} {1}:: (u0 *: (One /: u0))
+;                         ~ (u *: (One /: u)) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [aXb,/: [One [],aXb]],*: [aXd,/: [One [],aXd]])
+; (*: [aXl,/: [One [],aXl]],*: [aXj,/: [One [],aXj]])
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] hole{co_aXr} {1}:: (u *: (One /: u))
-;                              ~ (u0 *: (One /: u0)) (CNonCanonical)
+;      [WD] hole{co_aXz} {1}:: (u0 *: (One /: u0))
+;                              ~ (u *: (One /: u)) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -48,7 +48,7 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXb
+;      aXl
 ;      (
 ;        (_
 ;           map
@@ -60,14 +60,14 @@
 ;             const
 ;             (Array String Int))
 ;          0)
-;        aXb))
+;        aXl))
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXd
+;      aXj
 ;      (
 ;        (_
 ;           map
@@ -79,7 +79,7 @@
 ;             const
 ;             (Array String Int))
 ;          0)
-;        aXd)))
+;        aXj)))
 
 ; GIVENS (names)
 (push 1)
@@ -90,8 +90,8 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aXr} {1}:: (u *: (One /: u))
-;                              ~ (u0 *: (One /: u0)) (CNonCanonical)
+;      [WD] hole{co_aXz} {1}:: (u0 *: (One /: u0))
+;                              ~ (u *: (One /: u)) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -99,7 +99,7 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXb
+;      aXl
 ;      (
 ;        (_
 ;           map
@@ -111,14 +111,14 @@
 ;             const
 ;             (Array String Int))
 ;          0)
-;        aXb))
+;        aXl))
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXd
+;      aXj
 ;      (
 ;        (_
 ;           map
@@ -130,20 +130,20 @@
 ;             const
 ;             (Array String Int))
 ;          0)
-;        aXd)))
+;        aXj)))
 
 ; WANTEDS (names)
-;  aXb  <=  u
-;  aXd  <=  u_aXd
+;  aXj  <=  u
+;  aXl  <=  u_aXl
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aXb (Array String Int))
-; (declare-const aXd (Array String Int))
+; (declare-const aXj (Array String Int))
+; (declare-const aXl (Array String Int))
 (declare-const
-   aXb
+   aXj
    (Array String Int))
 (declare-const
-   aXd
+   aXl
    (Array String Int))
 (assert
    (!
@@ -155,7 +155,7 @@
                  (+
                     (Int Int)
                     Int))
-              aXb
+              aXl
               (
                 (_
                    map
@@ -167,14 +167,14 @@
                      const
                      (Array String Int))
                   0)
-                aXb))
+                aXl))
             (
               (_
                  map
                  (+
                     (Int Int)
                     Int))
-              aXd
+              aXj
               (
                 (_
                    map
@@ -186,7 +186,7 @@
                      const
                      (Array String Int))
                   0)
-                aXd))))
+                aXj))))
       :named
       wanted-1))
 (check-sat)
@@ -205,7 +205,7 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aXb
+;              aXl
 ;              (
 ;                (_
 ;                   map
@@ -217,14 +217,14 @@
 ;                     const
 ;                     (Array String Int))
 ;                  0)
-;                aXb))
+;                aXl))
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aXd
+;              aXj
 ;              (
 ;                (_
 ;                   map
@@ -236,7 +236,7 @@
 ;                     const
 ;                     (Array String Int))
 ;                  0)
-;                aXd))))
+;                aXj))))
 ;      :named
 ;      wanted-1))
 (get-unsat-core)
@@ -249,19 +249,19 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aY0} {1}:: (v0 *: u0) ~ (v *: u) (CNonCanonical)
-; [WD] hole{co_aY5} {1}:: (u *: v) ~ (u0 *: v0) (CNonCanonical)
+; [WD] hole{co_aYa} {1}:: (u0 *: v0) ~ (u *: v) (CNonCanonical)
+; [WD] hole{co_aYf} {1}:: (v0 *: u0) ~ (v *: u) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [aXR,aXQ],*: [aXO,aXN])
-; (*: [aXN,aXO],*: [aXQ,aXR])
+; (*: [aY0,aY1],*: [aXX,aXY])
+; (*: [aY1,aY0],*: [aXY,aXX])
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_aY0} {1}:: (v0 *: u0) ~ (v *: u) (CNonCanonical)
+;      [WD] hole{co_aYa} {1}:: (u0 *: v0) ~ (u *: v) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -269,18 +269,18 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXR
-;      aXQ)
+;      aY0
+;      aY1)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXO
-;      aXN))
+;      aXX
+;      aXY))
 
-;      [WD] hole{co_aY5} {1}:: (u *: v) ~ (u0 *: v0) (CNonCanonical)
+;      [WD] hole{co_aYf} {1}:: (v0 *: u0) ~ (v *: u) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -288,16 +288,16 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXN
-;      aXO)
+;      aY1
+;      aY0)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXQ
-;      aXR))
+;      aXY
+;      aXX))
 
 ; GIVENS (names)
 (push 1)
@@ -308,7 +308,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aY0} {1}:: (v0 *: u0) ~ (v *: u) (CNonCanonical)
+;      [WD] hole{co_aYa} {1}:: (u0 *: v0) ~ (u *: v) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -316,18 +316,18 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXR
-;      aXQ)
+;      aY0
+;      aY1)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXO
-;      aXN))
+;      aXX
+;      aXY))
 
-;      [WD] hole{co_aY5} {1}:: (u *: v) ~ (u0 *: v0) (CNonCanonical)
+;      [WD] hole{co_aYf} {1}:: (v0 *: u0) ~ (v *: u) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -335,39 +335,39 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXN
-;      aXO)
+;      aY1
+;      aY0)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aXQ
-;      aXR))
+;      aXY
+;      aXX))
 
 ; WANTEDS (names)
-;  aXN  <=  u
-;  aXO  <=  v
-;  aXQ  <=  u_aXQ
-;  aXR  <=  v_aXR
+;  aXX  <=  u
+;  aXY  <=  v
+;  aY0  <=  u_aY0
+;  aY1  <=  v_aY1
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aXN (Array String Int))
-; (declare-const aXO (Array String Int))
-; (declare-const aXQ (Array String Int))
-; (declare-const aXR (Array String Int))
+; (declare-const aXX (Array String Int))
+; (declare-const aXY (Array String Int))
+; (declare-const aY0 (Array String Int))
+; (declare-const aY1 (Array String Int))
 (declare-const
-   aXN
+   aXX
    (Array String Int))
 (declare-const
-   aXO
+   aXY
    (Array String Int))
 (declare-const
-   aXQ
+   aY0
    (Array String Int))
 (declare-const
-   aXR
+   aY1
    (Array String Int))
 (assert
    (!
@@ -380,16 +380,16 @@
                     (+
                        (Int Int)
                        Int))
-                 aXR
-                 aXQ)
+                 aY0
+                 aY1)
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
-                 aXO
-                 aXN)))
+                 aXX
+                 aXY)))
          (not
             (=
                (
@@ -398,16 +398,16 @@
                     (+
                        (Int Int)
                        Int))
-                 aXN
-                 aXO)
+                 aY1
+                 aY0)
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
-                 aXQ
-                 aXR))))
+                 aXY
+                 aXX))))
       :named
       wanted-2))
 (check-sat)
@@ -428,16 +428,16 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aXR
-;                 aXQ)
+;                 aY0
+;                 aY1)
 ;               (
 ;                 (_
 ;                    map
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aXO
-;                 aXN)))
+;                 aXX
+;                 aXY)))
 ;         (not
 ;            (=
 ;               (
@@ -446,18 +446,30 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aXN
-;                 aXO)
+;                 aY1
+;                 aY0)
 ;               (
 ;                 (_
 ;                    map
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aXQ
-;                 aXR)))))
+;                 aXY
+;                 aXX)))))
 ;   (define-fun
-;      aXR
+;      aXX
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           8855)
+;         "!0!"
+;         8365))
+;   (define-fun
+;      aY0
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -467,7 +479,7 @@
 ;              (Array String Int))
 ;           2437)
 ;         "!0!"
-;         8365))
+;         10450))
 ;   (define-fun
 ;      base
 ;      ()
@@ -478,30 +490,6 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      aXQ
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         32285))
-;   (define-fun
-;      aXO
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           8855)
-;         "!0!"
-;         10450))
-;   (define-fun
 ;      enc
 ;      ()
 ;      (Array String Int)
@@ -511,7 +499,24 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      aXN
+;      one
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      aY1
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         30199))
+;   (define-fun
+;      aXY
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -521,12 +526,7 @@
 ;              (Array String Int))
 ;           11797)
 ;         "!0!"
-;         30199))
-;   (define-fun
-;      one
-;      ()
-;      Int
-;      1)
+;         32285))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -544,21 +544,55 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aYy} {1}:: ((u0 *: v0) *: w0)
+; [WD] hole{co_aYJ} {1}:: (u0 *: (v0 *: w0))
+;                         ~ (u *: (v *: w)) (CNonCanonical)
+; [WD] hole{co_aYS} {1}:: ((u0 *: v0) *: w0)
 ;                         ~ ((u *: v) *: w) (CNonCanonical)
-; [WD] hole{co_aYH} {1}:: (u *: (v *: w))
-;                         ~ (u0 *: (v0 *: w0)) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [*: [aYj,aYk],aYl],*: [*: [aYf,aYg],aYh])
-; (*: [aYf,*: [aYg,aYh]],*: [aYj,*: [aYk,aYl]])
+; (*: [aYu,*: [aYv,aYw]],*: [aYq,*: [aYr,aYs]])
+; (*: [*: [aYu,aYv],aYw],*: [*: [aYq,aYr],aYs])
 
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
-;      [WD] hole{co_aYy} {1}:: ((u0 *: v0) *: w0)
+;      [WD] hole{co_aYJ} {1}:: (u0 *: (v0 *: w0))
+;                              ~ (u *: (v *: w)) (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      aYu
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        aYv
+;        aYw))
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      aYq
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        aYr
+;        aYs)))
+
+;      [WD] hole{co_aYS} {1}:: ((u0 *: v0) *: w0)
 ;                              ~ ((u *: v) *: w) (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -573,9 +607,9 @@
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aYj
-;        aYk)
-;      aYl)
+;        aYu
+;        aYv)
+;      aYw)
 ;    (
 ;      (_
 ;         map
@@ -588,43 +622,9 @@
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aYf
-;        aYg)
-;      aYh))
-
-;      [WD] hole{co_aYH} {1}:: (u *: (v *: w))
-;                              ~ (u0 *: (v0 *: w0)) (CNonCanonical)
-;  =>  (=
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      aYf
-;      (
-;        (_
-;           map
-;           (+
-;              (Int Int)
-;              Int))
-;        aYg
-;        aYh))
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      aYj
-;      (
-;        (_
-;           map
-;           (+
-;              (Int Int)
-;              Int))
-;        aYk
-;        aYl)))
+;        aYq
+;        aYr)
+;      aYs))
 
 ; GIVENS (names)
 (push 1)
@@ -635,7 +635,41 @@
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aYy} {1}:: ((u0 *: v0) *: w0)
+;      [WD] hole{co_aYJ} {1}:: (u0 *: (v0 *: w0))
+;                              ~ (u *: (v *: w)) (CNonCanonical)
+;  =>  (=
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      aYu
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        aYv
+;        aYw))
+;    (
+;      (_
+;         map
+;         (+
+;            (Int Int)
+;            Int))
+;      aYq
+;      (
+;        (_
+;           map
+;           (+
+;              (Int Int)
+;              Int))
+;        aYr
+;        aYs)))
+
+;      [WD] hole{co_aYS} {1}:: ((u0 *: v0) *: w0)
 ;                              ~ ((u *: v) *: w) (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -650,9 +684,9 @@
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aYj
-;        aYk)
-;      aYl)
+;        aYu
+;        aYv)
+;      aYw)
 ;    (
 ;      (_
 ;         map
@@ -665,76 +699,42 @@
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aYf
-;        aYg)
-;      aYh))
-
-;      [WD] hole{co_aYH} {1}:: (u *: (v *: w))
-;                              ~ (u0 *: (v0 *: w0)) (CNonCanonical)
-;  =>  (=
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      aYf
-;      (
-;        (_
-;           map
-;           (+
-;              (Int Int)
-;              Int))
-;        aYg
-;        aYh))
-;    (
-;      (_
-;         map
-;         (+
-;            (Int Int)
-;            Int))
-;      aYj
-;      (
-;        (_
-;           map
-;           (+
-;              (Int Int)
-;              Int))
-;        aYk
-;        aYl)))
+;        aYq
+;        aYr)
+;      aYs))
 
 ; WANTEDS (names)
-;  aYf  <=  u
-;  aYg  <=  v
-;  aYh  <=  w
-;  aYj  <=  u_aYj
-;  aYk  <=  v_aYk
-;  aYl  <=  w_aYl
+;  aYq  <=  u
+;  aYr  <=  v
+;  aYs  <=  w
+;  aYu  <=  u_aYu
+;  aYv  <=  v_aYv
+;  aYw  <=  w_aYw
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aYf (Array String Int))
-; (declare-const aYg (Array String Int))
-; (declare-const aYh (Array String Int))
-; (declare-const aYj (Array String Int))
-; (declare-const aYk (Array String Int))
-; (declare-const aYl (Array String Int))
+; (declare-const aYq (Array String Int))
+; (declare-const aYr (Array String Int))
+; (declare-const aYs (Array String Int))
+; (declare-const aYu (Array String Int))
+; (declare-const aYv (Array String Int))
+; (declare-const aYw (Array String Int))
 (declare-const
-   aYf
+   aYq
    (Array String Int))
 (declare-const
-   aYg
+   aYr
    (Array String Int))
 (declare-const
-   aYh
+   aYs
    (Array String Int))
 (declare-const
-   aYj
+   aYu
    (Array String Int))
 (declare-const
-   aYk
+   aYv
    (Array String Int))
 (declare-const
-   aYl
+   aYw
    (Array String Int))
 (assert
    (!
@@ -747,30 +747,30 @@
                     (+
                        (Int Int)
                        Int))
+                 aYu
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   aYj
-                   aYk)
-                 aYl)
+                   aYv
+                   aYw))
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
+                 aYq
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   aYf
-                   aYg)
-                 aYh)))
+                   aYr
+                   aYs))))
          (not
             (=
                (
@@ -779,30 +779,30 @@
                     (+
                        (Int Int)
                        Int))
-                 aYf
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   aYg
-                   aYh))
+                   aYu
+                   aYv)
+                 aYw)
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
-                 aYj
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   aYk
-                   aYl)))))
+                   aYq
+                   aYr)
+                 aYs))))
       :named
       wanted-3))
 (check-sat)
@@ -810,6 +810,18 @@
 (echo "wanteds-finish-cycle-3")
 (get-model)
 ; (
+;   (define-fun
+;      aYr
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         16120))
 ;   (define-fun
 ;      wanted-3
 ;      ()
@@ -823,18 +835,18 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aYj
-;                 aYk
-;                 aYl)
+;                 aYu
+;                 aYv
+;                 aYw)
 ;               (
 ;                 (_
 ;                    map
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aYf
-;                 aYg
-;                 aYh)))
+;                 aYq
+;                 aYr
+;                 aYs)))
 ;         (not
 ;            (=
 ;               (
@@ -843,18 +855,18 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aYf
-;                 aYg
-;                 aYh)
+;                 aYu
+;                 aYv
+;                 aYw)
 ;               (
 ;                 (_
 ;                    map
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 aYj
-;                 aYk
-;                 aYl)))))
+;                 aYq
+;                 aYr
+;                 aYs)))))
 ;   (define-fun
 ;      base
 ;      ()
@@ -865,40 +877,7 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      enc
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        2))
-;   (define-fun
-;      aYl
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         20537))
-;   (define-fun
-;      aYh
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         26285))
-;   (define-fun
-;      aYj
+;      aYw
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -910,12 +889,16 @@
 ;         "!0!"
 ;         8945))
 ;   (define-fun
-;      one
+;      enc
 ;      ()
-;      Int
-;      1)
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        2))
 ;   (define-fun
-;      aYf
+;      aYq
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -925,9 +908,26 @@
 ;              (Array String Int))
 ;           0)
 ;         "!0!"
-;         16122))
+;         26285))
 ;   (define-fun
-;      aYg
+;      aYu
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         20537))
+;   (define-fun
+;      one
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      aYs
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -939,7 +939,7 @@
 ;         "!0!"
 ;         2997))
 ;   (define-fun
-;      aYk
+;      aYv
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -967,17 +967,17 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aZu} {1}:: (Base b /: Base b) ~ One (CNonCanonical)
+; [WD] hole{co_aZF} {1}:: (Base b /: Base b) ~ One (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (/: [Base [aYJ],Base [aYJ]],One [])
+; (/: [Base [aYV],Base [aYV]],One [])
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{co_aZu} {1}:: (Base b /: Base b)
+;      [WD] hole{co_aZF} {1}:: (Base b /: Base b)
 ;                              ~ One (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -986,8 +986,8 @@
 ;         (-
 ;            (Int Int)
 ;            Int))
-;      (store base aYJ one)
-;      (store base aYJ one))
+;      (store base aYV one)
+;      (store base aYV one))
 ;    (
 ;      (as
 ;         const
@@ -1003,7 +1003,7 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aZu} {1}:: (Base b /: Base b)
+;      [WD] hole{co_aZF} {1}:: (Base b /: Base b)
 ;                              ~ One (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -1012,8 +1012,8 @@
 ;         (-
 ;            (Int Int)
 ;            Int))
-;      (store base aYJ one)
-;      (store base aYJ one))
+;      (store base aYV one)
+;      (store base aYV one))
 ;    (
 ;      (as
 ;         const
@@ -1021,11 +1021,11 @@
 ;      0))
 
 ; WANTEDS (names)
-;  aYJ  <=  b
+;  aYV  <=  b
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aYJ String)
-(declare-const aYJ String)
+; (declare-const aYV String)
+(declare-const aYV String)
 (assert
    (!
       (not
@@ -1036,8 +1036,8 @@
                  (-
                     (Int Int)
                     Int))
-              (store base aYJ one)
-              (store base aYJ one))
+              (store base aYV one)
+              (store base aYV one))
             (
               (as
                  const
@@ -1061,8 +1061,8 @@
 ;                 (-
 ;                    (Int Int)
 ;                    Int))
-;              (store base aYJ one)
-;              (store base aYJ one))
+;              (store base aYV one)
+;              (store base aYV one))
 ;            (
 ;              (as
 ;                 const
@@ -1080,17 +1080,17 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aZD} {1}:: (u *: (One /: u)) ~ One (CNonCanonical)
+; [WD] hole{co_aZO} {1}:: (u *: (One /: u)) ~ One (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [aYS,/: [One [],aYS]],One [])
+; (*: [aZ4,/: [One [],aZ4]],One [])
 
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
-;      [WD] hole{co_aZD} {1}:: (u *: (One /: u))
+;      [WD] hole{co_aZO} {1}:: (u *: (One /: u))
 ;                              ~ One (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -1099,7 +1099,7 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aYS
+;      aZ4
 ;      (
 ;        (_
 ;           map
@@ -1111,7 +1111,7 @@
 ;             const
 ;             (Array String Int))
 ;          0)
-;        aYS))
+;        aZ4))
 ;    (
 ;      (as
 ;         const
@@ -1127,7 +1127,7 @@
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aZD} {1}:: (u *: (One /: u))
+;      [WD] hole{co_aZO} {1}:: (u *: (One /: u))
 ;                              ~ One (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -1136,7 +1136,7 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aYS
+;      aZ4
 ;      (
 ;        (_
 ;           map
@@ -1148,7 +1148,7 @@
 ;             const
 ;             (Array String Int))
 ;          0)
-;        aYS))
+;        aZ4))
 ;    (
 ;      (as
 ;         const
@@ -1156,12 +1156,12 @@
 ;      0))
 
 ; WANTEDS (names)
-;  aYS  <=  u
+;  aZ4  <=  u
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aYS (Array String Int))
+; (declare-const aZ4 (Array String Int))
 (declare-const
-   aYS
+   aZ4
    (Array String Int))
 (assert
    (!
@@ -1173,7 +1173,7 @@
                  (+
                     (Int Int)
                     Int))
-              aYS
+              aZ4
               (
                 (_
                    map
@@ -1185,7 +1185,7 @@
                      const
                      (Array String Int))
                   0)
-                aYS))
+                aZ4))
             (
               (as
                  const
@@ -1209,7 +1209,7 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aYS
+;              aZ4
 ;              (
 ;                (_
 ;                   map
@@ -1221,7 +1221,7 @@
 ;                     const
 ;                     (Array String Int))
 ;                  0)
-;                aYS))
+;                aZ4))
 ;            (
 ;              (as
 ;                 const
@@ -1239,17 +1239,17 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aZI} {1}:: (u *: One) ~ u (CNonCanonical)
+; [WD] hole{co_aZV} {2}:: (u *: One) ~ u (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [aYZ,One []],aYZ)
+; (*: [aZb,One []],aZb)
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] hole{co_aZI} {1}:: (u *: One) ~ u (CNonCanonical)
+;      [WD] hole{co_aZV} {2}:: (u *: One) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -1257,13 +1257,13 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aYZ
+;      aZb
 ;      (
 ;        (as
 ;           const
 ;           (Array String Int))
 ;        0))
-;    aYZ)
+;    aZb)
 
 ; GIVENS (names)
 (push 1)
@@ -1274,7 +1274,7 @@
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aZI} {1}:: (u *: One) ~ u (CNonCanonical)
+;      [WD] hole{co_aZV} {2}:: (u *: One) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -1282,21 +1282,21 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aYZ
+;      aZb
 ;      (
 ;        (as
 ;           const
 ;           (Array String Int))
 ;        0))
-;    aYZ)
+;    aZb)
 
 ; WANTEDS (names)
-;  aYZ  <=  u
+;  aZb  <=  u
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aYZ (Array String Int))
+; (declare-const aZb (Array String Int))
 (declare-const
-   aYZ
+   aZb
    (Array String Int))
 (assert
    (!
@@ -1308,13 +1308,13 @@
                  (+
                     (Int Int)
                     Int))
-              aYZ
+              aZb
               (
                 (as
                    const
                    (Array String Int))
                 0))
-            aYZ))
+            aZb))
       :named
       wanted-6))
 (check-sat)
@@ -1333,13 +1333,13 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aYZ
+;              aZb
 ;              (
 ;                (as
 ;                   const
 ;                   (Array String Int))
 ;                0))
-;            aYZ))
+;            aZb))
 ;      :named
 ;      wanted-6))
 (get-unsat-core)
@@ -1352,17 +1352,17 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aZP} {1}:: (u *: v) ~ (v *: u) (CNonCanonical)
+; [WD] hole{co_a102} {1}:: (u *: v) ~ (v *: u) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [aZ5,aZ6],*: [aZ6,aZ5])
+; (*: [aZh,aZi],*: [aZi,aZh])
 
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
-;      [WD] hole{co_aZP} {1}:: (u *: v) ~ (v *: u) (CNonCanonical)
+;      [WD] hole{co_a102} {1}:: (u *: v) ~ (v *: u) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -1370,16 +1370,16 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aZ5
-;      aZ6)
+;      aZh
+;      aZi)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aZ6
-;      aZ5))
+;      aZi
+;      aZh))
 
 ; GIVENS (names)
 (push 1)
@@ -1390,7 +1390,7 @@
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aZP} {1}:: (u *: v) ~ (v *: u) (CNonCanonical)
+;      [WD] hole{co_a102} {1}:: (u *: v) ~ (v *: u) (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -1398,29 +1398,29 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aZ5
-;      aZ6)
+;      aZh
+;      aZi)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aZ6
-;      aZ5))
+;      aZi
+;      aZh))
 
 ; WANTEDS (names)
-;  aZ5  <=  u
-;  aZ6  <=  v
+;  aZh  <=  u
+;  aZi  <=  v
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aZ5 (Array String Int))
-; (declare-const aZ6 (Array String Int))
+; (declare-const aZh (Array String Int))
+; (declare-const aZi (Array String Int))
 (declare-const
-   aZ5
+   aZh
    (Array String Int))
 (declare-const
-   aZ6
+   aZi
    (Array String Int))
 (assert
    (!
@@ -1432,16 +1432,16 @@
                  (+
                     (Int Int)
                     Int))
-              aZ5
-              aZ6)
+              aZh
+              aZi)
             (
               (_
                  map
                  (+
                     (Int Int)
                     Int))
-              aZ6
-              aZ5)))
+              aZi
+              aZh)))
       :named
       wanted-7))
 (check-sat)
@@ -1460,16 +1460,16 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aZ5
-;              aZ6)
+;              aZh
+;              aZi)
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aZ6
-;              aZ5)))
+;              aZi
+;              aZh)))
 ;      :named
 ;      wanted-7))
 (get-unsat-core)
@@ -1482,18 +1482,18 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a100} {1}:: (u *: (v *: w))
+; [WD] hole{co_a10d} {1}:: (u *: (v *: w))
 ;                          ~ ((u *: v) *: w) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [aZd,*: [aZe,aZf]],*: [*: [aZd,aZe],aZf])
+; (*: [aZp,*: [aZq,aZr]],*: [*: [aZp,aZq],aZr])
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] hole{co_a100} {1}:: (u *: (v *: w))
+;      [WD] hole{co_a10d} {1}:: (u *: (v *: w))
 ;                               ~ ((u *: v) *: w) (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -1502,15 +1502,15 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aZd
+;      aZp
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aZe
-;        aZf))
+;        aZq
+;        aZr))
 ;    (
 ;      (_
 ;         map
@@ -1523,9 +1523,9 @@
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aZd
-;        aZe)
-;      aZf))
+;        aZp
+;        aZq)
+;      aZr))
 
 ; GIVENS (names)
 (push 1)
@@ -1536,7 +1536,7 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a100} {1}:: (u *: (v *: w))
+;      [WD] hole{co_a10d} {1}:: (u *: (v *: w))
 ;                               ~ ((u *: v) *: w) (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -1545,15 +1545,15 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aZd
+;      aZp
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aZe
-;        aZf))
+;        aZq
+;        aZr))
 ;    (
 ;      (_
 ;         map
@@ -1566,27 +1566,27 @@
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        aZd
-;        aZe)
-;      aZf))
+;        aZp
+;        aZq)
+;      aZr))
 
 ; WANTEDS (names)
-;  aZd  <=  u
-;  aZe  <=  v
-;  aZf  <=  w
+;  aZp  <=  u
+;  aZq  <=  v
+;  aZr  <=  w
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aZd (Array String Int))
-; (declare-const aZe (Array String Int))
-; (declare-const aZf (Array String Int))
+; (declare-const aZp (Array String Int))
+; (declare-const aZq (Array String Int))
+; (declare-const aZr (Array String Int))
 (declare-const
-   aZd
+   aZp
    (Array String Int))
 (declare-const
-   aZe
+   aZq
    (Array String Int))
 (declare-const
-   aZf
+   aZr
    (Array String Int))
 (assert
    (!
@@ -1598,15 +1598,15 @@
                  (+
                     (Int Int)
                     Int))
-              aZd
+              aZp
               (
                 (_
                    map
                    (+
                       (Int Int)
                       Int))
-                aZe
-                aZf))
+                aZq
+                aZr))
             (
               (_
                  map
@@ -1619,9 +1619,9 @@
                    (+
                       (Int Int)
                       Int))
-                aZd
-                aZe)
-              aZf)))
+                aZp
+                aZq)
+              aZr)))
       :named
       wanted-8))
 (check-sat)
@@ -1640,15 +1640,15 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aZd
+;              aZp
 ;              (
 ;                (_
 ;                   map
 ;                   (+
 ;                      (Int Int)
 ;                      Int))
-;                aZe
-;                aZf))
+;                aZq
+;                aZr))
 ;            (
 ;              (_
 ;                 map
@@ -1661,87 +1661,15 @@
 ;                   (+
 ;                      (Int Int)
 ;                      Int))
-;                aZd
-;                aZe)
-;              aZf)))
+;                aZp
+;                aZq)
+;              aZr)))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
 ; (wanted-8)
 (pop 1)
 (echo "solver-finish-cycle-8")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
 (exit)
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -2013,7 +1941,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a81N} {1}:: One
+; [WD] hole{co_a8dj} {1}:: One
 ;                          ~ (Base "cd" /: Base "cd") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -2024,7 +1952,7 @@
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] hole{co_a81N} {1}:: One
+;      [WD] hole{co_a8dj} {1}:: One
 ;                               ~ (Base "cd" /: Base "cd") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2050,7 +1978,7 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a81N} {1}:: One
+;      [WD] hole{co_a8dj} {1}:: One
 ;                               ~ (Base "cd" /: Base "cd") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2124,7 +2052,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a82f} {1}:: One
+; [WD] hole{co_a8dL} {1}:: One
 ;                          ~ (Base "mol" /: Base "mol") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -2135,7 +2063,7 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_a82f} {1}:: One
+;      [WD] hole{co_a8dL} {1}:: One
 ;                               ~ (Base "mol" /: Base "mol") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2161,7 +2089,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a82f} {1}:: One
+;      [WD] hole{co_a8dL} {1}:: One
 ;                               ~ (Base "mol" /: Base "mol") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2235,7 +2163,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a82H} {1}:: One
+; [WD] hole{co_a8ed} {1}:: One
 ;                          ~ (Base "K" /: Base "K") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -2246,7 +2174,7 @@
 
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
-;      [WD] hole{co_a82H} {1}:: One
+;      [WD] hole{co_a8ed} {1}:: One
 ;                               ~ (Base "K" /: Base "K") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2272,7 +2200,7 @@
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a82H} {1}:: One
+;      [WD] hole{co_a8ed} {1}:: One
 ;                               ~ (Base "K" /: Base "K") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2346,7 +2274,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a839} {1}:: One
+; [WD] hole{co_a8eF} {1}:: One
 ;                          ~ (Base "A" /: Base "A") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -2357,7 +2285,7 @@
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{co_a839} {1}:: One
+;      [WD] hole{co_a8eF} {1}:: One
 ;                               ~ (Base "A" /: Base "A") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2383,7 +2311,7 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a839} {1}:: One
+;      [WD] hole{co_a8eF} {1}:: One
 ;                               ~ (Base "A" /: Base "A") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2457,7 +2385,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a83B} {1}:: One
+; [WD] hole{co_a8f7} {1}:: One
 ;                          ~ (Base "s" /: Base "s") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -2468,7 +2396,7 @@
 
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
-;      [WD] hole{co_a83B} {1}:: One
+;      [WD] hole{co_a8f7} {1}:: One
 ;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2494,7 +2422,7 @@
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a83B} {1}:: One
+;      [WD] hole{co_a8f7} {1}:: One
 ;                               ~ (Base "s" /: Base "s") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2568,7 +2496,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a843} {1}:: One
+; [WD] hole{co_a8fz} {1}:: One
 ;                          ~ (Base "kg" /: Base "kg") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -2579,7 +2507,7 @@
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] hole{co_a843} {1}:: One
+;      [WD] hole{co_a8fz} {1}:: One
 ;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2605,7 +2533,7 @@
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a843} {1}:: One
+;      [WD] hole{co_a8fz} {1}:: One
 ;                               ~ (Base "kg" /: Base "kg") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2679,7 +2607,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a84v} {1}:: One
+; [WD] hole{co_a8g1} {1}:: One
 ;                          ~ (Base "m" /: Base "m") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -2690,7 +2618,7 @@
 
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
-;      [WD] hole{co_a84v} {1}:: One
+;      [WD] hole{co_a8g1} {1}:: One
 ;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -2716,7 +2644,7 @@
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a84v} {1}:: One
+;      [WD] hole{co_a8g1} {1}:: One
 ;                               ~ (Base "m" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -4873,6 +4801,438 @@
 (assert
    (= enc base))
 (exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
+(set-option :print-success true)
+(set-option :produce-models true)
+(set-option :interactive-mode true)
+(set-option :produce-assertions true)
+(set-option :produce-models true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-option :produce-unsat-assumptions true)
+(set-option :produce-unsat-cores true)
+(declare-const one Int)
+(assert
+   (= one 1))
+(declare-const
+   base
+   (Array String Int))
+(declare-const
+   enc
+   (Array String Int))
+(declare-const
+   exp
+   (Array String Int))
+(assert
+   (= enc base))
+(exit)
 ; Compiling Literal
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -4903,19 +5263,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_a8Dz {0}:: fsk0 ~~ (One *: fsk0) (CIrredCan(sol))
+; [WD] irred_a8KT {0}:: fsk0 ~~ (One *: fsk0) (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_a8Dz {0}:: fsk0 ~~ (One *: fsk0) (CIrredCan(sol))
+; [WD] irred_a8KT {0}:: fsk0 ~~ (One *: fsk0) (CIrredCan(soluble))
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] irred_a8Dz {0}:: fsk0 ~~ (One *: fsk0) (CIrredCan(sol))
+;      [WD] irred_a8KT {0}:: fsk0
+;                            ~~ (One *: fsk0) (CIrredCan(soluble))
 ;  =>  (=
-;    a8Dp
+;    a8KJ
 ;    (
 ;      (_
 ;         map
@@ -4927,7 +5288,7 @@
 ;           const
 ;           (Array String Int))
 ;        0)
-;      a8Dp))
+;      a8KJ))
 
 ; GIVENS (names)
 (push 1)
@@ -4938,9 +5299,10 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] irred_a8Dz {0}:: fsk0 ~~ (One *: fsk0) (CIrredCan(sol))
+;      [WD] irred_a8KT {0}:: fsk0
+;                            ~~ (One *: fsk0) (CIrredCan(soluble))
 ;  =>  (=
-;    a8Dp
+;    a8KJ
 ;    (
 ;      (_
 ;         map
@@ -4952,21 +5314,21 @@
 ;           const
 ;           (Array String Int))
 ;        0)
-;      a8Dp))
+;      a8KJ))
 
 ; WANTEDS (names)
-;  a8Dp  <=  fsk_a8Dp
+;  a8KJ  <=  fsk_a8KJ
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const a8Dp (Array String Int))
+; (declare-const a8KJ (Array String Int))
 (declare-const
-   a8Dp
+   a8KJ
    (Array String Int))
 (assert
    (!
       (not
          (=
-            a8Dp
+            a8KJ
             (
               (_
                  map
@@ -4978,7 +5340,7 @@
                    const
                    (Array String Int))
                 0)
-              a8Dp)))
+              a8KJ)))
       :named
       wanted-1))
 (check-sat)
@@ -4991,7 +5353,7 @@
 ;   (!
 ;      (not
 ;         (=
-;            a8Dp
+;            a8KJ
 ;            (
 ;              (_
 ;                 map
@@ -5003,613 +5365,13 @@
 ;                   const
 ;                   (Array String Int))
 ;                0)
-;              a8Dp)))
+;              a8KJ)))
 ;      :named
 ;      wanted-1))
 (get-unsat-core)
 ; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
 (exit)
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -9718,26 +9480,26 @@
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
-; [G] co_aa3s {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_aa3w {1}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_aa3u {1}:: (fsk0 *: a) ~ fsk1 (CNonCanonical)
-; [G] co_aa3x {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_aa8J {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_aa8N {1}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aa8L {1}:: (fsk0 *: a) ~ fsk1 (CNonCanonical)
+; [G] co_aa8O {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aa3D} {2}:: (b0 *: fsk0) ~ fsk1 (CNonCanonical)
+; [WD] hole{co_aa8U} {2}:: (b0 *: fsk0) ~ fsk1 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aa3r)
-; (*: [aa3j,aa3r],aa3v)
-; (*: [aa3r,aa3i],aa3t)
-; (aa3t,aa3v)
+; (One [],aa8I)
+; (*: [aa8A,aa8I],aa8M)
+; (*: [aa8I,aa8z],aa8K)
+; (aa8K,aa8M)
 
 ; WANTEDS (Thoralf style)
-; (*: [aa3m,aa3r],aa3v)
+; (*: [aa8D,aa8I],aa8M)
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] hole{co_aa3D} {2}:: (b0 *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_aa8U} {2}:: (b0 *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -9745,38 +9507,38 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aa3m
-;      aa3r)
-;    aa3v)
+;      aa8D
+;      aa8I)
+;    aa8M)
 
 ; GIVENS (names)
-;  aa3i  <=  a
-;  aa3j  <=  b
-;  aa3r  <=  fsk_aa3r
-;  aa3t  <=  fsk_aa3t
-;  aa3v  <=  fsk_aa3v
+;  aa8z  <=  a
+;  aa8A  <=  b
+;  aa8I  <=  fsk_aa8I
+;  aa8K  <=  fsk_aa8K
+;  aa8M  <=  fsk_aa8M
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aa3i (Array String Int))
-; (declare-const aa3j (Array String Int))
-; (declare-const aa3r (Array String Int))
-; (declare-const aa3t (Array String Int))
-; (declare-const aa3v (Array String Int))
+; (declare-const aa8A (Array String Int))
+; (declare-const aa8I (Array String Int))
+; (declare-const aa8K (Array String Int))
+; (declare-const aa8M (Array String Int))
+; (declare-const aa8z (Array String Int))
 (declare-const
-   aa3i
+   aa8z
    (Array String Int))
 (declare-const
-   aa3j
+   aa8A
    (Array String Int))
 (declare-const
-   aa3r
+   aa8I
    (Array String Int))
 (declare-const
-   aa3t
+   aa8K
    (Array String Int))
 (declare-const
-   aa3v
+   aa8M
    (Array String Int))
 (assert
    (!
@@ -9786,7 +9548,7 @@
               const
               (Array String Int))
            0)
-         aa3r)
+         aa8I)
       :named
       given-1.1))
 (assert
@@ -9798,9 +9560,9 @@
               (+
                  (Int Int)
                  Int))
-           aa3j
-           aa3r)
-         aa3v)
+           aa8A
+           aa8I)
+         aa8M)
       :named
       given-1.2))
 (assert
@@ -9812,14 +9574,14 @@
               (+
                  (Int Int)
                  Int))
-           aa3r
-           aa3i)
-         aa3t)
+           aa8I
+           aa8z)
+         aa8K)
       :named
       given-1.3))
 (assert
    (!
-      (= aa3t aa3v)
+      (= aa8K aa8M)
       :named
       given-1.4))
 (check-sat)
@@ -9827,7 +9589,7 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aa3D} {2}:: (b0 *: fsk0) ~ fsk1 (CNonCanonical)
+;      [WD] hole{co_aa8U} {2}:: (b0 *: fsk0) ~ fsk1 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -9835,19 +9597,19 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aa3m
-;      aa3r)
-;    aa3v)
+;      aa8D
+;      aa8I)
+;    aa8M)
 
 ; WANTEDS (names)
-;  aa3m  <=  b_aa3m
-;  aa3r  <=  fsk_aa3r
-;  aa3v  <=  fsk_aa3v
+;  aa8D  <=  b_aa8D
+;  aa8I  <=  fsk_aa8I
+;  aa8M  <=  fsk_aa8M
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aa3m (Array String Int))
+; (declare-const aa8D (Array String Int))
 (declare-const
-   aa3m
+   aa8D
    (Array String Int))
 (assert
    (!
@@ -9859,9 +9621,9 @@
                  (+
                     (Int Int)
                     Int))
-              aa3m
-              aa3r)
-            aa3v))
+              aa8D
+              aa8I)
+            aa8M))
       :named
       wanted-1))
 (check-sat)
@@ -9869,15 +9631,6 @@
 (echo "wanteds-finish-cycle-1")
 (get-model)
 ; (
-;   (define-fun
-;      aa3j
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
 ;   (define-fun
 ;      given-1.1
 ;      ()
@@ -9888,9 +9641,18 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         aa3r))
+;         aa8I))
 ;   (define-fun
-;      aa3t
+;      aa8I
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      aa8M
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9918,9 +9680,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aa3r
-;           aa3i)
-;         aa3t))
+;           aa8I
+;           aa8z)
+;         aa8K))
 ;   (define-fun
 ;      base
 ;      ()
@@ -9930,18 +9692,6 @@
 ;           const
 ;           (Array String Int))
 ;        2))
-;   (define-fun
-;      aa3m
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           38)
-;         "!0!"
-;         1))
 ;   (define-fun
 ;      given-1.2
 ;      ()
@@ -9953,11 +9703,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aa3j
-;           aa3r)
-;         aa3v))
+;           aa8A
+;           aa8I)
+;         aa8M))
 ;   (define-fun
-;      aa3v
+;      aa8z
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9966,7 +9716,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aa3i
+;      aa8A
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -9975,19 +9725,22 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aa3r
+;      aa8D
 ;      ()
 ;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           38)
+;         "!0!"
+;         1))
 ;   (define-fun
 ;      given-1.4
 ;      ()
 ;      Bool
-;      (= aa3t aa3v))
+;      (= aa8K aa8M))
 ;   (define-fun
 ;      wanted-1
 ;      ()
@@ -10000,14 +9753,23 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aa3m
-;              aa3r)
-;            aa3v)))
+;              aa8D
+;              aa8I)
+;            aa8M)))
 ;   (define-fun
 ;      one
 ;      ()
 ;      Int
 ;      1)
+;   (define-fun
+;      aa8K
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -10025,20 +9787,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaKK {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaUY {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaKK {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaUY {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] irred_aaKK {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaUY {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10063,8 +9825,8 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] irred_aaKK {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaUY {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10137,20 +9899,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaL7 {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaVl {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaL7 {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaVl {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
-;      [WD] irred_aaL7 {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaVl {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10175,8 +9937,8 @@
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
-;      [WD] irred_aaL7 {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaVl {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10249,20 +10011,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaLu {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaVI {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaLu {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaVI {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] irred_aaLu {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaVI {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10287,8 +10049,8 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] irred_aaLu {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaVI {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10361,20 +10123,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaLS {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaW6 {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaLS {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaW6 {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
-;      [WD] irred_aaLS {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaW6 {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10399,8 +10161,8 @@
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
-;      [WD] irred_aaLS {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaW6 {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10473,20 +10235,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaMe {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaWs {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaMe {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaWs {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] irred_aaMe {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaWs {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10511,8 +10273,8 @@
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] irred_aaMe {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaWs {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10585,20 +10347,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaMA {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaWO {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaMA {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaWO {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
-;      [WD] irred_aaMA {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaWO {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10623,8 +10385,8 @@
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
-;      [WD] irred_aaMA {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaWO {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10697,20 +10459,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaMX {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaXb {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaMX {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaXb {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] irred_aaMX {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaXb {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10735,8 +10497,8 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] irred_aaMX {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaXb {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10809,20 +10571,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaNj {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaXx {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaNj {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaXx {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
-;      [WD] irred_aaNj {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaXx {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10847,8 +10609,8 @@
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
-;      [WD] irred_aaNj {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaXx {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10921,20 +10683,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaNF {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaXT {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaNF {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaXT {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
-;      [WD] irred_aaNF {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaXT {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -10959,8 +10721,8 @@
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
-;      [WD] irred_aaNF {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaXT {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -11033,20 +10795,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaO2 {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaYg {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaO2 {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaYg {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
-;      [WD] irred_aaO2 {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaYg {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -11071,8 +10833,8 @@
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
-;      [WD] irred_aaO2 {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaYg {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -11145,20 +10907,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaOo {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaYC {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaOo {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaYC {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-12")
 ; GIVENS (conversions)
-;      [WD] irred_aaOo {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaYC {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -11183,8 +10945,8 @@
 (echo "givens-finish-cycle-12")
 (echo "wanteds-start-cycle-12")
 ; WANTEDS (conversions)
-;      [WD] irred_aaOo {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaYC {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -11257,20 +11019,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_aaOK {0}:: Base "m"
-;                       ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaYY {0}:: Base "m"
+;                       ~~ (One *: Base "m") (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_aaOK {0}:: Base "m"
-                      ~~ (One *: Base "m") (CIrredCan(sol))
+; [WD] irred_aaYY {0}:: Base "m"
+                      ~~ (One *: Base "m") (CIrredCan(soluble))
 
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
-;      [WD] irred_aaOK {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaYY {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -11295,8 +11057,8 @@
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
-;      [WD] irred_aaOK {0}:: Base "m"
-;                            ~~ (One *: Base "m") (CIrredCan(sol))
+;      [WD] irred_aaYY {0}:: Base "m"
+;                            ~~ (One *: Base "m") (CIrredCan(soluble))
 ;  =>  (=
 ;    (store base "m" one)
 ;    (
@@ -11366,58 +11128,58 @@
 (echo "solver-start-cycle-14")
 
 ; GIVENS (GHC style)
-; [G] co_aaOW {3}:: (b *: b) ~ fsk0 (CNonCanonical)
-; [G] co_aaOY {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_aaOU {2}:: (a *: a) ~ fsk0 (CNonCanonical)
-; [G] co_aaP0 {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_aaZa {3}:: (b *: b) ~ fsk0 (CNonCanonical)
+; [G] co_aaZc {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aaZ8 {2}:: (a *: a) ~ fsk0 (CNonCanonical)
+; [G] co_aaZe {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aaP4} {1}:: Base "s" ~ a (CNonCanonical)
+; [WD] hole{co_aaZi} {1}:: Base "s" ~ a (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (*: [aae7,aae7],aaOV)
-; (*: [aae7,aaOV],aaOX)
-; (*: [aae6,aae6],aaOT)
-; (aaOT,aaOX)
+; (*: [aajH,aajH],aaZ9)
+; (*: [aajH,aaZ9],aaZb)
+; (*: [aajG,aajG],aaZ7)
+; (aaZ7,aaZb)
 
 ; WANTEDS (Thoralf style)
-; (Base ["s"],aae6)
+; (Base ["s"],aajG)
 
 (echo "givens-start-cycle-14")
 ; GIVENS (conversions)
-;      [WD] hole{co_aaP4} {1}:: Base "s" ~ a (CNonCanonical)
+;      [WD] hole{co_aaZi} {1}:: Base "s" ~ a (CNonCanonical)
 ;  =>  (=
 ;    (store base "s" one)
-;    aae6)
+;    aajG)
 
 ; GIVENS (names)
-;  aae6  <=  a
-;  aae7  <=  b
-;  aaOT  <=  fsk_aaOT
-;  aaOV  <=  fsk_aaOV
-;  aaOX  <=  fsk_aaOX
+;  aajG  <=  a
+;  aajH  <=  b
+;  aaZ7  <=  fsk_aaZ7
+;  aaZ9  <=  fsk_aaZ9
+;  aaZb  <=  fsk_aaZb
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aaOT (Array String Int))
-; (declare-const aaOV (Array String Int))
-; (declare-const aaOX (Array String Int))
-; (declare-const aae6 (Array String Int))
-; (declare-const aae7 (Array String Int))
+; (declare-const aaZ7 (Array String Int))
+; (declare-const aaZ9 (Array String Int))
+; (declare-const aaZb (Array String Int))
+; (declare-const aajG (Array String Int))
+; (declare-const aajH (Array String Int))
 (declare-const
-   aae6
+   aajG
    (Array String Int))
 (declare-const
-   aae7
+   aajH
    (Array String Int))
 (declare-const
-   aaOT
+   aaZ7
    (Array String Int))
 (declare-const
-   aaOV
+   aaZ9
    (Array String Int))
 (declare-const
-   aaOX
+   aaZb
    (Array String Int))
 (assert
    (!
@@ -11428,9 +11190,9 @@
               (+
                  (Int Int)
                  Int))
-           aae7
-           aae7)
-         aaOV)
+           aajH
+           aajH)
+         aaZ9)
       :named
       given-14.1))
 (assert
@@ -11442,9 +11204,9 @@
               (+
                  (Int Int)
                  Int))
-           aae7
-           aaOV)
-         aaOX)
+           aajH
+           aaZ9)
+         aaZb)
       :named
       given-14.2))
 (assert
@@ -11456,14 +11218,14 @@
               (+
                  (Int Int)
                  Int))
-           aae6
-           aae6)
-         aaOT)
+           aajG
+           aajG)
+         aaZ7)
       :named
       given-14.3))
 (assert
    (!
-      (= aaOT aaOX)
+      (= aaZ7 aaZb)
       :named
       given-14.4))
 (check-sat)
@@ -11471,13 +11233,13 @@
 (echo "givens-finish-cycle-14")
 (echo "wanteds-start-cycle-14")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aaP4} {1}:: Base "s" ~ a (CNonCanonical)
+;      [WD] hole{co_aaZi} {1}:: Base "s" ~ a (CNonCanonical)
 ;  =>  (=
 ;    (store base "s" one)
-;    aae6)
+;    aajG)
 
 ; WANTEDS (names)
-;  aae6  <=  a
+;  aajG  <=  a
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -11485,7 +11247,7 @@
       (not
          (=
             (store base "s" one)
-            aae6))
+            aajG))
       :named
       wanted-14))
 (check-sat)
@@ -11494,19 +11256,10 @@
 (get-model)
 ; (
 ;   (define-fun
-;      aae7
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
 ;      given-14.4
 ;      ()
 ;      Bool
-;      (= aaOT aaOX))
+;      (= aaZ7 aaZb))
 ;   (define-fun
 ;      wanted-14
 ;      ()
@@ -11514,16 +11267,7 @@
 ;      (not
 ;         (=
 ;            (store base "s" one)
-;            aae6)))
-;   (define-fun
-;      aaOT
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;            aajG)))
 ;   (define-fun
 ;      given-14.1
 ;      ()
@@ -11535,9 +11279,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aae7
-;           aae7)
-;         aaOV))
+;           aajH
+;           aajH)
+;         aaZ9))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -11558,9 +11302,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aae7
-;           aaOV)
-;         aaOX))
+;           aajH
+;           aaZ9)
+;         aaZb))
 ;   (define-fun
 ;      base
 ;      ()
@@ -11570,6 +11314,15 @@
 ;           const
 ;           (Array String Int))
 ;        2))
+;   (define-fun
+;      aajG
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-14.3
 ;      ()
@@ -11581,11 +11334,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aae6
-;           aae6)
-;         aaOT))
+;           aajG
+;           aajG)
+;         aaZ7))
 ;   (define-fun
-;      aaOX
+;      aaZ7
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11594,7 +11347,16 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      aaOV
+;      aaZb
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      aajH
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11608,7 +11370,7 @@
 ;      Int
 ;      1)
 ;   (define-fun
-;      aae6
+;      aaZ9
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11630,58 +11392,58 @@
 (echo "solver-start-cycle-15")
 
 ; GIVENS (GHC style)
-; [G] co_aaPb {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_aaPf {1}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_aaPd {1}:: (fsk0 *: a) ~ fsk1 (CNonCanonical)
-; [G] co_aaPg {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_aaZp {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_aaZt {1}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aaZr {1}:: (fsk0 *: a) ~ fsk1 (CNonCanonical)
+; [G] co_aaZu {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aaPm} {2}:: Base "kg" ~ a (CNonCanonical)
+; [WD] hole{co_aaZz} {2}:: Base "kg" ~ a (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aaPa)
-; (*: [aaez,aaPa],aaPe)
-; (*: [aaPa,aaey],aaPc)
-; (aaPc,aaPe)
+; (One [],aaZo)
+; (*: [aak7,aaZo],aaZs)
+; (*: [aaZo,aak6],aaZq)
+; (aaZq,aaZs)
 
 ; WANTEDS (Thoralf style)
-; (Base ["kg"],aaey)
+; (Base ["kg"],aak6)
 
 (echo "givens-start-cycle-15")
 ; GIVENS (conversions)
-;      [WD] hole{co_aaPm} {2}:: Base "kg" ~ a (CNonCanonical)
+;      [WD] hole{co_aaZz} {2}:: Base "kg" ~ a (CNonCanonical)
 ;  =>  (=
 ;    (store base "kg" one)
-;    aaey)
+;    aak6)
 
 ; GIVENS (names)
-;  aaey  <=  a
-;  aaez  <=  b
-;  aaPa  <=  fsk_aaPa
-;  aaPc  <=  fsk_aaPc
-;  aaPe  <=  fsk_aaPe
+;  aak6  <=  a
+;  aak7  <=  b
+;  aaZo  <=  fsk_aaZo
+;  aaZq  <=  fsk_aaZq
+;  aaZs  <=  fsk_aaZs
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aaPa (Array String Int))
-; (declare-const aaPc (Array String Int))
-; (declare-const aaPe (Array String Int))
-; (declare-const aaey (Array String Int))
-; (declare-const aaez (Array String Int))
+; (declare-const aaZo (Array String Int))
+; (declare-const aaZq (Array String Int))
+; (declare-const aaZs (Array String Int))
+; (declare-const aak6 (Array String Int))
+; (declare-const aak7 (Array String Int))
 (declare-const
-   aaey
+   aak6
    (Array String Int))
 (declare-const
-   aaez
+   aak7
    (Array String Int))
 (declare-const
-   aaPa
+   aaZo
    (Array String Int))
 (declare-const
-   aaPc
+   aaZq
    (Array String Int))
 (declare-const
-   aaPe
+   aaZs
    (Array String Int))
 (assert
    (!
@@ -11691,7 +11453,7 @@
               const
               (Array String Int))
            0)
-         aaPa)
+         aaZo)
       :named
       given-15.1))
 (assert
@@ -11703,9 +11465,9 @@
               (+
                  (Int Int)
                  Int))
-           aaez
-           aaPa)
-         aaPe)
+           aak7
+           aaZo)
+         aaZs)
       :named
       given-15.2))
 (assert
@@ -11717,14 +11479,14 @@
               (+
                  (Int Int)
                  Int))
-           aaPa
-           aaey)
-         aaPc)
+           aaZo
+           aak6)
+         aaZq)
       :named
       given-15.3))
 (assert
    (!
-      (= aaPc aaPe)
+      (= aaZq aaZs)
       :named
       given-15.4))
 (check-sat)
@@ -11732,13 +11494,13 @@
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aaPm} {2}:: Base "kg" ~ a (CNonCanonical)
+;      [WD] hole{co_aaZz} {2}:: Base "kg" ~ a (CNonCanonical)
 ;  =>  (=
 ;    (store base "kg" one)
-;    aaey)
+;    aak6)
 
 ; WANTEDS (names)
-;  aaey  <=  a
+;  aak6  <=  a
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -11746,7 +11508,7 @@
       (not
          (=
             (store base "kg" one)
-            aaey))
+            aak6))
       :named
       wanted-15))
 (check-sat)
@@ -11761,7 +11523,7 @@
 ;      (not
 ;         (=
 ;            (store base "kg" one)
-;            aaey)))
+;            aak6)))
 ;   (define-fun
 ;      given-15.3
 ;      ()
@@ -11773,20 +11535,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aaPa
-;           aaey)
-;         aaPc))
+;           aaZo
+;           aak6)
+;         aaZq))
 ;   (define-fun
-;      aaPe
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aaey
+;      aaZq
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11813,7 +11566,7 @@
 ;           (Array String Int))
 ;        2))
 ;   (define-fun
-;      aaez
+;      aaZo
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11825,9 +11578,9 @@
 ;      given-15.4
 ;      ()
 ;      Bool
-;      (= aaPc aaPe))
+;      (= aaZq aaZs))
 ;   (define-fun
-;      aaPa
+;      aaZs
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -11846,9 +11599,27 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aaez
-;           aaPa)
-;         aaPe))
+;           aak7
+;           aaZo)
+;         aaZs))
+;   (define-fun
+;      aak7
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      aak6
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-15.1
 ;      ()
@@ -11859,21 +11630,12 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         aaPa))
+;         aaZo))
 ;   (define-fun
 ;      one
 ;      ()
 ;      Int
 ;      1)
-;   (define-fun
-;      aaPc
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -11888,53 +11650,53 @@
 (echo "solver-start-cycle-16")
 
 ; GIVENS (GHC style)
-; [G] co_aaPp {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_aaPt {1}:: (a *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_aaPr {1}:: (fsk0 *: a) ~ fsk1 (CNonCanonical)
-; [G] co_aaPu {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_aaZC {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_aaZG {1}:: (a *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aaZE {1}:: (fsk0 *: a) ~ fsk1 (CNonCanonical)
+; [G] co_aaZH {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aaPA} {2}:: Base "kg" ~ a (CNonCanonical)
+; [WD] hole{co_aaZM} {2}:: Base "kg" ~ a (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],aaPo)
-; (*: [aaeG,aaPo],aaPs)
-; (*: [aaPo,aaeG],aaPq)
-; (aaPq,aaPs)
+; (One [],aaZB)
+; (*: [aake,aaZB],aaZF)
+; (*: [aaZB,aake],aaZD)
+; (aaZD,aaZF)
 
 ; WANTEDS (Thoralf style)
-; (Base ["kg"],aaeG)
+; (Base ["kg"],aake)
 
 (echo "givens-start-cycle-16")
 ; GIVENS (conversions)
-;      [WD] hole{co_aaPA} {2}:: Base "kg" ~ a (CNonCanonical)
+;      [WD] hole{co_aaZM} {2}:: Base "kg" ~ a (CNonCanonical)
 ;  =>  (=
 ;    (store base "kg" one)
-;    aaeG)
+;    aake)
 
 ; GIVENS (names)
-;  aaeG  <=  a
-;  aaPo  <=  fsk_aaPo
-;  aaPq  <=  fsk_aaPq
-;  aaPs  <=  fsk_aaPs
+;  aake  <=  a
+;  aaZB  <=  fsk_aaZB
+;  aaZD  <=  fsk_aaZD
+;  aaZF  <=  fsk_aaZF
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aaPo (Array String Int))
-; (declare-const aaPq (Array String Int))
-; (declare-const aaPs (Array String Int))
-; (declare-const aaeG (Array String Int))
+; (declare-const aaZB (Array String Int))
+; (declare-const aaZD (Array String Int))
+; (declare-const aaZF (Array String Int))
+; (declare-const aake (Array String Int))
 (declare-const
-   aaeG
+   aake
    (Array String Int))
 (declare-const
-   aaPo
+   aaZB
    (Array String Int))
 (declare-const
-   aaPq
+   aaZD
    (Array String Int))
 (declare-const
-   aaPs
+   aaZF
    (Array String Int))
 (assert
    (!
@@ -11944,7 +11706,7 @@
               const
               (Array String Int))
            0)
-         aaPo)
+         aaZB)
       :named
       given-16.1))
 (assert
@@ -11956,9 +11718,9 @@
               (+
                  (Int Int)
                  Int))
-           aaeG
-           aaPo)
-         aaPs)
+           aake
+           aaZB)
+         aaZF)
       :named
       given-16.2))
 (assert
@@ -11970,14 +11732,14 @@
               (+
                  (Int Int)
                  Int))
-           aaPo
-           aaeG)
-         aaPq)
+           aaZB
+           aake)
+         aaZD)
       :named
       given-16.3))
 (assert
    (!
-      (= aaPq aaPs)
+      (= aaZD aaZF)
       :named
       given-16.4))
 (check-sat)
@@ -11985,13 +11747,13 @@
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aaPA} {2}:: Base "kg" ~ a (CNonCanonical)
+;      [WD] hole{co_aaZM} {2}:: Base "kg" ~ a (CNonCanonical)
 ;  =>  (=
 ;    (store base "kg" one)
-;    aaeG)
+;    aake)
 
 ; WANTEDS (names)
-;  aaeG  <=  a
+;  aake  <=  a
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -11999,7 +11761,7 @@
       (not
          (=
             (store base "kg" one)
-            aaeG))
+            aake))
       :named
       wanted-16))
 (check-sat)
@@ -12008,19 +11770,16 @@
 (get-model)
 ; (
 ;   (define-fun
-;      aaPs
+;      aaZB
 ;      ()
 ;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           7719)
-;         "k"
-;         21238))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
-;      aaeG
+;      aake
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -12038,7 +11797,19 @@
 ;      (not
 ;         (=
 ;            (store base "kg" one)
-;            aaeG)))
+;            aake)))
+;   (define-fun
+;      aaZF
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           7719)
+;         "k"
+;         21238))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -12055,7 +11826,7 @@
 ;      given-16.4
 ;      ()
 ;      Bool
-;      (= aaPq aaPs))
+;      (= aaZD aaZF))
 ;   (define-fun
 ;      given-16.3
 ;      ()
@@ -12067,9 +11838,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aaPo
-;           aaeG)
-;         aaPq))
+;           aaZB
+;           aake)
+;         aaZD))
 ;   (define-fun
 ;      given-16.2
 ;      ()
@@ -12081,9 +11852,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           aaeG
-;           aaPo)
-;         aaPs))
+;           aake
+;           aaZB)
+;         aaZF))
 ;   (define-fun
 ;      base
 ;      ()
@@ -12111,18 +11882,9 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         aaPo))
+;         aaZB))
 ;   (define-fun
-;      aaPo
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      aaPq
+;      aaZD
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -12150,7 +11912,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aaPE} {2}:: Base "s" ~ Base "m" (CNonCanonical)
+; [WD] hole{co_aaZQ} {2}:: Base "s" ~ Base "m" (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -12160,7 +11922,7 @@
 
 (echo "givens-start-cycle-17")
 ; GIVENS (conversions)
-;      [WD] hole{co_aaPE} {2}:: Base "s" ~ Base "m" (CNonCanonical)
+;      [WD] hole{co_aaZQ} {2}:: Base "s" ~ Base "m" (CNonCanonical)
 ;  =>  (=
 ;    (store base "s" one)
 ;    (store base "m" one))
@@ -12174,7 +11936,7 @@
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aaPE} {2}:: Base "s" ~ Base "m" (CNonCanonical)
+;      [WD] hole{co_aaZQ} {2}:: Base "s" ~ Base "m" (CNonCanonical)
 ;  =>  (=
 ;    (store base "s" one)
 ;    (store base "m" one))
@@ -12249,7 +12011,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aaPN} {3}:: Base "s" ~ Base "m" (CNonCanonical)
+; [WD] hole{co_aaZZ} {3}:: Base "s" ~ Base "m" (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
@@ -12259,7 +12021,7 @@
 
 (echo "givens-start-cycle-18")
 ; GIVENS (conversions)
-;      [WD] hole{co_aaPN} {3}:: Base "s" ~ Base "m" (CNonCanonical)
+;      [WD] hole{co_aaZZ} {3}:: Base "s" ~ Base "m" (CNonCanonical)
 ;  =>  (=
 ;    (store base "s" one)
 ;    (store base "m" one))
@@ -12273,7 +12035,7 @@
 (echo "givens-finish-cycle-18")
 (echo "wanteds-start-cycle-18")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aaPN} {3}:: Base "s" ~ Base "m" (CNonCanonical)
+;      [WD] hole{co_aaZZ} {3}:: Base "s" ~ Base "m" (CNonCanonical)
 ;  =>  (=
 ;    (store base "s" one)
 ;    (store base "m" one))
@@ -12348,7 +12110,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aaQ4} {1}:: (Base "m" /: Base "s")
+; [WD] hole{co_ab0g} {1}:: (Base "m" /: Base "s")
 ;                          ~ (Base "s" /: Base "m") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -12359,7 +12121,7 @@
 
 (echo "givens-start-cycle-19")
 ; GIVENS (conversions)
-;      [WD] hole{co_aaQ4} {1}:: (Base "m" /: Base "s")
+;      [WD] hole{co_ab0g} {1}:: (Base "m" /: Base "s")
 ;                               ~ (Base "s" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -12388,7 +12150,7 @@
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aaQ4} {1}:: (Base "m" /: Base "s")
+;      [WD] hole{co_ab0g} {1}:: (Base "m" /: Base "s")
 ;                               ~ (Base "s" /: Base "m") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -16707,462 +16469,6 @@
 (assert
    (= enc base))
 (exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
 ; Compiling DelayEq
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -17190,98 +16496,98 @@
 (echo "solver-start-cycle-1")
 
 ; GIVENS (GHC style)
-; [G] co_abPE {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_abOy {35}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOA {34}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOC {33}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOE {32}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOG {31}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOI {30}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOK {29}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOM {28}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOO {27}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOQ {26}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOS {25}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOU {24}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOW {23}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOY {22}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abP0 {21}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abP2 {20}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abP4 {19}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abP6 {18}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abP8 {17}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPa {16}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPc {15}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPe {14}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPg {13}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPi {12}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPk {11}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPm {10}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPo {9}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPq {8}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPs {7}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPu {6}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPw {5}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPy {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPA {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abPC {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOs {3}:: (b *: b) ~ fsk0 (CNonCanonical)
-; [G] co_abOu {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abOq {2}:: (a *: a) ~ fsk0 (CNonCanonical)
-; [G] co_abPG {1}:: fsk0 ~ fsk1 (CNonCanonical)
-; [G] co_abPI {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_abZT {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_abYN {35}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYP {34}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYR {33}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYT {32}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYV {31}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYX {30}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYZ {29}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZ1 {28}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZ3 {27}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZ5 {26}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZ7 {25}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZ9 {24}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZb {23}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZd {22}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZf {21}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZh {20}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZj {19}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZl {18}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZn {17}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZp {16}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZr {15}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZt {14}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZv {13}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZx {12}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZz {11}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZB {10}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZD {9}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZF {8}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZH {7}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZJ {6}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZL {5}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZN {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZP {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abZR {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYH {3}:: (b *: b) ~ fsk0 (CNonCanonical)
+; [G] co_abYJ {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_abYF {2}:: (a *: a) ~ fsk0 (CNonCanonical)
+; [G] co_abZV {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_abZX {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_abPN} {1}:: (a0 *: a0) ~ fsk0 (CNonCanonical)
+; [WD] hole{co_ac02} {1}:: (a0 *: a0) ~ fsk0 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],abPD)
-; (*: [abOf,abOt],abOx)
-; (*: [abOf,abOx],abOz)
-; (*: [abOf,abOz],abOB)
-; (*: [abOf,abOB],abOD)
-; (*: [abOf,abOD],abOF)
-; (*: [abOf,abOF],abOH)
-; (*: [abOf,abOH],abOJ)
-; (*: [abOf,abOJ],abOL)
-; (*: [abOf,abOL],abON)
-; (*: [abOf,abON],abOP)
-; (*: [abOf,abOP],abOR)
-; (*: [abOf,abOR],abOT)
-; (*: [abOf,abOT],abOV)
-; (*: [abOf,abOV],abOX)
-; (*: [abOf,abOX],abOZ)
-; (*: [abOf,abOZ],abP1)
-; (*: [abOf,abP1],abP3)
-; (*: [abOf,abP3],abP5)
-; (*: [abOf,abP5],abP7)
-; (*: [abOf,abP7],abP9)
-; (*: [abOf,abP9],abPb)
-; (*: [abOf,abPb],abPd)
-; (*: [abOf,abPd],abPf)
-; (*: [abOf,abPf],abPh)
-; (*: [abOf,abPh],abPj)
-; (*: [abOf,abPj],abPl)
-; (*: [abOf,abPl],abPn)
-; (*: [abOf,abPn],abPp)
-; (*: [abOf,abPp],abPr)
-; (*: [abOf,abPr],abPt)
-; (*: [abOf,abPt],abPv)
-; (*: [abOf,abPv],abPx)
-; (*: [abOf,abPx],abPz)
-; (*: [abOf,abPz],abPB)
-; (*: [abOf,abOf],abOr)
-; (*: [abOf,abOr],abOt)
-; (*: [abOe,abOe],abOp)
-; (abPB,abPD)
-; (abOp,abOt)
+; (One [],abZS)
+; (*: [abYu,abYI],abYM)
+; (*: [abYu,abYM],abYO)
+; (*: [abYu,abYO],abYQ)
+; (*: [abYu,abYQ],abYS)
+; (*: [abYu,abYS],abYU)
+; (*: [abYu,abYU],abYW)
+; (*: [abYu,abYW],abYY)
+; (*: [abYu,abYY],abZ0)
+; (*: [abYu,abZ0],abZ2)
+; (*: [abYu,abZ2],abZ4)
+; (*: [abYu,abZ4],abZ6)
+; (*: [abYu,abZ6],abZ8)
+; (*: [abYu,abZ8],abZa)
+; (*: [abYu,abZa],abZc)
+; (*: [abYu,abZc],abZe)
+; (*: [abYu,abZe],abZg)
+; (*: [abYu,abZg],abZi)
+; (*: [abYu,abZi],abZk)
+; (*: [abYu,abZk],abZm)
+; (*: [abYu,abZm],abZo)
+; (*: [abYu,abZo],abZq)
+; (*: [abYu,abZq],abZs)
+; (*: [abYu,abZs],abZu)
+; (*: [abYu,abZu],abZw)
+; (*: [abYu,abZw],abZy)
+; (*: [abYu,abZy],abZA)
+; (*: [abYu,abZA],abZC)
+; (*: [abYu,abZC],abZE)
+; (*: [abYu,abZE],abZG)
+; (*: [abYu,abZG],abZI)
+; (*: [abYu,abZI],abZK)
+; (*: [abYu,abZK],abZM)
+; (*: [abYu,abZM],abZO)
+; (*: [abYu,abZO],abZQ)
+; (*: [abYu,abYu],abYG)
+; (*: [abYu,abYG],abYI)
+; (*: [abYt,abYt],abYE)
+; (abZQ,abZS)
+; (abYE,abYI)
 
 ; WANTEDS (Thoralf style)
-; (*: [abOi,abOi],abOt)
+; (*: [abYx,abYx],abYI)
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] hole{co_abPN} {1}:: (a0 *: a0) ~ fsk0 (CNonCanonical)
+;      [WD] hole{co_ac02} {1}:: (a0 *: a0) ~ fsk0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -17289,213 +16595,213 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abOi
-;      abOi)
-;    abOt)
+;      abYx
+;      abYx)
+;    abYI)
 
 ; GIVENS (names)
-;  abOe  <=  a
-;  abOf  <=  b
-;  abOp  <=  fsk_abOp
-;  abOr  <=  fsk_abOr
-;  abOt  <=  fsk_abOt
-;  abOx  <=  fsk_abOx
-;  abOz  <=  fsk_abOz
-;  abOB  <=  fsk_abOB
-;  abOD  <=  fsk_abOD
-;  abOF  <=  fsk_abOF
-;  abOH  <=  fsk_abOH
-;  abOJ  <=  fsk_abOJ
-;  abOL  <=  fsk_abOL
-;  abON  <=  fsk_abON
-;  abOP  <=  fsk_abOP
-;  abOR  <=  fsk_abOR
-;  abOT  <=  fsk_abOT
-;  abOV  <=  fsk_abOV
-;  abOX  <=  fsk_abOX
-;  abOZ  <=  fsk_abOZ
-;  abP1  <=  fsk_abP1
-;  abP3  <=  fsk_abP3
-;  abP5  <=  fsk_abP5
-;  abP7  <=  fsk_abP7
-;  abP9  <=  fsk_abP9
-;  abPb  <=  fsk_abPb
-;  abPd  <=  fsk_abPd
-;  abPf  <=  fsk_abPf
-;  abPh  <=  fsk_abPh
-;  abPj  <=  fsk_abPj
-;  abPl  <=  fsk_abPl
-;  abPn  <=  fsk_abPn
-;  abPp  <=  fsk_abPp
-;  abPr  <=  fsk_abPr
-;  abPt  <=  fsk_abPt
-;  abPv  <=  fsk_abPv
-;  abPx  <=  fsk_abPx
-;  abPz  <=  fsk_abPz
-;  abPB  <=  fsk_abPB
-;  abPD  <=  fsk_abPD
+;  abYt  <=  a
+;  abYu  <=  b
+;  abYE  <=  fsk_abYE
+;  abYG  <=  fsk_abYG
+;  abYI  <=  fsk_abYI
+;  abYM  <=  fsk_abYM
+;  abYO  <=  fsk_abYO
+;  abYQ  <=  fsk_abYQ
+;  abYS  <=  fsk_abYS
+;  abYU  <=  fsk_abYU
+;  abYW  <=  fsk_abYW
+;  abYY  <=  fsk_abYY
+;  abZ0  <=  fsk_abZ0
+;  abZ2  <=  fsk_abZ2
+;  abZ4  <=  fsk_abZ4
+;  abZ6  <=  fsk_abZ6
+;  abZ8  <=  fsk_abZ8
+;  abZa  <=  fsk_abZa
+;  abZc  <=  fsk_abZc
+;  abZe  <=  fsk_abZe
+;  abZg  <=  fsk_abZg
+;  abZi  <=  fsk_abZi
+;  abZk  <=  fsk_abZk
+;  abZm  <=  fsk_abZm
+;  abZo  <=  fsk_abZo
+;  abZq  <=  fsk_abZq
+;  abZs  <=  fsk_abZs
+;  abZu  <=  fsk_abZu
+;  abZw  <=  fsk_abZw
+;  abZy  <=  fsk_abZy
+;  abZA  <=  fsk_abZA
+;  abZC  <=  fsk_abZC
+;  abZE  <=  fsk_abZE
+;  abZG  <=  fsk_abZG
+;  abZI  <=  fsk_abZI
+;  abZK  <=  fsk_abZK
+;  abZM  <=  fsk_abZM
+;  abZO  <=  fsk_abZO
+;  abZQ  <=  fsk_abZQ
+;  abZS  <=  fsk_abZS
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const abOB (Array String Int))
-; (declare-const abOD (Array String Int))
-; (declare-const abOF (Array String Int))
-; (declare-const abOH (Array String Int))
-; (declare-const abOJ (Array String Int))
-; (declare-const abOL (Array String Int))
-; (declare-const abON (Array String Int))
-; (declare-const abOP (Array String Int))
-; (declare-const abOR (Array String Int))
-; (declare-const abOT (Array String Int))
-; (declare-const abOV (Array String Int))
-; (declare-const abOX (Array String Int))
-; (declare-const abOZ (Array String Int))
-; (declare-const abOe (Array String Int))
-; (declare-const abOf (Array String Int))
-; (declare-const abOp (Array String Int))
-; (declare-const abOr (Array String Int))
-; (declare-const abOt (Array String Int))
-; (declare-const abOx (Array String Int))
-; (declare-const abOz (Array String Int))
-; (declare-const abP1 (Array String Int))
-; (declare-const abP3 (Array String Int))
-; (declare-const abP5 (Array String Int))
-; (declare-const abP7 (Array String Int))
-; (declare-const abP9 (Array String Int))
-; (declare-const abPB (Array String Int))
-; (declare-const abPD (Array String Int))
-; (declare-const abPb (Array String Int))
-; (declare-const abPd (Array String Int))
-; (declare-const abPf (Array String Int))
-; (declare-const abPh (Array String Int))
-; (declare-const abPj (Array String Int))
-; (declare-const abPl (Array String Int))
-; (declare-const abPn (Array String Int))
-; (declare-const abPp (Array String Int))
-; (declare-const abPr (Array String Int))
-; (declare-const abPt (Array String Int))
-; (declare-const abPv (Array String Int))
-; (declare-const abPx (Array String Int))
-; (declare-const abPz (Array String Int))
+; (declare-const abYE (Array String Int))
+; (declare-const abYG (Array String Int))
+; (declare-const abYI (Array String Int))
+; (declare-const abYM (Array String Int))
+; (declare-const abYO (Array String Int))
+; (declare-const abYQ (Array String Int))
+; (declare-const abYS (Array String Int))
+; (declare-const abYU (Array String Int))
+; (declare-const abYW (Array String Int))
+; (declare-const abYY (Array String Int))
+; (declare-const abYt (Array String Int))
+; (declare-const abYu (Array String Int))
+; (declare-const abZ0 (Array String Int))
+; (declare-const abZ2 (Array String Int))
+; (declare-const abZ4 (Array String Int))
+; (declare-const abZ6 (Array String Int))
+; (declare-const abZ8 (Array String Int))
+; (declare-const abZA (Array String Int))
+; (declare-const abZC (Array String Int))
+; (declare-const abZE (Array String Int))
+; (declare-const abZG (Array String Int))
+; (declare-const abZI (Array String Int))
+; (declare-const abZK (Array String Int))
+; (declare-const abZM (Array String Int))
+; (declare-const abZO (Array String Int))
+; (declare-const abZQ (Array String Int))
+; (declare-const abZS (Array String Int))
+; (declare-const abZa (Array String Int))
+; (declare-const abZc (Array String Int))
+; (declare-const abZe (Array String Int))
+; (declare-const abZg (Array String Int))
+; (declare-const abZi (Array String Int))
+; (declare-const abZk (Array String Int))
+; (declare-const abZm (Array String Int))
+; (declare-const abZo (Array String Int))
+; (declare-const abZq (Array String Int))
+; (declare-const abZs (Array String Int))
+; (declare-const abZu (Array String Int))
+; (declare-const abZw (Array String Int))
+; (declare-const abZy (Array String Int))
 (declare-const
-   abOe
+   abYt
    (Array String Int))
 (declare-const
-   abOf
+   abYu
    (Array String Int))
 (declare-const
-   abOp
+   abYE
    (Array String Int))
 (declare-const
-   abOr
+   abYG
    (Array String Int))
 (declare-const
-   abOt
+   abYI
    (Array String Int))
 (declare-const
-   abOx
+   abYM
    (Array String Int))
 (declare-const
-   abOz
+   abYO
    (Array String Int))
 (declare-const
-   abOB
+   abYQ
    (Array String Int))
 (declare-const
-   abOD
+   abYS
    (Array String Int))
 (declare-const
-   abOF
+   abYU
    (Array String Int))
 (declare-const
-   abOH
+   abYW
    (Array String Int))
 (declare-const
-   abOJ
+   abYY
    (Array String Int))
 (declare-const
-   abOL
+   abZ0
    (Array String Int))
 (declare-const
-   abON
+   abZ2
    (Array String Int))
 (declare-const
-   abOP
+   abZ4
    (Array String Int))
 (declare-const
-   abOR
+   abZ6
    (Array String Int))
 (declare-const
-   abOT
+   abZ8
    (Array String Int))
 (declare-const
-   abOV
+   abZa
    (Array String Int))
 (declare-const
-   abOX
+   abZc
    (Array String Int))
 (declare-const
-   abOZ
+   abZe
    (Array String Int))
 (declare-const
-   abP1
+   abZg
    (Array String Int))
 (declare-const
-   abP3
+   abZi
    (Array String Int))
 (declare-const
-   abP5
+   abZk
    (Array String Int))
 (declare-const
-   abP7
+   abZm
    (Array String Int))
 (declare-const
-   abP9
+   abZo
    (Array String Int))
 (declare-const
-   abPb
+   abZq
    (Array String Int))
 (declare-const
-   abPd
+   abZs
    (Array String Int))
 (declare-const
-   abPf
+   abZu
    (Array String Int))
 (declare-const
-   abPh
+   abZw
    (Array String Int))
 (declare-const
-   abPj
+   abZy
    (Array String Int))
 (declare-const
-   abPl
+   abZA
    (Array String Int))
 (declare-const
-   abPn
+   abZC
    (Array String Int))
 (declare-const
-   abPp
+   abZE
    (Array String Int))
 (declare-const
-   abPr
+   abZG
    (Array String Int))
 (declare-const
-   abPt
+   abZI
    (Array String Int))
 (declare-const
-   abPv
+   abZK
    (Array String Int))
 (declare-const
-   abPx
+   abZM
    (Array String Int))
 (declare-const
-   abPz
+   abZO
    (Array String Int))
 (declare-const
-   abPB
+   abZQ
    (Array String Int))
 (declare-const
-   abPD
+   abZS
    (Array String Int))
 (assert
    (!
@@ -17505,7 +16811,7 @@
               const
               (Array String Int))
            0)
-         abPD)
+         abZS)
       :named
       given-1.1))
 (assert
@@ -17517,9 +16823,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOt)
-         abOx)
+           abYu
+           abYI)
+         abYM)
       :named
       given-1.2))
 (assert
@@ -17531,9 +16837,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOx)
-         abOz)
+           abYu
+           abYM)
+         abYO)
       :named
       given-1.3))
 (assert
@@ -17545,9 +16851,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOz)
-         abOB)
+           abYu
+           abYO)
+         abYQ)
       :named
       given-1.4))
 (assert
@@ -17559,9 +16865,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOB)
-         abOD)
+           abYu
+           abYQ)
+         abYS)
       :named
       given-1.5))
 (assert
@@ -17573,9 +16879,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOD)
-         abOF)
+           abYu
+           abYS)
+         abYU)
       :named
       given-1.6))
 (assert
@@ -17587,9 +16893,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOF)
-         abOH)
+           abYu
+           abYU)
+         abYW)
       :named
       given-1.7))
 (assert
@@ -17601,9 +16907,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOH)
-         abOJ)
+           abYu
+           abYW)
+         abYY)
       :named
       given-1.8))
 (assert
@@ -17615,9 +16921,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOJ)
-         abOL)
+           abYu
+           abYY)
+         abZ0)
       :named
       given-1.9))
 (assert
@@ -17629,9 +16935,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOL)
-         abON)
+           abYu
+           abZ0)
+         abZ2)
       :named
       given-1.10))
 (assert
@@ -17643,9 +16949,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abON)
-         abOP)
+           abYu
+           abZ2)
+         abZ4)
       :named
       given-1.11))
 (assert
@@ -17657,9 +16963,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOP)
-         abOR)
+           abYu
+           abZ4)
+         abZ6)
       :named
       given-1.12))
 (assert
@@ -17671,9 +16977,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOR)
-         abOT)
+           abYu
+           abZ6)
+         abZ8)
       :named
       given-1.13))
 (assert
@@ -17685,9 +16991,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOT)
-         abOV)
+           abYu
+           abZ8)
+         abZa)
       :named
       given-1.14))
 (assert
@@ -17699,9 +17005,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOV)
-         abOX)
+           abYu
+           abZa)
+         abZc)
       :named
       given-1.15))
 (assert
@@ -17713,9 +17019,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOX)
-         abOZ)
+           abYu
+           abZc)
+         abZe)
       :named
       given-1.16))
 (assert
@@ -17727,9 +17033,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOZ)
-         abP1)
+           abYu
+           abZe)
+         abZg)
       :named
       given-1.17))
 (assert
@@ -17741,9 +17047,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abP1)
-         abP3)
+           abYu
+           abZg)
+         abZi)
       :named
       given-1.18))
 (assert
@@ -17755,9 +17061,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abP3)
-         abP5)
+           abYu
+           abZi)
+         abZk)
       :named
       given-1.19))
 (assert
@@ -17769,9 +17075,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abP5)
-         abP7)
+           abYu
+           abZk)
+         abZm)
       :named
       given-1.20))
 (assert
@@ -17783,9 +17089,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abP7)
-         abP9)
+           abYu
+           abZm)
+         abZo)
       :named
       given-1.21))
 (assert
@@ -17797,9 +17103,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abP9)
-         abPb)
+           abYu
+           abZo)
+         abZq)
       :named
       given-1.22))
 (assert
@@ -17811,9 +17117,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPb)
-         abPd)
+           abYu
+           abZq)
+         abZs)
       :named
       given-1.23))
 (assert
@@ -17825,9 +17131,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPd)
-         abPf)
+           abYu
+           abZs)
+         abZu)
       :named
       given-1.24))
 (assert
@@ -17839,9 +17145,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPf)
-         abPh)
+           abYu
+           abZu)
+         abZw)
       :named
       given-1.25))
 (assert
@@ -17853,9 +17159,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPh)
-         abPj)
+           abYu
+           abZw)
+         abZy)
       :named
       given-1.26))
 (assert
@@ -17867,9 +17173,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPj)
-         abPl)
+           abYu
+           abZy)
+         abZA)
       :named
       given-1.27))
 (assert
@@ -17881,9 +17187,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPl)
-         abPn)
+           abYu
+           abZA)
+         abZC)
       :named
       given-1.28))
 (assert
@@ -17895,9 +17201,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPn)
-         abPp)
+           abYu
+           abZC)
+         abZE)
       :named
       given-1.29))
 (assert
@@ -17909,9 +17215,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPp)
-         abPr)
+           abYu
+           abZE)
+         abZG)
       :named
       given-1.30))
 (assert
@@ -17923,9 +17229,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPr)
-         abPt)
+           abYu
+           abZG)
+         abZI)
       :named
       given-1.31))
 (assert
@@ -17937,9 +17243,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPt)
-         abPv)
+           abYu
+           abZI)
+         abZK)
       :named
       given-1.32))
 (assert
@@ -17951,9 +17257,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPv)
-         abPx)
+           abYu
+           abZK)
+         abZM)
       :named
       given-1.33))
 (assert
@@ -17965,9 +17271,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPx)
-         abPz)
+           abYu
+           abZM)
+         abZO)
       :named
       given-1.34))
 (assert
@@ -17979,9 +17285,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abPz)
-         abPB)
+           abYu
+           abZO)
+         abZQ)
       :named
       given-1.35))
 (assert
@@ -17993,9 +17299,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOf)
-         abOr)
+           abYu
+           abYu)
+         abYG)
       :named
       given-1.36))
 (assert
@@ -18007,9 +17313,9 @@
               (+
                  (Int Int)
                  Int))
-           abOf
-           abOr)
-         abOt)
+           abYu
+           abYG)
+         abYI)
       :named
       given-1.37))
 (assert
@@ -18021,19 +17327,19 @@
               (+
                  (Int Int)
                  Int))
-           abOe
-           abOe)
-         abOp)
+           abYt
+           abYt)
+         abYE)
       :named
       given-1.38))
 (assert
    (!
-      (= abPB abPD)
+      (= abZQ abZS)
       :named
       given-1.39))
 (assert
    (!
-      (= abOp abOt)
+      (= abYE abYI)
       :named
       given-1.40))
 (check-sat)
@@ -18041,7 +17347,7 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] hole{co_abPN} {1}:: (a0 *: a0) ~ fsk0 (CNonCanonical)
+;      [WD] hole{co_ac02} {1}:: (a0 *: a0) ~ fsk0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -18049,18 +17355,18 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abOi
-;      abOi)
-;    abOt)
+;      abYx
+;      abYx)
+;    abYI)
 
 ; WANTEDS (names)
-;  abOi  <=  a_abOi
-;  abOt  <=  fsk_abOt
+;  abYx  <=  a_abYx
+;  abYI  <=  fsk_abYI
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const abOi (Array String Int))
+; (declare-const abYx (Array String Int))
 (declare-const
-   abOi
+   abYx
    (Array String Int))
 (assert
    (!
@@ -18072,9 +17378,9 @@
                  (+
                     (Int Int)
                     Int))
-              abOi
-              abOi)
-            abOt))
+              abYx
+              abYx)
+            abYI))
       :named
       wanted-1))
 (check-sat)
@@ -18083,7 +17389,7 @@
 (get-model)
 ; (
 ;   (define-fun
-;      abOF
+;      abZM
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18092,7 +17398,25 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abOJ
+;      abZE
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abZm
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abZ8
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18111,9 +17435,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPx)
-;         abPz))
+;           abYu
+;           abZM)
+;         abZO))
+;   (define-fun
+;      abYU
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-1.28
 ;      ()
@@ -18125,18 +17458,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPl)
-;         abPn))
-;   (define-fun
-;      abP7
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           abYu
+;           abZA)
+;         abZC))
 ;   (define-fun
 ;      given-1.19
 ;      ()
@@ -18148,9 +17472,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abP3)
-;         abP5))
+;           abYu
+;           abZi)
+;         abZk))
 ;   (define-fun
 ;      given-1.18
 ;      ()
@@ -18162,9 +17486,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abP1)
-;         abP3))
+;           abYu
+;           abZg)
+;         abZi))
 ;   (define-fun
 ;      given-1.23
 ;      ()
@@ -18176,9 +17500,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPb)
-;         abPd))
+;           abYu
+;           abZq)
+;         abZs))
 ;   (define-fun
 ;      given-1.3
 ;      ()
@@ -18190,11 +17514,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOx)
-;         abOz))
+;           abYu
+;           abYM)
+;         abYO))
 ;   (define-fun
-;      abPz
+;      abZ6
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18203,7 +17527,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abOp
+;      abZq
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18212,34 +17536,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abP9
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abOR
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abPB
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abOV
+;      abYQ
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18258,9 +17555,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abP7)
-;         abP9))
+;           abYu
+;           abZm)
+;         abZo))
 ;   (define-fun
 ;      given-1.6
 ;      ()
@@ -18272,16 +17569,16 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOD)
-;         abOF))
+;           abYu
+;           abYS)
+;         abYU))
 ;   (define-fun
 ;      one
 ;      ()
 ;      Int
 ;      1)
 ;   (define-fun
-;      abOH
+;      abZi
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18290,7 +17587,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abOz
+;      abZk
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18299,7 +17596,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abP1
+;      abZC
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18308,7 +17605,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abPh
+;      abYS
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18317,25 +17614,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abPD
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abOZ
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abPp
+;      abZa
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18354,9 +17633,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPf)
-;         abPh))
+;           abYu
+;           abZu)
+;         abZw))
 ;   (define-fun
 ;      given-1.37
 ;      ()
@@ -18368,9 +17647,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOr)
-;         abOt))
+;           abYu
+;           abYG)
+;         abYI))
 ;   (define-fun
 ;      given-1.36
 ;      ()
@@ -18382,9 +17661,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOf)
-;         abOr))
+;           abYu
+;           abYu)
+;         abYG))
 ;   (define-fun
 ;      given-1.4
 ;      ()
@@ -18396,18 +17675,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOz)
-;         abOB))
-;   (define-fun
-;      abOL
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           abYu
+;           abYO)
+;         abYQ))
 ;   (define-fun
 ;      given-1.32
 ;      ()
@@ -18419,9 +17689,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPt)
-;         abPv))
+;           abYu
+;           abZI)
+;         abZK))
 ;   (define-fun
 ;      wanted-1
 ;      ()
@@ -18434,9 +17704,18 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              abOi
-;              abOi)
-;            abOt)))
+;              abYx
+;              abYx)
+;            abYI)))
+;   (define-fun
+;      abZK
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-1.29
 ;      ()
@@ -18448,11 +17727,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPn)
-;         abPp))
+;           abYu
+;           abZC)
+;         abZE))
 ;   (define-fun
-;      abOB
+;      abZA
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18461,7 +17740,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abOr
+;      abZy
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18470,25 +17749,19 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abON
+;      abYx
 ;      ()
 ;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           38)
+;         "!0!"
+;         (- 1)))
 ;   (define-fun
-;      abOP
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abPb
+;      abZo
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18507,9 +17780,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPj)
-;         abPl))
+;           abYu
+;           abZy)
+;         abZA))
 ;   (define-fun
 ;      given-1.12
 ;      ()
@@ -18521,18 +17794,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOP)
-;         abOR))
-;   (define-fun
-;      abPr
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           abYu
+;           abZ4)
+;         abZ6))
 ;   (define-fun
 ;      given-1.11
 ;      ()
@@ -18544,9 +17808,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abON)
-;         abOP))
+;           abYu
+;           abZ2)
+;         abZ4))
 ;   (define-fun
 ;      given-1.10
 ;      ()
@@ -18558,9 +17822,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOL)
-;         abON))
+;           abYu
+;           abZ0)
+;         abZ2))
 ;   (define-fun
 ;      given-1.2
 ;      ()
@@ -18572,9 +17836,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOt)
-;         abOx))
+;           abYu
+;           abYI)
+;         abYM))
 ;   (define-fun
 ;      given-1.17
 ;      ()
@@ -18586,32 +17850,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOZ)
-;         abP1))
-;   (define-fun
-;      abOx
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-1.7
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           abOf
-;           abOF)
-;         abOH))
+;           abYu
+;           abZe)
+;         abZg))
 ;   (define-fun
 ;      given-1.5
 ;      ()
@@ -18623,11 +17864,34 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOB)
-;         abOD))
+;           abYu
+;           abYQ)
+;         abYS))
 ;   (define-fun
-;      abOD
+;      given-1.7
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           abYu
+;           abYU)
+;         abYW))
+;   (define-fun
+;      abZ0
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abZc
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18646,27 +17910,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOX)
-;         abOZ))
-;   (define-fun
-;      abPf
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abPn
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           abYu
+;           abZc)
+;         abZe))
 ;   (define-fun
 ;      given-1.15
 ;      ()
@@ -18678,9 +17924,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOV)
-;         abOX))
+;           abYu
+;           abZa)
+;         abZc))
 ;   (define-fun
 ;      given-1.9
 ;      ()
@@ -18692,11 +17938,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOJ)
-;         abOL))
+;           abYu
+;           abYY)
+;         abZ0))
 ;   (define-fun
-;      abOe
+;      abZG
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18708,7 +17954,25 @@
 ;      given-1.40
 ;      ()
 ;      Bool
-;      (= abOp abOt))
+;      (= abYE abYI))
+;   (define-fun
+;      abZe
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abYG
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-1.13
 ;      ()
@@ -18720,9 +17984,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOR)
-;         abOT))
+;           abYu
+;           abZ6)
+;         abZ8))
 ;   (define-fun
 ;      given-1.33
 ;      ()
@@ -18734,9 +17998,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPv)
-;         abPx))
+;           abYu
+;           abZK)
+;         abZM))
 ;   (define-fun
 ;      given-1.35
 ;      ()
@@ -18748,9 +18012,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPz)
-;         abPB))
+;           abYu
+;           abZO)
+;         abZQ))
+;   (define-fun
+;      abZs
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-1.24
 ;      ()
@@ -18762,11 +18035,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPd)
-;         abPf))
+;           abYu
+;           abZs)
+;         abZu))
 ;   (define-fun
-;      abOT
+;      abYY
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18775,7 +18048,34 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abOt
+;      abZ4
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abYt
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abZu
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abZg
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18794,9 +18094,36 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOT)
-;         abOV))
+;           abYu
+;           abZ8)
+;         abZa))
+;   (define-fun
+;      abZS
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abYO
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      abZI
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -18817,9 +18144,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abOH)
-;         abOJ))
+;           abYu
+;           abYW)
+;         abYY))
 ;   (define-fun
 ;      base
 ;      ()
@@ -18833,9 +18160,9 @@
 ;      given-1.39
 ;      ()
 ;      Bool
-;      (= abPB abPD))
+;      (= abZQ abZS))
 ;   (define-fun
-;      abP3
+;      abYW
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18854,11 +18181,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abP5)
-;         abP7))
+;           abYu
+;           abZk)
+;         abZm))
 ;   (define-fun
-;      abP5
+;      abZw
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18867,7 +18194,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abPl
+;      abZO
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18876,7 +18203,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abPt
+;      abZQ
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18885,7 +18212,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abPv
+;      abYI
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18904,9 +18231,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOe
-;           abOe)
-;         abOp))
+;           abYt
+;           abYt)
+;         abYE))
 ;   (define-fun
 ;      given-1.31
 ;      ()
@@ -18918,11 +18245,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPr)
-;         abPt))
+;           abYu
+;           abZG)
+;         abZI))
 ;   (define-fun
-;      abOX
+;      abZ2
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18940,9 +18267,9 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         abPD))
+;         abZS))
 ;   (define-fun
-;      abOf
+;      abYE
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18951,7 +18278,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abPd
+;      abYu
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -18959,27 +18286,6 @@
 ;           const
 ;           (Array String Int))
 ;        0))
-;   (define-fun
-;      abPx
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      abOi
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           38)
-;         "!0!"
-;         (- 1)))
 ;   (define-fun
 ;      given-1.30
 ;      ()
@@ -18991,9 +18297,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPp)
-;         abPr))
+;           abYu
+;           abZE)
+;         abZG))
+;   (define-fun
+;      abYM
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      given-1.26
 ;      ()
@@ -19005,18 +18320,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abPh)
-;         abPj))
-;   (define-fun
-;      abPj
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
+;           abYu
+;           abZw)
+;         abZy))
 ;   (define-fun
 ;      given-1.22
 ;      ()
@@ -19028,9 +18334,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abOf
-;           abP9)
-;         abPb))
+;           abYu
+;           abZo)
+;         abZq))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -19045,39 +18351,39 @@
 (echo "solver-start-cycle-2")
 
 ; GIVENS (GHC style)
-; [G] co_abQn {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_abQh {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abQj {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abQl {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abQb {3}:: (b *: b) ~ fsk0 (CNonCanonical)
-; [G] co_abQd {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_abQ9 {2}:: (a *: a) ~ fsk0 (CNonCanonical)
-; [G] co_abQp {1}:: fsk0 ~ fsk1 (CNonCanonical)
-; [G] co_abQr {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_ac0D {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_ac0x {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ac0z {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ac0B {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ac0r {3}:: (b *: b) ~ fsk0 (CNonCanonical)
+; [G] co_ac0t {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ac0p {2}:: (a *: a) ~ fsk0 (CNonCanonical)
+; [G] co_ac0F {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_ac0H {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_abQz} {2}:: (b0 *: (b0 *: b0)) ~ fsk0 (CNonCanonical)
-; [WD] hole{co_abQH} {1}:: (b0 *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
+; [WD] hole{co_ac0P} {2}:: (b0 *: (b0 *: b0)) ~ fsk0 (CNonCanonical)
+; [WD] hole{co_ac0X} {1}:: (b0 *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                          ~ fsk0 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],abQm)
-; (*: [abPY,abQc],abQg)
-; (*: [abPY,abQg],abQi)
-; (*: [abPY,abQi],abQk)
-; (*: [abPY,abPY],abQa)
-; (*: [abPY,abQa],abQc)
-; (*: [abPX,abPX],abQ8)
-; (abQk,abQm)
-; (abQ8,abQc)
+; (One [],ac0C)
+; (*: [ac0e,ac0s],ac0w)
+; (*: [ac0e,ac0w],ac0y)
+; (*: [ac0e,ac0y],ac0A)
+; (*: [ac0e,ac0e],ac0q)
+; (*: [ac0e,ac0q],ac0s)
+; (*: [ac0d,ac0d],ac0o)
+; (ac0A,ac0C)
+; (ac0o,ac0s)
 
 ; WANTEDS (Thoralf style)
-; (*: [abQ2,*: [abQ2,abQ2]],abQc)
-; (*: [abQ2,*: [abQ2,*: [abQ2,*: [abQ2,*: [abQ2,abQ2]]]]],abQm)
+; (*: [ac0i,*: [ac0i,ac0i]],ac0s)
+; (*: [ac0i,*: [ac0i,*: [ac0i,*: [ac0i,*: [ac0i,ac0i]]]]],ac0C)
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_abQz} {2}:: (b0 *: (b0 *: b0))
+;      [WD] hole{co_ac0P} {2}:: (b0 *: (b0 *: b0))
 ;                               ~ fsk0 (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -19086,18 +18392,18 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abQ2
+;      ac0i
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        abQ2
-;        abQ2))
-;    abQc)
+;        ac0i
+;        ac0i))
+;    ac0s)
 
-;      [WD] hole{co_abQH} {1}:: (b0
+;      [WD] hole{co_ac0X} {1}:: (b0
 ;                                *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                               ~ fsk0 (CNonCanonical)
 ;  =>  (=
@@ -19107,86 +18413,86 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abQ2
+;      ac0i
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        abQ2
+;        ac0i
 ;        (
 ;          (_
 ;             map
 ;             (+
 ;                (Int Int)
 ;                Int))
-;          abQ2
+;          ac0i
 ;          (
 ;            (_
 ;               map
 ;               (+
 ;                  (Int Int)
 ;                  Int))
-;            abQ2
+;            ac0i
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              abQ2
-;              abQ2)))))
-;    abQm)
+;              ac0i
+;              ac0i)))))
+;    ac0C)
 
 ; GIVENS (names)
-;  abPX  <=  a
-;  abPY  <=  b
-;  abQ8  <=  fsk_abQ8
-;  abQa  <=  fsk_abQa
-;  abQc  <=  fsk_abQc
-;  abQg  <=  fsk_abQg
-;  abQi  <=  fsk_abQi
-;  abQk  <=  fsk_abQk
-;  abQm  <=  fsk_abQm
+;  ac0d  <=  a
+;  ac0e  <=  b
+;  ac0o  <=  fsk_ac0o
+;  ac0q  <=  fsk_ac0q
+;  ac0s  <=  fsk_ac0s
+;  ac0w  <=  fsk_ac0w
+;  ac0y  <=  fsk_ac0y
+;  ac0A  <=  fsk_ac0A
+;  ac0C  <=  fsk_ac0C
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const abPX (Array String Int))
-; (declare-const abPY (Array String Int))
-; (declare-const abQ8 (Array String Int))
-; (declare-const abQa (Array String Int))
-; (declare-const abQc (Array String Int))
-; (declare-const abQg (Array String Int))
-; (declare-const abQi (Array String Int))
-; (declare-const abQk (Array String Int))
-; (declare-const abQm (Array String Int))
+; (declare-const ac0A (Array String Int))
+; (declare-const ac0C (Array String Int))
+; (declare-const ac0d (Array String Int))
+; (declare-const ac0e (Array String Int))
+; (declare-const ac0o (Array String Int))
+; (declare-const ac0q (Array String Int))
+; (declare-const ac0s (Array String Int))
+; (declare-const ac0w (Array String Int))
+; (declare-const ac0y (Array String Int))
 (declare-const
-   abPX
+   ac0d
    (Array String Int))
 (declare-const
-   abPY
+   ac0e
    (Array String Int))
 (declare-const
-   abQ8
+   ac0o
    (Array String Int))
 (declare-const
-   abQa
+   ac0q
    (Array String Int))
 (declare-const
-   abQc
+   ac0s
    (Array String Int))
 (declare-const
-   abQg
+   ac0w
    (Array String Int))
 (declare-const
-   abQi
+   ac0y
    (Array String Int))
 (declare-const
-   abQk
+   ac0A
    (Array String Int))
 (declare-const
-   abQm
+   ac0C
    (Array String Int))
 (assert
    (!
@@ -19196,7 +18502,7 @@
               const
               (Array String Int))
            0)
-         abQm)
+         ac0C)
       :named
       given-2.1))
 (assert
@@ -19208,9 +18514,9 @@
               (+
                  (Int Int)
                  Int))
-           abPY
-           abQc)
-         abQg)
+           ac0e
+           ac0s)
+         ac0w)
       :named
       given-2.2))
 (assert
@@ -19222,9 +18528,9 @@
               (+
                  (Int Int)
                  Int))
-           abPY
-           abQg)
-         abQi)
+           ac0e
+           ac0w)
+         ac0y)
       :named
       given-2.3))
 (assert
@@ -19236,9 +18542,9 @@
               (+
                  (Int Int)
                  Int))
-           abPY
-           abQi)
-         abQk)
+           ac0e
+           ac0y)
+         ac0A)
       :named
       given-2.4))
 (assert
@@ -19250,9 +18556,9 @@
               (+
                  (Int Int)
                  Int))
-           abPY
-           abPY)
-         abQa)
+           ac0e
+           ac0e)
+         ac0q)
       :named
       given-2.5))
 (assert
@@ -19264,9 +18570,9 @@
               (+
                  (Int Int)
                  Int))
-           abPY
-           abQa)
-         abQc)
+           ac0e
+           ac0q)
+         ac0s)
       :named
       given-2.6))
 (assert
@@ -19278,19 +18584,19 @@
               (+
                  (Int Int)
                  Int))
-           abPX
-           abPX)
-         abQ8)
+           ac0d
+           ac0d)
+         ac0o)
       :named
       given-2.7))
 (assert
    (!
-      (= abQk abQm)
+      (= ac0A ac0C)
       :named
       given-2.8))
 (assert
    (!
-      (= abQ8 abQc)
+      (= ac0o ac0s)
       :named
       given-2.9))
 (check-sat)
@@ -19298,7 +18604,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_abQz} {2}:: (b0 *: (b0 *: b0))
+;      [WD] hole{co_ac0P} {2}:: (b0 *: (b0 *: b0))
 ;                               ~ fsk0 (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -19307,18 +18613,18 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abQ2
+;      ac0i
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        abQ2
-;        abQ2))
-;    abQc)
+;        ac0i
+;        ac0i))
+;    ac0s)
 
-;      [WD] hole{co_abQH} {1}:: (b0
+;      [WD] hole{co_ac0X} {1}:: (b0
 ;                                *: (b0 *: (b0 *: (b0 *: (b0 *: b0)))))
 ;                               ~ fsk0 (CNonCanonical)
 ;  =>  (=
@@ -19328,47 +18634,47 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abQ2
+;      ac0i
 ;      (
 ;        (_
 ;           map
 ;           (+
 ;              (Int Int)
 ;              Int))
-;        abQ2
+;        ac0i
 ;        (
 ;          (_
 ;             map
 ;             (+
 ;                (Int Int)
 ;                Int))
-;          abQ2
+;          ac0i
 ;          (
 ;            (_
 ;               map
 ;               (+
 ;                  (Int Int)
 ;                  Int))
-;            abQ2
+;            ac0i
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              abQ2
-;              abQ2)))))
-;    abQm)
+;              ac0i
+;              ac0i)))))
+;    ac0C)
 
 ; WANTEDS (names)
-;  abQ2  <=  b_abQ2
-;  abQc  <=  fsk_abQc
-;  abQm  <=  fsk_abQm
+;  ac0i  <=  b_ac0i
+;  ac0s  <=  fsk_ac0s
+;  ac0C  <=  fsk_ac0C
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const abQ2 (Array String Int))
+; (declare-const ac0i (Array String Int))
 (declare-const
-   abQ2
+   ac0i
    (Array String Int))
 (assert
    (!
@@ -19381,16 +18687,16 @@
                     (+
                        (Int Int)
                        Int))
-                 abQ2
+                 ac0i
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   abQ2
-                   abQ2))
-               abQc))
+                   ac0i
+                   ac0i))
+               ac0s))
          (not
             (=
                (
@@ -19399,37 +18705,37 @@
                     (+
                        (Int Int)
                        Int))
-                 abQ2
+                 ac0i
                  (
                    (_
                       map
                       (+
                          (Int Int)
                          Int))
-                   abQ2
+                   ac0i
                    (
                      (_
                         map
                         (+
                            (Int Int)
                            Int))
-                     abQ2
+                     ac0i
                      (
                        (_
                           map
                           (+
                              (Int Int)
                              Int))
-                       abQ2
+                       ac0i
                        (
                          (_
                             map
                             (+
                                (Int Int)
                                Int))
-                         abQ2
-                         abQ2)))))
-               abQm)))
+                         ac0i
+                         ac0i)))))
+               ac0C)))
       :named
       wanted-2))
 (check-sat)
@@ -19438,19 +18744,10 @@
 (get-model)
 ; (
 ;   (define-fun
-;      abQc
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
 ;      given-2.9
 ;      ()
 ;      Bool
-;      (= abQ8 abQc))
+;      (= ac0o ac0s))
 ;   (define-fun
 ;      given-2.3
 ;      ()
@@ -19462,9 +18759,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abPY
-;           abQg)
-;         abQi))
+;           ac0e
+;           ac0w)
+;         ac0y))
 ;   (define-fun
 ;      enc
 ;      ()
@@ -19484,7 +18781,7 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         abQm))
+;         ac0C))
 ;   (define-fun
 ;      base
 ;      ()
@@ -19505,9 +18802,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abPX
-;           abPX)
-;         abQ8))
+;           ac0d
+;           ac0d)
+;         ac0o))
 ;   (define-fun
 ;      given-2.4
 ;      ()
@@ -19519,9 +18816,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abPY
-;           abQi)
-;         abQk))
+;           ac0e
+;           ac0y)
+;         ac0A))
 ;   (define-fun
 ;      wanted-2
 ;      ()
@@ -19537,19 +18834,19 @@
 ;                         (+
 ;                            (Int Int)
 ;                            Int))
-;                      abQ2
-;                      abQ2
-;                      abQ2
+;                      ac0i
+;                      ac0i
+;                      ac0i
 ;                      (
 ;                        (_
 ;                           map
 ;                           (+
 ;                              (Int Int)
 ;                              Int))
-;                        abQ2
-;                        abQ2
-;                        abQ2))
-;                    abQm))))
+;                        ac0i
+;                        ac0i
+;                        ac0i))
+;                    ac0C))))
 ;         (or
 ;            (not
 ;               (=
@@ -19559,13 +18856,13 @@
 ;                       (+
 ;                          (Int Int)
 ;                          Int))
-;                    abQ2
-;                    abQ2
-;                    abQ2)
-;                  abQc))
+;                    ac0i
+;                    ac0i
+;                    ac0i)
+;                  ac0s))
 ;            a!1)))
 ;   (define-fun
-;      abPY
+;      ac0e
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19574,7 +18871,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abQg
+;      ac0y
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19583,7 +18880,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abQk
+;      ac0d
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19602,9 +18899,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abPY
-;           abPY)
-;         abQa))
+;           ac0e
+;           ac0e)
+;         ac0q))
 ;   (define-fun
 ;      given-2.6
 ;      ()
@@ -19616,11 +18913,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abPY
-;           abQa)
-;         abQc))
+;           ac0e
+;           ac0q)
+;         ac0s))
 ;   (define-fun
-;      abQa
+;      ac0C
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19629,7 +18926,7 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abQi
+;      ac0s
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19648,16 +18945,16 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abPY
-;           abQc)
-;         abQg))
+;           ac0e
+;           ac0s)
+;         ac0w))
 ;   (define-fun
 ;      given-2.8
 ;      ()
 ;      Bool
-;      (= abQk abQm))
+;      (= ac0A ac0C))
 ;   (define-fun
-;      abQ8
+;      ac0w
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19666,19 +18963,16 @@
 ;           (Array String Int))
 ;        0))
 ;   (define-fun
-;      abQ2
+;      ac0A
 ;      ()
 ;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           0)
-;         "!0!"
-;         1))
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
-;      abQm
+;      ac0o
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19692,7 +18986,7 @@
 ;      Int
 ;      1)
 ;   (define-fun
-;      abPX
+;      ac0q
 ;      ()
 ;      (Array String Int)
 ;      (
@@ -19700,6 +18994,18 @@
 ;           const
 ;           (Array String Int))
 ;        0))
+;   (define-fun
+;      ac0i
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           0)
+;         "!0!"
+;         1))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -19714,28 +19020,28 @@
 (echo "solver-start-cycle-3")
 
 ; GIVENS (GHC style)
-; [G] co_abRy {2}:: (v *: v) ~ fsk0 (CNonCanonical)
-; [G] co_abRt {1}:: (v *: w) ~ fsk0 (CNonCanonical)
-; [G] co_abRu {1}:: fsk0 ~ u (CNonCanonical)
-; [G] co_abRA {1}:: fsk0 ~ v (CNonCanonical)
+; [G] co_ac1Q {2}:: (v *: v) ~ fsk0 (CNonCanonical)
+; [G] co_ac1L {1}:: (v *: w) ~ fsk0 (CNonCanonical)
+; [G] co_ac1M {1}:: fsk0 ~ u (CNonCanonical)
+; [G] co_ac1S {1}:: fsk0 ~ v (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_abRG} {2}:: (v0 *: w) ~ u (CNonCanonical)
-; [WD] hole{co_abRK} {1}:: (v0 *: v0) ~ v0 (CNonCanonical)
+; [WD] hole{co_ac1Y} {2}:: (v0 *: w) ~ u (CNonCanonical)
+; [WD] hole{co_ac22} {1}:: (v0 *: v0) ~ v0 (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (*: [abRe,abRe],abRx)
-; (*: [abRe,abRf],abRs)
-; (abRs,abRd)
-; (abRx,abRe)
+; (*: [ac1w,ac1w],ac1P)
+; (*: [ac1w,ac1x],ac1K)
+; (ac1K,ac1v)
+; (ac1P,ac1w)
 
 ; WANTEDS (Thoralf style)
-; (*: [abRk,abRf],abRd)
-; (*: [abRk,abRk],abRk)
+; (*: [ac1C,ac1x],ac1v)
+; (*: [ac1C,ac1C],ac1C)
 
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
-;      [WD] hole{co_abRG} {2}:: (v0 *: w) ~ u (CNonCanonical)
+;      [WD] hole{co_ac1Y} {2}:: (v0 *: w) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -19743,11 +19049,11 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abRk
-;      abRf)
-;    abRd)
+;      ac1C
+;      ac1x)
+;    ac1v)
 
-;      [WD] hole{co_abRK} {1}:: (v0 *: v0) ~ v0 (CNonCanonical)
+;      [WD] hole{co_ac22} {1}:: (v0 *: v0) ~ v0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -19755,38 +19061,38 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abRk
-;      abRk)
-;    abRk)
+;      ac1C
+;      ac1C)
+;    ac1C)
 
 ; GIVENS (names)
-;  abRd  <=  u
-;  abRe  <=  v
-;  abRf  <=  w
-;  abRs  <=  fsk_abRs
-;  abRx  <=  fsk_abRx
+;  ac1v  <=  u
+;  ac1w  <=  v
+;  ac1x  <=  w
+;  ac1K  <=  fsk_ac1K
+;  ac1P  <=  fsk_ac1P
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const abRd (Array String Int))
-; (declare-const abRe (Array String Int))
-; (declare-const abRf (Array String Int))
-; (declare-const abRs (Array String Int))
-; (declare-const abRx (Array String Int))
+; (declare-const ac1K (Array String Int))
+; (declare-const ac1P (Array String Int))
+; (declare-const ac1v (Array String Int))
+; (declare-const ac1w (Array String Int))
+; (declare-const ac1x (Array String Int))
 (declare-const
-   abRd
+   ac1v
    (Array String Int))
 (declare-const
-   abRe
+   ac1w
    (Array String Int))
 (declare-const
-   abRf
+   ac1x
    (Array String Int))
 (declare-const
-   abRs
+   ac1K
    (Array String Int))
 (declare-const
-   abRx
+   ac1P
    (Array String Int))
 (assert
    (!
@@ -19797,9 +19103,9 @@
               (+
                  (Int Int)
                  Int))
-           abRe
-           abRe)
-         abRx)
+           ac1w
+           ac1w)
+         ac1P)
       :named
       given-3.1))
 (assert
@@ -19811,19 +19117,19 @@
               (+
                  (Int Int)
                  Int))
-           abRe
-           abRf)
-         abRs)
+           ac1w
+           ac1x)
+         ac1K)
       :named
       given-3.2))
 (assert
    (!
-      (= abRs abRd)
+      (= ac1K ac1v)
       :named
       given-3.3))
 (assert
    (!
-      (= abRx abRe)
+      (= ac1P ac1w)
       :named
       given-3.4))
 (check-sat)
@@ -19831,7 +19137,7 @@
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
-;      [WD] hole{co_abRG} {2}:: (v0 *: w) ~ u (CNonCanonical)
+;      [WD] hole{co_ac1Y} {2}:: (v0 *: w) ~ u (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -19839,11 +19145,11 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abRk
-;      abRf)
-;    abRd)
+;      ac1C
+;      ac1x)
+;    ac1v)
 
-;      [WD] hole{co_abRK} {1}:: (v0 *: v0) ~ v0 (CNonCanonical)
+;      [WD] hole{co_ac22} {1}:: (v0 *: v0) ~ v0 (CNonCanonical)
 ;  =>  (=
 ;    (
 ;      (_
@@ -19851,19 +19157,19 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      abRk
-;      abRk)
-;    abRk)
+;      ac1C
+;      ac1C)
+;    ac1C)
 
 ; WANTEDS (names)
-;  abRd  <=  u
-;  abRf  <=  w
-;  abRk  <=  v_abRk
+;  ac1v  <=  u
+;  ac1x  <=  w
+;  ac1C  <=  v_ac1C
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const abRk (Array String Int))
+; (declare-const ac1C (Array String Int))
 (declare-const
-   abRk
+   ac1C
    (Array String Int))
 (assert
    (!
@@ -19876,9 +19182,9 @@
                     (+
                        (Int Int)
                        Int))
-                 abRk
-                 abRf)
-               abRd))
+                 ac1C
+                 ac1x)
+               ac1v))
          (not
             (=
                (
@@ -19887,9 +19193,9 @@
                     (+
                        (Int Int)
                        Int))
-                 abRk
-                 abRk)
-               abRk)))
+                 ac1C
+                 ac1C)
+               ac1C)))
       :named
       wanted-3))
 (check-sat)
@@ -19908,107 +19214,11 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           abRe
-;           abRe)
-;         abRx))
+;           ac1w
+;           ac1w)
+;         ac1P))
 ;   (define-fun
-;      abRx
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      given-3.2
-;      ()
-;      Bool
-;      (=
-;         (
-;           (_
-;              map
-;              (+
-;                 (Int Int)
-;                 Int))
-;           abRe
-;           abRf)
-;         abRs))
-;   (define-fun
-;      enc
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        3))
-;   (define-fun
-;      base
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        3))
-;   (define-fun
-;      abRd
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           28957)
-;         "!0!"
-;         20652))
-;   (define-fun
-;      given-3.3
-;      ()
-;      Bool
-;      (= abRs abRd))
-;   (define-fun
-;      abRs
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           28957)
-;         "!0!"
-;         20652))
-;   (define-fun
-;      abRk
-;      ()
-;      (Array String Int)
-;      (store
-;         (
-;           (as
-;              const
-;              (Array String Int))
-;           2437)
-;         "!0!"
-;         1))
-;   (define-fun
-;      abRe
-;      ()
-;      (Array String Int)
-;      (
-;        (as
-;           const
-;           (Array String Int))
-;        0))
-;   (define-fun
-;      one
-;      ()
-;      Int
-;      1)
-;   (define-fun
-;      abRf
+;      ac1v
 ;      ()
 ;      (Array String Int)
 ;      (store
@@ -20032,9 +19242,9 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 abRk
-;                 abRf)
-;               abRd))
+;                 ac1C
+;                 ac1x)
+;               ac1v))
 ;         (not
 ;            (=
 ;               (
@@ -20043,14 +19253,110 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 abRk
-;                 abRk)
-;               abRk))))
+;                 ac1C
+;                 ac1C)
+;               ac1C))))
 ;   (define-fun
 ;      given-3.4
 ;      ()
 ;      Bool
-;      (= abRx abRe))
+;      (= ac1P ac1w))
+;   (define-fun
+;      enc
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        2))
+;   (define-fun
+;      base
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        2))
+;   (define-fun
+;      ac1x
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           28957)
+;         "!0!"
+;         20652))
+;   (define-fun
+;      ac1K
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           28957)
+;         "!0!"
+;         20652))
+;   (define-fun
+;      ac1w
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
+;   (define-fun
+;      given-3.2
+;      ()
+;      Bool
+;      (=
+;         (
+;           (_
+;              map
+;              (+
+;                 (Int Int)
+;                 Int))
+;           ac1w
+;           ac1x)
+;         ac1K))
+;   (define-fun
+;      ac1C
+;      ()
+;      (Array String Int)
+;      (store
+;         (
+;           (as
+;              const
+;              (Array String Int))
+;           2437)
+;         "!0!"
+;         (- 1)))
+;   (define-fun
+;      one
+;      ()
+;      Int
+;      1)
+;   (define-fun
+;      given-3.3
+;      ()
+;      Bool
+;      (= ac1K ac1v))
+;   (define-fun
+;      ac1P
+;      ()
+;      (Array String Int)
+;      (
+;        (as
+;           const
+;           (Array String Int))
+;        0))
 ;   (define-fun
 ;      exp
 ;      ()
@@ -20065,303 +19371,303 @@
 (echo "solver-start-cycle-4")
 
 ; GIVENS (GHC style)
-; [G] co_ac4H {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_ac3B {35}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3D {34}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3F {33}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3H {32}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3J {31}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3L {30}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3N {29}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3P {28}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3R {27}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3T {26}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3V {25}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3X {24}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3Z {23}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac41 {22}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac43 {21}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac45 {20}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac47 {19}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac49 {18}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4b {17}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4d {16}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4f {15}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4h {14}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4j {13}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4l {12}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4n {11}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4p {10}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4r {9}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4t {8}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4v {7}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4x {6}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4z {5}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4B {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4D {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4F {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3v {3}:: (b *: b) ~ fsk0 (CNonCanonical)
-; [G] co_ac3x {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac3t {2}:: (a *: a) ~ fsk0 (CNonCanonical)
-; [G] co_ac4J {1}:: fsk0 ~ fsk1 (CNonCanonical)
-; [G] co_ac4L {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_acf5 {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_acdZ {35}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ace1 {34}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ace3 {33}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ace5 {32}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ace7 {31}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_ace9 {30}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceb {29}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aced {28}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acef {27}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceh {26}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acej {25}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acel {24}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acen {23}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acep {22}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acer {21}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acet {20}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acev {19}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acex {18}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acez {17}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceB {16}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceD {15}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceF {14}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceH {13}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceJ {12}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceL {11}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceN {10}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceP {9}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceR {8}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceT {7}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceV {6}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceX {5}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_aceZ {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acf1 {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acf3 {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acdT {3}:: (b *: b) ~ fsk0 (CNonCanonical)
+; [G] co_acdV {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acdR {2}:: (a *: a) ~ fsk0 (CNonCanonical)
+; [G] co_acf7 {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_acf9 {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_ac4P} {2}:: fsk0 ~ b (CNonCanonical)
+; [WD] hole{co_acfc} {2}:: fsk0 ~ b (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],ac4G)
-; (*: [ac0t,ac3w],ac3A)
-; (*: [ac0t,ac3A],ac3C)
-; (*: [ac0t,ac3C],ac3E)
-; (*: [ac0t,ac3E],ac3G)
-; (*: [ac0t,ac3G],ac3I)
-; (*: [ac0t,ac3I],ac3K)
-; (*: [ac0t,ac3K],ac3M)
-; (*: [ac0t,ac3M],ac3O)
-; (*: [ac0t,ac3O],ac3Q)
-; (*: [ac0t,ac3Q],ac3S)
-; (*: [ac0t,ac3S],ac3U)
-; (*: [ac0t,ac3U],ac3W)
-; (*: [ac0t,ac3W],ac3Y)
-; (*: [ac0t,ac3Y],ac40)
-; (*: [ac0t,ac40],ac42)
-; (*: [ac0t,ac42],ac44)
-; (*: [ac0t,ac44],ac46)
-; (*: [ac0t,ac46],ac48)
-; (*: [ac0t,ac48],ac4a)
-; (*: [ac0t,ac4a],ac4c)
-; (*: [ac0t,ac4c],ac4e)
-; (*: [ac0t,ac4e],ac4g)
-; (*: [ac0t,ac4g],ac4i)
-; (*: [ac0t,ac4i],ac4k)
-; (*: [ac0t,ac4k],ac4m)
-; (*: [ac0t,ac4m],ac4o)
-; (*: [ac0t,ac4o],ac4q)
-; (*: [ac0t,ac4q],ac4s)
-; (*: [ac0t,ac4s],ac4u)
-; (*: [ac0t,ac4u],ac4w)
-; (*: [ac0t,ac4w],ac4y)
-; (*: [ac0t,ac4y],ac4A)
-; (*: [ac0t,ac4A],ac4C)
-; (*: [ac0t,ac4C],ac4E)
-; (*: [ac0t,ac0t],ac3u)
-; (*: [ac0t,ac3u],ac3w)
-; (*: [ac0s,ac0s],ac3s)
-; (ac4E,ac4G)
-; (ac3s,ac3w)
+; (One [],acf4)
+; (*: [acaQ,acdU],acdY)
+; (*: [acaQ,acdY],ace0)
+; (*: [acaQ,ace0],ace2)
+; (*: [acaQ,ace2],ace4)
+; (*: [acaQ,ace4],ace6)
+; (*: [acaQ,ace6],ace8)
+; (*: [acaQ,ace8],acea)
+; (*: [acaQ,acea],acec)
+; (*: [acaQ,acec],acee)
+; (*: [acaQ,acee],aceg)
+; (*: [acaQ,aceg],acei)
+; (*: [acaQ,acei],acek)
+; (*: [acaQ,acek],acem)
+; (*: [acaQ,acem],aceo)
+; (*: [acaQ,aceo],aceq)
+; (*: [acaQ,aceq],aces)
+; (*: [acaQ,aces],aceu)
+; (*: [acaQ,aceu],acew)
+; (*: [acaQ,acew],acey)
+; (*: [acaQ,acey],aceA)
+; (*: [acaQ,aceA],aceC)
+; (*: [acaQ,aceC],aceE)
+; (*: [acaQ,aceE],aceG)
+; (*: [acaQ,aceG],aceI)
+; (*: [acaQ,aceI],aceK)
+; (*: [acaQ,aceK],aceM)
+; (*: [acaQ,aceM],aceO)
+; (*: [acaQ,aceO],aceQ)
+; (*: [acaQ,aceQ],aceS)
+; (*: [acaQ,aceS],aceU)
+; (*: [acaQ,aceU],aceW)
+; (*: [acaQ,aceW],aceY)
+; (*: [acaQ,aceY],acf0)
+; (*: [acaQ,acf0],acf2)
+; (*: [acaQ,acaQ],acdS)
+; (*: [acaQ,acdS],acdU)
+; (*: [acaP,acaP],acdQ)
+; (acf2,acf4)
+; (acdQ,acdU)
 
 ; WANTEDS (Thoralf style)
-; (ac4G,ac0t)
+; (acf4,acaQ)
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{co_ac4P} {2}:: fsk0 ~ b (CNonCanonical)
-;  =>  (= ac4G ac0t)
+;      [WD] hole{co_acfc} {2}:: fsk0 ~ b (CNonCanonical)
+;  =>  (= acf4 acaQ)
 
 ; GIVENS (names)
-;  ac0s  <=  a
-;  ac0t  <=  b
-;  ac3s  <=  fsk_ac3s
-;  ac3u  <=  fsk_ac3u
-;  ac3w  <=  fsk_ac3w
-;  ac3A  <=  fsk_ac3A
-;  ac3C  <=  fsk_ac3C
-;  ac3E  <=  fsk_ac3E
-;  ac3G  <=  fsk_ac3G
-;  ac3I  <=  fsk_ac3I
-;  ac3K  <=  fsk_ac3K
-;  ac3M  <=  fsk_ac3M
-;  ac3O  <=  fsk_ac3O
-;  ac3Q  <=  fsk_ac3Q
-;  ac3S  <=  fsk_ac3S
-;  ac3U  <=  fsk_ac3U
-;  ac3W  <=  fsk_ac3W
-;  ac3Y  <=  fsk_ac3Y
-;  ac40  <=  fsk_ac40
-;  ac42  <=  fsk_ac42
-;  ac44  <=  fsk_ac44
-;  ac46  <=  fsk_ac46
-;  ac48  <=  fsk_ac48
-;  ac4a  <=  fsk_ac4a
-;  ac4c  <=  fsk_ac4c
-;  ac4e  <=  fsk_ac4e
-;  ac4g  <=  fsk_ac4g
-;  ac4i  <=  fsk_ac4i
-;  ac4k  <=  fsk_ac4k
-;  ac4m  <=  fsk_ac4m
-;  ac4o  <=  fsk_ac4o
-;  ac4q  <=  fsk_ac4q
-;  ac4s  <=  fsk_ac4s
-;  ac4u  <=  fsk_ac4u
-;  ac4w  <=  fsk_ac4w
-;  ac4y  <=  fsk_ac4y
-;  ac4A  <=  fsk_ac4A
-;  ac4C  <=  fsk_ac4C
-;  ac4E  <=  fsk_ac4E
-;  ac4G  <=  fsk_ac4G
+;  acaP  <=  a
+;  acaQ  <=  b
+;  acdQ  <=  fsk_acdQ
+;  acdS  <=  fsk_acdS
+;  acdU  <=  fsk_acdU
+;  acdY  <=  fsk_acdY
+;  ace0  <=  fsk_ace0
+;  ace2  <=  fsk_ace2
+;  ace4  <=  fsk_ace4
+;  ace6  <=  fsk_ace6
+;  ace8  <=  fsk_ace8
+;  acea  <=  fsk_acea
+;  acec  <=  fsk_acec
+;  acee  <=  fsk_acee
+;  aceg  <=  fsk_aceg
+;  acei  <=  fsk_acei
+;  acek  <=  fsk_acek
+;  acem  <=  fsk_acem
+;  aceo  <=  fsk_aceo
+;  aceq  <=  fsk_aceq
+;  aces  <=  fsk_aces
+;  aceu  <=  fsk_aceu
+;  acew  <=  fsk_acew
+;  acey  <=  fsk_acey
+;  aceA  <=  fsk_aceA
+;  aceC  <=  fsk_aceC
+;  aceE  <=  fsk_aceE
+;  aceG  <=  fsk_aceG
+;  aceI  <=  fsk_aceI
+;  aceK  <=  fsk_aceK
+;  aceM  <=  fsk_aceM
+;  aceO  <=  fsk_aceO
+;  aceQ  <=  fsk_aceQ
+;  aceS  <=  fsk_aceS
+;  aceU  <=  fsk_aceU
+;  aceW  <=  fsk_aceW
+;  aceY  <=  fsk_aceY
+;  acf0  <=  fsk_acf0
+;  acf2  <=  fsk_acf2
+;  acf4  <=  fsk_acf4
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const ac0s (Array String Int))
-; (declare-const ac0t (Array String Int))
-; (declare-const ac3A (Array String Int))
-; (declare-const ac3C (Array String Int))
-; (declare-const ac3E (Array String Int))
-; (declare-const ac3G (Array String Int))
-; (declare-const ac3I (Array String Int))
-; (declare-const ac3K (Array String Int))
-; (declare-const ac3M (Array String Int))
-; (declare-const ac3O (Array String Int))
-; (declare-const ac3Q (Array String Int))
-; (declare-const ac3S (Array String Int))
-; (declare-const ac3U (Array String Int))
-; (declare-const ac3W (Array String Int))
-; (declare-const ac3Y (Array String Int))
-; (declare-const ac3s (Array String Int))
-; (declare-const ac3u (Array String Int))
-; (declare-const ac3w (Array String Int))
-; (declare-const ac40 (Array String Int))
-; (declare-const ac42 (Array String Int))
-; (declare-const ac44 (Array String Int))
-; (declare-const ac46 (Array String Int))
-; (declare-const ac48 (Array String Int))
-; (declare-const ac4A (Array String Int))
-; (declare-const ac4C (Array String Int))
-; (declare-const ac4E (Array String Int))
-; (declare-const ac4G (Array String Int))
-; (declare-const ac4a (Array String Int))
-; (declare-const ac4c (Array String Int))
-; (declare-const ac4e (Array String Int))
-; (declare-const ac4g (Array String Int))
-; (declare-const ac4i (Array String Int))
-; (declare-const ac4k (Array String Int))
-; (declare-const ac4m (Array String Int))
-; (declare-const ac4o (Array String Int))
-; (declare-const ac4q (Array String Int))
-; (declare-const ac4s (Array String Int))
-; (declare-const ac4u (Array String Int))
-; (declare-const ac4w (Array String Int))
-; (declare-const ac4y (Array String Int))
+; (declare-const acaP (Array String Int))
+; (declare-const acaQ (Array String Int))
+; (declare-const acdQ (Array String Int))
+; (declare-const acdS (Array String Int))
+; (declare-const acdU (Array String Int))
+; (declare-const acdY (Array String Int))
+; (declare-const ace0 (Array String Int))
+; (declare-const ace2 (Array String Int))
+; (declare-const ace4 (Array String Int))
+; (declare-const ace6 (Array String Int))
+; (declare-const ace8 (Array String Int))
+; (declare-const aceA (Array String Int))
+; (declare-const aceC (Array String Int))
+; (declare-const aceE (Array String Int))
+; (declare-const aceG (Array String Int))
+; (declare-const aceI (Array String Int))
+; (declare-const aceK (Array String Int))
+; (declare-const aceM (Array String Int))
+; (declare-const aceO (Array String Int))
+; (declare-const aceQ (Array String Int))
+; (declare-const aceS (Array String Int))
+; (declare-const aceU (Array String Int))
+; (declare-const aceW (Array String Int))
+; (declare-const aceY (Array String Int))
+; (declare-const acea (Array String Int))
+; (declare-const acec (Array String Int))
+; (declare-const acee (Array String Int))
+; (declare-const aceg (Array String Int))
+; (declare-const acei (Array String Int))
+; (declare-const acek (Array String Int))
+; (declare-const acem (Array String Int))
+; (declare-const aceo (Array String Int))
+; (declare-const aceq (Array String Int))
+; (declare-const aces (Array String Int))
+; (declare-const aceu (Array String Int))
+; (declare-const acew (Array String Int))
+; (declare-const acey (Array String Int))
+; (declare-const acf0 (Array String Int))
+; (declare-const acf2 (Array String Int))
+; (declare-const acf4 (Array String Int))
 (declare-const
-   ac0s
+   acaP
    (Array String Int))
 (declare-const
-   ac0t
+   acaQ
    (Array String Int))
 (declare-const
-   ac3s
+   acdQ
    (Array String Int))
 (declare-const
-   ac3u
+   acdS
    (Array String Int))
 (declare-const
-   ac3w
+   acdU
    (Array String Int))
 (declare-const
-   ac3A
+   acdY
    (Array String Int))
 (declare-const
-   ac3C
+   ace0
    (Array String Int))
 (declare-const
-   ac3E
+   ace2
    (Array String Int))
 (declare-const
-   ac3G
+   ace4
    (Array String Int))
 (declare-const
-   ac3I
+   ace6
    (Array String Int))
 (declare-const
-   ac3K
+   ace8
    (Array String Int))
 (declare-const
-   ac3M
+   acea
    (Array String Int))
 (declare-const
-   ac3O
+   acec
    (Array String Int))
 (declare-const
-   ac3Q
+   acee
    (Array String Int))
 (declare-const
-   ac3S
+   aceg
    (Array String Int))
 (declare-const
-   ac3U
+   acei
    (Array String Int))
 (declare-const
-   ac3W
+   acek
    (Array String Int))
 (declare-const
-   ac3Y
+   acem
    (Array String Int))
 (declare-const
-   ac40
+   aceo
    (Array String Int))
 (declare-const
-   ac42
+   aceq
    (Array String Int))
 (declare-const
-   ac44
+   aces
    (Array String Int))
 (declare-const
-   ac46
+   aceu
    (Array String Int))
 (declare-const
-   ac48
+   acew
    (Array String Int))
 (declare-const
-   ac4a
+   acey
    (Array String Int))
 (declare-const
-   ac4c
+   aceA
    (Array String Int))
 (declare-const
-   ac4e
+   aceC
    (Array String Int))
 (declare-const
-   ac4g
+   aceE
    (Array String Int))
 (declare-const
-   ac4i
+   aceG
    (Array String Int))
 (declare-const
-   ac4k
+   aceI
    (Array String Int))
 (declare-const
-   ac4m
+   aceK
    (Array String Int))
 (declare-const
-   ac4o
+   aceM
    (Array String Int))
 (declare-const
-   ac4q
+   aceO
    (Array String Int))
 (declare-const
-   ac4s
+   aceQ
    (Array String Int))
 (declare-const
-   ac4u
+   aceS
    (Array String Int))
 (declare-const
-   ac4w
+   aceU
    (Array String Int))
 (declare-const
-   ac4y
+   aceW
    (Array String Int))
 (declare-const
-   ac4A
+   aceY
    (Array String Int))
 (declare-const
-   ac4C
+   acf0
    (Array String Int))
 (declare-const
-   ac4E
+   acf2
    (Array String Int))
 (declare-const
-   ac4G
+   acf4
    (Array String Int))
 (assert
    (!
@@ -20371,7 +19677,7 @@
               const
               (Array String Int))
            0)
-         ac4G)
+         acf4)
       :named
       given-4.1))
 (assert
@@ -20383,9 +19689,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3w)
-         ac3A)
+           acaQ
+           acdU)
+         acdY)
       :named
       given-4.2))
 (assert
@@ -20397,9 +19703,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3A)
-         ac3C)
+           acaQ
+           acdY)
+         ace0)
       :named
       given-4.3))
 (assert
@@ -20411,9 +19717,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3C)
-         ac3E)
+           acaQ
+           ace0)
+         ace2)
       :named
       given-4.4))
 (assert
@@ -20425,9 +19731,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3E)
-         ac3G)
+           acaQ
+           ace2)
+         ace4)
       :named
       given-4.5))
 (assert
@@ -20439,9 +19745,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3G)
-         ac3I)
+           acaQ
+           ace4)
+         ace6)
       :named
       given-4.6))
 (assert
@@ -20453,9 +19759,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3I)
-         ac3K)
+           acaQ
+           ace6)
+         ace8)
       :named
       given-4.7))
 (assert
@@ -20467,9 +19773,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3K)
-         ac3M)
+           acaQ
+           ace8)
+         acea)
       :named
       given-4.8))
 (assert
@@ -20481,9 +19787,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3M)
-         ac3O)
+           acaQ
+           acea)
+         acec)
       :named
       given-4.9))
 (assert
@@ -20495,9 +19801,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3O)
-         ac3Q)
+           acaQ
+           acec)
+         acee)
       :named
       given-4.10))
 (assert
@@ -20509,9 +19815,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3Q)
-         ac3S)
+           acaQ
+           acee)
+         aceg)
       :named
       given-4.11))
 (assert
@@ -20523,9 +19829,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3S)
-         ac3U)
+           acaQ
+           aceg)
+         acei)
       :named
       given-4.12))
 (assert
@@ -20537,9 +19843,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3U)
-         ac3W)
+           acaQ
+           acei)
+         acek)
       :named
       given-4.13))
 (assert
@@ -20551,9 +19857,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3W)
-         ac3Y)
+           acaQ
+           acek)
+         acem)
       :named
       given-4.14))
 (assert
@@ -20565,9 +19871,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3Y)
-         ac40)
+           acaQ
+           acem)
+         aceo)
       :named
       given-4.15))
 (assert
@@ -20579,9 +19885,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac40)
-         ac42)
+           acaQ
+           aceo)
+         aceq)
       :named
       given-4.16))
 (assert
@@ -20593,9 +19899,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac42)
-         ac44)
+           acaQ
+           aceq)
+         aces)
       :named
       given-4.17))
 (assert
@@ -20607,9 +19913,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac44)
-         ac46)
+           acaQ
+           aces)
+         aceu)
       :named
       given-4.18))
 (assert
@@ -20621,9 +19927,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac46)
-         ac48)
+           acaQ
+           aceu)
+         acew)
       :named
       given-4.19))
 (assert
@@ -20635,9 +19941,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac48)
-         ac4a)
+           acaQ
+           acew)
+         acey)
       :named
       given-4.20))
 (assert
@@ -20649,9 +19955,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4a)
-         ac4c)
+           acaQ
+           acey)
+         aceA)
       :named
       given-4.21))
 (assert
@@ -20663,9 +19969,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4c)
-         ac4e)
+           acaQ
+           aceA)
+         aceC)
       :named
       given-4.22))
 (assert
@@ -20677,9 +19983,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4e)
-         ac4g)
+           acaQ
+           aceC)
+         aceE)
       :named
       given-4.23))
 (assert
@@ -20691,9 +19997,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4g)
-         ac4i)
+           acaQ
+           aceE)
+         aceG)
       :named
       given-4.24))
 (assert
@@ -20705,9 +20011,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4i)
-         ac4k)
+           acaQ
+           aceG)
+         aceI)
       :named
       given-4.25))
 (assert
@@ -20719,9 +20025,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4k)
-         ac4m)
+           acaQ
+           aceI)
+         aceK)
       :named
       given-4.26))
 (assert
@@ -20733,9 +20039,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4m)
-         ac4o)
+           acaQ
+           aceK)
+         aceM)
       :named
       given-4.27))
 (assert
@@ -20747,9 +20053,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4o)
-         ac4q)
+           acaQ
+           aceM)
+         aceO)
       :named
       given-4.28))
 (assert
@@ -20761,9 +20067,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4q)
-         ac4s)
+           acaQ
+           aceO)
+         aceQ)
       :named
       given-4.29))
 (assert
@@ -20775,9 +20081,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4s)
-         ac4u)
+           acaQ
+           aceQ)
+         aceS)
       :named
       given-4.30))
 (assert
@@ -20789,9 +20095,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4u)
-         ac4w)
+           acaQ
+           aceS)
+         aceU)
       :named
       given-4.31))
 (assert
@@ -20803,9 +20109,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4w)
-         ac4y)
+           acaQ
+           aceU)
+         aceW)
       :named
       given-4.32))
 (assert
@@ -20817,9 +20123,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4y)
-         ac4A)
+           acaQ
+           aceW)
+         aceY)
       :named
       given-4.33))
 (assert
@@ -20831,9 +20137,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4A)
-         ac4C)
+           acaQ
+           aceY)
+         acf0)
       :named
       given-4.34))
 (assert
@@ -20845,9 +20151,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac4C)
-         ac4E)
+           acaQ
+           acf0)
+         acf2)
       :named
       given-4.35))
 (assert
@@ -20859,9 +20165,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac0t)
-         ac3u)
+           acaQ
+           acaQ)
+         acdS)
       :named
       given-4.36))
 (assert
@@ -20873,9 +20179,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0t
-           ac3u)
-         ac3w)
+           acaQ
+           acdS)
+         acdU)
       :named
       given-4.37))
 (assert
@@ -20887,19 +20193,19 @@
               (+
                  (Int Int)
                  Int))
-           ac0s
-           ac0s)
-         ac3s)
+           acaP
+           acaP)
+         acdQ)
       :named
       given-4.38))
 (assert
    (!
-      (= ac4E ac4G)
+      (= acf2 acf4)
       :named
       given-4.39))
 (assert
    (!
-      (= ac3s ac3w)
+      (= acdQ acdU)
       :named
       given-4.40))
 (check-sat)
@@ -20907,18 +20213,18 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{co_ac4P} {2}:: fsk0 ~ b (CNonCanonical)
-;  =>  (= ac4G ac0t)
+;      [WD] hole{co_acfc} {2}:: fsk0 ~ b (CNonCanonical)
+;  =>  (= acf4 acaQ)
 
 ; WANTEDS (names)
-;  ac0t  <=  b
-;  ac4G  <=  fsk_ac4G
+;  acaQ  <=  b
+;  acf4  <=  fsk_acf4
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= ac4G ac0t))
+         (= acf4 acaQ))
       :named
       wanted-4))
 (check-sat)
@@ -20935,7 +20241,7 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         ac4G)
+;         acf4)
 ;      :named
 ;      given-4.1)
 ;   (!
@@ -20946,9 +20252,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3w)
-;         ac3A)
+;           acaQ
+;           acdU)
+;         acdY)
 ;      :named
 ;      given-4.2)
 ;   (!
@@ -20959,9 +20265,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3A)
-;         ac3C)
+;           acaQ
+;           acdY)
+;         ace0)
 ;      :named
 ;      given-4.3)
 ;   (!
@@ -20972,9 +20278,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3C)
-;         ac3E)
+;           acaQ
+;           ace0)
+;         ace2)
 ;      :named
 ;      given-4.4)
 ;   (!
@@ -20985,9 +20291,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3E)
-;         ac3G)
+;           acaQ
+;           ace2)
+;         ace4)
 ;      :named
 ;      given-4.5)
 ;   (!
@@ -20998,9 +20304,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3G)
-;         ac3I)
+;           acaQ
+;           ace4)
+;         ace6)
 ;      :named
 ;      given-4.6)
 ;   (!
@@ -21011,9 +20317,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3I)
-;         ac3K)
+;           acaQ
+;           ace6)
+;         ace8)
 ;      :named
 ;      given-4.7)
 ;   (!
@@ -21024,9 +20330,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3K)
-;         ac3M)
+;           acaQ
+;           ace8)
+;         acea)
 ;      :named
 ;      given-4.8)
 ;   (!
@@ -21037,9 +20343,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3M)
-;         ac3O)
+;           acaQ
+;           acea)
+;         acec)
 ;      :named
 ;      given-4.9)
 ;   (!
@@ -21050,9 +20356,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3O)
-;         ac3Q)
+;           acaQ
+;           acec)
+;         acee)
 ;      :named
 ;      given-4.10)
 ;   (!
@@ -21063,9 +20369,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3Q)
-;         ac3S)
+;           acaQ
+;           acee)
+;         aceg)
 ;      :named
 ;      given-4.11)
 ;   (!
@@ -21076,9 +20382,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3S)
-;         ac3U)
+;           acaQ
+;           aceg)
+;         acei)
 ;      :named
 ;      given-4.12)
 ;   (!
@@ -21089,9 +20395,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3U)
-;         ac3W)
+;           acaQ
+;           acei)
+;         acek)
 ;      :named
 ;      given-4.13)
 ;   (!
@@ -21102,9 +20408,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3W)
-;         ac3Y)
+;           acaQ
+;           acek)
+;         acem)
 ;      :named
 ;      given-4.14)
 ;   (!
@@ -21115,9 +20421,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3Y)
-;         ac40)
+;           acaQ
+;           acem)
+;         aceo)
 ;      :named
 ;      given-4.15)
 ;   (!
@@ -21128,9 +20434,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac40)
-;         ac42)
+;           acaQ
+;           aceo)
+;         aceq)
 ;      :named
 ;      given-4.16)
 ;   (!
@@ -21141,9 +20447,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac42)
-;         ac44)
+;           acaQ
+;           aceq)
+;         aces)
 ;      :named
 ;      given-4.17)
 ;   (!
@@ -21154,9 +20460,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac44)
-;         ac46)
+;           acaQ
+;           aces)
+;         aceu)
 ;      :named
 ;      given-4.18)
 ;   (!
@@ -21167,9 +20473,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac46)
-;         ac48)
+;           acaQ
+;           aceu)
+;         acew)
 ;      :named
 ;      given-4.19)
 ;   (!
@@ -21180,9 +20486,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac48)
-;         ac4a)
+;           acaQ
+;           acew)
+;         acey)
 ;      :named
 ;      given-4.20)
 ;   (!
@@ -21193,9 +20499,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4a)
-;         ac4c)
+;           acaQ
+;           acey)
+;         aceA)
 ;      :named
 ;      given-4.21)
 ;   (!
@@ -21206,9 +20512,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4c)
-;         ac4e)
+;           acaQ
+;           aceA)
+;         aceC)
 ;      :named
 ;      given-4.22)
 ;   (!
@@ -21219,9 +20525,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4e)
-;         ac4g)
+;           acaQ
+;           aceC)
+;         aceE)
 ;      :named
 ;      given-4.23)
 ;   (!
@@ -21232,9 +20538,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4g)
-;         ac4i)
+;           acaQ
+;           aceE)
+;         aceG)
 ;      :named
 ;      given-4.24)
 ;   (!
@@ -21245,9 +20551,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4i)
-;         ac4k)
+;           acaQ
+;           aceG)
+;         aceI)
 ;      :named
 ;      given-4.25)
 ;   (!
@@ -21258,9 +20564,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4k)
-;         ac4m)
+;           acaQ
+;           aceI)
+;         aceK)
 ;      :named
 ;      given-4.26)
 ;   (!
@@ -21271,9 +20577,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4m)
-;         ac4o)
+;           acaQ
+;           aceK)
+;         aceM)
 ;      :named
 ;      given-4.27)
 ;   (!
@@ -21284,9 +20590,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4o)
-;         ac4q)
+;           acaQ
+;           aceM)
+;         aceO)
 ;      :named
 ;      given-4.28)
 ;   (!
@@ -21297,9 +20603,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4q)
-;         ac4s)
+;           acaQ
+;           aceO)
+;         aceQ)
 ;      :named
 ;      given-4.29)
 ;   (!
@@ -21310,9 +20616,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4s)
-;         ac4u)
+;           acaQ
+;           aceQ)
+;         aceS)
 ;      :named
 ;      given-4.30)
 ;   (!
@@ -21323,9 +20629,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4u)
-;         ac4w)
+;           acaQ
+;           aceS)
+;         aceU)
 ;      :named
 ;      given-4.31)
 ;   (!
@@ -21336,9 +20642,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4w)
-;         ac4y)
+;           acaQ
+;           aceU)
+;         aceW)
 ;      :named
 ;      given-4.32)
 ;   (!
@@ -21349,9 +20655,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4y)
-;         ac4A)
+;           acaQ
+;           aceW)
+;         aceY)
 ;      :named
 ;      given-4.33)
 ;   (!
@@ -21362,9 +20668,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4A)
-;         ac4C)
+;           acaQ
+;           aceY)
+;         acf0)
 ;      :named
 ;      given-4.34)
 ;   (!
@@ -21375,9 +20681,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac4C)
-;         ac4E)
+;           acaQ
+;           acf0)
+;         acf2)
 ;      :named
 ;      given-4.35)
 ;   (!
@@ -21388,9 +20694,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac0t)
-;         ac3u)
+;           acaQ
+;           acaQ)
+;         acdS)
 ;      :named
 ;      given-4.36)
 ;   (!
@@ -21401,9 +20707,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0t
-;           ac3u)
-;         ac3w)
+;           acaQ
+;           acdS)
+;         acdU)
 ;      :named
 ;      given-4.37)
 ;   (!
@@ -21414,43 +20720,45 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0s
-;           ac0s)
-;         ac3s)
+;           acaP
+;           acaP)
+;         acdQ)
 ;      :named
 ;      given-4.38)
 ;   (!
-;      (= ac4E ac4G)
+;      (= acf2 acf4)
 ;      :named
 ;      given-4.39)
 ;   (!
-;      (= ac3s ac3w)
+;      (= acdQ acdU)
 ;      :named
 ;      given-4.40)
 ;   (!
 ;      (not
-;         (= ac4G ac0t))
+;         (= acf4 acaQ))
 ;      :named
 ;      wanted-4))
 (get-unsat-core)
-; (given-4.23
-;    given-4.22
+; (given-4.22
 ;    given-4.21
-;    given-4.3
 ;    given-4.20
+;    given-4.3
 ;    given-4.19
 ;    given-4.18
 ;    given-4.17
-;    given-4.16
+;    given-4.6
 ;    given-4.15
 ;    given-4.14
-;    given-4.13
-;    given-4.4
+;    given-4.16
+;    given-4.12
+;    given-4.5
 ;    given-4.1
 ;    given-4.9
 ;    given-4.11
+;    given-4.10
 ;    given-4.8
-;    given-4.6
+;    given-4.7
+;    given-4.4
 ;    given-4.2
 ;    given-4.29
 ;    given-4.30
@@ -21460,8 +20768,7 @@
 ;    given-4.26
 ;    given-4.25
 ;    given-4.24
-;    given-4.7
-;    given-4.10
+;    given-4.23
 ;    wanted-4
 ;    given-4.39
 ;    given-4.37
@@ -21469,94 +20776,93 @@
 ;    given-4.35
 ;    given-4.34
 ;    given-4.33
-;    given-4.32
-;    given-4.12
-;    given-4.5)
+;    given-4.13
+;    given-4.32)
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
 
 ; GIVENS (GHC style)
-; [G] co_ac56 {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_ac50 {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac52 {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac54 {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4U {3}:: (b *: b) ~ fsk0 (CNonCanonical)
-; [G] co_ac4W {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac4S {2}:: (a *: a) ~ fsk0 (CNonCanonical)
-; [G] co_ac58 {1}:: fsk0 ~ fsk1 (CNonCanonical)
-; [G] co_ac5a {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_acft {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_acfn {4}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acfp {3}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acfr {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acfh {3}:: (b *: b) ~ fsk0 (CNonCanonical)
+; [G] co_acfj {2}:: (b *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acff {2}:: (a *: a) ~ fsk0 (CNonCanonical)
+; [G] co_acfv {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_acfx {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_ac5e} {2}:: fsk0 ~ a (CNonCanonical)
+; [WD] hole{co_acfA} {2}:: fsk0 ~ a (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],ac55)
-; (*: [ac0B,ac4V],ac4Z)
-; (*: [ac0B,ac4Z],ac51)
-; (*: [ac0B,ac51],ac53)
-; (*: [ac0B,ac0B],ac4T)
-; (*: [ac0B,ac4T],ac4V)
-; (*: [ac0A,ac0A],ac4R)
-; (ac53,ac55)
-; (ac4R,ac4V)
+; (One [],acfs)
+; (*: [acaY,acfi],acfm)
+; (*: [acaY,acfm],acfo)
+; (*: [acaY,acfo],acfq)
+; (*: [acaY,acaY],acfg)
+; (*: [acaY,acfg],acfi)
+; (*: [acaX,acaX],acfe)
+; (acfq,acfs)
+; (acfe,acfi)
 
 ; WANTEDS (Thoralf style)
-; (ac55,ac0A)
+; (acfs,acaX)
 
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
-;      [WD] hole{co_ac5e} {2}:: fsk0 ~ a (CNonCanonical)
-;  =>  (= ac55 ac0A)
+;      [WD] hole{co_acfA} {2}:: fsk0 ~ a (CNonCanonical)
+;  =>  (= acfs acaX)
 
 ; GIVENS (names)
-;  ac0A  <=  a
-;  ac0B  <=  b
-;  ac4R  <=  fsk_ac4R
-;  ac4T  <=  fsk_ac4T
-;  ac4V  <=  fsk_ac4V
-;  ac4Z  <=  fsk_ac4Z
-;  ac51  <=  fsk_ac51
-;  ac53  <=  fsk_ac53
-;  ac55  <=  fsk_ac55
+;  acaX  <=  a
+;  acaY  <=  b
+;  acfe  <=  fsk_acfe
+;  acfg  <=  fsk_acfg
+;  acfi  <=  fsk_acfi
+;  acfm  <=  fsk_acfm
+;  acfo  <=  fsk_acfo
+;  acfq  <=  fsk_acfq
+;  acfs  <=  fsk_acfs
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const ac0A (Array String Int))
-; (declare-const ac0B (Array String Int))
-; (declare-const ac4R (Array String Int))
-; (declare-const ac4T (Array String Int))
-; (declare-const ac4V (Array String Int))
-; (declare-const ac4Z (Array String Int))
-; (declare-const ac51 (Array String Int))
-; (declare-const ac53 (Array String Int))
-; (declare-const ac55 (Array String Int))
+; (declare-const acaX (Array String Int))
+; (declare-const acaY (Array String Int))
+; (declare-const acfe (Array String Int))
+; (declare-const acfg (Array String Int))
+; (declare-const acfi (Array String Int))
+; (declare-const acfm (Array String Int))
+; (declare-const acfo (Array String Int))
+; (declare-const acfq (Array String Int))
+; (declare-const acfs (Array String Int))
 (declare-const
-   ac0A
+   acaX
    (Array String Int))
 (declare-const
-   ac0B
+   acaY
    (Array String Int))
 (declare-const
-   ac4R
+   acfe
    (Array String Int))
 (declare-const
-   ac4T
+   acfg
    (Array String Int))
 (declare-const
-   ac4V
+   acfi
    (Array String Int))
 (declare-const
-   ac4Z
+   acfm
    (Array String Int))
 (declare-const
-   ac51
+   acfo
    (Array String Int))
 (declare-const
-   ac53
+   acfq
    (Array String Int))
 (declare-const
-   ac55
+   acfs
    (Array String Int))
 (assert
    (!
@@ -21566,7 +20872,7 @@
               const
               (Array String Int))
            0)
-         ac55)
+         acfs)
       :named
       given-5.1))
 (assert
@@ -21578,9 +20884,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0B
-           ac4V)
-         ac4Z)
+           acaY
+           acfi)
+         acfm)
       :named
       given-5.2))
 (assert
@@ -21592,9 +20898,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0B
-           ac4Z)
-         ac51)
+           acaY
+           acfm)
+         acfo)
       :named
       given-5.3))
 (assert
@@ -21606,9 +20912,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0B
-           ac51)
-         ac53)
+           acaY
+           acfo)
+         acfq)
       :named
       given-5.4))
 (assert
@@ -21620,9 +20926,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0B
-           ac0B)
-         ac4T)
+           acaY
+           acaY)
+         acfg)
       :named
       given-5.5))
 (assert
@@ -21634,9 +20940,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0B
-           ac4T)
-         ac4V)
+           acaY
+           acfg)
+         acfi)
       :named
       given-5.6))
 (assert
@@ -21648,19 +20954,19 @@
               (+
                  (Int Int)
                  Int))
-           ac0A
-           ac0A)
-         ac4R)
+           acaX
+           acaX)
+         acfe)
       :named
       given-5.7))
 (assert
    (!
-      (= ac53 ac55)
+      (= acfq acfs)
       :named
       given-5.8))
 (assert
    (!
-      (= ac4R ac4V)
+      (= acfe acfi)
       :named
       given-5.9))
 (check-sat)
@@ -21668,18 +20974,18 @@
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
-;      [WD] hole{co_ac5e} {2}:: fsk0 ~ a (CNonCanonical)
-;  =>  (= ac55 ac0A)
+;      [WD] hole{co_acfA} {2}:: fsk0 ~ a (CNonCanonical)
+;  =>  (= acfs acaX)
 
 ; WANTEDS (names)
-;  ac0A  <=  a
-;  ac55  <=  fsk_ac55
+;  acaX  <=  a
+;  acfs  <=  fsk_acfs
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= ac55 ac0A))
+         (= acfs acaX))
       :named
       wanted-5))
 (check-sat)
@@ -21696,7 +21002,7 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         ac55)
+;         acfs)
 ;      :named
 ;      given-5.1)
 ;   (!
@@ -21707,9 +21013,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0B
-;           ac4V)
-;         ac4Z)
+;           acaY
+;           acfi)
+;         acfm)
 ;      :named
 ;      given-5.2)
 ;   (!
@@ -21720,9 +21026,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0B
-;           ac4Z)
-;         ac51)
+;           acaY
+;           acfm)
+;         acfo)
 ;      :named
 ;      given-5.3)
 ;   (!
@@ -21733,9 +21039,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0B
-;           ac51)
-;         ac53)
+;           acaY
+;           acfo)
+;         acfq)
 ;      :named
 ;      given-5.4)
 ;   (!
@@ -21746,9 +21052,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0B
-;           ac0B)
-;         ac4T)
+;           acaY
+;           acaY)
+;         acfg)
 ;      :named
 ;      given-5.5)
 ;   (!
@@ -21759,9 +21065,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0B
-;           ac4T)
-;         ac4V)
+;           acaY
+;           acfg)
+;         acfi)
 ;      :named
 ;      given-5.6)
 ;   (!
@@ -21772,22 +21078,22 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0A
-;           ac0A)
-;         ac4R)
+;           acaX
+;           acaX)
+;         acfe)
 ;      :named
 ;      given-5.7)
 ;   (!
-;      (= ac53 ac55)
+;      (= acfq acfs)
 ;      :named
 ;      given-5.8)
 ;   (!
-;      (= ac4R ac4V)
+;      (= acfe acfi)
 ;      :named
 ;      given-5.9)
 ;   (!
 ;      (not
-;         (= ac55 ac0A))
+;         (= acfs acaX))
 ;      :named
 ;      wanted-5))
 (get-unsat-core)
@@ -21806,44 +21112,44 @@
 (echo "solver-start-cycle-6")
 
 ; GIVENS (GHC style)
-; [G] co_ac5j {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_ac5h {1}:: (a *: a) ~ fsk0 (CNonCanonical)
-; [G] co_ac5k {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_acfF {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_acfD {1}:: (a *: a) ~ fsk0 (CNonCanonical)
+; [G] co_acfG {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_ac5o} {2}:: fsk0 ~ a (CNonCanonical)
+; [WD] hole{co_acfJ} {2}:: fsk0 ~ a (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],ac5i)
-; (*: [ac0I,ac0I],ac5g)
-; (ac5g,ac5i)
+; (One [],acfE)
+; (*: [acb5,acb5],acfC)
+; (acfC,acfE)
 
 ; WANTEDS (Thoralf style)
-; (ac5i,ac0I)
+; (acfE,acb5)
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] hole{co_ac5o} {2}:: fsk0 ~ a (CNonCanonical)
-;  =>  (= ac5i ac0I)
+;      [WD] hole{co_acfJ} {2}:: fsk0 ~ a (CNonCanonical)
+;  =>  (= acfE acb5)
 
 ; GIVENS (names)
-;  ac0I  <=  a
-;  ac5g  <=  fsk_ac5g
-;  ac5i  <=  fsk_ac5i
+;  acb5  <=  a
+;  acfC  <=  fsk_acfC
+;  acfE  <=  fsk_acfE
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const ac0I (Array String Int))
-; (declare-const ac5g (Array String Int))
-; (declare-const ac5i (Array String Int))
+; (declare-const acb5 (Array String Int))
+; (declare-const acfC (Array String Int))
+; (declare-const acfE (Array String Int))
 (declare-const
-   ac0I
+   acb5
    (Array String Int))
 (declare-const
-   ac5g
+   acfC
    (Array String Int))
 (declare-const
-   ac5i
+   acfE
    (Array String Int))
 (assert
    (!
@@ -21853,7 +21159,7 @@
               const
               (Array String Int))
            0)
-         ac5i)
+         acfE)
       :named
       given-6.1))
 (assert
@@ -21865,14 +21171,14 @@
               (+
                  (Int Int)
                  Int))
-           ac0I
-           ac0I)
-         ac5g)
+           acb5
+           acb5)
+         acfC)
       :named
       given-6.2))
 (assert
    (!
-      (= ac5g ac5i)
+      (= acfC acfE)
       :named
       given-6.3))
 (check-sat)
@@ -21880,18 +21186,18 @@
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] hole{co_ac5o} {2}:: fsk0 ~ a (CNonCanonical)
-;  =>  (= ac5i ac0I)
+;      [WD] hole{co_acfJ} {2}:: fsk0 ~ a (CNonCanonical)
+;  =>  (= acfE acb5)
 
 ; WANTEDS (names)
-;  ac0I  <=  a
-;  ac5i  <=  fsk_ac5i
+;  acb5  <=  a
+;  acfE  <=  fsk_acfE
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= ac5i ac0I))
+         (= acfE acb5))
       :named
       wanted-6))
 (check-sat)
@@ -21908,7 +21214,7 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         ac5i)
+;         acfE)
 ;      :named
 ;      given-6.1)
 ;   (!
@@ -21919,18 +21225,18 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0I
-;           ac0I)
-;         ac5g)
+;           acb5
+;           acb5)
+;         acfC)
 ;      :named
 ;      given-6.2)
 ;   (!
-;      (= ac5g ac5i)
+;      (= acfC acfE)
 ;      :named
 ;      given-6.3)
 ;   (!
 ;      (not
-;         (= ac5i ac0I))
+;         (= acfE acb5))
 ;      :named
 ;      wanted-6))
 (get-unsat-core)
@@ -21940,56 +21246,56 @@
 (echo "solver-start-cycle-7")
 
 ; GIVENS (GHC style)
-; [G] co_ac5w {2}:: (v *: v) ~ fsk0 (CNonCanonical)
-; [G] co_ac5r {1}:: (v *: w) ~ fsk0 (CNonCanonical)
-; [G] co_ac5s {1}:: fsk0 ~ u (CNonCanonical)
-; [G] co_ac5y {1}:: fsk0 ~ v (CNonCanonical)
+; [G] co_acfR {2}:: (v *: v) ~ fsk0 (CNonCanonical)
+; [G] co_acfM {1}:: (v *: w) ~ fsk0 (CNonCanonical)
+; [G] co_acfN {1}:: fsk0 ~ u (CNonCanonical)
+; [G] co_acfT {1}:: fsk0 ~ v (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_ac0W} {0}:: u ~ w (CNonCanonical)
+; [WD] hole{co_acbi} {0}:: u ~ w (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (*: [ac0P,ac0P],ac5v)
-; (*: [ac0P,ac0Q],ac5q)
-; (ac5q,ac0O)
-; (ac5v,ac0P)
+; (*: [acbc,acbc],acfQ)
+; (*: [acbc,acbd],acfL)
+; (acfL,acbb)
+; (acfQ,acbc)
 
 ; WANTEDS (Thoralf style)
-; (ac0O,ac0Q)
+; (acbb,acbd)
 
 (echo "givens-start-cycle-7")
 ; GIVENS (conversions)
-;      [WD] hole{co_ac0W} {0}:: u ~ w (CNonCanonical)
-;  =>  (= ac0O ac0Q)
+;      [WD] hole{co_acbi} {0}:: u ~ w (CNonCanonical)
+;  =>  (= acbb acbd)
 
 ; GIVENS (names)
-;  ac0O  <=  u
-;  ac0P  <=  v
-;  ac0Q  <=  w
-;  ac5q  <=  fsk_ac5q
-;  ac5v  <=  fsk_ac5v
+;  acbb  <=  u
+;  acbc  <=  v
+;  acbd  <=  w
+;  acfL  <=  fsk_acfL
+;  acfQ  <=  fsk_acfQ
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const ac0O (Array String Int))
-; (declare-const ac0P (Array String Int))
-; (declare-const ac0Q (Array String Int))
-; (declare-const ac5q (Array String Int))
-; (declare-const ac5v (Array String Int))
+; (declare-const acbb (Array String Int))
+; (declare-const acbc (Array String Int))
+; (declare-const acbd (Array String Int))
+; (declare-const acfL (Array String Int))
+; (declare-const acfQ (Array String Int))
 (declare-const
-   ac0O
+   acbb
    (Array String Int))
 (declare-const
-   ac0P
+   acbc
    (Array String Int))
 (declare-const
-   ac0Q
+   acbd
    (Array String Int))
 (declare-const
-   ac5q
+   acfL
    (Array String Int))
 (declare-const
-   ac5v
+   acfQ
    (Array String Int))
 (assert
    (!
@@ -22000,9 +21306,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0P
-           ac0P)
-         ac5v)
+           acbc
+           acbc)
+         acfQ)
       :named
       given-7.1))
 (assert
@@ -22014,19 +21320,19 @@
               (+
                  (Int Int)
                  Int))
-           ac0P
-           ac0Q)
-         ac5q)
+           acbc
+           acbd)
+         acfL)
       :named
       given-7.2))
 (assert
    (!
-      (= ac5q ac0O)
+      (= acfL acbb)
       :named
       given-7.3))
 (assert
    (!
-      (= ac5v ac0P)
+      (= acfQ acbc)
       :named
       given-7.4))
 (check-sat)
@@ -22034,18 +21340,18 @@
 (echo "givens-finish-cycle-7")
 (echo "wanteds-start-cycle-7")
 ; WANTEDS (conversions)
-;      [WD] hole{co_ac0W} {0}:: u ~ w (CNonCanonical)
-;  =>  (= ac0O ac0Q)
+;      [WD] hole{co_acbi} {0}:: u ~ w (CNonCanonical)
+;  =>  (= acbb acbd)
 
 ; WANTEDS (names)
-;  ac0O  <=  u
-;  ac0Q  <=  w
+;  acbb  <=  u
+;  acbd  <=  w
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= ac0O ac0Q))
+         (= acbb acbd))
       :named
       wanted-7))
 (check-sat)
@@ -22063,9 +21369,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0P
-;           ac0P)
-;         ac5v)
+;           acbc
+;           acbc)
+;         acfQ)
 ;      :named
 ;      given-7.1)
 ;   (!
@@ -22076,97 +21382,97 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0P
-;           ac0Q)
-;         ac5q)
+;           acbc
+;           acbd)
+;         acfL)
 ;      :named
 ;      given-7.2)
 ;   (!
-;      (= ac5q ac0O)
+;      (= acfL acbb)
 ;      :named
 ;      given-7.3)
 ;   (!
-;      (= ac5v ac0P)
+;      (= acfQ acbc)
 ;      :named
 ;      given-7.4)
 ;   (!
 ;      (not
-;         (= ac0O ac0Q))
+;         (= acbb acbd))
 ;      :named
 ;      wanted-7))
 (get-unsat-core)
-; (given-7.1 given-7.2 given-7.4 given-7.3 wanted-7)
+; (given-7.1 given-7.3 given-7.2 given-7.4 wanted-7)
 (pop 1)
 (echo "solver-finish-cycle-7")
 (echo "solver-start-cycle-8")
 
 ; GIVENS (GHC style)
-; [G] co_ac5C {1}:: One ~ fsk0 (CNonCanonical)
-; [G] co_ac5I {3}:: Base "kg" ~ fsk0 (CNonCanonical)
-; [G] co_ac5E {2}:: (w *: w) ~ fsk0 (CNonCanonical)
-; [G] co_ac5K {2}:: (fsk0 *: fsk0) ~ fsk1 (CNonCanonical)
-; [G] co_ac5M {1}:: (fsk0 /: fsk1) ~ fsk2 (CNonCanonical)
-; [G] co_ac5G {1}:: (fsk0 /: fsk1) ~ fsk2 (CNonCanonical)
-; [G] co_ac5O {1}:: fsk0 ~ fsk1 (CNonCanonical)
+; [G] co_acfX {1}:: One ~ fsk0 (CNonCanonical)
+; [G] co_acg3 {3}:: Base "kg" ~ fsk0 (CNonCanonical)
+; [G] co_acfZ {2}:: (w *: w) ~ fsk0 (CNonCanonical)
+; [G] co_acg5 {2}:: (fsk0 *: fsk0) ~ fsk1 (CNonCanonical)
+; [G] co_acg7 {1}:: (fsk0 /: fsk1) ~ fsk2 (CNonCanonical)
+; [G] co_acg1 {1}:: (fsk0 /: fsk1) ~ fsk2 (CNonCanonical)
+; [G] co_acg9 {1}:: fsk0 ~ fsk1 (CNonCanonical)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_ac5S} {2}:: fsk0 ~ w (CNonCanonical)
+; [WD] hole{co_acgc} {2}:: fsk0 ~ w (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (One [],ac5B)
-; (Base ["kg"],ac5H)
-; (*: [ac0Y,ac0Y],ac5D)
-; (*: [ac5H,ac5H],ac5J)
-; (/: [ac5B,ac5J],ac5L)
-; (/: [ac5B,ac5D],ac5F)
-; (ac5F,ac5L)
+; (One [],acfW)
+; (Base ["kg"],acg2)
+; (*: [acbl,acbl],acfY)
+; (*: [acg2,acg2],acg4)
+; (/: [acfW,acg4],acg6)
+; (/: [acfW,acfY],acg0)
+; (acg0,acg6)
 
 ; WANTEDS (Thoralf style)
-; (ac5H,ac0Y)
+; (acg2,acbl)
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] hole{co_ac5S} {2}:: fsk0 ~ w (CNonCanonical)
-;  =>  (= ac5H ac0Y)
+;      [WD] hole{co_acgc} {2}:: fsk0 ~ w (CNonCanonical)
+;  =>  (= acg2 acbl)
 
 ; GIVENS (names)
-;  ac0Y  <=  w
-;  ac5B  <=  fsk_ac5B
-;  ac5D  <=  fsk_ac5D
-;  ac5F  <=  fsk_ac5F
-;  ac5H  <=  fsk_ac5H
-;  ac5J  <=  fsk_ac5J
-;  ac5L  <=  fsk_ac5L
+;  acbl  <=  w
+;  acfW  <=  fsk_acfW
+;  acfY  <=  fsk_acfY
+;  acg0  <=  fsk_acg0
+;  acg2  <=  fsk_acg2
+;  acg4  <=  fsk_acg4
+;  acg6  <=  fsk_acg6
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const ac0Y (Array String Int))
-; (declare-const ac5B (Array String Int))
-; (declare-const ac5D (Array String Int))
-; (declare-const ac5F (Array String Int))
-; (declare-const ac5H (Array String Int))
-; (declare-const ac5J (Array String Int))
-; (declare-const ac5L (Array String Int))
+; (declare-const acbl (Array String Int))
+; (declare-const acfW (Array String Int))
+; (declare-const acfY (Array String Int))
+; (declare-const acg0 (Array String Int))
+; (declare-const acg2 (Array String Int))
+; (declare-const acg4 (Array String Int))
+; (declare-const acg6 (Array String Int))
 (declare-const
-   ac0Y
+   acbl
    (Array String Int))
 (declare-const
-   ac5B
+   acfW
    (Array String Int))
 (declare-const
-   ac5D
+   acfY
    (Array String Int))
 (declare-const
-   ac5F
+   acg0
    (Array String Int))
 (declare-const
-   ac5H
+   acg2
    (Array String Int))
 (declare-const
-   ac5J
+   acg4
    (Array String Int))
 (declare-const
-   ac5L
+   acg6
    (Array String Int))
 (assert
    (!
@@ -22176,14 +21482,14 @@
               const
               (Array String Int))
            0)
-         ac5B)
+         acfW)
       :named
       given-8.1))
 (assert
    (!
       (=
          (store base "kg" one)
-         ac5H)
+         acg2)
       :named
       given-8.2))
 (assert
@@ -22195,9 +21501,9 @@
               (+
                  (Int Int)
                  Int))
-           ac0Y
-           ac0Y)
-         ac5D)
+           acbl
+           acbl)
+         acfY)
       :named
       given-8.3))
 (assert
@@ -22209,9 +21515,9 @@
               (+
                  (Int Int)
                  Int))
-           ac5H
-           ac5H)
-         ac5J)
+           acg2
+           acg2)
+         acg4)
       :named
       given-8.4))
 (assert
@@ -22223,9 +21529,9 @@
               (-
                  (Int Int)
                  Int))
-           ac5B
-           ac5J)
-         ac5L)
+           acfW
+           acg4)
+         acg6)
       :named
       given-8.5))
 (assert
@@ -22237,14 +21543,14 @@
               (-
                  (Int Int)
                  Int))
-           ac5B
-           ac5D)
-         ac5F)
+           acfW
+           acfY)
+         acg0)
       :named
       given-8.6))
 (assert
    (!
-      (= ac5F ac5L)
+      (= acg0 acg6)
       :named
       given-8.7))
 (check-sat)
@@ -22252,18 +21558,18 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] hole{co_ac5S} {2}:: fsk0 ~ w (CNonCanonical)
-;  =>  (= ac5H ac0Y)
+;      [WD] hole{co_acgc} {2}:: fsk0 ~ w (CNonCanonical)
+;  =>  (= acg2 acbl)
 
 ; WANTEDS (names)
-;  ac0Y  <=  w
-;  ac5H  <=  fsk_ac5H
+;  acbl  <=  w
+;  acg2  <=  fsk_acg2
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= ac5H ac0Y))
+         (= acg2 acbl))
       :named
       wanted-8))
 (check-sat)
@@ -22280,13 +21586,13 @@
 ;              const
 ;              (Array String Int))
 ;           0)
-;         ac5B)
+;         acfW)
 ;      :named
 ;      given-8.1)
 ;   (!
 ;      (=
 ;         (store base "kg" one)
-;         ac5H)
+;         acg2)
 ;      :named
 ;      given-8.2)
 ;   (!
@@ -22297,9 +21603,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac0Y
-;           ac0Y)
-;         ac5D)
+;           acbl
+;           acbl)
+;         acfY)
 ;      :named
 ;      given-8.3)
 ;   (!
@@ -22310,9 +21616,9 @@
 ;              (+
 ;                 (Int Int)
 ;                 Int))
-;           ac5H
-;           ac5H)
-;         ac5J)
+;           acg2
+;           acg2)
+;         acg4)
 ;      :named
 ;      given-8.4)
 ;   (!
@@ -22323,9 +21629,9 @@
 ;              (-
 ;                 (Int Int)
 ;                 Int))
-;           ac5B
-;           ac5J)
-;         ac5L)
+;           acfW
+;           acg4)
+;         acg6)
 ;      :named
 ;      given-8.5)
 ;   (!
@@ -22336,28 +21642,28 @@
 ;              (-
 ;                 (Int Int)
 ;                 Int))
-;           ac5B
-;           ac5D)
-;         ac5F)
+;           acfW
+;           acfY)
+;         acg0)
 ;      :named
 ;      given-8.6)
 ;   (!
-;      (= ac5F ac5L)
+;      (= acg0 acg6)
 ;      :named
 ;      given-8.7)
 ;   (!
 ;      (not
-;         (= ac5H ac0Y))
+;         (= acg2 acbl))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
 ; (given-8.4
-;    given-8.5
 ;    given-8.3
-;    given-8.6
 ;    given-8.7
+;    given-8.6
 ;    given-8.2
-;    wanted-8)
+;    wanted-8
+;    given-8.5)
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -22366,17 +21672,18 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_ac6f {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
+; [WD] irred_acgz {0}:: (u *: v) ~~ (u *: v) (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_ac6f {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
+; [WD] irred_acgz {0}:: (u *: v) ~~ (u *: v) (CIrredCan(soluble))
 
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
-;      [WD] irred_ac6f {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
+;      [WD] irred_acgz {0}:: (u *: v)
+;                            ~~ (u *: v) (CIrredCan(soluble))
 ;  =>  (=
 ;    (
 ;      (_
@@ -22384,16 +21691,16 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac16
-;      ac1j)
+;      acbt
+;      acbH)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac16
-;      ac1j))
+;      acbt
+;      acbH))
 
 ; GIVENS (names)
 (push 1)
@@ -22404,7 +21711,8 @@
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
-;      [WD] irred_ac6f {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
+;      [WD] irred_acgz {0}:: (u *: v)
+;                            ~~ (u *: v) (CIrredCan(soluble))
 ;  =>  (=
 ;    (
 ;      (_
@@ -22412,29 +21720,29 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac16
-;      ac1j)
+;      acbt
+;      acbH)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac16
-;      ac1j))
+;      acbt
+;      acbH))
 
 ; WANTEDS (names)
-;  ac16  <=  u
-;  ac1j  <=  v
+;  acbt  <=  u
+;  acbH  <=  v
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const ac16 (Array String Int))
-; (declare-const ac1j (Array String Int))
+; (declare-const acbH (Array String Int))
+; (declare-const acbt (Array String Int))
 (declare-const
-   ac16
+   acbt
    (Array String Int))
 (declare-const
-   ac1j
+   acbH
    (Array String Int))
 (assert
    (!
@@ -22446,16 +21754,16 @@
                  (+
                     (Int Int)
                     Int))
-              ac16
-              ac1j)
+              acbt
+              acbH)
             (
               (_
                  map
                  (+
                     (Int Int)
                     Int))
-              ac16
-              ac1j)))
+              acbt
+              acbH)))
       :named
       wanted-9))
 (check-sat)
@@ -22474,16 +21782,16 @@
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              ac16
-;              ac1j)
+;              acbt
+;              acbH)
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              ac16
-;              ac1j)))
+;              acbt
+;              acbH)))
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
@@ -22496,19 +21804,20 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_ac6u {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
-; [WD] irred_ac6z {0}:: (u *: v) ~~ (v *: u) (CIrredCan(sol))
+; [WD] irred_acgO {0}:: (u *: v) ~~ (u *: v) (CIrredCan(soluble))
+; [WD] irred_acgT {0}:: (u *: v) ~~ (v *: u) (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_ac6u {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
-; [WD] irred_ac6z {0}:: (u *: v) ~~ (v *: u) (CIrredCan(sol))
+; [WD] irred_acgO {0}:: (u *: v) ~~ (u *: v) (CIrredCan(soluble))
+; [WD] irred_acgT {0}:: (u *: v) ~~ (v *: u) (CIrredCan(soluble))
 
 (echo "givens-start-cycle-10")
 ; GIVENS (conversions)
-;      [WD] irred_ac6u {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
+;      [WD] irred_acgO {0}:: (u *: v)
+;                            ~~ (u *: v) (CIrredCan(soluble))
 ;  =>  (=
 ;    (
 ;      (_
@@ -22516,18 +21825,19 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2f
-;      ac2g)
+;      accA
+;      accB)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2f
-;      ac2g))
+;      accA
+;      accB))
 
-;      [WD] irred_ac6z {0}:: (u *: v) ~~ (v *: u) (CIrredCan(sol))
+;      [WD] irred_acgT {0}:: (u *: v)
+;                            ~~ (v *: u) (CIrredCan(soluble))
 ;  =>  (=
 ;    (
 ;      (_
@@ -22535,16 +21845,16 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2f
-;      ac2g)
+;      accA
+;      accB)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2g
-;      ac2f))
+;      accB
+;      accA))
 
 ; GIVENS (names)
 (push 1)
@@ -22555,7 +21865,8 @@
 (echo "givens-finish-cycle-10")
 (echo "wanteds-start-cycle-10")
 ; WANTEDS (conversions)
-;      [WD] irred_ac6u {0}:: (u *: v) ~~ (u *: v) (CIrredCan(sol))
+;      [WD] irred_acgO {0}:: (u *: v)
+;                            ~~ (u *: v) (CIrredCan(soluble))
 ;  =>  (=
 ;    (
 ;      (_
@@ -22563,18 +21874,19 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2f
-;      ac2g)
+;      accA
+;      accB)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2f
-;      ac2g))
+;      accA
+;      accB))
 
-;      [WD] irred_ac6z {0}:: (u *: v) ~~ (v *: u) (CIrredCan(sol))
+;      [WD] irred_acgT {0}:: (u *: v)
+;                            ~~ (v *: u) (CIrredCan(soluble))
 ;  =>  (=
 ;    (
 ;      (_
@@ -22582,29 +21894,29 @@
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2f
-;      ac2g)
+;      accA
+;      accB)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      ac2g
-;      ac2f))
+;      accB
+;      accA))
 
 ; WANTEDS (names)
-;  ac2f  <=  u
-;  ac2g  <=  v
+;  accA  <=  u
+;  accB  <=  v
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const ac2f (Array String Int))
-; (declare-const ac2g (Array String Int))
+; (declare-const accA (Array String Int))
+; (declare-const accB (Array String Int))
 (declare-const
-   ac2f
+   accA
    (Array String Int))
 (declare-const
-   ac2g
+   accB
    (Array String Int))
 (assert
    (!
@@ -22617,16 +21929,16 @@
                     (+
                        (Int Int)
                        Int))
-                 ac2f
-                 ac2g)
+                 accA
+                 accB)
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
-                 ac2f
-                 ac2g)))
+                 accA
+                 accB)))
          (not
             (=
                (
@@ -22635,16 +21947,16 @@
                     (+
                        (Int Int)
                        Int))
-                 ac2f
-                 ac2g)
+                 accA
+                 accB)
                (
                  (_
                     map
                     (+
                        (Int Int)
                        Int))
-                 ac2g
-                 ac2f))))
+                 accB
+                 accA))))
       :named
       wanted-10))
 (check-sat)
@@ -22664,16 +21976,16 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 ac2f
-;                 ac2g)
+;                 accA
+;                 accB)
 ;               (
 ;                 (_
 ;                    map
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 ac2f
-;                 ac2g)))
+;                 accA
+;                 accB)))
 ;         (not
 ;            (=
 ;               (
@@ -22682,16 +21994,16 @@
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 ac2f
-;                 ac2g)
+;                 accA
+;                 accB)
 ;               (
 ;                 (_
 ;                    map
 ;                    (+
 ;                       (Int Int)
 ;                       Int))
-;                 ac2g
-;                 ac2f))))
+;                 accB
+;                 accA))))
 ;      :named
 ;      wanted-10))
 (get-unsat-core)
@@ -22704,26 +22016,26 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] irred_ac6H {0}:: u ~~ (u /: One) (CIrredCan(sol))
+; [WD] irred_ach1 {0}:: u ~~ (u /: One) (CIrredCan(soluble))
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; [WD] irred_ac6H {0}:: u ~~ (u /: One) (CIrredCan(sol))
+; [WD] irred_ach1 {0}:: u ~~ (u /: One) (CIrredCan(soluble))
 
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
-;      [WD] irred_ac6H {0}:: u ~~ (u /: One) (CIrredCan(sol))
+;      [WD] irred_ach1 {0}:: u ~~ (u /: One) (CIrredCan(soluble))
 ;  =>  (=
-;    ac35
+;    acdt
 ;    (
 ;      (_
 ;         map
 ;         (-
 ;            (Int Int)
 ;            Int))
-;      ac35
+;      acdt
 ;      (
 ;        (as
 ;           const
@@ -22739,16 +22051,16 @@
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
-;      [WD] irred_ac6H {0}:: u ~~ (u /: One) (CIrredCan(sol))
+;      [WD] irred_ach1 {0}:: u ~~ (u /: One) (CIrredCan(soluble))
 ;  =>  (=
-;    ac35
+;    acdt
 ;    (
 ;      (_
 ;         map
 ;         (-
 ;            (Int Int)
 ;            Int))
-;      ac35
+;      acdt
 ;      (
 ;        (as
 ;           const
@@ -22756,25 +22068,25 @@
 ;        0)))
 
 ; WANTEDS (names)
-;  ac35  <=  u
+;  acdt  <=  u
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const ac35 (Array String Int))
+; (declare-const acdt (Array String Int))
 (declare-const
-   ac35
+   acdt
    (Array String Int))
 (assert
    (!
       (not
          (=
-            ac35
+            acdt
             (
               (_
                  map
                  (-
                     (Int Int)
                     Int))
-              ac35
+              acdt
               (
                 (as
                    const
@@ -22792,14 +22104,14 @@
 ;   (!
 ;      (not
 ;         (=
-;            ac35
+;            acdt
 ;            (
 ;              (_
 ;                 map
 ;                 (-
 ;                    (Int Int)
 ;                    Int))
-;              ac35
+;              acdt
 ;              (
 ;                (as
 ;                   const
@@ -22811,126 +22123,6 @@
 ; (wanted-11)
 (pop 1)
 (echo "solver-finish-cycle-11")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
 (exit)
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -24306,7 +23498,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_acAd} {1}:: One
+; [WD] hole{co_acGt} {1}:: One
 ;                          ~ (Base "byte" /: Base "byte") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -24317,7 +23509,7 @@
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] hole{co_acAd} {1}:: One
+;      [WD] hole{co_acGt} {1}:: One
 ;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -24343,7 +23535,7 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] hole{co_acAd} {1}:: One
+;      [WD] hole{co_acGt} {1}:: One
 ;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -26981,438 +26173,6 @@
 (assert
    (= enc base))
 (exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
 ; Compiling UnitDefsTests
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -27443,7 +26203,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aeuC} {1}:: One
+; [WD] hole{co_aewS} {1}:: One
 ;                          ~ (Base "byte" /: Base "byte") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -27454,7 +26214,7 @@
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] hole{co_aeuC} {1}:: One
+;      [WD] hole{co_aewS} {1}:: One
 ;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -27480,7 +26240,7 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aeuC} {1}:: One
+;      [WD] hole{co_aewS} {1}:: One
 ;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -27939,17 +26699,17 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aeGK} {1}:: (One *: a0) ~ (a0 *: One) (CNonCanonical)
+; [WD] hole{co_aeKK} {1}:: (One *: a0) ~ (a0 *: One) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (*: [One [],aeFx],*: [aeFx,One []])
+; (*: [One [],aeJx],*: [aeJx,One []])
 
 (echo "givens-start-cycle-1")
 ; GIVENS (conversions)
-;      [WD] hole{co_aeGK} {1}:: (One *: a0)
+;      [WD] hole{co_aeKK} {1}:: (One *: a0)
 ;                               ~ (a0 *: One) (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -27963,14 +26723,14 @@
 ;           const
 ;           (Array String Int))
 ;        0)
-;      aeFx)
+;      aeJx)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeFx
+;      aeJx
 ;      (
 ;        (as
 ;           const
@@ -27986,7 +26746,7 @@
 (echo "givens-finish-cycle-1")
 (echo "wanteds-start-cycle-1")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aeGK} {1}:: (One *: a0)
+;      [WD] hole{co_aeKK} {1}:: (One *: a0)
 ;                               ~ (a0 *: One) (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -28000,14 +26760,14 @@
 ;           const
 ;           (Array String Int))
 ;        0)
-;      aeFx)
+;      aeJx)
 ;    (
 ;      (_
 ;         map
 ;         (+
 ;            (Int Int)
 ;            Int))
-;      aeFx
+;      aeJx
 ;      (
 ;        (as
 ;           const
@@ -28015,12 +26775,12 @@
 ;        0)))
 
 ; WANTEDS (names)
-;  aeFx  <=  a_aeFx
+;  aeJx  <=  a_aeJx
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aeFx (Array String Int))
+; (declare-const aeJx (Array String Int))
 (declare-const
-   aeFx
+   aeJx
    (Array String Int))
 (assert
    (!
@@ -28037,14 +26797,14 @@
                    const
                    (Array String Int))
                 0)
-              aeFx)
+              aeJx)
             (
               (_
                  map
                  (+
                     (Int Int)
                     Int))
-              aeFx
+              aeJx
               (
                 (as
                    const
@@ -28073,14 +26833,14 @@
 ;                   const
 ;                   (Array String Int))
 ;                0)
-;              aeFx)
+;              aeJx)
 ;            (
 ;              (_
 ;                 map
 ;                 (+
 ;                    (Int Int)
 ;                    Int))
-;              aeFx
+;              aeJx
 ;              (
 ;                (as
 ;                   const
@@ -28092,78 +26852,6 @@
 ; (wanted-1)
 (pop 1)
 (echo "solver-finish-cycle-1")
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
 (exit)
 (set-option :print-success true)
 (set-option :produce-models true)
@@ -31886,702 +30574,6 @@
    (= enc base))
 (exit)
 ; Compiling Main
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
-(set-option :print-success true)
-(set-option :produce-models true)
-(set-option :interactive-mode true)
-(set-option :produce-assertions true)
-(set-option :produce-models true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-option :produce-unsat-assumptions true)
-(set-option :produce-unsat-cores true)
-(declare-const one Int)
-(assert
-   (= one 1))
-(declare-const
-   base
-   (Array String Int))
-(declare-const
-   enc
-   (Array String Int))
-(declare-const
-   exp
-   (Array String Int))
-(assert
-   (= enc base))
-(exit)
 (set-option :print-success true)
 (set-option :produce-models true)
 (set-option :interactive-mode true)

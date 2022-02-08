@@ -30,7 +30,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a5UK} {1}:: One
+; [WD] hole{co_aaPq} {1}:: One
 ;                          ~ (Base "byte" /: Base "byte") (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -41,7 +41,7 @@
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_a5UK} {1}:: One
+;      [WD] hole{co_aaPq} {1}:: One
 ;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
@@ -67,7 +67,7 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a5UK} {1}:: One
+;      [WD] hole{co_aaPq} {1}:: One
 ;                               ~ (Base "byte" /: Base "byte") (CNonCanonical)
 ;  =>  (=
 ;    (
