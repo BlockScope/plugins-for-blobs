@@ -8,6 +8,7 @@ import Data.Foldable (traverse_)
 import Data.Either (partitionEithers)
 import Data.Maybe (mapMaybe)
 import Data.List ((\\), foldl1')
+import Control.Monad (when)
 import qualified SimpleSMT as SMT
 import System.IO.Error (catchIOError)
 import GHC.Corroborate hiding (tracePlugin)
@@ -62,7 +63,13 @@ delayEqSolve
     -> TcPluginM TcPluginResult
 delayEqSolve
     dbgPlugin@DebugCts{traceCallCount}
-    dbgSmt
+    dbgSmt@DebugSmt
+        { traceCtsComments
+        , traceDecsSeen
+        , traceAssertions
+        , traceSatModel
+        , traceUnsatCore
+        }
     unpacks
     (unit_givens, unit_wanteds)
     ud
@@ -139,19 +146,25 @@ delayEqSolve
 
                 (decs1Unseen, givenCheck) <- tcPluginIO $ do
                     SMT.echo smtSolver $ "givens-start-cycle-" ++ cycle
-                    putStrLn "; GIVENS (conversions)"
-                    sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
-                    putStrLn "; GIVENS (names)"
-                    printAltNames ns1
+
+                    when traceCtsComments $ do
+                        putStrLn "; GIVENS (conversions)"
+                        sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                        putStrLn "; GIVENS (names)"
+                        printAltNames ns1
+
                     (decs1Unseen, check) <- hideError $ do
                         SMT.push smtSolver
 
                         let decs1Unseen = Set.difference (Set.fromList decs1) seenDecs
                         let decs1Seen = Set.intersection (Set.fromList decs1) seenDecs
-                        putStrLn "; DECS1 (seen) "
-                        printDecs decs1Seen
-                        putStrLn "; DECS1 (unseen) "
-                        printDecs decs1Unseen
+
+                        when traceDecsSeen $ do
+                            putStrLn "; DECS1 (seen) "
+                            printDecs decs1Seen
+                            putStrLn "; DECS1 (unseen) "
+                            printDecs decs1Unseen
+
                         traverse_ (SMT.ackCommand smtSolver) decs1
 
                         sequence_ $
@@ -186,20 +199,25 @@ delayEqSolve
                         SMT.Sat -> do
                             (decs2Unseen, wantedCheck) <- tcPluginIO $ do
                                 SMT.echo smtSolver $ "wanteds-start-cycle-" ++ cycle
-                                putStrLn "; WANTEDS (conversions)"
-                                sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
-                                putStrLn "; WANTEDS (names)"
-                                printAltNames ns2
+
+                                when traceCtsComments $ do
+                                    putStrLn "; WANTEDS (conversions)"
+                                    sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                                    putStrLn "; WANTEDS (names)"
+                                    printAltNames ns2
+
                                 setCheck <- hideError $ do
 
                                     let decs2' = decs2 \\ decs1
                                     let decs2Unseen = Set.difference (Set.fromList decs2') seenDecs 
                                     let decs2Seen = Set.intersection (Set.fromList decs2') seenDecs
 
-                                    putStrLn "; DECS2 (seen) "
-                                    printDecs decs2Seen
-                                    putStrLn "; DECS2 (unseen) "
-                                    printDecs decs2Unseen
+                                    when traceDecsSeen $ do
+                                        putStrLn "; DECS2 (seen) "
+                                        printDecs decs2Seen
+                                        putStrLn "; DECS2 (unseen) "
+                                        printDecs decs2Unseen
+
                                     traverse_ (SMT.ackCommand smtSolver) decs2'
 
                                     let name = "wanted-" ++ cycle 
@@ -212,10 +230,15 @@ delayEqSolve
 
                             solveCheck <- case wantedCheck of
                                 SMT.Unsat -> do
-                                    assertions <- tcPluginIO $ getAssertions smtSolver
-                                    tcPluginIO $ printCommented assertions
-                                    unsatCore <- tcPluginIO $ getUnsatCore smtSolver
-                                    tcPluginIO $ printCommented unsatCore
+
+                                    when traceAssertions $ do
+                                        assertions <- tcPluginIO $ getAssertions smtSolver
+                                        tcPluginIO $ printCommented assertions
+
+                                    when traceUnsatCore $ do
+                                        unsatCore <- tcPluginIO $ getUnsatCore smtSolver
+                                        tcPluginIO $ printCommented unsatCore
+
                                     tcPluginIO (SMT.pop smtSolver)
 
                                     let solvedCts = mapMaybe (addEvTerm . eqCt) wExprs
@@ -227,8 +250,10 @@ delayEqSolve
                                 SMT.Unknown -> tcPluginIO (SMT.pop smtSolver) >> noSolving
 
                                 SMT.Sat ->do
-                                    model <- tcPluginIO $ getModel smtSolver
-                                    tcPluginIO $ printCommented model
+                                    when traceSatModel $ do
+                                        model <- tcPluginIO $ getModel smtSolver
+                                        tcPluginIO $ printCommented model
+
                                     tcPluginIO (SMT.pop smtSolver) >> noSolving
 
                             return (decs2Unseen, solveCheck)

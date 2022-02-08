@@ -1,9 +1,9 @@
 {-# LANGUAGE NamedFieldPuns, RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..), DebugSmtTalk(..)
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..)
     , TraceCarry(..), TraceSmtTalk(..)
-    , defaultDebugSmt, sendOnlyDebugSmt
+    , defaultDebugSmt, nullDebugSmt
     , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
     , tracePlugin, traceSmt, compilingModuleSmtComment
     ) where
@@ -14,12 +14,12 @@ import Plugins.Print (Indent(..), tracePlugin, pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..), ConvEq(..))
 import Plugins.Print.SMT
-    ( DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..)
+    ( DebugSmt(..), DebugSmtRecv(..)
     , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , SmtCommentGivens(..), SmtCommentWanteds(..)
     , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk
-    , defaultDebugSmt, sendOnlyDebugSmt, compilingModuleSmtComment
+    , defaultDebugSmt, nullDebugSmt, compilingModuleSmtComment
     )
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
@@ -83,7 +83,7 @@ pprCommentList (y : ys) =
 
 pprAsSmtCommentCts :: DebugSmt -> ConvCtsStep -> [String]
 pprAsSmtCommentCts
-    DebugSmt{traceSmtTalk = TraceSmtTalk DebugSmtTalk{traceCtsComments}}
+    DebugSmt{traceCtsComments}
     ConvCtsStep{givens = ConvCts _ gs _, wanted = ConvCts _ ws _} =
         [
             ( showString "\n; GIVENS (GHC style)\n"
@@ -114,10 +114,10 @@ pprSDoc x =
     $ unlines [ "; " ++ line | line <- lines . showSDocUnsafe $ ppr x]
 
 traceSmt :: DebugSmt -> String -> TcPluginM ()
-traceSmt DebugSmt{traceSmtTalk = TraceSmtTalk talk, ..} s'
+traceSmt DebugSmt{traceSmtTalk, ..} s'
     | coerce traceCarry
         || coerce traceSmtCts
-        || not (isSilencedTalk talk)= tcPluginIO $ putStrLn s'
+        || not (isSilencedTalk traceSmtTalk)= tcPluginIO $ putStrLn s'
     | otherwise = return ()
 
 instance Outputable ConvCtsStep where

@@ -6,11 +6,10 @@ module Plugins.Print.SMT
     ( TraceCarry(..)
     , TraceSmtTalk(..)
     , TraceSmtCts(..)
-    , DebugSmtTalk(..)
     , DebugSmtRecv(..)
     , DebugSmt(..)
     , defaultDebugSmt
-    , sendOnlyDebugSmt
+    , nullDebugSmt
     , SmtDecls(..)
     , SmtGivens(..)
     , SmtWanteds(..)
@@ -35,14 +34,15 @@ import ThoralfPlugin.Convert (ConvCts(..), ConvEq(..))
 -- | Flag for controlling tracing constraints as SMT s-expressions.
 newtype TraceSmtCts = TraceSmtCts Bool
 
-data DebugSmtTalk =
-    DebugSmtTalk
+-- | Flags for tracing the conversation with the SMT solver (the talk).
+data TraceSmtTalk =
+    TraceSmtTalk
         { traceSend :: Bool
         , traceRecv :: DebugSmtRecv
+        , traceArrow :: Bool
+        -- ^ Print an arrow showing the direction of the communication.
         , traceErr :: Bool
         , traceOther :: Bool
-        , traceArrow :: Bool
-        , traceCtsComments :: Bool
         }
 
 data DebugSmtRecv
@@ -53,22 +53,18 @@ data DebugSmtRecv
         }
     deriving Eq
 
-isSilencedTalk :: DebugSmtTalk -> Bool
-isSilencedTalk DebugSmtTalk{..} =
+isSilencedTalk :: TraceSmtTalk -> Bool
+isSilencedTalk TraceSmtTalk{..} =
     not traceSend
     && isSilencedRecv traceRecv
     && not traceErr
     && not traceOther
     -- NOTE: traceArrow = false does not silence anything but only change the
     -- inclusion of the arrow prefixes.
-    && not traceCtsComments
 
 isSilencedRecv :: DebugSmtRecv -> Bool
 isSilencedRecv (DebugSmtRecvAll b) = b
 isSilencedRecv DebugSmtRecvSome{..} = not traceSuccess && not traceCheckSat
-
--- | Flag for controlling the two-way conversation with the SMT solver.
-newtype TraceSmtTalk = TraceSmtTalk DebugSmtTalk
 
 -- | Flag for controlling tracing of the carry.
 newtype TraceCarry = TraceCarry Bool
@@ -81,8 +77,16 @@ data DebugSmt =
         -- ^ Trace conversions to SMT notation
         , traceSmtTalk :: TraceSmtTalk
         -- ^ Trace the conversation with the SMT solver
+        , traceCtsComments :: Bool
+        , traceDecsSeen :: Bool
+        , traceAssertions :: Bool
+        , traceSatModel :: Bool
+        , traceUnsatCore :: Bool
         }
 
+-- | Default settings for debugging that includes rich information as SMT2
+-- comments; like the constraints, their conversions, the sat result, the
+-- assertions and the model the model.
 defaultDebugSmt :: DebugSmt
 defaultDebugSmt =
     DebugSmt
@@ -90,35 +94,42 @@ defaultDebugSmt =
         , traceSmtCts = TraceSmtCts False
         , traceSmtTalk =
             TraceSmtTalk
-                DebugSmtTalk
-                    { traceSend = True
-                    , traceRecv =
-                        DebugSmtRecvSome
-                            { traceSuccess = False
-                            , traceCheckSat = True
-                            }
-                    , traceErr = False
-                    , traceOther = False
-                    , traceArrow = False
-                    , traceCtsComments = True
-                    }
+                { traceSend = True
+                , traceRecv =
+                    DebugSmtRecvSome
+                        { traceSuccess = False
+                        , traceCheckSat = True
+                        }
+                , traceArrow = False
+                , traceErr = False
+                , traceOther = False
+                }
+        , traceCtsComments = True
+        , traceDecsSeen = True
+        , traceAssertions = True
+        , traceSatModel = True
+        , traceUnsatCore = True
         }
 
-sendOnlyDebugSmt :: DebugSmt
-sendOnlyDebugSmt =
+-- | A null debug setting that does not trace anything.
+nullDebugSmt :: DebugSmt
+nullDebugSmt =
     DebugSmt
         { traceCarry = TraceCarry False
         , traceSmtCts = TraceSmtCts False
         , traceSmtTalk =
             TraceSmtTalk
-                DebugSmtTalk
-                    { traceSend = True
-                    , traceRecv = DebugSmtRecvAll False
-                    , traceErr = False
-                    , traceOther = False
-                    , traceArrow = False
-                    , traceCtsComments = True
-                    }
+                { traceSend = False
+                , traceRecv = DebugSmtRecvAll False
+                , traceArrow = False
+                , traceErr = False
+                , traceOther = False
+                }
+        , traceCtsComments = False
+        , traceDecsSeen = False
+        , traceAssertions = False
+        , traceSatModel = False
+        , traceUnsatCore = False
         }
 
 newtype SmtDecls = SmtDecls [SExpr]

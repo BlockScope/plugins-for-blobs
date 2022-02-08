@@ -34,7 +34,7 @@ import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT (isSilencedTalk)
 import Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtTalk(..), DebugSmtRecv(..), TraceSmtTalk(..)
+    ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..)
     , tracePlugin, traceSmt, pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
     )
 
@@ -62,7 +62,7 @@ thoralfPlugin dbgPlugin dbgSmt pkgModuleName seed =
 
 -- TODO: Contribute upstream to SimpleSMT to avoid matching on string prefixes.
 solverWithLevel :: TraceSmtTalk -> IO SMT.Solver
-solverWithLevel (TraceSmtTalk dbg)
+solverWithLevel dbg
     | isSilencedTalk dbg = grabSMTsolver Nothing
     | otherwise = do
         logger@Logger{logMessage = logMsg} <- SMT.newLogger 0
