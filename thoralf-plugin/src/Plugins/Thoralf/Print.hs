@@ -1,25 +1,22 @@
 {-# LANGUAGE NamedFieldPuns, RecordWildCards #-}
 
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..)
-    , TraceCarry(..), TraceSmtTalk(..)
-    , defaultDebugSmt, nullDebugSmt
+    ( ConvCtsStep(..)
     , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
-    , tracePlugin, traceSmt, compilingModuleSmtComment
     ) where
 
 import Data.Coerce (coerce)
 import GHC.Corroborate hiding (tracePlugin)
-import Plugins.Print (Indent(..), tracePlugin, pprCts)
+import Plugins.Print (Indent(..), pprCts)
 
 import ThoralfPlugin.Convert (ConvCts(..), ConvEq(..))
 import Plugins.Print.SMT
-    ( DebugSmt(..), DebugSmtRecv(..)
-    , TraceCarry(..), TraceSmtTalk(..), TraceSmtCts(..)
+    ( DebugSmt(..)
+    , TraceCarry(..), TraceSmtCts(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , SmtCommentGivens(..), SmtCommentWanteds(..)
-    , pprSmtGivens, pprSmtWanteds, pprSmtDecls, isSilencedTalk
-    , defaultDebugSmt, nullDebugSmt, compilingModuleSmtComment
+    , pprSmtGivens, pprSmtWanteds, pprSmtDecls
+    
     )
 
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
@@ -112,13 +109,6 @@ pprSDoc x =
     -- comment leader to each line once I have the lines.
     showString
     $ unlines [ "; " ++ line | line <- lines . showSDocUnsafe $ ppr x]
-
-traceSmt :: DebugSmt -> String -> TcPluginM ()
-traceSmt DebugSmt{traceSmtTalk, ..} s'
-    | coerce traceCarry
-        || coerce traceSmtCts
-        || not (isSilencedTalk traceSmtTalk)= tcPluginIO $ putStrLn s'
-    | otherwise = return ()
 
 instance Outputable ConvCtsStep where
     ppr ConvCtsStep{givens = ConvCts ns1 gs ds1, wanted = ConvCts ns2 ws ds2} =

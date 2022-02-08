@@ -3,11 +3,12 @@
 module Plugins.Thoralf.UoM.DelayEq (plugin) where
 
 import GHC.Corroborate
+import qualified GHC.Corroborate as C
 import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), TraceCts(..))
 
 import ThoralfPlugin.Encode (thoralfUoMTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Thoralf.Print
+import Plugins.Print.SMT
     ( defaultDebugSmt
 #if __GLASGOW_HASKELL__ >= 806
     , compilingModuleSmtComment
@@ -35,7 +36,7 @@ plugin =
         tc = thoralfDelayEqPlugin dbgCts dbgSmt disEq thoralfUoMTheories
     in
         defaultPlugin
-            { tcPlugin = const . Just $ tracePlugin "thoralf-uom-plugin" tc
+            { tcPlugin = const . Just $ C.tracePlugin "thoralf-uom-plugin" tc
 #if __GLASGOW_HASKELL__ >= 806
             , pluginRecompile = purePlugin
             , parsedResultAction = const . const compilingModuleSmtComment

@@ -1,4 +1,4 @@
-{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE RecordWildCards, NamedFieldPuns #-}
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -21,8 +21,10 @@ module Plugins.Print.SMT
     , pprSmtWanteds
     , isSilencedTalk, isSilencedRecv
     , compilingModuleSmtComment
+    , traceSmt
     ) where
 
+import Data.Coerce (coerce)
 import GHC.Corroborate
 import Control.Monad.IO.Class (MonadIO(..))
 import SimpleSMT (SExpr(..))
@@ -228,3 +230,10 @@ compilingModuleSmtComment m = do
     let msg = "; Compiling " ++ maybe "an unnamed module" moduleNameString (modName m)
     liftIO $ putStrLn msg
     return m
+
+traceSmt :: DebugSmt -> String -> TcPluginM ()
+traceSmt DebugSmt{traceSmtTalk, ..} s'
+    | coerce traceCarry
+        || coerce traceSmtCts
+        || not (isSilencedTalk traceSmtTalk)= tcPluginIO $ putStrLn s'
+    | otherwise = return ()

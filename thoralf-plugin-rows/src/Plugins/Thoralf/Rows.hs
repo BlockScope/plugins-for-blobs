@@ -8,7 +8,7 @@ import Plugins.Print
 import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
-import Plugins.Thoralf.Print
+import Plugins.Print.SMT
     ( defaultDebugSmt
 #if __GLASGOW_HASKELL__ >= 806
     , compilingModuleSmtComment

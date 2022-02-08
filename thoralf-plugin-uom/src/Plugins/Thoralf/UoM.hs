@@ -15,7 +15,7 @@ import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import ThoralfPlugin.Convert (ExtractEq(..))
 import Plugins.Thoralf.TcPlugin
     (ThoralfState(..), mkThoralfInit, thoralfStop, thoralfSolver)
-import Plugins.Thoralf.Print
+import Plugins.Print.SMT
     ( DebugSmt, defaultDebugSmt
 #if __GLASGOW_HASKELL__ >= 806
     , compilingModuleSmtComment

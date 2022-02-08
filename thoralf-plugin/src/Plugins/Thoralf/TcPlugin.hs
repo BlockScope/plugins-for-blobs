@@ -32,11 +32,11 @@ import ThoralfPlugin.Convert
     (ExtractEq(..), EncodingData(..), ConvCts(..), ConvEq(..), convert, justReadSExpr)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Print.SMT (isSilencedTalk)
+import Plugins.Print (tracePlugin)
+import Plugins.Print.SMT
+    (DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..), isSilencedTalk, traceSmt)
 import Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..)
-    , tracePlugin, traceSmt, pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
-    )
+    (ConvCtsStep(..), pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc)
 
 data ThoralfState =
     ThoralfState

@@ -20,9 +20,11 @@ import ThoralfPlugin.Convert (EncodingData(..), ConvCts(..), ConvEq(..), convert
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
-    ( ConvCtsStep(..), DebugSmt(..)
-    , tracePlugin, traceSmt, pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
+    ( ConvCtsStep(..)
+    , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
     )
+import Plugins.Print.SMT (DebugSmt(..), traceSmt)
+import Plugins.Print (tracePlugin)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify (UnitEquality(..), fromUnitEquality)
 import "uom-quantity" Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
