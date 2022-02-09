@@ -2,14 +2,21 @@
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
+-- | This module provides for tracing that is itself valid SMT-2, anything that
+-- is not an s-expression is a @"; comment"@.
 module Plugins.Print.SMT
-    ( TraceCarry(..)
+    (
+     -- * Flags
+      TraceCarry(..)
     , TraceSmtTalk(..)
     , TraceSmtCts(..)
     , DebugSmtRecv(..)
     , DebugSmt(..)
     , defaultDebugSmt
     , nullDebugSmt
+
+    -- * Printing
+    -- $printing
     , SmtDecls(..)
     , SmtGivens(..)
     , SmtWanteds(..)
@@ -19,9 +26,11 @@ module Plugins.Print.SMT
     , pprSmtDecls
     , pprSmtGivens
     , pprSmtWanteds
-    , isSilencedTalk, isSilencedRecv
     , compilingModuleSmtComment
     , traceSmt
+
+    -- * Predicates
+    , isSilencedTalk, isSilencedRecv
     ) where
 
 import Data.Coerce (coerce)
@@ -39,22 +48,50 @@ newtype TraceSmtCts = TraceSmtCts Bool
 -- | Flags for tracing the conversation with the SMT solver (the talk).
 data TraceSmtTalk =
     TraceSmtTalk
-        { traceSend :: Bool
-        , traceRecv :: DebugSmtRecv
+        { traceSend :: Bool -- ^ Trace the sent commands.
+        , traceRecv :: DebugSmtRecv -- ^ Trace the received responses.
         , traceArrow :: Bool
-        -- ^ Print an arrow showing the direction of the communication.
-        , traceErr :: Bool
-        , traceOther :: Bool
+        -- ^ Print a send or recv with arrow prefix showing the direction of the
+        -- communication. With 'traceArrow' set to 'True' the annotated arrow is printed.
+        --
+        -- >>> [send->] (set-option :print-success true)
+        -- >>> [<-recv] success
+        --
+        -- Without 'traceArrow' the arrow is omitted:
+        --
+        -- >>> (set-option :print-success true)
+        -- >>> success
+        , traceErr :: Bool -- ^ Trace errors.
+        , traceOther :: Bool -- ^ Trace other messages.
         }
 
+-- | Trace responses from the SMT solver.
 data DebugSmtRecv
+    -- | Print all responses?
     = DebugSmtRecvAll Bool
+    -- | Print some responses?
     | DebugSmtRecvSome
         { traceSuccess :: Bool
+        -- ^ Trace success, we would have otherwise needed to set that option
+        -- __on__ with the solver but this is done for us by @simple-smt@.
+        -- Without asking, @simple-smt@ also sets the option to produce models
+        -- on too.
+        --
+        -- >>> [send->] (set-option :print-success true)
+        -- >>> [send->] (set-option :produce-models true)
         , traceCheckSat :: Bool
+        -- ^ Trace the result of @(check-sat)@. The expected response is either
+        -- @sat@ or @unsat@.
+        --
+        -- >>> [send->] (check-sat)
+        -- >>> [<-recv] sat
+        --
+        -- >>> [send->] (check-sat)
+        -- >>> [<-recv] unsat
         }
     deriving Eq
 
+-- | Are we not to trace the sent commands and not trace the received responses?
 isSilencedTalk :: TraceSmtTalk -> Bool
 isSilencedTalk TraceSmtTalk{..} =
     not traceSend
@@ -64,6 +101,7 @@ isSilencedTalk TraceSmtTalk{..} =
     -- NOTE: traceArrow = false does not silence anything but only change the
     -- inclusion of the arrow prefixes.
 
+-- | Are we not to trace the received responses?
 isSilencedRecv :: DebugSmtRecv -> Bool
 isSilencedRecv (DebugSmtRecvAll b) = b
 isSilencedRecv DebugSmtRecvSome{..} = not traceSuccess && not traceCheckSat
@@ -80,10 +118,15 @@ data DebugSmt =
         , traceSmtTalk :: TraceSmtTalk
         -- ^ Trace the conversation with the SMT solver
         , traceCtsComments :: Bool
+        -- ^ Trace the constraints we might solve as comments.
         , traceDecsSeen :: Bool
+        -- ^ Note which declarations have been seen.
         , traceAssertions :: Bool
+        -- ^ Trace assertions.
         , traceSatModel :: Bool
+        -- ^ Trace the model of a satisfiable constraint.
         , traceUnsatCore :: Bool
+        -- ^ Trace the unsat core of an unsatisfiable constraint.
         }
 
 -- | Default settings for debugging that includes rich information as SMT2
@@ -134,11 +177,19 @@ nullDebugSmt =
         , traceUnsatCore = False
         }
 
+-- | A list of conversion s-expressions wrapped up for printing.
 newtype SmtDecls = SmtDecls [SExpr]
+
+-- | A list of given constraints converted to s-expressions wrapped up for printing.
 newtype SmtGivens = SmtGivens [SExpr]
+
+-- | A list of wanted constraints converted to s-expressions wrapped up for printing.
 newtype SmtWanteds = SmtWanteds [SExpr]
 
+-- | A list of givens wrapped up for printing.
 newtype SmtCommentGivens = SmtCommentGivens [Ct]
+
+-- | A list of wanteds wrapped up for printing.
 newtype SmtCommentWanteds = SmtCommentWanteds [Ct]
 
 pprSmtList :: Indent -> [SExpr] -> ShowS
@@ -192,6 +243,7 @@ instance Outputable SmtCommentGivens where
         | null cts = text "[]"
         | otherwise = vcat [ppr ct | ct <- cts]
 
+-- | Pretty prints a list of SMT assertions for the givens.
 pprSmtGivens :: Indent -> SmtGivens -> ShowS
 pprSmtGivens _ (SmtGivens []) = showString "[]"
 pprSmtGivens (Indent i) (SmtGivens es) = let tab = replicate (2 * i) ' ' in
@@ -208,6 +260,7 @@ pprSmtGivens (Indent i) (SmtGivens es) = let tab = replicate (2 * i) ' ' in
         (showString tab . showChar ']')
         es
 
+-- | Pretty prints a list of SMT assertions for the wanteds.
 pprSmtWanteds :: Indent -> SmtWanteds -> ShowS
 pprSmtWanteds _ (SmtWanteds []) = showString "[]"
 pprSmtWanteds (Indent i) (SmtWanteds es) = let tab = replicate (2 * i) ' ' in
@@ -224,6 +277,7 @@ pprSmtWanteds (Indent i) (SmtWanteds es) = let tab = replicate (2 * i) ' ' in
         (showString tab . showChar ']')
         es
 
+-- | Adds a SMT2 comment @"; Compiling _"@ naming the module being compiled.
 compilingModuleSmtComment :: MonadIO m => HsParsedModule -> m HsParsedModule
 compilingModuleSmtComment m = do
     let modName = fmap unLoc . hsmodName . unLoc . hpm_module
@@ -231,9 +285,15 @@ compilingModuleSmtComment m = do
     liftIO $ putStrLn msg
     return m
 
+-- | Traces the given string if 'traceSmtTalk' is @True@.
 traceSmt :: DebugSmt -> String -> TcPluginM ()
 traceSmt DebugSmt{traceSmtTalk, ..} s'
     | coerce traceCarry
         || coerce traceSmtCts
         || not (isSilencedTalk traceSmtTalk)= tcPluginIO $ putStrLn s'
     | otherwise = return ()
+
+-- $printing
+--
+-- We use newtypes to define 'Outputable' instances for @[SExpr]@ and
+-- @[Ct]@ when they are givens, wanteds and declarations.
