@@ -66,7 +66,7 @@ in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                       , "ghc-tcplugins-trace"
                       , "ghc-corroborate"
                       , "template-haskell >=2.9"
-                      , "th-printf"
+                      , "th-printf >=0.7"
                       , "uom-quantity"
                       , "uom-th"
                       , "units-parser >=0.1.1.4"

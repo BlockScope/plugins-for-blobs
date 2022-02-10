@@ -23,7 +23,7 @@ in    defs
               , "ghc-tcplugins-extra"
               , "ghc-corroborate"
               , "template-haskell >=2.9"
-              , "th-printf"
+              , "th-printf >=0.7"
               , "uom-quantity"
               , "units-parser >=0.1.1.4"
               ]

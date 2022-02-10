@@ -26,7 +26,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
                 , "mtl"
                 , "simple-smt"
                 , "split"
-                , "th-printf"
+                , "th-printf >=0.7"
                 , "uom-quantity"
                 , "uom-th"
                 , "units-parser >=0.1.1.4"

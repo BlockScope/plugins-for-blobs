@@ -54,7 +54,7 @@ library
     , ghc-tcplugins-extra
     , ghc-tcplugins-trace
     , template-haskell >=2.9
-    , th-printf
+    , th-printf >=0.7
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th

@@ -60,7 +60,7 @@ library
     , mtl
     , simple-smt
     , template-haskell >=2.9
-    , th-printf
+    , th-printf >=0.7
     , thoralf-encode
     , thoralf-plugin
     , thoralf-theory
@@ -100,7 +100,7 @@ test-suite defs
     , tasty
     , tasty-hunit
     , template-haskell >=2.9
-    , th-printf
+    , th-printf >=0.7
     , thoralf-encode
     , thoralf-plugin
     , thoralf-plugin-uom
@@ -135,7 +135,7 @@ test-suite delay-eq
     , tasty
     , tasty-hunit
     , template-haskell >=2.9
-    , th-printf
+    , th-printf >=0.7
     , thoralf-encode
     , thoralf-plugin
     , thoralf-plugin-uom
@@ -170,7 +170,7 @@ test-suite force
     , tasty
     , tasty-hunit
     , template-haskell >=2.9
-    , th-printf
+    , th-printf >=0.7
     , thoralf-encode
     , thoralf-plugin
     , thoralf-plugin-uom
@@ -211,7 +211,7 @@ test-suite units
     , tasty
     , tasty-hunit
     , template-haskell >=2.9
-    , th-printf
+    , th-printf >=0.7
     , thoralf-encode
     , thoralf-plugin
     , thoralf-plugin-uom
@@ -274,7 +274,7 @@ test-suite uom-diy
     , tasty-quickcheck
     , tasty-th
     , template-haskell
-    , th-printf
+    , th-printf >=0.7
     , thoralf-encode
     , thoralf-plugin
     , thoralf-plugin-uom
@@ -314,7 +314,7 @@ test-suite uom-quantity
     , tasty-quickcheck
     , tasty-th
     , template-haskell
-    , th-printf
+    , th-printf >=0.7
     , thoralf-encode
     , thoralf-plugin
     , thoralf-plugin-uom
