@@ -57,214 +57,214 @@
 (echo "solver-start-cycle-2")
 
 ; GIVENS (GHC style)
-; [G] co_aGZ {1}:: IntersectL b_aGt[sk:1] c_aGv[sk:1]
-;                  ~# bc_aGx[sk:1] (CEqCan)
-; [G] co_aGW {1}:: IntersectL ab_aGu[sk:1] c_aGv[sk:1]
-;                  ~# abc_aGw[sk:1] (CEqCan)
-; [G] co_aGT {1}:: IntersectL a_aGs[sk:1] b_aGt[sk:1]
-;                  ~# ab_aGu[sk:1] (CEqCan)
-; [G] co_aH2 {1}:: IntersectL a_aGs[sk:1] bc_aGx[sk:1]
-;                  ~# abc'_aGy[sk:1] (CEqCan)
+; [G] co_aGY {1}:: IntersectL b_aGs[sk:1] c_aGu[sk:1]
+;                  ~# bc_aGw[sk:1] (CEqCan)
+; [G] co_aGV {1}:: IntersectL ab_aGt[sk:1] c_aGu[sk:1]
+;                  ~# abc_aGv[sk:1] (CEqCan)
+; [G] co_aGS {1}:: IntersectL a_aGr[sk:1] b_aGs[sk:1]
+;                  ~# ab_aGt[sk:1] (CEqCan)
+; [G] co_aH1 {1}:: IntersectL a_aGr[sk:1] bc_aGw[sk:1]
+;                  ~# abc'_aGx[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aH9} {2}:: IntersectL
-;                           a_aGF[tau:1] (IntersectL b_aGG[tau:1] c_aGI[tau:1])
-;                         ~# abc'_aGy[sk:1] (CNonCanonical)
-; [WD] hole{co_aH6} {2}:: IntersectL
-;                           (IntersectL a_aGF[tau:1] b_aGG[tau:1]) c_aGI[tau:1]
-;                         ~# abc_aGw[sk:1] (CNonCanonical)
+; [WD] hole{co_aH8} {2}:: IntersectL
+;                           a_aGE[tau:1] (IntersectL b_aGF[tau:1] c_aGH[tau:1])
+;                         ~# abc'_aGx[sk:1] (CNonCanonical)
+; [WD] hole{co_aH5} {2}:: IntersectL
+;                           (IntersectL a_aGE[tau:1] b_aGF[tau:1]) c_aGH[tau:1]
+;                         ~# abc_aGv[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (IntersectL [aGq,aGr,aGt,aGv],aGx)
-; (IntersectL [aGq,aGr,aGu,aGv],aGw)
-; (IntersectL [aGq,aGr,aGs,aGt],aGu)
-; (IntersectL [aGq,aGr,aGs,aGx],aGy)
+; (IntersectL [aGp,aGq,aGs,aGu],aGw)
+; (IntersectL [aGp,aGq,aGt,aGu],aGv)
+; (IntersectL [aGp,aGq,aGr,aGs],aGt)
+; (IntersectL [aGp,aGq,aGr,aGw],aGx)
 
 ; WANTEDS (Thoralf style)
-; (IntersectL [aGq,aGr,aGF,IntersectL [aGq,aGr,aGG,aGI]],aGy)
-; (IntersectL [aGq,aGr,IntersectL [aGq,aGr,aGF,aGG],aGI],aGw)
+; (IntersectL [aGp,aGq,aGE,IntersectL [aGp,aGq,aGF,aGH]],aGx)
+; (IntersectL [aGp,aGq,IntersectL [aGp,aGq,aGE,aGF],aGH],aGv)
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_aH9} {2}:: IntersectL
-;                                a_aGF[tau:1] (IntersectL b_aGG[tau:1] c_aGI[tau:1])
-;                              ~# abc'_aGy[sk:1] (CNonCanonical)
+;      [WD] hole{co_aH8} {2}:: IntersectL
+;                                a_aGE[tau:1] (IntersectL b_aGF[tau:1] c_aGH[tau:1])
+;                              ~# abc'_aGx[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map both1941158302631071856)
-;      aGF
+;      (_ map both1941159402142700077)
+;      aGE
 ;      (
-;        (_ map both1941158302631071856)
-;        aGG
-;        aGI))
-;    aGy)
-
-;      [WD] hole{co_aH6} {2}:: IntersectL
-;                                (IntersectL a_aGF[tau:1] b_aGG[tau:1]) c_aGI[tau:1]
-;                              ~# abc_aGw[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map both1941158302631071856)
-;      (
-;        (_ map both1941158302631071856)
+;        (_ map both1941159402142700077)
 ;        aGF
-;        aGG)
-;      aGI)
-;    aGw)
+;        aGH))
+;    aGx)
+
+;      [WD] hole{co_aH5} {2}:: IntersectL
+;                                (IntersectL a_aGE[tau:1] b_aGF[tau:1]) c_aGH[tau:1]
+;                              ~# abc_aGv[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map both1941159402142700077)
+;      (
+;        (_ map both1941159402142700077)
+;        aGE
+;        aGF)
+;      aGH)
+;    aGv)
 
 ; GIVENS (names)
-;  aGs  <=  a_aGs[sk:1]
-;  aGt  <=  b_aGt[sk:1]
-;  aGu  <=  ab_aGu[sk:1]
-;  aGv  <=  c_aGv[sk:1]
-;  aGw  <=  abc_aGw[sk:1]
-;  aGx  <=  bc_aGx[sk:1]
-;  aGy  <=  abc'_aGy[sk:1]
+;  aGr  <=  a_aGr[sk:1]
+;  aGs  <=  b_aGs[sk:1]
+;  aGt  <=  ab_aGt[sk:1]
+;  aGu  <=  c_aGu[sk:1]
+;  aGv  <=  abc_aGv[sk:1]
+;  aGw  <=  bc_aGw[sk:1]
+;  aGx  <=  abc'_aGx[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (assert (forall ((x (Maybe SortaGr)) (y (Maybe SortaGr))) (=> (and ((_ is (just (SortaGr) (Maybe SortaGr))) x) ((_ is (just (SortaGr) (Maybe SortaGr))) y)) (= (both1941158302631071856 x y) x))))
-; (assert (forall ((y (Maybe SortaGr))) (= (both1941158302631071856 nothing y) nothing)))
-; (assert (forall ((y (Maybe SortaGr))) (= (both1941158302631071856 y (as nothing (Maybe SortaGr))) (as nothing (Maybe SortaGr)))))
-; (declare-const aGs (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGt (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGu (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGv (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGw (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGx (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGy (Array SortaGq (Maybe SortaGr)))
-; (declare-fun both1941158302631071856 ((Maybe SortaGr) (Maybe SortaGr)) (Maybe SortaGr))
+; (assert (forall ((x (Maybe SortaGq)) (y (Maybe SortaGq))) (=> (and ((_ is (just (SortaGq) (Maybe SortaGq))) x) ((_ is (just (SortaGq) (Maybe SortaGq))) y)) (= (both1941159402142700077 x y) x))))
+; (assert (forall ((y (Maybe SortaGq))) (= (both1941159402142700077 nothing y) nothing)))
+; (assert (forall ((y (Maybe SortaGq))) (= (both1941159402142700077 y (as nothing (Maybe SortaGq))) (as nothing (Maybe SortaGq)))))
+; (declare-const aGr (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGs (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGt (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGu (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGv (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGw (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGx (Array SortaGp (Maybe SortaGq)))
+; (declare-fun both1941159402142700077 ((Maybe SortaGq) (Maybe SortaGq)) (Maybe SortaGq))
+; (declare-sort SortaGp)
 ; (declare-sort SortaGq)
-; (declare-sort SortaGr)
+(declare-sort SortaGp)
 (declare-sort SortaGq)
-(declare-sort SortaGr)
+(declare-const
+   aGr
+   (Array
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGs
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGt
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGu
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGv
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGw
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGx
    (Array
-      SortaGq
-      (Maybe SortaGr)))
-(declare-const
-   aGy
-   (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-fun
-   both1941158302631071856
+   both1941159402142700077
    (
-     (Maybe SortaGr)
-     (Maybe SortaGr))
-   (Maybe SortaGr))
+     (Maybe SortaGq)
+     (Maybe SortaGq))
+   (Maybe SortaGq))
 (assert
    (forall
       (
         (y
-           (Maybe SortaGr)))
+           (Maybe SortaGq)))
       (=
-         (both1941158302631071856
+         (both1941159402142700077
             y
             (as
                nothing
-               (Maybe SortaGr)))
+               (Maybe SortaGq)))
          (as
             nothing
-            (Maybe SortaGr)))))
+            (Maybe SortaGq)))))
 (assert
    (forall
       (
         (y
-           (Maybe SortaGr)))
+           (Maybe SortaGq)))
       (=
-         (both1941158302631071856 nothing y)
+         (both1941159402142700077 nothing y)
          nothing)))
 (assert
    (forall
       (
         (x
-           (Maybe SortaGr))
+           (Maybe SortaGq))
         (y
-           (Maybe SortaGr)))
+           (Maybe SortaGq)))
       (=>
          (and
             (
               (_
                  is
                  (just
-                    (SortaGr)
-                    (Maybe SortaGr)))
+                    (SortaGq)
+                    (Maybe SortaGq)))
               x)
             (
               (_
                  is
                  (just
-                    (SortaGr)
-                    (Maybe SortaGr)))
+                    (SortaGq)
+                    (Maybe SortaGq)))
               y))
          (=
-            (both1941158302631071856 x y)
+            (both1941159402142700077 x y)
             x))))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGt
-           aGv)
-         aGx)
+           (_ map both1941159402142700077)
+           aGs
+           aGu)
+         aGw)
       :named
       given-2.1))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGu
-           aGv)
-         aGw)
+           (_ map both1941159402142700077)
+           aGt
+           aGu)
+         aGv)
       :named
       given-2.2))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGs
-           aGt)
-         aGu)
+           (_ map both1941159402142700077)
+           aGr
+           aGs)
+         aGt)
       :named
       given-2.3))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGs
-           aGx)
-         aGy)
+           (_ map both1941159402142700077)
+           aGr
+           aGw)
+         aGx)
       :named
       given-2.4))
 (check-sat)
@@ -272,81 +272,81 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aH9} {2}:: IntersectL
-;                                a_aGF[tau:1] (IntersectL b_aGG[tau:1] c_aGI[tau:1])
-;                              ~# abc'_aGy[sk:1] (CNonCanonical)
+;      [WD] hole{co_aH8} {2}:: IntersectL
+;                                a_aGE[tau:1] (IntersectL b_aGF[tau:1] c_aGH[tau:1])
+;                              ~# abc'_aGx[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map both1941158302631071856)
-;      aGF
+;      (_ map both1941159402142700077)
+;      aGE
 ;      (
-;        (_ map both1941158302631071856)
-;        aGG
-;        aGI))
-;    aGy)
-
-;      [WD] hole{co_aH6} {2}:: IntersectL
-;                                (IntersectL a_aGF[tau:1] b_aGG[tau:1]) c_aGI[tau:1]
-;                              ~# abc_aGw[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map both1941158302631071856)
-;      (
-;        (_ map both1941158302631071856)
+;        (_ map both1941159402142700077)
 ;        aGF
-;        aGG)
-;      aGI)
-;    aGw)
+;        aGH))
+;    aGx)
+
+;      [WD] hole{co_aH5} {2}:: IntersectL
+;                                (IntersectL a_aGE[tau:1] b_aGF[tau:1]) c_aGH[tau:1]
+;                              ~# abc_aGv[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map both1941159402142700077)
+;      (
+;        (_ map both1941159402142700077)
+;        aGE
+;        aGF)
+;      aGH)
+;    aGv)
 
 ; WANTEDS (names)
-;  aGw  <=  abc_aGw[sk:1]
-;  aGy  <=  abc'_aGy[sk:1]
-;  aGF  <=  a_aGF[tau:1]
-;  aGG  <=  b_aGG[tau:1]
-;  aGI  <=  c_aGI[tau:1]
+;  aGv  <=  abc_aGv[sk:1]
+;  aGx  <=  abc'_aGx[sk:1]
+;  aGE  <=  a_aGE[tau:1]
+;  aGF  <=  b_aGF[tau:1]
+;  aGH  <=  c_aGH[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aGF (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGG (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGI (Array SortaGq (Maybe SortaGr)))
+; (declare-const aGE (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGF (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGH (Array SortaGp (Maybe SortaGq)))
+(declare-const
+   aGE
+   (Array
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGF
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
-   aGG
+   aGH
    (Array
-      SortaGq
-      (Maybe SortaGr)))
-(declare-const
-   aGI
-   (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (assert
    (!
       (or
          (not
             (=
                (
-                 (_ map both1941158302631071856)
-                 aGF
+                 (_ map both1941159402142700077)
+                 aGE
                  (
-                   (_ map both1941158302631071856)
-                   aGG
-                   aGI))
-               aGy))
+                   (_ map both1941159402142700077)
+                   aGF
+                   aGH))
+               aGx))
          (not
             (=
                (
-                 (_ map both1941158302631071856)
+                 (_ map both1941159402142700077)
                  (
-                   (_ map both1941158302631071856)
-                   aGF
-                   aGG)
-                 aGI)
-               aGw)))
+                   (_ map both1941159402142700077)
+                   aGE
+                   aGF)
+                 aGH)
+               aGv)))
       :named
       wanted-2))
 (check-sat)
@@ -355,133 +355,133 @@
 (get-model)
 ; (
 ;   (declare-fun
-;      SortaGr!val!2
+;      SortaGq!val!3
 ;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!4
-;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!0
-;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!1
-;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!3
-;      ()
-;      SortaGr)
-;   (forall
-;      (
-;        (x SortaGr))
-;      (or
-;         (= x SortaGr!val!2)
-;         (= x SortaGr!val!4)
-;         (= x SortaGr!val!0)
-;         (= x SortaGr!val!1)
-;         (= x SortaGr!val!3)))
+;      SortaGq)
 ;   (declare-fun
 ;      SortaGq!val!0
+;      ()
+;      SortaGq)
+;   (declare-fun
+;      SortaGq!val!2
+;      ()
+;      SortaGq)
+;   (declare-fun
+;      SortaGq!val!4
+;      ()
+;      SortaGq)
+;   (declare-fun
+;      SortaGq!val!1
 ;      ()
 ;      SortaGq)
 ;   (forall
 ;      (
 ;        (x SortaGq))
-;      (= x SortaGq!val!0))
+;      (or
+;         (= x SortaGq!val!3)
+;         (= x SortaGq!val!0)
+;         (= x SortaGq!val!2)
+;         (= x SortaGq!val!4)
+;         (= x SortaGq!val!1)))
+;   (declare-fun
+;      SortaGp!val!0
+;      ()
+;      SortaGp)
+;   (forall
+;      (
+;        (x SortaGp))
+;      (= x SortaGp!val!0))
 ;   (define-fun
-;      aGw
+;      aGF
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
-;        nothing))
+;         SortaGp
+;         (Maybe SortaGq))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           nothing)
+;         SortaGp!val!0
+;         (just SortaGq!val!3)))
 ;   (define-fun
 ;      given-2.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGt
-;           aGv)
-;         aGx))
+;           (_ map both1941159402142700077)
+;           aGs
+;           aGu)
+;         aGw))
 ;   (define-fun
-;      aGy
+;      aGu
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
+;              SortaGp
+;              (Maybe SortaGq)))
 ;        nothing))
+;   (define-fun
+;      aGt
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaGp
+;              (Maybe SortaGq)))
+;        nothing))
+;   (define-fun
+;      aGE
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           (just SortaGq!val!0))
+;         SortaGp!val!0
+;         (just SortaGq!val!2)))
 ;   (define-fun
 ;      given-2.3
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGs
-;           aGt)
-;         aGu))
+;           (_ map both1941159402142700077)
+;           aGr
+;           aGs)
+;         aGt))
 ;   (define-fun
-;      aGx
+;      aGw
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
+;              SortaGp
+;              (Maybe SortaGq)))
 ;        nothing))
-;   (define-fun
-;      aGs
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           (just SortaGr!val!1))
-;         SortaGq!val!0
-;         nothing))
-;   (define-fun
-;      aGG
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           nothing)
-;         SortaGq!val!0
-;         (just SortaGr!val!3)))
 ;   (define-fun
 ;      wanted-2
 ;      ()
@@ -492,24 +492,24 @@
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map both1941158302631071856)
-;                      aGF
+;                      (_ map both1941159402142700077)
+;                      aGE
 ;                      (
-;                        (_ map both1941158302631071856)
-;                        aGG
-;                        aGI))
-;                    aGy)))
+;                        (_ map both1941159402142700077)
+;                        aGF
+;                        aGH))
+;                    aGx)))
 ;           (a!2
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map both1941158302631071856)
+;                      (_ map both1941159402142700077)
 ;                      (
-;                        (_ map both1941158302631071856)
-;                        aGF
-;                        aGG)
-;                      aGI)
-;                    aGw))))
+;                        (_ map both1941159402142700077)
+;                        aGE
+;                        aGF)
+;                      aGH)
+;                    aGv))))
 ;         (or a!1 a!2)))
 ;   (define-fun
 ;      given-2.4
@@ -517,131 +517,131 @@
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGs
-;           aGx)
-;         aGy))
+;           (_ map both1941159402142700077)
+;           aGr
+;           aGw)
+;         aGx))
 ;   (define-fun
-;      aGv
+;      aGH
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
-;        nothing))
+;         SortaGp
+;         (Maybe SortaGq))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           nothing)
+;         SortaGp!val!0
+;         (just SortaGq!val!4)))
 ;   (define-fun
 ;      given-2.2
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGu
-;           aGv)
-;         aGw))
+;           (_ map both1941159402142700077)
+;           aGt
+;           aGu)
+;         aGv))
 ;   (define-fun
-;      aGI
+;      aGs
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaGp
+;              (Maybe SortaGq)))
+;        nothing))
+;   (define-fun
+;      aGx
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaGp
+;              (Maybe SortaGq)))
+;        nothing))
+;   (define-fun
+;      aGr
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           nothing)
-;         SortaGq!val!0
-;         (just SortaGr!val!4)))
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           (just SortaGq!val!1))
+;         SortaGp!val!0
+;         nothing))
 ;   (define-fun
-;      aGF
+;      aGv
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           (just SortaGr!val!0))
-;         SortaGq!val!0
-;         (just SortaGr!val!2)))
-;   (define-fun
-;      aGt
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
+;              SortaGp
+;              (Maybe SortaGq)))
 ;        nothing))
 ;   (define-fun
-;      aGu
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
-;        nothing))
-;   (define-fun
-;      both1941158302631071856
+;      both1941159402142700077
 ;      (
 ;        (x!0
-;           (Maybe SortaGr))
+;           (Maybe SortaGq))
 ;        (x!1
-;           (Maybe SortaGr)))
-;      (Maybe SortaGr)
+;           (Maybe SortaGq)))
+;      (Maybe SortaGq)
 ;      (ite
 ;         (and
 ;            (=
 ;               x!0
-;               (just SortaGr!val!1))
+;               (just SortaGq!val!1))
 ;            (= x!1 nothing))
 ;         nothing
 ;         (ite
 ;            (and
 ;               (=
 ;                  x!0
-;                  (just SortaGr!val!0))
+;                  (just SortaGq!val!0))
 ;               (= x!1 nothing))
 ;            nothing
 ;            (ite
 ;               (and
 ;                  (=
 ;                     x!0
-;                     (just SortaGr!val!2))
+;                     (just SortaGq!val!2))
 ;                  (=
 ;                     x!1
-;                     (just SortaGr!val!3)))
-;               (just SortaGr!val!2)
+;                     (just SortaGq!val!3)))
+;               (just SortaGq!val!2)
 ;               (ite
 ;                  (and
 ;                     (=
 ;                        x!0
-;                        (just SortaGr!val!2))
+;                        (just SortaGq!val!2))
 ;                     (=
 ;                        x!1
-;                        (just SortaGr!val!4)))
-;                  (just SortaGr!val!2)
+;                        (just SortaGq!val!4)))
+;                  (just SortaGq!val!2)
 ;                  (ite
 ;                     (and
 ;                        (= x!0 nothing)
@@ -651,11 +651,11 @@
 ;                        (and
 ;                           (=
 ;                              x!0
-;                              (just SortaGr!val!3))
+;                              (just SortaGq!val!3))
 ;                           (=
 ;                              x!1
-;                              (just SortaGr!val!4)))
-;                        (just SortaGr!val!3)
+;                              (just SortaGq!val!4)))
+;                        (just SortaGq!val!3)
 ;                        (ite
 ;                           (and
 ;                              (
@@ -671,214 +671,214 @@
 (echo "solver-start-cycle-2")
 
 ; GIVENS (GHC style)
-; [G] co_aGZ {1}:: IntersectL b_aGt[sk:1] c_aGv[sk:1]
-;                  ~# bc_aGx[sk:1] (CEqCan)
-; [G] co_aGW {1}:: IntersectL ab_aGu[sk:1] c_aGv[sk:1]
-;                  ~# abc_aGw[sk:1] (CEqCan)
-; [G] co_aGT {1}:: IntersectL a_aGs[sk:1] b_aGt[sk:1]
-;                  ~# ab_aGu[sk:1] (CEqCan)
-; [G] co_aH2 {1}:: IntersectL a_aGs[sk:1] bc_aGx[sk:1]
-;                  ~# abc'_aGy[sk:1] (CEqCan)
+; [G] co_aGY {1}:: IntersectL b_aGs[sk:1] c_aGu[sk:1]
+;                  ~# bc_aGw[sk:1] (CEqCan)
+; [G] co_aGV {1}:: IntersectL ab_aGt[sk:1] c_aGu[sk:1]
+;                  ~# abc_aGv[sk:1] (CEqCan)
+; [G] co_aGS {1}:: IntersectL a_aGr[sk:1] b_aGs[sk:1]
+;                  ~# ab_aGt[sk:1] (CEqCan)
+; [G] co_aH1 {1}:: IntersectL a_aGr[sk:1] bc_aGw[sk:1]
+;                  ~# abc'_aGx[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aH9} {2}:: IntersectL
-;                           a_aGF[tau:1] (IntersectL b_aGG[tau:1] c_aGI[tau:1])
-;                         ~# abc'_aGy[sk:1] (CNonCanonical)
-; [WD] hole{co_aH6} {2}:: IntersectL
-;                           (IntersectL a_aGF[tau:1] b_aGG[tau:1]) c_aGI[tau:1]
-;                         ~# abc_aGw[sk:1] (CNonCanonical)
+; [WD] hole{co_aH8} {2}:: IntersectL
+;                           a_aGE[tau:1] (IntersectL b_aGF[tau:1] c_aGH[tau:1])
+;                         ~# abc'_aGx[sk:1] (CNonCanonical)
+; [WD] hole{co_aH5} {2}:: IntersectL
+;                           (IntersectL a_aGE[tau:1] b_aGF[tau:1]) c_aGH[tau:1]
+;                         ~# abc_aGv[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (IntersectL [aGq,aGr,aGt,aGv],aGx)
-; (IntersectL [aGq,aGr,aGu,aGv],aGw)
-; (IntersectL [aGq,aGr,aGs,aGt],aGu)
-; (IntersectL [aGq,aGr,aGs,aGx],aGy)
+; (IntersectL [aGp,aGq,aGs,aGu],aGw)
+; (IntersectL [aGp,aGq,aGt,aGu],aGv)
+; (IntersectL [aGp,aGq,aGr,aGs],aGt)
+; (IntersectL [aGp,aGq,aGr,aGw],aGx)
 
 ; WANTEDS (Thoralf style)
-; (IntersectL [aGq,aGr,aGF,IntersectL [aGq,aGr,aGG,aGI]],aGy)
-; (IntersectL [aGq,aGr,IntersectL [aGq,aGr,aGF,aGG],aGI],aGw)
+; (IntersectL [aGp,aGq,aGE,IntersectL [aGp,aGq,aGF,aGH]],aGx)
+; (IntersectL [aGp,aGq,IntersectL [aGp,aGq,aGE,aGF],aGH],aGv)
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_aH9} {2}:: IntersectL
-;                                a_aGF[tau:1] (IntersectL b_aGG[tau:1] c_aGI[tau:1])
-;                              ~# abc'_aGy[sk:1] (CNonCanonical)
+;      [WD] hole{co_aH8} {2}:: IntersectL
+;                                a_aGE[tau:1] (IntersectL b_aGF[tau:1] c_aGH[tau:1])
+;                              ~# abc'_aGx[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map both1941158302631071856)
-;      aGF
+;      (_ map both1941159402142700077)
+;      aGE
 ;      (
-;        (_ map both1941158302631071856)
-;        aGG
-;        aGI))
-;    aGy)
-
-;      [WD] hole{co_aH6} {2}:: IntersectL
-;                                (IntersectL a_aGF[tau:1] b_aGG[tau:1]) c_aGI[tau:1]
-;                              ~# abc_aGw[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map both1941158302631071856)
-;      (
-;        (_ map both1941158302631071856)
+;        (_ map both1941159402142700077)
 ;        aGF
-;        aGG)
-;      aGI)
-;    aGw)
+;        aGH))
+;    aGx)
+
+;      [WD] hole{co_aH5} {2}:: IntersectL
+;                                (IntersectL a_aGE[tau:1] b_aGF[tau:1]) c_aGH[tau:1]
+;                              ~# abc_aGv[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map both1941159402142700077)
+;      (
+;        (_ map both1941159402142700077)
+;        aGE
+;        aGF)
+;      aGH)
+;    aGv)
 
 ; GIVENS (names)
-;  aGs  <=  a_aGs[sk:1]
-;  aGt  <=  b_aGt[sk:1]
-;  aGu  <=  ab_aGu[sk:1]
-;  aGv  <=  c_aGv[sk:1]
-;  aGw  <=  abc_aGw[sk:1]
-;  aGx  <=  bc_aGx[sk:1]
-;  aGy  <=  abc'_aGy[sk:1]
+;  aGr  <=  a_aGr[sk:1]
+;  aGs  <=  b_aGs[sk:1]
+;  aGt  <=  ab_aGt[sk:1]
+;  aGu  <=  c_aGu[sk:1]
+;  aGv  <=  abc_aGv[sk:1]
+;  aGw  <=  bc_aGw[sk:1]
+;  aGx  <=  abc'_aGx[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (assert (forall ((x (Maybe SortaGr)) (y (Maybe SortaGr))) (=> (and ((_ is (just (SortaGr) (Maybe SortaGr))) x) ((_ is (just (SortaGr) (Maybe SortaGr))) y)) (= (both1941158302631071856 x y) x))))
-; (assert (forall ((y (Maybe SortaGr))) (= (both1941158302631071856 nothing y) nothing)))
-; (assert (forall ((y (Maybe SortaGr))) (= (both1941158302631071856 y (as nothing (Maybe SortaGr))) (as nothing (Maybe SortaGr)))))
-; (declare-const aGs (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGt (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGu (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGv (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGw (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGx (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGy (Array SortaGq (Maybe SortaGr)))
-; (declare-fun both1941158302631071856 ((Maybe SortaGr) (Maybe SortaGr)) (Maybe SortaGr))
+; (assert (forall ((x (Maybe SortaGq)) (y (Maybe SortaGq))) (=> (and ((_ is (just (SortaGq) (Maybe SortaGq))) x) ((_ is (just (SortaGq) (Maybe SortaGq))) y)) (= (both1941159402142700077 x y) x))))
+; (assert (forall ((y (Maybe SortaGq))) (= (both1941159402142700077 nothing y) nothing)))
+; (assert (forall ((y (Maybe SortaGq))) (= (both1941159402142700077 y (as nothing (Maybe SortaGq))) (as nothing (Maybe SortaGq)))))
+; (declare-const aGr (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGs (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGt (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGu (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGv (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGw (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGx (Array SortaGp (Maybe SortaGq)))
+; (declare-fun both1941159402142700077 ((Maybe SortaGq) (Maybe SortaGq)) (Maybe SortaGq))
+; (declare-sort SortaGp)
 ; (declare-sort SortaGq)
-; (declare-sort SortaGr)
+(declare-sort SortaGp)
 (declare-sort SortaGq)
-(declare-sort SortaGr)
+(declare-const
+   aGr
+   (Array
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGs
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGt
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGu
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGv
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGw
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGx
    (Array
-      SortaGq
-      (Maybe SortaGr)))
-(declare-const
-   aGy
-   (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-fun
-   both1941158302631071856
+   both1941159402142700077
    (
-     (Maybe SortaGr)
-     (Maybe SortaGr))
-   (Maybe SortaGr))
+     (Maybe SortaGq)
+     (Maybe SortaGq))
+   (Maybe SortaGq))
 (assert
    (forall
       (
         (y
-           (Maybe SortaGr)))
+           (Maybe SortaGq)))
       (=
-         (both1941158302631071856
+         (both1941159402142700077
             y
             (as
                nothing
-               (Maybe SortaGr)))
+               (Maybe SortaGq)))
          (as
             nothing
-            (Maybe SortaGr)))))
+            (Maybe SortaGq)))))
 (assert
    (forall
       (
         (y
-           (Maybe SortaGr)))
+           (Maybe SortaGq)))
       (=
-         (both1941158302631071856 nothing y)
+         (both1941159402142700077 nothing y)
          nothing)))
 (assert
    (forall
       (
         (x
-           (Maybe SortaGr))
+           (Maybe SortaGq))
         (y
-           (Maybe SortaGr)))
+           (Maybe SortaGq)))
       (=>
          (and
             (
               (_
                  is
                  (just
-                    (SortaGr)
-                    (Maybe SortaGr)))
+                    (SortaGq)
+                    (Maybe SortaGq)))
               x)
             (
               (_
                  is
                  (just
-                    (SortaGr)
-                    (Maybe SortaGr)))
+                    (SortaGq)
+                    (Maybe SortaGq)))
               y))
          (=
-            (both1941158302631071856 x y)
+            (both1941159402142700077 x y)
             x))))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGt
-           aGv)
-         aGx)
+           (_ map both1941159402142700077)
+           aGs
+           aGu)
+         aGw)
       :named
       given-2.1))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGu
-           aGv)
-         aGw)
+           (_ map both1941159402142700077)
+           aGt
+           aGu)
+         aGv)
       :named
       given-2.2))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGs
-           aGt)
-         aGu)
+           (_ map both1941159402142700077)
+           aGr
+           aGs)
+         aGt)
       :named
       given-2.3))
 (assert
    (!
       (=
          (
-           (_ map both1941158302631071856)
-           aGs
-           aGx)
-         aGy)
+           (_ map both1941159402142700077)
+           aGr
+           aGw)
+         aGx)
       :named
       given-2.4))
 (check-sat)
@@ -886,81 +886,81 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aH9} {2}:: IntersectL
-;                                a_aGF[tau:1] (IntersectL b_aGG[tau:1] c_aGI[tau:1])
-;                              ~# abc'_aGy[sk:1] (CNonCanonical)
+;      [WD] hole{co_aH8} {2}:: IntersectL
+;                                a_aGE[tau:1] (IntersectL b_aGF[tau:1] c_aGH[tau:1])
+;                              ~# abc'_aGx[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map both1941158302631071856)
-;      aGF
+;      (_ map both1941159402142700077)
+;      aGE
 ;      (
-;        (_ map both1941158302631071856)
-;        aGG
-;        aGI))
-;    aGy)
-
-;      [WD] hole{co_aH6} {2}:: IntersectL
-;                                (IntersectL a_aGF[tau:1] b_aGG[tau:1]) c_aGI[tau:1]
-;                              ~# abc_aGw[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map both1941158302631071856)
-;      (
-;        (_ map both1941158302631071856)
+;        (_ map both1941159402142700077)
 ;        aGF
-;        aGG)
-;      aGI)
-;    aGw)
+;        aGH))
+;    aGx)
+
+;      [WD] hole{co_aH5} {2}:: IntersectL
+;                                (IntersectL a_aGE[tau:1] b_aGF[tau:1]) c_aGH[tau:1]
+;                              ~# abc_aGv[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map both1941159402142700077)
+;      (
+;        (_ map both1941159402142700077)
+;        aGE
+;        aGF)
+;      aGH)
+;    aGv)
 
 ; WANTEDS (names)
-;  aGw  <=  abc_aGw[sk:1]
-;  aGy  <=  abc'_aGy[sk:1]
-;  aGF  <=  a_aGF[tau:1]
-;  aGG  <=  b_aGG[tau:1]
-;  aGI  <=  c_aGI[tau:1]
+;  aGv  <=  abc_aGv[sk:1]
+;  aGx  <=  abc'_aGx[sk:1]
+;  aGE  <=  a_aGE[tau:1]
+;  aGF  <=  b_aGF[tau:1]
+;  aGH  <=  c_aGH[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aGF (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGG (Array SortaGq (Maybe SortaGr)))
-; (declare-const aGI (Array SortaGq (Maybe SortaGr)))
+; (declare-const aGE (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGF (Array SortaGp (Maybe SortaGq)))
+; (declare-const aGH (Array SortaGp (Maybe SortaGq)))
+(declare-const
+   aGE
+   (Array
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
    aGF
    (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (declare-const
-   aGG
+   aGH
    (Array
-      SortaGq
-      (Maybe SortaGr)))
-(declare-const
-   aGI
-   (Array
-      SortaGq
-      (Maybe SortaGr)))
+      SortaGp
+      (Maybe SortaGq)))
 (assert
    (!
       (or
          (not
             (=
                (
-                 (_ map both1941158302631071856)
-                 aGF
+                 (_ map both1941159402142700077)
+                 aGE
                  (
-                   (_ map both1941158302631071856)
-                   aGG
-                   aGI))
-               aGy))
+                   (_ map both1941159402142700077)
+                   aGF
+                   aGH))
+               aGx))
          (not
             (=
                (
-                 (_ map both1941158302631071856)
+                 (_ map both1941159402142700077)
                  (
-                   (_ map both1941158302631071856)
-                   aGF
-                   aGG)
-                 aGI)
-               aGw)))
+                   (_ map both1941159402142700077)
+                   aGE
+                   aGF)
+                 aGH)
+               aGv)))
       :named
       wanted-2))
 (check-sat)
@@ -969,133 +969,133 @@
 (get-model)
 ; (
 ;   (declare-fun
-;      SortaGr!val!2
+;      SortaGq!val!3
 ;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!4
-;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!0
-;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!1
-;      ()
-;      SortaGr)
-;   (declare-fun
-;      SortaGr!val!3
-;      ()
-;      SortaGr)
-;   (forall
-;      (
-;        (x SortaGr))
-;      (or
-;         (= x SortaGr!val!2)
-;         (= x SortaGr!val!4)
-;         (= x SortaGr!val!0)
-;         (= x SortaGr!val!1)
-;         (= x SortaGr!val!3)))
+;      SortaGq)
 ;   (declare-fun
 ;      SortaGq!val!0
+;      ()
+;      SortaGq)
+;   (declare-fun
+;      SortaGq!val!2
+;      ()
+;      SortaGq)
+;   (declare-fun
+;      SortaGq!val!4
+;      ()
+;      SortaGq)
+;   (declare-fun
+;      SortaGq!val!1
 ;      ()
 ;      SortaGq)
 ;   (forall
 ;      (
 ;        (x SortaGq))
-;      (= x SortaGq!val!0))
+;      (or
+;         (= x SortaGq!val!3)
+;         (= x SortaGq!val!0)
+;         (= x SortaGq!val!2)
+;         (= x SortaGq!val!4)
+;         (= x SortaGq!val!1)))
+;   (declare-fun
+;      SortaGp!val!0
+;      ()
+;      SortaGp)
+;   (forall
+;      (
+;        (x SortaGp))
+;      (= x SortaGp!val!0))
 ;   (define-fun
-;      aGw
+;      aGF
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
-;        nothing))
+;         SortaGp
+;         (Maybe SortaGq))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           nothing)
+;         SortaGp!val!0
+;         (just SortaGq!val!3)))
 ;   (define-fun
 ;      given-2.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGt
-;           aGv)
-;         aGx))
+;           (_ map both1941159402142700077)
+;           aGs
+;           aGu)
+;         aGw))
 ;   (define-fun
-;      aGy
+;      aGu
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
+;              SortaGp
+;              (Maybe SortaGq)))
 ;        nothing))
+;   (define-fun
+;      aGt
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaGp
+;              (Maybe SortaGq)))
+;        nothing))
+;   (define-fun
+;      aGE
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           (just SortaGq!val!0))
+;         SortaGp!val!0
+;         (just SortaGq!val!2)))
 ;   (define-fun
 ;      given-2.3
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGs
-;           aGt)
-;         aGu))
+;           (_ map both1941159402142700077)
+;           aGr
+;           aGs)
+;         aGt))
 ;   (define-fun
-;      aGx
+;      aGw
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
+;              SortaGp
+;              (Maybe SortaGq)))
 ;        nothing))
-;   (define-fun
-;      aGs
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           (just SortaGr!val!1))
-;         SortaGq!val!0
-;         nothing))
-;   (define-fun
-;      aGG
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           nothing)
-;         SortaGq!val!0
-;         (just SortaGr!val!3)))
 ;   (define-fun
 ;      wanted-2
 ;      ()
@@ -1106,24 +1106,24 @@
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map both1941158302631071856)
-;                      aGF
+;                      (_ map both1941159402142700077)
+;                      aGE
 ;                      (
-;                        (_ map both1941158302631071856)
-;                        aGG
-;                        aGI))
-;                    aGy)))
+;                        (_ map both1941159402142700077)
+;                        aGF
+;                        aGH))
+;                    aGx)))
 ;           (a!2
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map both1941158302631071856)
+;                      (_ map both1941159402142700077)
 ;                      (
-;                        (_ map both1941158302631071856)
-;                        aGF
-;                        aGG)
-;                      aGI)
-;                    aGw))))
+;                        (_ map both1941159402142700077)
+;                        aGE
+;                        aGF)
+;                      aGH)
+;                    aGv))))
 ;         (or a!1 a!2)))
 ;   (define-fun
 ;      given-2.4
@@ -1131,131 +1131,131 @@
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGs
-;           aGx)
-;         aGy))
+;           (_ map both1941159402142700077)
+;           aGr
+;           aGw)
+;         aGx))
 ;   (define-fun
-;      aGv
+;      aGH
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
-;        nothing))
+;         SortaGp
+;         (Maybe SortaGq))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           nothing)
+;         SortaGp!val!0
+;         (just SortaGq!val!4)))
 ;   (define-fun
 ;      given-2.2
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map both1941158302631071856)
-;           aGu
-;           aGv)
-;         aGw))
+;           (_ map both1941159402142700077)
+;           aGt
+;           aGu)
+;         aGv))
 ;   (define-fun
-;      aGI
+;      aGs
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaGp
+;              (Maybe SortaGq)))
+;        nothing))
+;   (define-fun
+;      aGx
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaGp
+;              (Maybe SortaGq)))
+;        nothing))
+;   (define-fun
+;      aGr
+;      ()
+;      (Array
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           nothing)
-;         SortaGq!val!0
-;         (just SortaGr!val!4)))
+;                 SortaGp
+;                 (Maybe SortaGq)))
+;           (just SortaGq!val!1))
+;         SortaGp!val!0
+;         nothing))
 ;   (define-fun
-;      aGF
+;      aGv
 ;      ()
 ;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 SortaGq
-;                 (Maybe SortaGr)))
-;           (just SortaGr!val!0))
-;         SortaGq!val!0
-;         (just SortaGr!val!2)))
-;   (define-fun
-;      aGt
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
+;         SortaGp
+;         (Maybe SortaGq))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
+;              SortaGp
+;              (Maybe SortaGq)))
 ;        nothing))
 ;   (define-fun
-;      aGu
-;      ()
-;      (Array
-;         SortaGq
-;         (Maybe SortaGr))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaGq
-;              (Maybe SortaGr)))
-;        nothing))
-;   (define-fun
-;      both1941158302631071856
+;      both1941159402142700077
 ;      (
 ;        (x!0
-;           (Maybe SortaGr))
+;           (Maybe SortaGq))
 ;        (x!1
-;           (Maybe SortaGr)))
-;      (Maybe SortaGr)
+;           (Maybe SortaGq)))
+;      (Maybe SortaGq)
 ;      (ite
 ;         (and
 ;            (=
 ;               x!0
-;               (just SortaGr!val!1))
+;               (just SortaGq!val!1))
 ;            (= x!1 nothing))
 ;         nothing
 ;         (ite
 ;            (and
 ;               (=
 ;                  x!0
-;                  (just SortaGr!val!0))
+;                  (just SortaGq!val!0))
 ;               (= x!1 nothing))
 ;            nothing
 ;            (ite
 ;               (and
 ;                  (=
 ;                     x!0
-;                     (just SortaGr!val!2))
+;                     (just SortaGq!val!2))
 ;                  (=
 ;                     x!1
-;                     (just SortaGr!val!3)))
-;               (just SortaGr!val!2)
+;                     (just SortaGq!val!3)))
+;               (just SortaGq!val!2)
 ;               (ite
 ;                  (and
 ;                     (=
 ;                        x!0
-;                        (just SortaGr!val!2))
+;                        (just SortaGq!val!2))
 ;                     (=
 ;                        x!1
-;                        (just SortaGr!val!4)))
-;                  (just SortaGr!val!2)
+;                        (just SortaGq!val!4)))
+;                  (just SortaGq!val!2)
 ;                  (ite
 ;                     (and
 ;                        (= x!0 nothing)
@@ -1265,11 +1265,11 @@
 ;                        (and
 ;                           (=
 ;                              x!0
-;                              (just SortaGr!val!3))
+;                              (just SortaGq!val!3))
 ;                           (=
 ;                              x!1
-;                              (just SortaGr!val!4)))
-;                        (just SortaGr!val!3)
+;                              (just SortaGq!val!4)))
+;                        (just SortaGq!val!3)
 ;                        (ite
 ;                           (and
 ;                              (
@@ -1289,195 +1289,195 @@
 (echo "solver-start-cycle-4")
 
 ; GIVENS (GHC style)
-; [G] co_aI9 {1}:: UnionL b_aHD[sk:1] c_aHF[sk:1]
-;                  ~# bc_aHH[sk:1] (CEqCan)
-; [G] co_aI6 {1}:: UnionL ab_aHE[sk:1] c_aHF[sk:1]
-;                  ~# abc_aHG[sk:1] (CEqCan)
-; [G] co_aI3 {1}:: UnionL a_aHC[sk:1] b_aHD[sk:1]
-;                  ~# ab_aHE[sk:1] (CEqCan)
-; [G] co_aIc {1}:: UnionL a_aHC[sk:1] bc_aHH[sk:1]
-;                  ~# abc'_aHI[sk:1] (CEqCan)
+; [G] co_aI8 {1}:: UnionL b_aHC[sk:1] c_aHE[sk:1]
+;                  ~# bc_aHG[sk:1] (CEqCan)
+; [G] co_aI5 {1}:: UnionL ab_aHD[sk:1] c_aHE[sk:1]
+;                  ~# abc_aHF[sk:1] (CEqCan)
+; [G] co_aI2 {1}:: UnionL a_aHB[sk:1] b_aHC[sk:1]
+;                  ~# ab_aHD[sk:1] (CEqCan)
+; [G] co_aIb {1}:: UnionL a_aHB[sk:1] bc_aHG[sk:1]
+;                  ~# abc'_aHH[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aIj} {2}:: UnionL
-;                           a_aHP[tau:1] (UnionL b_aHQ[tau:1] c_aHS[tau:1])
-;                         ~# abc'_aHI[sk:1] (CNonCanonical)
-; [WD] hole{co_aIg} {2}:: UnionL
-;                           (UnionL a_aHP[tau:1] b_aHQ[tau:1]) c_aHS[tau:1]
-;                         ~# abc_aHG[sk:1] (CNonCanonical)
+; [WD] hole{co_aIi} {2}:: UnionL
+;                           a_aHO[tau:1] (UnionL b_aHP[tau:1] c_aHR[tau:1])
+;                         ~# abc'_aHH[sk:1] (CNonCanonical)
+; [WD] hole{co_aIf} {2}:: UnionL
+;                           (UnionL a_aHO[tau:1] b_aHP[tau:1]) c_aHR[tau:1]
+;                         ~# abc_aHF[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (UnionL [aHA,aHB,aHD,aHF],aHH)
-; (UnionL [aHA,aHB,aHE,aHF],aHG)
-; (UnionL [aHA,aHB,aHC,aHD],aHE)
-; (UnionL [aHA,aHB,aHC,aHH],aHI)
+; (UnionL [aHz,aHA,aHC,aHE],aHG)
+; (UnionL [aHz,aHA,aHD,aHE],aHF)
+; (UnionL [aHz,aHA,aHB,aHC],aHD)
+; (UnionL [aHz,aHA,aHB,aHG],aHH)
 
 ; WANTEDS (Thoralf style)
-; (UnionL [aHA,aHB,aHP,UnionL [aHA,aHB,aHQ,aHS]],aHI)
-; (UnionL [aHA,aHB,UnionL [aHA,aHB,aHP,aHQ],aHS],aHG)
+; (UnionL [aHz,aHA,aHO,UnionL [aHz,aHA,aHP,aHR]],aHH)
+; (UnionL [aHz,aHA,UnionL [aHz,aHA,aHO,aHP],aHR],aHF)
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{co_aIj} {2}:: UnionL
-;                                a_aHP[tau:1] (UnionL b_aHQ[tau:1] c_aHS[tau:1])
-;                              ~# abc'_aHI[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIi} {2}:: UnionL
+;                                a_aHO[tau:1] (UnionL b_aHP[tau:1] c_aHR[tau:1])
+;                              ~# abc'_aHH[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map either1945923586026792211)
-;      aHP
+;      (_ map either1945926884561676842)
+;      aHO
 ;      (
-;        (_ map either1945923586026792211)
-;        aHQ
-;        aHS))
-;    aHI)
-
-;      [WD] hole{co_aIg} {2}:: UnionL
-;                                (UnionL a_aHP[tau:1] b_aHQ[tau:1]) c_aHS[tau:1]
-;                              ~# abc_aHG[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map either1945923586026792211)
-;      (
-;        (_ map either1945923586026792211)
+;        (_ map either1945926884561676842)
 ;        aHP
-;        aHQ)
-;      aHS)
-;    aHG)
+;        aHR))
+;    aHH)
+
+;      [WD] hole{co_aIf} {2}:: UnionL
+;                                (UnionL a_aHO[tau:1] b_aHP[tau:1]) c_aHR[tau:1]
+;                              ~# abc_aHF[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map either1945926884561676842)
+;      (
+;        (_ map either1945926884561676842)
+;        aHO
+;        aHP)
+;      aHR)
+;    aHF)
 
 ; GIVENS (names)
-;  aHC  <=  a_aHC[sk:1]
-;  aHD  <=  b_aHD[sk:1]
-;  aHE  <=  ab_aHE[sk:1]
-;  aHF  <=  c_aHF[sk:1]
-;  aHG  <=  abc_aHG[sk:1]
-;  aHH  <=  bc_aHH[sk:1]
-;  aHI  <=  abc'_aHI[sk:1]
+;  aHB  <=  a_aHB[sk:1]
+;  aHC  <=  b_aHC[sk:1]
+;  aHD  <=  ab_aHD[sk:1]
+;  aHE  <=  c_aHE[sk:1]
+;  aHF  <=  abc_aHF[sk:1]
+;  aHG  <=  bc_aHG[sk:1]
+;  aHH  <=  abc'_aHH[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (assert (forall ((x (Maybe SortaHB)) (y (Maybe SortaHB))) (=> ((_ is (just (SortaHB) (Maybe SortaHB))) x) (= (either1945923586026792211 x y) x))))
-; (assert (forall ((y (Maybe SortaHB))) (= (either1945923586026792211 (as nothing (Maybe SortaHB)) y) y)))
-; (declare-const aHC (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHD (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHE (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHF (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHG (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHH (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHI (Array SortaHA (Maybe SortaHB)))
-; (declare-fun either1945923586026792211 ((Maybe SortaHB) (Maybe SortaHB)) (Maybe SortaHB))
+; (assert (forall ((x (Maybe SortaHA)) (y (Maybe SortaHA))) (=> ((_ is (just (SortaHA) (Maybe SortaHA))) x) (= (either1945926884561676842 x y) x))))
+; (assert (forall ((y (Maybe SortaHA))) (= (either1945926884561676842 (as nothing (Maybe SortaHA)) y) y)))
+; (declare-const aHB (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHC (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHD (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHE (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHF (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHG (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHH (Array SortaHz (Maybe SortaHA)))
+; (declare-fun either1945926884561676842 ((Maybe SortaHA) (Maybe SortaHA)) (Maybe SortaHA))
 ; (declare-sort SortaHA)
-; (declare-sort SortaHB)
+; (declare-sort SortaHz)
+(declare-sort SortaHz)
 (declare-sort SortaHA)
-(declare-sort SortaHB)
+(declare-const
+   aHB
+   (Array
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHC
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHD
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHE
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHF
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHG
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHH
    (Array
-      SortaHA
-      (Maybe SortaHB)))
-(declare-const
-   aHI
-   (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-fun
-   either1945923586026792211
+   either1945926884561676842
    (
-     (Maybe SortaHB)
-     (Maybe SortaHB))
-   (Maybe SortaHB))
+     (Maybe SortaHA)
+     (Maybe SortaHA))
+   (Maybe SortaHA))
 (assert
    (forall
       (
         (y
-           (Maybe SortaHB)))
+           (Maybe SortaHA)))
       (=
-         (either1945923586026792211
+         (either1945926884561676842
             (as
                nothing
-               (Maybe SortaHB))
+               (Maybe SortaHA))
             y)
          y)))
 (assert
    (forall
       (
         (x
-           (Maybe SortaHB))
+           (Maybe SortaHA))
         (y
-           (Maybe SortaHB)))
+           (Maybe SortaHA)))
       (=>
          (
            (_
               is
               (just
-                 (SortaHB)
-                 (Maybe SortaHB)))
+                 (SortaHA)
+                 (Maybe SortaHA)))
            x)
          (=
-            (either1945923586026792211 x y)
+            (either1945926884561676842 x y)
             x))))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHD
-           aHF)
-         aHH)
+           (_ map either1945926884561676842)
+           aHC
+           aHE)
+         aHG)
       :named
       given-4.1))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHE
-           aHF)
-         aHG)
+           (_ map either1945926884561676842)
+           aHD
+           aHE)
+         aHF)
       :named
       given-4.2))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHC
-           aHD)
-         aHE)
+           (_ map either1945926884561676842)
+           aHB
+           aHC)
+         aHD)
       :named
       given-4.3))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHC
-           aHH)
-         aHI)
+           (_ map either1945926884561676842)
+           aHB
+           aHG)
+         aHH)
       :named
       given-4.4))
 (check-sat)
@@ -1485,81 +1485,81 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aIj} {2}:: UnionL
-;                                a_aHP[tau:1] (UnionL b_aHQ[tau:1] c_aHS[tau:1])
-;                              ~# abc'_aHI[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIi} {2}:: UnionL
+;                                a_aHO[tau:1] (UnionL b_aHP[tau:1] c_aHR[tau:1])
+;                              ~# abc'_aHH[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map either1945923586026792211)
-;      aHP
+;      (_ map either1945926884561676842)
+;      aHO
 ;      (
-;        (_ map either1945923586026792211)
-;        aHQ
-;        aHS))
-;    aHI)
-
-;      [WD] hole{co_aIg} {2}:: UnionL
-;                                (UnionL a_aHP[tau:1] b_aHQ[tau:1]) c_aHS[tau:1]
-;                              ~# abc_aHG[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map either1945923586026792211)
-;      (
-;        (_ map either1945923586026792211)
+;        (_ map either1945926884561676842)
 ;        aHP
-;        aHQ)
-;      aHS)
-;    aHG)
+;        aHR))
+;    aHH)
+
+;      [WD] hole{co_aIf} {2}:: UnionL
+;                                (UnionL a_aHO[tau:1] b_aHP[tau:1]) c_aHR[tau:1]
+;                              ~# abc_aHF[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map either1945926884561676842)
+;      (
+;        (_ map either1945926884561676842)
+;        aHO
+;        aHP)
+;      aHR)
+;    aHF)
 
 ; WANTEDS (names)
-;  aHG  <=  abc_aHG[sk:1]
-;  aHI  <=  abc'_aHI[sk:1]
-;  aHP  <=  a_aHP[tau:1]
-;  aHQ  <=  b_aHQ[tau:1]
-;  aHS  <=  c_aHS[tau:1]
+;  aHF  <=  abc_aHF[sk:1]
+;  aHH  <=  abc'_aHH[sk:1]
+;  aHO  <=  a_aHO[tau:1]
+;  aHP  <=  b_aHP[tau:1]
+;  aHR  <=  c_aHR[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aHP (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHQ (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHS (Array SortaHA (Maybe SortaHB)))
+; (declare-const aHO (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHP (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHR (Array SortaHz (Maybe SortaHA)))
+(declare-const
+   aHO
+   (Array
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHP
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
-   aHQ
+   aHR
    (Array
-      SortaHA
-      (Maybe SortaHB)))
-(declare-const
-   aHS
-   (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (assert
    (!
       (or
          (not
             (=
                (
-                 (_ map either1945923586026792211)
-                 aHP
+                 (_ map either1945926884561676842)
+                 aHO
                  (
-                   (_ map either1945923586026792211)
-                   aHQ
-                   aHS))
-               aHI))
+                   (_ map either1945926884561676842)
+                   aHP
+                   aHR))
+               aHH))
          (not
             (=
                (
-                 (_ map either1945923586026792211)
+                 (_ map either1945926884561676842)
                  (
-                   (_ map either1945923586026792211)
-                   aHP
-                   aHQ)
-                 aHS)
-               aHG)))
+                   (_ map either1945926884561676842)
+                   aHO
+                   aHP)
+                 aHR)
+               aHF)))
       :named
       wanted-4))
 (check-sat)
@@ -1567,6 +1567,22 @@
 (echo "wanteds-finish-cycle-4")
 (get-model)
 ; (
+;   (declare-fun
+;      SortaHz!val!0
+;      ()
+;      SortaHz)
+;   (forall
+;      (
+;        (x SortaHz))
+;      (= x SortaHz!val!0))
+;   (declare-fun
+;      SortaHA!val!2
+;      ()
+;      SortaHA)
+;   (declare-fun
+;      SortaHA!val!3
+;      ()
+;      SortaHA)
 ;   (declare-fun
 ;      SortaHA!val!0
 ;      ()
@@ -1579,243 +1595,185 @@
 ;      (
 ;        (x SortaHA))
 ;      (or
+;         (= x SortaHA!val!2)
+;         (= x SortaHA!val!3)
 ;         (= x SortaHA!val!0)
 ;         (= x SortaHA!val!1)))
-;   (declare-fun
-;      SortaHB!val!3
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!0
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!4
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!2
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!1
-;      ()
-;      SortaHB)
-;   (forall
-;      (
-;        (x SortaHB))
-;      (or
-;         (= x SortaHB!val!3)
-;         (= x SortaHB!val!0)
-;         (= x SortaHB!val!4)
-;         (= x SortaHB!val!2)
-;         (= x SortaHB!val!1)))
 ;   (define-fun
 ;      given-4.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHD
-;           aHF)
-;         aHH))
+;           (_ map either1945926884561676842)
+;           aHC
+;           aHE)
+;         aHG))
 ;   (define-fun
-;      aHD
+;      aHP
 ;      ()
 ;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            nothing)
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHH
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            (just SortaHB!val!1))
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHQ
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaHA
-;              (Maybe SortaHB)))
+;              SortaHz
+;              (Maybe SortaHA)))
 ;        nothing))
+;   (define-fun
+;      aHD
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
+;   (define-fun
+;      aHH
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
 ;   (define-fun
 ;      given-4.4
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHC
-;           aHH)
-;         aHI))
-;   (define-fun
-;      aHI
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            (just SortaHB!val!1))
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
+;           (_ map either1945926884561676842)
+;           aHB
+;           aHG)
+;         aHH))
 ;   (define-fun
 ;      given-4.2
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHE
-;           aHF)
-;         aHG))
+;           (_ map either1945926884561676842)
+;           aHD
+;           aHE)
+;         aHF))
+;   (define-fun
+;      aHB
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaHz
+;              (Maybe SortaHA)))
+;        nothing))
+;   (define-fun
+;      aHO
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaHz
+;              (Maybe SortaHA)))
+;        nothing))
+;   (define-fun
+;      aHR
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!0))
+;         SortaHz!val!0
+;         (just SortaHA!val!2)))
 ;   (define-fun
 ;      aHF
 ;      ()
 ;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
-;                 SortaHA
-;                 (Maybe SortaHB)))
-;           nothing)
-;         SortaHA!val!1
-;         (just SortaHB!val!1)))
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
 ;   (define-fun
 ;      aHG
 ;      ()
 ;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            (just SortaHB!val!1))
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHC
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaHA
-;              (Maybe SortaHB)))
-;        nothing))
-;   (define-fun
-;      aHE
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            nothing)
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHP
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaHA
-;              (Maybe SortaHB)))
-;        nothing))
-;   (define-fun
-;      aHS
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
-;                 SortaHA
-;                 (Maybe SortaHB)))
-;           (just SortaHB!val!0))
-;         SortaHA!val!1
-;         (just SortaHB!val!2)))
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
+;   (define-fun
+;      aHC
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
 ;   (define-fun
 ;      given-4.3
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHC
-;           aHD)
-;         aHE))
+;           (_ map either1945926884561676842)
+;           aHB
+;           aHC)
+;         aHD))
 ;   (define-fun
 ;      wanted-4
 ;      ()
@@ -1826,68 +1784,60 @@
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map either1945923586026792211)
-;                      aHP
+;                      (_ map either1945926884561676842)
+;                      aHO
 ;                      (
-;                        (_ map either1945923586026792211)
-;                        aHQ
-;                        aHS))
-;                    aHI)))
+;                        (_ map either1945926884561676842)
+;                        aHP
+;                        aHR))
+;                    aHH)))
 ;           (a!2
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map either1945923586026792211)
+;                      (_ map either1945926884561676842)
 ;                      (
-;                        (_ map either1945923586026792211)
-;                        aHP
-;                        aHQ)
-;                      aHS)
-;                    aHG))))
+;                        (_ map either1945926884561676842)
+;                        aHO
+;                        aHP)
+;                      aHR)
+;                    aHF))))
 ;         (or a!1 a!2)))
 ;   (define-fun
-;      k!52
+;      aHE
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (
-;        (x!0 SortaHA))
-;      (Maybe SortaHB)
-;      (ite
-;         (= x!0 SortaHA!val!1)
-;         (just SortaHB!val!2)
-;         (just SortaHB!val!0)))
+;        (as
+;           const
+;           (Array
+;              SortaHz
+;              (Maybe SortaHA)))
+;        nothing))
 ;   (define-fun
-;      k!45
-;      (
-;        (x!0 SortaHA))
-;      (Maybe SortaHB)
-;      (ite
-;         (= x!0 SortaHA!val!1)
-;         (just SortaHB!val!1)
-;         (ite
-;            (= x!0 SortaHA!val!0)
-;            (just SortaHB!val!3)
-;            (just SortaHB!val!4))))
-;   (define-fun
-;      either1945923586026792211
+;      either1945926884561676842
 ;      (
 ;        (x!0
-;           (Maybe SortaHB))
+;           (Maybe SortaHA))
 ;        (x!1
-;           (Maybe SortaHB)))
-;      (Maybe SortaHB)
+;           (Maybe SortaHA)))
+;      (Maybe SortaHA)
 ;      (ite
 ;         (and
 ;            (=
 ;               x!0
-;               (just SortaHB!val!4))
+;               (just SortaHA!val!1))
 ;            (= x!1 nothing))
-;         (just SortaHB!val!4)
+;         (just SortaHA!val!1)
 ;         (ite
 ;            (and
 ;               (= x!0 nothing)
 ;               (=
 ;                  x!1
-;                  (just SortaHB!val!4)))
-;            (just SortaHB!val!4)
+;                  (just SortaHA!val!1)))
+;            (just SortaHA!val!1)
 ;            (ite
 ;               (and
 ;                  (= x!0 nothing)
@@ -1898,236 +1848,229 @@
 ;                     (= x!0 nothing)
 ;                     (=
 ;                        x!1
-;                        (just SortaHB!val!0)))
-;                  (just SortaHB!val!0)
+;                        (just SortaHA!val!0)))
+;                  (just SortaHA!val!0)
 ;                  (ite
 ;                     (and
 ;                        (= x!0 nothing)
 ;                        (=
 ;                           x!1
-;                           (just SortaHB!val!3)))
-;                     (just SortaHB!val!3)
+;                           (just SortaHA!val!3)))
+;                     (just SortaHA!val!3)
 ;                     (ite
 ;                        (and
 ;                           (= x!0 nothing)
 ;                           (=
 ;                              x!1
-;                              (just SortaHB!val!2)))
-;                        (just SortaHB!val!2)
+;                              (just SortaHA!val!2)))
+;                        (just SortaHA!val!2)
 ;                        (ite
 ;                           (and
-;                              (= x!0 nothing)
 ;                              (=
-;                                 x!1
-;                                 (just SortaHB!val!1)))
-;                           (just SortaHB!val!1)
-;                           (ite
-;                              (and
-;                                 (=
-;                                    x!0
-;                                    (just SortaHB!val!3))
-;                                 (= x!1 nothing))
-;                              (just SortaHB!val!3)
-;                              (ite
-;                                 (
-;                                   (_ is just)
-;                                   x!0)
 ;                                 x!0
-;                                 x!1)))))))))))
+;                                 (just SortaHA!val!3))
+;                              (= x!1 nothing))
+;                           (just SortaHA!val!3)
+;                           (ite
+;                              (
+;                                (_ is just)
+;                                x!0)
+;                              x!0
+;                              x!1))))))))))
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-4")
 
 ; GIVENS (GHC style)
-; [G] co_aI9 {1}:: UnionL b_aHD[sk:1] c_aHF[sk:1]
-;                  ~# bc_aHH[sk:1] (CEqCan)
-; [G] co_aI6 {1}:: UnionL ab_aHE[sk:1] c_aHF[sk:1]
-;                  ~# abc_aHG[sk:1] (CEqCan)
-; [G] co_aI3 {1}:: UnionL a_aHC[sk:1] b_aHD[sk:1]
-;                  ~# ab_aHE[sk:1] (CEqCan)
-; [G] co_aIc {1}:: UnionL a_aHC[sk:1] bc_aHH[sk:1]
-;                  ~# abc'_aHI[sk:1] (CEqCan)
+; [G] co_aI8 {1}:: UnionL b_aHC[sk:1] c_aHE[sk:1]
+;                  ~# bc_aHG[sk:1] (CEqCan)
+; [G] co_aI5 {1}:: UnionL ab_aHD[sk:1] c_aHE[sk:1]
+;                  ~# abc_aHF[sk:1] (CEqCan)
+; [G] co_aI2 {1}:: UnionL a_aHB[sk:1] b_aHC[sk:1]
+;                  ~# ab_aHD[sk:1] (CEqCan)
+; [G] co_aIb {1}:: UnionL a_aHB[sk:1] bc_aHG[sk:1]
+;                  ~# abc'_aHH[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aIj} {2}:: UnionL
-;                           a_aHP[tau:1] (UnionL b_aHQ[tau:1] c_aHS[tau:1])
-;                         ~# abc'_aHI[sk:1] (CNonCanonical)
-; [WD] hole{co_aIg} {2}:: UnionL
-;                           (UnionL a_aHP[tau:1] b_aHQ[tau:1]) c_aHS[tau:1]
-;                         ~# abc_aHG[sk:1] (CNonCanonical)
+; [WD] hole{co_aIi} {2}:: UnionL
+;                           a_aHO[tau:1] (UnionL b_aHP[tau:1] c_aHR[tau:1])
+;                         ~# abc'_aHH[sk:1] (CNonCanonical)
+; [WD] hole{co_aIf} {2}:: UnionL
+;                           (UnionL a_aHO[tau:1] b_aHP[tau:1]) c_aHR[tau:1]
+;                         ~# abc_aHF[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (UnionL [aHA,aHB,aHD,aHF],aHH)
-; (UnionL [aHA,aHB,aHE,aHF],aHG)
-; (UnionL [aHA,aHB,aHC,aHD],aHE)
-; (UnionL [aHA,aHB,aHC,aHH],aHI)
+; (UnionL [aHz,aHA,aHC,aHE],aHG)
+; (UnionL [aHz,aHA,aHD,aHE],aHF)
+; (UnionL [aHz,aHA,aHB,aHC],aHD)
+; (UnionL [aHz,aHA,aHB,aHG],aHH)
 
 ; WANTEDS (Thoralf style)
-; (UnionL [aHA,aHB,aHP,UnionL [aHA,aHB,aHQ,aHS]],aHI)
-; (UnionL [aHA,aHB,UnionL [aHA,aHB,aHP,aHQ],aHS],aHG)
+; (UnionL [aHz,aHA,aHO,UnionL [aHz,aHA,aHP,aHR]],aHH)
+; (UnionL [aHz,aHA,UnionL [aHz,aHA,aHO,aHP],aHR],aHF)
 
 (echo "givens-start-cycle-4")
 ; GIVENS (conversions)
-;      [WD] hole{co_aIj} {2}:: UnionL
-;                                a_aHP[tau:1] (UnionL b_aHQ[tau:1] c_aHS[tau:1])
-;                              ~# abc'_aHI[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIi} {2}:: UnionL
+;                                a_aHO[tau:1] (UnionL b_aHP[tau:1] c_aHR[tau:1])
+;                              ~# abc'_aHH[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map either1945923586026792211)
-;      aHP
+;      (_ map either1945926884561676842)
+;      aHO
 ;      (
-;        (_ map either1945923586026792211)
-;        aHQ
-;        aHS))
-;    aHI)
-
-;      [WD] hole{co_aIg} {2}:: UnionL
-;                                (UnionL a_aHP[tau:1] b_aHQ[tau:1]) c_aHS[tau:1]
-;                              ~# abc_aHG[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map either1945923586026792211)
-;      (
-;        (_ map either1945923586026792211)
+;        (_ map either1945926884561676842)
 ;        aHP
-;        aHQ)
-;      aHS)
-;    aHG)
+;        aHR))
+;    aHH)
+
+;      [WD] hole{co_aIf} {2}:: UnionL
+;                                (UnionL a_aHO[tau:1] b_aHP[tau:1]) c_aHR[tau:1]
+;                              ~# abc_aHF[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map either1945926884561676842)
+;      (
+;        (_ map either1945926884561676842)
+;        aHO
+;        aHP)
+;      aHR)
+;    aHF)
 
 ; GIVENS (names)
-;  aHC  <=  a_aHC[sk:1]
-;  aHD  <=  b_aHD[sk:1]
-;  aHE  <=  ab_aHE[sk:1]
-;  aHF  <=  c_aHF[sk:1]
-;  aHG  <=  abc_aHG[sk:1]
-;  aHH  <=  bc_aHH[sk:1]
-;  aHI  <=  abc'_aHI[sk:1]
+;  aHB  <=  a_aHB[sk:1]
+;  aHC  <=  b_aHC[sk:1]
+;  aHD  <=  ab_aHD[sk:1]
+;  aHE  <=  c_aHE[sk:1]
+;  aHF  <=  abc_aHF[sk:1]
+;  aHG  <=  bc_aHG[sk:1]
+;  aHH  <=  abc'_aHH[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (assert (forall ((x (Maybe SortaHB)) (y (Maybe SortaHB))) (=> ((_ is (just (SortaHB) (Maybe SortaHB))) x) (= (either1945923586026792211 x y) x))))
-; (assert (forall ((y (Maybe SortaHB))) (= (either1945923586026792211 (as nothing (Maybe SortaHB)) y) y)))
-; (declare-const aHC (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHD (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHE (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHF (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHG (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHH (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHI (Array SortaHA (Maybe SortaHB)))
-; (declare-fun either1945923586026792211 ((Maybe SortaHB) (Maybe SortaHB)) (Maybe SortaHB))
+; (assert (forall ((x (Maybe SortaHA)) (y (Maybe SortaHA))) (=> ((_ is (just (SortaHA) (Maybe SortaHA))) x) (= (either1945926884561676842 x y) x))))
+; (assert (forall ((y (Maybe SortaHA))) (= (either1945926884561676842 (as nothing (Maybe SortaHA)) y) y)))
+; (declare-const aHB (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHC (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHD (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHE (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHF (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHG (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHH (Array SortaHz (Maybe SortaHA)))
+; (declare-fun either1945926884561676842 ((Maybe SortaHA) (Maybe SortaHA)) (Maybe SortaHA))
 ; (declare-sort SortaHA)
-; (declare-sort SortaHB)
+; (declare-sort SortaHz)
+(declare-sort SortaHz)
 (declare-sort SortaHA)
-(declare-sort SortaHB)
+(declare-const
+   aHB
+   (Array
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHC
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHD
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHE
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHF
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHG
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHH
    (Array
-      SortaHA
-      (Maybe SortaHB)))
-(declare-const
-   aHI
-   (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-fun
-   either1945923586026792211
+   either1945926884561676842
    (
-     (Maybe SortaHB)
-     (Maybe SortaHB))
-   (Maybe SortaHB))
+     (Maybe SortaHA)
+     (Maybe SortaHA))
+   (Maybe SortaHA))
 (assert
    (forall
       (
         (y
-           (Maybe SortaHB)))
+           (Maybe SortaHA)))
       (=
-         (either1945923586026792211
+         (either1945926884561676842
             (as
                nothing
-               (Maybe SortaHB))
+               (Maybe SortaHA))
             y)
          y)))
 (assert
    (forall
       (
         (x
-           (Maybe SortaHB))
+           (Maybe SortaHA))
         (y
-           (Maybe SortaHB)))
+           (Maybe SortaHA)))
       (=>
          (
            (_
               is
               (just
-                 (SortaHB)
-                 (Maybe SortaHB)))
+                 (SortaHA)
+                 (Maybe SortaHA)))
            x)
          (=
-            (either1945923586026792211 x y)
+            (either1945926884561676842 x y)
             x))))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHD
-           aHF)
-         aHH)
+           (_ map either1945926884561676842)
+           aHC
+           aHE)
+         aHG)
       :named
       given-4.1))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHE
-           aHF)
-         aHG)
+           (_ map either1945926884561676842)
+           aHD
+           aHE)
+         aHF)
       :named
       given-4.2))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHC
-           aHD)
-         aHE)
+           (_ map either1945926884561676842)
+           aHB
+           aHC)
+         aHD)
       :named
       given-4.3))
 (assert
    (!
       (=
          (
-           (_ map either1945923586026792211)
-           aHC
-           aHH)
-         aHI)
+           (_ map either1945926884561676842)
+           aHB
+           aHG)
+         aHH)
       :named
       given-4.4))
 (check-sat)
@@ -2135,81 +2078,81 @@
 (echo "givens-finish-cycle-4")
 (echo "wanteds-start-cycle-4")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aIj} {2}:: UnionL
-;                                a_aHP[tau:1] (UnionL b_aHQ[tau:1] c_aHS[tau:1])
-;                              ~# abc'_aHI[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIi} {2}:: UnionL
+;                                a_aHO[tau:1] (UnionL b_aHP[tau:1] c_aHR[tau:1])
+;                              ~# abc'_aHH[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (
-;      (_ map either1945923586026792211)
-;      aHP
+;      (_ map either1945926884561676842)
+;      aHO
 ;      (
-;        (_ map either1945923586026792211)
-;        aHQ
-;        aHS))
-;    aHI)
-
-;      [WD] hole{co_aIg} {2}:: UnionL
-;                                (UnionL a_aHP[tau:1] b_aHQ[tau:1]) c_aHS[tau:1]
-;                              ~# abc_aHG[sk:1] (CNonCanonical)
-;  =>  (=
-;    (
-;      (_ map either1945923586026792211)
-;      (
-;        (_ map either1945923586026792211)
+;        (_ map either1945926884561676842)
 ;        aHP
-;        aHQ)
-;      aHS)
-;    aHG)
+;        aHR))
+;    aHH)
+
+;      [WD] hole{co_aIf} {2}:: UnionL
+;                                (UnionL a_aHO[tau:1] b_aHP[tau:1]) c_aHR[tau:1]
+;                              ~# abc_aHF[sk:1] (CNonCanonical)
+;  =>  (=
+;    (
+;      (_ map either1945926884561676842)
+;      (
+;        (_ map either1945926884561676842)
+;        aHO
+;        aHP)
+;      aHR)
+;    aHF)
 
 ; WANTEDS (names)
-;  aHG  <=  abc_aHG[sk:1]
-;  aHI  <=  abc'_aHI[sk:1]
-;  aHP  <=  a_aHP[tau:1]
-;  aHQ  <=  b_aHQ[tau:1]
-;  aHS  <=  c_aHS[tau:1]
+;  aHF  <=  abc_aHF[sk:1]
+;  aHH  <=  abc'_aHH[sk:1]
+;  aHO  <=  a_aHO[tau:1]
+;  aHP  <=  b_aHP[tau:1]
+;  aHR  <=  c_aHR[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aHP (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHQ (Array SortaHA (Maybe SortaHB)))
-; (declare-const aHS (Array SortaHA (Maybe SortaHB)))
+; (declare-const aHO (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHP (Array SortaHz (Maybe SortaHA)))
+; (declare-const aHR (Array SortaHz (Maybe SortaHA)))
+(declare-const
+   aHO
+   (Array
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
    aHP
    (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (declare-const
-   aHQ
+   aHR
    (Array
-      SortaHA
-      (Maybe SortaHB)))
-(declare-const
-   aHS
-   (Array
-      SortaHA
-      (Maybe SortaHB)))
+      SortaHz
+      (Maybe SortaHA)))
 (assert
    (!
       (or
          (not
             (=
                (
-                 (_ map either1945923586026792211)
-                 aHP
+                 (_ map either1945926884561676842)
+                 aHO
                  (
-                   (_ map either1945923586026792211)
-                   aHQ
-                   aHS))
-               aHI))
+                   (_ map either1945926884561676842)
+                   aHP
+                   aHR))
+               aHH))
          (not
             (=
                (
-                 (_ map either1945923586026792211)
+                 (_ map either1945926884561676842)
                  (
-                   (_ map either1945923586026792211)
-                   aHP
-                   aHQ)
-                 aHS)
-               aHG)))
+                   (_ map either1945926884561676842)
+                   aHO
+                   aHP)
+                 aHR)
+               aHF)))
       :named
       wanted-4))
 (check-sat)
@@ -2217,6 +2160,22 @@
 (echo "wanteds-finish-cycle-4")
 (get-model)
 ; (
+;   (declare-fun
+;      SortaHz!val!0
+;      ()
+;      SortaHz)
+;   (forall
+;      (
+;        (x SortaHz))
+;      (= x SortaHz!val!0))
+;   (declare-fun
+;      SortaHA!val!2
+;      ()
+;      SortaHA)
+;   (declare-fun
+;      SortaHA!val!3
+;      ()
+;      SortaHA)
 ;   (declare-fun
 ;      SortaHA!val!0
 ;      ()
@@ -2229,243 +2188,185 @@
 ;      (
 ;        (x SortaHA))
 ;      (or
+;         (= x SortaHA!val!2)
+;         (= x SortaHA!val!3)
 ;         (= x SortaHA!val!0)
 ;         (= x SortaHA!val!1)))
-;   (declare-fun
-;      SortaHB!val!3
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!0
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!4
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!2
-;      ()
-;      SortaHB)
-;   (declare-fun
-;      SortaHB!val!1
-;      ()
-;      SortaHB)
-;   (forall
-;      (
-;        (x SortaHB))
-;      (or
-;         (= x SortaHB!val!3)
-;         (= x SortaHB!val!0)
-;         (= x SortaHB!val!4)
-;         (= x SortaHB!val!2)
-;         (= x SortaHB!val!1)))
 ;   (define-fun
 ;      given-4.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHD
-;           aHF)
-;         aHH))
+;           (_ map either1945926884561676842)
+;           aHC
+;           aHE)
+;         aHG))
 ;   (define-fun
-;      aHD
+;      aHP
 ;      ()
 ;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            nothing)
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHH
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            (just SortaHB!val!1))
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHQ
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (
 ;        (as
 ;           const
 ;           (Array
-;              SortaHA
-;              (Maybe SortaHB)))
+;              SortaHz
+;              (Maybe SortaHA)))
 ;        nothing))
+;   (define-fun
+;      aHD
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
+;   (define-fun
+;      aHH
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
 ;   (define-fun
 ;      given-4.4
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHC
-;           aHH)
-;         aHI))
-;   (define-fun
-;      aHI
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            (just SortaHB!val!1))
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
+;           (_ map either1945926884561676842)
+;           aHB
+;           aHG)
+;         aHH))
 ;   (define-fun
 ;      given-4.2
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHE
-;           aHF)
-;         aHG))
+;           (_ map either1945926884561676842)
+;           aHD
+;           aHE)
+;         aHF))
+;   (define-fun
+;      aHB
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaHz
+;              (Maybe SortaHA)))
+;        nothing))
+;   (define-fun
+;      aHO
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (
+;        (as
+;           const
+;           (Array
+;              SortaHz
+;              (Maybe SortaHA)))
+;        nothing))
+;   (define-fun
+;      aHR
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!0))
+;         SortaHz!val!0
+;         (just SortaHA!val!2)))
 ;   (define-fun
 ;      aHF
 ;      ()
 ;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
-;                 SortaHA
-;                 (Maybe SortaHB)))
-;           nothing)
-;         SortaHA!val!1
-;         (just SortaHB!val!1)))
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
 ;   (define-fun
 ;      aHG
 ;      ()
 ;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            (just SortaHB!val!1))
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHC
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaHA
-;              (Maybe SortaHB)))
-;        nothing))
-;   (define-fun
-;      aHE
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    SortaHA
-;                    (Maybe SortaHB)))
-;              (just SortaHB!val!4))
-;            SortaHA!val!1
-;            nothing)
-;         SortaHA!val!0
-;         (just SortaHB!val!3)))
-;   (define-fun
-;      aHP
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
-;      (
-;        (as
-;           const
-;           (Array
-;              SortaHA
-;              (Maybe SortaHB)))
-;        nothing))
-;   (define-fun
-;      aHS
-;      ()
-;      (Array
-;         SortaHA
-;         (Maybe SortaHB))
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
-;                 SortaHA
-;                 (Maybe SortaHB)))
-;           (just SortaHB!val!0))
-;         SortaHA!val!1
-;         (just SortaHB!val!2)))
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
+;   (define-fun
+;      aHC
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 SortaHz
+;                 (Maybe SortaHA)))
+;           (just SortaHA!val!1))
+;         SortaHz!val!0
+;         (just SortaHA!val!3)))
 ;   (define-fun
 ;      given-4.3
 ;      ()
 ;      Bool
 ;      (=
 ;         (
-;           (_ map either1945923586026792211)
-;           aHC
-;           aHD)
-;         aHE))
+;           (_ map either1945926884561676842)
+;           aHB
+;           aHC)
+;         aHD))
 ;   (define-fun
 ;      wanted-4
 ;      ()
@@ -2476,68 +2377,60 @@
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map either1945923586026792211)
-;                      aHP
+;                      (_ map either1945926884561676842)
+;                      aHO
 ;                      (
-;                        (_ map either1945923586026792211)
-;                        aHQ
-;                        aHS))
-;                    aHI)))
+;                        (_ map either1945926884561676842)
+;                        aHP
+;                        aHR))
+;                    aHH)))
 ;           (a!2
 ;              (not
 ;                 (=
 ;                    (
-;                      (_ map either1945923586026792211)
+;                      (_ map either1945926884561676842)
 ;                      (
-;                        (_ map either1945923586026792211)
-;                        aHP
-;                        aHQ)
-;                      aHS)
-;                    aHG))))
+;                        (_ map either1945926884561676842)
+;                        aHO
+;                        aHP)
+;                      aHR)
+;                    aHF))))
 ;         (or a!1 a!2)))
 ;   (define-fun
-;      k!52
+;      aHE
+;      ()
+;      (Array
+;         SortaHz
+;         (Maybe SortaHA))
 ;      (
-;        (x!0 SortaHA))
-;      (Maybe SortaHB)
-;      (ite
-;         (= x!0 SortaHA!val!1)
-;         (just SortaHB!val!2)
-;         (just SortaHB!val!0)))
+;        (as
+;           const
+;           (Array
+;              SortaHz
+;              (Maybe SortaHA)))
+;        nothing))
 ;   (define-fun
-;      k!45
-;      (
-;        (x!0 SortaHA))
-;      (Maybe SortaHB)
-;      (ite
-;         (= x!0 SortaHA!val!1)
-;         (just SortaHB!val!1)
-;         (ite
-;            (= x!0 SortaHA!val!0)
-;            (just SortaHB!val!3)
-;            (just SortaHB!val!4))))
-;   (define-fun
-;      either1945923586026792211
+;      either1945926884561676842
 ;      (
 ;        (x!0
-;           (Maybe SortaHB))
+;           (Maybe SortaHA))
 ;        (x!1
-;           (Maybe SortaHB)))
-;      (Maybe SortaHB)
+;           (Maybe SortaHA)))
+;      (Maybe SortaHA)
 ;      (ite
 ;         (and
 ;            (=
 ;               x!0
-;               (just SortaHB!val!4))
+;               (just SortaHA!val!1))
 ;            (= x!1 nothing))
-;         (just SortaHB!val!4)
+;         (just SortaHA!val!1)
 ;         (ite
 ;            (and
 ;               (= x!0 nothing)
 ;               (=
 ;                  x!1
-;                  (just SortaHB!val!4)))
-;            (just SortaHB!val!4)
+;                  (just SortaHA!val!1)))
+;            (just SortaHA!val!1)
 ;            (ite
 ;               (and
 ;                  (= x!0 nothing)
@@ -2548,42 +2441,35 @@
 ;                     (= x!0 nothing)
 ;                     (=
 ;                        x!1
-;                        (just SortaHB!val!0)))
-;                  (just SortaHB!val!0)
+;                        (just SortaHA!val!0)))
+;                  (just SortaHA!val!0)
 ;                  (ite
 ;                     (and
 ;                        (= x!0 nothing)
 ;                        (=
 ;                           x!1
-;                           (just SortaHB!val!3)))
-;                     (just SortaHB!val!3)
+;                           (just SortaHA!val!3)))
+;                     (just SortaHA!val!3)
 ;                     (ite
 ;                        (and
 ;                           (= x!0 nothing)
 ;                           (=
 ;                              x!1
-;                              (just SortaHB!val!2)))
-;                        (just SortaHB!val!2)
+;                              (just SortaHA!val!2)))
+;                        (just SortaHA!val!2)
 ;                        (ite
 ;                           (and
-;                              (= x!0 nothing)
 ;                              (=
-;                                 x!1
-;                                 (just SortaHB!val!1)))
-;                           (just SortaHB!val!1)
-;                           (ite
-;                              (and
-;                                 (=
-;                                    x!0
-;                                    (just SortaHB!val!3))
-;                                 (= x!1 nothing))
-;                              (just SortaHB!val!3)
-;                              (ite
-;                                 (
-;                                   (_ is just)
-;                                   x!0)
 ;                                 x!0
-;                                 x!1)))))))))))
+;                                 (just SortaHA!val!3))
+;                              (= x!1 nothing))
+;                           (just SortaHA!val!3)
+;                           (ite
+;                              (
+;                                (_ is just)
+;                                x!0)
+;                              x!0
+;                              x!1))))))))))
 (pop 1)
 (echo "solver-finish-cycle-4")
 (echo "solver-start-cycle-5")
@@ -2593,41 +2479,46 @@
 (echo "solver-start-cycle-6")
 
 ; GIVENS (GHC style)
-; [G] co_aIR {2}:: Alter m1_aID[sk:1] "ok" 2 ~# m2_aIE[sk:1] (CEqCan)
-; [G] co_aIV {2}:: Alter m2_aIE[sk:1] "ok" 2 ~# m3_aIF[sk:1] (CEqCan)
+; [G] co_aIQ {2}:: Alter m1_aIC[sk:1] "ok" 2 ~# m2_aID[sk:1] (CEqCan)
+; [G] co_aIU {2}:: Alter m2_aID[sk:1] "ok" 2 ~# m3_aIE[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aIZ} {3}:: Alter m1_aII[tau:1] "ok" 2
-;                         ~# m2_aIE[sk:1] (CNonCanonical)
+; [WD] hole{co_aIY} {3}:: Alter m1_aIH[tau:1] "ok" 2
+;                         ~# m2_aID[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
+; (Alter [Symbol [],Natural [],aIC,"ok",2],aID)
 ; (Alter [Symbol [],Natural [],aID,"ok",2],aIE)
-; (Alter [Symbol [],Natural [],aIE,"ok",2],aIF)
 
 ; WANTEDS (Thoralf style)
-; (Alter [Symbol [],Natural [],aII,"ok",2],aIE)
+; (Alter [Symbol [],Natural [],aIH,"ok",2],aID)
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] hole{co_aIZ} {3}:: Alter m1_aII[tau:1] "ok" 2
-;                              ~# m2_aIE[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIY} {3}:: Alter m1_aIH[tau:1] "ok" 2
+;                              ~# m2_aID[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aII
+;       aIH
 ;       "ok"
 ;       (just 2))
-;    aIE)
+;    aID)
 
 ; GIVENS (names)
-;  aID  <=  m1_aID[sk:1]
-;  aIE  <=  m2_aIE[sk:1]
-;  aIF  <=  m3_aIF[sk:1]
+;  aIC  <=  m1_aIC[sk:1]
+;  aID  <=  m2_aID[sk:1]
+;  aIE  <=  m3_aIE[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
+; (declare-const aIC (Array String (Maybe Int)))
 ; (declare-const aID (Array String (Maybe Int)))
 ; (declare-const aIE (Array String (Maybe Int)))
-; (declare-const aIF (Array String (Maybe Int)))
+(declare-const
+   aIC
+   (Array
+      String
+      (Maybe Int)))
 (declare-const
    aID
    (Array
@@ -2638,11 +2529,16 @@
    (Array
       String
       (Maybe Int)))
-(declare-const
-   aIF
-   (Array
-      String
-      (Maybe Int)))
+(assert
+   (!
+      (=
+         (store
+            aIC
+            "ok"
+            (just 2))
+         aID)
+      :named
+      given-6.1))
 (assert
    (!
       (=
@@ -2652,39 +2548,29 @@
             (just 2))
          aIE)
       :named
-      given-6.1))
-(assert
-   (!
-      (=
-         (store
-            aIE
-            "ok"
-            (just 2))
-         aIF)
-      :named
       given-6.2))
 (check-sat)
 ; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aIZ} {3}:: Alter m1_aII[tau:1] "ok" 2
-;                              ~# m2_aIE[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIY} {3}:: Alter m1_aIH[tau:1] "ok" 2
+;                              ~# m2_aID[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aII
+;       aIH
 ;       "ok"
 ;       (just 2))
-;    aIE)
+;    aID)
 
 ; WANTEDS (names)
-;  aIE  <=  m2_aIE[sk:1]
-;  aII  <=  m1_aII[tau:1]
+;  aID  <=  m2_aID[sk:1]
+;  aIH  <=  m1_aIH[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aII (Array String (Maybe Int)))
+; (declare-const aIH (Array String (Maybe Int)))
 (declare-const
-   aII
+   aIH
    (Array
       String
       (Maybe Int)))
@@ -2693,10 +2579,10 @@
       (not
          (=
             (store
-               aII
+               aIH
                "ok"
                (just 2))
-            aIE))
+            aID))
       :named
       wanted-6))
 (check-sat)
@@ -2711,28 +2597,12 @@
 ;      (not
 ;         (=
 ;            (store
-;               aII
+;               aIH
 ;               "ok"
 ;               (just 2))
-;            aIE)))
+;            aID)))
 ;   (define-fun
-;      aII
-;      ()
-;      (Array
-;         String
-;         (Maybe Int))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 String
-;                 (Maybe Int)))
-;           (just 5))
-;         "o"
-;         (just 3)))
-;   (define-fun
-;      aIF
+;      aID
 ;      ()
 ;      (Array
 ;         String
@@ -2747,25 +2617,9 @@
 ;                    (Maybe Int)))
 ;              (just 4))
 ;            "o"
-;            nothing)
+;            (just 3))
 ;         "ok"
 ;         (just 2)))
-;   (define-fun
-;      aID
-;      ()
-;      (Array
-;         String
-;         (Maybe Int))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 String
-;                 (Maybe Int)))
-;           (just 4))
-;         "o"
-;         nothing))
 ;   (define-fun
 ;      aIE
 ;      ()
@@ -2782,7 +2636,7 @@
 ;                    (Maybe Int)))
 ;              (just 4))
 ;            "o"
-;            nothing)
+;            (just 3))
 ;         "ok"
 ;         (just 2)))
 ;   (define-fun
@@ -2791,60 +2645,97 @@
 ;      Bool
 ;      (=
 ;         (store
-;            aIE
+;            aID
 ;            "ok"
 ;            (just 2))
-;         aIF))
+;         aIE))
+;   (define-fun
+;      aIC
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 4))
+;         "o"
+;         (just 3)))
 ;   (define-fun
 ;      given-6.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (store
-;            aID
+;            aIC
 ;            "ok"
 ;            (just 2))
-;         aIE)))
+;         aID))
+;   (define-fun
+;      aIH
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 5))
+;         "o"
+;         nothing)))
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-6")
 
 ; GIVENS (GHC style)
-; [G] co_aIR {2}:: Alter m1_aID[sk:1] "ok" 2 ~# m2_aIE[sk:1] (CEqCan)
-; [G] co_aIV {2}:: Alter m2_aIE[sk:1] "ok" 2 ~# m3_aIF[sk:1] (CEqCan)
+; [G] co_aIQ {2}:: Alter m1_aIC[sk:1] "ok" 2 ~# m2_aID[sk:1] (CEqCan)
+; [G] co_aIU {2}:: Alter m2_aID[sk:1] "ok" 2 ~# m3_aIE[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aIZ} {3}:: Alter m1_aII[tau:1] "ok" 2
-;                         ~# m2_aIE[sk:1] (CNonCanonical)
+; [WD] hole{co_aIY} {3}:: Alter m1_aIH[tau:1] "ok" 2
+;                         ~# m2_aID[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
+; (Alter [Symbol [],Natural [],aIC,"ok",2],aID)
 ; (Alter [Symbol [],Natural [],aID,"ok",2],aIE)
-; (Alter [Symbol [],Natural [],aIE,"ok",2],aIF)
 
 ; WANTEDS (Thoralf style)
-; (Alter [Symbol [],Natural [],aII,"ok",2],aIE)
+; (Alter [Symbol [],Natural [],aIH,"ok",2],aID)
 
 (echo "givens-start-cycle-6")
 ; GIVENS (conversions)
-;      [WD] hole{co_aIZ} {3}:: Alter m1_aII[tau:1] "ok" 2
-;                              ~# m2_aIE[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIY} {3}:: Alter m1_aIH[tau:1] "ok" 2
+;                              ~# m2_aID[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aII
+;       aIH
 ;       "ok"
 ;       (just 2))
-;    aIE)
+;    aID)
 
 ; GIVENS (names)
-;  aID  <=  m1_aID[sk:1]
-;  aIE  <=  m2_aIE[sk:1]
-;  aIF  <=  m3_aIF[sk:1]
+;  aIC  <=  m1_aIC[sk:1]
+;  aID  <=  m2_aID[sk:1]
+;  aIE  <=  m3_aIE[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
+; (declare-const aIC (Array String (Maybe Int)))
 ; (declare-const aID (Array String (Maybe Int)))
 ; (declare-const aIE (Array String (Maybe Int)))
-; (declare-const aIF (Array String (Maybe Int)))
+(declare-const
+   aIC
+   (Array
+      String
+      (Maybe Int)))
 (declare-const
    aID
    (Array
@@ -2855,11 +2746,16 @@
    (Array
       String
       (Maybe Int)))
-(declare-const
-   aIF
-   (Array
-      String
-      (Maybe Int)))
+(assert
+   (!
+      (=
+         (store
+            aIC
+            "ok"
+            (just 2))
+         aID)
+      :named
+      given-6.1))
 (assert
    (!
       (=
@@ -2869,39 +2765,29 @@
             (just 2))
          aIE)
       :named
-      given-6.1))
-(assert
-   (!
-      (=
-         (store
-            aIE
-            "ok"
-            (just 2))
-         aIF)
-      :named
       given-6.2))
 (check-sat)
 ; sat
 (echo "givens-finish-cycle-6")
 (echo "wanteds-start-cycle-6")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aIZ} {3}:: Alter m1_aII[tau:1] "ok" 2
-;                              ~# m2_aIE[sk:1] (CNonCanonical)
+;      [WD] hole{co_aIY} {3}:: Alter m1_aIH[tau:1] "ok" 2
+;                              ~# m2_aID[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aII
+;       aIH
 ;       "ok"
 ;       (just 2))
-;    aIE)
+;    aID)
 
 ; WANTEDS (names)
-;  aIE  <=  m2_aIE[sk:1]
-;  aII  <=  m1_aII[tau:1]
+;  aID  <=  m2_aID[sk:1]
+;  aIH  <=  m1_aIH[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aII (Array String (Maybe Int)))
+; (declare-const aIH (Array String (Maybe Int)))
 (declare-const
-   aII
+   aIH
    (Array
       String
       (Maybe Int)))
@@ -2910,10 +2796,10 @@
       (not
          (=
             (store
-               aII
+               aIH
                "ok"
                (just 2))
-            aIE))
+            aID))
       :named
       wanted-6))
 (check-sat)
@@ -2928,28 +2814,12 @@
 ;      (not
 ;         (=
 ;            (store
-;               aII
+;               aIH
 ;               "ok"
 ;               (just 2))
-;            aIE)))
+;            aID)))
 ;   (define-fun
-;      aII
-;      ()
-;      (Array
-;         String
-;         (Maybe Int))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 String
-;                 (Maybe Int)))
-;           (just 5))
-;         "o"
-;         (just 3)))
-;   (define-fun
-;      aIF
+;      aID
 ;      ()
 ;      (Array
 ;         String
@@ -2964,25 +2834,9 @@
 ;                    (Maybe Int)))
 ;              (just 4))
 ;            "o"
-;            nothing)
+;            (just 3))
 ;         "ok"
 ;         (just 2)))
-;   (define-fun
-;      aID
-;      ()
-;      (Array
-;         String
-;         (Maybe Int))
-;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 String
-;                 (Maybe Int)))
-;           (just 4))
-;         "o"
-;         nothing))
 ;   (define-fun
 ;      aIE
 ;      ()
@@ -2999,7 +2853,7 @@
 ;                    (Maybe Int)))
 ;              (just 4))
 ;            "o"
-;            nothing)
+;            (just 3))
 ;         "ok"
 ;         (just 2)))
 ;   (define-fun
@@ -3008,20 +2862,52 @@
 ;      Bool
 ;      (=
 ;         (store
-;            aIE
+;            aID
 ;            "ok"
 ;            (just 2))
-;         aIF))
+;         aIE))
+;   (define-fun
+;      aIC
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 4))
+;         "o"
+;         (just 3)))
 ;   (define-fun
 ;      given-6.1
 ;      ()
 ;      Bool
 ;      (=
 ;         (store
-;            aID
+;            aIC
 ;            "ok"
 ;            (just 2))
-;         aIE)))
+;         aID))
+;   (define-fun
+;      aIH
+;      ()
+;      (Array
+;         String
+;         (Maybe Int))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe Int)))
+;           (just 5))
+;         "o"
+;         nothing)))
 (pop 1)
 (echo "solver-finish-cycle-6")
 (echo "solver-start-cycle-7")
@@ -3031,60 +2917,72 @@
 (echo "solver-start-cycle-8")
 
 ; GIVENS (GHC style)
-; [G] co_aJy {2}:: Delete m1_aJj[sk:1] "bob" ~# m2_aJk[sk:1] (CEqCan)
-; [G] co_aJC {2}:: Delete m2_aJk[sk:1] "bob" ~# m3_aJl[sk:1] (CEqCan)
+; [G] co_aJx {2}:: Delete m1_aJi[sk:1] "bob" ~# m2_aJj[sk:1] (CEqCan)
+; [G] co_aJB {2}:: Delete m2_aJj[sk:1] "bob" ~# m3_aJk[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aJG} {3}:: Delete m1_aJp[tau:1] "bob"
-;                         ~# m2_aJk[sk:1] (CNonCanonical)
+; [WD] hole{co_aJF} {3}:: Delete m1_aJo[tau:1] "bob"
+;                         ~# m2_aJj[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (Delete [Symbol [],aJi,aJj,"bob"],aJk)
-; (Delete [Symbol [],aJi,aJk,"bob"],aJl)
+; (Delete [Symbol [],aJh,aJi,"bob"],aJj)
+; (Delete [Symbol [],aJh,aJj,"bob"],aJk)
 
 ; WANTEDS (Thoralf style)
-; (Delete [Symbol [],aJi,aJp,"bob"],aJk)
+; (Delete [Symbol [],aJh,aJo,"bob"],aJj)
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] hole{co_aJG} {3}:: Delete m1_aJp[tau:1] "bob"
-;                              ~# m2_aJk[sk:1] (CNonCanonical)
+;      [WD] hole{co_aJF} {3}:: Delete m1_aJo[tau:1] "bob"
+;                              ~# m2_aJj[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aJp
+;       aJo
 ;       "bob"
 ;       (as
 ;          nothing
-;          (Maybe SortaJi)))
-;    aJk)
+;          (Maybe SortaJh)))
+;    aJj)
 
 ; GIVENS (names)
-;  aJj  <=  m1_aJj[sk:1]
-;  aJk  <=  m2_aJk[sk:1]
-;  aJl  <=  m3_aJl[sk:1]
+;  aJi  <=  m1_aJi[sk:1]
+;  aJj  <=  m2_aJj[sk:1]
+;  aJk  <=  m3_aJk[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aJj (Array String (Maybe SortaJi)))
-; (declare-const aJk (Array String (Maybe SortaJi)))
-; (declare-const aJl (Array String (Maybe SortaJi)))
-; (declare-sort SortaJi)
-(declare-sort SortaJi)
+; (declare-const aJi (Array String (Maybe SortaJh)))
+; (declare-const aJj (Array String (Maybe SortaJh)))
+; (declare-const aJk (Array String (Maybe SortaJh)))
+; (declare-sort SortaJh)
+(declare-sort SortaJh)
+(declare-const
+   aJi
+   (Array
+      String
+      (Maybe SortaJh)))
 (declare-const
    aJj
    (Array
       String
-      (Maybe SortaJi)))
+      (Maybe SortaJh)))
 (declare-const
    aJk
    (Array
       String
-      (Maybe SortaJi)))
-(declare-const
-   aJl
-   (Array
-      String
-      (Maybe SortaJi)))
+      (Maybe SortaJh)))
+(assert
+   (!
+      (=
+         (store
+            aJi
+            "bob"
+            (as
+               nothing
+               (Maybe SortaJh)))
+         aJj)
+      :named
+      given-8.1))
 (assert
    (!
       (=
@@ -3093,20 +2991,8 @@
             "bob"
             (as
                nothing
-               (Maybe SortaJi)))
+               (Maybe SortaJh)))
          aJk)
-      :named
-      given-8.1))
-(assert
-   (!
-      (=
-         (store
-            aJk
-            "bob"
-            (as
-               nothing
-               (Maybe SortaJi)))
-         aJl)
       :named
       given-8.2))
 (check-sat)
@@ -3114,39 +3000,39 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aJG} {3}:: Delete m1_aJp[tau:1] "bob"
-;                              ~# m2_aJk[sk:1] (CNonCanonical)
+;      [WD] hole{co_aJF} {3}:: Delete m1_aJo[tau:1] "bob"
+;                              ~# m2_aJj[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aJp
+;       aJo
 ;       "bob"
 ;       (as
 ;          nothing
-;          (Maybe SortaJi)))
-;    aJk)
+;          (Maybe SortaJh)))
+;    aJj)
 
 ; WANTEDS (names)
-;  aJk  <=  m2_aJk[sk:1]
-;  aJp  <=  m1_aJp[tau:1]
+;  aJj  <=  m2_aJj[sk:1]
+;  aJo  <=  m1_aJo[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aJp (Array String (Maybe SortaJi)))
+; (declare-const aJo (Array String (Maybe SortaJh)))
 (declare-const
-   aJp
+   aJo
    (Array
       String
-      (Maybe SortaJi)))
+      (Maybe SortaJh)))
 (assert
    (!
       (not
          (=
             (store
-               aJp
+               aJo
                "bob"
                (as
                   nothing
-                  (Maybe SortaJi)))
-            aJk))
+                  (Maybe SortaJh)))
+            aJj))
       :named
       wanted-8))
 (check-sat)
@@ -3155,76 +3041,61 @@
 (get-model)
 ; (
 ;   (declare-fun
-;      SortaJi!val!1
+;      SortaJh!val!0
 ;      ()
-;      SortaJi)
+;      SortaJh)
 ;   (declare-fun
-;      SortaJi!val!0
+;      SortaJh!val!2
 ;      ()
-;      SortaJi)
+;      SortaJh)
 ;   (declare-fun
-;      SortaJi!val!2
+;      SortaJh!val!1
 ;      ()
-;      SortaJi)
+;      SortaJh)
 ;   (forall
 ;      (
-;        (x SortaJi))
+;        (x SortaJh))
 ;      (or
-;         (= x SortaJi!val!1)
-;         (= x SortaJi!val!0)
-;         (= x SortaJi!val!2)))
+;         (= x SortaJh!val!0)
+;         (= x SortaJh!val!2)
+;         (= x SortaJh!val!1)))
 ;   (define-fun
-;      aJl
+;      aJi
 ;      ()
 ;      (Array
 ;         String
-;         (Maybe SortaJi))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    String
-;                    (Maybe SortaJi)))
-;              (just SortaJi!val!1))
-;            "bob"
-;            nothing)
-;         "b"
-;         nothing))
-;   (define-fun
-;      aJk
-;      ()
-;      (Array
-;         String
-;         (Maybe SortaJi))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    String
-;                    (Maybe SortaJi)))
-;              (just SortaJi!val!1))
-;            "bob"
-;            nothing)
-;         "b"
-;         nothing))
-;   (define-fun
-;      aJj
-;      ()
-;      (Array
-;         String
-;         (Maybe SortaJi))
+;         (Maybe SortaJh))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
 ;                 String
-;                 (Maybe SortaJi)))
-;           (just SortaJi!val!1))
+;                 (Maybe SortaJh)))
+;           (just SortaJh!val!1))
+;         "b"
+;         (just SortaJh!val!0)))
+;   (define-fun
+;      given-8.2
+;      ()
+;      Bool
+;      (=
+;         (store aJj "bob" nothing)
+;         aJk))
+;   (define-fun
+;      aJo
+;      ()
+;      (Array
+;         String
+;         (Maybe SortaJh))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe SortaJh)))
+;           (just SortaJh!val!2))
 ;         "b"
 ;         nothing))
 ;   (define-fun
@@ -3233,97 +3104,124 @@
 ;      Bool
 ;      (not
 ;         (=
-;            (store aJp "bob" nothing)
-;            aJk)))
+;            (store aJo "bob" nothing)
+;            aJj)))
 ;   (define-fun
-;      aJp
+;      aJj
 ;      ()
 ;      (Array
 ;         String
-;         (Maybe SortaJi))
+;         (Maybe SortaJh))
 ;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 String
-;                 (Maybe SortaJi)))
-;           (just SortaJi!val!2))
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe SortaJh)))
+;              (just SortaJh!val!1))
+;            "bob"
+;            nothing)
 ;         "b"
-;         (just SortaJi!val!0)))
+;         (just SortaJh!val!0)))
+;   (define-fun
+;      aJk
+;      ()
+;      (Array
+;         String
+;         (Maybe SortaJh))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe SortaJh)))
+;              (just SortaJh!val!1))
+;            "bob"
+;            nothing)
+;         "b"
+;         (just SortaJh!val!0)))
 ;   (define-fun
 ;      given-8.1
 ;      ()
 ;      Bool
 ;      (=
-;         (store aJj "bob" nothing)
-;         aJk))
-;   (define-fun
-;      given-8.2
-;      ()
-;      Bool
-;      (=
-;         (store aJk "bob" nothing)
-;         aJl)))
+;         (store aJi "bob" nothing)
+;         aJj)))
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-8")
 
 ; GIVENS (GHC style)
-; [G] co_aJy {2}:: Delete m1_aJj[sk:1] "bob" ~# m2_aJk[sk:1] (CEqCan)
-; [G] co_aJC {2}:: Delete m2_aJk[sk:1] "bob" ~# m3_aJl[sk:1] (CEqCan)
+; [G] co_aJx {2}:: Delete m1_aJi[sk:1] "bob" ~# m2_aJj[sk:1] (CEqCan)
+; [G] co_aJB {2}:: Delete m2_aJj[sk:1] "bob" ~# m3_aJk[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aJG} {3}:: Delete m1_aJp[tau:1] "bob"
-;                         ~# m2_aJk[sk:1] (CNonCanonical)
+; [WD] hole{co_aJF} {3}:: Delete m1_aJo[tau:1] "bob"
+;                         ~# m2_aJj[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (Delete [Symbol [],aJi,aJj,"bob"],aJk)
-; (Delete [Symbol [],aJi,aJk,"bob"],aJl)
+; (Delete [Symbol [],aJh,aJi,"bob"],aJj)
+; (Delete [Symbol [],aJh,aJj,"bob"],aJk)
 
 ; WANTEDS (Thoralf style)
-; (Delete [Symbol [],aJi,aJp,"bob"],aJk)
+; (Delete [Symbol [],aJh,aJo,"bob"],aJj)
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] hole{co_aJG} {3}:: Delete m1_aJp[tau:1] "bob"
-;                              ~# m2_aJk[sk:1] (CNonCanonical)
+;      [WD] hole{co_aJF} {3}:: Delete m1_aJo[tau:1] "bob"
+;                              ~# m2_aJj[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aJp
+;       aJo
 ;       "bob"
 ;       (as
 ;          nothing
-;          (Maybe SortaJi)))
-;    aJk)
+;          (Maybe SortaJh)))
+;    aJj)
 
 ; GIVENS (names)
-;  aJj  <=  m1_aJj[sk:1]
-;  aJk  <=  m2_aJk[sk:1]
-;  aJl  <=  m3_aJl[sk:1]
+;  aJi  <=  m1_aJi[sk:1]
+;  aJj  <=  m2_aJj[sk:1]
+;  aJk  <=  m3_aJk[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aJj (Array String (Maybe SortaJi)))
-; (declare-const aJk (Array String (Maybe SortaJi)))
-; (declare-const aJl (Array String (Maybe SortaJi)))
-; (declare-sort SortaJi)
-(declare-sort SortaJi)
+; (declare-const aJi (Array String (Maybe SortaJh)))
+; (declare-const aJj (Array String (Maybe SortaJh)))
+; (declare-const aJk (Array String (Maybe SortaJh)))
+; (declare-sort SortaJh)
+(declare-sort SortaJh)
+(declare-const
+   aJi
+   (Array
+      String
+      (Maybe SortaJh)))
 (declare-const
    aJj
    (Array
       String
-      (Maybe SortaJi)))
+      (Maybe SortaJh)))
 (declare-const
    aJk
    (Array
       String
-      (Maybe SortaJi)))
-(declare-const
-   aJl
-   (Array
-      String
-      (Maybe SortaJi)))
+      (Maybe SortaJh)))
+(assert
+   (!
+      (=
+         (store
+            aJi
+            "bob"
+            (as
+               nothing
+               (Maybe SortaJh)))
+         aJj)
+      :named
+      given-8.1))
 (assert
    (!
       (=
@@ -3332,20 +3230,8 @@
             "bob"
             (as
                nothing
-               (Maybe SortaJi)))
+               (Maybe SortaJh)))
          aJk)
-      :named
-      given-8.1))
-(assert
-   (!
-      (=
-         (store
-            aJk
-            "bob"
-            (as
-               nothing
-               (Maybe SortaJi)))
-         aJl)
       :named
       given-8.2))
 (check-sat)
@@ -3353,39 +3239,39 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aJG} {3}:: Delete m1_aJp[tau:1] "bob"
-;                              ~# m2_aJk[sk:1] (CNonCanonical)
+;      [WD] hole{co_aJF} {3}:: Delete m1_aJo[tau:1] "bob"
+;                              ~# m2_aJj[sk:1] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       aJp
+;       aJo
 ;       "bob"
 ;       (as
 ;          nothing
-;          (Maybe SortaJi)))
-;    aJk)
+;          (Maybe SortaJh)))
+;    aJj)
 
 ; WANTEDS (names)
-;  aJk  <=  m2_aJk[sk:1]
-;  aJp  <=  m1_aJp[tau:1]
+;  aJj  <=  m2_aJj[sk:1]
+;  aJo  <=  m1_aJo[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (declare-const aJp (Array String (Maybe SortaJi)))
+; (declare-const aJo (Array String (Maybe SortaJh)))
 (declare-const
-   aJp
+   aJo
    (Array
       String
-      (Maybe SortaJi)))
+      (Maybe SortaJh)))
 (assert
    (!
       (not
          (=
             (store
-               aJp
+               aJo
                "bob"
                (as
                   nothing
-                  (Maybe SortaJi)))
-            aJk))
+                  (Maybe SortaJh)))
+            aJj))
       :named
       wanted-8))
 (check-sat)
@@ -3394,76 +3280,61 @@
 (get-model)
 ; (
 ;   (declare-fun
-;      SortaJi!val!1
+;      SortaJh!val!0
 ;      ()
-;      SortaJi)
+;      SortaJh)
 ;   (declare-fun
-;      SortaJi!val!0
+;      SortaJh!val!2
 ;      ()
-;      SortaJi)
+;      SortaJh)
 ;   (declare-fun
-;      SortaJi!val!2
+;      SortaJh!val!1
 ;      ()
-;      SortaJi)
+;      SortaJh)
 ;   (forall
 ;      (
-;        (x SortaJi))
+;        (x SortaJh))
 ;      (or
-;         (= x SortaJi!val!1)
-;         (= x SortaJi!val!0)
-;         (= x SortaJi!val!2)))
+;         (= x SortaJh!val!0)
+;         (= x SortaJh!val!2)
+;         (= x SortaJh!val!1)))
 ;   (define-fun
-;      aJl
+;      aJi
 ;      ()
 ;      (Array
 ;         String
-;         (Maybe SortaJi))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    String
-;                    (Maybe SortaJi)))
-;              (just SortaJi!val!1))
-;            "bob"
-;            nothing)
-;         "b"
-;         nothing))
-;   (define-fun
-;      aJk
-;      ()
-;      (Array
-;         String
-;         (Maybe SortaJi))
-;      (store
-;         (store
-;            (
-;              (as
-;                 const
-;                 (Array
-;                    String
-;                    (Maybe SortaJi)))
-;              (just SortaJi!val!1))
-;            "bob"
-;            nothing)
-;         "b"
-;         nothing))
-;   (define-fun
-;      aJj
-;      ()
-;      (Array
-;         String
-;         (Maybe SortaJi))
+;         (Maybe SortaJh))
 ;      (store
 ;         (
 ;           (as
 ;              const
 ;              (Array
 ;                 String
-;                 (Maybe SortaJi)))
-;           (just SortaJi!val!1))
+;                 (Maybe SortaJh)))
+;           (just SortaJh!val!1))
+;         "b"
+;         (just SortaJh!val!0)))
+;   (define-fun
+;      given-8.2
+;      ()
+;      Bool
+;      (=
+;         (store aJj "bob" nothing)
+;         aJk))
+;   (define-fun
+;      aJo
+;      ()
+;      (Array
+;         String
+;         (Maybe SortaJh))
+;      (store
+;         (
+;           (as
+;              const
+;              (Array
+;                 String
+;                 (Maybe SortaJh)))
+;           (just SortaJh!val!2))
 ;         "b"
 ;         nothing))
 ;   (define-fun
@@ -3472,38 +3343,53 @@
 ;      Bool
 ;      (not
 ;         (=
-;            (store aJp "bob" nothing)
-;            aJk)))
+;            (store aJo "bob" nothing)
+;            aJj)))
 ;   (define-fun
-;      aJp
+;      aJj
 ;      ()
 ;      (Array
 ;         String
-;         (Maybe SortaJi))
+;         (Maybe SortaJh))
 ;      (store
-;         (
-;           (as
-;              const
-;              (Array
-;                 String
-;                 (Maybe SortaJi)))
-;           (just SortaJi!val!2))
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe SortaJh)))
+;              (just SortaJh!val!1))
+;            "bob"
+;            nothing)
 ;         "b"
-;         (just SortaJi!val!0)))
+;         (just SortaJh!val!0)))
+;   (define-fun
+;      aJk
+;      ()
+;      (Array
+;         String
+;         (Maybe SortaJh))
+;      (store
+;         (store
+;            (
+;              (as
+;                 const
+;                 (Array
+;                    String
+;                    (Maybe SortaJh)))
+;              (just SortaJh!val!1))
+;            "bob"
+;            nothing)
+;         "b"
+;         (just SortaJh!val!0)))
 ;   (define-fun
 ;      given-8.1
 ;      ()
 ;      Bool
 ;      (=
-;         (store aJj "bob" nothing)
-;         aJk))
-;   (define-fun
-;      given-8.2
-;      ()
-;      Bool
-;      (=
-;         (store aJk "bob" nothing)
-;         aJl)))
+;         (store aJi "bob" nothing)
+;         aJj)))
 (pop 1)
 (echo "solver-finish-cycle-8")
 (echo "solver-start-cycle-9")
@@ -3512,7 +3398,7 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aL3} {1}:: Alter (Alter Nil 1 "ok") 2 "hi"
+; [WD] hole{co_aL2} {1}:: Alter (Alter Nil 1 "ok") 2 "hi"
 ;                         ~# Alter (Alter Nil 2 "hi") 1 "ok" (CNonCanonical)
 
 ; GIVENS (Thoralf style)
@@ -3523,7 +3409,7 @@
 
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
-;      [WD] hole{co_aL3} {1}:: Alter (Alter Nil 1 "ok") 2 "hi"
+;      [WD] hole{co_aL2} {1}:: Alter (Alter Nil 1 "ok") 2 "hi"
 ;                              ~# Alter (Alter Nil 2 "hi") 1 "ok" (CNonCanonical)
 ;  =>  (=
 ;    (store
@@ -3562,7 +3448,7 @@
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aL3} {1}:: Alter (Alter Nil 1 "ok") 2 "hi"
+;      [WD] hole{co_aL2} {1}:: Alter (Alter Nil 1 "ok") 2 "hi"
 ;                              ~# Alter (Alter Nil 2 "hi") 1 "ok" (CNonCanonical)
 ;  =>  (=
 ;    (store
@@ -3676,187 +3562,187 @@
 (echo "solver-start-cycle-11")
 
 ; GIVENS (GHC style)
-; [G] co_aLb {1}:: IntersectL b_aJY[sk:1] c_aK0[sk:1]
-;                  ~# bc_aK2[sk:1] (CEqCan)
-; [G] co_aL8 {1}:: IntersectL ab_aJZ[sk:1] c_aK0[sk:1]
-;                  ~# abc_aK1[sk:1] (CEqCan)
-; [G] co_aL5 {1}:: IntersectL a_aJX[sk:1] b_aJY[sk:1]
-;                  ~# ab_aJZ[sk:1] (CEqCan)
-; [G] co_aLe {1}:: IntersectL a_aJX[sk:1] bc_aK2[sk:1]
-;                  ~# abc'_aK3[sk:1] (CEqCan)
+; [G] co_aLa {1}:: IntersectL b_aJX[sk:1] c_aJZ[sk:1]
+;                  ~# bc_aK1[sk:1] (CEqCan)
+; [G] co_aL7 {1}:: IntersectL ab_aJY[sk:1] c_aJZ[sk:1]
+;                  ~# abc_aK0[sk:1] (CEqCan)
+; [G] co_aL4 {1}:: IntersectL a_aJW[sk:1] b_aJX[sk:1]
+;                  ~# ab_aJY[sk:1] (CEqCan)
+; [G] co_aLd {1}:: IntersectL a_aJW[sk:1] bc_aK1[sk:1]
+;                  ~# abc'_aK2[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aKa} {0}:: abc_aK1[sk:1]
-;                         ~# abc'_aK3[sk:1] (CNonCanonical)
+; [WD] hole{co_aK9} {0}:: abc_aK0[sk:1]
+;                         ~# abc'_aK2[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (IntersectL [aJV,aJW,aJY,aK0],aK2)
-; (IntersectL [aJV,aJW,aJZ,aK0],aK1)
-; (IntersectL [aJV,aJW,aJX,aJY],aJZ)
-; (IntersectL [aJV,aJW,aJX,aK2],aK3)
+; (IntersectL [aJU,aJV,aJX,aJZ],aK1)
+; (IntersectL [aJU,aJV,aJY,aJZ],aK0)
+; (IntersectL [aJU,aJV,aJW,aJX],aJY)
+; (IntersectL [aJU,aJV,aJW,aK1],aK2)
 
 ; WANTEDS (Thoralf style)
-; (aK1,aK3)
+; (aK0,aK2)
 
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
-;      [WD] hole{co_aKa} {0}:: abc_aK1[sk:1]
-;                              ~# abc'_aK3[sk:1] (CNonCanonical)
-;  =>  (= aK1 aK3)
+;      [WD] hole{co_aK9} {0}:: abc_aK0[sk:1]
+;                              ~# abc'_aK2[sk:1] (CNonCanonical)
+;  =>  (= aK0 aK2)
 
 ; GIVENS (names)
-;  aJX  <=  a_aJX[sk:1]
-;  aJY  <=  b_aJY[sk:1]
-;  aJZ  <=  ab_aJZ[sk:1]
-;  aK0  <=  c_aK0[sk:1]
-;  aK1  <=  abc_aK1[sk:1]
-;  aK2  <=  bc_aK2[sk:1]
-;  aK3  <=  abc'_aK3[sk:1]
+;  aJW  <=  a_aJW[sk:1]
+;  aJX  <=  b_aJX[sk:1]
+;  aJY  <=  ab_aJY[sk:1]
+;  aJZ  <=  c_aJZ[sk:1]
+;  aK0  <=  abc_aK0[sk:1]
+;  aK1  <=  bc_aK1[sk:1]
+;  aK2  <=  abc'_aK2[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (assert (forall ((x (Maybe SortaJW)) (y (Maybe SortaJW))) (=> (and ((_ is (just (SortaJW) (Maybe SortaJW))) x) ((_ is (just (SortaJW) (Maybe SortaJW))) y)) (= (both1944002739212686042 x y) x))))
-; (assert (forall ((y (Maybe SortaJW))) (= (both1944002739212686042 nothing y) nothing)))
-; (assert (forall ((y (Maybe SortaJW))) (= (both1944002739212686042 y (as nothing (Maybe SortaJW))) (as nothing (Maybe SortaJW)))))
-; (declare-const aJX (Array SortaJV (Maybe SortaJW)))
-; (declare-const aJY (Array SortaJV (Maybe SortaJW)))
-; (declare-const aJZ (Array SortaJV (Maybe SortaJW)))
-; (declare-const aK0 (Array SortaJV (Maybe SortaJW)))
-; (declare-const aK1 (Array SortaJV (Maybe SortaJW)))
-; (declare-const aK2 (Array SortaJV (Maybe SortaJW)))
-; (declare-const aK3 (Array SortaJV (Maybe SortaJW)))
-; (declare-fun both1944002739212686042 ((Maybe SortaJW) (Maybe SortaJW)) (Maybe SortaJW))
+; (assert (forall ((x (Maybe SortaJV)) (y (Maybe SortaJV))) (=> (and ((_ is (just (SortaJV) (Maybe SortaJV))) x) ((_ is (just (SortaJV) (Maybe SortaJV))) y)) (= (both1944001639701057837 x y) x))))
+; (assert (forall ((y (Maybe SortaJV))) (= (both1944001639701057837 nothing y) nothing)))
+; (assert (forall ((y (Maybe SortaJV))) (= (both1944001639701057837 y (as nothing (Maybe SortaJV))) (as nothing (Maybe SortaJV)))))
+; (declare-const aJW (Array SortaJU (Maybe SortaJV)))
+; (declare-const aJX (Array SortaJU (Maybe SortaJV)))
+; (declare-const aJY (Array SortaJU (Maybe SortaJV)))
+; (declare-const aJZ (Array SortaJU (Maybe SortaJV)))
+; (declare-const aK0 (Array SortaJU (Maybe SortaJV)))
+; (declare-const aK1 (Array SortaJU (Maybe SortaJV)))
+; (declare-const aK2 (Array SortaJU (Maybe SortaJV)))
+; (declare-fun both1944001639701057837 ((Maybe SortaJV) (Maybe SortaJV)) (Maybe SortaJV))
+; (declare-sort SortaJU)
 ; (declare-sort SortaJV)
-; (declare-sort SortaJW)
+(declare-sort SortaJU)
 (declare-sort SortaJV)
-(declare-sort SortaJW)
+(declare-const
+   aJW
+   (Array
+      SortaJU
+      (Maybe SortaJV)))
 (declare-const
    aJX
    (Array
-      SortaJV
-      (Maybe SortaJW)))
+      SortaJU
+      (Maybe SortaJV)))
 (declare-const
    aJY
    (Array
-      SortaJV
-      (Maybe SortaJW)))
+      SortaJU
+      (Maybe SortaJV)))
 (declare-const
    aJZ
    (Array
-      SortaJV
-      (Maybe SortaJW)))
+      SortaJU
+      (Maybe SortaJV)))
 (declare-const
    aK0
    (Array
-      SortaJV
-      (Maybe SortaJW)))
+      SortaJU
+      (Maybe SortaJV)))
 (declare-const
    aK1
    (Array
-      SortaJV
-      (Maybe SortaJW)))
+      SortaJU
+      (Maybe SortaJV)))
 (declare-const
    aK2
    (Array
-      SortaJV
-      (Maybe SortaJW)))
-(declare-const
-   aK3
-   (Array
-      SortaJV
-      (Maybe SortaJW)))
+      SortaJU
+      (Maybe SortaJV)))
 (declare-fun
-   both1944002739212686042
+   both1944001639701057837
    (
-     (Maybe SortaJW)
-     (Maybe SortaJW))
-   (Maybe SortaJW))
+     (Maybe SortaJV)
+     (Maybe SortaJV))
+   (Maybe SortaJV))
 (assert
    (forall
       (
         (y
-           (Maybe SortaJW)))
+           (Maybe SortaJV)))
       (=
-         (both1944002739212686042
+         (both1944001639701057837
             y
             (as
                nothing
-               (Maybe SortaJW)))
+               (Maybe SortaJV)))
          (as
             nothing
-            (Maybe SortaJW)))))
+            (Maybe SortaJV)))))
 (assert
    (forall
       (
         (y
-           (Maybe SortaJW)))
+           (Maybe SortaJV)))
       (=
-         (both1944002739212686042 nothing y)
+         (both1944001639701057837 nothing y)
          nothing)))
 (assert
    (forall
       (
         (x
-           (Maybe SortaJW))
+           (Maybe SortaJV))
         (y
-           (Maybe SortaJW)))
+           (Maybe SortaJV)))
       (=>
          (and
             (
               (_
                  is
                  (just
-                    (SortaJW)
-                    (Maybe SortaJW)))
+                    (SortaJV)
+                    (Maybe SortaJV)))
               x)
             (
               (_
                  is
                  (just
-                    (SortaJW)
-                    (Maybe SortaJW)))
+                    (SortaJV)
+                    (Maybe SortaJV)))
               y))
          (=
-            (both1944002739212686042 x y)
+            (both1944001639701057837 x y)
             x))))
 (assert
    (!
       (=
          (
-           (_ map both1944002739212686042)
-           aJY
-           aK0)
-         aK2)
+           (_ map both1944001639701057837)
+           aJX
+           aJZ)
+         aK1)
       :named
       given-11.1))
 (assert
    (!
       (=
          (
-           (_ map both1944002739212686042)
-           aJZ
-           aK0)
-         aK1)
+           (_ map both1944001639701057837)
+           aJY
+           aJZ)
+         aK0)
       :named
       given-11.2))
 (assert
    (!
       (=
          (
-           (_ map both1944002739212686042)
-           aJX
-           aJY)
-         aJZ)
+           (_ map both1944001639701057837)
+           aJW
+           aJX)
+         aJY)
       :named
       given-11.3))
 (assert
    (!
       (=
          (
-           (_ map both1944002739212686042)
-           aJX
-           aK2)
-         aK3)
+           (_ map both1944001639701057837)
+           aJW
+           aK1)
+         aK2)
       :named
       given-11.4))
 (check-sat)
@@ -3864,19 +3750,19 @@
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aKa} {0}:: abc_aK1[sk:1]
-;                              ~# abc'_aK3[sk:1] (CNonCanonical)
-;  =>  (= aK1 aK3)
+;      [WD] hole{co_aK9} {0}:: abc_aK0[sk:1]
+;                              ~# abc'_aK2[sk:1] (CNonCanonical)
+;  =>  (= aK0 aK2)
 
 ; WANTEDS (names)
-;  aK1  <=  abc_aK1[sk:1]
-;  aK3  <=  abc'_aK3[sk:1]
+;  aK0  <=  abc_aK0[sk:1]
+;  aK2  <=  abc'_aK2[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= aK1 aK3))
+         (= aK0 aK2))
       :named
       wanted-11))
 (check-sat)
@@ -3887,91 +3773,91 @@
 ;   (forall
 ;      (
 ;        (y
-;           (Maybe SortaJW)))
+;           (Maybe SortaJV)))
 ;      (=
-;         (both1944002739212686042
+;         (both1944001639701057837
 ;            y
 ;            (as
 ;               nothing
-;               (Maybe SortaJW)))
+;               (Maybe SortaJV)))
 ;         (as
 ;            nothing
-;            (Maybe SortaJW))))
+;            (Maybe SortaJV))))
 ;   (forall
 ;      (
 ;        (y
-;           (Maybe SortaJW)))
+;           (Maybe SortaJV)))
 ;      (=
-;         (both1944002739212686042 nothing y)
+;         (both1944001639701057837 nothing y)
 ;         nothing))
 ;   (forall
 ;      (
 ;        (x
-;           (Maybe SortaJW))
+;           (Maybe SortaJV))
 ;        (y
-;           (Maybe SortaJW)))
+;           (Maybe SortaJV)))
 ;      (=>
 ;         (and
 ;            (
 ;              (_
 ;                 is
 ;                 (just
-;                    (SortaJW)
-;                    (Maybe SortaJW)))
+;                    (SortaJV)
+;                    (Maybe SortaJV)))
 ;              x)
 ;            (
 ;              (_
 ;                 is
 ;                 (just
-;                    (SortaJW)
-;                    (Maybe SortaJW)))
+;                    (SortaJV)
+;                    (Maybe SortaJV)))
 ;              y))
 ;         (=
-;            (both1944002739212686042 x y)
+;            (both1944001639701057837 x y)
 ;            x)))
 ;   (!
 ;      (=
 ;         (
-;           (_ map both1944002739212686042)
-;           aJY
-;           aK0)
-;         aK2)
+;           (_ map both1944001639701057837)
+;           aJX
+;           aJZ)
+;         aK1)
 ;      :named
 ;      given-11.1)
 ;   (!
 ;      (=
 ;         (
-;           (_ map both1944002739212686042)
-;           aJZ
-;           aK0)
-;         aK1)
+;           (_ map both1944001639701057837)
+;           aJY
+;           aJZ)
+;         aK0)
 ;      :named
 ;      given-11.2)
 ;   (!
 ;      (=
 ;         (
-;           (_ map both1944002739212686042)
-;           aJX
-;           aJY)
-;         aJZ)
+;           (_ map both1944001639701057837)
+;           aJW
+;           aJX)
+;         aJY)
 ;      :named
 ;      given-11.3)
 ;   (!
 ;      (=
 ;         (
-;           (_ map both1944002739212686042)
-;           aJX
-;           aK2)
-;         aK3)
+;           (_ map both1944001639701057837)
+;           aJW
+;           aK1)
+;         aK2)
 ;      :named
 ;      given-11.4)
 ;   (!
 ;      (not
-;         (= aK1 aK3))
+;         (= aK0 aK2))
 ;      :named
 ;      wanted-11))
 (get-unsat-core)
-; (given-11.3 given-11.2 given-11.1 given-11.4 wanted-11)
+; (given-11.2 given-11.3 given-11.4 wanted-11 given-11.1)
 (pop 1)
 (echo "solver-finish-cycle-11")
 (echo "solver-start-cycle-11")
@@ -3983,168 +3869,168 @@
 (echo "solver-start-cycle-13")
 
 ; GIVENS (GHC style)
-; [G] co_aLn {1}:: UnionL b_aKg[sk:1] c_aKi[sk:1]
-;                  ~# bc_aKk[sk:1] (CEqCan)
-; [G] co_aLk {1}:: UnionL ab_aKh[sk:1] c_aKi[sk:1]
-;                  ~# abc_aKj[sk:1] (CEqCan)
-; [G] co_aLh {1}:: UnionL a_aKf[sk:1] b_aKg[sk:1]
-;                  ~# ab_aKh[sk:1] (CEqCan)
-; [G] co_aLq {1}:: UnionL a_aKf[sk:1] bc_aKk[sk:1]
-;                  ~# abc'_aKl[sk:1] (CEqCan)
+; [G] co_aLm {1}:: UnionL b_aKf[sk:1] c_aKh[sk:1]
+;                  ~# bc_aKj[sk:1] (CEqCan)
+; [G] co_aLj {1}:: UnionL ab_aKg[sk:1] c_aKh[sk:1]
+;                  ~# abc_aKi[sk:1] (CEqCan)
+; [G] co_aLg {1}:: UnionL a_aKe[sk:1] b_aKf[sk:1]
+;                  ~# ab_aKg[sk:1] (CEqCan)
+; [G] co_aLp {1}:: UnionL a_aKe[sk:1] bc_aKj[sk:1]
+;                  ~# abc'_aKk[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aKs} {0}:: abc_aKj[sk:1]
-;                         ~# abc'_aKl[sk:1] (CNonCanonical)
+; [WD] hole{co_aKr} {0}:: abc_aKi[sk:1]
+;                         ~# abc'_aKk[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (UnionL [aKd,aKe,aKg,aKi],aKk)
-; (UnionL [aKd,aKe,aKh,aKi],aKj)
-; (UnionL [aKd,aKe,aKf,aKg],aKh)
-; (UnionL [aKd,aKe,aKf,aKk],aKl)
+; (UnionL [aKc,aKd,aKf,aKh],aKj)
+; (UnionL [aKc,aKd,aKg,aKh],aKi)
+; (UnionL [aKc,aKd,aKe,aKf],aKg)
+; (UnionL [aKc,aKd,aKe,aKj],aKk)
 
 ; WANTEDS (Thoralf style)
-; (aKj,aKl)
+; (aKi,aKk)
 
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
-;      [WD] hole{co_aKs} {0}:: abc_aKj[sk:1]
-;                              ~# abc'_aKl[sk:1] (CNonCanonical)
-;  =>  (= aKj aKl)
+;      [WD] hole{co_aKr} {0}:: abc_aKi[sk:1]
+;                              ~# abc'_aKk[sk:1] (CNonCanonical)
+;  =>  (= aKi aKk)
 
 ; GIVENS (names)
-;  aKf  <=  a_aKf[sk:1]
-;  aKg  <=  b_aKg[sk:1]
-;  aKh  <=  ab_aKh[sk:1]
-;  aKi  <=  c_aKi[sk:1]
-;  aKj  <=  abc_aKj[sk:1]
-;  aKk  <=  bc_aKk[sk:1]
-;  aKl  <=  abc'_aKl[sk:1]
+;  aKe  <=  a_aKe[sk:1]
+;  aKf  <=  b_aKf[sk:1]
+;  aKg  <=  ab_aKg[sk:1]
+;  aKh  <=  c_aKh[sk:1]
+;  aKi  <=  abc_aKi[sk:1]
+;  aKj  <=  bc_aKj[sk:1]
+;  aKk  <=  abc'_aKk[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (assert (forall ((x (Maybe SortaKe)) (y (Maybe SortaKe))) (=> ((_ is (just (SortaKe) (Maybe SortaKe))) x) (= (either1945078061584887181 x y) x))))
-; (assert (forall ((y (Maybe SortaKe))) (= (either1945078061584887181 (as nothing (Maybe SortaKe)) y) y)))
-; (declare-const aKf (Array SortaKd (Maybe SortaKe)))
-; (declare-const aKg (Array SortaKd (Maybe SortaKe)))
-; (declare-const aKh (Array SortaKd (Maybe SortaKe)))
-; (declare-const aKi (Array SortaKd (Maybe SortaKe)))
-; (declare-const aKj (Array SortaKd (Maybe SortaKe)))
-; (declare-const aKk (Array SortaKd (Maybe SortaKe)))
-; (declare-const aKl (Array SortaKd (Maybe SortaKe)))
-; (declare-fun either1945078061584887181 ((Maybe SortaKe) (Maybe SortaKe)) (Maybe SortaKe))
+; (assert (forall ((x (Maybe SortaKd)) (y (Maybe SortaKd))) (=> ((_ is (just (SortaKd) (Maybe SortaKd))) x) (= (either1945079161096515386 x y) x))))
+; (assert (forall ((y (Maybe SortaKd))) (= (either1945079161096515386 (as nothing (Maybe SortaKd)) y) y)))
+; (declare-const aKe (Array SortaKc (Maybe SortaKd)))
+; (declare-const aKf (Array SortaKc (Maybe SortaKd)))
+; (declare-const aKg (Array SortaKc (Maybe SortaKd)))
+; (declare-const aKh (Array SortaKc (Maybe SortaKd)))
+; (declare-const aKi (Array SortaKc (Maybe SortaKd)))
+; (declare-const aKj (Array SortaKc (Maybe SortaKd)))
+; (declare-const aKk (Array SortaKc (Maybe SortaKd)))
+; (declare-fun either1945079161096515386 ((Maybe SortaKd) (Maybe SortaKd)) (Maybe SortaKd))
+; (declare-sort SortaKc)
 ; (declare-sort SortaKd)
-; (declare-sort SortaKe)
+(declare-sort SortaKc)
 (declare-sort SortaKd)
-(declare-sort SortaKe)
+(declare-const
+   aKe
+   (Array
+      SortaKc
+      (Maybe SortaKd)))
 (declare-const
    aKf
    (Array
-      SortaKd
-      (Maybe SortaKe)))
+      SortaKc
+      (Maybe SortaKd)))
 (declare-const
    aKg
    (Array
-      SortaKd
-      (Maybe SortaKe)))
+      SortaKc
+      (Maybe SortaKd)))
 (declare-const
    aKh
    (Array
-      SortaKd
-      (Maybe SortaKe)))
+      SortaKc
+      (Maybe SortaKd)))
 (declare-const
    aKi
    (Array
-      SortaKd
-      (Maybe SortaKe)))
+      SortaKc
+      (Maybe SortaKd)))
 (declare-const
    aKj
    (Array
-      SortaKd
-      (Maybe SortaKe)))
+      SortaKc
+      (Maybe SortaKd)))
 (declare-const
    aKk
    (Array
-      SortaKd
-      (Maybe SortaKe)))
-(declare-const
-   aKl
-   (Array
-      SortaKd
-      (Maybe SortaKe)))
+      SortaKc
+      (Maybe SortaKd)))
 (declare-fun
-   either1945078061584887181
+   either1945079161096515386
    (
-     (Maybe SortaKe)
-     (Maybe SortaKe))
-   (Maybe SortaKe))
+     (Maybe SortaKd)
+     (Maybe SortaKd))
+   (Maybe SortaKd))
 (assert
    (forall
       (
         (y
-           (Maybe SortaKe)))
+           (Maybe SortaKd)))
       (=
-         (either1945078061584887181
+         (either1945079161096515386
             (as
                nothing
-               (Maybe SortaKe))
+               (Maybe SortaKd))
             y)
          y)))
 (assert
    (forall
       (
         (x
-           (Maybe SortaKe))
+           (Maybe SortaKd))
         (y
-           (Maybe SortaKe)))
+           (Maybe SortaKd)))
       (=>
          (
            (_
               is
               (just
-                 (SortaKe)
-                 (Maybe SortaKe)))
+                 (SortaKd)
+                 (Maybe SortaKd)))
            x)
          (=
-            (either1945078061584887181 x y)
+            (either1945079161096515386 x y)
             x))))
 (assert
    (!
       (=
          (
-           (_ map either1945078061584887181)
-           aKg
-           aKi)
-         aKk)
+           (_ map either1945079161096515386)
+           aKf
+           aKh)
+         aKj)
       :named
       given-13.1))
 (assert
    (!
       (=
          (
-           (_ map either1945078061584887181)
-           aKh
-           aKi)
-         aKj)
+           (_ map either1945079161096515386)
+           aKg
+           aKh)
+         aKi)
       :named
       given-13.2))
 (assert
    (!
       (=
          (
-           (_ map either1945078061584887181)
-           aKf
-           aKg)
-         aKh)
+           (_ map either1945079161096515386)
+           aKe
+           aKf)
+         aKg)
       :named
       given-13.3))
 (assert
    (!
       (=
          (
-           (_ map either1945078061584887181)
-           aKf
-           aKk)
-         aKl)
+           (_ map either1945079161096515386)
+           aKe
+           aKj)
+         aKk)
       :named
       given-13.4))
 (check-sat)
@@ -4152,19 +4038,19 @@
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aKs} {0}:: abc_aKj[sk:1]
-;                              ~# abc'_aKl[sk:1] (CNonCanonical)
-;  =>  (= aKj aKl)
+;      [WD] hole{co_aKr} {0}:: abc_aKi[sk:1]
+;                              ~# abc'_aKk[sk:1] (CNonCanonical)
+;  =>  (= aKi aKk)
 
 ; WANTEDS (names)
-;  aKj  <=  abc_aKj[sk:1]
-;  aKl  <=  abc'_aKl[sk:1]
+;  aKi  <=  abc_aKi[sk:1]
+;  aKk  <=  abc'_aKk[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= aKj aKl))
+         (= aKi aKk))
       :named
       wanted-13))
 (check-sat)
@@ -4175,74 +4061,74 @@
 ;   (forall
 ;      (
 ;        (y
-;           (Maybe SortaKe)))
+;           (Maybe SortaKd)))
 ;      (=
-;         (either1945078061584887181
+;         (either1945079161096515386
 ;            (as
 ;               nothing
-;               (Maybe SortaKe))
+;               (Maybe SortaKd))
 ;            y)
 ;         y))
 ;   (forall
 ;      (
 ;        (x
-;           (Maybe SortaKe))
+;           (Maybe SortaKd))
 ;        (y
-;           (Maybe SortaKe)))
+;           (Maybe SortaKd)))
 ;      (=>
 ;         (
 ;           (_
 ;              is
 ;              (just
-;                 (SortaKe)
-;                 (Maybe SortaKe)))
+;                 (SortaKd)
+;                 (Maybe SortaKd)))
 ;           x)
 ;         (=
-;            (either1945078061584887181 x y)
+;            (either1945079161096515386 x y)
 ;            x)))
 ;   (!
 ;      (=
 ;         (
-;           (_ map either1945078061584887181)
-;           aKg
-;           aKi)
-;         aKk)
+;           (_ map either1945079161096515386)
+;           aKf
+;           aKh)
+;         aKj)
 ;      :named
 ;      given-13.1)
 ;   (!
 ;      (=
 ;         (
-;           (_ map either1945078061584887181)
-;           aKh
-;           aKi)
-;         aKj)
+;           (_ map either1945079161096515386)
+;           aKg
+;           aKh)
+;         aKi)
 ;      :named
 ;      given-13.2)
 ;   (!
 ;      (=
 ;         (
-;           (_ map either1945078061584887181)
-;           aKf
-;           aKg)
-;         aKh)
+;           (_ map either1945079161096515386)
+;           aKe
+;           aKf)
+;         aKg)
 ;      :named
 ;      given-13.3)
 ;   (!
 ;      (=
 ;         (
-;           (_ map either1945078061584887181)
-;           aKf
-;           aKk)
-;         aKl)
+;           (_ map either1945079161096515386)
+;           aKe
+;           aKj)
+;         aKk)
 ;      :named
 ;      given-13.4)
 ;   (!
 ;      (not
-;         (= aKj aKl))
+;         (= aKi aKk))
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
-; (given-13.3 given-13.4 wanted-13 given-13.1 given-13.2)
+; (given-13.4 wanted-13 given-13.1 given-13.2 given-13.3)
 (pop 1)
 (echo "solver-finish-cycle-13")
 (echo "solver-start-cycle-13")
@@ -4254,36 +4140,41 @@
 (echo "solver-start-cycle-15")
 
 ; GIVENS (GHC style)
-; [G] co_aLu {2}:: Alter m1_aKv[sk:1] "ok" 2 ~# m2_aKw[sk:1] (CEqCan)
-; [G] co_aLy {2}:: Alter m2_aKw[sk:1] "ok" 2 ~# m3_aKx[sk:1] (CEqCan)
+; [G] co_aLt {2}:: Alter m1_aKu[sk:1] "ok" 2 ~# m2_aKv[sk:1] (CEqCan)
+; [G] co_aLx {2}:: Alter m2_aKv[sk:1] "ok" 2 ~# m3_aKw[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aKC} {0}:: m2_aKw[sk:1]
-;                         ~# m3_aKx[sk:1] (CNonCanonical)
+; [WD] hole{co_aKB} {0}:: m2_aKv[sk:1]
+;                         ~# m3_aKw[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
+; (Alter [Symbol [],Natural [],aKu,"ok",2],aKv)
 ; (Alter [Symbol [],Natural [],aKv,"ok",2],aKw)
-; (Alter [Symbol [],Natural [],aKw,"ok",2],aKx)
 
 ; WANTEDS (Thoralf style)
-; (aKw,aKx)
+; (aKv,aKw)
 
 (echo "givens-start-cycle-15")
 ; GIVENS (conversions)
-;      [WD] hole{co_aKC} {0}:: m2_aKw[sk:1]
-;                              ~# m3_aKx[sk:1] (CNonCanonical)
-;  =>  (= aKw aKx)
+;      [WD] hole{co_aKB} {0}:: m2_aKv[sk:1]
+;                              ~# m3_aKw[sk:1] (CNonCanonical)
+;  =>  (= aKv aKw)
 
 ; GIVENS (names)
-;  aKv  <=  m1_aKv[sk:1]
-;  aKw  <=  m2_aKw[sk:1]
-;  aKx  <=  m3_aKx[sk:1]
+;  aKu  <=  m1_aKu[sk:1]
+;  aKv  <=  m2_aKv[sk:1]
+;  aKw  <=  m3_aKw[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
+; (declare-const aKu (Array String (Maybe Int)))
 ; (declare-const aKv (Array String (Maybe Int)))
 ; (declare-const aKw (Array String (Maybe Int)))
-; (declare-const aKx (Array String (Maybe Int)))
+(declare-const
+   aKu
+   (Array
+      String
+      (Maybe Int)))
 (declare-const
    aKv
    (Array
@@ -4294,11 +4185,16 @@
    (Array
       String
       (Maybe Int)))
-(declare-const
-   aKx
-   (Array
-      String
-      (Maybe Int)))
+(assert
+   (!
+      (=
+         (store
+            aKu
+            "ok"
+            (just 2))
+         aKv)
+      :named
+      given-15.1))
 (assert
    (!
       (=
@@ -4308,35 +4204,25 @@
             (just 2))
          aKw)
       :named
-      given-15.1))
-(assert
-   (!
-      (=
-         (store
-            aKw
-            "ok"
-            (just 2))
-         aKx)
-      :named
       given-15.2))
 (check-sat)
 ; sat
 (echo "givens-finish-cycle-15")
 (echo "wanteds-start-cycle-15")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aKC} {0}:: m2_aKw[sk:1]
-;                              ~# m3_aKx[sk:1] (CNonCanonical)
-;  =>  (= aKw aKx)
+;      [WD] hole{co_aKB} {0}:: m2_aKv[sk:1]
+;                              ~# m3_aKw[sk:1] (CNonCanonical)
+;  =>  (= aKv aKw)
 
 ; WANTEDS (names)
-;  aKw  <=  m2_aKw[sk:1]
-;  aKx  <=  m3_aKx[sk:1]
+;  aKv  <=  m2_aKv[sk:1]
+;  aKw  <=  m3_aKw[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= aKw aKx))
+         (= aKv aKw))
       :named
       wanted-15))
 (check-sat)
@@ -4347,28 +4233,28 @@
 ;   (!
 ;      (=
 ;         (store
-;            aKv
+;            aKu
 ;            "ok"
 ;            (just 2))
-;         aKw)
+;         aKv)
 ;      :named
 ;      given-15.1)
 ;   (!
 ;      (=
 ;         (store
-;            aKw
+;            aKv
 ;            "ok"
 ;            (just 2))
-;         aKx)
+;         aKw)
 ;      :named
 ;      given-15.2)
 ;   (!
 ;      (not
-;         (= aKw aKx))
+;         (= aKv aKw))
 ;      :named
 ;      wanted-15))
 (get-unsat-core)
-; (wanted-15 given-15.1 given-15.2)
+; (given-15.1 given-15.2 wanted-15)
 (pop 1)
 (echo "solver-finish-cycle-15")
 (echo "solver-start-cycle-15")
@@ -4380,53 +4266,65 @@
 (echo "solver-start-cycle-17")
 
 ; GIVENS (GHC style)
-; [G] co_aLC {2}:: Delete m1_aKG[sk:1] "bob" ~# m2_aKH[sk:1] (CEqCan)
-; [G] co_aLG {2}:: Delete m2_aKH[sk:1] "bob" ~# m3_aKI[sk:1] (CEqCan)
+; [G] co_aLB {2}:: Delete m1_aKF[sk:1] "bob" ~# m2_aKG[sk:1] (CEqCan)
+; [G] co_aLF {2}:: Delete m2_aKG[sk:1] "bob" ~# m3_aKH[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_aKN} {0}:: m2_aKH[sk:1]
-;                         ~# m3_aKI[sk:1] (CNonCanonical)
+; [WD] hole{co_aKM} {0}:: m2_aKG[sk:1]
+;                         ~# m3_aKH[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (Delete [Symbol [],aKF,aKG,"bob"],aKH)
-; (Delete [Symbol [],aKF,aKH,"bob"],aKI)
+; (Delete [Symbol [],aKE,aKF,"bob"],aKG)
+; (Delete [Symbol [],aKE,aKG,"bob"],aKH)
 
 ; WANTEDS (Thoralf style)
-; (aKH,aKI)
+; (aKG,aKH)
 
 (echo "givens-start-cycle-17")
 ; GIVENS (conversions)
-;      [WD] hole{co_aKN} {0}:: m2_aKH[sk:1]
-;                              ~# m3_aKI[sk:1] (CNonCanonical)
-;  =>  (= aKH aKI)
+;      [WD] hole{co_aKM} {0}:: m2_aKG[sk:1]
+;                              ~# m3_aKH[sk:1] (CNonCanonical)
+;  =>  (= aKG aKH)
 
 ; GIVENS (names)
-;  aKG  <=  m1_aKG[sk:1]
-;  aKH  <=  m2_aKH[sk:1]
-;  aKI  <=  m3_aKI[sk:1]
+;  aKF  <=  m1_aKF[sk:1]
+;  aKG  <=  m2_aKG[sk:1]
+;  aKH  <=  m3_aKH[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const aKG (Array String (Maybe SortaKF)))
-; (declare-const aKH (Array String (Maybe SortaKF)))
-; (declare-const aKI (Array String (Maybe SortaKF)))
-; (declare-sort SortaKF)
-(declare-sort SortaKF)
+; (declare-const aKF (Array String (Maybe SortaKE)))
+; (declare-const aKG (Array String (Maybe SortaKE)))
+; (declare-const aKH (Array String (Maybe SortaKE)))
+; (declare-sort SortaKE)
+(declare-sort SortaKE)
+(declare-const
+   aKF
+   (Array
+      String
+      (Maybe SortaKE)))
 (declare-const
    aKG
    (Array
       String
-      (Maybe SortaKF)))
+      (Maybe SortaKE)))
 (declare-const
    aKH
    (Array
       String
-      (Maybe SortaKF)))
-(declare-const
-   aKI
-   (Array
-      String
-      (Maybe SortaKF)))
+      (Maybe SortaKE)))
+(assert
+   (!
+      (=
+         (store
+            aKF
+            "bob"
+            (as
+               nothing
+               (Maybe SortaKE)))
+         aKG)
+      :named
+      given-17.1))
 (assert
    (!
       (=
@@ -4435,20 +4333,8 @@
             "bob"
             (as
                nothing
-               (Maybe SortaKF)))
+               (Maybe SortaKE)))
          aKH)
-      :named
-      given-17.1))
-(assert
-   (!
-      (=
-         (store
-            aKH
-            "bob"
-            (as
-               nothing
-               (Maybe SortaKF)))
-         aKI)
       :named
       given-17.2))
 (check-sat)
@@ -4456,19 +4342,19 @@
 (echo "givens-finish-cycle-17")
 (echo "wanteds-start-cycle-17")
 ; WANTEDS (conversions)
-;      [WD] hole{co_aKN} {0}:: m2_aKH[sk:1]
-;                              ~# m3_aKI[sk:1] (CNonCanonical)
-;  =>  (= aKH aKI)
+;      [WD] hole{co_aKM} {0}:: m2_aKG[sk:1]
+;                              ~# m3_aKH[sk:1] (CNonCanonical)
+;  =>  (= aKG aKH)
 
 ; WANTEDS (names)
-;  aKH  <=  m2_aKH[sk:1]
-;  aKI  <=  m3_aKI[sk:1]
+;  aKG  <=  m2_aKG[sk:1]
+;  aKH  <=  m3_aKH[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= aKH aKI))
+         (= aKG aKH))
       :named
       wanted-17))
 (check-sat)
@@ -4479,32 +4365,32 @@
 ;   (!
 ;      (=
 ;         (store
-;            aKG
+;            aKF
 ;            "bob"
 ;            (as
 ;               nothing
-;               (Maybe SortaKF)))
-;         aKH)
+;               (Maybe SortaKE)))
+;         aKG)
 ;      :named
 ;      given-17.1)
 ;   (!
 ;      (=
 ;         (store
-;            aKH
+;            aKG
 ;            "bob"
 ;            (as
 ;               nothing
-;               (Maybe SortaKF)))
-;         aKI)
+;               (Maybe SortaKE)))
+;         aKH)
 ;      :named
 ;      given-17.2)
 ;   (!
 ;      (not
-;         (= aKH aKI))
+;         (= aKG aKH))
 ;      :named
 ;      wanted-17))
 (get-unsat-core)
-; (given-17.2 given-17.1 wanted-17)
+; (given-17.2 wanted-17 given-17.1)
 (pop 1)
 (echo "solver-finish-cycle-17")
 (echo "solver-start-cycle-17")
@@ -4573,40 +4459,40 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1yl} {0}:: (b_a1yi[tau:1] <? c_a1yj[tau:1])
-;                          ~# (b_a1yf[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
-; [WD] hole{co_a1yk} {0}:: (a_a1yh[tau:1] <? b_a1yi[tau:1])
-;                          ~# (a_a1ye[sk:1] <? b_a1yf[sk:1]) (CNonCanonical)
-; [WD] hole{co_a1ym} {0}:: (a_a1yh[tau:1] <? c_a1yj[tau:1])
-;                          ~# (a_a1ye[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yk} {0}:: (b_a1yh[tau:1] <? c_a1yi[tau:1])
+;                          ~# (b_a1ye[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yj} {0}:: (a_a1yg[tau:1] <? b_a1yh[tau:1])
+;                          ~# (a_a1yd[sk:1] <? b_a1ye[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yl} {0}:: (a_a1yg[tau:1] <? c_a1yi[tau:1])
+;                          ~# (a_a1yd[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (<? [a1yi,a1yj],<? [a1yf,a1yg])
 ; (<? [a1yh,a1yi],<? [a1ye,a1yf])
-; (<? [a1yh,a1yj],<? [a1ye,a1yg])
+; (<? [a1yg,a1yh],<? [a1yd,a1ye])
+; (<? [a1yg,a1yi],<? [a1yd,a1yf])
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1yl} {0}:: (b_a1yi[tau:1] <? c_a1yj[tau:1])
-;                               ~# (b_a1yf[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
-;  =>  (=
-;    (< a1yi a1yj)
-;    (< a1yf a1yg))
-
-;      [WD] hole{co_a1yk} {0}:: (a_a1yh[tau:1] <? b_a1yi[tau:1])
-;                               ~# (a_a1ye[sk:1] <? b_a1yf[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yk} {0}:: (b_a1yh[tau:1] <? c_a1yi[tau:1])
+;                               ~# (b_a1ye[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
 ;  =>  (=
 ;    (< a1yh a1yi)
 ;    (< a1ye a1yf))
 
-;      [WD] hole{co_a1ym} {0}:: (a_a1yh[tau:1] <? c_a1yj[tau:1])
-;                               ~# (a_a1ye[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yj} {0}:: (a_a1yg[tau:1] <? b_a1yh[tau:1])
+;                               ~# (a_a1yd[sk:1] <? b_a1ye[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (< a1yh a1yj)
-;    (< a1ye a1yg))
+;    (< a1yg a1yh)
+;    (< a1yd a1ye))
+
+;      [WD] hole{co_a1yl} {0}:: (a_a1yg[tau:1] <? c_a1yi[tau:1])
+;                               ~# (a_a1yd[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
+;  =>  (=
+;    (< a1yg a1yi)
+;    (< a1yd a1yf))
 
 ; GIVENS (names)
 (push 1)
@@ -4617,51 +4503,53 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1yl} {0}:: (b_a1yi[tau:1] <? c_a1yj[tau:1])
-;                               ~# (b_a1yf[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
-;  =>  (=
-;    (< a1yi a1yj)
-;    (< a1yf a1yg))
-
-;      [WD] hole{co_a1yk} {0}:: (a_a1yh[tau:1] <? b_a1yi[tau:1])
-;                               ~# (a_a1ye[sk:1] <? b_a1yf[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yk} {0}:: (b_a1yh[tau:1] <? c_a1yi[tau:1])
+;                               ~# (b_a1ye[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
 ;  =>  (=
 ;    (< a1yh a1yi)
 ;    (< a1ye a1yf))
 
-;      [WD] hole{co_a1ym} {0}:: (a_a1yh[tau:1] <? c_a1yj[tau:1])
-;                               ~# (a_a1ye[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yj} {0}:: (a_a1yg[tau:1] <? b_a1yh[tau:1])
+;                               ~# (a_a1yd[sk:1] <? b_a1ye[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (< a1yh a1yj)
-;    (< a1ye a1yg))
+;    (< a1yg a1yh)
+;    (< a1yd a1ye))
+
+;      [WD] hole{co_a1yl} {0}:: (a_a1yg[tau:1] <? c_a1yi[tau:1])
+;                               ~# (a_a1yd[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
+;  =>  (=
+;    (< a1yg a1yi)
+;    (< a1yd a1yf))
 
 ; WANTEDS (names)
-;  a1ye  <=  a_a1ye[sk:1]
-;  a1yf  <=  b_a1yf[sk:1]
-;  a1yg  <=  c_a1yg[sk:1]
-;  a1yh  <=  a_a1yh[tau:1]
-;  a1yi  <=  b_a1yi[tau:1]
-;  a1yj  <=  c_a1yj[tau:1]
+;  a1yd  <=  a_a1yd[sk:1]
+;  a1ye  <=  b_a1ye[sk:1]
+;  a1yf  <=  c_a1yf[sk:1]
+;  a1yg  <=  a_a1yg[tau:1]
+;  a1yh  <=  b_a1yh[tau:1]
+;  a1yi  <=  c_a1yi[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
+; (assert (<= 0 a1yd))
 ; (assert (<= 0 a1ye))
 ; (assert (<= 0 a1yf))
 ; (assert (<= 0 a1yg))
 ; (assert (<= 0 a1yh))
 ; (assert (<= 0 a1yi))
-; (assert (<= 0 a1yj))
+; (declare-const a1yd Int)
 ; (declare-const a1ye Int)
 ; (declare-const a1yf Int)
 ; (declare-const a1yg Int)
 ; (declare-const a1yh Int)
 ; (declare-const a1yi Int)
-; (declare-const a1yj Int)
+(declare-const a1yd Int)
 (declare-const a1ye Int)
 (declare-const a1yf Int)
 (declare-const a1yg Int)
 (declare-const a1yh Int)
 (declare-const a1yi Int)
-(declare-const a1yj Int)
+(assert
+   (<= 0 a1yd))
 (assert
    (<= 0 a1ye))
 (assert
@@ -4673,23 +4561,21 @@
 (assert
    (<= 0 a1yi))
 (assert
-   (<= 0 a1yj))
-(assert
    (!
       (or
          (or
             (not
                (=
-                  (< a1yi a1yj)
-                  (< a1yf a1yg)))
+                  (< a1yh a1yi)
+                  (< a1ye a1yf)))
             (not
                (=
-                  (< a1yh a1yi)
-                  (< a1ye a1yf))))
+                  (< a1yg a1yh)
+                  (< a1yd a1ye))))
          (not
             (=
-               (< a1yh a1yj)
-               (< a1ye a1yg))))
+               (< a1yg a1yi)
+               (< a1yd a1yf))))
       :named
       wanted-2))
 (check-sat)
@@ -4704,33 +4590,28 @@
 ;      (or
 ;         (not
 ;            (=
-;               (< a1yi a1yj)
-;               (< a1yf a1yg)))
-;         (not
-;            (=
 ;               (< a1yh a1yi)
 ;               (< a1ye a1yf)))
 ;         (not
 ;            (=
-;               (< a1yh a1yj)
-;               (< a1ye a1yg)))))
+;               (< a1yg a1yh)
+;               (< a1yd a1ye)))
+;         (not
+;            (=
+;               (< a1yg a1yi)
+;               (< a1yd a1yf)))))
 ;   (define-fun
 ;      a1yf
 ;      ()
 ;      Int
-;      0)
-;   (define-fun
-;      a1yi
-;      ()
-;      Int
-;      0)
+;      1)
 ;   (define-fun
 ;      a1yh
 ;      ()
 ;      Int
 ;      0)
 ;   (define-fun
-;      a1yj
+;      a1yi
 ;      ()
 ;      Int
 ;      0)
@@ -4743,7 +4624,12 @@
 ;      a1yg
 ;      ()
 ;      Int
-;      1))
+;      0)
+;   (define-fun
+;      a1yd
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-2")
@@ -4752,40 +4638,40 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1yl} {0}:: (b_a1yi[tau:1] <? c_a1yj[tau:1])
-;                          ~# (b_a1yf[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
-; [WD] hole{co_a1yk} {0}:: (a_a1yh[tau:1] <? b_a1yi[tau:1])
-;                          ~# (a_a1ye[sk:1] <? b_a1yf[sk:1]) (CNonCanonical)
-; [WD] hole{co_a1ym} {0}:: (a_a1yh[tau:1] <? c_a1yj[tau:1])
-;                          ~# (a_a1ye[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yk} {0}:: (b_a1yh[tau:1] <? c_a1yi[tau:1])
+;                          ~# (b_a1ye[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yj} {0}:: (a_a1yg[tau:1] <? b_a1yh[tau:1])
+;                          ~# (a_a1yd[sk:1] <? b_a1ye[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yl} {0}:: (a_a1yg[tau:1] <? c_a1yi[tau:1])
+;                          ~# (a_a1yd[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (<? [a1yi,a1yj],<? [a1yf,a1yg])
 ; (<? [a1yh,a1yi],<? [a1ye,a1yf])
-; (<? [a1yh,a1yj],<? [a1ye,a1yg])
+; (<? [a1yg,a1yh],<? [a1yd,a1ye])
+; (<? [a1yg,a1yi],<? [a1yd,a1yf])
 
 (echo "givens-start-cycle-2")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1yl} {0}:: (b_a1yi[tau:1] <? c_a1yj[tau:1])
-;                               ~# (b_a1yf[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
-;  =>  (=
-;    (< a1yi a1yj)
-;    (< a1yf a1yg))
-
-;      [WD] hole{co_a1yk} {0}:: (a_a1yh[tau:1] <? b_a1yi[tau:1])
-;                               ~# (a_a1ye[sk:1] <? b_a1yf[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yk} {0}:: (b_a1yh[tau:1] <? c_a1yi[tau:1])
+;                               ~# (b_a1ye[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
 ;  =>  (=
 ;    (< a1yh a1yi)
 ;    (< a1ye a1yf))
 
-;      [WD] hole{co_a1ym} {0}:: (a_a1yh[tau:1] <? c_a1yj[tau:1])
-;                               ~# (a_a1ye[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yj} {0}:: (a_a1yg[tau:1] <? b_a1yh[tau:1])
+;                               ~# (a_a1yd[sk:1] <? b_a1ye[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (< a1yh a1yj)
-;    (< a1ye a1yg))
+;    (< a1yg a1yh)
+;    (< a1yd a1ye))
+
+;      [WD] hole{co_a1yl} {0}:: (a_a1yg[tau:1] <? c_a1yi[tau:1])
+;                               ~# (a_a1yd[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
+;  =>  (=
+;    (< a1yg a1yi)
+;    (< a1yd a1yf))
 
 ; GIVENS (names)
 (push 1)
@@ -4796,51 +4682,53 @@
 (echo "givens-finish-cycle-2")
 (echo "wanteds-start-cycle-2")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1yl} {0}:: (b_a1yi[tau:1] <? c_a1yj[tau:1])
-;                               ~# (b_a1yf[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
-;  =>  (=
-;    (< a1yi a1yj)
-;    (< a1yf a1yg))
-
-;      [WD] hole{co_a1yk} {0}:: (a_a1yh[tau:1] <? b_a1yi[tau:1])
-;                               ~# (a_a1ye[sk:1] <? b_a1yf[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yk} {0}:: (b_a1yh[tau:1] <? c_a1yi[tau:1])
+;                               ~# (b_a1ye[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
 ;  =>  (=
 ;    (< a1yh a1yi)
 ;    (< a1ye a1yf))
 
-;      [WD] hole{co_a1ym} {0}:: (a_a1yh[tau:1] <? c_a1yj[tau:1])
-;                               ~# (a_a1ye[sk:1] <? c_a1yg[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yj} {0}:: (a_a1yg[tau:1] <? b_a1yh[tau:1])
+;                               ~# (a_a1yd[sk:1] <? b_a1ye[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (< a1yh a1yj)
-;    (< a1ye a1yg))
+;    (< a1yg a1yh)
+;    (< a1yd a1ye))
+
+;      [WD] hole{co_a1yl} {0}:: (a_a1yg[tau:1] <? c_a1yi[tau:1])
+;                               ~# (a_a1yd[sk:1] <? c_a1yf[sk:1]) (CNonCanonical)
+;  =>  (=
+;    (< a1yg a1yi)
+;    (< a1yd a1yf))
 
 ; WANTEDS (names)
-;  a1ye  <=  a_a1ye[sk:1]
-;  a1yf  <=  b_a1yf[sk:1]
-;  a1yg  <=  c_a1yg[sk:1]
-;  a1yh  <=  a_a1yh[tau:1]
-;  a1yi  <=  b_a1yi[tau:1]
-;  a1yj  <=  c_a1yj[tau:1]
+;  a1yd  <=  a_a1yd[sk:1]
+;  a1ye  <=  b_a1ye[sk:1]
+;  a1yf  <=  c_a1yf[sk:1]
+;  a1yg  <=  a_a1yg[tau:1]
+;  a1yh  <=  b_a1yh[tau:1]
+;  a1yi  <=  c_a1yi[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
+; (assert (<= 0 a1yd))
 ; (assert (<= 0 a1ye))
 ; (assert (<= 0 a1yf))
 ; (assert (<= 0 a1yg))
 ; (assert (<= 0 a1yh))
 ; (assert (<= 0 a1yi))
-; (assert (<= 0 a1yj))
+; (declare-const a1yd Int)
 ; (declare-const a1ye Int)
 ; (declare-const a1yf Int)
 ; (declare-const a1yg Int)
 ; (declare-const a1yh Int)
 ; (declare-const a1yi Int)
-; (declare-const a1yj Int)
+(declare-const a1yd Int)
 (declare-const a1ye Int)
 (declare-const a1yf Int)
 (declare-const a1yg Int)
 (declare-const a1yh Int)
 (declare-const a1yi Int)
-(declare-const a1yj Int)
+(assert
+   (<= 0 a1yd))
 (assert
    (<= 0 a1ye))
 (assert
@@ -4852,23 +4740,21 @@
 (assert
    (<= 0 a1yi))
 (assert
-   (<= 0 a1yj))
-(assert
    (!
       (or
          (or
             (not
                (=
-                  (< a1yi a1yj)
-                  (< a1yf a1yg)))
+                  (< a1yh a1yi)
+                  (< a1ye a1yf)))
             (not
                (=
-                  (< a1yh a1yi)
-                  (< a1ye a1yf))))
+                  (< a1yg a1yh)
+                  (< a1yd a1ye))))
          (not
             (=
-               (< a1yh a1yj)
-               (< a1ye a1yg))))
+               (< a1yg a1yi)
+               (< a1yd a1yf))))
       :named
       wanted-2))
 (check-sat)
@@ -4883,33 +4769,28 @@
 ;      (or
 ;         (not
 ;            (=
-;               (< a1yi a1yj)
-;               (< a1yf a1yg)))
-;         (not
-;            (=
 ;               (< a1yh a1yi)
 ;               (< a1ye a1yf)))
 ;         (not
 ;            (=
-;               (< a1yh a1yj)
-;               (< a1ye a1yg)))))
+;               (< a1yg a1yh)
+;               (< a1yd a1ye)))
+;         (not
+;            (=
+;               (< a1yg a1yi)
+;               (< a1yd a1yf)))))
 ;   (define-fun
 ;      a1yf
 ;      ()
 ;      Int
-;      0)
-;   (define-fun
-;      a1yi
-;      ()
-;      Int
-;      0)
+;      1)
 ;   (define-fun
 ;      a1yh
 ;      ()
 ;      Int
 ;      0)
 ;   (define-fun
-;      a1yj
+;      a1yi
 ;      ()
 ;      Int
 ;      0)
@@ -4922,7 +4803,12 @@
 ;      a1yg
 ;      ()
 ;      Int
-;      1))
+;      0)
+;   (define-fun
+;      a1yd
+;      ()
+;      Int
+;      0))
 (pop 1)
 (echo "solver-finish-cycle-2")
 (echo "solver-start-cycle-3")
@@ -4931,31 +4817,31 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1yS} {0}:: (a_a1yQ[tau:1] + b_a1yR[tau:1])
-;                          ~# (a_a1yO[sk:1] + b_a1yP[sk:1]) (CNonCanonical)
-; [WD] hole{co_a1yT} {0}:: (b_a1yR[tau:1] + a_a1yQ[tau:1])
-;                          ~# (b_a1yP[sk:1] + a_a1yO[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yR} {0}:: (a_a1yP[tau:1] + b_a1yQ[tau:1])
+;                          ~# (a_a1yN[sk:1] + b_a1yO[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yS} {0}:: (b_a1yQ[tau:1] + a_a1yP[tau:1])
+;                          ~# (b_a1yO[sk:1] + a_a1yN[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (+ [a1yQ,a1yR],+ [a1yO,a1yP])
-; (+ [a1yR,a1yQ],+ [a1yP,a1yO])
+; (+ [a1yP,a1yQ],+ [a1yN,a1yO])
+; (+ [a1yQ,a1yP],+ [a1yO,a1yN])
 
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1yS} {0}:: (a_a1yQ[tau:1] + b_a1yR[tau:1])
-;                               ~# (a_a1yO[sk:1] + b_a1yP[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yR} {0}:: (a_a1yP[tau:1] + b_a1yQ[tau:1])
+;                               ~# (a_a1yN[sk:1] + b_a1yO[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yQ a1yR)
-;    (+ a1yO a1yP))
+;    (+ a1yP a1yQ)
+;    (+ a1yN a1yO))
 
-;      [WD] hole{co_a1yT} {0}:: (b_a1yR[tau:1] + a_a1yQ[tau:1])
-;                               ~# (b_a1yP[sk:1] + a_a1yO[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yS} {0}:: (b_a1yQ[tau:1] + a_a1yP[tau:1])
+;                               ~# (b_a1yO[sk:1] + a_a1yN[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yR a1yQ)
-;    (+ a1yP a1yO))
+;    (+ a1yQ a1yP)
+;    (+ a1yO a1yN))
 
 ; GIVENS (names)
 (push 1)
@@ -4966,37 +4852,39 @@
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1yS} {0}:: (a_a1yQ[tau:1] + b_a1yR[tau:1])
-;                               ~# (a_a1yO[sk:1] + b_a1yP[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yR} {0}:: (a_a1yP[tau:1] + b_a1yQ[tau:1])
+;                               ~# (a_a1yN[sk:1] + b_a1yO[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yQ a1yR)
-;    (+ a1yO a1yP))
+;    (+ a1yP a1yQ)
+;    (+ a1yN a1yO))
 
-;      [WD] hole{co_a1yT} {0}:: (b_a1yR[tau:1] + a_a1yQ[tau:1])
-;                               ~# (b_a1yP[sk:1] + a_a1yO[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yS} {0}:: (b_a1yQ[tau:1] + a_a1yP[tau:1])
+;                               ~# (b_a1yO[sk:1] + a_a1yN[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yR a1yQ)
-;    (+ a1yP a1yO))
+;    (+ a1yQ a1yP)
+;    (+ a1yO a1yN))
 
 ; WANTEDS (names)
-;  a1yO  <=  a_a1yO[sk:1]
-;  a1yP  <=  b_a1yP[sk:1]
-;  a1yQ  <=  a_a1yQ[tau:1]
-;  a1yR  <=  b_a1yR[tau:1]
+;  a1yN  <=  a_a1yN[sk:1]
+;  a1yO  <=  b_a1yO[sk:1]
+;  a1yP  <=  a_a1yP[tau:1]
+;  a1yQ  <=  b_a1yQ[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
+; (assert (<= 0 a1yN))
 ; (assert (<= 0 a1yO))
 ; (assert (<= 0 a1yP))
 ; (assert (<= 0 a1yQ))
-; (assert (<= 0 a1yR))
+; (declare-const a1yN Int)
 ; (declare-const a1yO Int)
 ; (declare-const a1yP Int)
 ; (declare-const a1yQ Int)
-; (declare-const a1yR Int)
+(declare-const a1yN Int)
 (declare-const a1yO Int)
 (declare-const a1yP Int)
 (declare-const a1yQ Int)
-(declare-const a1yR Int)
+(assert
+   (<= 0 a1yN))
 (assert
    (<= 0 a1yO))
 (assert
@@ -5004,18 +4892,16 @@
 (assert
    (<= 0 a1yQ))
 (assert
-   (<= 0 a1yR))
-(assert
    (!
       (or
          (not
             (=
-               (+ a1yQ a1yR)
-               (+ a1yO a1yP)))
+               (+ a1yP a1yQ)
+               (+ a1yN a1yO)))
          (not
             (=
-               (+ a1yR a1yQ)
-               (+ a1yP a1yO))))
+               (+ a1yQ a1yP)
+               (+ a1yO a1yN))))
       :named
       wanted-3))
 (check-sat)
@@ -5027,7 +4913,7 @@
 ;      a1yQ
 ;      ()
 ;      Int
-;      1)
+;      0)
 ;   (define-fun
 ;      wanted-3
 ;      ()
@@ -5035,12 +4921,17 @@
 ;      (or
 ;         (not
 ;            (=
-;               (+ a1yQ a1yR)
-;               (+ a1yO a1yP)))
+;               (+ a1yP a1yQ)
+;               (+ a1yN a1yO)))
 ;         (not
 ;            (=
-;               (+ a1yR a1yQ)
-;               (+ a1yP a1yO)))))
+;               (+ a1yQ a1yP)
+;               (+ a1yO a1yN)))))
+;   (define-fun
+;      a1yN
+;      ()
+;      Int
+;      0)
 ;   (define-fun
 ;      a1yO
 ;      ()
@@ -5050,12 +4941,7 @@
 ;      a1yP
 ;      ()
 ;      Int
-;      0)
-;   (define-fun
-;      a1yR
-;      ()
-;      Int
-;      0))
+;      1))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-3")
@@ -5064,31 +4950,31 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1yS} {0}:: (a_a1yQ[tau:1] + b_a1yR[tau:1])
-;                          ~# (a_a1yO[sk:1] + b_a1yP[sk:1]) (CNonCanonical)
-; [WD] hole{co_a1yT} {0}:: (b_a1yR[tau:1] + a_a1yQ[tau:1])
-;                          ~# (b_a1yP[sk:1] + a_a1yO[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yR} {0}:: (a_a1yP[tau:1] + b_a1yQ[tau:1])
+;                          ~# (a_a1yN[sk:1] + b_a1yO[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1yS} {0}:: (b_a1yQ[tau:1] + a_a1yP[tau:1])
+;                          ~# (b_a1yO[sk:1] + a_a1yN[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (+ [a1yQ,a1yR],+ [a1yO,a1yP])
-; (+ [a1yR,a1yQ],+ [a1yP,a1yO])
+; (+ [a1yP,a1yQ],+ [a1yN,a1yO])
+; (+ [a1yQ,a1yP],+ [a1yO,a1yN])
 
 (echo "givens-start-cycle-3")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1yS} {0}:: (a_a1yQ[tau:1] + b_a1yR[tau:1])
-;                               ~# (a_a1yO[sk:1] + b_a1yP[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yR} {0}:: (a_a1yP[tau:1] + b_a1yQ[tau:1])
+;                               ~# (a_a1yN[sk:1] + b_a1yO[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yQ a1yR)
-;    (+ a1yO a1yP))
+;    (+ a1yP a1yQ)
+;    (+ a1yN a1yO))
 
-;      [WD] hole{co_a1yT} {0}:: (b_a1yR[tau:1] + a_a1yQ[tau:1])
-;                               ~# (b_a1yP[sk:1] + a_a1yO[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yS} {0}:: (b_a1yQ[tau:1] + a_a1yP[tau:1])
+;                               ~# (b_a1yO[sk:1] + a_a1yN[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yR a1yQ)
-;    (+ a1yP a1yO))
+;    (+ a1yQ a1yP)
+;    (+ a1yO a1yN))
 
 ; GIVENS (names)
 (push 1)
@@ -5099,37 +4985,39 @@
 (echo "givens-finish-cycle-3")
 (echo "wanteds-start-cycle-3")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1yS} {0}:: (a_a1yQ[tau:1] + b_a1yR[tau:1])
-;                               ~# (a_a1yO[sk:1] + b_a1yP[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yR} {0}:: (a_a1yP[tau:1] + b_a1yQ[tau:1])
+;                               ~# (a_a1yN[sk:1] + b_a1yO[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yQ a1yR)
-;    (+ a1yO a1yP))
+;    (+ a1yP a1yQ)
+;    (+ a1yN a1yO))
 
-;      [WD] hole{co_a1yT} {0}:: (b_a1yR[tau:1] + a_a1yQ[tau:1])
-;                               ~# (b_a1yP[sk:1] + a_a1yO[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1yS} {0}:: (b_a1yQ[tau:1] + a_a1yP[tau:1])
+;                               ~# (b_a1yO[sk:1] + a_a1yN[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1yR a1yQ)
-;    (+ a1yP a1yO))
+;    (+ a1yQ a1yP)
+;    (+ a1yO a1yN))
 
 ; WANTEDS (names)
-;  a1yO  <=  a_a1yO[sk:1]
-;  a1yP  <=  b_a1yP[sk:1]
-;  a1yQ  <=  a_a1yQ[tau:1]
-;  a1yR  <=  b_a1yR[tau:1]
+;  a1yN  <=  a_a1yN[sk:1]
+;  a1yO  <=  b_a1yO[sk:1]
+;  a1yP  <=  a_a1yP[tau:1]
+;  a1yQ  <=  b_a1yQ[tau:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
+; (assert (<= 0 a1yN))
 ; (assert (<= 0 a1yO))
 ; (assert (<= 0 a1yP))
 ; (assert (<= 0 a1yQ))
-; (assert (<= 0 a1yR))
+; (declare-const a1yN Int)
 ; (declare-const a1yO Int)
 ; (declare-const a1yP Int)
 ; (declare-const a1yQ Int)
-; (declare-const a1yR Int)
+(declare-const a1yN Int)
 (declare-const a1yO Int)
 (declare-const a1yP Int)
 (declare-const a1yQ Int)
-(declare-const a1yR Int)
+(assert
+   (<= 0 a1yN))
 (assert
    (<= 0 a1yO))
 (assert
@@ -5137,18 +5025,16 @@
 (assert
    (<= 0 a1yQ))
 (assert
-   (<= 0 a1yR))
-(assert
    (!
       (or
          (not
             (=
-               (+ a1yQ a1yR)
-               (+ a1yO a1yP)))
+               (+ a1yP a1yQ)
+               (+ a1yN a1yO)))
          (not
             (=
-               (+ a1yR a1yQ)
-               (+ a1yP a1yO))))
+               (+ a1yQ a1yP)
+               (+ a1yO a1yN))))
       :named
       wanted-3))
 (check-sat)
@@ -5160,7 +5046,7 @@
 ;      a1yQ
 ;      ()
 ;      Int
-;      1)
+;      0)
 ;   (define-fun
 ;      wanted-3
 ;      ()
@@ -5168,12 +5054,17 @@
 ;      (or
 ;         (not
 ;            (=
-;               (+ a1yQ a1yR)
-;               (+ a1yO a1yP)))
+;               (+ a1yP a1yQ)
+;               (+ a1yN a1yO)))
 ;         (not
 ;            (=
-;               (+ a1yR a1yQ)
-;               (+ a1yP a1yO)))))
+;               (+ a1yQ a1yP)
+;               (+ a1yO a1yN)))))
+;   (define-fun
+;      a1yN
+;      ()
+;      Int
+;      0)
 ;   (define-fun
 ;      a1yO
 ;      ()
@@ -5183,12 +5074,7 @@
 ;      a1yP
 ;      ()
 ;      Int
-;      0)
-;   (define-fun
-;      a1yR
-;      ()
-;      Int
-;      0))
+;      1))
 (pop 1)
 (echo "solver-finish-cycle-3")
 (echo "solver-start-cycle-4")
@@ -5214,68 +5100,68 @@
 (echo "solver-start-cycle-9")
 
 ; GIVENS (GHC style)
-; [G] co_a1FA {1}:: (1 + n_a1zs[ssk:2]) ~# n_a1zg[sk:1] (CEqCan)
-; [G] co_a1FB {1}:: (1 + n_a1zu[ssk:3]) ~# m_a1zh[sk:1] (CEqCan)
+; [G] co_a1Fz {1}:: (1 + n_a1zr[ssk:2]) ~# n_a1zf[sk:1] (CEqCan)
+; [G] co_a1FA {1}:: (1 + n_a1zt[ssk:3]) ~# m_a1zg[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1zC} {0}:: (n_a1zu[ssk:3] - n_a1zs[ssk:2])
-;                          ~# (m_a1zh[sk:1] - n_a1zg[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1zB} {0}:: (n_a1zt[ssk:3] - n_a1zr[ssk:2])
+;                          ~# (m_a1zg[sk:1] - n_a1zf[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (+ [1,a1zs],a1zg)
-; (+ [1,a1zu],a1zh)
+; (+ [1,a1zr],a1zf)
+; (+ [1,a1zt],a1zg)
 
 ; WANTEDS (Thoralf style)
-; (- [a1zu,a1zs],- [a1zh,a1zg])
+; (- [a1zt,a1zr],- [a1zg,a1zf])
 
 (echo "givens-start-cycle-9")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1zC} {0}:: (n_a1zu[ssk:3] - n_a1zs[ssk:2])
-;                               ~# (m_a1zh[sk:1] - n_a1zg[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1zB} {0}:: (n_a1zt[ssk:3] - n_a1zr[ssk:2])
+;                               ~# (m_a1zg[sk:1] - n_a1zf[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (- a1zu a1zs)
-;    (- a1zh a1zg))
+;    (- a1zt a1zr)
+;    (- a1zg a1zf))
 
 ; GIVENS (names)
-;  a1zg  <=  n_a1zg[sk:1]
-;  a1zh  <=  m_a1zh[sk:1]
-;  a1zs  <=  n_a1zs[ssk:2]
-;  a1zu  <=  n_a1zu[ssk:3]
+;  a1zf  <=  n_a1zf[sk:1]
+;  a1zg  <=  m_a1zg[sk:1]
+;  a1zr  <=  n_a1zr[ssk:2]
+;  a1zt  <=  n_a1zt[ssk:3]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
+; (assert (<= 0 a1zf))
 ; (assert (<= 0 a1zg))
-; (assert (<= 0 a1zh))
-; (assert (<= 0 a1zs))
-; (assert (<= 0 a1zu))
+; (assert (<= 0 a1zr))
+; (assert (<= 0 a1zt))
+; (declare-const a1zf Int)
 ; (declare-const a1zg Int)
-; (declare-const a1zh Int)
-; (declare-const a1zs Int)
-; (declare-const a1zu Int)
+; (declare-const a1zr Int)
+; (declare-const a1zt Int)
+(declare-const a1zf Int)
 (declare-const a1zg Int)
-(declare-const a1zh Int)
-(declare-const a1zs Int)
-(declare-const a1zu Int)
+(declare-const a1zr Int)
+(declare-const a1zt Int)
+(assert
+   (<= 0 a1zf))
 (assert
    (<= 0 a1zg))
 (assert
-   (<= 0 a1zh))
+   (<= 0 a1zr))
 (assert
-   (<= 0 a1zs))
-(assert
-   (<= 0 a1zu))
+   (<= 0 a1zt))
 (assert
    (!
       (=
-         (+ 1 a1zs)
-         a1zg)
+         (+ 1 a1zr)
+         a1zf)
       :named
       given-9.1))
 (assert
    (!
       (=
-         (+ 1 a1zu)
-         a1zh)
+         (+ 1 a1zt)
+         a1zg)
       :named
       given-9.2))
 (check-sat)
@@ -5283,25 +5169,25 @@
 (echo "givens-finish-cycle-9")
 (echo "wanteds-start-cycle-9")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1zC} {0}:: (n_a1zu[ssk:3] - n_a1zs[ssk:2])
-;                               ~# (m_a1zh[sk:1] - n_a1zg[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1zB} {0}:: (n_a1zt[ssk:3] - n_a1zr[ssk:2])
+;                               ~# (m_a1zg[sk:1] - n_a1zf[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (- a1zu a1zs)
-;    (- a1zh a1zg))
+;    (- a1zt a1zr)
+;    (- a1zg a1zf))
 
 ; WANTEDS (names)
-;  a1zg  <=  n_a1zg[sk:1]
-;  a1zh  <=  m_a1zh[sk:1]
-;  a1zs  <=  n_a1zs[ssk:2]
-;  a1zu  <=  n_a1zu[ssk:3]
+;  a1zf  <=  n_a1zf[sk:1]
+;  a1zg  <=  m_a1zg[sk:1]
+;  a1zr  <=  n_a1zr[ssk:2]
+;  a1zt  <=  n_a1zt[ssk:3]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
          (=
-            (- a1zu a1zs)
-            (- a1zh a1zg)))
+            (- a1zt a1zr)
+            (- a1zg a1zf)))
       :named
       wanted-9))
 (check-sat)
@@ -5309,27 +5195,27 @@
 (echo "wanteds-finish-cycle-9")
 (get-assertions)
 ; (
+;   (<= 0 a1zf)
 ;   (<= 0 a1zg)
-;   (<= 0 a1zh)
-;   (<= 0 a1zs)
-;   (<= 0 a1zu)
+;   (<= 0 a1zr)
+;   (<= 0 a1zt)
 ;   (!
 ;      (=
-;         (+ 1 a1zs)
-;         a1zg)
+;         (+ 1 a1zr)
+;         a1zf)
 ;      :named
 ;      given-9.1)
 ;   (!
 ;      (=
-;         (+ 1 a1zu)
-;         a1zh)
+;         (+ 1 a1zt)
+;         a1zg)
 ;      :named
 ;      given-9.2)
 ;   (!
 ;      (not
 ;         (=
-;            (- a1zu a1zs)
-;            (- a1zh a1zg)))
+;            (- a1zt a1zr)
+;            (- a1zg a1zf)))
 ;      :named
 ;      wanted-9))
 (get-unsat-core)
@@ -5365,49 +5251,49 @@
 (echo "solver-start-cycle-16")
 
 ; GIVENS (GHC style)
-; [G] co_a1FJ {1}:: (1 + n_a1At[ssk:2]) ~# n_a1An[sk:1] (CEqCan)
+; [G] co_a1FI {1}:: (1 + n_a1As[ssk:2]) ~# n_a1Am[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1Az} {0}:: (1 + (n_a1At[ssk:2] + m_a1Ap[sk:1]))
-;                          ~# (n_a1An[sk:1] + m_a1Ap[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1Ay} {0}:: (1 + (n_a1As[ssk:2] + m_a1Ao[sk:1]))
+;                          ~# (n_a1Am[sk:1] + m_a1Ao[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (+ [1,a1At],a1An)
+; (+ [1,a1As],a1Am)
 
 ; WANTEDS (Thoralf style)
-; (+ [1,+ [a1At,a1Ap]],+ [a1An,a1Ap])
+; (+ [1,+ [a1As,a1Ao]],+ [a1Am,a1Ao])
 
 (echo "givens-start-cycle-16")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1Az} {0}:: (1 + (n_a1At[ssk:2] + m_a1Ap[sk:1]))
-;                               ~# (n_a1An[sk:1] + m_a1Ap[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1Ay} {0}:: (1 + (n_a1As[ssk:2] + m_a1Ao[sk:1]))
+;                               ~# (n_a1Am[sk:1] + m_a1Ao[sk:1]) (CNonCanonical)
 ;  =>  (=
 ;    (+
 ;       1
-;       (+ a1At a1Ap))
-;    (+ a1An a1Ap))
+;       (+ a1As a1Ao))
+;    (+ a1Am a1Ao))
 
 ; GIVENS (names)
-;  a1An  <=  n_a1An[sk:1]
-;  a1At  <=  n_a1At[ssk:2]
+;  a1Am  <=  n_a1Am[sk:1]
+;  a1As  <=  n_a1As[ssk:2]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (assert (<= 0 a1An))
-; (assert (<= 0 a1At))
-; (declare-const a1An Int)
-; (declare-const a1At Int)
-(declare-const a1An Int)
-(declare-const a1At Int)
+; (assert (<= 0 a1Am))
+; (assert (<= 0 a1As))
+; (declare-const a1Am Int)
+; (declare-const a1As Int)
+(declare-const a1Am Int)
+(declare-const a1As Int)
 (assert
-   (<= 0 a1An))
+   (<= 0 a1Am))
 (assert
-   (<= 0 a1At))
+   (<= 0 a1As))
 (assert
    (!
       (=
-         (+ 1 a1At)
-         a1An)
+         (+ 1 a1As)
+         a1Am)
       :named
       given-16.1))
 (check-sat)
@@ -5415,33 +5301,33 @@
 (echo "givens-finish-cycle-16")
 (echo "wanteds-start-cycle-16")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1Az} {0}:: (1 + (n_a1At[ssk:2] + m_a1Ap[sk:1]))
-;                               ~# (n_a1An[sk:1] + m_a1Ap[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1Ay} {0}:: (1 + (n_a1As[ssk:2] + m_a1Ao[sk:1]))
+;                               ~# (n_a1Am[sk:1] + m_a1Ao[sk:1]) (CNonCanonical)
 ;  =>  (=
 ;    (+
 ;       1
-;       (+ a1At a1Ap))
-;    (+ a1An a1Ap))
+;       (+ a1As a1Ao))
+;    (+ a1Am a1Ao))
 
 ; WANTEDS (names)
-;  a1An  <=  n_a1An[sk:1]
-;  a1Ap  <=  m_a1Ap[sk:1]
-;  a1At  <=  n_a1At[ssk:2]
+;  a1Am  <=  n_a1Am[sk:1]
+;  a1Ao  <=  m_a1Ao[sk:1]
+;  a1As  <=  n_a1As[ssk:2]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (assert (<= 0 a1Ap))
-; (declare-const a1Ap Int)
-(declare-const a1Ap Int)
+; (assert (<= 0 a1Ao))
+; (declare-const a1Ao Int)
+(declare-const a1Ao Int)
 (assert
-   (<= 0 a1Ap))
+   (<= 0 a1Ao))
 (assert
    (!
       (not
          (=
             (+
                1
-               (+ a1At a1Ap))
-            (+ a1An a1Ap)))
+               (+ a1As a1Ao))
+            (+ a1Am a1Ao)))
       :named
       wanted-16))
 (check-sat)
@@ -5449,22 +5335,22 @@
 (echo "wanteds-finish-cycle-16")
 (get-assertions)
 ; (
-;   (<= 0 a1An)
-;   (<= 0 a1At)
+;   (<= 0 a1Am)
+;   (<= 0 a1As)
 ;   (!
 ;      (=
-;         (+ 1 a1At)
-;         a1An)
+;         (+ 1 a1As)
+;         a1Am)
 ;      :named
 ;      given-16.1)
-;   (<= 0 a1Ap)
+;   (<= 0 a1Ao)
 ;   (!
 ;      (not
 ;         (=
 ;            (+
 ;               1
-;               (+ a1At a1Ap))
-;            (+ a1An a1Ap)))
+;               (+ a1As a1Ao))
+;            (+ a1Am a1Ao)))
 ;      :named
 ;      wanted-16))
 (get-unsat-core)
@@ -5484,61 +5370,61 @@
 (echo "solver-start-cycle-19")
 
 ; GIVENS (GHC style)
-; [G] co_a1FL {1}:: (a_a1DO[sk:1] <? b_a1DP[sk:1]) ~# 'True (CEqCan)
-; [G] co_a1FM {1}:: (b_a1DP[sk:1] <? c_a1DQ[sk:1]) ~# 'True (CEqCan)
+; [G] co_a1FK {1}:: (a_a1DN[sk:1] <? b_a1DO[sk:1]) ~# 'True (CEqCan)
+; [G] co_a1FL {1}:: (b_a1DO[sk:1] <? c_a1DP[sk:1]) ~# 'True (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1FN} {1}:: (a_a1DO[sk:1] <? c_a1DQ[sk:1])
+; [WD] hole{co_a1FM} {1}:: (a_a1DN[sk:1] <? c_a1DP[sk:1])
 ;                          ~# 'True (CNonCanonical)
 
 ; GIVENS (Thoralf style)
+; (<? [a1DN,a1DO],True [])
 ; (<? [a1DO,a1DP],True [])
-; (<? [a1DP,a1DQ],True [])
 
 ; WANTEDS (Thoralf style)
-; (<? [a1DO,a1DQ],True [])
+; (<? [a1DN,a1DP],True [])
 
 (echo "givens-start-cycle-19")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1FN} {1}:: (a_a1DO[sk:1] <? c_a1DQ[sk:1])
+;      [WD] hole{co_a1FM} {1}:: (a_a1DN[sk:1] <? c_a1DP[sk:1])
 ;                               ~# 'True (CNonCanonical)
 ;  =>  (=
-;    (< a1DO a1DQ)
+;    (< a1DN a1DP)
 ;    true)
 
 ; GIVENS (names)
-;  a1DO  <=  a_a1DO[sk:1]
-;  a1DP  <=  b_a1DP[sk:1]
-;  a1DQ  <=  c_a1DQ[sk:1]
+;  a1DN  <=  a_a1DN[sk:1]
+;  a1DO  <=  b_a1DO[sk:1]
+;  a1DP  <=  c_a1DP[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
+; (assert (<= 0 a1DN))
 ; (assert (<= 0 a1DO))
 ; (assert (<= 0 a1DP))
-; (assert (<= 0 a1DQ))
+; (declare-const a1DN Int)
 ; (declare-const a1DO Int)
 ; (declare-const a1DP Int)
-; (declare-const a1DQ Int)
+(declare-const a1DN Int)
 (declare-const a1DO Int)
 (declare-const a1DP Int)
-(declare-const a1DQ Int)
+(assert
+   (<= 0 a1DN))
 (assert
    (<= 0 a1DO))
 (assert
    (<= 0 a1DP))
 (assert
-   (<= 0 a1DQ))
-(assert
    (!
       (=
-         (< a1DO a1DP)
+         (< a1DN a1DO)
          true)
       :named
       given-19.1))
 (assert
    (!
       (=
-         (< a1DP a1DQ)
+         (< a1DO a1DP)
          true)
       :named
       given-19.2))
@@ -5547,22 +5433,22 @@
 (echo "givens-finish-cycle-19")
 (echo "wanteds-start-cycle-19")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1FN} {1}:: (a_a1DO[sk:1] <? c_a1DQ[sk:1])
+;      [WD] hole{co_a1FM} {1}:: (a_a1DN[sk:1] <? c_a1DP[sk:1])
 ;                               ~# 'True (CNonCanonical)
 ;  =>  (=
-;    (< a1DO a1DQ)
+;    (< a1DN a1DP)
 ;    true)
 
 ; WANTEDS (names)
-;  a1DO  <=  a_a1DO[sk:1]
-;  a1DQ  <=  c_a1DQ[sk:1]
+;  a1DN  <=  a_a1DN[sk:1]
+;  a1DP  <=  c_a1DP[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
          (=
-            (< a1DO a1DQ)
+            (< a1DN a1DP)
             true))
       :named
       wanted-19))
@@ -5571,25 +5457,25 @@
 (echo "wanteds-finish-cycle-19")
 (get-assertions)
 ; (
+;   (<= 0 a1DN)
 ;   (<= 0 a1DO)
 ;   (<= 0 a1DP)
-;   (<= 0 a1DQ)
 ;   (!
 ;      (=
-;         (< a1DO a1DP)
+;         (< a1DN a1DO)
 ;         true)
 ;      :named
 ;      given-19.1)
 ;   (!
 ;      (=
-;         (< a1DP a1DQ)
+;         (< a1DO a1DP)
 ;         true)
 ;      :named
 ;      given-19.2)
 ;   (!
 ;      (not
 ;         (=
-;            (< a1DO a1DQ)
+;            (< a1DN a1DP)
 ;            true))
 ;      :named
 ;      wanted-19))
@@ -5606,46 +5492,46 @@
 (echo "solver-start-cycle-21")
 
 ; GIVENS (GHC style)
-; [G] co_a1E2 {0}:: (a_a1E0[sk:1] + a_a1E0[sk:1])
-;                   ~# (a_a1E0[sk:1] + b_a1E1[sk:1]) (CEqCan)
+; [G] co_a1E1 {0}:: (a_a1DZ[sk:1] + a_a1DZ[sk:1])
+;                   ~# (a_a1DZ[sk:1] + b_a1E0[sk:1]) (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1E5} {0}:: a_a1E0[sk:1]
-;                          ~# b_a1E1[sk:1] (CNonCanonical)
+; [WD] hole{co_a1E4} {0}:: a_a1DZ[sk:1]
+;                          ~# b_a1E0[sk:1] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (+ [a1E0,a1E0],+ [a1E0,a1E1])
+; (+ [a1DZ,a1DZ],+ [a1DZ,a1E0])
 
 ; WANTEDS (Thoralf style)
-; (a1E0,a1E1)
+; (a1DZ,a1E0)
 
 (echo "givens-start-cycle-21")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1E5} {0}:: a_a1E0[sk:1]
-;                               ~# b_a1E1[sk:1] (CNonCanonical)
-;  =>  (= a1E0 a1E1)
+;      [WD] hole{co_a1E4} {0}:: a_a1DZ[sk:1]
+;                               ~# b_a1E0[sk:1] (CNonCanonical)
+;  =>  (= a1DZ a1E0)
 
 ; GIVENS (names)
-;  a1E0  <=  a_a1E0[sk:1]
-;  a1E1  <=  b_a1E1[sk:1]
+;  a1DZ  <=  a_a1DZ[sk:1]
+;  a1E0  <=  b_a1E0[sk:1]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
+; (assert (<= 0 a1DZ))
 ; (assert (<= 0 a1E0))
-; (assert (<= 0 a1E1))
+; (declare-const a1DZ Int)
 ; (declare-const a1E0 Int)
-; (declare-const a1E1 Int)
+(declare-const a1DZ Int)
 (declare-const a1E0 Int)
-(declare-const a1E1 Int)
+(assert
+   (<= 0 a1DZ))
 (assert
    (<= 0 a1E0))
 (assert
-   (<= 0 a1E1))
-(assert
    (!
       (=
-         (+ a1E0 a1E0)
-         (+ a1E0 a1E1))
+         (+ a1DZ a1DZ)
+         (+ a1DZ a1E0))
       :named
       given-21.1))
 (check-sat)
@@ -5653,19 +5539,19 @@
 (echo "givens-finish-cycle-21")
 (echo "wanteds-start-cycle-21")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1E5} {0}:: a_a1E0[sk:1]
-;                               ~# b_a1E1[sk:1] (CNonCanonical)
-;  =>  (= a1E0 a1E1)
+;      [WD] hole{co_a1E4} {0}:: a_a1DZ[sk:1]
+;                               ~# b_a1E0[sk:1] (CNonCanonical)
+;  =>  (= a1DZ a1E0)
 
 ; WANTEDS (names)
-;  a1E0  <=  a_a1E0[sk:1]
-;  a1E1  <=  b_a1E1[sk:1]
+;  a1DZ  <=  a_a1DZ[sk:1]
+;  a1E0  <=  b_a1E0[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
-         (= a1E0 a1E1))
+         (= a1DZ a1E0))
       :named
       wanted-21))
 (check-sat)
@@ -5673,17 +5559,17 @@
 (echo "wanteds-finish-cycle-21")
 (get-assertions)
 ; (
+;   (<= 0 a1DZ)
 ;   (<= 0 a1E0)
-;   (<= 0 a1E1)
 ;   (!
 ;      (=
-;         (+ a1E0 a1E0)
-;         (+ a1E0 a1E1))
+;         (+ a1DZ a1DZ)
+;         (+ a1DZ a1E0))
 ;      :named
 ;      given-21.1)
 ;   (!
 ;      (not
-;         (= a1E0 a1E1))
+;         (= a1DZ a1E0))
 ;      :named
 ;      wanted-21))
 (get-unsat-core)
@@ -5698,22 +5584,22 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1Ee} {0}:: (a_a1E9[sk:1] + b_a1Ea[sk:1])
-;                          ~# (b_a1Ea[sk:1] + a_a1E9[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1Ed} {0}:: (a_a1E8[sk:1] + b_a1E9[sk:1])
+;                          ~# (b_a1E9[sk:1] + a_a1E8[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (+ [a1E9,a1Ea],+ [a1Ea,a1E9])
+; (+ [a1E8,a1E9],+ [a1E9,a1E8])
 
 (echo "givens-start-cycle-22")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1Ee} {0}:: (a_a1E9[sk:1] + b_a1Ea[sk:1])
-;                               ~# (b_a1Ea[sk:1] + a_a1E9[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1Ed} {0}:: (a_a1E8[sk:1] + b_a1E9[sk:1])
+;                               ~# (b_a1E9[sk:1] + a_a1E8[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1E9 a1Ea)
-;    (+ a1Ea a1E9))
+;    (+ a1E8 a1E9)
+;    (+ a1E9 a1E8))
 
 ; GIVENS (names)
 (push 1)
@@ -5724,33 +5610,33 @@
 (echo "givens-finish-cycle-22")
 (echo "wanteds-start-cycle-22")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1Ee} {0}:: (a_a1E9[sk:1] + b_a1Ea[sk:1])
-;                               ~# (b_a1Ea[sk:1] + a_a1E9[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1Ed} {0}:: (a_a1E8[sk:1] + b_a1E9[sk:1])
+;                               ~# (b_a1E9[sk:1] + a_a1E8[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1E9 a1Ea)
-;    (+ a1Ea a1E9))
+;    (+ a1E8 a1E9)
+;    (+ a1E9 a1E8))
 
 ; WANTEDS (names)
-;  a1E9  <=  a_a1E9[sk:1]
-;  a1Ea  <=  b_a1Ea[sk:1]
+;  a1E8  <=  a_a1E8[sk:1]
+;  a1E9  <=  b_a1E9[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
+; (assert (<= 0 a1E8))
 ; (assert (<= 0 a1E9))
-; (assert (<= 0 a1Ea))
+; (declare-const a1E8 Int)
 ; (declare-const a1E9 Int)
-; (declare-const a1Ea Int)
+(declare-const a1E8 Int)
 (declare-const a1E9 Int)
-(declare-const a1Ea Int)
+(assert
+   (<= 0 a1E8))
 (assert
    (<= 0 a1E9))
-(assert
-   (<= 0 a1Ea))
 (assert
    (!
       (not
          (=
-            (+ a1E9 a1Ea)
-            (+ a1Ea a1E9)))
+            (+ a1E8 a1E9)
+            (+ a1E9 a1E8)))
       :named
       wanted-22))
 (check-sat)
@@ -5758,13 +5644,13 @@
 (echo "wanteds-finish-cycle-22")
 (get-assertions)
 ; (
+;   (<= 0 a1E8)
 ;   (<= 0 a1E9)
-;   (<= 0 a1Ea)
 ;   (!
 ;      (not
 ;         (=
-;            (+ a1E9 a1Ea)
-;            (+ a1Ea a1E9)))
+;            (+ a1E8 a1E9)
+;            (+ a1E9 a1E8)))
 ;      :named
 ;      wanted-22))
 (get-unsat-core)
@@ -5779,22 +5665,22 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a1El} {0}:: (a_a1Eh[sk:1] + 1)
-;                          ~# (1 + a_a1Eh[sk:1]) (CNonCanonical)
+; [WD] hole{co_a1Ek} {0}:: (a_a1Eg[sk:1] + 1)
+;                          ~# (1 + a_a1Eg[sk:1]) (CNonCanonical)
 
 ; GIVENS (Thoralf style)
 ; []
 
 ; WANTEDS (Thoralf style)
-; (+ [a1Eh,1],+ [1,a1Eh])
+; (+ [a1Eg,1],+ [1,a1Eg])
 
 (echo "givens-start-cycle-23")
 ; GIVENS (conversions)
-;      [WD] hole{co_a1El} {0}:: (a_a1Eh[sk:1] + 1)
-;                               ~# (1 + a_a1Eh[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1Ek} {0}:: (a_a1Eg[sk:1] + 1)
+;                               ~# (1 + a_a1Eg[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1Eh 1)
-;    (+ 1 a1Eh))
+;    (+ a1Eg 1)
+;    (+ 1 a1Eg))
 
 ; GIVENS (names)
 (push 1)
@@ -5805,27 +5691,27 @@
 (echo "givens-finish-cycle-23")
 (echo "wanteds-start-cycle-23")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a1El} {0}:: (a_a1Eh[sk:1] + 1)
-;                               ~# (1 + a_a1Eh[sk:1]) (CNonCanonical)
+;      [WD] hole{co_a1Ek} {0}:: (a_a1Eg[sk:1] + 1)
+;                               ~# (1 + a_a1Eg[sk:1]) (CNonCanonical)
 ;  =>  (=
-;    (+ a1Eh 1)
-;    (+ 1 a1Eh))
+;    (+ a1Eg 1)
+;    (+ 1 a1Eg))
 
 ; WANTEDS (names)
-;  a1Eh  <=  a_a1Eh[sk:1]
+;  a1Eg  <=  a_a1Eg[sk:1]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
-; (assert (<= 0 a1Eh))
-; (declare-const a1Eh Int)
-(declare-const a1Eh Int)
+; (assert (<= 0 a1Eg))
+; (declare-const a1Eg Int)
+(declare-const a1Eg Int)
 (assert
-   (<= 0 a1Eh))
+   (<= 0 a1Eg))
 (assert
    (!
       (not
          (=
-            (+ a1Eh 1)
-            (+ 1 a1Eh)))
+            (+ a1Eg 1)
+            (+ 1 a1Eg)))
       :named
       wanted-23))
 (check-sat)
@@ -5833,12 +5719,12 @@
 (echo "wanteds-finish-cycle-23")
 (get-assertions)
 ; (
-;   (<= 0 a1Eh)
+;   (<= 0 a1Eg)
 ;   (!
 ;      (not
 ;         (=
-;            (+ a1Eh 1)
-;            (+ 1 a1Eh)))
+;            (+ a1Eg 1)
+;            (+ 1 a1Eg)))
 ;      :named
 ;      wanted-23))
 (get-unsat-core)
@@ -5935,10 +5821,10 @@
 ; []
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a2NT} {3}:: Alter
+; [WD] hole{co_a2NS} {3}:: Alter
 ;                            (Alter (Alter Nil "price" Int) "make" String) "price" Int
 ;                          ~# Alter (Alter Nil "price" Int) "make" String (CNonCanonical)
-; [WD] hole{co_a2NL} {3}:: Alter
+; [WD] hole{co_a2NK} {3}:: Alter
 ;                            (Alter (Alter Nil "pilot" String) "price" Int) "price" Int
 ;                          ~# Alter (Alter Nil "pilot" String) "price" Int (CNonCanonical)
 
@@ -5951,7 +5837,7 @@
 
 (echo "givens-start-cycle-5")
 ; GIVENS (conversions)
-;      [WD] hole{co_a2NT} {3}:: Alter
+;      [WD] hole{co_a2NS} {3}:: Alter
 ;                                 (Alter (Alter Nil "price" Int) "make" String) "price" Int
 ;                               ~# Alter (Alter Nil "price" Int) "make" String (CNonCanonical)
 ;  =>  (=
@@ -5994,7 +5880,7 @@
 ;             (lit "3Q")
 ;             (lit "3g")))))
 
-;      [WD] hole{co_a2NL} {3}:: Alter
+;      [WD] hole{co_a2NK} {3}:: Alter
 ;                                 (Alter (Alter Nil "pilot" String) "price" Int) "price" Int
 ;                               ~# Alter (Alter Nil "pilot" String) "price" Int (CNonCanonical)
 ;  =>  (=
@@ -6046,7 +5932,7 @@
 (echo "givens-finish-cycle-5")
 (echo "wanteds-start-cycle-5")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a2NT} {3}:: Alter
+;      [WD] hole{co_a2NS} {3}:: Alter
 ;                                 (Alter (Alter Nil "price" Int) "make" String) "price" Int
 ;                               ~# Alter (Alter Nil "price" Int) "make" String (CNonCanonical)
 ;  =>  (=
@@ -6089,7 +5975,7 @@
 ;             (lit "3Q")
 ;             (lit "3g")))))
 
-;      [WD] hole{co_a2NL} {3}:: Alter
+;      [WD] hole{co_a2NK} {3}:: Alter
 ;                                 (Alter (Alter Nil "pilot" String) "price" Int) "price" Int
 ;                               ~# Alter (Alter Nil "pilot" String) "price" Int (CNonCanonical)
 ;  =>  (=
@@ -6326,76 +6212,76 @@
 (echo "solver-start-cycle-8")
 
 ; GIVENS (GHC style)
-; [G] co_a2O6 {2}:: Alter m_a2LT[sk:1] "price" Int
-;                   ~# m_a2LT[sk:1] (CEqCan)
-; [G] co_a2Oa {2}:: Delete m_a2LV[ssk:2] field_a2LW[ssk:2]
-;                   ~# m_a2LT[sk:1] (CEqCan)
+; [G] co_a2O5 {2}:: Alter m_a2LS[sk:1] "price" Int
+;                   ~# m_a2LS[sk:1] (CEqCan)
+; [G] co_a2O9 {2}:: Delete m_a2LU[ssk:2] field_a2LV[ssk:2]
+;                   ~# m_a2LS[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a2Oe} {3}:: Alter m_a2LV[ssk:2] "price" Int
-;                          ~# m_a2LV[ssk:2] (CNonCanonical)
+; [WD] hole{co_a2Od} {3}:: Alter m_a2LU[ssk:2] "price" Int
+;                          ~# m_a2LU[ssk:2] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LT,"price",Int []],a2LT)
-; (Delete [Symbol [],TYPE [BoxedRep [Lifted []]],a2LV,a2LW],a2LT)
+; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LS,"price",Int []],a2LS)
+; (Delete [Symbol [],TYPE [BoxedRep [Lifted []]],a2LU,a2LV],a2LS)
 
 ; WANTEDS (Thoralf style)
-; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LV,"price",Int []],a2LV)
+; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LU,"price",Int []],a2LU)
 
 (echo "givens-start-cycle-8")
 ; GIVENS (conversions)
-;      [WD] hole{co_a2Oe} {3}:: Alter m_a2LV[ssk:2] "price" Int
-;                               ~# m_a2LV[ssk:2] (CNonCanonical)
+;      [WD] hole{co_a2Od} {3}:: Alter m_a2LU[ssk:2] "price" Int
+;                               ~# m_a2LU[ssk:2] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       a2LV
+;       a2LU
 ;       "price"
 ;       (just
 ;          (lit "3u")))
-;    a2LV)
+;    a2LU)
 
 ; GIVENS (names)
-;  a2LT  <=  m_a2LT[sk:1]
-;  a2LV  <=  m_a2LV[ssk:2]
-;  a2LW  <=  field_a2LW[ssk:2]
+;  a2LS  <=  m_a2LS[sk:1]
+;  a2LU  <=  m_a2LU[ssk:2]
+;  a2LV  <=  field_a2LV[ssk:2]
 (push 1)
 ; DECS1 (seen) 
 ; DECS1 (unseen) 
-; (declare-const a2LT (Array String (Maybe Type)))
-; (declare-const a2LV (Array String (Maybe Type)))
-; (declare-const a2LW String)
+; (declare-const a2LS (Array String (Maybe Type)))
+; (declare-const a2LU (Array String (Maybe Type)))
+; (declare-const a2LV String)
 (declare-const
-   a2LT
+   a2LS
    (Array
       String
       (Maybe Type)))
 (declare-const
-   a2LV
+   a2LU
    (Array
       String
       (Maybe Type)))
-(declare-const a2LW String)
+(declare-const a2LV String)
 (assert
    (!
       (=
          (store
-            a2LT
+            a2LS
             "price"
             (just
                (lit "3u")))
-         a2LT)
+         a2LS)
       :named
       given-8.1))
 (assert
    (!
       (=
          (store
+            a2LU
             a2LV
-            a2LW
             (as
                nothing
                (Maybe Type)))
-         a2LT)
+         a2LS)
       :named
       given-8.2))
 (check-sat)
@@ -6403,18 +6289,18 @@
 (echo "givens-finish-cycle-8")
 (echo "wanteds-start-cycle-8")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a2Oe} {3}:: Alter m_a2LV[ssk:2] "price" Int
-;                               ~# m_a2LV[ssk:2] (CNonCanonical)
+;      [WD] hole{co_a2Od} {3}:: Alter m_a2LU[ssk:2] "price" Int
+;                               ~# m_a2LU[ssk:2] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       a2LV
+;       a2LU
 ;       "price"
 ;       (just
 ;          (lit "3u")))
-;    a2LV)
+;    a2LU)
 
 ; WANTEDS (names)
-;  a2LV  <=  m_a2LV[ssk:2]
+;  a2LU  <=  m_a2LU[ssk:2]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -6422,11 +6308,11 @@
       (not
          (=
             (store
-               a2LV
+               a2LU
                "price"
                (just
                   (lit "3u")))
-            a2LV))
+            a2LU))
       :named
       wanted-8))
 (check-sat)
@@ -6437,33 +6323,33 @@
 ;   (!
 ;      (=
 ;         (store
-;            a2LT
+;            a2LS
 ;            "price"
 ;            (just
 ;               (lit "3u")))
-;         a2LT)
+;         a2LS)
 ;      :named
 ;      given-8.1)
 ;   (!
 ;      (=
 ;         (store
+;            a2LU
 ;            a2LV
-;            a2LW
 ;            (as
 ;               nothing
 ;               (Maybe Type)))
-;         a2LT)
+;         a2LS)
 ;      :named
 ;      given-8.2)
 ;   (!
 ;      (not
 ;         (=
 ;            (store
-;               a2LV
+;               a2LU
 ;               "price"
 ;               (just
 ;                  (lit "3u")))
-;            a2LV))
+;            a2LU))
 ;      :named
 ;      wanted-8))
 (get-unsat-core)
@@ -6483,79 +6369,79 @@
 (echo "solver-start-cycle-11")
 
 ; GIVENS (GHC style)
-; [G] co_a2O6 {2}:: Alter m_a2LT[sk:1] "price" Int
-;                   ~# m_a2LT[sk:1] (CEqCan)
-; [G] co_a2Om {5}:: Alter m_a2M2[ssk:2] "price" val_a2M4[ssk:2]
-;                   ~# m_a2LT[sk:1] (CEqCan)
-; [G] co_a2Oj {1}:: field_a2M3[ssk:2] ~# "price" (CEqCan)
+; [G] co_a2O5 {2}:: Alter m_a2LS[sk:1] "price" Int
+;                   ~# m_a2LS[sk:1] (CEqCan)
+; [G] co_a2Ol {5}:: Alter m_a2M1[ssk:2] "price" val_a2M3[ssk:2]
+;                   ~# m_a2LS[sk:1] (CEqCan)
+; [G] co_a2Oi {1}:: field_a2M2[ssk:2] ~# "price" (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a2Mj} {0}:: val_a2M4[ssk:2] ~# Int (CNonCanonical)
+; [WD] hole{co_a2Mi} {0}:: val_a2M3[ssk:2] ~# Int (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LT,"price",Int []],a2LT)
-; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2M2,"price",a2M4],a2LT)
-; (a2M3,"price")
+; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LS,"price",Int []],a2LS)
+; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2M1,"price",a2M3],a2LS)
+; (a2M2,"price")
 
 ; WANTEDS (Thoralf style)
-; (a2M4,Int [])
+; (a2M3,Int [])
 
 (echo "givens-start-cycle-11")
 ; GIVENS (conversions)
-;      [WD] hole{co_a2Mj} {0}:: val_a2M4[ssk:2]
+;      [WD] hole{co_a2Mi} {0}:: val_a2M3[ssk:2]
 ;                               ~# Int (CNonCanonical)
 ;  =>  (=
-;    a2M4
+;    a2M3
 ;    (lit "3u"))
 
 ; GIVENS (names)
-;  a2LT  <=  m_a2LT[sk:1]
-;  a2M2  <=  m_a2M2[ssk:2]
-;  a2M3  <=  field_a2M3[ssk:2]
-;  a2M4  <=  val_a2M4[ssk:2]
+;  a2LS  <=  m_a2LS[sk:1]
+;  a2M1  <=  m_a2M1[ssk:2]
+;  a2M2  <=  field_a2M2[ssk:2]
+;  a2M3  <=  val_a2M3[ssk:2]
 (push 1)
 ; DECS1 (seen) 
-; (declare-const a2LT (Array String (Maybe Type)))
+; (declare-const a2LS (Array String (Maybe Type)))
 ; DECS1 (unseen) 
-; (declare-const a2M2 (Array String (Maybe Type)))
-; (declare-const a2M3 String)
-; (declare-const a2M4 Type)
+; (declare-const a2M1 (Array String (Maybe Type)))
+; (declare-const a2M2 String)
+; (declare-const a2M3 Type)
 (declare-const
-   a2LT
+   a2LS
    (Array
       String
       (Maybe Type)))
 (declare-const
-   a2M2
+   a2M1
    (Array
       String
       (Maybe Type)))
-(declare-const a2M3 String)
-(declare-const a2M4 Type)
+(declare-const a2M2 String)
+(declare-const a2M3 Type)
 (assert
    (!
       (=
          (store
-            a2LT
+            a2LS
             "price"
             (just
                (lit "3u")))
-         a2LT)
+         a2LS)
       :named
       given-11.1))
 (assert
    (!
       (=
          (store
-            a2M2
+            a2M1
             "price"
-            (just a2M4))
-         a2LT)
+            (just a2M3))
+         a2LS)
       :named
       given-11.2))
 (assert
    (!
-      (= a2M3 "price")
+      (= a2M2 "price")
       :named
       given-11.3))
 (check-sat)
@@ -6563,21 +6449,21 @@
 (echo "givens-finish-cycle-11")
 (echo "wanteds-start-cycle-11")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a2Mj} {0}:: val_a2M4[ssk:2]
+;      [WD] hole{co_a2Mi} {0}:: val_a2M3[ssk:2]
 ;                               ~# Int (CNonCanonical)
 ;  =>  (=
-;    a2M4
+;    a2M3
 ;    (lit "3u"))
 
 ; WANTEDS (names)
-;  a2M4  <=  val_a2M4[ssk:2]
+;  a2M3  <=  val_a2M3[ssk:2]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
    (!
       (not
          (=
-            a2M4
+            a2M3
             (lit "3u")))
       :named
       wanted-11))
@@ -6589,30 +6475,30 @@
 ;   (!
 ;      (=
 ;         (store
-;            a2LT
+;            a2LS
 ;            "price"
 ;            (just
 ;               (lit "3u")))
-;         a2LT)
+;         a2LS)
 ;      :named
 ;      given-11.1)
 ;   (!
 ;      (=
 ;         (store
-;            a2M2
+;            a2M1
 ;            "price"
-;            (just a2M4))
-;         a2LT)
+;            (just a2M3))
+;         a2LS)
 ;      :named
 ;      given-11.2)
 ;   (!
-;      (= a2M3 "price")
+;      (= a2M2 "price")
 ;      :named
 ;      given-11.3)
 ;   (!
 ;      (not
 ;         (=
-;            a2M4
+;            a2M3
 ;            (lit "3u")))
 ;      :named
 ;      wanted-11))
@@ -6629,88 +6515,88 @@
 (echo "solver-start-cycle-13")
 
 ; GIVENS (GHC style)
-; [G] $dDisEquality_a2Ml {0}:: DisEquality
-;                                field_a2M3[ssk:2] "price" (CDictCan)
-; [G] co_a2O6 {2}:: Alter m_a2LT[sk:1] "price" Int
-;                   ~# m_a2LT[sk:1] (CEqCan)
-; [G] co_a2Oh {2}:: Alter
-;                     m_a2M2[ssk:2] field_a2M3[ssk:2] val_a2M4[ssk:2]
-;                   ~# m_a2LT[sk:1] (CEqCan)
+; [G] $dDisEquality_a2Mk {0}:: DisEquality
+;                                field_a2M2[ssk:2] "price" (CDictCan)
+; [G] co_a2O5 {2}:: Alter m_a2LS[sk:1] "price" Int
+;                   ~# m_a2LS[sk:1] (CEqCan)
+; [G] co_a2Og {2}:: Alter
+;                     m_a2M1[ssk:2] field_a2M2[ssk:2] val_a2M3[ssk:2]
+;                   ~# m_a2LS[sk:1] (CEqCan)
 
 ; WANTEDS (GHC style)
-; [WD] hole{co_a2Op} {3}:: Alter m_a2M2[ssk:2] "price" Int
-;                          ~# m_a2M2[ssk:2] (CNonCanonical)
+; [WD] hole{co_a2Oo} {3}:: Alter m_a2M1[ssk:2] "price" Int
+;                          ~# m_a2M1[ssk:2] (CNonCanonical)
 
 ; GIVENS (Thoralf style)
-; [G] $dDisEquality_a2Ml {0}:: DisEquality
-                               field_a2M3[ssk:2] "price" (CDictCan)
-; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LT,"price",Int []],a2LT)
-; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2M2,a2M3,a2M4],a2LT)
+; [G] $dDisEquality_a2Mk {0}:: DisEquality
+                               field_a2M2[ssk:2] "price" (CDictCan)
+; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2LS,"price",Int []],a2LS)
+; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2M1,a2M2,a2M3],a2LS)
 
 ; WANTEDS (Thoralf style)
-; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2M2,"price",Int []],a2M2)
+; (Alter [Symbol [],TYPE [BoxedRep [Lifted []]],a2M1,"price",Int []],a2M1)
 
 (echo "givens-start-cycle-13")
 ; GIVENS (conversions)
-;      [WD] hole{co_a2Op} {3}:: Alter m_a2M2[ssk:2] "price" Int
-;                               ~# m_a2M2[ssk:2] (CNonCanonical)
+;      [WD] hole{co_a2Oo} {3}:: Alter m_a2M1[ssk:2] "price" Int
+;                               ~# m_a2M1[ssk:2] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       a2M2
+;       a2M1
 ;       "price"
 ;       (just
 ;          (lit "3u")))
-;    a2M2)
+;    a2M1)
 
 ; GIVENS (names)
-;  a2LT  <=  m_a2LT[sk:1]
-;  a2M2  <=  m_a2M2[ssk:2]
-;  a2M3  <=  field_a2M3[ssk:2]
-;  a2M4  <=  val_a2M4[ssk:2]
+;  a2LS  <=  m_a2LS[sk:1]
+;  a2M1  <=  m_a2M1[ssk:2]
+;  a2M2  <=  field_a2M2[ssk:2]
+;  a2M3  <=  val_a2M3[ssk:2]
 (push 1)
 ; DECS1 (seen) 
-; (declare-const a2LT (Array String (Maybe Type)))
-; (declare-const a2M2 (Array String (Maybe Type)))
-; (declare-const a2M3 String)
-; (declare-const a2M4 Type)
+; (declare-const a2LS (Array String (Maybe Type)))
+; (declare-const a2M1 (Array String (Maybe Type)))
+; (declare-const a2M2 String)
+; (declare-const a2M3 Type)
 ; DECS1 (unseen) 
 (declare-const
-   a2LT
+   a2LS
    (Array
       String
       (Maybe Type)))
 (declare-const
-   a2M2
+   a2M1
    (Array
       String
       (Maybe Type)))
-(declare-const a2M3 String)
-(declare-const a2M4 Type)
+(declare-const a2M2 String)
+(declare-const a2M3 Type)
 (assert
    (!
       (not
-         (= a2M3 "price"))
+         (= a2M2 "price"))
       :named
       given-13.1))
 (assert
    (!
       (=
          (store
-            a2LT
+            a2LS
             "price"
             (just
                (lit "3u")))
-         a2LT)
+         a2LS)
       :named
       given-13.2))
 (assert
    (!
       (=
          (store
+            a2M1
             a2M2
-            a2M3
-            (just a2M4))
-         a2LT)
+            (just a2M3))
+         a2LS)
       :named
       given-13.3))
 (check-sat)
@@ -6718,18 +6604,18 @@
 (echo "givens-finish-cycle-13")
 (echo "wanteds-start-cycle-13")
 ; WANTEDS (conversions)
-;      [WD] hole{co_a2Op} {3}:: Alter m_a2M2[ssk:2] "price" Int
-;                               ~# m_a2M2[ssk:2] (CNonCanonical)
+;      [WD] hole{co_a2Oo} {3}:: Alter m_a2M1[ssk:2] "price" Int
+;                               ~# m_a2M1[ssk:2] (CNonCanonical)
 ;  =>  (=
 ;    (store
-;       a2M2
+;       a2M1
 ;       "price"
 ;       (just
 ;          (lit "3u")))
-;    a2M2)
+;    a2M1)
 
 ; WANTEDS (names)
-;  a2M2  <=  m_a2M2[ssk:2]
+;  a2M1  <=  m_a2M1[ssk:2]
 ; DECS2 (seen) 
 ; DECS2 (unseen) 
 (assert
@@ -6737,11 +6623,11 @@
       (not
          (=
             (store
-               a2M2
+               a2M1
                "price"
                (just
                   (lit "3u")))
-            a2M2))
+            a2M1))
       :named
       wanted-13))
 (check-sat)
@@ -6751,37 +6637,37 @@
 ; (
 ;   (!
 ;      (not
-;         (= a2M3 "price"))
+;         (= a2M2 "price"))
 ;      :named
 ;      given-13.1)
 ;   (!
 ;      (=
 ;         (store
-;            a2LT
+;            a2LS
 ;            "price"
 ;            (just
 ;               (lit "3u")))
-;         a2LT)
+;         a2LS)
 ;      :named
 ;      given-13.2)
 ;   (!
 ;      (=
 ;         (store
+;            a2M1
 ;            a2M2
-;            a2M3
-;            (just a2M4))
-;         a2LT)
+;            (just a2M3))
+;         a2LS)
 ;      :named
 ;      given-13.3)
 ;   (!
 ;      (not
 ;         (=
 ;            (store
-;               a2M2
+;               a2M1
 ;               "price"
 ;               (just
 ;                  (lit "3u")))
-;            a2M2))
+;            a2M1))
 ;      :named
 ;      wanted-13))
 (get-unsat-core)
