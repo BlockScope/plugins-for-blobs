@@ -57,12 +57,12 @@ data TraceSmtTalk =
         , traceRecv :: DebugSmtRecv -- ^ Trace the received responses.
         , traceArrow :: Bool
         -- ^ Print a send or recv with arrow prefix showing the direction of the
-        -- communication. With 'traceArrow' set to 'True' the annotated arrow is printed.
+        -- communication. With @traceArrow@ set to @True@ the annotated arrow is printed.
         --
         -- >>> [send->] (set-option :print-success true)
         -- >>> [<-recv] success
         --
-        -- Without 'traceArrow' the arrow is omitted:
+        -- Without @traceArrow@ the arrow is omitted:
         --
         -- >>> (set-option :print-success true)
         -- >>> success
