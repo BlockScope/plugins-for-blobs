@@ -114,19 +114,186 @@ data DebugSmt =
         { traceCarry :: TraceCarry
         -- ^ Trace GHC constraints carried through conversion and solving.
         , traceSmtCts :: TraceSmtCts
-        -- ^ Trace conversions to SMT notation
+        -- ^ Trace conversions to SMT notation in TOML-like format.
+        --
+        -- >>>
+        --     [cts-as-smt]
+        --       smt-givens-decs = []
+        --       smt-givens = []
+        --       smt-wanteds-decs = [
+        --       (declare-const
+        --    aeM7
+        --    (Array String Int))
+        --       ]
+        --       smt-wanteds = [
+        --       (assert (or false (not (=
+        --    (
+        --      (_
+        --         map
+        --         (+
+        --            (Int Int)
+        --            Int))
+        --      (
+        --        (as
+        --           const
+        --           (Array String Int))
+        --        0)
+        --      aeM7)
+        --    (
+        --      (_
+        --         map
+        --         (+
+        --            (Int Int)
+        --            Int))
+        --      aeM7
+        --      (
+        --        (as
+        --           const
+        --           (Array String Int))
+        --        0))))))
+        --       ]
+
         , traceSmtTalk :: TraceSmtTalk
         -- ^ Trace the conversation with the SMT solver
         , traceCtsComments :: Bool
-        -- ^ Trace the constraints we might solve as comments.
+        -- ^ Trace the constraints we might solve as comments in both GHC and
+        -- Thoralf style.
+        --
+        -- >>> (echo "solver-start-cycle-15")
+        -- ;
+        -- ; GIVENS (GHC style)
+        -- ; [G] co_a9Ov {0}:: (One *: a_a9aN[sk:1])
+        -- ;                   ~# (b_a9aO[sk:1] *: One) (CNonCanonical)
+        -- ;
+        -- ; WANTEDS (GHC style)
+        -- ; [WD] hole{co_a9Oy} {2}:: Base "kg" ~# a_a9aN[sk:1] (CNonCanonical)
+        -- ;
+        -- ; GIVENS (Thoralf style)
+        -- ; (*: [One [],a9aN],*: [a9aO,One []])
+        -- ;
+        -- ; WANTEDS (Thoralf style)
+        -- ; (Base ["kg"],a9aN)
+        -- ;
+        -- >>> (echo "givens-start-cycle-15")
+        -- ; GIVENS (conversions)
+        -- ;      [WD] hole{co_a9Oy} {2}:: Base "kg"
+        -- ;                               ~# a_a9aN[sk:1] (CNonCanonical)
+        -- ;  =>  (=
+        -- ;    (store base "kg" one)
+        -- ;    a9aN)
+        -- ;
+        -- ; GIVENS (names)
+        -- ;  a9aN  <=  a_a9aN[sk:1]
+        -- ;  a9aO  <=  b_a9aO[sk:1]
+        -- ;
+        -- >>> (echo "wanteds-start-cycle-15")
+        -- ; WANTEDS (conversions)
+        -- ;      [WD] hole{co_a9Oy} {2}:: Base "kg"
+        -- ;                               ~# a_a9aN[sk:1] (CNonCanonical)
+        -- ;  =>  (=
+        -- ;    (store base "kg" one)
+        -- ;    a9aN)
+        -- ;
+        -- ; WANTEDS (names)
+        -- ;  a9aN  <=  a_a9aN[sk:1]
+
         , traceDecsSeen :: Bool
-        -- ^ Note which declarations have been seen.
+        -- ^ Note which declarations have been seen where (1) is are the
+        -- declarations for the givens and (2) are the declarations for the
+        -- wanteds.
+        --
+        -- >>>
+        -- ; DECS1 (seen) 
+        -- ; DECS1 (unseen) 
+        -- ; (declare-const aahd (array string int))
+        -- ; (declare-const aaHE (Array String Int))
+        --
+        -- ; DECS2 (seen) 
+        -- ; DECS2 (unseen) 
+
         , traceAssertions :: Bool
         -- ^ Trace assertions.
+        --
+        -- >>> (get-assertions)
+        -- ; (
+        -- ;   (= one 1)
+        -- ;   (= enc base)
+        -- ;   (!
+        -- ;      (not
+        -- ;         (=
+        -- ;            (
+        -- ;              (as
+        -- ;                 const
+        -- ;                 (Array String Int))
+        -- ;              0)
+        -- ;            (
+        -- ;              (_
+        -- ;                 map
+        -- ;                 (-
+        -- ;                    (Int Int)
+        -- ;                    Int))
+        -- ;              (store base "byte" one)
+        -- ;              (store base "byte" one))))
+        -- ;      :named
+        -- ;      wanted-1))
+
         , traceSatModel :: Bool
         -- ^ Trace the model of a satisfiable constraint.
+        --
+        -- >>> (get-model)
+        -- ; (
+        -- ;   (define-fun
+        -- ;      base
+        -- ;      ()
+        -- ;      (Array String Int)
+        -- ;      (store
+        -- ;         (
+        -- ;           (as
+        -- ;              const
+        -- ;              (Array String Int))
+        -- ;           2)
+        -- ;         "m"
+        -- ;         3))
+        -- ;   (define-fun
+        -- ;      wanted-17
+        -- ;      ()
+        -- ;      Bool
+        -- ;      (not
+        -- ;         (=
+        -- ;            (store base "m" one)
+        -- ;            (store base "s" one))))
+        -- ;   (define-fun
+        -- ;      one
+        -- ;      ()
+        -- ;      Int
+        -- ;      1)
+        -- ;   (define-fun
+        -- ;      enc
+        -- ;      ()
+        -- ;      (Array String Int)
+        -- ;      (store
+        -- ;         (
+        -- ;           (as
+        -- ;              const
+        -- ;              (Array String Int))
+        -- ;           2)
+        -- ;         "m"
+        -- ;         3))
+        -- ;   (define-fun
+        -- ;      exp
+        -- ;      ()
+        -- ;      (Array String Int)
+        -- ;      (
+        -- ;        (as
+        -- ;           const
+        -- ;           (Array String Int))
+        -- ;        0)))
+
         , traceUnsatCore :: Bool
         -- ^ Trace the unsat core of an unsatisfiable constraint.
+        --
+        -- >>> (get-unsat-core)
+        -- ; (wanted-1)
         }
 
 -- | Default settings for debugging that includes rich information as SMT2
