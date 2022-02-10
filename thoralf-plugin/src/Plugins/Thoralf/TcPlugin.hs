@@ -24,7 +24,9 @@ import Data.IORef (IORef)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeClass)
 import "ghc-tcplugins-trace" Plugins.Print
-    (DebugCts(..), Indent(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
+    ( DebugCts(..), Indent(..)
+    , pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution, tracePlugin
+    )
 
 import ThoralfPlugin.Extract (maybeExtractTyEq, maybeExtractTyDisEq)
 import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
@@ -32,10 +34,9 @@ import ThoralfPlugin.Convert
     (ExtractEq(..), EncodingData(..), ConvCts(..), ConvEq(..), convert, justReadSExpr)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
-import Plugins.Print (tracePlugin)
 import Plugins.Print.SMT
     (DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..), isSilencedTalk, traceSmt)
-import "thoralf-plugin" Plugins.Thoralf.Print
+import Plugins.Thoralf.Print
     (ConvCtsStep(..), pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc)
 
 data ThoralfState =
