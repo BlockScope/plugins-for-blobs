@@ -37,7 +37,7 @@ import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT
     (DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..), isSilencedTalk, traceSmt)
 import Plugins.Thoralf.Print
-    (ConvCtsStep(..), pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc)
+    (ConvCtsStep(..), pprAsSmtCommentStep, pprAsSmtCommentCts, pprSmtStep, pprAsSmtCommentSDoc)
 
 data ThoralfState =
     ThoralfState
@@ -259,7 +259,7 @@ thoralfSolver
             (decs1Unseen, givenCheck) <- tcPluginIO $ do
                 SMT.echo smtSolver $ "givens-start-cycle-" ++ cycle
                 putStrLn "; GIVENS (conversions)"
-                sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                sequence_ [ putStrLn $ pprAsSmtCommentSDoc e "" | e <- wExprs ]
                 putStrLn "; GIVENS (names)"
                 printAltNames ns1
                 (decs1Unseen, check) <- hideError $ do
@@ -306,7 +306,7 @@ thoralfSolver
                         (decs2Unseen, wantedCheck) <- tcPluginIO $ do
                             SMT.echo smtSolver $ "wanteds-start-cycle-" ++ cycle
                             putStrLn "; WANTEDS (conversions)"
-                            sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                            sequence_ [ putStrLn $ pprAsSmtCommentSDoc e "" | e <- wExprs ]
                             putStrLn "; WANTEDS (names)"
                             printAltNames ns2
                             setCheck <- hideError $ do
@@ -389,7 +389,7 @@ thoralfSolver
         logConvCts step =
             sequence_
             $ tracePlugin dbgPlugin
-            <$> pprConvCtsStep jIndent dbgSmt step
+            <$> pprAsSmtCommentStep jIndent dbgSmt step
 
         logSmtComments step =
             sequence_
@@ -397,7 +397,7 @@ thoralfSolver
 
         logSmtCts step =
             sequence_
-            $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
+            $ traceSmt dbgSmt <$> pprSmtStep jIndent dbgSmt step
 
         smtWanted :: [ConvEq] -> SMT.SExpr
         smtWanted [] = SMT.Atom "false"

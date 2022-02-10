@@ -1,8 +1,21 @@
 {-# LANGUAGE NamedFieldPuns, RecordWildCards #-}
 
+-- | Has functions for printing constraints as SMT-LIB comments and for printing
+-- converted constraints.
 module Plugins.Thoralf.Print
-    ( ConvCtsStep(..)
-    , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
+    (
+    -- * Conversion
+      ConvCtsStep(..)
+
+    -- * Printing
+
+    -- ** As SMT-LIB comments
+    , pprAsSmtCommentStep
+    , pprAsSmtCommentCts
+    , pprAsSmtCommentSDoc
+
+    -- ** As TOML-like
+    , pprSmtStep
     ) where
 
 import Data.Coerce (coerce)
@@ -19,10 +32,13 @@ import Plugins.Print.SMT
     
     )
 
+-- | For one step in typechecking, the converted givens and wanteds.
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
 
-pprConvCtsStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
-pprConvCtsStep
+-- | Pretty prints converted constraints laid out TOML-like but as lines of
+-- SMT-LIB comments with 'pprCts' for the actual printing.
+pprAsSmtCommentStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
+pprAsSmtCommentStep
     indent
     DebugSmt{..}
     ConvCtsStep{givens = ConvCts _ gs _ds1, wanted = ConvCts _ ws _ds2} =
@@ -33,10 +49,11 @@ pprConvCtsStep
         gCts = eqCt <$> gs
         wCts = eqCt <$> ws
 
-pprSmtStep :: DebugSmt -> Indent -> ConvCtsStep -> [String]
+-- | Pretty prints converted constraints in a nested TOML-like format.
+pprSmtStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
 pprSmtStep
-    DebugSmt{..}
     indent@(Indent i)
+    DebugSmt{..}
     ConvCtsStep{givens = ConvCts _ns1 gs ds1, wanted = ConvCts _ns2 ws ds2} =
     [
         ( tab
@@ -67,10 +84,11 @@ pprSmtStep
         gSs = eqSExpr <$> gs
         wSs = eqSExpr <$> ws
 
-pprCommentList :: Show a => [a] -> ShowS
-pprCommentList [] = showString "; []\n"
-pprCommentList [y] = showString "; " . shows y . showChar '\n'
-pprCommentList (y : ys) =
+-- | Prints a list of things as lines of SMT-LIB comments.
+pprAsSmtCommentList :: Show a => [a] -> ShowS
+pprAsSmtCommentList [] = showString "; []\n"
+pprAsSmtCommentList [y] = showString "; " . shows y . showChar '\n'
+pprAsSmtCommentList (y : ys) =
         showString "; "
         . shows y
         . foldr
@@ -78,24 +96,25 @@ pprCommentList (y : ys) =
             (showString "\n")
             ys
 
+-- | Prints a list of constraints as lines of SMT-LIB comments.
 pprAsSmtCommentCts :: DebugSmt -> ConvCtsStep -> [String]
 pprAsSmtCommentCts
     DebugSmt{traceCtsComments}
     ConvCtsStep{givens = ConvCts _ gs _, wanted = ConvCts _ ws _} =
         [
             ( showString "\n; GIVENS (GHC style)\n"
-            . pprSDoc (SmtCommentGivens gCts)
+            . pprAsSmtCommentSDoc (SmtCommentGivens gCts)
             . showString "\n; WANTEDS (GHC style)\n"
-            . pprSDoc (SmtCommentWanteds wCts))
+            . pprAsSmtCommentSDoc (SmtCommentWanteds wCts))
             ""
         | traceCtsComments
         ]
         ++
         [
             ( showString "; GIVENS (Thoralf style)\n"
-            . pprCommentList gCts
+            . pprAsSmtCommentList gCts
             . showString "\n; WANTEDS (Thoralf style)\n"
-            . pprCommentList wCts)
+            . pprAsSmtCommentList wCts)
             ""
         | traceCtsComments
         ]
@@ -103,8 +122,9 @@ pprAsSmtCommentCts
         gCts = eqCt <$> gs
         wCts = eqCt <$> ws
 
-pprSDoc :: Outputable a => a -> ShowS
-pprSDoc x =
+-- | Pretty prints as lines of SMT-LIB comments.
+pprAsSmtCommentSDoc :: Outputable a => a -> ShowS
+pprAsSmtCommentSDoc x =
     -- WARNING: Some lines are wrapped when printed so I'm adding the
     -- comment leader to each line once I have the lines.
     showString

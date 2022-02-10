@@ -23,7 +23,7 @@ import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..)
-    , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
+    , pprAsSmtCommentStep, pprAsSmtCommentCts, pprSmtStep, pprAsSmtCommentSDoc
     )
 import Plugins.Print.SMT (DebugSmt(..), traceSmt)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify (UnitEquality(..), fromUnitEquality)
@@ -152,7 +152,7 @@ delayEqSolve
 
                     when traceCtsComments $ do
                         putStrLn "; GIVENS (conversions)"
-                        sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                        sequence_ [ putStrLn $ pprAsSmtCommentSDoc e "" | e <- wExprs ]
                         putStrLn "; GIVENS (names)"
                         printAltNames ns1
 
@@ -205,7 +205,7 @@ delayEqSolve
 
                                 when traceCtsComments $ do
                                     putStrLn "; WANTEDS (conversions)"
-                                    sequence_ [ putStrLn $ pprSDoc e "" | e <- wExprs ]
+                                    sequence_ [ putStrLn $ pprAsSmtCommentSDoc e "" | e <- wExprs ]
                                     putStrLn "; WANTEDS (names)"
                                     printAltNames ns2
 
@@ -307,7 +307,7 @@ delayEqSolve
         logConvCts step =
             sequence_
             $ tracePlugin dbgPlugin
-            <$> pprConvCtsStep jIndent dbgSmt step
+            <$> pprAsSmtCommentStep jIndent dbgSmt step
 
         logSmtComments step =
             sequence_
@@ -315,7 +315,7 @@ delayEqSolve
 
         logSmtCts step =
             sequence_
-            $ traceSmt dbgSmt <$> pprSmtStep dbgSmt jIndent step
+            $ traceSmt dbgSmt <$> pprSmtStep jIndent dbgSmt step
 
         smtWanted :: [ConvEq] -> SMT.SExpr
         smtWanted [] = SMT.Atom "false"
