@@ -8,12 +8,20 @@ module Plugins.Print.SMT
     (
      -- * Flags
       TraceCarry(..)
-    , TraceSmtTalk(..)
-    , TraceSmtCts(..)
     , DebugSmtRecv(..)
     , DebugSmt(..)
     , defaultDebugSmt
     , nullDebugSmt
+
+    -- * Verbosity
+    , TraceSmtTalk(..)
+    , noSmtTalk
+    , tracingSExprCts
+    , tracingCtsComments
+    , tracingDecsSeen
+    , tracingAssertions
+    , tracingSatModel
+    , tracingUnsatCore
 
     -- * Printing
     -- $printing
@@ -42,9 +50,6 @@ import Plugins.Print (Indent(..))
 
 import ThoralfPlugin.Convert (ConvCts(..), ConvEq(..))
 
--- | Flag for controlling tracing constraints as SMT s-expressions.
-newtype TraceSmtCts = TraceSmtCts Bool
-
 -- | Flags for tracing the conversation with the SMT solver (the talk).
 data TraceSmtTalk =
     TraceSmtTalk
@@ -64,6 +69,9 @@ data TraceSmtTalk =
         , traceErr :: Bool -- ^ Trace errors.
         , traceOther :: Bool -- ^ Trace other messages.
         }
+
+noSmtTalk :: TraceSmtTalk
+noSmtTalk = TraceSmtTalk False (DebugSmtRecvAll False) False False False
 
 -- | Trace responses from the SMT solver.
 data DebugSmtRecv
@@ -109,12 +117,15 @@ isSilencedRecv DebugSmtRecvSome{..} = not traceSuccess && not traceCheckSat
 -- | Flag for controlling tracing of the carry.
 newtype TraceCarry = TraceCarry Bool
 
-data DebugSmt =
-    DebugSmt
+data DebugSmt
+    -- | For text output roughly formatted in a readable way with headings and
+    -- nested indentation.
+    = DebugSmtAsToml
         { traceCarry :: TraceCarry
         -- ^ Trace GHC constraints carried through conversion and solving.
-        , traceSmtCts :: TraceSmtCts
-        -- ^ Trace conversions to SMT notation in TOML-like format.
+
+        , traceEqCts :: Bool
+        -- ^ Trace equality constraints in TOML-like format.
         --
         -- >>>
         --     [cts-as-smt]
@@ -152,9 +163,17 @@ data DebugSmt =
         --           (Array String Int))
         --        0))))))
         --       ]
+        }
 
-        , traceSmtTalk :: TraceSmtTalk
+    -- | For text output in a format that is compatible with the SMT solver so
+    -- that the output can be fed back into the solver as-is.
+    | DebugSmtAsSmt
+        { traceSmtTalk :: TraceSmtTalk
         -- ^ Trace the conversation with the SMT solver
+
+        , traceSExprCts :: Bool
+        -- ^ Trace equality constraints converted to s-expressions
+
         , traceCtsComments :: Bool
         -- ^ Trace the constraints we might solve as comments in both GHC and
         -- Thoralf style.
@@ -296,15 +315,38 @@ data DebugSmt =
         -- ; (wanted-1)
         }
 
+tracingSExprCts, tracingCtsComments, tracingDecsSeen, tracingAssertions, tracingSatModel, tracingUnsatCore :: DebugSmt -> Bool
+tracingSExprCts x
+    | DebugSmtAsSmt{..} <- x = traceSExprCts
+    | otherwise = False
+
+tracingCtsComments x
+    | DebugSmtAsSmt{..} <- x = traceCtsComments
+    | otherwise = False
+
+tracingDecsSeen x
+    | DebugSmtAsSmt{..} <- x = traceDecsSeen
+    | otherwise = False
+
+tracingAssertions x
+    | DebugSmtAsSmt{..} <- x = traceAssertions
+    | otherwise = False
+
+tracingSatModel x
+    | DebugSmtAsSmt{..} <- x = traceSatModel
+    | otherwise = False
+
+tracingUnsatCore x
+    | DebugSmtAsSmt{..} <- x = traceUnsatCore
+    | otherwise = False
+
 -- | Default settings for debugging that includes rich information as SMT2
 -- comments; like the constraints, their conversions, the sat result, the
 -- assertions and the model the model.
 defaultDebugSmt :: DebugSmt
 defaultDebugSmt =
-    DebugSmt
-        { traceCarry = TraceCarry False
-        , traceSmtCts = TraceSmtCts False
-        , traceSmtTalk =
+    DebugSmtAsSmt
+        { traceSmtTalk =
             TraceSmtTalk
                 { traceSend = True
                 , traceRecv =
@@ -316,6 +358,7 @@ defaultDebugSmt =
                 , traceErr = False
                 , traceOther = False
                 }
+        , traceSExprCts = True
         , traceCtsComments = True
         , traceDecsSeen = True
         , traceAssertions = True
@@ -326,10 +369,8 @@ defaultDebugSmt =
 -- | A null debug setting that does not trace anything.
 nullDebugSmt :: DebugSmt
 nullDebugSmt =
-    DebugSmt
-        { traceCarry = TraceCarry False
-        , traceSmtCts = TraceSmtCts False
-        , traceSmtTalk =
+    DebugSmtAsSmt
+        { traceSmtTalk =
             TraceSmtTalk
                 { traceSend = False
                 , traceRecv = DebugSmtRecvAll False
@@ -337,6 +378,7 @@ nullDebugSmt =
                 , traceErr = False
                 , traceOther = False
                 }
+        , traceSExprCts = False
         , traceCtsComments = False
         , traceDecsSeen = False
         , traceAssertions = False
@@ -454,10 +496,11 @@ compilingModuleSmtComment m = do
 
 -- | Traces the given string if 'traceSmtTalk' is @True@.
 traceSmt :: DebugSmt -> String -> TcPluginM ()
-traceSmt DebugSmt{traceSmtTalk, ..} s'
-    | coerce traceCarry
-        || coerce traceSmtCts
-        || not (isSilencedTalk traceSmtTalk)= tcPluginIO $ putStrLn s'
+traceSmt DebugSmtAsSmt{traceSExprCts, traceSmtTalk} s'
+    | coerce traceSExprCts || not (isSilencedTalk traceSmtTalk) = tcPluginIO $ putStrLn s'
+    | otherwise = return ()
+traceSmt DebugSmtAsToml{traceCarry, traceEqCts} s'
+    | coerce traceCarry || coerce traceEqCts = tcPluginIO $ putStrLn s'
     | otherwise = return ()
 
 -- $printing

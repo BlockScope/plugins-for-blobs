@@ -35,9 +35,9 @@ import ThoralfPlugin.Convert
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT
-    (DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..), isSilencedTalk, traceSmt)
+    (DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..), noSmtTalk, isSilencedTalk, traceSmt)
 import Plugins.Thoralf.Print
-    (ConvCtsStep(..), pprAsSmtCommentStep, pprAsSmtCommentCts, pprSmtStep, pprAsSmtCommentSDoc)
+    (ConvCtsStep(..), pprCtsStep, pprAsSmtCommentCts, pprSmtStep, pprAsSmtCommentSDoc)
 
 data ThoralfState =
     ThoralfState
@@ -160,16 +160,17 @@ mkThoralfInit
     -> TcPluginM TheoryEncoding
     -> DebugSmt
     -> TcPluginM ThoralfState
-mkThoralfInit
-    PkgModuleName{moduleName = disEqName, pkgName}
-    seed
-    DebugSmt{traceSmtTalk} = do
+mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed dbg = do
 
     encoding@TheoryEncoding{startDecs = decs} <- seed
     Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
     disEq <- divulgeClass disEqModule "DisEquality"
 
-    smtSolver <- tcPluginIO $ solverWithLevel traceSmtTalk
+    let talk =
+            case dbg of
+                DebugSmtAsSmt{traceSmtTalk} -> traceSmtTalk
+                DebugSmtAsToml{} -> noSmtTalk
+    smtSolver <- tcPluginIO $ solverWithLevel talk
     smtSolverRef <- unsafeTcPluginTcM $ newMutVar (smtSolver, 1)
 
     tcPluginIO $ sequence_ [ SMT.setOption smtSolver o "true" | o <- options ]
@@ -389,7 +390,7 @@ thoralfSolver
         logConvCts step =
             sequence_
             $ tracePlugin dbgPlugin
-            <$> pprAsSmtCommentStep jIndent dbgSmt step
+            <$> pprCtsStep jIndent dbgSmt step
 
         logSmtComments step =
             sequence_

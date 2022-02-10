@@ -23,9 +23,14 @@ import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.Print
     ( ConvCtsStep(..)
-    , pprAsSmtCommentStep, pprAsSmtCommentCts, pprSmtStep, pprAsSmtCommentSDoc
+    , pprCtsStep, pprAsSmtCommentCts, pprSmtStep, pprAsSmtCommentSDoc
     )
-import Plugins.Print.SMT (DebugSmt(..), traceSmt)
+import Plugins.Print.SMT
+    ( DebugSmt(..), traceSmt
+    , tracingCtsComments, tracingDecsSeen, tracingAssertions
+    , tracingSatModel, tracingUnsatCore
+    )
+
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify (UnitEquality(..), fromUnitEquality)
 import "uom-quantity" Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
@@ -66,13 +71,7 @@ delayEqSolve
     -> TcPluginM TcPluginResult
 delayEqSolve
     dbgPlugin@DebugCts{traceCallCount}
-    dbgSmt@DebugSmt
-        { traceCtsComments
-        , traceDecsSeen
-        , traceAssertions
-        , traceSatModel
-        , traceUnsatCore
-        }
+    dbgSmt
     unpacks
     (unit_givens, unit_wanteds)
     ud
@@ -150,7 +149,7 @@ delayEqSolve
                 (decs1Unseen, givenCheck) <- tcPluginIO $ do
                     SMT.echo smtSolver $ "givens-start-cycle-" ++ cycle
 
-                    when traceCtsComments $ do
+                    when (tracingCtsComments dbgSmt) $ do
                         putStrLn "; GIVENS (conversions)"
                         sequence_ [ putStrLn $ pprAsSmtCommentSDoc e "" | e <- wExprs ]
                         putStrLn "; GIVENS (names)"
@@ -162,7 +161,7 @@ delayEqSolve
                         let decs1Unseen = Set.difference (Set.fromList decs1) seenDecs
                         let decs1Seen = Set.intersection (Set.fromList decs1) seenDecs
 
-                        when traceDecsSeen $ do
+                        when (tracingDecsSeen dbgSmt) $ do
                             putStrLn "; DECS1 (seen) "
                             printDecs decs1Seen
                             putStrLn "; DECS1 (unseen) "
@@ -203,7 +202,7 @@ delayEqSolve
                             (decs2Unseen, wantedCheck) <- tcPluginIO $ do
                                 SMT.echo smtSolver $ "wanteds-start-cycle-" ++ cycle
 
-                                when traceCtsComments $ do
+                                when (tracingCtsComments dbgSmt) $ do
                                     putStrLn "; WANTEDS (conversions)"
                                     sequence_ [ putStrLn $ pprAsSmtCommentSDoc e "" | e <- wExprs ]
                                     putStrLn "; WANTEDS (names)"
@@ -215,7 +214,7 @@ delayEqSolve
                                     let decs2Unseen = Set.difference (Set.fromList decs2') seenDecs 
                                     let decs2Seen = Set.intersection (Set.fromList decs2') seenDecs
 
-                                    when traceDecsSeen $ do
+                                    when (tracingDecsSeen dbgSmt) $ do
                                         putStrLn "; DECS2 (seen) "
                                         printDecs decs2Seen
                                         putStrLn "; DECS2 (unseen) "
@@ -234,11 +233,11 @@ delayEqSolve
                             solveCheck <- case wantedCheck of
                                 SMT.Unsat -> do
 
-                                    when traceAssertions $ do
+                                    when (tracingAssertions dbgSmt) $ do
                                         assertions <- tcPluginIO $ getAssertions smtSolver
                                         tcPluginIO $ printCommented assertions
 
-                                    when traceUnsatCore $ do
+                                    when (tracingUnsatCore dbgSmt) $ do
                                         unsatCore <- tcPluginIO $ getUnsatCore smtSolver
                                         tcPluginIO $ printCommented unsatCore
 
@@ -253,7 +252,7 @@ delayEqSolve
                                 SMT.Unknown -> tcPluginIO (SMT.pop smtSolver) >> noSolving
 
                                 SMT.Sat ->do
-                                    when traceSatModel $ do
+                                    when (tracingSatModel dbgSmt) $ do
                                         model <- tcPluginIO $ getModel smtSolver
                                         tcPluginIO $ printCommented model
 
@@ -307,7 +306,7 @@ delayEqSolve
         logConvCts step =
             sequence_
             $ tracePlugin dbgPlugin
-            <$> pprAsSmtCommentStep jIndent dbgSmt step
+            <$> pprCtsStep jIndent dbgSmt step
 
         logSmtComments step =
             sequence_

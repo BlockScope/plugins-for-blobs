@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, RecordWildCards #-}
+{-# LANGUAGE NamedFieldPuns #-}
 
 -- | Has functions for printing constraints as SMT-LIB comments and for printing
 -- converted constraints.
@@ -10,12 +10,12 @@ module Plugins.Thoralf.Print
     -- * Printing
 
     -- ** As SMT-LIB comments
-    , pprAsSmtCommentStep
     , pprAsSmtCommentCts
     , pprAsSmtCommentSDoc
 
     -- ** As TOML-like
     , pprSmtStep
+    , pprCtsStep
     ) where
 
 import Data.Coerce (coerce)
@@ -25,7 +25,7 @@ import Plugins.Print (Indent(..), pprCts)
 import ThoralfPlugin.Convert (ConvCts(..), ConvEq(..))
 import Plugins.Print.SMT
     ( DebugSmt(..)
-    , TraceCarry(..), TraceSmtCts(..)
+    , TraceCarry(..)
     , SmtGivens(..), SmtWanteds(..), SmtDecls(..)
     , SmtCommentGivens(..), SmtCommentWanteds(..)
     , pprSmtGivens, pprSmtWanteds, pprSmtDecls
@@ -35,12 +35,12 @@ import Plugins.Print.SMT
 -- | For one step in typechecking, the converted givens and wanteds.
 data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
 
--- | Pretty prints converted constraints laid out TOML-like but as lines of
--- SMT-LIB comments with 'pprCts' for the actual printing.
-pprAsSmtCommentStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
-pprAsSmtCommentStep
+-- | Pretty prints unconverted constraints laid out TOML-like.
+pprCtsStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
+pprCtsStep _ DebugSmtAsSmt{} _ = []
+pprCtsStep
     indent
-    DebugSmt{..}
+    DebugSmtAsToml{traceCarry}
     ConvCtsStep{givens = ConvCts _ gs _ds1, wanted = ConvCts _ ws _ds2} =
     if not (coerce traceCarry)
         then []
@@ -49,11 +49,13 @@ pprAsSmtCommentStep
         gCts = eqCt <$> gs
         wCts = eqCt <$> ws
 
--- | Pretty prints converted constraints in a nested TOML-like format.
+-- | Pretty prints constraints converted to s-expressions in a nested TOML-like
+-- format.
 pprSmtStep :: Indent -> DebugSmt -> ConvCtsStep -> [String]
+pprSmtStep _ DebugSmtAsSmt{} _ = []
 pprSmtStep
     indent@(Indent i)
-    DebugSmt{..}
+    DebugSmtAsToml{traceEqCts}
     ConvCtsStep{givens = ConvCts _ns1 gs ds1, wanted = ConvCts _ns2 ws ds2} =
     [
         ( tab
@@ -75,7 +77,7 @@ pprSmtStep
         . showString "smt-wanteds = "
         . pprSmtWanteds j (SmtWanteds wSs))
         ""
-    | coerce traceSmtCts
+    | coerce traceEqCts
     ]
     where
         tab = showString $ replicate (2 * i) ' '
@@ -98,8 +100,9 @@ pprAsSmtCommentList (y : ys) =
 
 -- | Prints a list of constraints as lines of SMT-LIB comments.
 pprAsSmtCommentCts :: DebugSmt -> ConvCtsStep -> [String]
+pprAsSmtCommentCts DebugSmtAsToml{} _ = []
 pprAsSmtCommentCts
-    DebugSmt{traceCtsComments}
+    DebugSmtAsSmt{traceCtsComments}
     ConvCtsStep{givens = ConvCts _ gs _, wanted = ConvCts _ ws _} =
         [
             ( showString "\n; GIVENS (GHC style)\n"
