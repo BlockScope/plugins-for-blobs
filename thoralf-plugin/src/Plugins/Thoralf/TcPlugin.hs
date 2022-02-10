@@ -1,4 +1,4 @@
-{-# LANGUAGE MultiWayIf, NamedFieldPuns, ParallelListComp, TypeFamilies, TypeInType #-}
+{-# LANGUAGE MultiWayIf, NamedFieldPuns, ParallelListComp, TypeFamilies, TypeInType, PackageImports #-}
 
 module Plugins.Thoralf.TcPlugin
     ( ThoralfState(..)
@@ -23,7 +23,7 @@ import System.IO.Error (catchIOError)
 import Data.IORef (IORef)
 import GHC.Corroborate hiding (tracePlugin)
 import GHC.Corroborate.Divulge (divulgeClass)
-import Plugins.Print
+import "ghc-tcplugins-trace" Plugins.Print
     (DebugCts(..), Indent(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
 
 import ThoralfPlugin.Extract (maybeExtractTyEq, maybeExtractTyDisEq)
@@ -35,7 +35,7 @@ import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print (tracePlugin)
 import Plugins.Print.SMT
     (DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..), isSilencedTalk, traceSmt)
-import Plugins.Thoralf.Print
+import "thoralf-plugin" Plugins.Thoralf.Print
     (ConvCtsStep(..), pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc)
 
 data ThoralfState =

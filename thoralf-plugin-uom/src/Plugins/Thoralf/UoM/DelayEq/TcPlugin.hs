@@ -12,7 +12,7 @@ import Control.Monad (when)
 import qualified SimpleSMT as SMT
 import System.IO.Error (catchIOError)
 import GHC.Corroborate hiding (tracePlugin)
-import Plugins.Print
+import "ghc-tcplugins-trace" Plugins.Print
     (DebugCts(..), Indent(..), pprSolverCallCount, pprCtsStepProblem, pprCtsStepSolution)
 
 import ThoralfPlugin.Extract (maybeExtractTyEq, maybeExtractTyDisEq)
@@ -24,7 +24,7 @@ import Plugins.Thoralf.Print
     , pprConvCtsStep, pprAsSmtCommentCts, pprSmtStep, pprSDoc
     )
 import Plugins.Print.SMT (DebugSmt(..), traceSmt)
-import Plugins.Print (tracePlugin)
+import "thoralf-plugin" Plugins.Print (tracePlugin)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify (UnitEquality(..), fromUnitEquality)
 import "uom-quantity" Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
