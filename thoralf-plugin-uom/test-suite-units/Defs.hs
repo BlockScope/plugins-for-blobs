@@ -7,7 +7,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE PackageImports #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Defs where

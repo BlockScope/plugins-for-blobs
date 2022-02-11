@@ -8,7 +8,7 @@
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.DelayEq #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
 
 -- | Some basic examples.
 module Basic

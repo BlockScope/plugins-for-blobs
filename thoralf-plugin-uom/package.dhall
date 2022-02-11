@@ -39,14 +39,14 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               [ "Plugins.Thoralf.DisEq"
               , "Plugins.Thoralf.DisEq.TcPlugin"
               , "Plugins.Thoralf.UoM"
-              , "Plugins.Thoralf.UoM.DelayEq"
+              , "Plugins.Thoralf.UoM.Solve"
               , "Data.UnitsOfMeasure.Constraint"
               , "ThoralfPlugin.Singletons.Nat"
               ]
             , other-modules =
               [ "ThoralfPlugin.Encode"
               , "ThoralfPlugin.Encode.UoM"
-              , "Plugins.Thoralf.UoM.DelayEq.TcPlugin"
+              , "Plugins.Thoralf.UoM.TcPlugin"
               ]
             , other-extensions =
               [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]

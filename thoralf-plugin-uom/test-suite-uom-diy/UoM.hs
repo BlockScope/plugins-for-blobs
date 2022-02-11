@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds, PackageImports #-}
 
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Solve #-}
 
 module UoM where
 

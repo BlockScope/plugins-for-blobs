@@ -11,7 +11,7 @@
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+{-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Sovle #-}
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
 
 module Main

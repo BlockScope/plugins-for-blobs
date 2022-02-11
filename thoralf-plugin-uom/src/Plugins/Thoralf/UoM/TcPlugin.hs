@@ -1,6 +1,6 @@
 {-# LANGUAGE NamedFieldPuns, ParallelListComp, TypeFamilies, TypeInType, PackageImports #-}
 
-module Plugins.Thoralf.UoM.DelayEq.TcPlugin (thoralfDelayEqPlugin) where
+module Plugins.Thoralf.UoM.TcPlugin (thoralfDelayEqPlugin) where
 
 import Prelude hiding (showList, cycle)
 import qualified Data.Set as Set
@@ -36,7 +36,7 @@ import "uom-quantity" Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
 import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import Plugins.Thoralf.TcPlugin (ThoralfState(..), thoralfStop)
 import Plugins.UoM.Eq.TcPlugin (unitsEq, evMagic)
-import Plugins.Thoralf.UoM (mkThoralfUomInit)
+import Plugins.Thoralf.UoM.Solve (mkThoralfUomInit)
 import Plugins.UoM.State (UomState(..))
 
 thoralfDelayEqPlugin
