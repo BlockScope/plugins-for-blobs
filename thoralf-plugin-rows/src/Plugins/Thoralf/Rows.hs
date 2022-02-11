@@ -9,7 +9,7 @@ import ThoralfPlugin.Encode (thoralfTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Thoralf.TcPlugin (thoralfPlugin)
 import Plugins.Print.SMT
-    ( defaultDebugSmt
+    ( nullDebugSmt
 #if __GLASGOW_HASKELL__ >= 806
     , compilingModuleSmtComment
 #endif
@@ -29,7 +29,7 @@ plugin =
                 , traceSolution = TraceSolution False
                 }
 
-        dbgSmt = defaultDebugSmt
+        dbgSmt = nullDebugSmt
 
         tyCheck = thoralfPlugin dbgPlugin dbgSmt pm thoralfTheories
     in

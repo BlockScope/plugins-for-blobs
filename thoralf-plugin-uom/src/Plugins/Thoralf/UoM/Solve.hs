@@ -16,7 +16,7 @@ import ThoralfPlugin.Convert (ExtractEq(..))
 import Plugins.Thoralf.TcPlugin
     (ThoralfState(..), mkThoralfInit, thoralfStop, thoralfSolver)
 import Plugins.Print.SMT
-    ( DebugSmt, defaultDebugSmt
+    ( DebugSmt, nullDebugSmt
 #if __GLASGOW_HASKELL__ >= 806
     , compilingModuleSmtComment
 #endif
@@ -36,7 +36,7 @@ plugin =
                 , traceSolution = TraceSolution False
                 }
 
-        dbgSmt = defaultDebugSmt
+        dbgSmt = nullDebugSmt
 
         tc = thoralfUomPlugin dbgPlugin dbgSmt disEq thoralfUoMTheories
     in

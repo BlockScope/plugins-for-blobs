@@ -9,7 +9,7 @@ import Plugins.Print (DebugCts(..), TraceSolution(..), TraceCallCount(..), Trace
 import ThoralfPlugin.Encode (thoralfUoMTheories )
 import ThoralfPlugin.Encode.Find (PkgModuleName(..))
 import Plugins.Print.SMT
-    ( defaultDebugSmt
+    ( nullDebugSmt
 #if __GLASGOW_HASKELL__ >= 806
     , compilingModuleSmtComment
 #endif
@@ -31,7 +31,7 @@ plugin =
                 , traceSolution = TraceSolution False
                 }
 
-        dbgSmt = defaultDebugSmt
+        dbgSmt = nullDebugSmt
 
         tc = thoralfDelayEqPlugin dbgCts dbgSmt disEq thoralfUoMTheories
     in
