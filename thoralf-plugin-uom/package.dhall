@@ -36,9 +36,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , library =
             { source-dirs = "src"
             , exposed-modules =
-              [ "Plugins.Thoralf.DisEq"
-              , "Plugins.Thoralf.DisEq.TcPlugin"
-              , "Plugins.Thoralf.UoM"
+              [ "Plugins.Thoralf.UoM"
               , "Plugins.Thoralf.UoM.Solve"
               , "Data.UnitsOfMeasure.Constraint"
               , "ThoralfPlugin.Singletons.Nat"

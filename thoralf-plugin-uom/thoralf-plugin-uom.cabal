@@ -31,8 +31,6 @@ source-repository head
 
 library
   exposed-modules:
-      Plugins.Thoralf.DisEq
-      Plugins.Thoralf.DisEq.TcPlugin
       Plugins.Thoralf.UoM
       Plugins.Thoralf.UoM.Solve
       Data.UnitsOfMeasure.Constraint
