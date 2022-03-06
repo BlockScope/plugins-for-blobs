@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5d9c1737e4f24d7b1218640ad5072709fb0b949e082cc56739d9e438110fb106
+-- hash: e6fb6cc586a32af018ae74a622d7170861c7694ffe6ddfe70632293de7141f86
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -51,7 +51,7 @@ library
       GADTs
       RecordWildCards
   build-depends:
-      base
+      base >=4.9.1.0 && <5
     , containers
     , ghc-corroborate
     , ghc-prim

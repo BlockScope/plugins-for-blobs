@@ -34,7 +34,7 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base
+      base >=4.9.1.0 && <5
     , template-haskell >=2.9
     , thoralf-encode
     , thoralf-plugin

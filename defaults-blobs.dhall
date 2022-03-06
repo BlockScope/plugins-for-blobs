@@ -16,5 +16,5 @@ in  { version = "0.1.0"
         = ghc-opts # [ "-fwrite-ide-info", "-hiedir=../.hie" ]
       , `else`.ghc-options = ghc-opts
       }
-    , dependencies = [ "base" ]
+    , dependencies = [ "base >=4.9.1.0 && <5" ]
     }

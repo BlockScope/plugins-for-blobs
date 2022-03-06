@@ -48,7 +48,7 @@ library
       RecordWildCards
   ghc-options: -Wall -fno-warn-partial-type-signatures
   build-depends:
-      base
+      base >=4.9.1.0 && <5
     , containers
     , ghc-corroborate
     , ghc-prim

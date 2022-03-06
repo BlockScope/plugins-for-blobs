@@ -34,7 +34,7 @@ executable build-plugins-for-blobs
   ghc-options: -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       ansi-terminal
-    , base
+    , base >=4.9.1.0 && <5
     , raw-strings-qq
     , shake
     , text
