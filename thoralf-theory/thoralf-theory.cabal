@@ -26,10 +26,6 @@ source-repository head
   location: https://github.com/bgamari/the-thoralf-plugin
   subdir: thoralf
 
-flag suppress-failing-tests
-  manual: False
-  default: True
-
 library
   exposed-modules:
       Data.Theory.Bool

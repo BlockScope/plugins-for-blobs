@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e6fb6cc586a32af018ae74a622d7170861c7694ffe6ddfe70632293de7141f86
+-- hash: c3e8d96f8842fed0ea797ea359a255b57eec5ecc5750da96db99f08e452aa88f
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -27,10 +27,6 @@ source-repository head
   type: git
   location: https://github.com/bgamari/the-thoralf-plugin
   subdir: thoralf
-
-flag suppress-failing-tests
-  manual: False
-  default: True
 
 library
   hs-source-dirs:
