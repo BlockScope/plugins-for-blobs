@@ -14,5 +14,6 @@ packages:
     uom-plugin-examples
     uom-th
     build
+    plugins-for-blobs.cabal
 tests: True
 write-ghc-environment-files: always
