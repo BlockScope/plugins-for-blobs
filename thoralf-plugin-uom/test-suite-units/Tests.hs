@@ -63,7 +63,7 @@ main = defaultMain tests
 
 -- WARNING: The commented out tests work for ghc-8.2.2 but not for later GHC versions.
 tests :: TestTree
-tests = testGroup "thoralf-plugin:units"
+tests = testGroup "thoralf-plugin-uom:units"
   [ unQuantityTestGroup
   , testGroup "Attach units by applying the quasiquoter without a numeric value"
     [ testCase "m 3"                           $ [u| m |] 3           @?= [u| 3 m |]

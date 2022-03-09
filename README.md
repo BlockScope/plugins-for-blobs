@@ -183,204 +183,122 @@ __ | declareBaseUnit "byte"
 A goal of this project is to run the same tests in `thoralf-plugin-uom:units` as
 in `uom-plugin:units`.
 
-```
-> cabal test thoralf-plugin-uom:units --test-show-details=always --test-options="--color always"
-Running 1 test suites...
-Test suite units: RUNNING...
-thoralf-plugin:units
-  Get the underlying value with unQuantity
-    unQuantity 3 m:                             OK
-    unQuantity 3 s^2:                           OK
-    unQuantity 3 m s^-1:                        OK
-    unQuantity 3.0 kg m^2 / m s^2:              OK
-    unQuantity 1:                               OK
-    unQuantity 1 (1/s):                         OK
-    unQuantity 1 1/s:                           OK
-    unQuantity 1 s^-1:                          OK
-    unQuantity 2 1 / kg s:                      OK
-    unQuantity (1 % 2) kg:                      OK
-  Attach units by applying the quasiquoter without a numeric value
-    m 3:                                        OK
-    m <$> [3..5]:                               OK
-    m/s 3:                                      OK
-    m s^-1 3:                                   OK
-    s^2 3:                                      OK
-    1 $ 3:                                      OK
-    fmap [u| kg |] read $ "3":                  OK
-    fmap [u| kg |] read $ "3.0":                OK
-  Showing constants
-    show 3m:                                    OK
-    show 3m/s:                                  OK
-    show 3.2 s^2:                               OK
-    show 3.0 kg m^2 / m s^2:                    OK
-    show 1:                                     OK
-    show 1 s^-1:                                OK
-    show 2 1 / kg s:                            OK
-    show (1 % 2) kg:                            OK
-  Basic operations
-    2 + 2:                                      OK
-    in m/s:                                     OK
-    mean:                                       OK
-    tricky generalisation:                      OK
-    polymorphic zero:                           OK
-    polymorphic frac zero:                      OK
-  Literal 1 (*:) Quantity _ u
-    _ = Double:                                 OK
-    _ = Int:                                    OK
-    _ = Integer:                                OK
-    _ = Rational, 1 *: [u| 1 m |]:              OK
-    _ = Rational, mk (1 % 1) *: [u| 1 m |]:     OK
-    _ = Rational, 1 *: [u| 1 % 1 m |]:          OK
-    _ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]: OK
-  (1 :: Quantity _ One) (*:) Quantity _ u
-    _ = Double:                                 OK
-    _ = Int:                                    OK
-    _ = Integer:                                OK
-    _ = Int:                                    OK
-  errors when a /= b, (1 :: Quantity a One) (*:) Quantity b u
-    b = Double
-      a = Int:                                  OK
-      a = Integer:                              OK
-      a = Rational:                             OK
-    b = Int
-      a = Double:                               OK
-      a = Integer:                              OK
-      a = Rational:                             OK
-    b = Integer
-      a = Double:                               OK
-      a = Int:                                  OK
-      a = Rational:                             OK
-    b = Rational
-      a = Double:                               OK
-      a = Int:                                  OK
-      a = Integer:                              OK
-  showQuantity
-    myMass:                                     OK
-    gravityOnEarth:                             OK
-    forceOnGround:                              OK
-  errors
-    s/m ~ m/s:                                  OK
-    m + s:                                      OK
-  read . show
-    3 m:                                        OK
-    1.2 m/s:                                    OK
-    1:                                          OK
-  read normalisation
-    1 m/m:                                      OK
-    -0.3 m s^-1:                                OK
-    42 s m s:                                   OK
+```diff
+- > cabal test uom-plugin:units --test-show-details=always --test-options="--color always"
++ > cabal test thoralf-plugin-uom:units --test-show-details=always --test-options="--color always"
+  Running 1 test suites...
+  Test suite units: RUNNING...
+- uom-plugin:units
++ thoralf-plugin-uom:units
+    Get the underlying value with unQuantity
+      unQuantity 3 m:                             OK
+      unQuantity 3 s^2:                           OK
+      unQuantity 3 m s^-1:                        OK
+      unQuantity 3.0 kg m^2 / m s^2:              OK
+      unQuantity 1:                               OK
+      unQuantity 1 (1/s):                         OK
+      unQuantity 1 1/s:                           OK
+      unQuantity 1 s^-1:                          OK
+      unQuantity 2 1 / kg s:                      OK
+      unQuantity (1 % 2) kg:                      OK
+    Attach units by applying the quasiquoter without a numeric value
+      m 3:                                        OK
+      m <$> [3..5]:                               OK
+      m/s 3:                                      OK
+      m s^-1 3:                                   OK
+      s^2 3:                                      OK
+      1 $ 3:                                      OK
+      fmap [u| kg |] read $ "3":                  OK
+      fmap [u| kg |] read $ "3.0":                OK
+    Showing constants
+      show 3m:                                    OK
+      show 3m/s:                                  OK
+      show 3.2 s^2:                               OK
+      show 3.0 kg m^2 / m s^2:                    OK
+      show 1:                                     OK
+      show 1 s^-1:                                OK
+      show 2 1 / kg s:                            OK
+      show (1 % 2) kg:                            OK
+    Basic operations
+      2 + 2:                                      OK
+      in m/s:                                     OK
+      mean:                                       OK
+      tricky generalisation:                      OK
+      polymorphic zero:                           OK
+      polymorphic frac zero:                      OK
+    Literal 1 (*:) Quantity _ u
+      _ = Double:                                 OK
+      _ = Int:                                    OK
+      _ = Integer:                                OK
+      _ = Rational, 1 *: [u| 1 m |]:              OK
+      _ = Rational, mk (1 % 1) *: [u| 1 m |]:     OK
+      _ = Rational, 1 *: [u| 1 % 1 m |]:          OK
+      _ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]: OK
+    (1 :: Quantity _ One) (*:) Quantity _ u
+      _ = Double:                                 OK
+      _ = Int:                                    OK
+      _ = Integer:                                OK
+      _ = Int:                                    OK
+    errors when a /= b, (1 :: Quantity a One) (*:) Quantity b u
+      b = Double
+        a = Int:                                  OK
+        a = Integer:                              OK
+        a = Rational:                             OK
+      b = Int
+        a = Double:                               OK
+        a = Integer:                              OK
+        a = Rational:                             OK
+      b = Integer
+        a = Double:                               OK
+        a = Int:                                  OK
+        a = Rational:                             OK
+      b = Rational
+        a = Double:                               OK
+        a = Int:                                  OK
+        a = Integer:                              OK
+    showQuantity
+      myMass:                                     OK
+      gravityOnEarth:                             OK
+      forceOnGround:                              OK
+-   convert
+-     10m in ft:                                  OK
+-     5 km^2 in m^2:                              OK
+-     ratio:                                      OK
+-     100l in m^3:                                OK
+-     1l/m in m^2:                                OK
+-     1l/m in m^2:                                OK
+-     5l in ft^3:                                 OK
+-     2000000l^2 in ft^3 m^3:                     OK
+-     42 rad/s in s^-1:                           OK
+-     2.4 l/h in m:                               OK
+-     1 m^4 in l m:                               OK
+-   show via convert
+-     A 1.01km:                                   OK
+-     B 1010m:                                    OK
+    errors
+      s/m ~ m/s:                                  OK
+      m + s:                                      OK
+      a ~ a  =>  a ~ kg:                          OK
+-     a ~ b  =>  a ~ kg:                          OK
+-     a^2 ~ b^3  =>  a ~ s:                       OK
+    read . show
+      3 m:                                        OK
+      1.2 m/s:                                    OK
+      0:                                          OK
+    read normalisation
+      1 m/m:                                      OK
+      -0.3 m s^-1:                                OK
+      42 s m s:                                   OK
+-   read equality (avoid false equivalences)
+-     1 m/m^2 /= 1 m:                             OK
+-     1 m /= 1 m/m^2:                             OK
 
-All 66 tests passed (0.00s)
-```
+- All 84 tests passed (0.00s)
++ All 67 tests passed (0.00s)
 
-```
-> cabal test uom-plugin:units --test-show-details=always --test-options="--color always"
-Running 1 test suites...
-Test suite units: RUNNING...
-uom-plugin:units
-  Get the underlying value with unQuantity
-    unQuantity 3 m:                             OK
-    unQuantity 3 s^2:                           OK
-    unQuantity 3 m s^-1:                        OK
-    unQuantity 3.0 kg m^2 / m s^2:              OK
-    unQuantity 1:                               OK
-    unQuantity 1 (1/s):                         OK
-    unQuantity 1 1/s:                           OK
-    unQuantity 1 s^-1:                          OK
-    unQuantity 2 1 / kg s:                      OK
-    unQuantity (1 % 2) kg:                      OK
-  Attach units by applying the quasiquoter without a numeric value
-    m 3:                                        OK
-    m <$> [3..5]:                               OK
-    m/s 3:                                      OK
-    s^2 3:                                      OK
-    1 $ 3:                                      OK
-    fmap [u| kg |] read $ "3":                  OK
-    fmap [u| kg |] read $ "3.0":                OK
-  Showing constants
-    show 3m:                                    OK
-    show 3m/s:                                  OK
-    show 3.2 s^2:                               OK
-    show 3.0 kg m^2 / m s^2:                    OK
-    show 1:                                     OK
-    show 1 s^-1:                                OK
-    show 2 1 / kg s:                            OK
-    show (1 % 2) kg:                            OK
-  Basic operations
-    2 + 2:                                      OK
-    in m/s:                                     OK
-    mean:                                       OK
-    tricky generalisation:                      OK
-    polymorphic zero:                           OK
-    polymorphic frac zero:                      OK
-  Literal 1 (*:) Quantity _ u
-    _ = Double:                                 OK
-    _ = Int:                                    OK
-    _ = Integer:                                OK
-    _ = Rational, 1 *: [u| 1 m |]:              OK
-    _ = Rational, mk (1 % 1) *: [u| 1 m |]:     OK
-    _ = Rational, 1 *: [u| 1 % 1 m |]:          OK
-    _ = Rational, mk (1 % 1) *: [u| 1 % 1 m |]: OK
-  (1 :: Quantity _ One) (*:) Quantity _ u
-    _ = Double:                                 OK
-    _ = Int:                                    OK
-    _ = Integer:                                OK
-    _ = Int:                                    OK
-  errors when a /= b, (1 :: Quantity a One) (*:) Quantity b u
-    b = Double
-      a = Int:                                  OK
-      a = Integer:                              OK
-      a = Rational:                             OK
-    b = Int
-      a = Double:                               OK
-      a = Integer:                              OK
-      a = Rational:                             OK
-    b = Integer
-      a = Double:                               OK
-      a = Int:                                  OK
-      a = Rational:                             OK
-    b = Rational
-      a = Double:                               OK
-      a = Int:                                  OK
-      a = Integer:                              OK
-  showQuantity
-    myMass:                                     OK
-    gravityOnEarth:                             OK
-    forceOnGround:                              OK
-  convert
-    10m in ft:                                  OK
-    5 km^2 in m^2:                              OK
-    ratio:                                      OK
-    100l in m^3:                                OK
-    1l/m in m^2:                                OK
-    1l/m in m^2:                                OK
-    5l in ft^3:                                 OK
-    2000000l^2 in ft^3 m^3:                     OK
-    42 rad/s in s^-1:                           OK
-    2.4 l/h in m:                               OK
-    1 m^4 in l m:                               OK
-  show via convert
-    A 1.01km:                                   OK
-    B 1010m:                                    OK
-  errors
-    s/m ~ m/s:                                  OK
-    m + s:                                      OK
-    a ~ a  =>  a ~ kg:                          OK
-    a ~ b  =>  a ~ kg:                          OK
-    a^2 ~ b^3  =>  a ~ s:                       OK
-  read . show
-    3 m:                                        OK
-    1.2 m/s:                                    OK
-    0:                                          OK
-  read normalisation
-    1 m/m:                                      OK
-    -0.3 m s^-1:                                OK
-    42 s m s:                                   OK
-  read equality (avoid false equivalences)
-    1 m/m^2 /= 1 m:                             OK
-    1 m /= 1 m/m^2:                             OK
-
-All 83 tests passed (0.00s)
+  Test suite units: PASS
+  Test suite logged to:
+  1 of 1 test suites (1 of 1 test cases) passed.
 ```
 
 ## Running All Test Suites
