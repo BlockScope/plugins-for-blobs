@@ -284,7 +284,7 @@ in `uom-plugin:units`.
     read . show
       3 m:                                        OK
       1.2 m/s:                                    OK
-      0:                                          OK
+      1:                                          OK
     read normalisation
       1 m/m:                                      OK
       -0.3 m s^-1:                                OK
@@ -297,7 +297,6 @@ in `uom-plugin:units`.
 + All 67 tests passed (0.00s)
 
   Test suite units: PASS
-  Test suite logged to:
   1 of 1 test suites (1 of 1 test cases) passed.
 ```
 
