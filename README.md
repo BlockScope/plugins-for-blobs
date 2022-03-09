@@ -153,30 +153,44 @@ I've shortened names of the plugins.
 There are two phases to solving with the uom-plugin, unpacking and solving
 constraints. The plugin `Plugins.UoM` does both. It will unpack if there is any
 of that work to do. Only when the unpacks are discharged will it solve. I've
-separated these steps so that the unpacking can be used with the
-thoralf-plugin-uom. 
+separated these steps so that the unpacking can be used with solver plugins that
+don't themselves do unit unpacking.
 
-```
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Solve #-}
-```
+* Two ways of solving with plugins from the `uom-plugin` package.
+  * Using one plugin that does both unpacking and solving.
+    ```haskell
+    {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
+    ```
 
-```
-{-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
-{-# OPTIONS_GHC -fplugin Plugins.Thoralf #-}
-```
+  * Using one plugin for unpacking and another for solving.
+    ```haskell
+    {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
+    {-# OPTIONS_GHC -fplugin Plugins.UoM.Solve #-}
+    ```
 
-With this, we're able to use the `u` quasiquoter with the thoralf-plugin-uom.
-Without the unpacking, trying to declare units would fail with:
+* Two ways of solving with plugins from the `thoralf-plugin-uom` package.
+  * Using one plugin that does both unpacking and solving.
+    ```haskell
+    {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
+    ```
 
-```
-    • Could not deduce: IsCanonical (Unpack (Base "byte"))
-        arising from the superclasses of an instance declaration
-    • In the instance declaration for ‘HasCanonicalBaseUnit "byte"’
-   |
-__ | declareBaseUnit "byte"
-   | ^
-```
+  * Using one plugin for unpacking and another for solving.
+    ```haskell
+    {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
+    {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Solve #-}
+    ```
+
+    With this, we're able to use the `u` quasiquoter.  Without the unpacking,
+    trying to declare units would fail with:
+
+    ```
+        • Could not deduce: IsCanonical (Unpack (Base "byte"))
+            arising from the superclasses of an instance declaration
+        • In the instance declaration for ‘HasCanonicalBaseUnit "byte"’
+       |
+    __ | declareBaseUnit "byte"
+       | ^
+    ```
 
 ## Test Suite Units
 
