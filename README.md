@@ -184,8 +184,8 @@ A goal of this project is to run the same tests in `thoralf-plugin-uom:units` as
 in `uom-plugin:units`.
 
 ```diff
-- > cabal test uom-plugin:units --test-show-details=always --test-options="--color always"
-+ > cabal test thoralf-plugin-uom:units --test-show-details=always --test-options="--color always"
+- > cabal test uom-plugin:units --test-show-details=always"
++ > cabal test thoralf-plugin-uom:units --test-show-details=always"
   Running 1 test suites...
   Test suite units: RUNNING...
 - uom-plugin:units
