@@ -83,6 +83,30 @@ so that they could be shared between both.
 * Split the units of measure features of the thoralf plugin from the rest so
   that we have `thoralf-plugin-uom` for units and `thoralf-plugin-rows` for the
   rest.
+  
+```pre
+   thoralf-plugin-defs
+   └─ thoralf-plugin-uom
+      └─ thoralf-plugin
+            ├─ split
+            └─ thoralf-encode
+               └─ thoralf-theory
+                  ├─ simple-smt
+                  └─ uom-th
+                        └─ uom-quantity
+                           ├─ ghc-tcplugins-trace
+                           │   ├─ ghc-corroborate
+                           │   │   └─ ghc-tcplugins-extra
+                           │   └─ th-printf
+                           └─ units-parser
+
+   thoralf-plugin-rows
+   └─ thoralf-plugin
+
+   uom-plugin-defs
+   └─ uom-plugin
+      └─ uom-th
+```
 
 ### Enhanced Tracing
 
