@@ -1,9 +1,3 @@
-[submodule "ghc-tcplugins-extra"]
-	path = ghc-tcplugins-extra
-	url = https://github.com/BlockScope/ghc-tcplugins-extra-undef.git
-[submodule "ghc-corroborate"]
-	path = ghc-corroborate
-	url = https://github.com/blockscope/ghc-corroborate
 [submodule "ghc-tcplugins-trace"]
 	path = ghc-tcplugins-trace
 	url = https://github.com/blockscope/ghc-tcplugins-trace
