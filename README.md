@@ -61,8 +61,7 @@ with a core-lint error.
   plugins as a single API across multiple GHC versions. It uses cabal
   conditionals and mixins and avoids use of the `CPP` language extension and
   predefined macros for switching between GHC versions.
-* Forked [ghc-tcplugins-extra](https://github.com/BlockScope/ghc-tcplugins-extra-undef#readme)
-  to use `ghc-corroborate` and to remove its use of `CPP`.
+* Used the same techniques for avoiding `CPP` with [ghc-tcplugins-extra](https://github.com/clash-lang/ghc-tcplugins-extra/pull/18).
 * Moved the tracing of the `thoralf-plugin` to
   [ghc-tcplugins-trace](https://github.com/BlockScope/ghc-tcplugins-trace#readme).
 
