@@ -46,7 +46,7 @@ library
       TypeInType
       GADTs
       RecordWildCards
-  ghc-options: -Wall -fno-warn-partial-type-signatures
+  ghc-options: -Wall -fno-warn-partial-type-signatures -dcore-lint
   build-depends:
       base >=4.9.1.0 && <5
     , containers
@@ -84,7 +84,7 @@ test-suite defs
       Defs
   hs-source-dirs:
       test-suite-defs
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -fno-warn-partial-type-signatures -dcore-lint -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -119,7 +119,7 @@ test-suite delay-eq
       UnitDefs
   hs-source-dirs:
       test-suite-delay-eq
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -fno-warn-partial-type-signatures -dcore-lint -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -154,7 +154,7 @@ test-suite force
       UnitDefs
   hs-source-dirs:
       test-suite-force
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -fno-warn-partial-type-signatures -dcore-lint -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -195,7 +195,7 @@ test-suite units
       UnQuantity
   hs-source-dirs:
       test-suite-units
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -fno-warn-partial-type-signatures -dcore-lint -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -254,7 +254,7 @@ test-suite uom-diy
       UoM
   hs-source-dirs:
       test-suite-uom-diy
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -fno-warn-partial-type-signatures -dcore-lint -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base
@@ -294,7 +294,7 @@ test-suite uom-quantity
       UoM
   hs-source-dirs:
       test-suite-uom-quantity
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -fno-warn-partial-type-signatures -dcore-lint -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base

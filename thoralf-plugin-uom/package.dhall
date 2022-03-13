@@ -13,7 +13,8 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               ''
           , category = "Development"
           , github = "bgamari/the-thoralf-plugin/thoralf"
-          , ghc-options = [ "-Wall", "-fno-warn-partial-type-signatures" ]
+          , ghc-options =
+            [ "-Wall", "-fno-warn-partial-type-signatures", "-dcore-lint" ]
           , dependencies =
                 defs.dependencies
               # [ "containers"
