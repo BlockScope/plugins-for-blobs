@@ -43,7 +43,7 @@ dhallCabal =
     ]
 
 dhallRootImports :: [String]
-dhallRootImports = ["defaults"]
+dhallRootImports = ["defaults-uom", "defaults-thoralf", "defaults-blobs"]
 
 formatPkg :: Folder -> Rules ()
 formatPkg folder =
