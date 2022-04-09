@@ -1,6 +1,7 @@
 {-# LANGUAGE TypeOperators, PackageImports #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
+{-# OPTIONS_GHC -dcore-lint #-}
 
 -- | Checks that the abelian group laws hold.
 module Abelian where

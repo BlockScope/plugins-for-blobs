@@ -27,6 +27,7 @@
 -- > cabal new-repl uom-plugin:units
 -- solveSimpleWanteds: too many iterations (limit = 4)
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
+{-# OPTIONS_GHC -dcore-lint #-}
 
 module Main
     ( main

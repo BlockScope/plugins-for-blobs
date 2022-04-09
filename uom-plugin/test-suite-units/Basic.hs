@@ -9,6 +9,7 @@
 
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
+{-# OPTIONS_GHC -dcore-lint #-}
 
 -- | Some basic examples.
 module Basic

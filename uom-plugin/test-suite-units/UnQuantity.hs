@@ -2,6 +2,7 @@
 
 -- NOTE: The plugin is not needed to use unQuantity.
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
+{-# OPTIONS_GHC -dcore-lint #-}
 
 module UnQuantity where
 

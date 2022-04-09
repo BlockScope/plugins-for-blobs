@@ -7,6 +7,7 @@
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+{-# OPTIONS_GHC -dcore-lint #-}
 
 module Z (z, tests) where
 

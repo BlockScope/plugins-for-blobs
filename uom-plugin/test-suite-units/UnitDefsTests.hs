@@ -8,6 +8,7 @@
 {-# LANGUAGE PackageImports #-}
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# OPTIONS_GHC -dcore-lint #-}
 
 module UnitDefsTests where
 
