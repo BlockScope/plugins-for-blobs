@@ -77,7 +77,7 @@ deriving instance NFData a => NFData (Quantity a u)
 
 -- | Extract the underlying value of a quantity
 --
--- >>> unQuantity (1 :: Quantity Double One)
+-- >>> unQuantity (1 :: Quantity Double Data.Theory.UoM.One)
 -- 1.0
 unQuantity :: Quantity a u -> a
 unQuantity (MkQuantity x) = x

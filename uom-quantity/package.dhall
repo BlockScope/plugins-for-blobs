@@ -1,2 +1,1 @@
-let pkg-rel = ./package-relative.dhall
-in pkg-rel ""
+let pkg-rel = ./package-relative.dhall in pkg-rel ""

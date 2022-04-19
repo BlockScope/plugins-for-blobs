@@ -1,19 +1,10 @@
 module Main where
 
-import Test.DocTest (doctest)
-
-arguments :: [String]
-arguments =
-    [ "-isrc"
-    , "-isrc-NoStandaloneKindSignatures"
-    , "src-NoStandaloneKindSignatures/Data/Theory/UoM.hs"
-    , "src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs"
-    , "src/Data/UnitsOfMeasure/Unsafe/Quantity.hs"
-    , "src/Data/UnitsOfMeasure/Read.hs"
-    , "src/Data/UnitsOfMeasure/Show.hs"
-    , "src/Data/UnitsOfMeasure/Singleton.hs"
-    , "src-NoStandaloneKindSignatures/Data/UnitsOfMeasure/Syntax.hs"
-    ]
+import Test.DocTest.Internal.Interpreter (ghcInfo)
 
 main :: IO ()
-main = doctest arguments
+main = do
+    info <- filter ((== "Project version") . fst) <$> ghcInfo
+    case info of
+        [("Project version", v)] -> error $ "Not performing doctest with-compiler: ghc-" <> v
+        _ -> error "Could not find GHC interpreter version"

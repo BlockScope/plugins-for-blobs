@@ -16,6 +16,9 @@ module Data.UnitsOfMeasure.Read
    , readWithUnit
    , Some(..)
    , QuantityWithUnit(..)
+
+     -- * Exports for doctest-parallel testing
+   , expToUnitSyntax, someListVal, unitSyntaxToSomeUnit, expToSomeUnit
    ) where
 
 import Control.Monad (join)
@@ -161,7 +164,9 @@ expToUnitSyntax (u `Pow` n)
 
 -- $setup
 -- >>> :set -XFlexibleInstances
--- >>> import Data.UnitsOfMeasure.Singleton (forgetSList)
+-- >>> import Data.UnitsOfMeasure.Singleton
+-- >>> import Data.UnitsOfMeasure.Syntax (UnitSyntax((:/)))
+-- >>> import Text.Parse.Units
 --
 -- >>> :{
 -- instance Show (Some SUnit) where

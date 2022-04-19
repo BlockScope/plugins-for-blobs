@@ -20,7 +20,12 @@
 -- Apart from the definitions below, this module also exports a 'Show'
 -- instance for @'Quantity' a u@, which is re-exported by
 -- "Data.UnitsOfMeasure".
-module Data.UnitsOfMeasure.Show (showQuantity, showUnit) where
+module Data.UnitsOfMeasure.Show
+  ( showQuantity, showUnit
+
+    -- * Exports for doctest-parallel testing
+  , showNeg, showPos, showAtom, showUnitBits
+  ) where
 
 import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
 import Data.UnitsOfMeasure.Syntax (Unpack, UnitSyntax((:/)))
@@ -111,3 +116,6 @@ showAtom :: (String, Int) -> String
 showAtom (_, 0) = "1"
 showAtom (s, 1) = s
 showAtom (s, i) = s ++ "^" ++ show i
+
+-- $setup
+-- >>> import Data.UnitsOfMeasure.Syntax (UnitSyntax((:/)))

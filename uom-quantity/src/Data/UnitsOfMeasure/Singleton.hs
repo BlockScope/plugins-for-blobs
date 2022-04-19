@@ -26,6 +26,9 @@ module Data.UnitsOfMeasure.Singleton
     , SList(..)
     , KnownList(..)
     , forgetSList
+
+      -- * Exports for doctest-parallel testing
+    , normaliseUnitSyntax
     ) where
 
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
@@ -193,3 +196,4 @@ unitVal _ = forgetSUnit (unitSing :: SUnit u)
 
 -- $setup
 -- >>> :set -XExplicitNamespaces -XDataKinds -XTypeOperators
+-- >>> import Data.UnitsOfMeasure.Syntax (UnitSyntax((:/)))

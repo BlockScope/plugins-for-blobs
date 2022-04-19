@@ -1,19 +1,34 @@
 module Main where
 
-import Test.DocTest (doctest)
+import Test.DocTest
+import Test.DocTest.Helpers
+import Test.DocTest.Internal.Interpreter (ghcInfo)
+import System.Environment (getArgs)
 
-arguments :: [String]
-arguments =
-    [ "-isrc"
-    , "-isrc-StandaloneKindSignatures"
-    , "src-StandaloneKindSignatures/Data/Theory/UoM.hs"
-    , "src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs"
-    , "src/Data/UnitsOfMeasure/Unsafe/Quantity.hs"
-    , "src/Data/UnitsOfMeasure/Read.hs"
-    , "src/Data/UnitsOfMeasure/Show.hs"
-    , "src/Data/UnitsOfMeasure/Singleton.hs"
-    , "src-StandaloneKindSignatures/Data/UnitsOfMeasure/Syntax.hs"
+dirs922 :: [FilePath]
+dirs922 =
+    [ "./uom-quantity/src"
+    , "./uom-quantity/src-ghc-9.0"
+    , "./uom-quantity/src-StandaloneKindSignatures"
+    ]
+
+dirs8107 :: [FilePath]
+dirs8107 =
+    [ "./uom-quantity/src"
+    , "./uom-quantity/src-ghc-8.10"
+    , "./uom-quantity/src-StandaloneKindSignatures"
     ]
 
 main :: IO ()
-main = doctest arguments
+main = do
+    pkg <- findCabalPackage "plugins-for-blobs"
+    lib <- extractSpecificCabalLibrary (Just "uom-quantity") pkg
+
+    info <- filter ((== "Project version") . fst) <$> ghcInfo
+    case info of
+        [("Project version", "9.2.2")] ->
+            getArgs >>= mainFromLibrary lib { libSourceDirectories = dirs922 }
+        [("Project version", "8.10.7")] ->
+            getArgs >>= mainFromLibrary lib { libSourceDirectories = dirs8107 }
+        [("Project version", v)] -> error $ "Not performing doctest with-compiler: ghc-" <> v
+        _ -> error "Could not find GHC interpreter version"

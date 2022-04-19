@@ -201,4 +201,4 @@ substUnit a v u = case Map.lookup (VarAtom a) $ _NormUnit u of
     Just i  -> (v ^: i) *: leftover a u
 
 -- $setup
--- >>> import GHC.Corroborate (showSDocUnsafe)
+-- >>> import GHC.Corroborate (showSDocUnsafe, ppr)

@@ -182,12 +182,12 @@
                     , "ghc-corroborate"
                     , "ghc-tcplugins-trace"
                     , "units-parser >=0.1"
-                    , "doctest"
+                    , "doctest-parallel"
                     , "QuickCheck"
+                    , "plugins-for-blobs:uom-quantity"
                     ]
               , ghc-options = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "DocTest.hs"
-              , source-dirs = [ "${src}src" ]
               , when =
                 { condition = "impl(ghc >= 8.10.1)"
                 , `then` =
