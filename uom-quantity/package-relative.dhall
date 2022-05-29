@@ -182,7 +182,7 @@
                     , "ghc-corroborate"
                     , "ghc-tcplugins-trace"
                     , "units-parser >=0.1"
-                    , "doctest-parallel"
+                    , "doctest-parallel >=0.2.3"
                     , "QuickCheck"
                     , "plugins-for-blobs:uom-quantity"
                     ]
