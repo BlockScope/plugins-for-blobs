@@ -1,10 +1,12 @@
 module Main where
 
-import Test.DocTest.Internal.Interpreter (ghcInfo)
+import Debug.Trace
+import Test.DocTest
+import Test.DocTest.Helpers
+import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-    info <- filter ((== "Project version") . fst) <$> ghcInfo
-    case info of
-        [("Project version", v)] -> error $ "Not performing doctest with-compiler: ghc-" <> v
-        _ -> error "Could not find GHC interpreter version"
+    pkg <- findCabalPackage "plugins-for-blobs"
+    lib <- extractSpecificCabalLibrary (Just "uom-quantity") pkg
+    getArgs >>= mainFromLibrary (traceShowId lib)
