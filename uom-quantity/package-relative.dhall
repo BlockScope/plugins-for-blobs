@@ -188,17 +188,7 @@
                     ]
               , ghc-options = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "DocTest.hs"
-              , when =
-                { condition = "impl(ghc >= 8.10.1)"
-                , `then` =
-                  { source-dirs = "${src}test-suite-doctest-StandaloneKindSignatures"
-                  , other-modules = [] : List Text
-                  }
-                , `else` =
-                  { source-dirs =
-                      "${src}test-suite-doctest-NoStandaloneKindSignatures"
-                  , other-modules = [] : List Text
-                  }
-                }
+              , source-dirs = "${src}test-suite-doctest"
+              , other-modules = [] : List Text
               }
             }
