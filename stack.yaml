@@ -1,6 +1,7 @@
 resolver: lts-11.22
 packages:
 - build
+- doctest-parallel
 - simple-smt
 - ghc-tcplugins-trace/ghc-tcplugins-trace
 - thoralf-theory
@@ -15,6 +16,7 @@ packages:
 - uom-plugin-defs
 - uom-plugin-tutorial
 - uom-plugin-examples
+- .
 extra-deps:
 - units-parser-0.1.1.4
 - th-printf-0.7@sha256:c6b2c08e62a32a327b29b1a3739939f0c85b4079ff2ae6d79fac639f25ee48b1,2297

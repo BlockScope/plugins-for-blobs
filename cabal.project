@@ -1,4 +1,5 @@
 packages:
+    doctest-parallel
     simple-smt
     ghc-tcplugins-trace/ghc-tcplugins-trace
     thoralf-theory

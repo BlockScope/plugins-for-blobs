@@ -141,3 +141,5 @@ type family MkUnit (s :: Symbol) :: Unit
 -- $setup
 -- >>> :set -XExplicitNamespaces -XDataKinds -XTypeOperators -XOverloadedStrings
 -- >>> import Data.Type.Equality (type (:~:), type (:~~:))
+-- >>> import Data.Theory.UoM
+-- >>> import GHC.Types (Symbol)

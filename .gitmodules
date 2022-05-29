@@ -4,3 +4,6 @@
 [submodule "simple-smt"]
 	path = simple-smt
 	url = https://github.com/BlockScope/simple-smt
+[submodule "doctest-parallel"]
+	path = doctest-parallel
+	url = https://github.com/typechecker/doctest-parallel.git
