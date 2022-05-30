@@ -22,14 +22,19 @@ let uom-quantity =
 
 let uom-th = ./uom-th/package-relative.dhall "uom-th/" "plugins-for-blobs:"
 
+let thoralf-theory =
+      ./thoralf-theory/package-relative.dhall
+        "thoralf-theory/"
+        "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
         , internal-libraries =
           { uom-quantity =
                   uom-quantity.library
               //  { visibility = "public", when = uom-quantity.when }
-          , uom-th =
-              uom-th.library // { visibility = "public", when = uom-th.when }
+          , uom-th = uom-th.library // { visibility = "public" }
+          , thoralf-theory = thoralf-theory.library // { visibility = "public" }
           }
         , tests.uom-quantity-doctest = uom-quantity.tests.doctest
         }
