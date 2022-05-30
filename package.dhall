@@ -27,6 +27,11 @@ let thoralf-theory =
         "thoralf-theory/"
         "plugins-for-blobs:"
 
+let thoralf-encode =
+      ./thoralf-encode/package-relative.dhall
+        "thoralf-encode/"
+        "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
         , internal-libraries =
@@ -34,7 +39,16 @@ in      defs
                   uom-quantity.library
               //  { visibility = "public", when = uom-quantity.when }
           , uom-th = uom-th.library // { visibility = "public" }
-          , thoralf-theory = thoralf-theory.library // { visibility = "public" }
+          , thoralf-theory =
+                  thoralf-theory.library
+              //  { visibility = "public"
+                  , dependencies = thoralf-theory.dependencies
+                  }
+          , thoralf-encode =
+                  thoralf-encode.library
+              //  { visibility = "public"
+                  , dependencies = thoralf-encode.dependencies
+                  }
           }
         , tests.uom-quantity-doctest = uom-quantity.tests.doctest
         }

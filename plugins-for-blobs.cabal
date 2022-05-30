@@ -33,6 +33,45 @@ source-repository head
   type: git
   location: https://github.com/blockscope/plugins-for-blobs
 
+library thoralf-encode
+  visibility: public
+  exposed-modules:
+      Data.Vec
+      ThoralfPlugin.Encode.Convert
+      ThoralfPlugin.Encode.Find
+      ThoralfPlugin.Encode.TheoryEncoding
+      ThoralfPlugin.Encode.Nat
+      ThoralfPlugin.Encode.Symbol
+      ThoralfPlugin.Encode.Bool
+  hs-source-dirs:
+      thoralf-encode/src
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
+  build-depends:
+      base >=4.9.1.0 && <5
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , plugins-for-blobs:thoralf-theory
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  default-language: Haskell2010
+
 library thoralf-theory
   visibility: public
   exposed-modules:
@@ -47,6 +86,19 @@ library thoralf-theory
       RecordWildCards
   build-depends:
       base >=4.9.1.0 && <5
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , units-parser >=0.1.1.4
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
