@@ -32,6 +32,11 @@ let thoralf-encode =
         "thoralf-encode/"
         "plugins-for-blobs:"
 
+let thoralf-plugin =
+      ./thoralf-plugin/package-relative.dhall
+        "thoralf-plugin/"
+        "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
         , internal-libraries =
@@ -48,6 +53,11 @@ in      defs
                   thoralf-encode.library
               //  { visibility = "public"
                   , dependencies = thoralf-encode.dependencies
+                  }
+          , thoralf-plugin =
+                  thoralf-plugin.library
+              //  { visibility = "public"
+                  , dependencies = thoralf-plugin.dependencies
                   }
           }
         , tests.uom-quantity-doctest = uom-quantity.tests.doctest
