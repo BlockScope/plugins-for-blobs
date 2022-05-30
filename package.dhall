@@ -20,11 +20,16 @@ let defs = ./defaults-blobs.dhall
 let uom-quantity =
       ./uom-quantity/package-relative.dhall "uom-quantity/" "plugins-for-blobs:"
 
+let uom-th = ./uom-th/package-relative.dhall "uom-th/" "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
-        , internal-libraries.uom-quantity
-          =
-                uom-quantity.library
-            //  { visibility = "public", when = uom-quantity.when }
+        , internal-libraries =
+          { uom-quantity =
+                  uom-quantity.library
+              //  { visibility = "public", when = uom-quantity.when }
+          , uom-th =
+              uom-th.library // { visibility = "public", when = uom-th.when }
+          }
         , tests.uom-quantity-doctest = uom-quantity.tests.doctest
         }

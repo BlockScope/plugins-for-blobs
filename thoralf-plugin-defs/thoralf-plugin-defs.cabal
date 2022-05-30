@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.6.
+-- This file has been generated from package.dhall by hpack version 0.34.7.
 --
 -- see: https://github.com/sol/hpack
 
@@ -12,6 +12,7 @@ description:    The @thoralf-plugin-uom@ library adds support for units of measu
                 package adds some unit definitions.
 category:       Type System
 stability:      experimental
+homepage:       https://github.com/blockscope/plugins-for-blobs#readme
 bug-reports:    https://github.com/blockscope/plugins-for-blobs/issues
 author:         Phil de Joux
 maintainer:     phil.dejoux@blockscope.com
@@ -20,13 +21,15 @@ license:        MPL-2.0
 license-file:   LICENSE.md
 build-type:     Simple
 tested-with:
-    GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.1
+    GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.2
 extra-source-files:
     package.dhall
+    LICENSE.md
+    README.md
 
 source-repository head
   type: git
-  location: https://github.com/slockscope/plugins-for-blobs.git
+  location: https://github.com/blockscope/plugins-for-blobs
 
 library
   exposed-modules:

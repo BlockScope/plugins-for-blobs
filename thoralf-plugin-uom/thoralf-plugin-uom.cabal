@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.6.
+-- This file has been generated from package.dhall by hpack version 0.34.7.
 --
 -- see: https://github.com/sol/hpack
 
@@ -11,8 +11,9 @@ description:    Thoralf is a small yet extensible typechecker plugin based on th
                 Z3 SMT solver. It is designed to be easy to extend with new
                 theories.
 category:       Development
+stability:      experimental
 homepage:       https://github.com/bgamari/the-thoralf-plugin#readme
-bug-reports:    https://github.com/blockscope/plugins-for-blobs/issues
+bug-reports:    https://github.com/bgamari/the-thoralf-plugin/issues
 author:         Phil de Joux
 maintainer:     phil.dejoux@blockscope.com
 copyright:      © 2017-2022 Phil de Joux, © 2017-2022 Block Scope Limited
@@ -20,9 +21,11 @@ license:        MPL-2.0
 license-file:   LICENSE.md
 build-type:     Simple
 tested-with:
-    GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.1
+    GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.2
 extra-source-files:
     package.dhall
+    LICENSE.md
+    README.md
 
 source-repository head
   type: git
