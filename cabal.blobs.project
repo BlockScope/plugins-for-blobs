@@ -1,0 +1,7 @@
+packages:
+    simple-smt
+    ghc-tcplugins-trace/ghc-tcplugins-trace
+    build
+    plugins-for-blobs.cabal
+tests: True
+write-ghc-environment-files: always

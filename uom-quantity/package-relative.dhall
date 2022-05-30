@@ -1,4 +1,5 @@
 λ(src : Text) →
+λ(prefix : Text) →
   let defs = ./../defaults-uom.dhall
 
   in  let testopts = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
@@ -83,7 +84,9 @@
                 }
               , { condition = "impl(ghc >= 8.10.0) && impl(ghc < 8.10.1)"
                 , source-dirs =
-                  [ "${src}src-ghc-8.10", "${src}src-NoStandaloneKindSignatures" ]
+                  [ "${src}src-ghc-8.10"
+                  , "${src}src-NoStandaloneKindSignatures"
+                  ]
                 , dependencies =
                   [ { name = "ghc"
                     , version = ">=8.10 && <8.12"
@@ -93,7 +96,9 @@
                 }
               , { condition = "impl(ghc >= 8.8.0) && impl(ghc < 8.10.0)"
                 , source-dirs =
-                  [ "${src}src-ghc-8.8", "${src}src-NoStandaloneKindSignatures" ]
+                  [ "${src}src-ghc-8.8"
+                  , "${src}src-NoStandaloneKindSignatures"
+                  ]
                 , dependencies =
                   [ { name = "ghc"
                     , version = ">=8.8 && <8.10"
@@ -109,7 +114,9 @@
                 }
               , { condition = "impl(ghc >= 8.6.0) && impl(ghc < 8.8.0)"
                 , source-dirs =
-                  [ "${src}src-ghc-8.6", "${src}src-NoStandaloneKindSignatures" ]
+                  [ "${src}src-ghc-8.6"
+                  , "${src}src-NoStandaloneKindSignatures"
+                  ]
                 , dependencies =
                   [ { name = "ghc"
                     , version = ">=8.6 && <8.8"
@@ -125,7 +132,9 @@
                 }
               , { condition = "impl(ghc >= 8.4.0) && impl(ghc < 8.6.0)"
                 , source-dirs =
-                  [ "${src}src-ghc-8.4", "${src}src-NoStandaloneKindSignatures" ]
+                  [ "${src}src-ghc-8.4"
+                  , "${src}src-NoStandaloneKindSignatures"
+                  ]
                 , dependencies =
                   [ { name = "ghc"
                     , version = ">=8.4 && <8.6"
@@ -141,7 +150,9 @@
                 }
               , { condition = "impl(ghc >= 8.2.0) && impl(ghc < 8.4.0)"
                 , source-dirs =
-                  [ "${src}src-ghc-8.2", "${src}src-NoStandaloneKindSignatures" ]
+                  [ "${src}src-ghc-8.2"
+                  , "${src}src-NoStandaloneKindSignatures"
+                  ]
                 , dependencies =
                   [ { name = "ghc"
                     , version = ">=8.2 && <8.4"
@@ -157,7 +168,9 @@
                 }
               , { condition = "impl(ghc >= 8.0.0) && impl(ghc < 8.2.0)"
                 , source-dirs =
-                  [ "${src}src-ghc-8.0", "${src}src-NoStandaloneKindSignatures" ]
+                  [ "${src}src-ghc-8.0"
+                  , "${src}src-NoStandaloneKindSignatures"
+                  ]
                 , dependencies =
                   [ { name = "ghc"
                     , version = ">=8.0 && <8.2"
@@ -184,7 +197,7 @@
                     , "units-parser >=0.1"
                     , "doctest-parallel >=0.2.3"
                     , "QuickCheck"
-                    , "plugins-for-blobs:uom-quantity"
+                    , "${prefix}uom-quantity"
                     ]
               , ghc-options = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
               , main = "DocTest.hs"

@@ -1,4 +1,4 @@
-cabal-version: 3.0
+cabal-version: 2.0
 
 -- This file has been generated from package.dhall by hpack version 0.34.7.
 --
@@ -18,7 +18,7 @@ bug-reports:    https://github.com/adamgundry/uom-plugin/issues
 author:         Adam Gundry <adam@well-typed.com>
 maintainer:     Adam Gundry <adam@well-typed.com>
 copyright:      Copyright (c) 2014-2018, Adam Gundry
-license:        BSD-3-Clause
+license:        BSD3
 license-file:   LICENSE.txt
 build-type:     Simple
 tested-with:
@@ -163,9 +163,9 @@ test-suite doctest
     , doctest-parallel >=0.2.3
     , ghc-corroborate
     , ghc-tcplugins-trace
-    , plugins-for-blobs:uom-quantity
     , template-haskell >=2.9
     , units-parser >=0.1
+    , uom-quantity
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     other-modules:
         Internal.Unit.Type

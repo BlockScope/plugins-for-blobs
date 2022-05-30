@@ -17,7 +17,8 @@
 -}
 let defs = ./defaults-blobs.dhall
 
-let uom-quantity = ./uom-quantity/package-relative.dhall "uom-quantity/"
+let uom-quantity =
+      ./uom-quantity/package-relative.dhall "uom-quantity/" "plugins-for-blobs:"
 
 in      defs
     //  { name = "plugins-for-blobs"
