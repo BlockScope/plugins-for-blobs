@@ -48,7 +48,7 @@ module Data.UnitsOfMeasure.Tutorial
   -- $reading
   ) where
 
-import "uom-quantity" Data.UnitsOfMeasure
+import Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH
 
 -- $setup
@@ -67,7 +67,7 @@ import "uom-th" Data.UnitsOfMeasure.TH
 --
 -- >>> {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 -- >>> {-# LANGUAGE DataKinds, QuasiQuotes, TypeOperators, PackageImports #-}
--- >>> import "uom-quantity" Data.UnitsOfMeasure
+-- >>> import Data.UnitsOfMeasure
 -- >>> import "uom-th" Data.UnitsOfMeasure.TH
 --
 -- In a module that imports the library but has not enabled the plugin or
@@ -81,7 +81,7 @@ import "uom-th" Data.UnitsOfMeasure.TH
 -- equivalent setup.
 --
 -- >>> :seti -fplugin Plugins.UoM -XDataKinds -XQuasiQuotes -XTypeOperators -XPackageImports
--- >>> import "uom-quantity" Data.UnitsOfMeasure
+-- >>> import Data.UnitsOfMeasure
 -- >>> import "uom-th" Data.UnitsOfMeasure.TH
 
 -- $units

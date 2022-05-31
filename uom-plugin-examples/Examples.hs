@@ -17,8 +17,8 @@
 
 module Main (main) where
 
-import "uom-quantity" Data.UnitsOfMeasure
-import "uom-quantity" Data.UnitsOfMeasure.Show
+import Data.UnitsOfMeasure
+import Data.UnitsOfMeasure.Show
 import "uom-th" Data.UnitsOfMeasure.TH
 import "uom-plugin" Data.UnitsOfMeasure.Convert
 import Data.List

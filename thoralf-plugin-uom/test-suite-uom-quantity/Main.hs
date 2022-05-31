@@ -25,7 +25,7 @@ module Main where
 import Test.Tasty.TH (defaultMainGenerator)
 import Test.Tasty.QuickCheck (testProperty)
 import Text.Printf (printf)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
+import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
 import UoM (mkMpS, mkS, metres, extract, distance)
 import Defs ()
 

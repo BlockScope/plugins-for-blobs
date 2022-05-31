@@ -8,7 +8,7 @@ module UnQuantity where
 import Test.Tasty (TestTree, testGroup)
 import Test.Tasty.HUnit ((@?=), testCase)
 
-import "uom-quantity" Data.UnitsOfMeasure (mk, unQuantity)
+import Data.UnitsOfMeasure (mk, unQuantity)
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
 unQuantityTestGroup :: TestTree

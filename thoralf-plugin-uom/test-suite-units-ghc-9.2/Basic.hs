@@ -26,9 +26,9 @@ module Basic
 import Test.Tasty
 import Test.Tasty.HUnit
 
-import "uom-quantity" Data.UnitsOfMeasure
+import Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH (u)
-import "uom-quantity" Data.UnitsOfMeasure.Show
+import Data.UnitsOfMeasure.Show
 
 import UnitDefs ()
 import DelayEq (mean, tricky)

@@ -9,8 +9,8 @@ import Plugins.Print
     , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
     )
 
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
+import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
+import Data.UnitsOfMeasure.Unsafe.Unify
     ( UnitEquality(..), SubstItem(..), SimplifyResult(..)
     , fromUnitEquality, toUnitEquality
     , simplifySubst, simplifyUnsubst
@@ -18,8 +18,8 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
     , substsSubst, substsUnitEquality
     )
 
-import "uom-quantity" Plugins.UoM.Eq.TcPlugin (evMagic)
-import "uom-quantity" Plugins.UoM.State (UomState(..), mkUoMInit)
+import Plugins.UoM.Eq.TcPlugin (evMagic)
+import Plugins.UoM.State (UomState(..), mkUoMInit)
 import Plugins.UoM.Solve.TcPlugin (reportContradiction, substItemToCt)
 
 uomSimplifyPlugin :: DebugCts -> ModuleName -> ModuleName -> FastString -> TcPlugin

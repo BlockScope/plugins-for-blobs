@@ -6,8 +6,8 @@ module UoM where
 
 import Data.Kind (Type)
 
-import "uom-quantity" Data.Theory.UoM (type (/:), Unit, One)
-import "uom-quantity" Data.UnitsOfMeasure.Syntax (Exp)
+import Data.Theory.UoM (type (/:), Unit, One)
+import Data.UnitsOfMeasure.Syntax (Exp)
 import "thoralf-plugin" ThoralfPlugin.Singletons.Symbol (SSymbol)
 
 import "thoralf-plugin-uom" Data.UnitsOfMeasure.Constraint (IsProd, IsDiv, IsEnc)

@@ -31,9 +31,9 @@ import Plugins.Print.SMT
     , tracingSatModel, tracingUnsatCore
     )
 
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify (UnitEquality(..), fromUnitEquality)
-import "uom-quantity" Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
+import Data.UnitsOfMeasure.Unsafe.Unify (UnitEquality(..), fromUnitEquality)
+import Plugins.UoM.Unpack.TcPlugin (unitsUnpack)
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 import Plugins.Thoralf.TcPlugin (ThoralfState(..), thoralfStop)
 import Plugins.UoM.Eq.TcPlugin (unitsEq, evMagic)
 import Plugins.Thoralf.UoM.Solve (mkThoralfUomInit)

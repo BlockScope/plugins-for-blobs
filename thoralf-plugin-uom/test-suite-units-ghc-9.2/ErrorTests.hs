@@ -16,7 +16,7 @@
 
 module ErrorTests where
 
-import "uom-quantity" Data.UnitsOfMeasure
+import Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH
 import UnitDefs ()
 

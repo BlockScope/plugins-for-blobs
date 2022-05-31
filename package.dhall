@@ -37,6 +37,11 @@ let thoralf-plugin =
         "thoralf-plugin/"
         "plugins-for-blobs:"
 
+let thoralf-plugin-uom =
+      ./thoralf-plugin-uom/package-relative.dhall
+        "thoralf-plugin-uom/"
+        "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
         , internal-libraries =
@@ -58,6 +63,11 @@ in      defs
                   thoralf-plugin.library
               //  { visibility = "public"
                   , dependencies = thoralf-plugin.dependencies
+                  }
+          , thoralf-plugin-uom =
+                  thoralf-plugin-uom.library
+              //  { visibility = "public"
+                  , dependencies = thoralf-plugin-uom.dependencies
                   }
           }
         , tests.uom-quantity-doctest = uom-quantity.tests.doctest

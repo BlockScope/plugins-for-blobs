@@ -5,7 +5,7 @@
 -- | Checks that the abelian group laws hold.
 module Abelian where
 
-import "uom-quantity" Data.UnitsOfMeasure (type (*:), type (/:), One, Base, Quantity)
+import Data.UnitsOfMeasure (type (*:), type (/:), One, Base, Quantity)
 
 associativity :: Quantity a (u *: (v *: w)) -> Quantity a ((u *: v) *: w)
 associativity = id

@@ -10,9 +10,9 @@
 
 module RationalExamples (dump) where
 
-import "uom-quantity" Data.UnitsOfMeasure
-import "uom-quantity" Data.UnitsOfMeasure.Show ()
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..), toRational')
+import Data.UnitsOfMeasure
+import Data.UnitsOfMeasure.Show ()
+import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..), toRational')
 import "uom-th" Data.UnitsOfMeasure.TH
 import "uom-plugin-defs" Plugins.UoM.UnitDefs ()
 import "uom-plugin" Data.UnitsOfMeasure.Convert (convert)

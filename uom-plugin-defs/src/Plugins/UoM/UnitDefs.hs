@@ -14,7 +14,7 @@ module Plugins.UoM.UnitDefs
     ( MkUnit
     ) where
 
-import "uom-quantity" Data.UnitsOfMeasure
+import Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH
 
 -- The SI base units

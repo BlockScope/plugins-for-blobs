@@ -11,7 +11,7 @@
 
 module UnitDefsTests where
 
-import "uom-quantity" Data.UnitsOfMeasure
+import Data.UnitsOfMeasure
 import "uom-th" Data.UnitsOfMeasure.TH (u, declareBaseUnit, declareDerivedUnit, declareConvertibleUnit)
 import "uom-plugin" Data.UnitsOfMeasure.Convert
 

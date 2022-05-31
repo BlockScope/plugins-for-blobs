@@ -5,8 +5,8 @@
 
 module UoM where
 
-import "uom-quantity" Data.UnitsOfMeasure
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
+import Data.UnitsOfMeasure
+import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..))
 import "uom-th" Data.UnitsOfMeasure.TH (u)
 
 import "thoralf-plugin-uom" Data.UnitsOfMeasure.Constraint (IsProd, IsDiv)

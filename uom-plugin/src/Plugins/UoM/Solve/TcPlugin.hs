@@ -17,10 +17,10 @@ import Plugins.Print
     , pprCtsStepProblem, pprCtsStepSolution, tracePlugin, pprSolverCallCount
     )
 
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Kind (reifyUnit)
-import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
+import Data.UnitsOfMeasure.Unsafe.Find (lookupUnitDefs)
+import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
+import Data.UnitsOfMeasure.Unsafe.Kind (reifyUnit)
+import Data.UnitsOfMeasure.Unsafe.Unify
     ( UnitEquality(..), SubstItem(..), SimplifyResult(..)
     , fromUnitEquality
     , simplifySubst, simplifyUnsubst
@@ -28,8 +28,8 @@ import "uom-quantity" Data.UnitsOfMeasure.Unsafe.Unify
     , substsSubst, substsUnitEquality
     )
 
-import "uom-quantity" Plugins.UoM.Eq.TcPlugin (unitsEq, evMagic)
-import "uom-quantity" Plugins.UoM.State (UomState(..), mkUoMInit)
+import Plugins.UoM.Eq.TcPlugin (unitsEq, evMagic)
+import Plugins.UoM.State (UomState(..), mkUoMInit)
 
 uomSolvePlugin :: DebugCts -> ModuleName -> ModuleName -> FastString -> TcPlugin
 uomSolvePlugin dbg theory syntax pkg =
