@@ -10,6 +10,6 @@
 
 module UnitDefs () where
 
-import "uom-th" Data.UnitsOfMeasure.TH
+import Data.UnitsOfMeasure.TH
 
 [u| m, kg |]

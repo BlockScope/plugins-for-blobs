@@ -13,7 +13,7 @@
 -- to change or be moved to a separate package.
 module UnitDefs () where
 
-import "uom-th" Data.UnitsOfMeasure.TH
+import Data.UnitsOfMeasure.TH
 
 -- | The SI base units
 -- http://www.bipm.org/en/measurement-units/

@@ -70,5 +70,61 @@ in      defs
                   , dependencies = thoralf-plugin-uom.dependencies
                   }
           }
-        , tests.uom-quantity-doctest = uom-quantity.tests.doctest
+        , tests =
+          { uom-quantity-doctest = uom-quantity.tests.doctest
+          , thoralf-uom-diy =
+                  thoralf-plugin-uom.tests.uom-diy
+              //  { dependencies =
+                        thoralf-plugin-uom.dependencies
+                      # thoralf-plugin-uom.tests.uom-diy.dependencies
+                  , ghc-options =
+                        thoralf-plugin-uom.ghc-options
+                      # thoralf-plugin-uom.tests.uom-diy.ghc-options
+                  }
+          , thoralf-uom-quantity =
+                  thoralf-plugin-uom.tests.uom-quantity
+              //  { dependencies =
+                        thoralf-plugin-uom.dependencies
+                      # thoralf-plugin-uom.tests.uom-quantity.dependencies
+                  , ghc-options =
+                        thoralf-plugin-uom.ghc-options
+                      # thoralf-plugin-uom.tests.uom-quantity.ghc-options
+                  }
+          , thoralf-defs =
+                  thoralf-plugin-uom.tests.defs
+              //  { dependencies =
+                        thoralf-plugin-uom.dependencies
+                      # thoralf-plugin-uom.tests.defs.dependencies
+                  , ghc-options =
+                        thoralf-plugin-uom.ghc-options
+                      # thoralf-plugin-uom.tests.defs.ghc-options
+                  }
+          , thoralf-force =
+                  thoralf-plugin-uom.tests.force
+              //  { dependencies =
+                        thoralf-plugin-uom.dependencies
+                      # thoralf-plugin-uom.tests.force.dependencies
+                  , ghc-options =
+                        thoralf-plugin-uom.ghc-options
+                      # thoralf-plugin-uom.tests.force.ghc-options
+                  }
+          , thoralf-delay-eq =
+                  thoralf-plugin-uom.tests.delay-eq
+              //  { dependencies =
+                        thoralf-plugin-uom.dependencies
+                      # thoralf-plugin-uom.tests.delay-eq.dependencies
+                  , ghc-options =
+                        thoralf-plugin-uom.ghc-options
+                      # thoralf-plugin-uom.tests.delay-eq.ghc-options
+                  }
+          , thoralf-units =
+                  thoralf-plugin-uom.tests.units
+              //  { dependencies =
+                        thoralf-plugin-uom.dependencies
+                      # thoralf-plugin-uom.tests.units.dependencies
+                  , ghc-options =
+                        thoralf-plugin-uom.ghc-options
+                      # thoralf-plugin-uom.tests.units.ghc-options
+                  }
+          }
         }

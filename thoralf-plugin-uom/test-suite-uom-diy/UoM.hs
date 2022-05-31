@@ -8,10 +8,10 @@ import Data.Kind (Type)
 
 import Data.Theory.UoM (type (/:), Unit, One)
 import Data.UnitsOfMeasure.Syntax (Exp)
-import "thoralf-plugin" ThoralfPlugin.Singletons.Symbol (SSymbol)
+import ThoralfPlugin.Singletons.Symbol (SSymbol)
 
-import "thoralf-plugin-uom" Data.UnitsOfMeasure.Constraint (IsProd, IsDiv, IsEnc)
-import "thoralf-plugin-uom" ThoralfPlugin.Singletons.Nat (SNat(..))
+import Data.UnitsOfMeasure.Constraint (IsProd, IsDiv, IsEnc)
+import ThoralfPlugin.Singletons.Nat (SNat(..))
 
 data Quantity :: Unit -> Type where
     MkQuantity :: Double -> Quantity m

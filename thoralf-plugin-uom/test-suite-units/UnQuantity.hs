@@ -9,7 +9,7 @@ import Test.Tasty (TestTree, testGroup)
 import Test.Tasty.HUnit ((@?=), testCase)
 
 import Data.UnitsOfMeasure (mk, unQuantity)
-import "uom-th" Data.UnitsOfMeasure.TH (u)
+import Data.UnitsOfMeasure.TH (u)
 
 unQuantityTestGroup :: TestTree
 unQuantityTestGroup = testGroup "Get the underlying value with unQuantity"

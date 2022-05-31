@@ -49,7 +49,7 @@ module Data.UnitsOfMeasure.Tutorial
   ) where
 
 import Data.UnitsOfMeasure
-import "uom-th" Data.UnitsOfMeasure.TH
+import Data.UnitsOfMeasure.TH
 
 -- $setup
 -- >>> import Plugins.UoM.UnitDefs ()
@@ -68,7 +68,7 @@ import "uom-th" Data.UnitsOfMeasure.TH
 -- >>> {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 -- >>> {-# LANGUAGE DataKinds, QuasiQuotes, TypeOperators, PackageImports #-}
 -- >>> import Data.UnitsOfMeasure
--- >>> import "uom-th" Data.UnitsOfMeasure.TH
+-- >>> import Data.UnitsOfMeasure.TH
 --
 -- In a module that imports the library but has not enabled the plugin or
 -- enabled the required extensions you will likely get mysterious unsolved
@@ -82,7 +82,7 @@ import "uom-th" Data.UnitsOfMeasure.TH
 --
 -- >>> :seti -fplugin Plugins.UoM -XDataKinds -XQuasiQuotes -XTypeOperators -XPackageImports
 -- >>> import Data.UnitsOfMeasure
--- >>> import "uom-th" Data.UnitsOfMeasure.TH
+-- >>> import Data.UnitsOfMeasure.TH
 
 -- $units
 --

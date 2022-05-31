@@ -19,7 +19,7 @@ module Main (main) where
 
 import Data.UnitsOfMeasure
 import Data.UnitsOfMeasure.Show
-import "uom-th" Data.UnitsOfMeasure.TH
+import Data.UnitsOfMeasure.TH
 import "uom-plugin" Data.UnitsOfMeasure.Convert
 import Data.List
 import qualified RationalExamples as RE

@@ -12,7 +12,7 @@
 
 module UnitDefsTests where
 
-import "uom-th" Data.UnitsOfMeasure.TH
+import Data.UnitsOfMeasure.TH
     (declareBaseUnit, declareDerivedUnit, declareConvertibleUnit)
 
 -- Import the definitions of m and s from UnitDefs

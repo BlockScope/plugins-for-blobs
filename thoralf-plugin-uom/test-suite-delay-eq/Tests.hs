@@ -16,7 +16,7 @@ import Test.Tasty
 import Test.Tasty.HUnit
 
 import Data.UnitsOfMeasure
-import "uom-th" Data.UnitsOfMeasure.TH (u)
+import Data.UnitsOfMeasure.TH (u)
 
 import UnitDefs ()
 

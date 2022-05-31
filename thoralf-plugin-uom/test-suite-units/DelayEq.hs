@@ -14,7 +14,7 @@ module DelayEq where
 import Data.List
 
 import Data.UnitsOfMeasure
-import "uom-th" Data.UnitsOfMeasure.TH (u)
+import Data.UnitsOfMeasure.TH (u)
 
 import UnitDefs ()
 

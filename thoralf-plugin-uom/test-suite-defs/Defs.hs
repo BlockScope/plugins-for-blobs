@@ -15,7 +15,7 @@
 
 module Defs where
 
-import "uom-th" Data.UnitsOfMeasure.TH (declareBaseUnit)
+import Data.UnitsOfMeasure.TH (declareBaseUnit)
 
 -- Declarations.
 declareBaseUnit "byte"

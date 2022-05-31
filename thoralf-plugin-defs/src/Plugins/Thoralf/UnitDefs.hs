@@ -16,7 +16,7 @@ module Plugins.Thoralf.UnitDefs
     ) where
 
 import Data.UnitsOfMeasure
-import "uom-th" Data.UnitsOfMeasure.TH
+import Data.UnitsOfMeasure.TH
 
 -- The SI base units
 -- http://www.bipm.org/en/measurement-units/

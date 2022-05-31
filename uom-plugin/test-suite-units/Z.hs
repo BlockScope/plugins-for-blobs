@@ -14,8 +14,8 @@ import Test.Tasty
 import Test.Tasty.HUnit
 
 import Data.UnitsOfMeasure
-import "uom-th" Data.UnitsOfMeasure.Canonical (Convertible)
-import "uom-th" Data.UnitsOfMeasure.TH (u)
+import Data.UnitsOfMeasure.Canonical (Convertible)
+import Data.UnitsOfMeasure.TH (u)
 import "uom-plugin" Data.UnitsOfMeasure.Convert (convert)
 
 import UnitDefs ()
