@@ -200,6 +200,44 @@ library thoralf-theory
         thoralf-theory/src-NoStandaloneKindSignatures
   default-language: Haskell2010
 
+library uom-plugin
+  visibility: public
+  exposed-modules:
+      Data.UnitsOfMeasure.Convert
+      Data.UnitsOfMeasure.Tutorial
+      Plugins.UoM.Solve
+      Plugins.UoM.Simplify
+      Plugins.UoM
+  other-modules:
+      Plugins.UoM.Simplify.TcPlugin
+      Plugins.UoM.Solve.TcPlugin
+      Plugins.UoM.TcPlugin
+  hs-source-dirs:
+      uom-plugin/src
+  build-depends:
+      base >=4.9.1.0 && <5
+    , containers >=0.5
+    , deepseq >=1.3 && <1.5
+    , ghc-corroborate
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 9.2) && impl(ghc < 9.4)
+    hs-source-dirs:
+        uom-plugin/doc-ghc-9.2
+  if impl(ghc >= 8.2) && impl(ghc < 9.2)
+    hs-source-dirs:
+        uom-plugin/doc-ghc-8.2
+  default-language: Haskell2010
+
 library uom-quantity
   visibility: public
   exposed-modules:
@@ -600,6 +638,52 @@ test-suite thoralf-uom-quantity
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
+test-suite uom-defs
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Defs
+  hs-source-dirs:
+      uom-plugin/test-suite-defs
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , plugins-for-blobs:uom-plugin
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , tasty
+    , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
+    buildable: False
+  default-language: Haskell2010
+
+test-suite uom-force
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      UnitDefs
+  hs-source-dirs:
+      uom-plugin/test-suite-force
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , plugins-for-blobs:uom-plugin
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , tasty
+    , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
+    buildable: False
+  default-language: Haskell2010
+
 test-suite uom-quantity-doctest
   type: exitcode-stdio-1.0
   main-is: DocTest.hs
@@ -621,4 +705,92 @@ test-suite uom-quantity-doctest
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  default-language: Haskell2010
+
+test-suite uom-units
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Abelian
+      Basic
+      DelayEq
+      Literal
+      UnitDefs
+      UnitDefsTests
+      UnQuantity
+      Z
+  hs-source-dirs:
+      uom-plugin/test-suite-units
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N -fplugin=Plugins.UoM
+  build-depends:
+      base
+    , plugins-for-blobs:uom-plugin
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , tasty
+    , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 9.2) && impl(ghc < 9.4)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        uom-plugin/test-suite-units-ghc-9.2
+    buildable: True
+  if impl(ghc >= 8.2) && impl(ghc < 9.2)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        uom-plugin/test-suite-units-ghc-8.2
+    buildable: True
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
+    buildable: False
+  default-language: Haskell2010
+
+test-suite uom-unpack-solve
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Abelian
+      Basic
+      DelayEq
+      Literal
+      UnitDefs
+      UnitDefsTests
+      UnQuantity
+      Z
+  hs-source-dirs:
+      uom-plugin/test-suite-units
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N -fplugin=Plugins.UoM.Unpack -fplugin=Plugins.UoM.Solve
+  build-depends:
+      base
+    , plugins-for-blobs:uom-plugin
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , tasty
+    , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 9.2) && impl(ghc < 9.4)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        uom-plugin/test-suite-units-ghc-9.2
+    buildable: True
+  if impl(ghc >= 8.2) && impl(ghc < 9.2)
+    other-modules:
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        uom-plugin/test-suite-units-ghc-8.2
+    buildable: True
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
+    buildable: False
   default-language: Haskell2010

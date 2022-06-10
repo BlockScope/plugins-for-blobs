@@ -61,7 +61,7 @@ import Test.Tasty.HUnit
 
 import Data.UnitsOfMeasure
 import Data.UnitsOfMeasure.TH (u)
-import "uom-plugin" Data.UnitsOfMeasure.Convert
+import Data.UnitsOfMeasure.Convert
 
 import Abelian (associativity, commutativity, unit, inverse, inverse2)
 import Basic

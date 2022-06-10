@@ -13,7 +13,7 @@ module UnitDefsTests where
 
 import Data.UnitsOfMeasure
 import Data.UnitsOfMeasure.TH (u, declareBaseUnit, declareDerivedUnit, declareConvertibleUnit)
-import "uom-plugin" Data.UnitsOfMeasure.Convert
+import Data.UnitsOfMeasure.Convert
 
 -- Import the definitions of m and s from UnitDefs
 import UnitDefs ()

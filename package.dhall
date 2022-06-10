@@ -42,6 +42,9 @@ let thoralf-plugin-uom =
         "thoralf-plugin-uom/"
         "plugins-for-blobs:"
 
+let uom-plugin =
+      ./uom-plugin/package-relative.dhall "uom-plugin/" "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
         , internal-libraries =
@@ -69,6 +72,7 @@ in      defs
               //  { visibility = "public"
                   , dependencies = thoralf-plugin-uom.dependencies
                   }
+          , uom-plugin = uom-plugin.library // { visibility = "public" }
           }
         , tests =
           { uom-quantity-doctest = uom-quantity.tests.doctest
@@ -126,5 +130,9 @@ in      defs
                         thoralf-plugin-uom.ghc-options
                       # thoralf-plugin-uom.tests.units.ghc-options
                   }
+          , uom-defs = uom-plugin.tests.defs
+          , uom-units = uom-plugin.tests.units
+          , uom-unpack-solve = uom-plugin.tests.unpack-solve
+          , uom-force = uom-plugin.tests.force
           }
         }

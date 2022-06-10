@@ -15,7 +15,7 @@ import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..), toRational')
 import Data.UnitsOfMeasure.TH
 import "uom-plugin-defs" Plugins.UoM.UnitDefs ()
-import "uom-plugin" Data.UnitsOfMeasure.Convert (convert)
+import Data.UnitsOfMeasure.Convert (convert)
 
 -- A nautical mile.
 [u| NM = 1852 m |]
