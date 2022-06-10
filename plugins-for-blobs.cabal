@@ -238,6 +238,24 @@ library uom-plugin
         uom-plugin/doc-ghc-8.2
   default-language: Haskell2010
 
+library uom-plugin-defs
+  visibility: public
+  exposed-modules:
+      Plugins.UoM.UnitDefs
+  hs-source-dirs:
+      uom-plugin-defs/src
+  build-depends:
+      base >=4.9.1.0 && <5
+    , plugins-for-blobs:uom-plugin
+    , plugins-for-blobs:uom-quantity
+    , plugins-for-blobs:uom-th
+    , template-haskell >=2.9
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  default-language: Haskell2010
+
 library uom-quantity
   visibility: public
   exposed-modules:
