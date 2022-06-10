@@ -37,6 +37,11 @@ let thoralf-plugin =
         "thoralf-plugin/"
         "plugins-for-blobs:"
 
+let thoralf-plugin-rows =
+      ./thoralf-plugin-rows/package-relative.dhall
+        "thoralf-plugin-rows/"
+        "plugins-for-blobs:"
+
 let thoralf-plugin-uom =
       ./thoralf-plugin-uom/package-relative.dhall
         "thoralf-plugin-uom/"
@@ -72,6 +77,12 @@ in      defs
               //  { visibility = "public"
                   , dependencies = thoralf-plugin.dependencies
                   }
+          , thoralf-plugin-rows =
+                  thoralf-plugin-rows.library
+              //  { visibility = "public"
+                  , ghc-options = thoralf-plugin-rows.ghc-options
+                  , dependencies = thoralf-plugin-rows.dependencies
+                  }
           , thoralf-plugin-uom =
                   thoralf-plugin-uom.library
               //  { visibility = "public"
@@ -83,6 +94,15 @@ in      defs
           }
         , tests =
           { uom-quantity-doctest = uom-quantity.tests.doctest
+          , thoralf-rows =
+                  thoralf-plugin-rows.tests.rows
+              //  { dependencies =
+                        thoralf-plugin-rows.dependencies
+                      # thoralf-plugin-rows.tests.rows.dependencies
+                  , ghc-options =
+                        thoralf-plugin-rows.ghc-options
+                      # thoralf-plugin-rows.tests.rows.ghc-options
+                  }
           , thoralf-uom-diy =
                   thoralf-plugin-uom.tests.uom-diy
               //  { dependencies =
