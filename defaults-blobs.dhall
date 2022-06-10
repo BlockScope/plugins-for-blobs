@@ -1,3 +1,9 @@
+-- , when =
+--   { condition = "impl(ghc >= 8.8.0)"
+--   , `then`.ghc-options
+--     = ghc-opts # [ "-fwrite-ide-info", "-hiedir=../.hie" ]
+--   , `else`.ghc-options = ghc-opts
+--   }
 let ghc-opts = [ "-Wall", "-fno-warn-unticked-promoted-constructors" ]
 
 in  { version = "0.1.0"
@@ -20,11 +26,5 @@ in  { version = "0.1.0"
     , license-file = "LICENSE.md"
     , tested-with = "GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.2"
     , extra-source-files = [ "package.dhall", "LICENSE.md", "README.md" ]
-    , when =
-      { condition = "impl(ghc >= 8.8.0)"
-      , `then`.ghc-options
-        = ghc-opts # [ "-fwrite-ide-info", "-hiedir=../.hie" ]
-      , `else`.ghc-options = ghc-opts
-      }
     , dependencies = [ "base >=4.9.1.0 && <5" ]
     }
