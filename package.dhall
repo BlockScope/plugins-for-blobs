@@ -65,6 +65,11 @@ let uom-plugin-examples =
         "uom-plugin-examples/"
         "plugins-for-blobs:"
 
+let uom-plugin-tutorial =
+      ./uom-plugin-tutorial/package-relative.dhall
+        "uom-plugin-tutorial/"
+        "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
         , internal-libraries =
@@ -174,5 +179,6 @@ in      defs
           , uom-units = uom-plugin.tests.units
           , uom-unpack-solve = uom-plugin.tests.unpack-solve
           , uom-force = uom-plugin.tests.force
+          , uom-tutorial-doctest = uom-plugin-tutorial.tests.doctest
           }
         }
