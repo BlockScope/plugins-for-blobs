@@ -66,6 +66,10 @@ library thoralf-encode
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 library thoralf-plugin
@@ -103,6 +107,10 @@ library thoralf-plugin
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 library thoralf-plugin-rows
@@ -136,6 +144,10 @@ library thoralf-plugin-rows
     , simple-smt
     , template-haskell >=2.9
     , th-printf >=0.7
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.10.1)
     hs-source-dirs:
         thoralf-plugin-rows/src-StandaloneKindSignatures
@@ -180,6 +192,10 @@ library thoralf-plugin-uom
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.10.1)
     hs-source-dirs:
         thoralf-plugin-uom/src-StandaloneKindSignatures
@@ -215,6 +231,10 @@ library thoralf-theory
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.10.1)
     hs-source-dirs:
         thoralf-theory/src-StandaloneKindSignatures
@@ -249,6 +269,10 @@ library uom-plugin
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     hs-source-dirs:
         uom-plugin/doc-ghc-9.2
@@ -269,6 +293,10 @@ library uom-plugin-defs
     , plugins-for-blobs:uom-quantity
     , plugins-for-blobs:uom-th
     , template-haskell >=2.9
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 library uom-quantity
@@ -303,6 +331,10 @@ library uom-quantity
     , ghc-tcplugins-trace
     , template-haskell >=2.9
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     hs-source-dirs:
         uom-quantity/src-ghc-9.0
@@ -406,6 +438,10 @@ library uom-th
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.10.1)
     hs-source-dirs:
         uom-th/src-StandaloneKindSignatures
@@ -443,6 +479,10 @@ test-suite thoralf-defs
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite thoralf-delay-eq
@@ -474,6 +514,10 @@ test-suite thoralf-delay-eq
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite thoralf-force
@@ -505,6 +549,10 @@ test-suite thoralf-force
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite thoralf-rows
@@ -533,6 +581,10 @@ test-suite thoralf-rows
     , simple-smt
     , template-haskell >=2.9
     , th-printf >=0.7
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite thoralf-units
@@ -570,6 +622,10 @@ test-suite thoralf-units
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     other-modules:
         Basic
@@ -629,6 +685,10 @@ test-suite thoralf-uom-diy
     , template-haskell
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite thoralf-uom-quantity
@@ -665,6 +725,10 @@ test-suite thoralf-uom-quantity
     , template-haskell
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite uom-defs
@@ -682,6 +746,10 @@ test-suite uom-defs
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
   default-language: Haskell2010
@@ -701,6 +769,10 @@ test-suite uom-force
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
   default-language: Haskell2010
@@ -722,6 +794,10 @@ test-suite uom-quantity-doctest
     , plugins-for-blobs:uom-quantity
     , template-haskell >=2.9
     , units-parser >=0.1
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
 
 test-suite uom-units
@@ -746,6 +822,10 @@ test-suite uom-units
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     other-modules:
         ErrorTests
@@ -786,6 +866,10 @@ test-suite uom-unpack-solve
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
     other-modules:
         ErrorTests
