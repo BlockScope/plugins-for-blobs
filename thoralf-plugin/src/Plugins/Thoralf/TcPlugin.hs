@@ -33,7 +33,7 @@ import qualified ThoralfPlugin.Extract as Ex(extractEq, extractDisEq)
 import ThoralfPlugin.Convert
     (ExtractEq(..), EncodingData(..), ConvCts(..), ConvEq(..), convert, justReadSExpr)
 import ThoralfPlugin.Encode.TheoryEncoding (TheoryEncoding(..))
-import ThoralfPlugin.Encode.Find (PkgModuleName(..))
+import ThoralfPlugin.Encode.Find (PkgModuleName(..), findModule)
 import Plugins.Print.SMT
     (DebugSmt(..), DebugSmtRecv(..), TraceSmtTalk(..), noSmtTalk, isSilencedTalk, traceSmt)
 import Plugins.Thoralf.Print
@@ -160,10 +160,10 @@ mkThoralfInit
     -> TcPluginM TheoryEncoding
     -> DebugSmt
     -> TcPluginM ThoralfState
-mkThoralfInit PkgModuleName{moduleName = disEqName, pkgName} seed dbg = do
+mkThoralfInit pkgModuleName seed dbg = do
 
     encoding@TheoryEncoding{startDecs = decs} <- seed
-    Found _ disEqModule <- findImportedModule disEqName (Just pkgName)
+    disEqModule <- findModule pkgModuleName
     disEq <- divulgeClass disEqModule "DisEquality"
 
     let talk =
