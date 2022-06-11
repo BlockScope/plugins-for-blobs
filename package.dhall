@@ -60,6 +60,11 @@ let uom-plugin-defs =
         "uom-plugin-defs/"
         "plugins-for-blobs:"
 
+let uom-plugin-examples =
+      ./uom-plugin-examples/package-relative.dhall
+        "uom-plugin-examples/"
+        "plugins-for-blobs:"
+
 in      defs
     //  { name = "plugins-for-blobs"
         , internal-libraries =
@@ -99,6 +104,7 @@ in      defs
           , uom-plugin-defs =
               uom-plugin-defs.library // { visibility = "public" }
           }
+        , executables = uom-plugin-examples.executables
         , tests =
           { uom-quantity-doctest = uom-quantity.tests.doctest
           , thoralf-rows =
