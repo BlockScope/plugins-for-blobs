@@ -10,10 +10,10 @@ synopsis:       An extensible GHC typechecker plugin based on Z3
 description:    Thoralf is a small yet extensible typechecker plugin based on the
                 Z3 SMT solver. It is designed to be easy to extend with new
                 theories.
-category:       Development
+category:       Type System
 stability:      experimental
-homepage:       https://github.com/bgamari/the-thoralf-plugin#readme
-bug-reports:    https://github.com/bgamari/the-thoralf-plugin/issues
+homepage:       https://github.com/blockscope/plugins-for-blobs#readme
+bug-reports:    https://github.com/blockscope/plugins-for-blobs/issues
 author:         Phil de Joux
 maintainer:     phil.dejoux@blockscope.com
 copyright:      © 2017-2022 Phil de Joux, © 2017-2022 Block Scope Limited
@@ -23,14 +23,11 @@ build-type:     Simple
 tested-with:
     GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.2
 extra-source-files:
-    package.dhall
     LICENSE.md
-    README.md
 
 source-repository head
   type: git
-  location: https://github.com/bgamari/the-thoralf-plugin
-  subdir: thoralf
+  location: https://github.com/blockscope/plugins-for-blobs
 
 library
   exposed-modules:

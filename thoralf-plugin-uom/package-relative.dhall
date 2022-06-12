@@ -13,8 +13,6 @@
                 Z3 SMT solver. It is designed to be easy to extend with new
                 theories.
                 ''
-            , category = "Development"
-            , github = "bgamari/the-thoralf-plugin/thoralf"
             , ghc-options = [ "-Wall", "-fno-warn-partial-type-signatures" ]
             , dependencies =
                   defs.dependencies

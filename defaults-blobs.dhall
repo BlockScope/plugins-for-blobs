@@ -19,7 +19,7 @@ in  { version = "0.1.0"
     , license = "MPL-2.0"
     , license-file = "LICENSE.md"
     , tested-with = "GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.2"
-    , extra-source-files = [ "package.dhall", "LICENSE.md", "README.md" ]
+    , extra-source-files = [ "LICENSE.md" ]
     , dependencies = [ "base >=4.9.1.0 && <5" ]
     , when =
       { condition = "impl(ghc >= 8.8.0)"

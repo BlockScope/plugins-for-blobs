@@ -25,9 +25,7 @@ build-type:     Simple
 tested-with:
     GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.2
 extra-source-files:
-    package.dhall
     LICENSE.md
-    README.md
 
 source-repository head
   type: git
