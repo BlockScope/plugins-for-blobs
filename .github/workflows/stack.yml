@@ -36,8 +36,9 @@ jobs:
           path: ~/.stack
           key: ${{ runner.os }}-${{ matrix.ghc }}-stack
 
-      - name: build tests
-        run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      # Stack has problems building all the tests because of doctest-parallel.
+      # - name: build tests
+      #   run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-rows:rows
         run: stack test thoralf-plugin-rows:rows --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
