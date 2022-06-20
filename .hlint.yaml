@@ -1,3 +1,2 @@
 # Warnings currently triggered by your code
 - ignore: {name: "Unused LANGUAGE pragma"} # 29 hints
-- ignore: {name: "Use mapM_"} # 4 hints
