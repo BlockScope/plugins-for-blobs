@@ -13,7 +13,7 @@ import Data.UnitsOfMeasure
 import Data.UnitsOfMeasure.Show ()
 import Data.UnitsOfMeasure.Unsafe.Quantity (Quantity(..), toRational')
 import Data.UnitsOfMeasure.TH
-import "uom-plugin-defs" Plugins.UoM.UnitDefs ()
+import Plugins.UoM.UnitDefs ()
 import Data.UnitsOfMeasure.Convert (convert)
 
 -- A nautical mile.
