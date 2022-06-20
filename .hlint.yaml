@@ -3,5 +3,3 @@
 - ignore: {name: "Redundant $"} # 5 hints
 - ignore: {name: "Unused LANGUAGE pragma"} # 29 hints
 - ignore: {name: "Use mapM_"} # 26 hints
-- ignore: {name: "Use section"} # 1 hint
-- ignore: {name: "Use void"} # 1 hint

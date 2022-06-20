@@ -3,4 +3,4 @@
 	url = https://github.com/blockscope/ghc-tcplugins-trace
 [submodule "simple-smt"]
 	path = simple-smt
-	url = https://github.com/BlockScope/simple-smt
+	url = https://github.com/typechecker/simple-smt
