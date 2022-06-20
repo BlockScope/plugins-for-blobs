@@ -12,12 +12,12 @@ packages:
   original:
     hackage: units-parser-0.1.1.4
 - completed:
-    hackage: ghc-corroborate-0.1.0@sha256:6573317294a3e6d3f384bf79505e914e9764dc6ca1d5594b7e0cbceb9a278a02,3855
+    hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
     pantry-tree:
       size: 4120
-      sha256: 87cb6833a314434e5cd7a8040364a710e363a1c5fc23b366540b881465a27c9f
+      sha256: 92677e4f5b9145fc1e67bdb5843f699a4d17ea36aa08d5e99fe88a7065b539ea
   original:
-    hackage: ghc-corroborate-0.1.0
+    hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
 snapshots:
 - completed:
     size: 534126

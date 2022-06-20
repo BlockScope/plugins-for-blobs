@@ -1,4 +1,4 @@
-resolver: nightly-2021-12-11
+resolver: lts-19.12
 packages:
 - ../simple-smt
 - ../ghc-tcplugins-trace/ghc-tcplugins-trace
@@ -16,4 +16,4 @@ packages:
 - ../uom-plugin-examples
 extra-deps:
 - units-parser-0.1.1.4
-- ghc-corroborate-0.1.0
+- ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855

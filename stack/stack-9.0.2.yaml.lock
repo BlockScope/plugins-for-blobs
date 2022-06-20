@@ -5,10 +5,10 @@
 
 packages:
 - completed:
-    hackage: units-parser-0.1.1.4@sha256:fdf942e2b929d6bbc4d92b726192e1a54338b3318207633e8d1b2ba0ae7d5104,1664
+    hackage: units-parser-0.1.1.4@sha256:c75a2bdd7a0c08794f0c1d1d1ff8acf2ebef8be6b3350f9841b737fd1551e891,1738
     pantry-tree:
       size: 274
-      sha256: 739b83c92d537075203f3d4964fa74135c8dda63c27602f27e1001e7d0b7c45e
+      sha256: fa6335e11a64de8b362419549901c1c62b6f82932f0e8f61de4f0fd6966d94f8
   original:
     hackage: units-parser-0.1.1.4
 - completed:
@@ -20,7 +20,7 @@ packages:
     hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
 snapshots:
 - completed:
-    size: 586296
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
-    sha256: 63539429076b7ebbab6daa7656cfb079393bf644971156dc349d7c0453694ac2
-  original: lts-18.18
+    size: 619158
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/12.yaml
+    sha256: d4d7a4ac80485f3c21d0c6bfe5e7a21c3f71ca4fdfea022f98574047ebb58ebb
+  original: lts-19.12
