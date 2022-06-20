@@ -2,9 +2,7 @@ name: cabal
 
 on:
   push:
-    branches: [ci-cabal, wip/thoralf]
   pull_request:
-    branches: [master, main]
 
 jobs:
   build:
@@ -28,11 +26,6 @@ jobs:
         with:
           ghc-version: ${{ matrix.ghc }}
           cabal-version: ${{ matrix.cabal }}
-
-      - uses: rwe/actions-hlint-setup@v1
-        name: Set up HLint
-        with:
-          version: "3.3.4"
 
       - uses: actions/cache@v2
         name: cache ~/.cabal/store
@@ -103,9 +96,3 @@ jobs:
       - name: test uom-plugin-tutorial:doctest with ghc-9.2.1
         if: ${{ matrix.ghc == '9.2.1' }}
         run: cabal test uom-plugin-tutorial:doctest --test-show-details=direct --test-option="--color=always"
-
-      - uses: rwe/actions-hlint-run@v2
-        name: hlint
-        with:
-          path: '["thoralf-theory", "thoralf-encode", "thoralf-plugin", "thoralf-plugin-rows", "thoralf-plugin-uom", "uom-plugin", "uom-plugin-defs", "uom-plugin-examples", "uom-plugin-tutorial", "uom-quantity", "uom-th"]'
-          fail-on: suggestion

@@ -2,9 +2,7 @@ name: stack
 
 on:
   push:
-    branches: [ci-stack, wip/thoralf]
   pull_request:
-    branches: [master, main]
 
 jobs:
   build:
@@ -26,11 +24,6 @@ jobs:
           enable-stack: true
           stack-version: "latest"
           cabal-version: ${{ matrix.cabal }}
-
-      - uses: rwe/actions-hlint-setup@v1
-        name: Set up HLint
-        with:
-          version: "3.3.4"
 
       - uses: pavpanchekha/setup-z3@1.2.2
         name: setup z3
@@ -84,9 +77,3 @@ jobs:
       - name: test uom-plugin-tutorial:doctest
         if: ${{ matrix.ghc == '8.2.2' }}
         run: stack test uom-plugin-tutorial:doctest --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
-
-      - uses: rwe/actions-hlint-run@v2
-        name: hlint
-        with:
-          path: '["thoralf-theory", "thoralf-encode", "thoralf-plugin", "thoralf-plugin-rows", "thoralf-plugin-uom", "uom-plugin", "uom-plugin-defs", "uom-plugin-examples", "uom-plugin-tutorial", "uom-quantity", "uom-th"]'
-          fail-on: suggestion
