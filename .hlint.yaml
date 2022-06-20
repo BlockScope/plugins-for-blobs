@@ -1,0 +1,2 @@
+# Hlint suggests removing LANGUAGE pragma QuasiQuotes but they're needed by the plugins.
+- ignore: {name: Unused LANGUAGE pragma, within: [Defs, UnitDefs, Plugins.UoM.UnitDefs, Plugins.Thoralf.UnitDefs]}

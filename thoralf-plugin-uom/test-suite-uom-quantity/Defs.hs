@@ -5,7 +5,6 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 {-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE TemplateHaskell #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Solve #-}
