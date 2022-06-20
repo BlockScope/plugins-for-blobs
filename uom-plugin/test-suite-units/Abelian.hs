@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeOperators, PackageImports #-}
+{-# LANGUAGE TypeOperators #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 

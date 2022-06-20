@@ -8,7 +8,6 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
-{-# LANGUAGE PackageImports #-}
 
 -- WARNING: It would be a lot of work to add type annotations to avoid type-default
 -- warnings and what is more this leads to type checking failures;

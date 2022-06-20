@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, QuasiQuotes, PackageImports #-}
+{-# LANGUAGE DataKinds, QuasiQuotes #-}
 
 -- NOTE: The plugin is not needed to use unQuantity.
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}

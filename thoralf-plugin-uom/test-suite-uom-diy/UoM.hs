@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds, PackageImports #-}
+{-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Solve #-}
 

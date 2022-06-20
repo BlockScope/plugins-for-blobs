@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, QuasiQuotes, TemplateHaskell, TypeOperators, PackageImports #-}
+{-# LANGUAGE DataKinds, QuasiQuotes, TemplateHaskell, TypeOperators #-}
 
 -- NOTE: The plugin Plugins.UoM.Unpack in needed for Known (Unpack (Base "m"))
 -- otherwise we'll get an error like this:

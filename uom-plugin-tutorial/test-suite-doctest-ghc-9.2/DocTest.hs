@@ -8,7 +8,6 @@ arguments =
     , "-isrc"
     , "./src/Plugins/UoM/UnitDefs.hs"
     , "./doc-ghc-9.2/Data/UnitsOfMeasure/Tutorial.hs"
-    , "-XPackageImports"
     , "-fplugin Plugins.UoM"
     ]
 

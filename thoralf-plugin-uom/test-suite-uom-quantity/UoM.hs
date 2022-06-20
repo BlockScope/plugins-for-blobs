@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds, QuasiQuotes, PackageImports #-}
+{-# LANGUAGE TypeFamilies, TypeOperators, GADTs, DataKinds, QuasiQuotes #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Solve #-}

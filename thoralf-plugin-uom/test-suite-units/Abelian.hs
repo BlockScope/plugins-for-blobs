@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeOperators, AllowAmbiguousTypes, PackageImports #-}
+{-# LANGUAGE TypeOperators, AllowAmbiguousTypes #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
 

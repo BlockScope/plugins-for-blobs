@@ -1,2 +1,0 @@
-# Warnings currently triggered by your code
-- ignore: {name: "Unused LANGUAGE pragma"} # 29 hints

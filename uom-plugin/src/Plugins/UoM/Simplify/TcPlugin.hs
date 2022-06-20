@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, PackageImports #-}
+{-# LANGUAGE NamedFieldPuns #-}
 
 module Plugins.UoM.Simplify.TcPlugin (uomSimplifyPlugin, unitsSimplify) where
 

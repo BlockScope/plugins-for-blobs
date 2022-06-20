@@ -1,5 +1,3 @@
-{-# LANGUAGE PackageImports #-}
-
 module Plugins.UoM.TcPlugin (uomPlugin) where
 
 import GHC.Corroborate hiding (tracePlugin)
