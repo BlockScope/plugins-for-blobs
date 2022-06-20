@@ -122,14 +122,14 @@ unitsSimplify'
                 (pprSolverCallCount traceCallCount "ghc-tcplugin-uom-simplify" indent calls)
 
         logCtsProblem ws =
-            sequence_
-                $ tracePlugin dbgPlugin
-                <$> pprCtsStepProblem dbgPlugin "cts-problem" indent Nothing givens deriveds ws
+            mapM_
+                (tracePlugin dbgPlugin)
+                (pprCtsStepProblem dbgPlugin "cts-problem" indent Nothing givens deriveds ws)
 
         logCtsSolution x =
-            sequence_
-                $ tracePlugin dbgPlugin
-                <$> pprCtsStepSolution dbgPlugin "cts-solution" indent x
+            mapM_
+                (tracePlugin dbgPlugin)
+                (pprCtsStepSolution dbgPlugin "cts-solution" indent x)
 
         contradiction eq = do
             contra <- reportContradiction unitDefs eq

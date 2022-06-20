@@ -378,27 +378,20 @@ thoralfSolver
         getUnsatCore = flip SMT.command (SMT.List [ SMT.Atom "get-unsat-core" ])
 
         logCtsProblem msg gs ds ws =
-            sequence_
-            $ tracePlugin dbgPlugin
-            <$> pprCtsStepProblem dbgPlugin "cts-problem" jIndent msg gs ds ws
+            mapM_
+                (tracePlugin dbgPlugin)
+                (pprCtsStepProblem dbgPlugin "cts-problem" jIndent msg gs ds ws)
 
         logCtsSolution x =
-            sequence_
-            $ tracePlugin dbgPlugin
-            <$> pprCtsStepSolution dbgPlugin "cts-solution" jIndent x
+            mapM_
+                (tracePlugin dbgPlugin)
+                (pprCtsStepSolution dbgPlugin "cts-solution" jIndent x)
 
         logConvCts step =
-            sequence_
-            $ tracePlugin dbgPlugin
-            <$> pprCtsStep jIndent dbgSmt step
+            mapM_ (tracePlugin dbgPlugin) (pprCtsStep jIndent dbgSmt step)
 
-        logSmtComments step =
-            sequence_
-            $ traceSmt dbgSmt <$> pprAsSmtCommentCts dbgSmt step
-
-        logSmtCts step =
-            sequence_
-            $ traceSmt dbgSmt <$> pprSmtStep jIndent dbgSmt step
+        logSmtComments step = mapM_ (traceSmt dbgSmt) (pprAsSmtCommentCts dbgSmt step)
+        logSmtCts step = mapM_ (traceSmt dbgSmt) (pprSmtStep jIndent dbgSmt step)
 
         smtWanted :: [ConvEq] -> SMT.SExpr
         smtWanted [] = SMT.Atom "false"
