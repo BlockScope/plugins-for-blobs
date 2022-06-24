@@ -46,7 +46,7 @@ jobs:
         run: cabal build all --enable-tests
 
       - name: run stan
-        run: ./bin/stan report
+        run: ./.bin/stan report
 
       - run: stan report
       - uses: actions/upload-artifact@v3
