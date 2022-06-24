@@ -48,8 +48,8 @@ jobs:
       - name: run stan
         run: ./.bin/stan report
 
-      - run: stan report
       - uses: actions/upload-artifact@v3
+        if: failure()
         with:
           name: stan-report
           path: ./stan.html

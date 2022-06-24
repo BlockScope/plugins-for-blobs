@@ -1,0 +1,35 @@
+# Partial: base/read
+[[check]]
+id = "STAN-0009" 
+type = "Exclude"
+scope = "all"
+
+# Partial: base/foldl1'
+[[check]]
+id = "STAN-0018" 
+type = "Exclude"
+scope = "all"
+
+# Infinite: base/genericLength
+[[check]]
+id = "STAN-0104" 
+type = "Exclude"
+scope = "all"
+
+# Data types with non-strict fields
+[[check]]
+id = "STAN-0206" 
+type = "Exclude"
+scope = "all"
+
+# Anti-pattern: unsafe functions
+[[check]]
+id = "STAN-0212" 
+type = "Exclude"
+scope = "all"
+
+# Anti-pattern: Pattern matching on '_'
+[[check]]
+id = "STAN-0213" 
+type = "Exclude"
+scope = "all"
