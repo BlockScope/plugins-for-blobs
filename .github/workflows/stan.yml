@@ -40,7 +40,7 @@ jobs:
         run: cabal update
 
       - name: install stan
-        run: cabal install stan -w ghc-{{matrix.ghc}} --installdir=.bin --install-method=copy --overwrite-policy=always
+        run: cabal install stan -w ghc-${{matrix.ghc}} --installdir=.bin --install-method=copy --overwrite-policy=always
 
       - name: build
         run: cabal build all --enable-tests

@@ -13,8 +13,8 @@ jobs:
         cabal: ["3.6"]
         ghc:
           - "8.2.2"
-          - "8.10.7"
-          - "9.2.2"
+          # - "8.10.7" is built and tested by the stan action.
+          - "9.2.3"
 
     steps:
       - uses: actions/checkout@v2
