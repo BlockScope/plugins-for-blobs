@@ -16,12 +16,6 @@ id = "STAN-0104"
 type = "Exclude"
 scope = "all"
 
-# Data types with non-strict fields
-[[check]]
-id = "STAN-0206" 
-type = "Exclude"
-scope = "all"
-
 # Anti-pattern: unsafe functions
 [[check]]
 id = "STAN-0212" 

@@ -116,8 +116,8 @@ uDec s = case parseUnitDecs s of
 
 data UnitDecl
     = BaseUnit
-    | DefinedUnit (UnitExp () String)
-    | ConversionUnit Rational (UnitExp () String)
+    | DefinedUnit !(UnitExp () String)
+    | ConversionUnit !Rational !(UnitExp () String)
 
 -- | Parse a comma-separated list of unit declarations, for example:
 --
