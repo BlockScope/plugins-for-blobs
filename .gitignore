@@ -10,5 +10,5 @@ dist-newstyle/
 *.swn
 .hie/
 *.txt
-.bin/stan
+.bin/
 stan.html
