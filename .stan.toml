@@ -1,33 +1,3 @@
-# Partial: base/read
-[[check]]
-id = "STAN-0009" 
-type = "Exclude"
-scope = "all"
-
-# Partial: base/foldl1'
-[[check]]
-id = "STAN-0018" 
-type = "Exclude"
-scope = "all"
-
-# Infinite: base/genericLength
-[[check]]
-id = "STAN-0104" 
-type = "Exclude"
-scope = "all"
-
-# Anti-pattern: unsafe functions
-[[check]]
-id = "STAN-0212" 
-type = "Exclude"
-scope = "all"
-
-# Anti-pattern: Pattern matching on '_'
-[[check]]
-id = "STAN-0213" 
-type = "Exclude"
-scope = "all"
-
 #  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #  ┃  ✦ ID:            OBS-STAN-0004-me4T/d-67:22
 #  ┃  ✦ Severity:      Warning
@@ -41,3 +11,317 @@ scope = "all"
 #  ┃    67 ┃   | isPathSeparator (List.last dir) = dir ++ fname
 [[ignore]]
 id = "OBS-STAN-0004-me4T/d-67:22"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0009-qiyW2s-42:27
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0009
+#  ┃  ✦ Name:          Partial: base/read
+#  ┃  ✦ Description:   Usage of partial function 'read' for parsing 'String'
+#  ┃  ✦ Category:      #Partial
+#  ┃  ✦ File:          test-suite-units-ghc-8.4/Basic.hs
+#  ┃
+#  ┃    41 ┃
+#  ┃    42 ┃ readMass = fmap [u| kg |] read
+#  ┃    43 ┃                           ^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Use 'readMaybe' or 'readEither' to handle failed parsing
+[[ignore]]
+id = "OBS-STAN-0009-qiyW2s-42:27"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0018-30IO8S-317:24
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0018
+#  ┃  ✦ Name:          Partial: base/foldl1'
+#  ┃  ✦ Description:   Usage of partial function 'foldl1'' for lists
+#  ┃  ✦ Category:      #Partial #List
+#  ┃  ✦ File:          src/Plugins/Thoralf/UoM/TcPlugin.hs
+#  ┃
+#  ┃   316 ┃
+#  ┃   317 ┃         smtWanted ws = foldl1' SMT.or (map (SMT.not . eqSExpr) ws)
+#  ┃   318 ┃                        ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Replace list with 'NonEmpty' from 'Data.List.NonEmpty'
+#  ┃      ⍟ Use explicit pattern-matching over lists
+[[ignore]]
+id = "OBS-STAN-0018-30IO8S-317:24"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0104-LEn9To-24:26
+#  ┃  ✦ Severity:      PotentialBug
+#  ┃  ✦ Inspection ID: STAN-0104
+#  ┃  ✦ Name:          Infinite: base/genericLength
+#  ┃  ✦ Description:   Usage of the 'genericLength' function that hangs on infinite lists
+#  ┃  ✦ Category:      #Infinite #List
+#  ┃  ✦ File:          test-suite-units/DelayEq.hs
+#  ┃
+#  ┃    23 ┃
+#  ┃    24 ┃ mean xs = sum' xs /: mk (genericLength xs)
+#  ┃    25 ┃                          ^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Don't use 'genericLength' if you expect your function to work with infinite lists
+#  ┃      ⍟ {Extra dependency} Use the 'slist' library for fast and safe functions on infinite lists
+[[ignore]]
+id = "OBS-STAN-0104-LEn9To-24:26"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-NdFeVI-91:19
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          src/Data/UnitsOfMeasure/Convert.hs
+#  ┃
+#  ┃    90 ┃
+#  ┃    91 ┃ convert = (ratio (undefined :: proxy' (proxy v)) (undefined :: proxy' (proxy u)) *:)
+#  ┃    92 ┃                   ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-NdFeVI-91:19"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-NdFeVI-91:51
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          src/Data/UnitsOfMeasure/Convert.hs
+#  ┃
+#  ┃    90 ┃
+#  ┃    91 ┃ convert = (ratio (undefined :: proxy' (proxy v)) (undefined :: proxy' (proxy u)) *:)
+#  ┃    92 ┃                                                   ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-NdFeVI-91:51"
+ 
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-NdFeVI-103:46
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          src/Data/UnitsOfMeasure/Convert.hs
+#  ┃
+#  ┃   102 ┃
+#  ┃   103 ┃ ratio _ _ = fromRational' $ conversionRatio (undefined :: proxy u) /: conversionRatio (undefined :: proxy v)
+#  ┃   104 ┃                                              ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-NdFeVI-103:46"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-NdFeVI-103:88
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          src/Data/UnitsOfMeasure/Convert.hs
+#  ┃
+#  ┃   102 ┃
+#  ┃   103 ┃ ratio _ _ = fromRational' $ conversionRatio (undefined :: proxy u) /: conversionRatio (undefined :: proxy v)
+#  ┃   104 ┃                                                                                        ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-NdFeVI-103:88"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-1/9mMI-29:18
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          src/ThoralfPlugin/Singletons/Nat.hs
+#  ┃
+#  ┃    28 ┃
+#  ┃    29 ┃ forceCT x = case unsafeCoerce (Dict :: Dict ()) :: Dict c of
+#  ┃    30 ┃                  ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-1/9mMI-29:18"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-9Dk0zy-48:48
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          test-suite-units-ghc-8.4/ErrorTestGroups.hs
+#  ┃
+#  ┃    47 ┃
+#  ┃    48 ┃     , testCase "a ~ a  =>  a ~ kg"    $ given1 undefined `throws` given1_errors
+#  ┃    49 ┃                                                ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-9Dk0zy-48:48"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-hhaL+C-148:21
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          src/Data/UnitsOfMeasure/TH.hs
+#  ┃
+#  ┃   147 ┃
+#  ┃   148 ┃                     _ -> Nothing
+#  ┃   149 ┃                     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-hhaL+C-148:21"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-hhaL+C-150:9
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          src/Data/UnitsOfMeasure/TH.hs
+#  ┃
+#  ┃   149 ┃
+#  ┃   150 ┃         _ ->
+#  ┃   151 ┃             case parseUnit universalSymbolTable d of
+#  ┃   152 ┃                 Right e -> ((u, DefinedUnit e) :) <$> go ys
+#  ┃   153 ┃                 Left  _ -> Nothing
+#  ┃   154 ┃         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-hhaL+C-150:9"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-aAJh8i-105:9
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          src/Plugins/Thoralf/UoM/Solve.hs
+#  ┃
+#  ┃   104 ┃
+#  ┃   105 ┃         _ -> Nothing
+#  ┃   106 ┃         ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-aAJh8i-105:9"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-30IO8S-265:13
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          src/Plugins/Thoralf/UoM/TcPlugin.hs
+#  ┃
+#  ┃   264 ┃
+#  ┃   265 ┃             _ -> do
+#  ┃   266 ┃                 c <- tcPluginIO (putStrLn "Parse Failed") >> noSolving
+#  ┃   267 ┃                 return (Set.empty, Set.empty, c)
+#  ┃   268 ┃             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-30IO8S-265:13"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-30IO8S-341:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          src/Plugins/Thoralf/UoM/TcPlugin.hs
+#  ┃
+#  ┃   340 ┃
+#  ┃   341 ┃     _ -> True
+#  ┃   342 ┃     ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-30IO8S-341:5"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-xEvGqW-58:13
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          src/ThoralfPlugin/Encode/UoM.hs
+#  ┃
+#  ┃    57 ┃
+#  ┃    58 ┃             _ -> Nothing
+#  ┃    59 ┃             ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-xEvGqW-58:13"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-xEvGqW-62:13
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          src/ThoralfPlugin/Encode/UoM.hs
+#  ┃
+#  ┃    61 ┃
+#  ┃    62 ┃             _ -> Nothing
+#  ┃    63 ┃             ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-xEvGqW-62:13"
