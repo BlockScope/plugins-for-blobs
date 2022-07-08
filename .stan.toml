@@ -27,3 +27,17 @@ scope = "all"
 id = "STAN-0213" 
 type = "Exclude"
 scope = "all"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0004-me4T/d-67:22
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0004
+#  ┃  ✦ Name:          Partial: base/last
+#  ┃  ✦ Description:   Usage of partial function 'last' for lists
+#  ┃  ✦ Category:      #Partial #List
+#  ┃  ✦ File:          .../autogen/Paths_build_plugins_for_blobs.hs
+#  ┃
+#  ┃    66 ┃
+#  ┃    67 ┃   | isPathSeparator (List.last dir) = dir ++ fname
+[[ignore]]
+id = "OBS-STAN-0004-me4T/d-67:22"
