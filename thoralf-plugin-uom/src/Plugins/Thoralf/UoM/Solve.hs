@@ -105,5 +105,4 @@ _maybeExtractTyEq uds ct =
             | Just (tc, [t1,t2]) <- splitTyConApp_maybe t
             , tc == equivTyCon uds -> return ((t1, t2), ct)
             | otherwise -> Nothing
-        ClassPred{} -> Nothing
-        ForAllPred{} -> Nothing
+        _otherPred -> Nothing
