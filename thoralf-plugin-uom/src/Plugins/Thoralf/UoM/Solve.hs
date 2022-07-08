@@ -98,8 +98,12 @@ _maybeExtractTyDisEq disEqCls ct = do
 _maybeExtractTyEq :: UnitDefs -> Ct -> Maybe ((Type, Type), Ct)
 _maybeExtractTyEq uds ct =
     case classifyPredType $ ctPred ct of
-        EqPred NomEq t1 t2 -> return ((t1, t2), ct)
+        EqPred eqRel t1 t2
+            | NomEq <- eqRel -> return ((t1, t2), ct)
+            | otherwise -> Nothing
         IrredPred t
             | Just (tc, [t1,t2]) <- splitTyConApp_maybe t
             , tc == equivTyCon uds -> return ((t1, t2), ct)
-        _ -> Nothing
+            | otherwise -> Nothing
+        ClassPred{} -> Nothing
+        ForAllPred{} -> Nothing

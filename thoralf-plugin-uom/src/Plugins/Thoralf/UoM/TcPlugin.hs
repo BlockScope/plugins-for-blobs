@@ -6,7 +6,7 @@ import Prelude hiding (showList, cycle)
 import qualified Data.Set as Set
 import Data.Foldable (traverse_)
 import Data.Either (partitionEithers)
-import Data.Maybe (mapMaybe)
+import Data.Maybe (mapMaybe, isJust)
 import Data.List ((\\), foldl1')
 import Control.Monad (when)
 import qualified SimpleSMT as SMT
@@ -262,7 +262,7 @@ delayEqSolve
 
                 return (decs1Unseen, decs2Unseen, solveCheck)
 
-            _ -> do
+            (_gsConvCts, _wsConvCts) -> do
                 c <- tcPluginIO (putStrLn "Parse Failed") >> noSolving
                 return (Set.empty, Set.empty, c)
 
@@ -336,9 +336,7 @@ delayEqSolve
                 ]
 
 isEqCt :: Class -> Ct -> Bool
-isEqCt diseq ct = case (maybeExtractTyEq ct, maybeExtractTyDisEq diseq ct) of
-    (Nothing, Nothing) -> False
-    _ -> True
+isEqCt diseq ct = isJust (maybeExtractTyEq ct) || isJust (maybeExtractTyDisEq diseq ct)
 
 -- * Solver Helper Functions
 --------------------------------------------------------------------------------

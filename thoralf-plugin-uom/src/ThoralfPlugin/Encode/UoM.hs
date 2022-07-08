@@ -55,11 +55,11 @@ mkUoMEncoding
     where
         f s' = typeArgConvert $ \case
             (x : _) -> Just (x :> VNil, s')
-            _ -> Nothing
+            _xs -> Nothing
 
         g s' = typeArgConvert $ \case
             (x : y : _) -> Just (x :> y :> VNil, s')
-            _ -> Nothing
+            _xs -> Nothing
 
 oneString :: String
 oneString = "((as const (Array String Int)) 0)"

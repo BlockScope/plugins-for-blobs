@@ -145,9 +145,9 @@ parseUnitDecs = go
             | not (all isSpace s) ->
                 case parseUnit universalSymbolTable s of
                     Right e -> ((u, ConversionUnit (either fromInteger id ei) e) :) <$> go ys
-                    _ -> Nothing
+                    _unparsed -> Nothing
 
-        _ ->
+        _unread ->
             case parseUnit universalSymbolTable d of
                 Right e -> ((u, DefinedUnit e) :) <$> go ys
                 Left  _ -> Nothing
