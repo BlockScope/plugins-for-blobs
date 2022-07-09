@@ -1,4 +1,4 @@
-let defs = ./../defaults-blobs.dhall "../.hie"
+let defs = ./../defaults-blobs.dhall ".hie"
 
 in    defs
     ⫽ { name = "build-plugins-for-blobs"

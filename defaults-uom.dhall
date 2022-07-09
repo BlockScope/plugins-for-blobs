@@ -12,8 +12,7 @@ in  { version = "0.3.0.1"
     , dependencies = [ "base >=4.9.1.0 && <5" ]
     , when =
       { condition = "impl(ghc >= 8.8.0)"
-      , `then`.ghc-options
-        = ghc-opts # [ "-fwrite-ide-info", "-hiedir=../.hie" ]
+      , `then`.ghc-options = ghc-opts # [ "-fwrite-ide-info", "-hiedir=.hie" ]
       , `else`.ghc-options = ghc-opts
       }
     }

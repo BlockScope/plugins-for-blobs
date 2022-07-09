@@ -67,7 +67,7 @@ library
     , uom-th
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.10.1)
@@ -108,7 +108,7 @@ test-suite defs
     , uom-th
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
 
@@ -143,7 +143,7 @@ test-suite delay-eq
     , uom-th
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
 
@@ -178,7 +178,7 @@ test-suite force
     , uom-th
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
 
@@ -219,7 +219,7 @@ test-suite units
     , uom-th
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 9.2) && impl(ghc < 9.4)
@@ -282,7 +282,7 @@ test-suite uom-diy
     , uom-th
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
 
@@ -322,6 +322,6 @@ test-suite uom-quantity
     , uom-th
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors

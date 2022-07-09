@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 595487f774a0c0cb7f0c7e5f034347ad227d4a6e0f3a785ba71adf7aeb6c7dd3
+-- hash: 61413627f8995d7f8b5fb201ad7906309704d29ee76af9badd1a754635c33399
 
 name:           uom-th
 version:        0.3.0.1
@@ -53,7 +53,7 @@ library
     , uom-quantity
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.10.1)
