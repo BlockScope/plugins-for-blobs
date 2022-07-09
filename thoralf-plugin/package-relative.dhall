@@ -29,9 +29,6 @@
                   , "simple-smt"
                   , "split"
                   , "th-printf >=0.7"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
-                  , "units-parser >=0.1.1.4"
                   , "${prefix}thoralf-theory"
                   , "${prefix}thoralf-encode"
                   ]

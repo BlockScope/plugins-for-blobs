@@ -87,26 +87,27 @@ so that they could be shared between both.
 ```
 > cabal-plan tred --hide-exes --hide-builtin
 thoralf-plugin-defs
-└─ thoralf-plugin-uom
-  └─ thoralf-plugin
-        ├─ split
-        └─ thoralf-encode
-            └─ thoralf-theory
-              ├─ simple-smt
-              └─ uom-th
-                    └─ uom-quantity
-                        ├─ ghc-tcplugins-trace
-                        │   ├─ ghc-corroborate
-                        │   │   └─ ghc-tcplugins-extra
-                        │   └─ th-printf
-                        └─ units-parser
+ └─ thoralf-plugin-uom
+     ├─ thoralf-plugin
+     └─ uom-th
 
 thoralf-plugin-rows
 └─ thoralf-plugin
 
+thoralf-plugin
+ └─ thoralf-encode
+
 uom-plugin-defs
 └─ uom-plugin
   └─ uom-th
+
+uom-th
+└─ uom-quantity
+    ├─ ghc-tcplugins-trace
+    │   ├─ ghc-corroborate
+    │   │   └─ ghc-tcplugins-extra
+    │   └─ th-printf
+    └─ units-parser
 ```
 
 ### Enhanced Tracing

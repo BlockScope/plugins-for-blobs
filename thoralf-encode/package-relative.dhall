@@ -29,9 +29,6 @@
                   , "simple-smt"
                   , "th-printf >=0.7"
                   , "${prefix}thoralf-theory"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
-                  , "units-parser >=0.1.1.4"
                   ]
             , library =
               { source-dirs = "${src}src"

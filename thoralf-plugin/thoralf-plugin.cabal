@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.6.
+-- This file has been generated from package.dhall by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c3e8d96f8842fed0ea797ea359a255b57eec5ecc5750da96db99f08e452aa88f
+-- hash: e8f96a0cd1cc273708e7479ac33d501c753ce767da093f12e5033db6e243fb54
 
 name:                thoralf-plugin
 version:             0.1.0.0
@@ -61,6 +61,3 @@ library
     , th-printf >=0.7
     , thoralf-encode
     , thoralf-theory
-    , units-parser >=0.1.1.4
-    , uom-quantity
-    , uom-th
