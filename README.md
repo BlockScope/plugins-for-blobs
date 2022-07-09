@@ -92,22 +92,26 @@ thoralf-plugin-defs
      └─ uom-th
 
 thoralf-plugin-rows
-└─ thoralf-plugin
+ └─ thoralf-plugin
 
 thoralf-plugin
  └─ thoralf-encode
+     └─ thoralf-theory
+         └─ ghc-tcplugins-trace
 
 uom-plugin-defs
 └─ uom-plugin
   └─ uom-th
 
 uom-th
-└─ uom-quantity
-    ├─ ghc-tcplugins-trace
-    │   ├─ ghc-corroborate
-    │   │   └─ ghc-tcplugins-extra
-    │   └─ th-printf
-    └─ units-parser
+ └─ uom-quantity
+     ├─ ghc-tcplugins-trace
+     └─ units-parser
+
+ghc-tcplugins-trace
+ └─ ghc-corroborate
+     └─ ghc-tcplugins-extra
+         └─ simple-smt
 ```
 
 ### Enhanced Tracing
