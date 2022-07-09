@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.6.
+-- This file has been generated from package.dhall by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -58,6 +58,7 @@ library
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
@@ -68,7 +69,6 @@ library
   if impl(ghc >= 8.2) && impl(ghc < 9.2)
     hs-source-dirs:
         doc-ghc-8.2
-  default-language: Haskell2010
 
 test-suite defs
   type: exitcode-stdio-1.0
@@ -85,13 +85,13 @@ test-suite defs
     , uom-plugin
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010
 
 test-suite force
   type: exitcode-stdio-1.0
@@ -108,13 +108,13 @@ test-suite force
     , uom-plugin
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010
 
 test-suite units
   type: exitcode-stdio-1.0
@@ -138,6 +138,7 @@ test-suite units
     , uom-plugin
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
@@ -158,7 +159,6 @@ test-suite units
     buildable: True
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010
 
 test-suite unpack-solve
   type: exitcode-stdio-1.0
@@ -182,6 +182,7 @@ test-suite unpack-solve
     , uom-plugin
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
@@ -202,4 +203,3 @@ test-suite unpack-solve
     buildable: True
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010

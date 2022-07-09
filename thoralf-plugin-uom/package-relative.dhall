@@ -1,6 +1,7 @@
+λ(hie : Text) →
 λ(src : Text) →
 λ(prefix : Text) →
-  let defs = ./../defaults-blobs.dhall
+  let defs = ./../defaults-blobs.dhall hie
 
   in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
 

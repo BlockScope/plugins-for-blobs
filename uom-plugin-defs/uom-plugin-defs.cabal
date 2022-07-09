@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.6.
+-- This file has been generated from package.dhall by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5c66977b2a5bda7dd4335dd08bcf86ed78517cff7918b1be92ffd1e1d77ee791
+-- hash: 49a45918e2271dae06d5a14bd857385d360eb47c5b6132cfe034420b6f62c837
 
 name:           uom-plugin-defs
 version:        0.3.0.1
@@ -43,8 +43,8 @@ library
     , uom-plugin
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010

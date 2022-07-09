@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.6.
+-- This file has been generated from package.dhall by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 77fa83a7a47d4677af86f93858173ea8f119e6123496deed6a10746c5cf3b118
+-- hash: 595487f774a0c0cb7f0c7e5f034347ad227d4a6e0f3a785ba71adf7aeb6c7dd3
 
 name:           uom-th
 version:        0.3.0.1
@@ -51,6 +51,7 @@ library
     , th-printf >=0.7
     , units-parser >=0.1.1.4
     , uom-quantity
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
@@ -61,4 +62,3 @@ library
   else
     hs-source-dirs:
         src-NoStandaloneKindSignatures
-  default-language: Haskell2010

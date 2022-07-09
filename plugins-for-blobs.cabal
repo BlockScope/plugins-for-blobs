@@ -1,6 +1,6 @@
 cabal-version: 3.0
 
--- This file has been generated from package.dhall by hpack version 0.34.7.
+-- This file has been generated from package.dhall by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -64,11 +64,11 @@ library thoralf-encode
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 library thoralf-plugin
   visibility: public
@@ -105,11 +105,11 @@ library thoralf-plugin
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 library thoralf-plugin-defs
   visibility: public
@@ -126,11 +126,11 @@ library thoralf-plugin-defs
     , template-haskell >=2.9
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 library thoralf-plugin-rows
   visibility: public
@@ -163,6 +163,7 @@ library thoralf-plugin-rows
     , simple-smt
     , template-haskell >=2.9
     , th-printf >=0.7
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -173,7 +174,6 @@ library thoralf-plugin-rows
   else
     hs-source-dirs:
         thoralf-plugin-rows/src-NoStandaloneKindSignatures
-  default-language: Haskell2010
 
 library thoralf-plugin-uom
   visibility: public
@@ -211,6 +211,7 @@ library thoralf-plugin-uom
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -221,7 +222,6 @@ library thoralf-plugin-uom
   else
     hs-source-dirs:
         thoralf-plugin-uom/src-NoStandaloneKindSignatures
-  default-language: Haskell2010
 
 library thoralf-theory
   visibility: public
@@ -250,6 +250,7 @@ library thoralf-theory
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -260,7 +261,6 @@ library thoralf-theory
   else
     hs-source-dirs:
         thoralf-theory/src-NoStandaloneKindSignatures
-  default-language: Haskell2010
 
 library uom-plugin
   visibility: public
@@ -288,6 +288,7 @@ library uom-plugin
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -298,7 +299,6 @@ library uom-plugin
   if impl(ghc >= 8.2) && impl(ghc < 9.2)
     hs-source-dirs:
         uom-plugin/doc-ghc-8.2
-  default-language: Haskell2010
 
 library uom-plugin-defs
   visibility: public
@@ -312,11 +312,11 @@ library uom-plugin-defs
     , plugins-for-blobs:uom-quantity
     , plugins-for-blobs:uom-th
     , template-haskell >=2.9
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 library uom-quantity
   visibility: public
@@ -350,6 +350,7 @@ library uom-quantity
     , ghc-tcplugins-trace
     , template-haskell >=2.9
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -438,7 +439,6 @@ library uom-quantity
       , ghc (Type as Type)
       , ghc (TcRnTypes as Constraint)
       , ghc (Type as Predicate)
-  default-language: Haskell2010
 
 library uom-th
   visibility: public
@@ -457,6 +457,7 @@ library uom-th
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -467,7 +468,6 @@ library uom-th
   else
     hs-source-dirs:
         uom-th/src-NoStandaloneKindSignatures
-  default-language: Haskell2010
 
 executable uom-plugin-examples
   main-is: Examples.hs
@@ -485,13 +485,13 @@ executable uom-plugin-examples
     , plugins-for-blobs:uom-plugin-defs
     , plugins-for-blobs:uom-quantity
     , plugins-for-blobs:uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4.0)
     buildable: False
-  default-language: Haskell2010
 
 test-suite thoralf-defs
   type: exitcode-stdio-1.0
@@ -522,11 +522,11 @@ test-suite thoralf-defs
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite thoralf-delay-eq
   type: exitcode-stdio-1.0
@@ -557,11 +557,11 @@ test-suite thoralf-delay-eq
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite thoralf-force
   type: exitcode-stdio-1.0
@@ -592,11 +592,11 @@ test-suite thoralf-force
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite thoralf-rows
   type: exitcode-stdio-1.0
@@ -624,11 +624,11 @@ test-suite thoralf-rows
     , simple-smt
     , template-haskell >=2.9
     , th-printf >=0.7
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite thoralf-units
   type: exitcode-stdio-1.0
@@ -665,6 +665,7 @@ test-suite thoralf-units
     , template-haskell >=2.9
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -693,7 +694,6 @@ test-suite thoralf-units
     hs-source-dirs:
         thoralf-plugin-uom/test-suite-units-ghc-8.2
     buildable: True
-  default-language: Haskell2010
 
 test-suite thoralf-uom-diy
   type: exitcode-stdio-1.0
@@ -728,11 +728,11 @@ test-suite thoralf-uom-diy
     , template-haskell
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite thoralf-uom-quantity
   type: exitcode-stdio-1.0
@@ -768,11 +768,11 @@ test-suite thoralf-uom-quantity
     , template-haskell
     , th-printf >=0.7
     , units-parser >=0.1.1.4
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite uom-defs
   type: exitcode-stdio-1.0
@@ -789,13 +789,13 @@ test-suite uom-defs
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010
 
 test-suite uom-force
   type: exitcode-stdio-1.0
@@ -812,13 +812,13 @@ test-suite uom-force
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010
 
 test-suite uom-quantity-doctest
   type: exitcode-stdio-1.0
@@ -837,11 +837,11 @@ test-suite uom-quantity-doctest
     , plugins-for-blobs:uom-quantity
     , template-haskell >=2.9
     , units-parser >=0.1
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite uom-tutorial-doctest
   type: exitcode-stdio-1.0
@@ -857,6 +857,7 @@ test-suite uom-tutorial-doctest
     , plugins-for-blobs:uom-plugin
     , plugins-for-blobs:uom-quantity
     , plugins-for-blobs:uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -873,7 +874,6 @@ test-suite uom-tutorial-doctest
     hs-source-dirs:
         uom-plugin-tutorial/doc-ghc-8.2
         uom-plugin-tutorial/test-suite-doctest-ghc-8.2
-  default-language: Haskell2010
 
 test-suite uom-units
   type: exitcode-stdio-1.0
@@ -897,6 +897,7 @@ test-suite uom-units
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -917,7 +918,6 @@ test-suite uom-units
     buildable: True
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010
 
 test-suite uom-unpack-solve
   type: exitcode-stdio-1.0
@@ -941,6 +941,7 @@ test-suite uom-unpack-solve
     , plugins-for-blobs:uom-th
     , tasty
     , tasty-hunit
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
@@ -961,4 +962,3 @@ test-suite uom-unpack-solve
     buildable: True
   if impl(ghc >= 8.4) && impl(ghc < 9.2)
     buildable: False
-  default-language: Haskell2010

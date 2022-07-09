@@ -15,7 +15,7 @@
     goals I've had most trouble fulfilling: uom-quantity, uom-quantity:test,
     plugins-for-blobs
 -}
-let defs = ./defaults-blobs.dhall
+let defs = ./defaults-blobs.dhall ".hie"
 
 let uom-quantity =
       ./uom-quantity/package-relative.dhall "uom-quantity/" "plugins-for-blobs:"
@@ -44,11 +44,13 @@ let thoralf-plugin-rows =
 
 let thoralf-plugin-uom =
       ./thoralf-plugin-uom/package-relative.dhall
+        ".hie"
         "thoralf-plugin-uom/"
         "plugins-for-blobs:"
 
 let thoralf-plugin-defs =
       ./thoralf-plugin-defs/package-relative.dhall
+        ".hie"
         "thoralf-plugin-defs/"
         "plugins-for-blobs:"
 

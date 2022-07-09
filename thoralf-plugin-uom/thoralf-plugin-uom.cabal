@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.7.
+-- This file has been generated from package.dhall by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -65,6 +65,7 @@ library
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
@@ -75,7 +76,6 @@ library
   else
     hs-source-dirs:
         src-NoStandaloneKindSignatures
-  default-language: Haskell2010
 
 test-suite defs
   type: exitcode-stdio-1.0
@@ -106,11 +106,11 @@ test-suite defs
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite delay-eq
   type: exitcode-stdio-1.0
@@ -141,11 +141,11 @@ test-suite delay-eq
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite force
   type: exitcode-stdio-1.0
@@ -176,11 +176,11 @@ test-suite force
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite units
   type: exitcode-stdio-1.0
@@ -217,6 +217,7 @@ test-suite units
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
@@ -245,7 +246,6 @@ test-suite units
     hs-source-dirs:
         test-suite-units-ghc-8.2
     buildable: True
-  default-language: Haskell2010
 
 test-suite uom-diy
   type: exitcode-stdio-1.0
@@ -280,11 +280,11 @@ test-suite uom-diy
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
 
 test-suite uom-quantity
   type: exitcode-stdio-1.0
@@ -320,8 +320,8 @@ test-suite uom-quantity
     , units-parser >=0.1.1.4
     , uom-quantity
     , uom-th
+  default-language: Haskell2010
   if impl(ghc >= 8.8.0)
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
   else
     ghc-options: -Wall -fno-warn-unticked-promoted-constructors
-  default-language: Haskell2010
