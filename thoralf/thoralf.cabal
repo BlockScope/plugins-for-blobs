@@ -1,0 +1,183 @@
+cabal-version: 3.0
+
+-- This file has been generated from package.dhall by hpack version 0.35.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           thoralf
+version:        0.1.0.0
+author:         Divesh Otwani
+maintainer:     Ben Gamari
+license:        MIT
+license-file:   LICENSE.txt
+build-type:     Simple
+tested-with:
+    GHC == 8.4.4
+
+library thoralf-encode
+  visibility: public
+  exposed-modules:
+      Data.Vec
+      ThoralfPlugin.Encode.Convert
+      ThoralfPlugin.Encode.Find
+      ThoralfPlugin.Encode.TheoryEncoding
+      ThoralfPlugin.Encode.Nat
+      ThoralfPlugin.Encode.Symbol
+      ThoralfPlugin.Encode.Bool
+  hs-source-dirs:
+      encode/src
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
+  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths
+  build-depends:
+      base >=4.9.1.0 && <5
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf:thoralf-theory
+  default-language: Haskell2010
+
+library thoralf-plugin
+  visibility: public
+  exposed-modules:
+      Plugins.Thoralf.TcPlugin
+      Plugins.Thoralf.Print
+      Plugins.Print.SMT
+      ThoralfPlugin.Extract
+      ThoralfPlugin.Convert
+      ThoralfPlugin.Variables
+      ThoralfPlugin.Singletons.Symbol
+  hs-source-dirs:
+      plugin/src
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
+  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths
+  build-depends:
+      base >=4.9.1.0 && <5
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , split
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-theory
+  default-language: Haskell2010
+
+library thoralf-plugin-rows
+  visibility: public
+  exposed-modules:
+      Plugins.Thoralf.Rows
+      Data.Theory.FiniteMap
+  other-modules:
+      ThoralfPlugin.Encode
+      ThoralfPlugin.Encode.FiniteMap
+  hs-source-dirs:
+      plugin-rows/src
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
+  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths -Wall -fno-warn-partial-type-signatures
+  build-depends:
+      base >=4.9.1.0 && <5
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+  default-language: Haskell2010
+  if impl(ghc >= 8.10.1)
+    hs-source-dirs:
+        plugin-rows/src-StandaloneKindSignatures
+  else
+    hs-source-dirs:
+        plugin-rows/src-NoStandaloneKindSignatures
+
+library thoralf-theory
+  visibility: public
+  exposed-modules:
+      Data.Theory.Bool
+      Data.Theory.DisEq
+  hs-source-dirs:
+      theory/src
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
+  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths
+  build-depends:
+      base >=4.9.1.0 && <5
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf >=0.7
+  default-language: Haskell2010
+  if impl(ghc >= 8.10.1)
+    hs-source-dirs:
+        theory/src-StandaloneKindSignatures
+  else
+    hs-source-dirs:
+        theory/src-NoStandaloneKindSignatures
+
+test-suite thoralf-rows
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      FiniteMaps
+      Nat
+      RowTypes
+  hs-source-dirs:
+      plugin-rows/test-suite-rows
+  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf.Rows
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-plugin-rows
+    , thoralf:thoralf-theory
+  default-language: Haskell2010

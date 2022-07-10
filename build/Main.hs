@@ -12,7 +12,7 @@ main = shakeArgs shakeOptions $ do
     mapM_ formatPkg dhallPkgs
     mapM_ hpack dhallPkgs
     mapM_ cabal dhallCabal
-    phony "dhall-format" $ need $ ("dhall-format-" ++) <$> dhallPkgs ++ dhallRootImports
+    phony "dhall-format" $ need $ ("dhall-format-" ++) <$> dhallPkgs ++ (snd <$> dhallRootImports)
     phony "hpack-dhall" $ need $ ("hpack-dhall-" ++) <$> dhallPkgs
     phony "cabal-files" $ need $ (\(x, y) -> x </> y <.> "cabal") <$> dhallCabal
 
@@ -40,20 +40,30 @@ dhallCabal =
     , ("uom/tutorial", "uom-plugin-tutorial")
     , ("uom/quantity", "uom-quantity")
     , ("uom/th", "uom-th")
+
+    , ("thoralf", "thoralf")
+    , ("uom", "uom")
+    , ("thoralf-uom", "thoralf-uom")
+
+    , (".", "plugins-for-blobs")
     ]
 
-dhallRootImports :: [String]
-dhallRootImports = ["defaults-uom", "defaults-thoralf", "defaults-blobs"]
+dhallRootImports :: [(Folder, String)]
+dhallRootImports =
+    [ ("uom", "defaults-uom")
+    , ("thoralf", "defaults-thoralf")
+    , ("thoralf-uom", "defaults-blobs")
+    ]
 
 formatPkg :: Folder -> Rules ()
 formatPkg folder =
     phony ("dhall-format-" ++ folder)
     $ cmd Shell ("dhall format " ++ (folder </> "package.dhall"))
 
-formatRoot :: String -> Rules ()
-formatRoot x =
+formatRoot :: (Folder, String) -> Rules ()
+formatRoot (folder, x) =
     phony ("dhall-format-" ++ x)
-    $ cmd Shell ("dhall format " ++ (x <.> ".dhall"))
+    $ cmd (Cwd folder) Shell ("dhall format " ++ (x <.> ".dhall"))
 
 hpack :: Folder -> Rules ()
 hpack folder =

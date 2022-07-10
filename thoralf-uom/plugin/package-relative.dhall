@@ -1,6 +1,8 @@
 λ(hie : Text) →
 λ(src : Text) →
 λ(prefix : Text) →
+λ(thoralf-prefix : Text) →
+λ(uom-prefix : Text) →
   let defs = ./../defaults-blobs.dhall hie
 
   in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
@@ -27,12 +29,12 @@
                   , "mtl"
                   , "simple-smt"
                   , "th-printf >=0.7"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
+                  , "${uom-prefix}uom-quantity"
+                  , "${uom-prefix}uom-th"
                   , "units-parser >=0.1.1.4"
-                  , "${prefix}thoralf-theory"
-                  , "${prefix}thoralf-encode"
-                  , "${prefix}thoralf-plugin"
+                  , "${thoralf-prefix}thoralf-theory"
+                  , "${thoralf-prefix}thoralf-encode"
+                  , "${thoralf-prefix}thoralf-plugin"
                   ]
             , library =
               { source-dirs = "${src}src"
@@ -67,8 +69,8 @@
                   , "tasty-quickcheck"
                   , "tasty-th"
                   , "${prefix}thoralf-plugin-uom"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
+                  , "${uom-prefix}uom-quantity"
+                  , "${uom-prefix}uom-th"
                   ]
                 , ghc-options = testopts
                 , other-modules = [ "UoM" ]
@@ -86,8 +88,8 @@
                   , "tasty-quickcheck"
                   , "tasty-th"
                   , "${prefix}thoralf-plugin-uom"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
+                  , "${uom-prefix}uom-quantity"
+                  , "${uom-prefix}uom-th"
                   ]
                 , ghc-options = testopts
                 , other-modules = [ "Defs", "UoM" ]
@@ -99,8 +101,8 @@
                   [ "base"
                   , "tasty"
                   , "tasty-hunit"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
+                  , "${uom-prefix}uom-quantity"
+                  , "${uom-prefix}uom-th"
                   , "${prefix}thoralf-plugin-uom"
                   ]
                 , ghc-options = testopts
@@ -113,8 +115,8 @@
                   [ "base"
                   , "tasty"
                   , "tasty-hunit"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
+                  , "${uom-prefix}uom-quantity"
+                  , "${uom-prefix}uom-th"
                   , "${prefix}thoralf-plugin-uom"
                   ]
                 , ghc-options = testopts
@@ -128,8 +130,8 @@
                   , "tasty"
                   , "tasty-hunit"
                   , "${prefix}thoralf-plugin-uom"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
+                  , "${uom-prefix}uom-quantity"
+                  , "${uom-prefix}uom-th"
                   ]
                 , ghc-options = testopts
                 , main = "Tests.hs"
@@ -142,8 +144,8 @@
                   , "tasty"
                   , "tasty-hunit"
                   , "${prefix}thoralf-plugin-uom"
-                  , "${prefix}uom-quantity"
-                  , "${prefix}uom-th"
+                  , "${uom-prefix}uom-quantity"
+                  , "${uom-prefix}uom-th"
                   ]
                 , ghc-options = testopts
                 , main = "Tests.hs"

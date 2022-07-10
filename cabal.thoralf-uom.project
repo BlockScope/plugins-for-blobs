@@ -1,0 +1,9 @@
+packages:
+    simple-smt
+    ghc-tcplugins-trace/ghc-tcplugins-trace
+    build
+    thoralf
+    uom
+    thoralf-uom
+tests: True
+write-ghc-environment-files: always

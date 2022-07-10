@@ -47,30 +47,28 @@ let thoralf-plugin-uom =
         ".hie"
         "thoralf-uom/plugin/"
         "plugins-for-blobs:"
+        "plugins-for-blobs:"
+        "plugins-for-blobs:"
 
 let thoralf-plugin-defs =
       ./thoralf-uom/defs/package-relative.dhall
         ".hie"
         "thoralf-uom/defs/"
         "plugins-for-blobs:"
+        "plugins-for-blobs:"
+        "plugins-for-blobs:"
 
 let uom-plugin =
       ./uom/plugin/package-relative.dhall "uom/plugin/" "plugins-for-blobs:"
 
 let uom-plugin-defs =
-      ./uom/defs/package-relative.dhall
-        "uom/defs/"
-        "plugins-for-blobs:"
+      ./uom/defs/package-relative.dhall "uom/defs/" "plugins-for-blobs:"
 
 let uom-plugin-examples =
-      ./uom/examples/package-relative.dhall
-        "uom/examples/"
-        "plugins-for-blobs:"
+      ./uom/examples/package-relative.dhall "uom/examples/" "plugins-for-blobs:"
 
 let uom-plugin-tutorial =
-      ./uom/tutorial/package-relative.dhall
-        "uom/tutorial/"
-        "plugins-for-blobs:"
+      ./uom/tutorial/package-relative.dhall "uom/tutorial/" "plugins-for-blobs:"
 
 in      defs
     //  { name = "plugins-for-blobs"

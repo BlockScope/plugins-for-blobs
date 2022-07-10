@@ -1,0 +1,350 @@
+cabal-version: 3.0
+
+-- This file has been generated from package.dhall by hpack version 0.35.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           thoralf-uom
+version:        0.1.0
+synopsis:       Plugins for helping GHC type check units of measure.
+description:    Starting from the uom and thoralf plugins; we identify, refactor and
+                extract commonality in both plugins and then break up the uom plugin for
+                reuse. The unit quasiquoter can now be used with the thoralf plugin and
+                it passes all units tests of the uom plugin except for those involving
+                unit conversions.
+category:       Type System
+stability:      experimental
+homepage:       https://github.com/blockscope/plugins-for-blobs#readme
+bug-reports:    https://github.com/blockscope/plugins-for-blobs/issues
+author:         Phil de Joux
+maintainer:     phil.dejoux@blockscope.com
+copyright:      © 2017-2022 Phil de Joux, © 2017-2022 Block Scope Limited
+license:        MPL-2.0
+license-file:   LICENSE.md
+build-type:     Simple
+tested-with:
+    GHC == 8.2.2, GHC == 8.10.7, GHC == 9.2.2
+extra-source-files:
+    LICENSE.md
+
+source-repository head
+  type: git
+  location: https://github.com/blockscope/plugins-for-blobs
+
+library thoralf-plugin-defs
+  visibility: public
+  exposed-modules:
+      Plugins.Thoralf.UnitDefs
+  hs-source-dirs:
+      defs/src
+  build-depends:
+      base >=4.9.1.0 && <5
+    , template-haskell >=2.9
+    , thoralf-uom:thoralf-plugin-uom
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+
+library thoralf-plugin-uom
+  visibility: public
+  exposed-modules:
+      Plugins.Thoralf.UoM
+      Plugins.Thoralf.UoM.Solve
+      Data.UnitsOfMeasure.Constraint
+      ThoralfPlugin.Singletons.Nat
+  other-modules:
+      ThoralfPlugin.Encode
+      ThoralfPlugin.Encode.UoM
+      Plugins.Thoralf.UoM.TcPlugin
+  hs-source-dirs:
+      plugin/src
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
+  build-depends:
+      base >=4.9.1.0 && <5
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 8.10.1)
+    hs-source-dirs:
+        plugin/src-StandaloneKindSignatures
+  else
+    hs-source-dirs:
+        plugin/src-NoStandaloneKindSignatures
+
+test-suite thoralf-defs
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Defs
+  hs-source-dirs:
+      plugin/test-suite-defs
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , tasty
+    , tasty-hunit
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf-uom:thoralf-plugin-uom
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+
+test-suite thoralf-delay-eq
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      UnitDefs
+  hs-source-dirs:
+      plugin/test-suite-delay-eq
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , tasty
+    , tasty-hunit
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf-uom:thoralf-plugin-uom
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+
+test-suite thoralf-force
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      UnitDefs
+  hs-source-dirs:
+      plugin/test-suite-force
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , tasty
+    , tasty-hunit
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf-uom:thoralf-plugin-uom
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+
+test-suite thoralf-units
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  other-modules:
+      Abelian
+      Defs
+      DelayEq
+      Literal
+      UnitDefs
+      UnitDefsTests
+      UnQuantity
+  hs-source-dirs:
+      plugin/test-suite-units
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , tasty
+    , tasty-hunit
+    , template-haskell >=2.9
+    , th-printf >=0.7
+    , thoralf-uom:thoralf-plugin-uom
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+  if impl(ghc >= 9.2) && impl(ghc < 9.4)
+    other-modules:
+        Basic
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        plugin/test-suite-units-ghc-9.2
+    buildable: True
+  if impl(ghc >= 8.4) && impl(ghc < 9.2)
+    other-modules:
+        Basic
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        plugin/test-suite-units-ghc-8.4
+    buildable: True
+  if impl(ghc >= 8.2) && impl(ghc < 8.4)
+    other-modules:
+        Basic
+        ErrorTests
+        ErrorTestGroups
+    hs-source-dirs:
+        plugin/test-suite-units-ghc-8.2
+    buildable: True
+
+test-suite thoralf-uom-diy
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      UoM
+  hs-source-dirs:
+      plugin/test-suite-uom-diy
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , singletons
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+    , tasty-th
+    , template-haskell
+    , th-printf >=0.7
+    , thoralf-uom:thoralf-plugin-uom
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+
+test-suite thoralf-uom-quantity
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Defs
+      UoM
+  hs-source-dirs:
+      plugin/test-suite-uom-quantity
+  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra
+    , ghc-tcplugins-trace
+    , hashable
+    , mtl
+    , simple-smt
+    , singletons
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+    , tasty-th
+    , template-haskell
+    , th-printf >=0.7
+    , thoralf-uom:thoralf-plugin-uom
+    , thoralf:thoralf-encode
+    , thoralf:thoralf-plugin
+    , thoralf:thoralf-theory
+    , units-parser >=0.1.1.4
+    , uom:uom-quantity
+    , uom:uom-th
+  default-language: Haskell2010
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors

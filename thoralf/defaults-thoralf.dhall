@@ -6,7 +6,6 @@
 , tested-with = "GHC == 8.4.4"
 , ghc-options =
   [ "-Wall"
-  , "-Werror"
   , "-Wincomplete-uni-patterns"
   , "-Wcompat"
   , "-Widentities"

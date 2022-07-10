@@ -1,6 +1,8 @@
 λ(hie : Text) →
 λ(src : Text) →
 λ(prefix : Text) →
+λ(thoralf-prefix : Text) →
+λ(uom-prefix : Text) →
   let defs = ./../defaults-blobs.dhall hie
 
   in    defs
@@ -20,11 +22,11 @@
           , dependencies =
                 defs.dependencies
               # [ "template-haskell >=2.9"
-                , "uom-quantity"
-                , "uom-th"
-                , "${prefix}thoralf-theory"
-                , "${prefix}thoralf-encode"
-                , "${prefix}thoralf-plugin"
+                , "${uom-prefix}uom-quantity"
+                , "${uom-prefix}uom-th"
+                , "${thoralf-prefix}thoralf-theory"
+                , "${thoralf-prefix}thoralf-encode"
+                , "${thoralf-prefix}thoralf-plugin"
                 , "${prefix}thoralf-plugin-uom"
                 ]
           }
