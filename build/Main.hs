@@ -28,18 +28,18 @@ dhallPkgs = fst <$> dhallCabal
 dhallCabal :: [(Folder, Pkg)]
 dhallCabal =
     [ ("build", "build-plugins-for-blobs")
-    , ("thoralf-theory", "thoralf-theory")
-    , ("thoralf-encode", "thoralf-encode")
-    , ("thoralf-plugin", "thoralf-plugin")
-    , ("thoralf-plugin-rows", "thoralf-plugin-rows")
-    , ("thoralf-plugin-uom", "thoralf-plugin-uom")
-    , ("thoralf-plugin-defs", "thoralf-plugin-defs")
-    , ("uom-plugin", "uom-plugin")
-    , ("uom-plugin-defs", "uom-plugin-defs")
-    , ("uom-plugin-examples", "uom-plugin-examples")
-    , ("uom-plugin-tutorial", "uom-plugin-tutorial")
-    , ("uom-quantity", "uom-quantity")
-    , ("uom-th", "uom-th")
+    , ("thoralf/theory", "thoralf-theory")
+    , ("thoralf/encode", "thoralf-encode")
+    , ("thoralf/plugin", "thoralf-plugin")
+    , ("thoralf/plugin-rows", "thoralf-plugin-rows")
+    , ("thoralf-uom/plugin", "thoralf-plugin-uom")
+    , ("thoralf-uom/defs", "thoralf-plugin-defs")
+    , ("uom/plugin", "uom-plugin")
+    , ("uom/defs", "uom-plugin-defs")
+    , ("uom/examples", "uom-plugin-examples")
+    , ("uom/tutorial", "uom-plugin-tutorial")
+    , ("uom/quantity", "uom-quantity")
+    , ("uom/th", "uom-th")
     ]
 
 dhallRootImports :: [String]

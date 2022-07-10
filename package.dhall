@@ -15,61 +15,61 @@
     goals I've had most trouble fulfilling: uom-quantity, uom-quantity:test,
     plugins-for-blobs
 -}
-let defs = ./defaults-blobs.dhall ".hie"
+let defs = ./thoralf-uom/defaults-blobs.dhall ".hie"
 
 let uom-quantity =
-      ./uom-quantity/package-relative.dhall "uom-quantity/" "plugins-for-blobs:"
+      ./uom/quantity/package-relative.dhall "uom/quantity/" "plugins-for-blobs:"
 
-let uom-th = ./uom-th/package-relative.dhall "uom-th/" "plugins-for-blobs:"
+let uom-th = ./uom/th/package-relative.dhall "uom/th/" "plugins-for-blobs:"
 
 let thoralf-theory =
-      ./thoralf-theory/package-relative.dhall
-        "thoralf-theory/"
+      ./thoralf/theory/package-relative.dhall
+        "thoralf/theory/"
         "plugins-for-blobs:"
 
 let thoralf-encode =
-      ./thoralf-encode/package-relative.dhall
-        "thoralf-encode/"
+      ./thoralf/encode/package-relative.dhall
+        "thoralf/encode/"
         "plugins-for-blobs:"
 
 let thoralf-plugin =
-      ./thoralf-plugin/package-relative.dhall
-        "thoralf-plugin/"
+      ./thoralf/plugin/package-relative.dhall
+        "thoralf/plugin/"
         "plugins-for-blobs:"
 
 let thoralf-plugin-rows =
-      ./thoralf-plugin-rows/package-relative.dhall
-        "thoralf-plugin-rows/"
+      ./thoralf/plugin-rows/package-relative.dhall
+        "thoralf/plugin-rows/"
         "plugins-for-blobs:"
 
 let thoralf-plugin-uom =
-      ./thoralf-plugin-uom/package-relative.dhall
+      ./thoralf-uom/plugin/package-relative.dhall
         ".hie"
-        "thoralf-plugin-uom/"
+        "thoralf-uom/plugin/"
         "plugins-for-blobs:"
 
 let thoralf-plugin-defs =
-      ./thoralf-plugin-defs/package-relative.dhall
+      ./thoralf-uom/defs/package-relative.dhall
         ".hie"
-        "thoralf-plugin-defs/"
+        "thoralf-uom/defs/"
         "plugins-for-blobs:"
 
 let uom-plugin =
-      ./uom-plugin/package-relative.dhall "uom-plugin/" "plugins-for-blobs:"
+      ./uom/plugin/package-relative.dhall "uom/plugin/" "plugins-for-blobs:"
 
 let uom-plugin-defs =
-      ./uom-plugin-defs/package-relative.dhall
-        "uom-plugin-defs/"
+      ./uom/defs/package-relative.dhall
+        "uom/defs/"
         "plugins-for-blobs:"
 
 let uom-plugin-examples =
-      ./uom-plugin-examples/package-relative.dhall
-        "uom-plugin-examples/"
+      ./uom/examples/package-relative.dhall
+        "uom/examples/"
         "plugins-for-blobs:"
 
 let uom-plugin-tutorial =
-      ./uom-plugin-tutorial/package-relative.dhall
-        "uom-plugin-tutorial/"
+      ./uom/tutorial/package-relative.dhall
+        "uom/tutorial/"
         "plugins-for-blobs:"
 
 in      defs

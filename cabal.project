@@ -1,18 +1,18 @@
 packages:
     simple-smt
     ghc-tcplugins-trace/ghc-tcplugins-trace
-    thoralf-theory
-    thoralf-encode
-    thoralf-plugin
-    thoralf-plugin-rows
-    thoralf-plugin-uom
-    thoralf-plugin-defs
-    uom-quantity
-    uom-plugin
-    uom-plugin-defs
-    uom-plugin-tutorial
-    uom-plugin-examples
-    uom-th
+    thoralf/theory
+    thoralf/encode
+    thoralf/plugin
+    thoralf/plugin-rows
+    thoralf-uom/plugin
+    thoralf-uom/defs
+    uom/quantity
+    uom/plugin
+    uom/defs
+    uom/tutorial
+    uom/examples
+    uom/th
     build
 tests: True
 write-ghc-environment-files: always
