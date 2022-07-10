@@ -84,6 +84,32 @@ so that they could be shared between both.
   that we have `thoralf-plugin-uom` for units and `thoralf-plugin-rows` for the
   rest.
   
+
+Find the new plugin in `thoralf-uom` and new versions of the existing plugins in
+`thoralf` and in `uom`.
+
+```
+> tree -L 2 -d
+.
+├── thoralf
+│   ├── encode
+│   ├── plugin
+│   ├── plugin-rows
+│   └── theory
+├── thoralf-uom
+│   ├── defs
+│   └── plugin
+└── uom
+    ├── defs
+    ├── examples
+    ├── plugin
+    ├── quantity
+    ├── th
+    └── tutorial
+```
+
+## Package Dependencies
+
 ```
 > cabal-plan tred --hide-exes --hide-builtin
 thoralf-plugin-defs
