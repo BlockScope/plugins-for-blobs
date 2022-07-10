@@ -2,18 +2,18 @@ resolver: lts-19.12
 packages:
 - ../simple-smt
 - ../ghc-tcplugins-trace/ghc-tcplugins-trace
-- ../thoralf-theory
-- ../thoralf-encode
-- ../thoralf-plugin
-- ../thoralf-plugin-rows
-- ../thoralf-plugin-uom
-- ../thoralf-plugin-defs
-- ../uom-th
-- ../uom-quantity
-- ../uom-plugin
-- ../uom-plugin-defs
-- ../uom-plugin-tutorial
-- ../uom-plugin-examples
+- ../thoralf/theory
+- ../thoralf/encode
+- ../thoralf/plugin
+- ../thoralf/plugin-rows
+- ../thoralf-uom/plugin
+- ../thoralf-uom/defs
+- ../uom/th
+- ../uom/quantity
+- ../uom/plugin
+- ../uom/defs
+- ../uom/tutorial
+- ../uom/examples
 extra-deps:
 - units-parser-0.1.1.4
 - ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
