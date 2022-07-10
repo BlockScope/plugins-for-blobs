@@ -43,7 +43,7 @@ jobs:
         run: cabal install stan -w ghc-${{matrix.ghc}} --installdir=.bin --install-method=copy --overwrite-policy=always
 
       - name: build
-        run: cabal build all --enable-tests
+        run: cabal build all --enable-tests --project-file=cabal.blobs.project
 
       - name: run stan
         run: ./.bin/stan report

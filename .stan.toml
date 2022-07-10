@@ -1,18 +1,4 @@
 #  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-#  ┃  ✦ ID:            OBS-STAN-0004-me4T/d-67:22
-#  ┃  ✦ Severity:      Warning
-#  ┃  ✦ Inspection ID: STAN-0004
-#  ┃  ✦ Name:          Partial: base/last
-#  ┃  ✦ Description:   Usage of partial function 'last' for lists
-#  ┃  ✦ Category:      #Partial #List
-#  ┃  ✦ File:          .../autogen/Paths_build_plugins_for_blobs.hs
-#  ┃
-#  ┃    66 ┃
-#  ┃    67 ┃   | isPathSeparator (List.last dir) = dir ++ fname
-[[ignore]]
-id = "OBS-STAN-0004-me4T/d-67:22"
-
-#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #  ┃  ✦ ID:            OBS-STAN-0009-qiyW2s-42:27
 #  ┃  ✦ Severity:      Warning
 #  ┃  ✦ Inspection ID: STAN-0009
@@ -88,7 +74,6 @@ id = "OBS-STAN-0104-LEn9To-24:26"
 [[ignore]]
 id = "OBS-STAN-0212-NdFeVI-91:19"
 
-#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #  ┃  ✦ ID:            OBS-STAN-0212-NdFeVI-91:51
 #  ┃  ✦ Severity:      Error
 #  ┃  ✦ Inspection ID: STAN-0212
@@ -107,8 +92,7 @@ id = "OBS-STAN-0212-NdFeVI-91:19"
 #  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
 [[ignore]]
 id = "OBS-STAN-0212-NdFeVI-91:51"
- 
-#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 #  ┃  ✦ ID:            OBS-STAN-0212-NdFeVI-103:46
 #  ┃  ✦ Severity:      Error
 #  ┃  ✦ Inspection ID: STAN-0212
@@ -128,7 +112,6 @@ id = "OBS-STAN-0212-NdFeVI-91:51"
 [[ignore]]
 id = "OBS-STAN-0212-NdFeVI-103:46"
 
-#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #  ┃  ✦ ID:            OBS-STAN-0212-NdFeVI-103:88
 #  ┃  ✦ Severity:      Error
 #  ┃  ✦ Inspection ID: STAN-0212
@@ -187,3 +170,2424 @@ id = "OBS-STAN-0212-1/9mMI-29:18"
 #  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
 [[ignore]]
 id = "OBS-STAN-0212-9Dk0zy-48:48"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-FIpsdg-37:13
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Bool.hs
+#  ┃
+#  ┃    36 ┃
+#  ┃    37 ┃             _ -> Nothing
+#  ┃    38 ┃             ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-FIpsdg-37:13"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0302-o5BZ+I-48:17
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Convert.hs
+#  ┃
+#  ┃    47 ┃
+#  ┃    48 ┃                 ( Vec n Type, Vec m Kind
+#  ┃    49 ┃                 , Vec n String -> Vec m String -> String
+#  ┃    50 ┃                 , [DecCont]
+#  ┃    51 ┃                 )
+#  ┃    52 ┃                 ^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-o5BZ+I-48:17"
+
+#  ┃  ✦ ID:            OBS-STAN-0302-o5BZ+I-60:40
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Convert.hs
+#  ┃
+#  ┃    59 ┃
+#  ┃    60 ┃ uncurry4 :: (a -> b -> c -> d -> e) -> (a, b, c, d) -> e
+#  ┃    61 ┃                                        ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-o5BZ+I-60:40"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-Me28aM-9:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Find.hs
+#  ┃
+#  ┃     8 ┃
+#  ┃     9 ┃         { moduleName :: ModuleName
+#  ┃    10 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-Me28aM-9:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-Me28aM-10:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Find.hs
+#  ┃
+#  ┃     9 ┃
+#  ┃    10 ┃         , pkgName :: FastString
+#  ┃    11 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-Me28aM-10:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-Me28aM-23:9
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Find.hs
+#  ┃
+#  ┃    22 ┃
+#  ┃    23 ┃         _ -> do
+#  ┃    24 ┃             let blobs = "plugins-for-blobs"
+#  ┃    25 ┃             let blobsFS = fsLit blobs
+#  ┃    26 ┃             findBlob <- findImportedModule moduleName (Just blobsFS)
+#  ┃    27 ┃             case findBlob of
+#  ┃    28 ┃                 Found _ mBlob -> do
+#  ┃    29 ┃                     tcPluginTrace (mFound ++ " in package " ++ blobs) (text "")
+#  ┃    30 ┃                     return mBlob
+#  ┃    31 ┃                 _ -> do
+#  ┃    32 ┃                     let msg = "Can't find module " ++ m ++ " in package " ++ p
+#  ┃    33 ┃                     tcPluginTrace msg (text "")
+#  ┃    34 ┃                     error msg
+#  ┃    35 ┃         ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-Me28aM-23:9"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-Me28aM-31:17
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Find.hs
+#  ┃
+#  ┃    30 ┃
+#  ┃    31 ┃                 _ -> do
+#  ┃    32 ┃                     let msg = "Can't find module " ++ m ++ " in package " ++ p
+#  ┃    33 ┃                     tcPluginTrace msg (text "")
+#  ┃    34 ┃                     error msg
+#  ┃    35 ┃                 ^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-Me28aM-31:17"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-3CcTwp-32:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Nat.hs
+#  ┃
+#  ┃    31 ┃
+#  ┃    32 ┃     _ -> Nothing
+#  ┃    33 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-3CcTwp-32:5"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-3CcTwp-37:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/Nat.hs
+#  ┃
+#  ┃    36 ┃
+#  ┃    37 ┃     _ -> Nothing
+#  ┃    38 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-3CcTwp-37:5"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0202-+QGpLo-102:22
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0202
+#  ┃  ✦ Name:          Anti-pattern: foldl
+#  ┃  ✦ Description:   Usage of space-leaking function 'foldl'
+#  ┃  ✦ Category:      #SpaceLeak #AntiPattern
+#  ┃  ✦ File:          thoralf/encode/src/ThoralfPlugin/Encode/TheoryEncoding.hs
+#  ┃
+#  ┃   101 ┃
+#  ┃   102 ┃ sumEncodings = fmap (foldl addEncodings emptyTheory) . sequence
+#  ┃   103 ┃                      ^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Replace 'foldl' with 'foldl''
+#  ┃      ⍟ Use 'foldr (flip . f)` instead of 'foldl f'
+[[ignore]]
+id = "OBS-STAN-0202-+QGpLo-102:22"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0302-FYIt8l-18:17
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    17 ┃
+#  ┃    18 ┃ type FmTyCons = (TyCon, TyCon, TyCon, TyCon, TyCon, TyCon)
+#  ┃    19 ┃                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-FYIt8l-18:17"
+
+#  ┃  ✦ ID:            OBS-STAN-0302-FYIt8l-30:25
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    29 ┃
+#  ┃    30 ┃     return $ mkFmTheory (nil, alt, del, union, inter, fm)
+#  ┃    31 ┃                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-FYIt8l-30:25"
+
+#  ┃  ✦ ID:            OBS-STAN-0302-FYIt8l-56:13
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    55 ┃
+#  ┃    56 ┃             ( VNil
+#  ┃    57 ┃             , keyKd :> valKd :> VNil
+#  ┃    58 ┃             , nilString
+#  ┃    59 ┃             , []
+#  ┃    60 ┃             )
+#  ┃    61 ┃             ^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-FYIt8l-56:13"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-FYIt8l-61:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    60 ┃
+#  ┃    61 ┃     _ -> Nothing
+#  ┃    62 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-FYIt8l-61:5"
+
+#  ┃  ✦ ID:            OBS-STAN-0302-FYIt8l-67:13
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    66 ┃
+#  ┃    67 ┃             ( fmTp :> keyTp :> valTp :> VNil
+#  ┃    68 ┃             , VNil
+#  ┃    69 ┃             , alterString
+#  ┃    70 ┃             , []
+#  ┃    71 ┃             )
+#  ┃    72 ┃             ^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-FYIt8l-67:13"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-FYIt8l-72:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    71 ┃
+#  ┃    72 ┃     _ -> Nothing
+#  ┃    73 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-FYIt8l-72:5"
+
+#  ┃  ✦ ID:            OBS-STAN-0302-FYIt8l-78:13
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    77 ┃
+#  ┃    78 ┃             ( fmTp :> keyTp :> VNil
+#  ┃    79 ┃             , valKd :> VNil
+#  ┃    80 ┃             , deleteString
+#  ┃    81 ┃             , []
+#  ┃    82 ┃             )
+#  ┃    83 ┃             ^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-FYIt8l-78:13"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-FYIt8l-83:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    82 ┃
+#  ┃    83 ┃     _ -> Nothing
+#  ┃    84 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-FYIt8l-83:5"
+
+#  ┃  ✦ ID:            OBS-STAN-0302-FYIt8l-89:13
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    88 ┃
+#  ┃    89 ┃             ( m1 :> m2 :> VNil
+#  ┃    90 ┃             , kds
+#  ┃    91 ┃             , opString "either"
+#  ┃    92 ┃             , [DecCont kds "either" eitherDec]
+#  ┃    93 ┃             )
+#  ┃    94 ┃             ^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-FYIt8l-89:13"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-FYIt8l-94:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    93 ┃
+#  ┃    94 ┃     _ -> Nothing
+#  ┃    95 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-FYIt8l-94:5"
+
+#  ┃  ✦ ID:            OBS-STAN-0302-FYIt8l-100:13
+#  ┃  ✦ Severity:      Style
+#  ┃  ✦ Inspection ID: STAN-0302
+#  ┃  ✦ Name:          Big tuples
+#  ┃  ✦ Description:   Using tuples of big size (>= 4) can decrease code readability
+#  ┃  ✦ Category:      #AntiPattern #Syntax
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃    99 ┃
+#  ┃   100 ┃             ( m1 :> m2 :> VNil
+#  ┃   101 ┃             , kds
+#  ┃   102 ┃             , opString "both"
+#  ┃   103 ┃             , [DecCont kds "both" bothDec]
+#  ┃   104 ┃             )
+#  ┃   105 ┃             ^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Consider defining and using a custom data type to improve code comprehension
+[[ignore]]
+id = "OBS-STAN-0302-FYIt8l-100:13"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-FYIt8l-105:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃   104 ┃
+#  ┃   105 ┃     _ -> Nothing
+#  ┃   106 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-FYIt8l-105:5"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-FYIt8l-163:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin-rows/src/ThoralfPlugin/Encode/FiniteMap.hs
+#  ┃
+#  ┃   162 ┃
+#  ┃   163 ┃     _ -> Nothing
+#  ┃   164 ┃     ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-FYIt8l-163:5"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0105-XxZVqu-44:14
+#  ┃  ✦ Severity:      PotentialBug
+#  ┃  ✦ Inspection ID: STAN-0105
+#  ┃  ✦ Name:          Infinite: base/sum
+#  ┃  ✦ Description:   Usage of the 'sum' function that hangs on infinite lists
+#  ┃  ✦ Category:      #Infinite #List
+#  ┃  ✦ File:          thoralf/plugin-rows/test-suite-rows/RowTypes.hs
+#  ┃
+#  ┃    43 ┃
+#  ┃    44 ┃ totalPrice = sum . map pRecPrice
+#  ┃    45 ┃              ^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Don't use 'sum' if you expect your function to work with infinite lists
+#  ┃      ⍟ {Extra dependency} Use the 'slist' library for fast and safe functions on infinite lists
+[[ignore]]
+id = "OBS-STAN-0105-XxZVqu-44:14"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-56:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    55 ┃
+#  ┃    56 ┃         { traceSend :: Bool -- ^ Trace the sent commands.
+#  ┃    57 ┃           ^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-56:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-57:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    56 ┃
+#  ┃    57 ┃         , traceRecv :: DebugSmtRecv -- ^ Trace the received responses.
+#  ┃    58 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-57:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-58:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    57 ┃
+#  ┃    58 ┃         , traceArrow :: Bool
+#  ┃    59 ┃           ^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-58:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-69:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    68 ┃
+#  ┃    69 ┃         , traceErr :: Bool -- ^ Trace errors.
+#  ┃    70 ┃           ^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-69:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-70:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    69 ┃
+#  ┃    70 ┃         , traceOther :: Bool -- ^ Trace other messages.
+#  ┃    71 ┃           ^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-70:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-79:23
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    78 ┃
+#  ┃    79 ┃     = DebugSmtRecvAll Bool
+#  ┃    80 ┃                       ^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-79:23"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-82:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    81 ┃
+#  ┃    82 ┃         { traceSuccess :: Bool
+#  ┃    83 ┃           ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-82:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-90:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃    89 ┃
+#  ┃    90 ┃         , traceCheckSat :: Bool
+#  ┃    91 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-90:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-124:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   123 ┃
+#  ┃   124 ┃         { traceCarry :: TraceCarry
+#  ┃   125 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-124:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-127:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   126 ┃
+#  ┃   127 ┃         , traceEqCts :: Bool
+#  ┃   128 ┃           ^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-127:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-171:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   170 ┃
+#  ┃   171 ┃         { traceSmtTalk :: TraceSmtTalk
+#  ┃   172 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-171:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-174:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   173 ┃
+#  ┃   174 ┃         , traceSExprCts :: Bool
+#  ┃   175 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-174:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-177:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   176 ┃
+#  ┃   177 ┃         , traceCtsComments :: Bool
+#  ┃   178 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-177:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-219:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   218 ┃
+#  ┃   219 ┃         , traceDecsSeen :: Bool
+#  ┃   220 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-219:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-233:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   232 ┃
+#  ┃   233 ┃         , traceAssertions :: Bool
+#  ┃   234 ┃           ^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-233:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-259:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   258 ┃
+#  ┃   259 ┃         , traceSatModel :: Bool
+#  ┃   260 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-259:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-IWRpPz-311:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Print/SMT.hs
+#  ┃
+#  ┃   310 ┃
+#  ┃   311 ┃         , traceUnsatCore :: Bool
+#  ┃   312 ┃           ^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-IWRpPz-311:11"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-XETC0u-36:34
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/Print.hs
+#  ┃
+#  ┃    35 ┃
+#  ┃    36 ┃ data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
+#  ┃    37 ┃                                  ^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XETC0u-36:34"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XETC0u-36:53
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/Print.hs
+#  ┃
+#  ┃    35 ┃
+#  ┃    36 ┃ data ConvCtsStep = ConvCtsStep { givens :: ConvCts, wanted :: ConvCts }
+#  ┃    37 ┃                                                     ^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XETC0u-36:53"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-igc3Sd-44:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃    43 ┃
+#  ┃    44 ┃         { theoryEncoding :: TheoryEncoding
+#  ┃    45 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-igc3Sd-44:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-igc3Sd-45:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃    44 ┃
+#  ┃    45 ┃         , disEqClass :: Class
+#  ┃    46 ┃           ^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-igc3Sd-45:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-igc3Sd-46:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃    45 ┃
+#  ┃    46 ┃         , extract :: ExtractEq
+#  ┃    47 ┃           ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-igc3Sd-46:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-igc3Sd-47:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃    46 ┃
+#  ┃    47 ┃         , smtSolverRef :: IORef (SMT.Solver, Int)
+#  ┃    48 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-igc3Sd-47:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-igc3Sd-48:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃    47 ┃
+#  ┃    48 ┃         , seenDecsRef :: IORef (Set SMT.SExpr)
+#  ┃    49 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-igc3Sd-48:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-igc3Sd-81:25
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃    80 ┃
+#  ┃    81 ┃                         _ -> False
+#  ┃    82 ┃                         ^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-igc3Sd-81:25"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-igc3Sd-86:25
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃    85 ┃
+#  ┃    86 ┃                         _ -> False
+#  ┃    87 ┃                         ^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-igc3Sd-86:25"
+
+#  ┃  ✦ ID:            OBS-STAN-0103-igc3Sd-121:67
+#  ┃  ✦ Severity:      PotentialBug
+#  ┃  ✦ Inspection ID: STAN-0103
+#  ┃  ✦ Name:          Infinite: base/length
+#  ┃  ✦ Description:   Usage of the 'length' function that hangs on infinite lists
+#  ┃  ✦ Category:      #Infinite #List
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃   120 ┃
+#  ┃   121 ┃                                | dbgRecvSuccess -> logMsg $ drop (length "[<-recv] error ") s
+#  ┃   122 ┃                                                                   ^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Don't use 'length' if you expect your function to work with infinite lists
+#  ┃      ⍟ {Extra dependency} Use the 'slist' library for fast and safe functions on infinite lists
+[[ignore]]
+id = "OBS-STAN-0103-igc3Sd-121:67"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-igc3Sd-358:9
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃   357 ┃
+#  ┃   358 ┃         _ -> do
+#  ┃   359 ┃             c <- tcPluginIO (putStrLn "Parse Failed") >> noSolving
+#  ┃   360 ┃             return (Set.empty, Set.empty, c)
+#  ┃   361 ┃         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-igc3Sd-358:9"
+
+#  ┃  ✦ ID:            OBS-STAN-0018-igc3Sd-398:24
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0018
+#  ┃  ✦ Name:          Partial: base/foldl1'
+#  ┃  ✦ Description:   Usage of partial function 'foldl1'' for lists
+#  ┃  ✦ Category:      #Partial #List
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃   397 ┃
+#  ┃   398 ┃         smtWanted ws = foldl1' SMT.or (map (SMT.not . eqSExpr) ws)
+#  ┃   399 ┃                        ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Replace list with 'NonEmpty' from 'Data.List.NonEmpty'
+#  ┃      ⍟ Use explicit pattern-matching over lists
+[[ignore]]
+id = "OBS-STAN-0018-igc3Sd-398:24"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-igc3Sd-422:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/Plugins/Thoralf/TcPlugin.hs
+#  ┃
+#  ┃   421 ┃
+#  ┃   422 ┃     _ -> True
+#  ┃   423 ┃     ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-igc3Sd-422:5"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-53:35
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃    52 ┃
+#  ┃    53 ┃ data EncodingData = EncodingData {encDisEq :: Class, encTheory :: TheoryEncoding}
+#  ┃    54 ┃                                   ^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-53:35"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-53:54
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃    52 ┃
+#  ┃    53 ┃ data EncodingData = EncodingData {encDisEq :: Class, encTheory :: TheoryEncoding}
+#  ┃    54 ┃                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-53:54"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-57:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃    56 ┃
+#  ┃    57 ┃         { eqSExpr :: SExpr
+#  ┃    58 ┃           ^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-57:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-58:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃    57 ┃
+#  ┃    58 ┃         , eqCt :: Ct
+#  ┃    59 ┃           ^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-58:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-84:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃    83 ┃
+#  ┃    84 ┃         { convDescs :: [AltName]
+#  ┃    85 ┃           ^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-84:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-86:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃    85 ┃
+#  ┃    86 ┃         , convEquals :: [ConvEq]
+#  ┃    87 ┃           ^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-86:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-88:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃    87 ┃
+#  ┃    88 ┃         , convDeps :: [SExpr]
+#  ┃    89 ┃           ^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-88:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-139:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   138 ┃
+#  ┃   139 ┃         { extractEq :: [Ct] -> [((Type, Type), Ct)]
+#  ┃   140 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-139:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-140:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   139 ┃
+#  ┃   140 ┃         , extractDisEq :: Class -> [Ct] -> [((Type, Type), Ct)]
+#  ┃   141 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-140:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-210:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   209 ┃
+#  ┃   210 ┃         { convTyDesc :: String -- ^ A description of the term.
+#  ┃   211 ┃           ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-210:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-211:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   210 ┃
+#  ┃   211 ┃         , convTySmt :: String -- ^ The SMT term.
+#  ┃   212 ┃           ^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-211:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-212:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   211 ┃
+#  ┃   212 ┃         , convTyDeps :: ConvDeps -- ^ The dependencies of the term.
+#  ┃   213 ┃           ^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-212:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-219:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   218 ┃
+#  ┃   219 ┃         { convTyVars :: [TyVar] -- ^ Type variables for a known theory
+#  ┃   220 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-219:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-220:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   219 ┃
+#  ┃   220 ┃         , convKdVars :: [TyVar] -- ^ Kind variables for unknown theories
+#  ┃   221 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-220:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-221:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   220 ┃
+#  ┃   221 ┃         , convDefVar :: [TyVar] -- ^ Type variables for default, syntactic theories
+#  ┃   222 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-221:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-222:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   221 ┃
+#  ┃   222 ┃         , convDecs   :: [Decl]  -- ^ SMT declarations specific to some converted type
+#  ┃   223 ┃           ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-222:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-230:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   229 ┃
+#  ┃   230 ┃         { decKey :: (String, String) -- ^ A unique identifier
+#  ┃   231 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-230:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-XxRlr6-231:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   230 ┃
+#  ┃   231 ┃         , localDec :: [String]       -- ^ A list of local declarations
+#  ┃   232 ┃           ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-XxRlr6-231:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0202-XxRlr6-344:25
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0202
+#  ┃  ✦ Name:          Anti-pattern: foldl
+#  ┃  ✦ Description:   Usage of space-leaking function 'foldl'
+#  ┃  ✦ Category:      #SpaceLeak #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Convert.hs
+#  ┃
+#  ┃   343 ┃
+#  ┃   344 ┃         let converted = foldl [s|(apply %s %s)|] convTcon defConvTys
+#  ┃   345 ┃                         ^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Replace 'foldl' with 'foldl''
+#  ┃      ⍟ Use 'foldr (flip . f)` instead of 'foldl f'
+[[ignore]]
+id = "OBS-STAN-0202-XxRlr6-344:25"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-k3e8wi-28:9
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Extract.hs
+#  ┃
+#  ┃    27 ┃
+#  ┃    28 ┃         _ -> Nothing
+#  ┃    29 ┃         ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-k3e8wi-28:9"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-ksoJcb-19:13
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Singletons/Symbol.hs
+#  ┃
+#  ┃    18 ┃
+#  ┃    19 ┃        then unsafeCoerce Refl
+#  ┃    20 ┃             ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-ksoJcb-19:13"
+
+#  ┃  ✦ ID:            OBS-STAN-0212-ksoJcb-24:18
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          thoralf/plugin/src/ThoralfPlugin/Singletons/Symbol.hs
+#  ┃
+#  ┃    23 ┃
+#  ┃    24 ┃ forceCT x = case unsafeCoerce (Dict :: Dict ()) :: Dict c of
+#  ┃    25 ┃                  ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-ksoJcb-24:18"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-KF2b2l-67:20
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Read.hs
+#  ┃
+#  ┃    66 ┃
+#  ┃    67 ┃                    _         -> Left "reads: no parse"
+#  ┃    68 ┃                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-KF2b2l-67:20"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0212-ZiTwFw-45:23
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Show.hs
+#  ┃
+#  ┃    44 ┃
+#  ┃    45 ┃   where s = showUnit (undefined :: proxy u)
+#  ┃    46 ┃                       ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-ZiTwFw-45:23"
+
+#  ┃  ✦ ID:            OBS-STAN-0212-ZiTwFw-55:37
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Show.hs
+#  ┃
+#  ┃    54 ┃
+#  ┃    55 ┃ showUnit _ = showUnitBits (unitVal (undefined :: proxy' (Unpack u)))
+#  ┃    56 ┃                                     ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-ZiTwFw-55:37"
+
+#  ┃  ✦ ID:            OBS-STAN-0001-ZiTwFw-84:44
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0001
+#  ┃  ✦ Name:          Partial: base/head
+#  ┃  ✦ Description:   Usage of partial function 'head' for lists
+#  ┃  ✦ Category:      #Partial #List
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Show.hs
+#  ┃
+#  ┃    83 ┃
+#  ┃    84 ┃ showPos = unwords . map (\ xs -> showAtom (head xs, length xs)) . group
+#  ┃    85 ┃                                            ^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Replace list with 'NonEmpty' from 'Data.List.NonEmpty'
+#  ┃      ⍟ Use explicit pattern-matching over lists
+[[ignore]]
+id = "OBS-STAN-0001-ZiTwFw-84:44"
+
+#  ┃  ✦ ID:            OBS-STAN-0103-ZiTwFw-84:53
+#  ┃  ✦ Severity:      PotentialBug
+#  ┃  ✦ Inspection ID: STAN-0103
+#  ┃  ✦ Name:          Infinite: base/length
+#  ┃  ✦ Description:   Usage of the 'length' function that hangs on infinite lists
+#  ┃  ✦ Category:      #Infinite #List
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Show.hs
+#  ┃
+#  ┃    83 ┃
+#  ┃    84 ┃ showPos = unwords . map (\ xs -> showAtom (head xs, length xs)) . group
+#  ┃    85 ┃                                                     ^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Don't use 'length' if you expect your function to work with infinite lists
+#  ┃      ⍟ {Extra dependency} Use the 'slist' library for fast and safe functions on infinite lists
+[[ignore]]
+id = "OBS-STAN-0103-ZiTwFw-84:53"
+
+#  ┃  ✦ ID:            OBS-STAN-0001-ZiTwFw-97:44
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0001
+#  ┃  ✦ Name:          Partial: base/head
+#  ┃  ✦ Description:   Usage of partial function 'head' for lists
+#  ┃  ✦ Category:      #Partial #List
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Show.hs
+#  ┃
+#  ┃    96 ┃
+#  ┃    97 ┃ showNeg = unwords . map (\ xs -> showAtom (head xs, negate $ length xs)) . group
+#  ┃    98 ┃                                            ^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Replace list with 'NonEmpty' from 'Data.List.NonEmpty'
+#  ┃      ⍟ Use explicit pattern-matching over lists
+[[ignore]]
+id = "OBS-STAN-0001-ZiTwFw-97:44"
+
+#  ┃  ✦ ID:            OBS-STAN-0103-ZiTwFw-97:62
+#  ┃  ✦ Severity:      PotentialBug
+#  ┃  ✦ Inspection ID: STAN-0103
+#  ┃  ✦ Name:          Infinite: base/length
+#  ┃  ✦ Description:   Usage of the 'length' function that hangs on infinite lists
+#  ┃  ✦ Category:      #Infinite #List
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Show.hs
+#  ┃
+#  ┃    96 ┃
+#  ┃    97 ┃ showNeg = unwords . map (\ xs -> showAtom (head xs, negate $ length xs)) . group
+#  ┃    98 ┃                                                              ^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Don't use 'length' if you expect your function to work with infinite lists
+#  ┃      ⍟ {Extra dependency} Use the 'slist' library for fast and safe functions on infinite lists
+[[ignore]]
+id = "OBS-STAN-0103-ZiTwFw-97:62"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-6Kl1JX-59:13
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Singleton.hs
+#  ┃
+#  ┃    58 ┃
+#  ┃    59 ┃             _ -> Nothing
+#  ┃    60 ┃             ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-6Kl1JX-59:13"
+
+#  ┃  ✦ ID:            OBS-STAN-0212-6Kl1JX-77:44
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Singleton.hs
+#  ┃
+#  ┃    76 ┃
+#  ┃    77 ┃     | symbolVal px == symbolVal py = Just (unsafeCoerce Refl)
+#  ┃    78 ┃                                            ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-6Kl1JX-77:44"
+
+#  ┃  ✦ ID:            OBS-STAN-0212-6Kl1JX-86:15
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Singleton.hs
+#  ┃
+#  ┃    85 ┃
+#  ┃    86 ┃         Just (unsafeCoerce Refl)
+#  ┃    87 ┃               ^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-6Kl1JX-86:15"
+
+#  ┃  ✦ ID:            OBS-STAN-0212-6Kl1JX-191:23
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0212
+#  ┃  ✦ Name:          Anti-pattern: unsafe functions
+#  ┃  ✦ Description:   Usage of unsafe functions breaks referential transparency
+#  ┃  ✦ Category:      #Unsafe #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Singleton.hs
+#  ┃
+#  ┃   190 ┃
+#  ┃   191 ┃     listSing = SCons (undefined :: proxy x) listSing
+#  ┃   192 ┃                       ^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Remove 'undefined' or at least replace with 'error' to give better error messages
+#  ┃      ⍟ Replace 'unsafeCoerce' with 'coerce'
+#  ┃      ⍟ Rewrite the code to avoid using 'unsafePerformIO' and other unsafe IO functions
+[[ignore]]
+id = "OBS-STAN-0212-6Kl1JX-191:23"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-9e9cVr-92:17
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Find.hs
+#  ┃
+#  ┃    91 ┃
+#  ┃    92 ┃                 _ -> error $ "lookupUnitDefs/getDataCon: missing " ++ s
+#  ┃    93 ┃                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-9e9cVr-92:17"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0019-7rD7gs-34:17
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0019
+#  ┃  ✦ Name:          Partial: base/foldr1
+#  ┃  ✦ Description:   Usage of partial function 'foldr1' for
+#  ┃  ✦ Category:      #Partial
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Kind.hs
+#  ┃
+#  ┃    33 ┃
+#  ┃    34 ┃     | null ys = foldr1 times xs
+#  ┃    35 ┃                 ^^^^^^
+[[ignore]]
+id = "OBS-STAN-0019-7rD7gs-34:17"
+
+#  ┃  ✦ ID:            OBS-STAN-0019-7rD7gs-35:32
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0019
+#  ┃  ✦ Name:          Partial: base/foldr1
+#  ┃  ✦ Description:   Usage of partial function 'foldr1' for
+#  ┃  ✦ Category:      #Partial
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Kind.hs
+#  ┃
+#  ┃    34 ┃
+#  ┃    35 ┃     | null xs = oneTy `divide` foldr1 times ys
+#  ┃    36 ┃                                ^^^^^^
+[[ignore]]
+id = "OBS-STAN-0019-7rD7gs-35:32"
+
+#  ┃  ✦ ID:            OBS-STAN-0019-7rD7gs-36:19
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0019
+#  ┃  ✦ Name:          Partial: base/foldr1
+#  ┃  ✦ Description:   Usage of partial function 'foldr1' for
+#  ┃  ✦ Category:      #Partial
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Kind.hs
+#  ┃
+#  ┃    35 ┃
+#  ┃    36 ┃     | otherwise = foldr1 times xs `divide` foldr1 times ys
+#  ┃    37 ┃                   ^^^^^^
+[[ignore]]
+id = "OBS-STAN-0019-7rD7gs-36:19"
+
+#  ┃  ✦ ID:            OBS-STAN-0019-7rD7gs-36:44
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0019
+#  ┃  ✦ Name:          Partial: base/foldr1
+#  ┃  ✦ Description:   Usage of partial function 'foldr1' for
+#  ┃  ✦ Category:      #Partial
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Kind.hs
+#  ┃
+#  ┃    35 ┃
+#  ┃    36 ┃     | otherwise = foldr1 times xs `divide` foldr1 times ys
+#  ┃    37 ┃                                            ^^^^^^
+[[ignore]]
+id = "OBS-STAN-0019-7rD7gs-36:44"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-MfeqNg-60:22
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs
+#  ┃
+#  ┃    59 ┃
+#  ┃    60 ┃ data Atom = BaseAtom Type | VarAtom TyVar | FamAtom TyCon [Type]
+#  ┃    61 ┃                      ^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-MfeqNg-60:22"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-MfeqNg-60:37
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs
+#  ┃
+#  ┃    59 ┃
+#  ┃    60 ┃ data Atom = BaseAtom Type | VarAtom TyVar | FamAtom TyCon [Type]
+#  ┃    61 ┃                                     ^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-MfeqNg-60:37"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-MfeqNg-60:53
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs
+#  ┃
+#  ┃    59 ┃
+#  ┃    60 ┃ data Atom = BaseAtom Type | VarAtom TyVar | FamAtom TyCon [Type]
+#  ┃    61 ┃                                                     ^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-MfeqNg-60:53"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-MfeqNg-60:59
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/NormalForm.hs
+#  ┃
+#  ┃    59 ┃
+#  ┃    60 ┃ data Atom = BaseAtom Type | VarAtom TyVar | FamAtom TyCon [Type]
+#  ┃    61 ┃                                                           ^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-MfeqNg-60:59"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-32:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    31 ┃
+#  ┃    32 ┃         { siVar :: TyVar
+#  ┃    33 ┃           ^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-32:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-33:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    32 ┃
+#  ┃    33 ┃         , siUnit :: NormUnit
+#  ┃    34 ┃           ^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-33:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-34:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    33 ┃
+#  ┃    34 ┃         , siCt :: Ct
+#  ┃    35 ┃           ^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-34:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0202-//+GL8-48:14
+#  ┃  ✦ Severity:      Error
+#  ┃  ✦ Inspection ID: STAN-0202
+#  ┃  ✦ Name:          Anti-pattern: foldl
+#  ┃  ✦ Description:   Usage of space-leaking function 'foldl'
+#  ┃  ✦ Category:      #SpaceLeak #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    47 ┃
+#  ┃    48 ┃ substsUnit = foldl (\ u si -> substUnit (siVar si) (siUnit si) u)
+#  ┃    49 ┃              ^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Replace 'foldl' with 'foldl''
+#  ┃      ⍟ Use 'foldr (flip . f)` instead of 'foldl f'
+[[ignore]]
+id = "OBS-STAN-0202-//+GL8-48:14"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-65:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    64 ┃
+#  ┃    65 ┃     = Win [TyVar] TySubst TySubst
+#  ┃    66 ┃           ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-65:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-65:19
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    64 ┃
+#  ┃    65 ┃     = Win [TyVar] TySubst TySubst
+#  ┃    66 ┃                   ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-65:19"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-65:27
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    64 ┃
+#  ┃    65 ┃     = Win [TyVar] TySubst TySubst
+#  ┃    66 ┃                           ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-65:27"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-66:12
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    65 ┃
+#  ┃    66 ┃     | Draw [TyVar] TySubst TySubst
+#  ┃    67 ┃            ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-66:12"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-66:20
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    65 ┃
+#  ┃    66 ┃     | Draw [TyVar] TySubst TySubst
+#  ┃    67 ┃                    ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-66:20"
+# 
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-66:28
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃    65 ┃
+#  ┃    66 ┃     | Draw [TyVar] TySubst TySubst
+#  ┃    67 ┃                            ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-66:28"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-133:34
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   132 ┃
+#  ┃   133 ┃ data UnitEquality = UnitEquality Ct NormUnit NormUnit
+#  ┃   134 ┃                                  ^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-133:34"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-133:37
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   132 ┃
+#  ┃   133 ┃ data UnitEquality = UnitEquality Ct NormUnit NormUnit
+#  ┃   134 ┃                                     ^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-133:37"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-133:46
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   132 ┃
+#  ┃   133 ┃ data UnitEquality = UnitEquality Ct NormUnit NormUnit
+#  ┃   134 ┃                                              ^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-133:46"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-//+GL8-154:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   153 ┃
+#  ┃   154 ┃     _ -> Right ct
+#  ┃   155 ┃     ^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-//+GL8-154:5"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-161:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   160 ┃
+#  ┃   161 ┃         { simplifyFreshVars :: [TyVar]
+#  ┃   162 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-161:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-162:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   161 ┃
+#  ┃   162 ┃         , simplifySubst :: TySubst
+#  ┃   163 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-162:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-163:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   162 ┃
+#  ┃   163 ┃         , simplifyUnsubst :: TySubst
+#  ┃   164 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-163:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-164:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   163 ┃
+#  ┃   164 ┃         , simplifySolved :: [UnitEquality]
+#  ┃   165 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-164:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-165:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   164 ┃
+#  ┃   165 ┃         , simplifyStuck :: [UnitEquality]
+#  ┃   166 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-165:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-180:18
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   179 ┃
+#  ┃   180 ┃     = Simplified SimplifyState
+#  ┃   181 ┃                  ^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-180:18"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-182:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   181 ┃
+#  ┃   182 ┃         { simplifyImpossible :: UnitEquality
+#  ┃   183 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-182:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-//+GL8-183:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/Unify.hs
+#  ┃
+#  ┃   182 ┃
+#  ┃   183 ┃         , simplifyRemaining :: [UnitEquality]
+#  ┃   184 ┃           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-//+GL8-183:11"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-17:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    16 ┃
+#  ┃    17 ┃     { unitKindCon :: TyCon
+#  ┃    18 ┃       ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-17:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-19:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    18 ┃
+#  ┃    19 ┃     , unitBaseTyCon :: TyCon
+#  ┃    20 ┃       ^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-19:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-21:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    20 ┃
+#  ┃    21 ┃     , unitOneTyCon :: TyCon
+#  ┃    22 ┃       ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-21:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-23:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    22 ┃
+#  ┃    23 ┃     , mulTyCon :: TyCon
+#  ┃    24 ┃       ^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-23:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-25:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    24 ┃
+#  ┃    25 ┃     , divTyCon :: TyCon
+#  ┃    26 ┃       ^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-25:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-27:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    26 ┃
+#  ┃    27 ┃     , expTyCon :: TyCon
+#  ┃    28 ┃       ^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-27:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-29:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    28 ┃
+#  ┃    29 ┃     , unpackTyCon :: TyCon
+#  ┃    30 ┃       ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-29:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-31:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    30 ┃
+#  ┃    31 ┃     , unitSyntaxTyCon :: TyCon
+#  ┃    32 ┃       ^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-31:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-33:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    32 ┃
+#  ┃    33 ┃     , unitSyntaxPromotedDataCon :: TyCon
+#  ┃    34 ┃       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-33:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-zESaOQ-35:7
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    34 ┃
+#  ┃    35 ┃     , equivTyCon :: TyCon
+#  ┃    36 ┃       ^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-zESaOQ-35:7"
+
+#  ┃  ✦ ID:            OBS-STAN-0213-zESaOQ-45:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Data/UnitsOfMeasure/Unsafe/UnitDefs.hs
+#  ┃
+#  ┃    44 ┃
+#  ┃    45 ┃     _ -> []
+#  ┃    46 ┃     ^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-zESaOQ-45:5"
+
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0213-8Jo1A5-98:5
+#  ┃  ✦ Severity:      Warning
+#  ┃  ✦ Inspection ID: STAN-0213
+#  ┃  ✦ Name:          Anti-pattern: Pattern matching on '_'
+#  ┃  ✦ Description:   Pattern matching on '_' for sum types can create maintainability issues
+#  ┃  ✦ Category:      #AntiPattern
+#  ┃  ✦ File:          uom/quantity/src/Plugins/UoM/Eq/TcPlugin.hs
+#  ┃
+#  ┃    97 ┃
+#  ┃    98 ┃     _ -> error "evMagic"
+#  ┃    99 ┃     ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Pattern match on each constructor explicitly
+#  ┃      ⍟ Add meaningful names to holes, e.g. '_anyOtherFailure'
+[[ignore]]
+id = "OBS-STAN-0213-8Jo1A5-98:5"
+
+#  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ┃  ✦ ID:            OBS-STAN-0206-LN8cFs-10:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Plugins/UoM/State.hs
+#  ┃
+#  ┃     9 ┃
+#  ┃    10 ┃         { unitDefs :: UnitDefs
+#  ┃    11 ┃           ^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-LN8cFs-10:11"
+
+#  ┃  ✦ ID:            OBS-STAN-0206-LN8cFs-11:11
+#  ┃  ✦ Severity:      Performance
+#  ┃  ✦ Inspection ID: STAN-0206
+#  ┃  ✦ Name:          Data types with non-strict fields
+#  ┃  ✦ Description:   Defining lazy fields in data types can lead to unexpected space leaks
+#  ┃  ✦ Category:      #SpaceLeak #Syntax
+#  ┃  ✦ File:          uom/quantity/src/Plugins/UoM/State.hs
+#  ┃
+#  ┃    10 ┃
+#  ┃    11 ┃         , callsRef :: IORef Int
+#  ┃    12 ┃           ^^^^^^^^^^^^^^^^^^^^^
+#  ┃
+#  ┃  💡 Possible solution:
+#  ┃      ⍟ Add '!' before the type, e.g. !Int or !(Maybe Bool)
+#  ┃      ⍟ Enable the 'StrictData' extension: {-# LANGUAGE StrictData #-}
+[[ignore]]
+id = "OBS-STAN-0206-LN8cFs-11:11"
