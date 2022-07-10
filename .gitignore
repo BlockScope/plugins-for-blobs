@@ -9,6 +9,5 @@ dist-newstyle/
 *.code-workspace
 *.swn
 .hie/
-*.txt
 .bin/
 stan.html
