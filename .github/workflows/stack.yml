@@ -11,7 +11,7 @@ jobs:
       matrix:
         cabal: ["3.6"]
         ghc:
-          - "8.2.2"
+          - "9.2.3"
 
     steps:
       - uses: actions/checkout@v2
@@ -53,6 +53,7 @@ jobs:
         run: stack test thoralf-plugin-uom:delay-eq --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:units
+        if: ${{ matrix.ghc != '9.0.2' }}
         run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:uom-diy
@@ -65,7 +66,7 @@ jobs:
         run: stack build thoralf-plugin-defs
 
       - name: test uom-plugin:defs
-        if: ${{ matrix.ghc == '8.2.2' }} ||
+        if: ${{ matrix.ghc == '8.2.2' }}
         run: stack test uom-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
       - name: test uom-plugin:units

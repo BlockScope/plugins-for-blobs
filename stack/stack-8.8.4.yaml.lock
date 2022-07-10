@@ -25,13 +25,6 @@ packages:
       sha256: 02d59dee25e86d9097fb0e926acedafabcba1f5d9fd474ba8d1be3dc6f8b9a1d
   original:
     hackage: doctest-parallel-0.2.3@sha256:5dfa9e67ba0e09339b6916d722ca7afe5fca7d602abb542dbbd9e45f65679f86,5832
-- completed:
-    hackage: Cabal-3.6.3.0@sha256:ff97c442b0c679c1c9876acd15f73ac4f602b973c45bde42b43ec28265ee48f4,12459
-    pantry-tree:
-      size: 19757
-      sha256: b250a53bdb56844f047a2927833bb565b936a289abfa85dfc2a63148d776368a
-  original:
-    hackage: Cabal-3.6.3.0@sha256:ff97c442b0c679c1c9876acd15f73ac4f602b973c45bde42b43ec28265ee48f4,12459
 snapshots:
 - completed:
     size: 534126
