@@ -1,4 +1,4 @@
-resolver: lts-11.22
+resolver: nightly-2022-07-10
 packages:
 - build
 - simple-smt
@@ -16,6 +16,4 @@ packages:
 - uom/tutorial
 - uom/examples
 extra-deps:
-- units-parser-0.1.1.4
 - ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
-- th-printf-0.7@sha256:db33661f1b66b091b54f1ba7f63d719391cc5f7d32d86c58791e396c76472b61,2338

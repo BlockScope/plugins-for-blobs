@@ -7,14 +7,17 @@ packages:
 - ../thoralf/plugin
 - ../thoralf/plugin-rows
 - ../thoralf-uom/plugin
-- ../thoralf-uom/-defs
+- ../thoralf-uom/defs
 - ../uom/th
 - ../uom/quantity
 - ../uom/plugin
 - ../uom/defs
 - ../uom/tutorial
 - ../uom/examples
+allow-newer: true
 extra-deps:
 - units-parser-0.1.1.4
 - ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
 - th-printf-0.7@sha256:db33661f1b66b091b54f1ba7f63d719391cc5f7d32d86c58791e396c76472b61,2338
+- doctest-parallel-0.2.3@sha256:5dfa9e67ba0e09339b6916d722ca7afe5fca7d602abb542dbbd9e45f65679f86,5832
+- Cabal-3.6.3.0@sha256:ff97c442b0c679c1c9876acd15f73ac4f602b973c45bde42b43ec28265ee48f4,12459

@@ -1,4 +1,4 @@
-resolver: lts-18.18
+resolver: lts-18.28
 packages:
 - ../simple-smt
 - ../ghc-tcplugins-trace/ghc-tcplugins-trace
@@ -6,7 +6,7 @@ packages:
 - ../thoralf/encode
 - ../thoralf/plugin
 - ../thoralf/plugin-rows
-- ../thoralf-uom/uom
+- ../thoralf-uom/plugin
 - ../thoralf-uom/defs
 - ../uom/th
 - ../uom/quantity
@@ -14,6 +14,9 @@ packages:
 - ../uom/defs
 - ../uom/tutorial
 - ../uom/examples
+allow-newer: true
 extra-deps:
 - units-parser-0.1.1.4
 - ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
+- doctest-parallel-0.2.3@sha256:5dfa9e67ba0e09339b6916d722ca7afe5fca7d602abb542dbbd9e45f65679f86,5832
+- Cabal-3.6.3.0@sha256:ff97c442b0c679c1c9876acd15f73ac4f602b973c45bde42b43ec28265ee48f4,12459
