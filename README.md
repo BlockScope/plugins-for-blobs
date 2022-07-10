@@ -108,6 +108,21 @@ Find the new plugin in `thoralf-uom` and new versions of the existing plugins in
     └── tutorial
 ```
 
+### Packaging in Transition
+
+We've not yet settled on final packaging but there are three potential options:
+
+* Each plugin is in its own package, such as `thoralf-plugin` and `uom-plugin`.
+* All plugins are in the one `plugins-for-blobs` package.
+* Plugins are in one of three packages; `thoralf`, `uom` or `thoralf-uom`.
+
+Plugins load modules from packages but while we're in transition with packaging
+the function `findModule` has a set of known package names that it tries first.
+
+```haskell
+knownPkgs = ["plugins-for-blobs", "thoralf", "uom", "thoralf-uom"]
+```
+
 ## Package Dependencies
 
 ```
