@@ -92,9 +92,9 @@ plugins in `thoralf/` and in `uom/`.
 
 We've not yet settled on final packaging but there are three potential options:
 
-⑴ All plugins are in the one `plugins-for-blobs` package.
-⑵ Plugins are in one of three packages; `thoralf`, `uom` or `thoralf-uom`.
-⑶ Each plugin is in its own package, such as `thoralf-plugin` and `uom-plugin`.
+⑴ All plugins are in the one `plugins-for-blobs` package.  
+⑵ Plugins are in one of three packages; `thoralf`, `uom` or `thoralf-uom`.  
+⑶ Each plugin is in its own package, such as `thoralf-plugin` and `uom-plugin`.  
 
 ```
 > tree -L 2 -d
