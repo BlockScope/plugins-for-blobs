@@ -85,36 +85,36 @@ so that they could be shared between both.
   rest.
   
 
-Find the new plugin in `thoralf-uom` and new versions of the existing plugins in
-`thoralf` and in `uom`.
-
-```
-> tree -L 2 -d
-.
-├── thoralf
-│   ├── encode
-│   ├── plugin
-│   ├── plugin-rows
-│   └── theory
-├── thoralf-uom
-│   ├── defs
-│   └── plugin
-└── uom
-    ├── defs
-    ├── examples
-    ├── plugin
-    ├── quantity
-    ├── th
-    └── tutorial
-```
+Find the new plugin in `thoralf-uom/` and new versions of the existing
+plugins in `thoralf/` and in `uom/`.
 
 ### Packaging in Transition
 
 We've not yet settled on final packaging but there are three potential options:
 
-* Each plugin is in its own package, such as `thoralf-plugin` and `uom-plugin`.
-* All plugins are in the one `plugins-for-blobs` package.
-* Plugins are in one of three packages; `thoralf`, `uom` or `thoralf-uom`.
+⑴ All plugins are in the one `plugins-for-blobs` package.
+⑵ Plugins are in one of three packages; `thoralf`, `uom` or `thoralf-uom`.
+⑶ Each plugin is in its own package, such as `thoralf-plugin` and `uom-plugin`.
+
+```
+> tree -L 2 -d
+.                  ⑴ plugins-for-blobs.cabal
+├── thoralf           ⑵ thoralf.cabal
+│   ├── encode           ⑶ thoralf-encode.cabal
+│   ├── plugin           ⑶ thoralf-plugin.cabal
+│   ├── plugin-rows      ⑶ thoralf-plugin-rows.cabal
+│   └── theory           ⑶ thoralf-theory.cabal
+├── thoralf-uom       ⑵ thoralf-uom.cabal
+│   ├── defs             ⑶ thoralf-uom-defs.cabal
+│   └── plugin           ⑶ thoralf-uom-plugin.cabal
+└── uom               ⑵ uom.cabal
+    ├── defs             ⑶ uom-plugin-defs.cabal
+    ├── examples         ⑶ uom-plugin-examples.cabal
+    ├── plugin           ⑶ uom-plugin.cabal
+    ├── quantity         ⑶ uom-quantity.cabal
+    ├── th               ⑶ uom-th.cabal
+    └── tutorial         ⑶ uom-plugin-tutorial.cabal
+```
 
 Plugins load modules from packages but while we're in transition with packaging
 the function `findModule` has a set of known package names that it tries first.
