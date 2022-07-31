@@ -10,7 +10,7 @@
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Solve #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Defs where
 

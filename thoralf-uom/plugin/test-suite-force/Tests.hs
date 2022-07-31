@@ -11,7 +11,7 @@
 
 {-# OPTIONS_GHC -fplugin Plugins.UoM.Unpack #-}
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM.Solve #-}
-{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+{-# OPTIONS_GHC -Wno-type-defaults #-}
 
 module Main
     ( main

@@ -10,7 +10,7 @@
 {-# OPTIONS_GHC -fplugin Plugins.UoM #-}
 
 #if __GLASGOW_HASKELL__ > 710
-{-# OPTIONS_GHC -fno-warn-deferred-type-errors #-}
+{-# OPTIONS_GHC -Wno-deferred-type-errors #-}
 #endif
 
 module ErrorTests where

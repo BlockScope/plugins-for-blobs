@@ -1,5 +1,5 @@
 \(hie : Text) ->
-  let ghc-opts = [ "-Wall", "-fno-warn-unticked-promoted-constructors" ]
+  let ghc-opts = [ "-Wall", "-Wno-unticked-promoted-constructors" ]
 
   in  { version = "0.1.0"
       , synopsis = "Plugins for helping GHC type check units of measure."

@@ -5,7 +5,7 @@
 {-# LANGUAGE QuasiQuotes #-}
 
 {-# OPTIONS_GHC -fplugin Plugins.Thoralf.UoM #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 
 -- | This module exports some example definitions of base and derived
 -- units, for demonstration purposes.  In the future, this is likely

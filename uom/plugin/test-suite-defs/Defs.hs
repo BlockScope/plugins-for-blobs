@@ -22,7 +22,7 @@
 -- {-# OPTIONS_GHC -fplugin Plugins.UoM.UnpackEq #-}
 -- {-# OPTIONS_GHC -fplugin Plugins.UoM.Simplify #-}
 
-{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Defs where
 

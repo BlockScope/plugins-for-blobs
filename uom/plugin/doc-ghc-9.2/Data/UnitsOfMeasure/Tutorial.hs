@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 -- | This module gives a brief introduction to the @uom-plugin@
 -- library.
@@ -151,7 +151,7 @@ import Data.UnitsOfMeasure.TH
 -- Adding a full or partial type signature can make the underlying
 -- representational type more concrete.
 --
--- >>> :seti -XPartialTypeSignatures -fno-warn-partial-type-signatures
+-- >>> :seti -XPartialTypeSignatures -Wno-partial-type-signatures
 --
 -- >>> :type [u| 1 m |] :: _ Int _
 -- [u| 1 m |] :: _ Int _ :: Quantity Int (Base "m")

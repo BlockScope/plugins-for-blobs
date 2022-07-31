@@ -1,7 +1,7 @@
 {-# LANGUAGE CPP, NamedFieldPuns, ParallelListComp, PartialTypeSignatures #-}
 {-# LANGUAGE LambdaCase, QuasiQuotes, ScopedTypeVariables #-}
 
-{-# OPTIONS_GHC -fno-warn-partial-type-signatures #-}
+{-# OPTIONS_GHC -Wno-partial-type-signatures #-}
 
 module ThoralfPlugin.Convert
     (
