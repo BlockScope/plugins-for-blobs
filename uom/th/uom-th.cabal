@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 61413627f8995d7f8b5fb201ad7906309704d29ee76af9badd1a754635c33399
+-- hash: ddca1135aefc047d09cb5d2ad2ad2ddca4099f4e73f0f061d98c40de5f2ec02c
 
 name:           uom-th
 version:        0.3.0.1
@@ -53,9 +53,9 @@ library
     , uom-quantity
   default-language: Haskell2010
   if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
+    ghc-options: -Wall -Wno-unticked-promoted-constructors -fwrite-ide-info -hiedir=.hie
   else
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
+    ghc-options: -Wall -Wno-unticked-promoted-constructors
   if impl(ghc >= 8.10.1)
     hs-source-dirs:
         src-StandaloneKindSignatures

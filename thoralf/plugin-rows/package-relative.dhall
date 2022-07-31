@@ -15,7 +15,7 @@
                 ''
             , category = "Development"
             , github = "bgamari/the-thoralf-plugin/thoralf"
-            , ghc-options = [ "-Wall", "-fno-warn-partial-type-signatures" ]
+            , ghc-options = [ "-Wall", "-Wno-partial-type-signatures" ]
             , dependencies =
                   defs.dependencies
                 # [ "containers"

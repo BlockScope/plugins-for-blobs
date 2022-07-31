@@ -1,4 +1,4 @@
-let ghc-opts = [ "-Wall", "-fno-warn-unticked-promoted-constructors" ]
+let ghc-opts = [ "-Wall", "-Wno-unticked-promoted-constructors" ]
 
 in  { version = "0.3.0.1"
     , author = "Adam Gundry <adam@well-typed.com>"

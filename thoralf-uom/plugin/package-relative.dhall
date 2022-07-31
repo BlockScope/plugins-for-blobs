@@ -16,7 +16,7 @@
                 Z3 SMT solver. It is designed to be easy to extend with new
                 theories.
                 ''
-            , ghc-options = [ "-Wall", "-fno-warn-partial-type-signatures" ]
+            , ghc-options = [ "-Wall", "-Wno-partial-type-signatures" ]
             , dependencies =
                   defs.dependencies
                 # [ "containers"

@@ -97,7 +97,7 @@ library thoralf-plugin-rows
       TypeInType
       GADTs
       RecordWildCards
-  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths -Wall -fno-warn-partial-type-signatures
+  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths -Wall -Wno-partial-type-signatures
   build-depends:
       base >=4.9.1.0 && <5
     , containers
@@ -163,7 +163,7 @@ test-suite thoralf-rows
       RowTypes
   hs-source-dirs:
       plugin-rows/test-suite-rows
-  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf.Rows
+  ghc-options: -Wall -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf.Rows
   build-depends:
       base
     , containers

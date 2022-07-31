@@ -141,7 +141,7 @@ library thoralf-plugin-rows
       TypeInType
       GADTs
       RecordWildCards
-  ghc-options: -Wall -fno-warn-partial-type-signatures
+  ghc-options: -Wall -Wno-partial-type-signatures
   build-depends:
       base >=4.9.1.0 && <5
     , containers
@@ -491,7 +491,7 @@ test-suite thoralf-defs
       Defs
   hs-source-dirs:
       thoralf-uom/plugin/test-suite-defs
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -526,7 +526,7 @@ test-suite thoralf-delay-eq
       UnitDefs
   hs-source-dirs:
       thoralf-uom/plugin/test-suite-delay-eq
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -561,7 +561,7 @@ test-suite thoralf-force
       UnitDefs
   hs-source-dirs:
       thoralf-uom/plugin/test-suite-force
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -598,7 +598,7 @@ test-suite thoralf-rows
       RowTypes
   hs-source-dirs:
       thoralf/plugin-rows/test-suite-rows
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf.Rows
+  ghc-options: -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N -fplugin Plugins.Thoralf.Rows
   build-depends:
       base
     , containers
@@ -634,7 +634,7 @@ test-suite thoralf-units
       UnQuantity
   hs-source-dirs:
       thoralf-uom/plugin/test-suite-units
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       base
     , containers
@@ -693,7 +693,7 @@ test-suite thoralf-uom-diy
       UoM
   hs-source-dirs:
       thoralf-uom/plugin/test-suite-uom-diy
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base
@@ -733,7 +733,7 @@ test-suite thoralf-uom-quantity
       UoM
   hs-source-dirs:
       thoralf-uom/plugin/test-suite-uom-quantity
-  ghc-options: -Wall -fno-warn-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -Wno-partial-type-signatures -Wall -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base
