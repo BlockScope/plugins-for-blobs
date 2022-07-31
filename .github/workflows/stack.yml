@@ -28,7 +28,7 @@ jobs:
       - uses: pavpanchekha/setup-z3@1.2.2
         name: setup z3
         with:
-          version: "4.8.7"
+          version: "4.8.8"
 
       - uses: actions/cache@v2
         name: Cache ~/.stack
