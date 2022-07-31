@@ -7,8 +7,8 @@ module Data.UnitsOfMeasure.Unsafe.UnitDefs
 
 import GHC.Corroborate
 import Data.UnitsOfMeasure.Unsafe.NormalForm
-    ( (^:), (*:), (/:), Atom(..), NormUnit, BaseUnit
-    , one, baseUnit, varUnit, famUnit, maybeConstant, ascending
+    ( (^:), (*:), (/:), NormUnit, BaseUnit
+    , one, baseUnit, varUnit, famUnit, maybeConstant
     )
 
 -- | Contains referenes to the basic unit constructors declared in

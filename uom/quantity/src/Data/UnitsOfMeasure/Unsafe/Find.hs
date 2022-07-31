@@ -5,15 +5,12 @@ module Data.UnitsOfMeasure.Unsafe.Find
 
 import GHC.Corroborate
 import GHC.Corroborate.Divulge (divulgeTyCon)
-import GHC.Corroborate.Shim (promoteTyCon, mkEqPred)
+import GHC.Corroborate.Shim (mkEqPred)
 import GHC.Corroborate.Wrap (newGivenCt)
-import Data.List (partition, genericReplicate)
+import Data.List (genericReplicate)
 
 import Internal.Unit.Type (collectType)
-import Data.UnitsOfMeasure.Unsafe.NormalForm
-    ( (^:), (*:), (/:), Atom(..), NormUnit, BaseUnit
-    , one, baseUnit, varUnit, famUnit, maybeConstant, ascending
-    )
+import Data.UnitsOfMeasure.Unsafe.NormalForm (BaseUnit)
 import Data.UnitsOfMeasure.Unsafe.UnitDefs (UnitDefs(..))
 
 lookForUnpacks

@@ -5,17 +5,11 @@ module Data.UnitsOfMeasure.Unsafe.Kind
   ) where
 
 import GHC.Corroborate
-import GHC.Corroborate.Divulge (divulgeTyCon)
-import GHC.Corroborate.Shim (promoteTyCon, mkEqPred)
-import GHC.Corroborate.Wrap (newGivenCt)
-import Data.List (partition, genericReplicate)
+import GHC.Corroborate.Shim (promoteTyCon)
+import Data.List (partition)
 
-import Data.UnitsOfMeasure.Unsafe.NormalForm
-    ( (^:), (*:), (/:), Atom(..), NormUnit, BaseUnit
-    , one, baseUnit, varUnit, famUnit, maybeConstant, ascending
-    )
+import Data.UnitsOfMeasure.Unsafe.NormalForm (Atom(..), NormUnit, ascending)
 import Data.UnitsOfMeasure.Unsafe.UnitDefs
-import Internal.Unit.Type (collectType)
 
 -- | 'Unit' promoted to a kind
 unitKind :: UnitDefs -> Kind
