@@ -1,4 +1,6 @@
 resolver: nightly-2022-07-10
+install-ghc: false
+system-ghc: true
 packages:
 - simple-smt
 - ghc-tcplugins-trace/ghc-tcplugins-trace
