@@ -38,37 +38,37 @@ jobs:
 
       # Stack has problems building all the tests because of doctest-parallel.
       # - name: build tests
-      #   run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      #   run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-rows:rows
-        run: stack test thoralf-plugin-rows:rows --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-rows:rows --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:defs
-        run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:force
-        run: stack test thoralf-plugin-uom:force --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-uom:force --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:delay-eq
-        run: stack test thoralf-plugin-uom:delay-eq --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-uom:delay-eq --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:units
         if: ${{ matrix.ghc != '9.0.2' }}
-        run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-uom:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:uom-diy
-        run: stack test thoralf-plugin-uom:uom-diy --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-uom:uom-diy --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test thoralf-plugin-uom:uom-quantity
-        run: stack test thoralf-plugin-uom:uom-quantity --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test thoralf-plugin-uom:uom-quantity --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: build thoralf-plugin-defs
         run: stack build thoralf-plugin-defs
 
       - name: test uom-plugin:defs
         if: ${{ matrix.ghc == '8.2.2' }}
-        run: stack test uom-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test uom-plugin:defs --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml
 
       - name: test uom-plugin:units
         if: ${{ matrix.ghc == '8.2.2' }}
-        run: stack test uom-plugin:units --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+        run: stack test uom-plugin:units --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/ghc-${{ matrix.ghc }}.yaml

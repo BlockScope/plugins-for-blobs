@@ -1,0 +1,10 @@
+resolver: lts-18.27
+install-ghc: false
+system-ghc: true
+packages:
+- ../simple-smt
+- ../ghc-tcplugins-trace/ghc-tcplugins-trace
+- ../.
+extra-deps:
+- ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
+- units-parser-0.1.1.4@sha256:c75a2bdd7a0c08794f0c1d1d1ff8acf2ebef8be6b3350f9841b737fd1551e891,1738

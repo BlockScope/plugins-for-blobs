@@ -20,7 +20,7 @@ packages:
     hackage: units-parser-0.1.1.4@sha256:c75a2bdd7a0c08794f0c1d1d1ff8acf2ebef8be6b3350f9841b737fd1551e891,1738
 snapshots:
 - completed:
-    sha256: f14a1083bc537cad9e94fdb625ff3a874aee5cb1eb33e5b6271e7b5a557de7fb
-    size: 631956
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2022/8/29.yaml
-  original: nightly-2022-08-29
+    sha256: 79a786674930a89301b0e908fad2822a48882f3d01486117693c377b8edffdbe
+    size: 590102
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/27.yaml
+  original: lts-18.27

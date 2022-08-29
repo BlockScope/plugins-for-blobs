@@ -1,0 +1,12 @@
+resolver: lts-18.28
+install-ghc: false
+system-ghc: true
+packages:
+- ../simple-smt
+- ../ghc-tcplugins-trace/ghc-tcplugins-trace
+- ../
+allow-newer: true
+extra-deps:
+- units-parser-0.1.1.4
+- ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
+- doctest-parallel-0.2.3@sha256:5dfa9e67ba0e09339b6916d722ca7afe5fca7d602abb542dbbd9e45f65679f86,5832
