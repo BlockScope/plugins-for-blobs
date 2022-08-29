@@ -11,13 +11,6 @@ packages:
       size: 4120
   original:
     hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
-- completed:
-    hackage: units-parser-0.1.1.4@sha256:c75a2bdd7a0c08794f0c1d1d1ff8acf2ebef8be6b3350f9841b737fd1551e891,1738
-    pantry-tree:
-      sha256: fa6335e11a64de8b362419549901c1c62b6f82932f0e8f61de4f0fd6966d94f8
-      size: 274
-  original:
-    hackage: units-parser-0.1.1.4@sha256:c75a2bdd7a0c08794f0c1d1d1ff8acf2ebef8be6b3350f9841b737fd1551e891,1738
 snapshots:
 - completed:
     sha256: f14a1083bc537cad9e94fdb625ff3a874aee5cb1eb33e5b6271e7b5a557de7fb
