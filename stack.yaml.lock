@@ -7,13 +7,13 @@ packages:
 - completed:
     hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
     pantry-tree:
-      size: 4120
       sha256: 92677e4f5b9145fc1e67bdb5843f699a4d17ea36aa08d5e99fe88a7065b539ea
+      size: 4120
   original:
     hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
 snapshots:
 - completed:
-    size: 616564
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2022/7/10.yaml
-    sha256: fcf6e0fb5397b1a523ecbf5d40ff702cdff022870eedb545aedb744fb10d1816
-  original: nightly-2022-07-10
+    sha256: 5a59b2a405b3aba3c00188453be172b85893cab8ebc352b1ef58b0eae5d248a2
+    size: 650475
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/20/26.yaml
+  original: lts-20.26
