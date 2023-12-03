@@ -10,17 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         submodules: true
 
-    - uses: rwe/actions-hlint-setup@v1
+    - uses: haskell-actions/hlint-setup@v2
       name: Set up HLint
       with:
-        version: "3.3.6"
+        version: "3.6.1"
 
-    - uses: rwe/actions-hlint-run@v2
-      name: hlint
+    - uses: haskell-actions/hlint-run@v2
+      name: Run HLint
       with:
         path: '.'
         fail-on: suggestion
