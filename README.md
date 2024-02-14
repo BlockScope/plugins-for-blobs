@@ -3,6 +3,7 @@
 [![cabal](https://github.com/BlockScope/plugins-for-blobs/actions/workflows/cabal.yml/badge.svg)](https://github.com/BlockScope/plugins-for-blobs/actions/workflows/cabal.yml)
 [![stack](https://github.com/BlockScope/plugins-for-blobs/actions/workflows/stack.yml/badge.svg)](https://github.com/BlockScope/plugins-for-blobs/actions/workflows/stack.yml)
 [![hlint](https://github.com/BlockScope/plugins-for-blobs/actions/workflows/hlint.yml/badge.svg)](https://github.com/BlockScope/plugins-for-blobs/actions/workflows/hlint.yml)
+![Scarf Analytics](https://static.scarf.sh/a.png?x-pxid=9fca804d-1838-4882-86fe-2a259c45392b)
 
 > 1 blob is equal to 1 lbf⋅s2/in, or 12 [slugs][slug].
 
